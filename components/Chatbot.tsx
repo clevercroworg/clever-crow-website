@@ -20,7 +20,7 @@ export default function Chatbot() {
   const [mode, setMode] = useState<ChatMode>("chat");
   const [currentStep, setCurrentStep] = useState<LeadStep>("name");
   const [isTyping, setIsTyping] = useState(false);
-  
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -29,7 +29,7 @@ export default function Chatbot() {
       options: ["What services do you provide?", "Connect with team"],
     },
   ]);
-  
+
   const [inputValue, setInputValue] = useState("");
   const [userData, setUserData] = useState({
     name: "",
@@ -38,7 +38,7 @@ export default function Chatbot() {
     budget: "",
     other: "",
   });
-  
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -67,12 +67,12 @@ export default function Chatbot() {
 
     setTimeout(() => {
       processInput(text);
-    }, 1000 + Math.random() * 800); 
+    }, 1000 + Math.random() * 800);
   };
 
   const generateAIResponse = (text: string) => {
     const lowerText = text.toLowerCase();
-    
+
     // Greetings
     if (/^(hi|hello|hey|greetings|good morning|good afternoon|good evening)\b/.test(lowerText)) {
       addMessage({
@@ -129,7 +129,7 @@ export default function Chatbot() {
       return;
     }
 
-    const matchedService = Object.values(services).find(s => 
+    const matchedService = Object.values(services).find(s =>
       lowerText.includes(s.title.toLowerCase()) || lowerText.includes(s.slug.toLowerCase().replace("-", " ")) || (lowerText.includes("google") && lowerText.includes("ads"))
     );
 
@@ -150,7 +150,7 @@ export default function Chatbot() {
       });
       return;
     }
-    
+
     if (lowerText === "yes, connect" || lowerText === "yes") {
       setMode("lead_gen");
       setCurrentStep("name");
@@ -196,7 +196,7 @@ export default function Chatbot() {
         }
         setUserData((prev) => ({ ...prev, contact: val }));
         setCurrentStep("service");
-        
+
         const serviceOptions = Object.values(services).map((s) => s.title);
         addMessage({
           sender: "bot",
@@ -237,7 +237,7 @@ export default function Chatbot() {
           sender: "bot",
           text: "Thank you for sharing your details. I am generating your inquiry and redirecting you to our WhatsApp to continue.",
         });
-        
+
         setTimeout(() => {
           redirectWhatsApp({ ...userData, other: val });
         }, 2000);
@@ -272,8 +272,8 @@ export default function Chatbot() {
 *Additional Info:* ${data.other || 'N/A'}`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappNumber = "919876543210"; 
-    
+    const whatsappNumber = "919876543210";
+
     window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
   };
 
@@ -329,137 +329,130 @@ export default function Chatbot() {
         }
         .typing-dot:nth-child(1) { animation-delay: 0s; }
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
       `}</style>
-      
-      <div className="fixed bottom-[84px] right-4 sm:bottom-6 sm:right-6 z-[9999] flex flex-col items-end font-sans">
-        {isOpen && (
-          <div 
-            className={`mb-4 sm:mb-5 w-[calc(100vw-2rem)] sm:w-[400px] h-[calc(100dvh-140px)] sm:h-[38rem] max-h-[800px] flex flex-col rounded-2xl sm:rounded-3xl bg-zinc-950 shadow-[0_20px_60px_rgba(0,0,0,0.9)] border border-zinc-800 origin-bottom-right overflow-hidden transition-all duration-300 animate-spring-open ${isTyping ? 'animate-typing-pulse' : ''}`}
-          >
-            {/* Header - Minimalist Black/White */}
-            <div className="p-5 flex justify-between items-center flex-shrink-0 border-b border-zinc-800 bg-zinc-950">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-                  <Sparkles size={20} className="text-zinc-950" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-[16px] tracking-wide text-white">Clever Crow Assistant</h3>
-                  <div className="flex items-center gap-2 mt-0.5">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-90"></span>
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
-                    </span>
-                    <p className="text-xs text-zinc-400 font-medium">Online</p>
-                  </div>
+      {isOpen && (
+        <div
+          className={`fixed bottom-[80px] left-4 right-4 sm:left-auto sm:bottom-[100px] sm:right-6 z-[9999] sm:w-[400px] h-[75dvh] sm:h-[38rem] max-h-[650px] sm:max-h-[800px] flex flex-col rounded-2xl sm:rounded-3xl bg-zinc-950 shadow-[0_20px_60px_rgba(0,0,0,0.9)] border border-zinc-800 origin-bottom-right overflow-hidden transition-all duration-300 animate-spring-open ${isTyping ? 'animate-typing-pulse' : ''} font-sans`}
+        >
+          {/* Header - Minimalist Black/White */}
+          <div className="p-5 flex justify-between items-center flex-shrink-0 border-b border-zinc-800 bg-zinc-950">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+                <Sparkles size={20} className="text-zinc-950" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-[16px] tracking-wide text-white">Clever Crow Assistant</h3>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-90"></span>
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+                  </span>
+                  <p className="text-xs text-zinc-400 font-medium">Online</p>
                 </div>
               </div>
-              <button 
-                onClick={() => setIsOpen(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-zinc-900 hover:bg-white text-zinc-400 hover:text-zinc-950 transition-colors border border-zinc-800"
-                aria-label="Close Chat"
-              >
-                <X size={16} strokeWidth={2.5} />
-              </button>
             </div>
-            
-            {/* Main Chat Area - Deep Black Background */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-6 flex flex-col scroll-smooth bg-zinc-950">
-              {messages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"} items-end gap-3 max-w-full`}
-                >
-                  {msg.sender === "bot" && (
-                    <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center flex-shrink-0">
-                      <Bot size={14} className="text-white" />
-                    </div>
-                  )}
-                  <div
-                    className={`px-5 py-3.5 text-[15px] shadow-sm tracking-tight ${
-                      msg.sender === "user"
-                        ? "bg-white text-zinc-950 font-medium rounded-2xl rounded-tr-sm self-end"
-                        : "bg-zinc-900 border border-zinc-800 text-zinc-200 rounded-2xl rounded-tl-sm self-start"
-                    }`}
-                    style={{ maxWidth: msg.sender === 'user' ? '85%' : '90%' }}
-                  >
-                    <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
-                  </div>
-                </div>
-              ))}
+            <button
+              onClick={() => setIsOpen(false)}
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-zinc-900 hover:bg-white text-zinc-400 hover:text-zinc-950 transition-colors border border-zinc-800"
+              aria-label="Close Chat"
+            >
+              <X size={16} strokeWidth={2.5} />
+            </button>
+          </div>
 
-              {/* Typing Indicator */}
-              {isTyping && (
-                <div className="flex justify-start items-end gap-3">
+          {/* Main Chat Area - Deep Black Background */}
+          <div className="flex-1 overflow-y-auto p-5 space-y-6 flex flex-col scroll-smooth bg-zinc-950">
+            {messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"} items-end gap-3 max-w-full`}
+              >
+                {msg.sender === "bot" && (
                   <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center flex-shrink-0">
                     <Bot size={14} className="text-white" />
                   </div>
-                  <div className="px-5 py-4 bg-zinc-900 border border-zinc-800 rounded-2xl rounded-tl-sm flex gap-1.5 items-center">
-                    <div className="w-1.5 h-1.5 rounded-full typing-dot"></div>
-                    <div className="w-1.5 h-1.5 rounded-full typing-dot"></div>
-                    <div className="w-1.5 h-1.5 rounded-full typing-dot"></div>
-                  </div>
-                </div>
-              )}
-              
-              {/* Quick Actions */}
-              {!isTyping && messages[messages.length - 1]?.options && messages[messages.length - 1].sender === "bot" && currentStep !== "done" && (
-                <div className="flex flex-wrap gap-2 mt-2 ml-11">
-                  {messages[messages.length - 1].options?.map((opt, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => handleOptionClick(opt)}
-                      className="text-[13px] font-medium bg-zinc-900 border border-zinc-700 text-zinc-300 px-4 py-2 rounded-full hover:bg-white hover:text-zinc-950 transition-colors shadow-sm"
-                    >
-                      {opt}
-                    </button>
-                  ))}
-                </div>
-              )}
-              
-              <div ref={messagesEndRef} />
-            </div>
-
-            {/* Input Box Area - Minimalist Dark */}
-            <div className="p-4 bg-zinc-950 border-t border-zinc-800 flex-shrink-0">
-              <form 
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleSend(inputValue);
-                }} 
-                className="relative flex items-center"
-              >
-                <input
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  disabled={currentStep === "done" || isTyping}
-                  placeholder={currentStep === "done" ? "Session complete." : isTyping ? "AI is typing..." : "Type your message..."}
-                  className="w-full pl-5 pr-14 py-3.5 bg-zinc-900 border border-zinc-800 rounded-full text-[14px] focus:outline-none focus:border-zinc-500 focus:bg-zinc-800 transition-colors text-white placeholder-zinc-500 disabled:opacity-50"
-                />
-                <button
-                  type="submit"
-                  disabled={!inputValue.trim() || currentStep === "done" || isTyping}
-                  className="absolute right-2 w-9 h-9 rounded-full bg-white text-zinc-950 flex items-center justify-center disabled:opacity-20 hover:scale-105 transition-transform"
+                )}
+                <div
+                  className={`px-5 py-3.5 text-[15px] shadow-sm tracking-tight ${msg.sender === "user"
+                    ? "bg-white text-zinc-950 font-medium rounded-2xl rounded-tr-sm self-end"
+                    : "bg-zinc-900 border border-zinc-800 text-zinc-200 rounded-2xl rounded-tl-sm self-start"
+                    }`}
+                  style={{ maxWidth: msg.sender === 'user' ? '85%' : '90%' }}
                 >
-                  <Send size={16} className="ml-0.5" />
-                </button>
-              </form>
-            </div>
-          </div>
-        )}
+                  <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
+                </div>
+              </div>
+            ))}
 
-        {/* Floating Action Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={`flex items-center justify-center w-[54px] h-[54px] sm:w-[64px] sm:h-[64px] rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.5)] transition-all duration-300 hover:scale-105 z-50 overflow-hidden relative border ${
-            isOpen ? 'bg-zinc-900 border-zinc-800 rotate-90 scale-95 shadow-none' : 'bg-white border-white'
+            {/* Typing Indicator */}
+            {isTyping && (
+              <div className="flex justify-start items-end gap-3">
+                <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center flex-shrink-0">
+                  <Bot size={14} className="text-white" />
+                </div>
+                <div className="px-5 py-4 bg-zinc-900 border border-zinc-800 rounded-2xl rounded-tl-sm flex gap-1.5 items-center">
+                  <div className="w-1.5 h-1.5 rounded-full typing-dot"></div>
+                  <div className="w-1.5 h-1.5 rounded-full typing-dot"></div>
+                  <div className="w-1.5 h-1.5 rounded-full typing-dot"></div>
+                </div>
+              </div>
+            )}
+
+            {/* Quick Actions */}
+            {!isTyping && messages[messages.length - 1]?.options && messages[messages.length - 1].sender === "bot" && currentStep !== "done" && (
+              <div className="flex flex-wrap gap-2 mt-2 ml-11">
+                {messages[messages.length - 1].options?.map((opt, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleOptionClick(opt)}
+                    className="text-[13px] font-medium bg-zinc-900 border border-zinc-700 text-zinc-300 px-4 py-2 rounded-full hover:bg-white hover:text-zinc-950 transition-colors shadow-sm"
+                  >
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input Box Area - Minimalist Dark */}
+          <div className="p-4 bg-zinc-950 border-t border-zinc-800 flex-shrink-0">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSend(inputValue);
+              }}
+              className="relative flex items-center"
+            >
+              <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                disabled={currentStep === "done" || isTyping}
+                placeholder={currentStep === "done" ? "Session complete." : isTyping ? "AI is typing..." : "Type your message..."}
+                className="w-full pl-5 pr-14 py-3.5 bg-zinc-900 border border-zinc-800 rounded-full text-[14px] focus:outline-none focus:border-zinc-500 focus:bg-zinc-800 transition-colors text-white placeholder-zinc-500 disabled:opacity-50"
+              />
+              <button
+                type="submit"
+                disabled={!inputValue.trim() || currentStep === "done" || isTyping}
+                className="absolute right-2 w-9 h-9 rounded-full bg-white text-zinc-950 flex items-center justify-center disabled:opacity-20 hover:scale-105 transition-transform"
+              >
+                <Send size={16} className="ml-0.5" />
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Action Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`fixed bottom-4 right-[76px] sm:bottom-6 sm:right-6 z-[10000] flex items-center justify-center w-[54px] h-[54px] sm:w-[64px] sm:h-[64px] rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.5)] transition-all duration-300 hover:scale-105 overflow-hidden group border ${isOpen ? 'bg-zinc-900 border-zinc-800 rotate-90 scale-95 shadow-none' : 'bg-white border-white'
           }`}
-          aria-label="Toggle Chat"
-        >
-          {isOpen ? <X size={26} strokeWidth={2.5} className="text-white relative z-10 -rotate-90 transition-transform duration-300" /> : <MessageCircleMore size={28} strokeWidth={2.5} className="text-zinc-950 relative z-10 transition-transform duration-300 sm:scale-110" />}
-        </button>
-      </div>
+        aria-label="Toggle Chat"
+      >
+      </button>
     </>
   );
 }
