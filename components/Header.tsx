@@ -12,6 +12,7 @@ import {
   PhoneIcon,
 } from "@heroicons/react/24/outline";
 import { FaWhatsapp } from "react-icons/fa";
+import { Bot } from "lucide-react";
 
 const navLinks = [
   {
@@ -182,8 +183,15 @@ export default function Header() {
                 className="flex items-center gap-1.5 rounded-full bg-[#25D366] px-5 2xl:px-6 py-2.5 text-[13px] 2xl:text-[14px] font-black text-white shadow-lg shadow-[#25D366]/20 transition-all hover:bg-[#128C7E] hover:shadow-[#25D366]/30 hover:-translate-y-px active:scale-[0.98] ring-4 ring-[#25D366]/10"
               >
                 <FaWhatsapp className="h-4 w-4 2xl:h-4.5 2xl:w-4.5" />
-                Start Chat
+                WhatsApp
               </a>
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent("toggle-chat"))}
+                className="flex items-center gap-1.5 rounded-full bg-zinc-900 px-5 2xl:px-6 py-2.5 text-[13px] 2xl:text-[14px] font-black text-white shadow-lg shadow-zinc-900/20 transition-all hover:bg-zinc-800 hover:shadow-zinc-900/30 hover:-translate-y-px active:scale-[0.98] ring-4 ring-zinc-900/10"
+              >
+                <Bot className="h-4 w-4 2xl:h-4.5 2xl:w-4.5" />
+                AI Chat
+              </button>
             </div>
 
             {/* MOBILE TOGGLE */}
@@ -195,6 +203,13 @@ export default function Header() {
               >
                 <FaWhatsapp className="h-5 w-5" />
               </a>
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent("toggle-chat"))}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 text-white shadow-lg shadow-zinc-900/25 transition-transform hover:scale-105"
+                title="AI Chat"
+              >
+                <Bot className="h-5 w-5" />
+              </button>
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-900 border border-gray-100 shadow-sm transition-transform hover:scale-105"
@@ -277,6 +292,15 @@ export default function Header() {
                 >
                   <FaWhatsapp className="h-4.5 w-4.5" /> WhatsApp
                 </a>
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setTimeout(() => window.dispatchEvent(new CustomEvent("toggle-chat")), 300);
+                  }}
+                  className="col-span-2 flex items-center justify-center gap-2 rounded-2xl bg-zinc-900 py-4 text-[15px] font-bold text-white shadow-lg shadow-zinc-900/20 transition-transform hover:scale-[0.98] active:scale-95"
+                >
+                  <Bot className="h-4.5 w-4.5" /> Talk to AI Assistant
+                </button>
               </div>
             </div>
           </motion.div>

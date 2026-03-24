@@ -460,10 +460,7 @@ export default function Chatbot() {
             </div>
           </div>
         )}
-
-            </div>
-          </div>
-        )}
       </>
+    </>
   );
 }
