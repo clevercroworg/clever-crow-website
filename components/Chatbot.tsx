@@ -109,50 +109,6 @@ export default function Chatbot() {
       return;
     }
 
-    // General Q&A
-    if (lowerText.includes("who are you") || lowerText.includes("what is clever crow") || lowerText.includes("about you")) {
-      addMessage({
-        sender: "bot",
-        text: "We are Clever Crow — a premium digital agency. We specialize in engineering world-class web architectures, mobile app development, branding, and high-performance ad systems tailored for visionaries.",
-        options: ["What services do you provide?", "Connect with team"],
-      });
-      return;
-    }
-
-    if (lowerText.includes("where") || lowerText.includes("location") || lowerText.includes("based in")) {
-      addMessage({
-        sender: "bot",
-        text: "We collaborate with clients globally! Since we are a digital-first agency, distance is never an issue. Our systems and communication are built for international standard delivery.",
-      });
-      return;
-    }
-
-    if (lowerText.includes("how long") || lowerText.includes("timeline") || lowerText.includes("duration")) {
-      addMessage({
-        sender: "bot",
-        text: "Timelines depend entirely on the scope of work. A custom website might take 4-8 weeks, while an app can take a few months. Ad campaigns are ongoing with month-over-month optimization.\n\nWould you like to get a specific estimate for your project?",
-        options: ["Yes, connect", "What services do you provide?"],
-      });
-      return;
-    }
-
-    if (lowerText.includes("process") || lowerText.includes("how does it work") || lowerText.includes("how do we start")) {
-      addMessage({
-        sender: "bot",
-        text: "Our process always starts with a Discovery Call to deeply understand your goals. From there, we build a tailored strategy, execute the design/development, and continuously optimize for performance and concrete ROI.",
-        options: ["Connect with team"],
-      });
-      return;
-    }
-
-    if (lowerText.includes("startup") || lowerText.includes("who do you work with") || lowerText.includes("clients")) {
-       addMessage({
-        sender: "bot",
-        text: "We partner with ambitious startups, established enterprise businesses, e-commerce brands, and anyone in between who is serious about scaling heavily and building premium digital experiences.",
-      });
-      return;
-    }
-
     if (lowerText.includes("connect") || lowerText.includes("contact") || lowerText.includes("hire") || lowerText.includes("quote") || lowerText.includes("talk")) {
       setMode("lead_gen");
       setCurrentStep("name");
