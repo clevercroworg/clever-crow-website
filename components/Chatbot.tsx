@@ -376,10 +376,10 @@ export default function Chatbot() {
         .typing-dot:nth-child(3) { animation-delay: 0.4s; }
       `}</style>
       
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] flex flex-col items-end font-sans">
+      <div className="fixed bottom-[84px] right-4 sm:bottom-6 sm:right-6 z-[9999] flex flex-col items-end font-sans">
         {isOpen && (
           <div 
-            className={`mb-4 sm:mb-5 w-[calc(100vw-2rem)] sm:w-[400px] h-[calc(100dvh-100px)] sm:h-[38rem] max-h-[800px] flex flex-col rounded-2xl sm:rounded-3xl bg-zinc-950 shadow-[0_20px_60px_rgba(0,0,0,0.9)] border border-zinc-800 origin-bottom-right overflow-hidden transition-all duration-300 animate-spring-open ${isTyping ? 'animate-typing-pulse' : ''}`}
+            className={`mb-4 sm:mb-5 w-[calc(100vw-2rem)] sm:w-[400px] h-[calc(100dvh-140px)] sm:h-[38rem] max-h-[800px] flex flex-col rounded-2xl sm:rounded-3xl bg-zinc-950 shadow-[0_20px_60px_rgba(0,0,0,0.9)] border border-zinc-800 origin-bottom-right overflow-hidden transition-all duration-300 animate-spring-open ${isTyping ? 'animate-typing-pulse' : ''}`}
           >
             {/* Header - Minimalist Black/White */}
             <div className="p-5 flex justify-between items-center flex-shrink-0 border-b border-zinc-800 bg-zinc-950">
