@@ -1,0 +1,636 @@
+@import "tailwindcss";
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --yellow-base: #f4b000;      /* deep amber */
+--yellow-dark: #e0a200;     /* hover depth */
+--yellow-light: #ffd36a;    /* glow highlight */
+
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+     
+
+}
+ 
+
+
+h1 {
+  font-size: clamp(2.25rem, 4vw, 3.75rem); /* 36px → 60px */
+  line-height: 1.15; font-weight: 900;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem); /* 28px → 40px */
+  line-height: 1.25; 
+  font-weight: 800;
+}
+
+h3 {
+  font-size: 1.375rem; /* 22px */
+  line-height: 1.3;
+}
+
+h4 {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.4;
+}
+
+
+     
+p { font-weight: 400;  }
+
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeUp {
+  animation: fadeUp 0.7s ease-out forwards;
+}
+
+
+@keyframes smokeFadeStrong {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(1.08);
+  }
+
+  70% {
+    opacity: 0.6;
+    filter: blur(5px);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+.animate-smoke-strong {
+  animation: smokeFadeStrong 1.8s ease-out forwards;
+}
+
+
+@keyframes fadeUpSoft {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up-soft {
+  animation: fadeUpSoft 0.6s ease-out forwards;
+}
+
+
+.ai-gradient-border {
+  position: relative;
+  z-index: 0;
+}
+
+.ai-gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    #6366f1,
+    #8b5cf6,
+    #22d3ee
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  pointer-events: none; /* 🔥 THIS FIXES IT */
+}
+
+.ai-gradient-border:hover::before {
+  opacity: 1;
+}
+
+ /* Infinite client logo scroll */
+@keyframes scrollLogos {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-logos {
+  animation: scrollLogos 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-scroll-logos:hover {
+  animation-play-state: paused;
+}
+
+
+ /* ================================
+   Global Hover Glow System
+   ================================ */
+.hero-glow {
+  background: radial-gradient(
+    circle,
+    rgba(253, 224, 71, 0.35) 0%,
+    rgba(253, 224, 71, 0.15) 35%,
+    transparent 65%
+  );
+}
+
+.hover-glow {
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* GREEN (Primary – Phone, WhatsApp, Contact) */
+.hover-glow-green:hover {
+  border-color: #22c55e; /* emerald-500 */
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.4);
+}
+
+/* BLUE (AI / Tech actions) */
+.hover-glow-blue:hover {
+  border-color: #3b82f6; /* blue-500 */
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+}
+
+/* PURPLE (AI Automation / Advanced features) */
+.hover-glow-purple:hover {
+  border-color: #8b5cf6; /* violet-500 */
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+}
+
+/* YELLOW (Highlights / Limited offers – optional) */
+.hover-glow-yellow:hover {
+  border-color: #facc15; /* yellow-400 */
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.45);
+}
+
+/* NEUTRAL (Subtle corporate buttons) */
+.hover-glow-neutral:hover {
+  border-color: #9ca3af; /* gray-400 */
+  box-shadow: 0 0 10px rgba(156, 163, 175, 0.35);
+}
+
+/* Emphasised glow for primary contact actions */
+.hover-glow-strong:hover {
+  border-color: #22c55e;
+  box-shadow:
+    0 0 0 3px rgba(34, 197, 94, 0.18),
+    0 8px 24px rgba(34, 197, 94, 0.35);
+  transform: translateY(-1px);
+}
+
+
+.TEST-GLOW:hover {
+  box-shadow: 0 0 20px red;
+}
+
+
+@keyframes logo-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-logo-scroll {
+  animation: logo-scroll 30s linear infinite;
+}
+
+.pause-animation:hover {
+  animation-play-state: paused;
+}
+
+
+
+.hero-dots {
+  background-image: radial-gradient(
+    rgba(0, 0, 0, 0.08) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
+}
+
+
+/* subtle grid */
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* film noise */
+.hero-noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* ultra-subtle noise */
+.bg-noise {
+  background-image:
+    radial-gradient(rgba(0, 0, 0, 0.025) 0.5px, transparent 0.5px);
+  background-size: 14px 14px;
+}
+
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 4s linear infinite;
+}
+
+
+/* square checks pattern */
+.bg-square-checks {
+  background-color: #0b0b0b;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+/* ===============================
+   Ambient Grid Drift (Premium)
+   =============================== */
+
+.animate-grid {
+  animation: grid-drift-soft 90s ease-in-out infinite;
+  will-change: background-position;
+  opacity: 0.35; /* keep it subtle */
+}
+
+/* Slow, organic drift */
+@keyframes grid-drift-soft {
+  0% {
+    background-position: 0px 0px, 0px 0px;
+  }
+  50% {
+    background-position: 24px 32px, 32px 24px;
+  }
+  100% {
+    background-position: 0px 0px, 0px 0px;
+  }
+}
+
+/* Respect motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-grid {
+    animation: none;
+  }
+}
+
+
+/* subtle motion */
+@keyframes grid-drift {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 28px 28px, 28px 28px;
+  }
+}
+
+ 
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+  @keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 40s linear infinite;
+}
+
+
+/* ===============================
+   Ambient Light Pass Background
+   =============================== */
+
+.bg-ambient-light {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    #eef5ff 0%,
+    #f4ecff 40%,
+    #eef9ff 100%
+  );
+}
+
+/* Primary moving light */
+.bg-ambient-light::before {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: radial-gradient(
+    40% 25% at 50% 50%,
+    rgba(255, 255, 255, 0.45),
+    rgba(255, 255, 255, 0.15) 40%,
+    transparent 70%
+  );
+  filter: blur(90px);
+  animation: ambient-light-pass 30s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Secondary depth light */
+.bg-ambient-light::after {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: radial-gradient(
+    35% 20% at 30% 60%,
+    rgba(210, 220, 255, 0.35),
+    transparent 70%
+  );
+  filter: blur(120px);
+  animation: ambient-light-pass 42s ease-in-out infinite reverse;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+@keyframes ambient-light-pass {
+  0% {
+    transform: translateX(-18%) translateY(-6%);
+  }
+  50% {
+    transform: translateX(18%) translateY(6%);
+  }
+  100% {
+    transform: translateX(-18%) translateY(-6%);
+  }
+}
+
+/* Soft exit fade at bottom */
+.ambient-fade-bottom {
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.92) 70%,
+    #ffffff 100%
+  );
+}
+
+
+
+/* ===============================
+   Cinematic Icon Motion
+   =============================== */
+
+.icon-cinematic {
+  width: 42px;
+  height: 42px;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.03);
+  animation: icon-breathe 6s ease-in-out infinite;
+}
+
+.icon-cinematic.delay-1 { animation-delay: 1.5s; }
+.icon-cinematic.delay-2 { animation-delay: 3s; }
+.icon-cinematic.delay-3 { animation-delay: 4.5s; }
+
+@keyframes icon-breathe {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateY(-3px) scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.85;
+  }
+}
+
+ 
+
+
+/* Premium icon container */
+.icon-premium {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111827;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.06),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+  animation: icon-float 8s ease-in-out infinite;
+}
+
+@keyframes icon-float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+
+
+/* ===== LIGHT RAYS BACKGROUND ===== */
+.bg-light-rays {
+  position: relative;
+  overflow: hidden;
+  background-color: #020617; /* near-black base */
+}
+
+.bg-light-rays::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: 0;
+
+  background:
+    radial-gradient(
+      60% 40% at 50% 0%,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.06) 40%,
+      transparent 70%
+    ),
+    conic-gradient(
+      from 210deg at 50% 0%,
+      rgba(255, 255, 255, 0.12),
+      transparent 26deg
+    ),
+    conic-gradient(
+      from 330deg at 50% 0%,
+      rgba(255, 255, 255, 0.10),
+      transparent 24deg
+    );
+
+  filter: blur(50px);
+  opacity: 1;
+  pointer-events: none;
+}
+
+/* content layer */
+.bg-light-rays > * {
+  position: relative;
+  z-index: 1;
+}
+ 
+
+/* ===============================
+   GLASS CARD
+   =============================== */
+
+.glass-card {
+  position: relative;
+  max-width: 100%;
+  padding: 56px;
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* mobile spacing */
+@media (max-width: 768px) {
+  .glass-card {
+    padding: 36px;
+    border-radius: 20px;
+  }
+}
+
+  
+/* ===============================
+   GLASS CARD (CONTENT)
+   =============================== */
+
+.glass-card {
+  padding: 56px;
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+  .glass-card {
+    padding: 36px;
+    border-radius: 20px;
+  }
+}
+   
+ /* ===============================
+   CHECK GRID BACKGROUND (STATIC)
+   =============================== */
+
+.bg-check-grid {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+
+.bg-check-grid {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+
