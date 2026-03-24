@@ -460,6 +460,17 @@ export default function Chatbot() {
             </div>
           </div>
         )}
+
+        {/* Floating Action Button (Desktop Only) */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className={`fixed bottom-6 right-6 z-[10000] hidden sm:flex items-center justify-center w-[64px] h-[64px] rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.5)] transition-all duration-300 hover:scale-105 overflow-hidden group border ${
+            isOpen ? 'bg-zinc-900 border-zinc-800 rotate-90 scale-95 shadow-none' : 'bg-white border-white'
+          }`}
+          aria-label="Toggle Chat"
+        >
+          {isOpen ? <X size={26} strokeWidth={2.5} className="text-white relative z-10 -rotate-90 transition-transform duration-300" /> : <MessageCircleMore size={28} strokeWidth={2.5} className="text-zinc-950 relative z-10 transition-transform duration-300 scale-110" />}
+        </button>
       </>
     </>
   );

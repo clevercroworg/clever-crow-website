@@ -7,6 +7,7 @@ import {
   Instagram,
   Twitter,
   Phone,
+  Bot
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -194,10 +195,17 @@ export default function Footer() {
         <a
           href="https://wa.me/919986389444"
           target="_blank"
-          className="flex items-center justify-center px-5 rounded-2xl sm:rounded-full bg-[#25D366] py-3.5 text-white shadow-xl shadow-green-500/10 active:scale-95 transition-transform"
+          className="flex items-center justify-center px-4 rounded-2xl sm:rounded-full bg-[#25D366] py-3.5 text-white shadow-xl shadow-green-500/10 active:scale-95 transition-transform"
         >
-          <FaWhatsapp size={22} />
+          <FaWhatsapp size={20} />
         </a>
+
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent("toggle-chat"))}
+          className="flex items-center justify-center px-4 rounded-2xl sm:rounded-full bg-zinc-900 py-3.5 text-white shadow-xl shadow-zinc-900/10 active:scale-95 transition-transform"
+        >
+          <Bot size={20} />
+        </button>
       </div>
     </footer>
   );
