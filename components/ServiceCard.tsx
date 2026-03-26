@@ -12,6 +12,10 @@ import {
   Video,
   Bot,
   LineChart,
+  ShoppingBag,
+  Search,
+  Fingerprint,
+  Globe,
 } from "lucide-react";
 
 const ICONS: Record<string, React.ElementType> = {
@@ -21,6 +25,10 @@ const ICONS: Record<string, React.ElementType> = {
   video: Video,
   bot: Bot,
   analytics: LineChart,
+  shopping: ShoppingBag,
+  search: Search,
+  brand: Fingerprint,
+  globe: Globe,
 };
 
 type ServiceCardProps = {

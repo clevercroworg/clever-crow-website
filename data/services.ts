@@ -1,196 +1,300 @@
 export const services = {
-  "google-ads": {
-    slug: "google-ads",
-    title: "Google Ads Management",
-    heroSubtitle:
-      "High-intent traffic, lower cost per lead, and measurable ROI through disciplined Google Ads optimisation.",
+  "business-websites": {
+    slug: "business-websites",
+    title: "Business Website",
+    heroSubtitle: "High-performance, custom-built websites designed to establish your brand authority and generate leads.",
     outcomes: [
-      "Lower cost per lead",
-      "Higher-quality enquiries",
-      "Clear conversion tracking",
-      "Ongoing performance optimisation",
+      "Professional brand presence",
+      "High-speed performance",
+      "Mobile-first responsiveness",
+      "Conversion-optimized design",
     ],
     whatWeDo: [
-      "Google Ads account & campaign setup",
-      "Search, Display & Performance Max campaigns",
-      "Conversion tracking & GA4 integration",
-      "Ad copy testing and refinement",
-      "Ongoing bid, budget & keyword optimisation",
+      "Custom UI/UX design",
+      "Next.js & React development",
+      "CMS integration",
+      "Technical SEO foundation",
     ],
     aiUsage: [
-      "Smart bidding optimisation",
-      "Search term mining & negative keywords",
-      "Performance anomaly detection",
+      "AI-driven design prototyping",
+      "Automated quality assurance",
+      "Smart content optimization",
+    ],
+    whoItsFor: [
+      "Corporate companies",
+      "Service-based professionals",
+      "Startups & MSMEs",
+    ],
+  },
+  "ecommerce": {
+    slug: "ecommerce",
+    title: "E-commerce Website",
+    heroSubtitle: "Powerful online stores built for scale, speed, and seamless customer shopping experiences.",
+    outcomes: [
+      "Increased online sales",
+      "Seamless checkout experience",
+      "Secure payment integration",
+      "Inventory & order management",
+    ],
+    whatWeDo: [
+      "Custom Shopify/WooCommerce development",
+      "Product page optimization",
+      "Payment gateway setup",
+      "E-commerce SEO",
+    ],
+    aiUsage: [
+      "AI product recommendations",
+      "Smart inventory forecasting",
+      "Automated fraud detection",
+    ],
+    whoItsFor: [
+      "Retail brands",
+      "D2C startups",
+      "Wholesale businesses",
+    ],
+  },
+  "social-media-ads": {
+    slug: "social-media-ads",
+    title: "Social Media Ads",
+    heroSubtitle: "Targeted advertising on Facebook, Instagram, and LinkedIn to reach your ideal audience and grow your brand.",
+    outcomes: [
+      "Increased brand awareness",
+      "High-quality lead generation",
+      "Retargeting interested customers",
+      "Measurable return on ad spend (ROAS)",
+    ],
+    whatWeDo: [
+      "Meta Ads (FB & IG)",
+      "LinkedIn Advertising",
+      "Ad creative design",
+      "A/B testing & optimization",
+    ],
+    aiUsage: [
+      "AI audience targeting",
+      "Creative performance analysis",
+      "Automated bid management",
+    ],
+    whoItsFor: [
+      "B2C product brands",
+      "Real estate & education",
+      "Event organizers",
+    ],
+  },
+  "google-ads": {
+    slug: "google-ads",
+    title: "Google Ads",
+    heroSubtitle: "Capture high-intent traffic and dominate search results with precision-targeted Google Ads campaigns.",
+    outcomes: [
+      "Instant top-of-page visibility",
+      "High-intent traffic only",
+      "Lower cost per acquisition",
+      "Clear conversion tracking",
+    ],
+    whatWeDo: [
+      "Search, Display & YouTube ads",
+      "Performance Max campaigns",
+      "Keyword research & mining",
+      "Conversion tracking setup",
+    ],
+    aiUsage: [
+      "Smart bidding optimization",
+      "AI-powered search term mining",
       "Budget reallocation based on ROI",
     ],
     whoItsFor: [
-      "Local and service-based businesses",
-      "Brands spending ₹50,000+/month on ads",
-      "Businesses focused on leads, not vanity metrics",
-      "Teams that want clarity and accountability",
+      "Service-based businesses",
+      "Local service providers",
+      "SaaS & Tech companies",
     ],
   },
-  "android-app-development": {
-    slug: "android-app-development",
-    title: "Android App Development",
-    heroSubtitle: "High-performance, scalable native and cross-platform Android applications tailored to your business needs.",
+  "seo": {
+    slug: "seo",
+    title: "SEO",
+    heroSubtitle: "Long-term organic growth and sustainable traffic through data-driven search engine optimization.",
     outcomes: [
-      "Seamless user experience",
-      "High performance & reliability",
-      "Scalable backend integration",
-      "Play Store ready deployment"
+      "First-page organic rankings",
+      "Consistent free traffic",
+      "Increased domain authority",
+      "Better user experience",
     ],
     whatWeDo: [
-      "Custom Android app development",
-      "UI/UX design for mobile",
-      "API integrations & backend",
-      "App testing & quality assurance",
-      "Maintenance & ongoing support"
+      "On-page & technical SEO",
+      "Content strategy & backlinks",
+      "Local SEO (Google Maps)",
+      "Keyword gap analysis",
     ],
     aiUsage: [
-      "AI-driven automated testing",
-      "Smart user behavior analytics",
-      "Generative AI features integration"
+      "AI semantic keyword research",
+      "Content gap detection",
+      "Automated technical auditing",
     ],
     whoItsFor: [
-      "Startups building MVP",
-      "Enterprises needing internal tools",
-      "E-commerce focusing on mobile"
-    ]
+      "Long-term growth focused brands",
+      "Content-heavy websites",
+      "Local businesses wanting more visibility",
+    ],
   },
-  "ios-app-development": {
-    slug: "ios-app-development",
-    title: "iOS App Development",
-    heroSubtitle: "Premium, fluid, and secure iOS applications crafted for the Apple ecosystem.",
+  "logo-design": {
+    slug: "logo-design",
+    title: "Logo Design",
+    heroSubtitle: "Distinctive, memorable logos that capture your brand's essence and leave a lasting impression.",
     outcomes: [
-      "Strict Apple guideline compliance",
-      "Smooth animations and UI",
-      "High security & data protection",
-      "App Store optimization"
+      "Unique brand identity",
+      "Professional & modern look",
+      "Versatile design files",
+      "Brand trust & recognition",
     ],
     whatWeDo: [
-      "Native Swift development",
-      "Cross-platform React Native / Flutter",
-      "Apple Watch & iPad optimization",
-      "Seamless App Store deployment"
+      "Custom logo concepts",
+      "Typography & color palettes",
+      "Brand style guides",
+      "Vector source files",
     ],
     aiUsage: [
-      "CoreML integration",
-      "AI-assisted code generation",
-      "Automated UI testing"
+      "AI concept iteration",
+      "Visual trend analysis",
+      "Rapid prototyping",
     ],
     whoItsFor: [
-      "Premium consumer brands",
-      "Tech-driven startups",
-      "Businesses targeting high-tier users"
-    ]
+      "New startups",
+      "Businesses needing rebranding",
+      "Personal brands",
+    ],
   },
-  "web-design": {
-    slug: "web-design",
-    title: "Website & Web Design",
-    heroSubtitle: "Beautiful, responsive, and conversion-optimized websites that turn visitors into customers.",
+  "graphic-design": {
+    slug: "graphic-design",
+    title: "Graphic Design",
+    heroSubtitle: "Stunning visual communication that elevates your marketing and makes your message stand out.",
     outcomes: [
-      "High conversion rates",
-      "Lightning-fast load times",
-      "Mobile-first responsiveness",
-      "SEO-friendly architecture"
+      "Professional marketing assets",
+      "Consistent brand visuals",
+      "Engaging social media graphics",
+      "Higher brand perception",
     ],
     whatWeDo: [
-      "Custom UI/UX website design",
-      "Next.js & React development",
-      "CMS integration (WordPress/Shopify)",
-      "Technical SEO foundation"
+      "Social media post design",
+      "Brochures & marketing collaterals",
+      "Digital banners & carousels",
+      "Print media design",
     ],
     aiUsage: [
-      "AI-assisted layout generation",
-      "Automated accessibility checks",
-      "Smart content optimization"
+      "AI-assisted layout design",
+      "Smart background removal",
+      "Generative image enhancement",
     ],
     whoItsFor: [
-      "B2B service businesses",
-      "E-commerce stores",
-      "Agencies looking for a revamp"
-    ]
+      "Marketing teams",
+      "Content creators",
+      "Businesses with ongoing design needs",
+    ],
   },
-  "logo-branding": {
-    slug: "logo-branding",
-    title: "Logo Design & Branding",
-    heroSubtitle: "Memorable brand identities, stunning logos, and cohesive design systems that capture your essence.",
+  "content-writing": {
+    slug: "content-writing",
+    title: "Content Writing",
+    heroSubtitle: "Compelling, SEO-friendly copy that engages readers and drives conversions.",
     outcomes: [
-      "Standout visual identity",
-      "Brand consistency across channels",
-      "Increased brand trust",
-      "Professional market positioning"
+      "Higher reader engagement",
+      "Better SEO rankings",
+      "Clear brand voice",
+      "Increased time on page",
     ],
     whatWeDo: [
-      "Custom logo design",
-      "Brand guidelines & typography",
-      "Color palette creation",
-      "Marketing collateral design"
+      "Blog posts & articles",
+      "Website copywriting",
+      "Whitepapers & case studies",
+      "Email newsletters",
     ],
     aiUsage: [
-      "AI-driven concept ideation",
-      "Rapid design iteration",
-      "Competitor visual analysis"
+      "AI drafting & optimization",
+      "Sentence structure analysis",
+      "Tone & style consistency checks",
     ],
     whoItsFor: [
-      "New businesses and startups",
-      "Companies undergoing rebranding",
-      "Brands wanting a modern refresh"
-    ]
+      "Information-driven brands",
+      "Companies focused on thought leadership",
+      "SEO-conscious businesses",
+    ],
   },
-  "video-photo-editing": {
-    slug: "video-photo-editing",
-    title: "Video & Photo Editing",
-    heroSubtitle: "Engaging video content and flawless photo editing to elevate your social media and marketing campaigns.",
+  "script-writing": {
+    slug: "script-writing",
+    title: "Script Writing",
+    heroSubtitle: "Engaging scripts for videos, ads, and presentations that tell your story effectively.",
     outcomes: [
-      "Higher engagement rates",
-      "Professional visual quality",
-      "Faster content turnaround",
-      "Optimized for social platforms"
+      "Better video retention",
+      "Clearer messaging",
+      "Compelling storytelling",
+      "Higher ad performance",
     ],
     whatWeDo: [
-      "Short-form video editing (Reels/TikTok)",
-      "Corporate video production",
-      "Product photo retouching",
-      "Color grading & VFX"
+      "Video ad scripts",
+      "Corporate video scripts",
+      "YouTube & Reel scripts",
+      "Explainer video narratives",
     ],
     aiUsage: [
-      "AI-powered noise reduction",
-      "Automated caption generation",
-      "Smart color correction"
+      "AI hook generation",
+      "Audience engagement analysis",
+      "Script structure optimization",
     ],
     whoItsFor: [
-      "Content creators & influencers",
-      "E-commerce product brands",
-      "Marketing agencies"
-    ]
+      "Video creators",
+      "Ad agencies",
+      "Internal marketing teams",
+    ],
   },
-  "brand-strategy": {
-    slug: "brand-strategy",
-    title: "Branding & Strategies",
-    heroSubtitle: "Data-driven brand strategies and marketing roadmaps to scale your business predictably.",
+  "content-marketing": {
+    slug: "content-marketing",
+    title: "Content Marketing",
+    heroSubtitle: "Strategic content distribution that builds authority and nurtures leads at every stage of the funnel.",
     outcomes: [
-      "Clear target audience definition",
-      "Actionable marketing roadmap",
-      "Higher ROI on campaigns",
-      "Long-term business growth"
+      "Stronger brand authority",
+      "Consistent lead flow",
+      "Integrated marketing strategy",
+      "Improved customer lifecycle",
     ],
     whatWeDo: [
-      "Market & competitor research",
-      "Go-to-market strategy",
-      "Brand positioning & messaging",
-      "Multi-channel marketing planning"
+      "Multi-channel content strategy",
+      "Lead magnet creation",
+      "Distribution planning",
+      "Performance tracking",
     ],
     aiUsage: [
-      "Predictive trend analysis",
+      "AI distribution modeling",
+      "Customer journey mapping",
+      "Predictive content performance",
+    ],
+    whoItsFor: [
+      "B2B service providers",
+      "Educational platforms",
+      "Strategic growth companies",
+    ],
+  },
+  "strategy-planning": {
+    slug: "strategy-planning",
+    title: "Strategy & Planning",
+    heroSubtitle: "Data-backed roadmaps and marketing strategies designed to take your business from where it is to where it needs to be.",
+    outcomes: [
+      "Clear marketing roadmap",
+      "Predictable growth model",
+      "Optimized budget allocation",
+      "Defined KPIs & goals",
+    ],
+    whatWeDo: [
+      "Market & competitor analysis",
+      "Project roadmapping",
+      "Brand positioning",
+      "Marketing funnel design",
+    ],
+    aiUsage: [
+      "Predictive market modeling",
       "AI-driven competitor insights",
-      "Audience sentiment analysis"
+      "Scenario simulation",
     ],
     whoItsFor: [
-      "Brands looking to scale rapidly",
-      "Businesses launching new products",
-      "Founders needing strategic direction"
-    ]
-  }
+      "Founders & CEOs",
+      "Established businesses scaling up",
+      "Consultancies",
+    ],
+  },
 };
+

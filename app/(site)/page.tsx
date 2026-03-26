@@ -18,40 +18,40 @@ export const metadata = {
 /* ================= SERVICES DATA ================= */
 const services = [
   {
-    title: "Google & Meta Ads",
-    text: "High-performance Google and Meta campaigns designed for efficient acquisition, measurable ROI, and continuous optimisation.",
-    icon: "megaphone",
-    href: "/services/paid-ads",
-  },
-  {
-    title: "Social Media Marketing",
-    text: "Content, distribution, and growth systems that build visibility, trust, and demand across social platforms.",
-    icon: "chart",
-    href: "/services/social-media",
-  },
-  {
-    title: "Web Design & Development",
-    text: "Fast, scalable, and conversion-focused websites engineered with modern frameworks to turn traffic into qualified leads.",
+    title: "Business Website",
+    text: "High-performance, custom-built websites designed to establish your brand authority and generate leads.",
     icon: "layout",
-    href: "/services/web-design",
+    href: "/services/business-websites",
   },
   {
-    title: "Mobile App Development",
-    text: "Native and cross-platform mobile applications built for performance, seamless UX, and long-term scalability.",
-    icon: "bot",
-    href: "/services/mobile-apps",
+    title: "E-commerce Website",
+    text: "Powerful online stores built for scale, speed, and seamless customer shopping experiences across all devices.",
+    icon: "shopping",
+    href: "/services/ecommerce",
   },
   {
-    title: "Content & Video Creatives",
-    text: "Short-form content, video edits, and ad creatives built to perform across platforms and scale with campaigns.",
-    icon: "video",
-    href: "/services/content",
+    title: "Social Media Ads",
+    text: "Targeted advertising on Facebook, Instagram, and LinkedIn to reach your ideal audience and grow your brand.",
+    icon: "megaphone",
+    href: "/services/meta-ads",
   },
   {
-    title: "Analytics & Optimisation",
-    text: "Tracking, reporting, and optimisation frameworks that turn data into decisions and growth into a repeatable process.",
-    icon: "analytics",
-    href: "/services/analytics",
+    title: "Google Ads",
+    text: "Capture high-intent traffic and dominate search results with precision-targeted Google Ads campaigns.",
+    icon: "chart",
+    href: "/services/google-ads",
+  },
+  {
+    title: "SEO",
+    text: "Long-term organic growth and sustainable traffic through data-driven search engine optimization.",
+    icon: "search",
+    href: "/services/seo",
+  },
+  {
+    title: "Branding & Strategy",
+    text: "Data-driven brand strategies and marketing roadmaps to scale your business predictably and memorably.",
+    icon: "brand",
+    href: "/services/strategy-planning",
   },
 ];
 

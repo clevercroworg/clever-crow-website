@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { MessageSquare, X, Send, Bot, User, Loader2, Sparkles, MessageCircleMore } from "lucide-react";
+import { X, Send, Sparkles, MessageCircleMore } from "lucide-react";
 import { services } from "@/data/services";
+import { motion, AnimatePresence } from "framer-motion";
+import { submitLead } from "@/components/lib/submitLead";
 
 type Message = {
   id: string;
@@ -13,7 +15,40 @@ type Message = {
 };
 
 type ChatMode = "chat" | "lead_gen";
-type LeadStep = "name" | "contact" | "service" | "budget" | "other" | "done";
+type LeadStep = "name" | "email" | "phone" | "message" | "done";
+
+// Custom Animated Bot Component
+const AnimatedBot = ({ isSpeaking }: { isSpeaking: boolean }) => (
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
+    <rect x="5" y="10" width="30" height="25" rx="6" fill="#18181b" stroke="#fbbf24" strokeWidth="2"/>
+    <circle cx="13" cy="20" r="2.5" fill="#fbbf24">
+      <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="27" cy="20" r="2.5" fill="#fbbf24">
+      <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
+    </circle>
+    {/* Animated Mouth */}
+    <rect x="15" y="28" width="10" height="2" rx="1" fill="#fbbf24">
+      {isSpeaking && (
+        <animate 
+          attributeName="height" 
+          values="2;6;2" 
+          dur="0.4s" 
+          repeatCount="indefinite" 
+        />
+      )}
+      {isSpeaking && (
+        <animate 
+          attributeName="y" 
+          values="28;26;28" 
+          dur="0.4s" 
+          repeatCount="indefinite" 
+        />
+      )}
+    </rect>
+    <path d="M15 5L25 5L20 10L15 5Z" fill="#fbbf24" />
+  </svg>
+);
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,18 +60,17 @@ export default function Chatbot() {
     {
       id: "1",
       sender: "bot",
-      text: "Hi there. I am the Clever Crow AI.\n\nYou can ask me about our services, pricing, or just type 'connect' if you'd like to get started with our team.",
-      options: ["What services do you provide?", "Connect with team"],
+      text: "Hi! I'm the Clever Crow AI.\n\nAsk me about Web Development, Marketing, or Branding.",
+      options: ["Web Dev", "Marketing", "Branding", "Connect"],
     },
   ]);
   
   const [inputValue, setInputValue] = useState("");
   const [userData, setUserData] = useState({
     name: "",
-    contact: "",
-    service: "",
-    budget: "",
-    other: "",
+    email: "",
+    phone: "",
+    message: "",
   });
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -64,6 +98,7 @@ export default function Chatbot() {
   };
 
   const validateName = (name: string) => name.trim().length >= 2;
+  const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const validatePhone = (phone: string) => {
     const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
     return phoneRegex.test(phone.trim());
@@ -71,194 +106,166 @@ export default function Chatbot() {
 
   const handleSend = (text: string) => {
     if (!text.trim()) return;
-
     addMessage({ sender: "user", text });
     setInputValue("");
     setIsTyping(true);
-
-    setTimeout(() => {
-      processInput(text);
-    }, 1000 + Math.random() * 800); 
+    setTimeout(() => processInput(text), 1500 + Math.random() * 1000); 
   };
 
   const generateAIResponse = (text: string) => {
     const lowerText = text.toLowerCase();
     
     // Greetings
-    if (/^(hi|hello|hey|greetings|good morning|good afternoon|good evening)\b/.test(lowerText)) {
+    if (/^(hi|hello|hey)\b/.test(lowerText)) {
       addMessage({
         sender: "bot",
-        text: "Hello! How can I help you today? You can ask me about our services, pricing, or type 'connect' to speak with a human.",
-        options: ["What services do you provide?", "Connect with team"],
+        text: "Hello! How can I help you today?",
+        options: ["Web Dev", "Marketing", "Branding", "Connect"],
       });
       return;
     }
 
-    if (lowerText.includes("how are you")) {
+    // Contact & Address Info
+    if (lowerText.includes("address") || lowerText.includes("location") || lowerText.includes("office") || lowerText.includes("where")) {
       addMessage({
         sender: "bot",
-        text: "I'm functioning perfectly, thank you! I'm here to help you learn about Clever Crow's digital services or get your project started. How can I assist you today?",
-        options: ["What services do you provide?", "Connect with team"],
+        text: "Our Global HQ is located at:\n\n**Business Bay, 2nd Floor, Udupi–Manipal Highway, Kunjibettu, KA, India.**\n\nWould you like to visit us or schedule a call?",
+        options: ["Schedule Call", "Main Menu"],
       });
       return;
     }
 
-    if (lowerText.includes("thank you") || lowerText === "thanks") {
+    if (lowerText.includes("contact") || lowerText.includes("phone") || lowerText.includes("email") || lowerText.includes("number")) {
       addMessage({
         sender: "bot",
-        text: "You're very welcome! Let me know if there's anything else you need.",
-        options: ["Connect with team"],
+        text: "You can reach us at:\n\n📞 **+91 99863 89444**\n📧 **hello@clevercrow.in**\n\nOr I can collect your details and have our team call you?",
+        options: ["Connect Now", "Main Menu"],
       });
       return;
     }
 
-    if (lowerText.includes("bye") || lowerText.includes("goodbye")) {
-      addMessage({
-        sender: "bot",
-        text: "Goodbye! Feel free to open this chat anytime if you have more questions.",
-      });
-      return;
-    }
-
-    if (lowerText.includes("connect") || lowerText.includes("contact") || lowerText.includes("hire") || lowerText.includes("quote") || lowerText.includes("talk")) {
+    // Lead Gen Triggers
+    if (lowerText.includes("connect") || lowerText.includes("schedule") || lowerText === "yes, connect" || lowerText === "connect now" || lowerText === "schedule call") {
       setMode("lead_gen");
       setCurrentStep("name");
+      addMessage({ sender: "bot", text: "Great! Let's get some details. What's your name?" });
+      return;
+    }
+
+    // Reset / Main Menu
+    if (lowerText.includes("main menu") || lowerText.includes("other services") || lowerText.includes("start over")) {
       addMessage({
         sender: "bot",
-        text: "Understood. Let's get a few details so our team can reach out to you properly. First, what's your name?",
+        text: "I'm here to help with Web, Marketing, and Branding. What would you like to explore?",
+        options: ["Web Dev", "Marketing", "Branding", "Connect"],
       });
       return;
     }
 
-    if (lowerText.includes("service") || lowerText.includes("provide") || lowerText.includes("what do you do") || lowerText.includes("offer")) {
-      const serviceNames = Object.values(services).map(s => s.title).join(", ");
-      addMessage({
-        sender: "bot",
-        text: `We provide bespoke digital strategy, app development, and AI-driven SEO. Our primary services currently include: ${serviceNames}.\n\nWhich one would you like to know more about?`,
-        options: Object.values(services).map(s => s.title).concat(["Connect with team"]),
-      });
-      return;
-    }
-
+    // --- CHECK FOR SPECIFIC SERVICES FIRST ---
     const matchedService = Object.values(services).find(s => 
-      lowerText.includes(s.title.toLowerCase()) || lowerText.includes(s.slug.toLowerCase().replace("-", " ")) || (lowerText.includes("google") && lowerText.includes("ads"))
+      lowerText.includes(s.title.toLowerCase()) || 
+      lowerText.includes(s.slug.replace("-", " ")) ||
+      (s.title.toLowerCase() === "logo design" && lowerText === "logo design")
     );
 
     if (matchedService) {
       addMessage({
         sender: "bot",
-        text: `${matchedService.title}: ${matchedService.heroSubtitle}\n\nWe typically focus on: ${matchedService.outcomes.slice(0, 2).join(" & ")}. Would you like to connect with our team to discuss this further?`,
-        options: ["Yes, connect", "What other services?"],
+        text: `${matchedService.title}: ${matchedService.heroSubtitle}\n\nShall we connect?`,
+        options: ["Yes, connect", "Other services"],
       });
       return;
     }
 
-    if (lowerText.includes("price") || lowerText.includes("cost") || lowerText.includes("budget") || lowerText.includes("how much")) {
+    // --- BROAD CATEGORY CHECKS ---
+    if (lowerText.includes("web") || lowerText.includes("site")) {
       addMessage({
         sender: "bot",
-        text: "Our projects typically start around ₹50,000, but it completely depends on your bespoke requirements. The best way to get an accurate estimate is to share your details with us. Shall we connect on WhatsApp?",
-        options: ["Yes, connect", "Not right now"],
+        text: "We build Business and E-commerce websites. Which do you need?",
+        options: ["Business Website", "E-commerce Website", "Connect"],
       });
       return;
     }
-    
-    if (lowerText === "yes, connect" || lowerText === "yes") {
-      setMode("lead_gen");
-      setCurrentStep("name");
+
+    if (lowerText.includes("marketing") || lowerText.includes("ads") || lowerText.includes("seo")) {
       addMessage({
         sender: "bot",
-        text: "Great. Let's get started. What's your name?",
+        text: "We offer Google Ads, Social Media Ads, and SEO. Interested in one?",
+        options: ["Google Ads", "Social Media Ads", "SEO", "Connect"],
+      });
+      return;
+    }
+
+    if (lowerText.includes("branding") || lowerText.includes("logo") || lowerText.includes("design") || lowerText.includes("strategy")) {
+      addMessage({
+        sender: "bot",
+        text: "Our Branding includes Logo Design, Graphic Design, and Strategy & Planning. Need a refresh?",
+        options: ["Logo Design", "Graphic Design", "Strategy & Planning", "Connect"],
       });
       return;
     }
 
     addMessage({
       sender: "bot",
-      text: "I'm not completely sure about that. I am an AI assistant for Clever Crow focused on helping you learn about our digital strategies and services.\n\nType 'services' to see what we do, or 'connect' to speak to a human.",
-      options: ["What services do you provide?", "Connect with team"],
+      text: "I'm here to help with Web, Marketing, and Branding. What can I do for you?",
+      options: ["Web Dev", "Marketing", "Branding", "Connect"],
     });
   };
 
-  const processLeadGen = (val: string) => {
+  const processLeadGen = async (val: string) => {
     switch (currentStep) {
       case "name":
-        if (!validateName(val)) {
-          addMessage({
-            sender: "bot",
-            text: "Please enter a valid name.",
-          });
-          return;
-        }
+        if (!validateName(val)) { addMessage({ sender: "bot", text: "Please enter a valid name." }); return; }
         setUserData((prev) => ({ ...prev, name: val }));
-        setCurrentStep("contact");
-        addMessage({
-          sender: "bot",
-          text: `Thank you, ${val}. Could you please provide your mobile number?`,
-        });
+        setCurrentStep("email");
+        addMessage({ sender: "bot", text: `Hi ${val}! What is your email address?` });
         break;
+      case "email":
+        if (!validateEmail(val)) { addMessage({ sender: "bot", text: "Please enter a valid email." }); return; }
+        setUserData((prev) => ({ ...prev, email: val }));
+        setCurrentStep("phone");
+        addMessage({ sender: "bot", text: "Great! And your phone number?" });
+        break;
+      case "phone":
+        if (!validatePhone(val)) { addMessage({ sender: "bot", text: "Please enter a valid number." }); return; }
+        const finalData = { ...userData, phone: val, message: "No requirement specified" };
+        setUserData(finalData);
+        setIsTyping(true);
+        
+        const result = await submitLead({
+          name: finalData.name,
+          email: finalData.email,
+          phone: finalData.phone,
+          message: finalData.message,
+          source: "AI Chatbot"
+        });
 
-      case "contact":
-        if (!validatePhone(val)) {
-          addMessage({
-            sender: "bot",
-            text: "Please enter a valid mobile number.",
+        setIsTyping(false);
+        if (result.success) {
+          setCurrentStep("done");
+          addMessage({ 
+            sender: "bot", 
+            text: "Thank you! Your inquiry has been sent to our team. We will connect you shortly.",
+            options: ["Start New Chat"]
           });
-          return;
+        } else {
+          addMessage({ sender: "bot", text: "Oops, something went wrong. Could you please try again or contact us via phone?" });
         }
-        setUserData((prev) => ({ ...prev, contact: val }));
-        setCurrentStep("service");
-        
-        const serviceOptions = Object.values(services).map((s) => s.title);
-        addMessage({
-          sender: "bot",
-          text: "Noted. Which service are you primarily looking for?",
-          options: serviceOptions,
-        });
         break;
-
-      case "service":
-        setUserData((prev) => ({ ...prev, service: val }));
-        setCurrentStep("budget");
-        addMessage({
-          sender: "bot",
-          text: "Understood. What is your estimated budget for this project?",
-          options: [
-            "Under ₹50,000",
-            "₹50,000 - ₹1,00,000",
-            "₹1,00,000 - ₹5,00,000",
-            "Above ₹5,00,000",
-            "Not Sure",
-          ],
-        });
-        break;
-
-      case "budget":
-        setUserData((prev) => ({ ...prev, budget: val }));
-        setCurrentStep("other");
-        addMessage({
-          sender: "bot",
-          text: "Almost done. Any other details about your website or specific goals you'd like to achieve?",
-        });
-        break;
-
-      case "other":
-        setUserData((prev) => ({ ...prev, other: val }));
-        setCurrentStep("done");
-        addMessage({
-          sender: "bot",
-          text: "Thank you for sharing your details. I am generating your inquiry and redirecting you to our WhatsApp to continue.",
-        });
-        
-        setTimeout(() => {
-          redirectWhatsApp({ ...userData, other: val });
-        }, 2000);
-        break;
-
       case "done":
-        addMessage({
-          sender: "bot",
-          text: "Your request has been prepared. If WhatsApp didn't open automatically, please let us know.",
-        });
+        if (val.toLowerCase().includes("new chat") || val.toLowerCase().includes("start")) {
+          setMode("chat");
+          setCurrentStep("name");
+          setMessages([{
+            id: "1",
+            sender: "bot",
+            text: "Hi! I'm the Clever Crow AI.\n\nAsk me about Web Development, Digital Marketing, or Branding.",
+            options: ["Web Dev", "Marketing", "Branding", "Connect"],
+          }]);
+        } else {
+          addMessage({ sender: "bot", text: "We have received your inquiry. Thank you!" });
+        }
         break;
     }
   };
@@ -266,212 +273,128 @@ export default function Chatbot() {
   const processInput = (text: string) => {
     setIsTyping(false);
     const val = text.trim();
-
-    if (mode === "chat") {
-      generateAIResponse(val);
-    } else {
-      processLeadGen(val);
-    }
+    if (mode === "chat") generateAIResponse(val);
+    else processLeadGen(val);
   };
 
-  const redirectWhatsApp = (data: typeof userData) => {
-    const message = `*New Lead from AI Chatbot*
-*Name:* ${data.name}
-*Contact:* ${data.contact}
-*Service Request:* ${data.service}
-*Estimated Budget:* ${data.budget}
-*Additional Info:* ${data.other || 'N/A'}`;
-
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappNumber = "919876543210"; 
-    
-    window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
-  };
-
-  const handleOptionClick = (option: string) => {
-    handleSend(option);
-  };
+  const handleOptionClick = (option: string) => handleSend(option);
 
   return (
     <>
-      <style>{`
-        @keyframes customSpringOpen {
-          0% {
-            opacity: 0;
-            transform: scale(0.95) translateY(20px);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-          }
-        }
-        
-        @keyframes subtleWhitePulse {
-          0% {
-            border-color: rgba(255,255,255,0.1);
-            box-shadow: 0 0 20px rgba(255,255,255,0.05);
-          }
-          50% {
-            border-color: rgba(255,255,255,0.3);
-            box-shadow: 0 0 30px rgba(255,255,255,0.1);
-          }
-          100% {
-            border-color: rgba(255,255,255,0.1);
-            box-shadow: 0 0 20px rgba(255,255,255,0.05);
-          }
-        }
-
-        @keyframes typingDotWhite {
-          0% { transform: translateY(0px); background-color: #52525b; }
-          50% { transform: translateY(-3px); background-color: #ffffff; }
-          100% { transform: translateY(0px); background-color: #52525b; }
-        }
-
-        .animate-spring-open {
-          animation: customSpringOpen 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .animate-typing-pulse {
-          animation: subtleWhitePulse 2s infinite ease-in-out !important;
-        }
-
-        .typing-dot {
-          animation: typingDotWhite 1.4s infinite ease-in-out;
-        }
-        .typing-dot:nth-child(1) { animation-delay: 0s; }
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-      `}</style>
-      
-      <>
-        {/* Chat Window Container */}
+      <AnimatePresence>
         {isOpen && (
-          <div 
-            className={`fixed bottom-[80px] left-4 right-4 sm:left-auto sm:bottom-[100px] sm:right-6 z-[9999] sm:w-[400px] h-[75dvh] sm:h-[38rem] max-h-[650px] sm:max-h-[800px] flex flex-col rounded-2xl sm:rounded-3xl bg-zinc-950 shadow-[0_20px_60px_rgba(0,0,0,0.9)] border border-zinc-800 origin-bottom-right overflow-hidden transition-all duration-300 animate-spring-open ${isTyping ? 'animate-typing-pulse' : ''} font-sans`}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9, y: 40, transformOrigin: "bottom right" }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 40 }}
+            className="fixed bottom-[80px] left-4 right-4 sm:left-auto sm:bottom-[100px] sm:right-6 z-[9999] w-auto sm:w-[320px] max-w-[calc(100vw-2rem)] h-[70dvh] sm:h-[32rem] max-h-[600px] flex flex-col rounded-3xl bg-black shadow-[0_25px_70px_rgba(0,0,0,1)] border border-zinc-800 overflow-hidden font-sans"
           >
-            {/* Header - Minimalist Black/White */}
-            <div className="p-5 flex justify-between items-center flex-shrink-0 border-b border-zinc-800 bg-zinc-950">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-                  <Sparkles size={20} className="text-zinc-950" />
-                </div>
+            {/* Header - Compact */}
+            <div className="p-4 flex justify-between items-center bg-zinc-950 border-b border-zinc-900">
+              <div className="flex items-center gap-2">
+                <AnimatedBot isSpeaking={isTyping} />
                 <div>
-                  <h3 className="font-semibold text-[16px] tracking-wide text-white">Clever Crow Assistant</h3>
-                  <div className="flex items-center gap-2 mt-0.5">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-90"></span>
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
-                    </span>
-                    <p className="text-xs text-zinc-400 font-medium">Online</p>
+                  <h3 className="font-bold text-[15px] text-white tracking-tight">Clever Crow</h3>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span>
+                    <p className="text-[10px] text-zinc-500 font-semibold uppercase tracking-widest">Active</p>
                   </div>
                 </div>
               </div>
-              <button 
-                onClick={() => setIsOpen(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-zinc-900 hover:bg-white text-zinc-400 hover:text-zinc-950 transition-colors border border-zinc-800"
-                aria-label="Close Chat"
-              >
-                <X size={16} strokeWidth={2.5} />
+              <button onClick={() => setIsOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-full bg-zinc-900 text-zinc-500 hover:text-white transition-colors">
+                <X size={18} />
               </button>
             </div>
             
-            {/* Main Chat Area - Deep Black Background */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-6 flex flex-col scroll-smooth bg-zinc-950">
+            {/* Chat Area */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-5 bg-black scrollbar-hide">
               {messages.map((msg) => (
-                <div
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
                   key={msg.id}
-                  className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"} items-end gap-3 max-w-full`}
+                  className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"} items-end gap-2`}
                 >
-                  {msg.sender === "bot" && (
-                    <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center flex-shrink-0">
-                      <Bot size={14} className="text-white" />
-                    </div>
-                  )}
                   <div
-                    className={`px-5 py-3.5 text-[15px] shadow-sm tracking-tight ${
+                    className={`px-4 py-3 text-[18px] leading-[1.3] tracking-tight font-semibold ${
                       msg.sender === "user"
-                        ? "bg-white text-zinc-950 font-medium rounded-2xl rounded-tr-sm self-end"
-                        : "bg-zinc-900 border border-zinc-800 text-zinc-200 rounded-2xl rounded-tl-sm self-start"
+                        ? "bg-yellow-500 text-black rounded-2xl rounded-tr-sm"
+                        : "bg-zinc-900 text-white border border-zinc-800 rounded-2xl rounded-tl-sm"
                     }`}
-                    style={{ maxWidth: msg.sender === 'user' ? '85%' : '90%' }}
+                    style={{ maxWidth: '88%' }}
                   >
-                    <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
+                    <p className="whitespace-pre-wrap">{msg.text}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
 
               {/* Typing Indicator */}
               {isTyping && (
-                <div className="flex justify-start items-end gap-3">
-                  <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center flex-shrink-0">
-                    <Bot size={14} className="text-white" />
-                  </div>
-                  <div className="px-5 py-4 bg-zinc-900 border border-zinc-800 rounded-2xl rounded-tl-sm flex gap-1.5 items-center">
-                    <div className="w-1.5 h-1.5 rounded-full typing-dot"></div>
-                    <div className="w-1.5 h-1.5 rounded-full typing-dot"></div>
-                    <div className="w-1.5 h-1.5 rounded-full typing-dot"></div>
+                <div className="flex justify-start items-end gap-2">
+                  <div className="px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl rounded-tl-sm flex items-center">
+                    <div className="flex gap-1">
+                      {[0, 1, 2].map((i) => (
+                        <div key={i} className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }}></div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
               
-              {/* Quick Actions */}
-              {!isTyping && messages[messages.length - 1]?.options && messages[messages.length - 1].sender === "bot" && currentStep !== "done" && (
-                <div className="flex flex-wrap gap-2 mt-2 ml-11">
+              {!isTyping && messages[messages.length - 1]?.options && messages[messages.length - 1].sender === "bot" && (
+                <div className="flex flex-wrap gap-1.5 mt-1">
                   {messages[messages.length - 1].options?.map((opt, idx) => (
                     <button
                       key={idx}
                       onClick={() => handleOptionClick(opt)}
-                      className="text-[13px] font-medium bg-zinc-900 border border-zinc-700 text-zinc-300 px-4 py-2 rounded-full hover:bg-white hover:text-zinc-950 transition-colors shadow-sm"
+                      className="text-[13px] font-semibold bg-zinc-900 border border-zinc-800 text-white px-3.5 py-2 rounded-full hover:bg-yellow-500 hover:text-black transition-all shadow-md"
                     >
                       {opt}
                     </button>
                   ))}
                 </div>
               )}
-              
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input Box Area - Minimalist Dark */}
-            <div className="p-4 bg-zinc-950 border-t border-zinc-800 flex-shrink-0">
-              <form 
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleSend(inputValue);
-                }} 
-                className="relative flex items-center"
-              >
+            {/* Input - Compact */}
+            <div className="p-3 bg-zinc-950 border-t border-zinc-900">
+              <form onSubmit={(e) => { e.preventDefault(); handleSend(inputValue); }} className="relative">
                 <input
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  disabled={currentStep === "done" || isTyping}
-                  placeholder={currentStep === "done" ? "Session complete." : isTyping ? "AI is typing..." : "Type your message..."}
-                  className="w-full pl-5 pr-14 py-3.5 bg-zinc-900 border border-zinc-800 rounded-full text-[14px] focus:outline-none focus:border-zinc-500 focus:bg-zinc-800 transition-colors text-white placeholder-zinc-500 disabled:opacity-50"
+                  disabled={isTyping}
+                  placeholder="Type..."
+                  className="w-full pl-4 pr-12 py-3 bg-zinc-900 border border-zinc-800 rounded-full text-[16px] font-semibold focus:outline-none focus:border-yellow-500 text-white placeholder-zinc-700 transition-all"
                 />
-                <button
-                  type="submit"
-                  disabled={!inputValue.trim() || currentStep === "done" || isTyping}
-                  className="absolute right-2 w-9 h-9 rounded-full bg-white text-zinc-950 flex items-center justify-center disabled:opacity-20 hover:scale-105 transition-transform"
-                >
-                  <Send size={16} className="ml-0.5" />
+                <button type="submit" disabled={!inputValue.trim() || isTyping} className="absolute right-1.5 top-1.5 w-9 h-9 rounded-full bg-yellow-500 text-black flex items-center justify-center disabled:opacity-20 transition-transform active:scale-90">
+                  <Send size={18} />
                 </button>
               </form>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`fixed bottom-6 right-6 z-[10000] hidden sm:flex items-center justify-center w-[60px] h-[60px] rounded-full shadow-2xl transition-all duration-500 hover:scale-110 border-2 ${
+          isOpen ? 'bg-zinc-900 border-zinc-800' : 'bg-black border-yellow-500'
+        }`}
+      >
+        {isOpen ? (
+          <X size={24} className="text-white" />
+        ) : (
+          <div className="relative">
+            <MessageCircleMore size={30} className="text-yellow-500" />
+            <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-black animate-pulse"></span>
           </div>
         )}
-
-        {/* Floating Action Button (Desktop Only) */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={`fixed bottom-6 right-6 z-[10000] hidden sm:flex items-center justify-center w-[64px] h-[64px] rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.5)] transition-all duration-300 hover:scale-105 overflow-hidden group border ${
-            isOpen ? 'bg-zinc-900 border-zinc-800 rotate-90 scale-95 shadow-none' : 'bg-white border-white'
-          }`}
-          aria-label="Toggle Chat"
-        >
-          {isOpen ? <X size={26} strokeWidth={2.5} className="text-white relative z-10 -rotate-90 transition-transform duration-300" /> : <MessageCircleMore size={28} strokeWidth={2.5} className="text-zinc-950 relative z-10 transition-transform duration-300 scale-110" />}
-        </button>
-      </>
+      </button>
     </>
   );
 }
+
+
+
