@@ -55,6 +55,7 @@ export default function Chatbot() {
   const [mode, setMode] = useState<ChatMode>("chat");
   const [currentStep, setCurrentStep] = useState<LeadStep>("name");
   const [isTyping, setIsTyping] = useState(false);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
   
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -170,6 +171,7 @@ export default function Chatbot() {
     );
 
     if (matchedService) {
+      setSelectedServices(prev => Array.from(new Set([...prev, matchedService.title])));
       addMessage({
         sender: "bot",
         text: `${matchedService.title}: ${matchedService.heroSubtitle}\n\nShall we connect?`,
@@ -180,6 +182,7 @@ export default function Chatbot() {
 
     // --- BROAD CATEGORY CHECKS ---
     if (lowerText.includes("web") || lowerText.includes("site")) {
+      setSelectedServices(prev => Array.from(new Set([...prev, "Web Development"])));
       addMessage({
         sender: "bot",
         text: "We build Business and E-commerce websites. Which do you need?",
@@ -189,6 +192,7 @@ export default function Chatbot() {
     }
 
     if (lowerText.includes("marketing") || lowerText.includes("ads") || lowerText.includes("seo")) {
+      setSelectedServices(prev => Array.from(new Set([...prev, "Digital Marketing"])));
       addMessage({
         sender: "bot",
         text: "We offer Google Ads, Social Media Ads, and SEO. Interested in one?",
@@ -198,6 +202,7 @@ export default function Chatbot() {
     }
 
     if (lowerText.includes("branding") || lowerText.includes("logo") || lowerText.includes("design") || lowerText.includes("strategy")) {
+      setSelectedServices(prev => Array.from(new Set([...prev, "Branding"])));
       addMessage({
         sender: "bot",
         text: "Our Branding includes Logo Design, Graphic Design, and Strategy & Planning. Need a refresh?",
@@ -229,7 +234,7 @@ export default function Chatbot() {
         break;
       case "phone":
         if (!validatePhone(val)) { addMessage({ sender: "bot", text: "Please enter a valid number." }); return; }
-        const finalData = { ...userData, phone: val, message: "No requirement specified" };
+        const finalData = { ...userData, phone: val, message: selectedServices.join(", ") || "General Interest" };
         setUserData(finalData);
         setIsTyping(true);
         
@@ -257,6 +262,7 @@ export default function Chatbot() {
         if (val.toLowerCase().includes("new chat") || val.toLowerCase().includes("start")) {
           setMode("chat");
           setCurrentStep("name");
+          setSelectedServices([]);
           setMessages([{
             id: "1",
             sender: "bot",
