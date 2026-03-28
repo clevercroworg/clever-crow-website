@@ -54,6 +54,7 @@ export default function InternshipPage() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [country, setCountry] = useState("India");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -276,12 +277,14 @@ export default function InternshipPage() {
                       id="country"
                       name="country"
                       required
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
                       className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 appearance-none focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium"
                     >
-                      <option>India</option>
-                      <option>USA</option>
-                      <option>UK</option>
-                      <option>Other</option>
+                      <option value="India">India</option>
+                      <option value="USA">USA</option>
+                      <option value="UK">UK</option>
+                      <option value="Other">Other</option>
                     </select>
                     <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
@@ -294,9 +297,10 @@ export default function InternshipPage() {
                     <select
                       id="state"
                       name="state"
-                      required
+                      required={country === "India"}
+                      disabled={country !== "India"}
                       defaultValue=""
-                      className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 appearance-none focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium"
+                      className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 appearance-none focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium disabled:opacity-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
                     >
                       <option value="" disabled>Select state...</option>
                       {INDIAN_STATES.map(s => <option key={s}>{s}</option>)}

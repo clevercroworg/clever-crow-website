@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Bars3Icon,
@@ -57,6 +58,7 @@ const navLinks = [
 ];
 
 export default function Header() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
@@ -168,7 +170,7 @@ export default function Header() {
             </nav>
 
             {/* DESKTOP CTAs */}
-            <div className="hidden xl:flex items-center gap-2.5">
+            <div className={`hidden xl:flex items-center gap-2.5 ${pathname === "/internship" ? "opacity-0 pointer-events-none" : ""}`}>
               <a
                 href={`tel:${phoneNumber}`}
                 className="flex items-center gap-1.5 rounded-full border border-gray-200/80 bg-white/50 px-4 2xl:px-5 py-2.5 text-[13px] 2xl:text-[14px] font-bold text-gray-700 shadow-sm transition-all hover:bg-gray-50 hover:shadow-md hover:-translate-y-px active:scale-95"
@@ -187,21 +189,23 @@ export default function Header() {
             </div>
 
             {/* MOBILE TOGGLE */}
-            <div className="flex items-center gap-2.5 xl:hidden relative z-10">
-              <a
-                href={whatsappLink}
-                target="_blank"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/25 transition-transform hover:scale-105"
-              >
-                <FaWhatsapp className="h-5 w-5" />
-              </a>
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-900 border border-gray-100 shadow-sm transition-transform hover:scale-105"
-              >
-                {menuOpen ? <XMarkIcon className="h-5 w-5" /> : <Bars3Icon className="h-5 w-5" />}
-              </button>
-            </div>
+            {pathname !== "/internship" && (
+              <div className="flex items-center gap-2.5 xl:hidden relative z-10">
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/25 transition-transform hover:scale-105"
+                >
+                  <FaWhatsapp className="h-5 w-5" />
+                </a>
+                <button
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-900 border border-gray-100 shadow-sm transition-transform hover:scale-105"
+                >
+                  {menuOpen ? <XMarkIcon className="h-5 w-5" /> : <Bars3Icon className="h-5 w-5" />}
+                </button>
+              </div>
+            )}
           </div>
         </motion.div>
       </div>
