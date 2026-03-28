@@ -170,7 +170,11 @@ export default function InternshipPage() {
                         className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-3 sm:px-4 py-4 text-gray-900 appearance-none focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium text-[13px] sm:text-sm"
                       >
                         <option value="" disabled>Month</option>
-                        {MONTHS.map((m) => <option key={m} value={m}>{window.innerWidth < 640 ? m.slice(0, 3) : m}</option>)}
+                        {MONTHS.map((m) => (
+                          <option key={m} value={m}>
+                            {m}
+                          </option>
+                        ))}
                       </select>
                       <div className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
