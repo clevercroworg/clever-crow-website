@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
   Linkedin,
   Instagram,
@@ -12,6 +13,7 @@ import {
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function Footer() {
+  const pathname = usePathname();
   return (
     <footer className="relative w-full bg-white text-gray-600 border-t border-gray-100 overflow-hidden">
       {/* ───────────────── CONVERSION STRIP ───────────────── */}
@@ -183,30 +185,32 @@ export default function Footer() {
       </div>
 
       {/* ───────────── STICKY MOBILE CTA ───────────── */}
-      <div className="fixed bottom-4 left-4 right-4 z-[100] flex gap-2 rounded-3xl sm:rounded-full bg-white/95 backdrop-blur-xl px-3 py-3 shadow-[0_12px_40px_rgba(0,0,0,0.15)] sm:hidden border border-gray-100">
-        <a
-          href="tel:+919986389444"
-          className="flex flex-1 items-center justify-center gap-2 rounded-2xl sm:rounded-full bg-yellow-400 py-3.5 text-[11px] font-black uppercase tracking-widest text-gray-950 shadow-xl shadow-yellow-500/10 active:scale-95 transition-transform"
-        >
-          <Phone size={14} />
-          Call
-        </a>
+      {pathname !== "/internship" && (
+        <div className="fixed bottom-4 left-4 right-4 z-[100] flex gap-2 rounded-3xl sm:rounded-full bg-white/95 backdrop-blur-xl px-3 py-3 shadow-[0_12px_40px_rgba(0,0,0,0.15)] sm:hidden border border-gray-100">
+          <a
+            href="tel:+919986389444"
+            className="flex flex-1 items-center justify-center gap-2 rounded-2xl sm:rounded-full bg-yellow-400 py-3.5 text-[11px] font-black uppercase tracking-widest text-gray-950 shadow-xl shadow-yellow-500/10 active:scale-95 transition-transform"
+          >
+            <Phone size={14} />
+            Call
+          </a>
 
-        <a
-          href="https://wa.me/919986389444"
-          target="_blank"
-          className="flex items-center justify-center px-4 rounded-2xl sm:rounded-full bg-[#25D366] py-3.5 text-white shadow-xl shadow-green-500/10 active:scale-95 transition-transform"
-        >
-          <FaWhatsapp size={20} />
-        </a>
+          <a
+            href="https://wa.me/919986389444"
+            target="_blank"
+            className="flex items-center justify-center px-4 rounded-2xl sm:rounded-full bg-[#25D366] py-3.5 text-white shadow-xl shadow-green-500/10 active:scale-95 transition-transform"
+          >
+            <FaWhatsapp size={20} />
+          </a>
 
-        <button
-          onClick={() => window.dispatchEvent(new CustomEvent("toggle-chat"))}
-          className="flex items-center justify-center px-4 rounded-2xl sm:rounded-full bg-zinc-900 py-3.5 text-white shadow-xl shadow-zinc-900/10 active:scale-95 transition-transform"
-        >
-          <Bot size={20} />
-        </button>
-      </div>
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent("toggle-chat"))}
+            className="flex items-center justify-center px-4 rounded-2xl sm:rounded-full bg-zinc-900 py-3.5 text-white shadow-xl shadow-zinc-900/10 active:scale-95 transition-transform"
+          >
+            <Bot size={20} />
+          </button>
+        </div>
+      )}
     </footer>
   );
 }
