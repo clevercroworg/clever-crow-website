@@ -110,7 +110,7 @@ export default function InternshipPage() {
   }
 
   return (
-    <main className="bg-white selection:bg-yellow-500/30 min-h-screen pt-32 pb-20">
+    <main className="bg-white selection:bg-yellow-500/30 min-h-screen pt-32 pb-20 overflow-x-hidden">
       <div className="max-w-4xl mx-auto px-6">
         <SectionHeader
           badge="Join Our Pack"
@@ -123,7 +123,7 @@ export default function InternshipPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="relative mt-8 sm:mt-12 bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-gray-100 p-6 sm:p-12 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.1)]"
+          className="relative mt-8 sm:mt-12 bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-gray-100 p-6 sm:p-12 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.1)] overflow-hidden"
         >
           {/* Decorative elements */}
           <div className="absolute -top-24 -right-24 h-64 w-64 bg-yellow-400/10 blur-[60px] rounded-full pointer-events-none" />
@@ -140,8 +140,8 @@ export default function InternshipPage() {
                 <h3 className="text-xl font-bold text-gray-900">Personal Details</h3>
               </div>
               <div className="grid sm:grid-cols-2 gap-6">
-                <FormField label="Full Name" id="name" required placeholder="Your name here..." />
-                <FormField label="Email Address" id="email" type="email" required placeholder="Your email here..." />
+                <FormField label="Full Name" id="name" required placeholder="Enter a name" />
+                <FormField label="Email Address" id="email" type="email" required placeholder="Enter email" />
                 <FormField label="Phone Number" id="phone" type="tel" required placeholder="+91 99887 76655" />
                 
                 <div className="space-y-4">
