@@ -17,37 +17,39 @@ export default function Footer() {
   return (
     <footer className="relative w-full bg-white text-gray-600 border-t border-gray-100 overflow-hidden">
       {/* ───────────────── CONVERSION STRIP ───────────────── */}
-      <div className="border-b border-black/5 bg-yellow-400">
-        <div className="mx-auto max-w-7xl px-6 py-5 sm:py-6 lg:py-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col gap-1">
-            <h3 className="text-lg lg:text-xl font-black tracking-tight text-gray-900">
-              Ready to grow your business?
-            </h3>
-            <p className="text-sm font-bold text-gray-800">
-              Consult with our experts for a custom growth audit.
-            </p>
-          </div>
+      {pathname !== "/internship" && (
+        <div className="border-b border-black/5 bg-yellow-400">
+          <div className="mx-auto max-w-7xl px-6 py-5 sm:py-6 lg:py-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-1">
+              <h3 className="text-lg lg:text-xl font-black tracking-tight text-gray-900">
+                Ready to grow your business?
+              </h3>
+              <p className="text-sm font-bold text-gray-800">
+                Consult with our experts for a custom growth audit.
+              </p>
+            </div>
 
-          <div className="flex flex-wrap gap-4">
-            <a
-              href="tel:+919986389444"
-              className="group inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-gray-950 transition-all hover:bg-gray-50 hover:shadow-xl hover:-translate-y-1"
-            >
-              <Phone size={16} className="group-hover:rotate-12 transition-transform" />
-              Call Now
-            </a>
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="tel:+919986389444"
+                className="group inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-gray-950 transition-all hover:bg-gray-50 hover:shadow-xl hover:-translate-y-1"
+              >
+                <Phone size={16} className="group-hover:rotate-12 transition-transform" />
+                Call Now
+              </a>
 
-            <a
-              href="https://wa.me/919986389444"
-              target="_blank"
-              className="group inline-flex items-center gap-2 rounded-xl border border-black/10 bg-white/40 backdrop-blur-md px-6 py-3 text-sm font-bold text-gray-900 transition-all hover:bg-white hover:border-black/20 hover:shadow-lg hover:-translate-y-1"
-            >
-              <FaWhatsapp size={18} className="text-[#25D366] group-hover:scale-110 transition-transform" />
-              WhatsApp
-            </a>
+              <a
+                href="https://wa.me/919986389444"
+                target="_blank"
+                className="group inline-flex items-center gap-2 rounded-xl border border-black/10 bg-white/40 backdrop-blur-md px-6 py-3 text-sm font-bold text-gray-900 transition-all hover:bg-white hover:border-black/20 hover:shadow-lg hover:-translate-y-1"
+              >
+                <FaWhatsapp size={18} className="text-[#25D366] group-hover:scale-110 transition-transform" />
+                WhatsApp
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* ───────────── MAIN FOOTER ───────────── */}
       <div className="relative overflow-hidden bg-white">
@@ -101,35 +103,38 @@ export default function Footer() {
             </div>
 
             {/* ───── NAVIGATION GRID ───── */}
-            <div className="lg:col-span-8 grid gap-6 sm:gap-8 sm:grid-cols-3">
+            <div className={`lg:col-span-8 grid gap-6 sm:gap-8 ${pathname === "/internship" ? "lg:grid-cols-1" : "sm:grid-cols-3"}`}>
               
-              {/* ───── SERVICES ───── */}
-              <div>
-                <h4 className="mb-4 sm:mb-6 text-[10px] font-black uppercase tracking-[0.2em] text-gray-900">
-                  Growth Stack
-                </h4>
-                <ul className="space-y-3 sm:space-y-4 text-sm font-bold text-gray-600">
-                  <li><Link href="/services/digital-marketing" className="transition-colors hover:text-yellow-600">Digital Marketing</Link></li>
-                  <li><Link href="/services/paid-ads" className="transition-colors hover:text-yellow-600">Google & Meta Ads</Link></li>
-                  <li><Link href="/services/seo" className="transition-colors hover:text-yellow-600">Strategic SEO</Link></li>
-                  <li><Link href="/services/social-media" className="transition-colors hover:text-yellow-600">Brand Identity</Link></li>
-                  <li><Link href="/services/ai-automation" className="transition-colors tracking-tight text-gray-900 hover:text-yellow-600 underline decoration-yellow-400/50 decoration-2 underline-offset-4">AI Systems</Link></li>
-                </ul>
-              </div>
+              {/* ───── SERVICES & EXPERIENCE ───── */}
+              {pathname !== "/internship" && (
+                <>
+                  <div>
+                    <h4 className="mb-4 sm:mb-6 text-[10px] font-black uppercase tracking-[0.2em] text-gray-900">
+                      Growth Stack
+                    </h4>
+                    <ul className="space-y-3 sm:space-y-4 text-sm font-bold text-gray-600">
+                      <li><Link href="/services/digital-marketing" className="transition-colors hover:text-yellow-600">Digital Marketing</Link></li>
+                      <li><Link href="/services/paid-ads" className="transition-colors hover:text-yellow-600">Google & Meta Ads</Link></li>
+                      <li><Link href="/services/seo" className="transition-colors hover:text-yellow-600">Strategic SEO</Link></li>
+                      <li><Link href="/services/social-media" className="transition-colors hover:text-yellow-600">Brand Identity</Link></li>
+                      <li><Link href="/services/ai-automation" className="transition-colors tracking-tight text-gray-900 hover:text-yellow-600 underline decoration-yellow-400/50 decoration-2 underline-offset-4">AI Systems</Link></li>
+                    </ul>
+                  </div>
 
-              {/* ───── ECOSYSTEM ───── */}
-              <div>
-                <h4 className="mb-4 sm:mb-6 text-[10px] font-black uppercase tracking-[0.2em] text-gray-900">
-                  Experience
-                </h4>
-                <ul className="space-y-3 sm:space-y-4 text-sm font-bold text-gray-600">
-                  <li><Link href="/about" className="transition-colors hover:text-yellow-600">Company Story</Link></li>
-                  <li><Link href="/case-studies" className="transition-colors hover:text-yellow-600">Case Results</Link></li>
-                  <li><Link href="/reviews" className="transition-colors hover:text-yellow-600">Client Reviews</Link></li>
-                  <li><Link href="/contact" className="transition-colors hover:text-yellow-600">Contact Hub</Link></li>
-                  <li><Link href="/careers" className="transition-colors hover:text-yellow-600">Careers</Link></li>
-                </ul>
-              </div>
+                  <div>
+                    <h4 className="mb-4 sm:mb-6 text-[10px] font-black uppercase tracking-[0.2em] text-gray-900">
+                      Experience
+                    </h4>
+                    <ul className="space-y-3 sm:space-y-4 text-sm font-bold text-gray-600">
+                      <li><Link href="/about" className="transition-colors hover:text-yellow-600">Company Story</Link></li>
+                      <li><Link href="/case-studies" className="transition-colors hover:text-yellow-600">Case Results</Link></li>
+                      <li><Link href="/reviews" className="transition-colors hover:text-yellow-600">Client Reviews</Link></li>
+                      <li><Link href="/contact" className="transition-colors hover:text-yellow-600">Contact Hub</Link></li>
+                      <li><Link href="/careers" className="transition-colors hover:text-yellow-600">Careers</Link></li>
+                    </ul>
+                  </div>
+                </>
+              )}
 
               {/* ───── CONTACT & REGIONAL ───── */}
               <div>

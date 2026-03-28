@@ -47,7 +47,7 @@ const MONTHS = [
   "January", "February", "March", "April", "May", "June", 
   "July", "August", "September", "October", "November", "December"
 ];
-const YEARS = Array.from({ length: 45 }, (_, i) => 2000 - i);
+const YEARS = Array.from({ length: 16 }, (_, i) => 2000 + i);
 
 
 export default function InternshipPage() {
