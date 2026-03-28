@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { X, Send, Sparkles, MessageCircleMore } from "lucide-react";
 import { services } from "@/data/services";
 import { motion, AnimatePresence } from "framer-motion";
@@ -51,11 +52,16 @@ const AnimatedBot = ({ isSpeaking }: { isSpeaking: boolean }) => (
 );
 
 export default function Chatbot() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [mode, setMode] = useState<ChatMode>("chat");
   const [currentStep, setCurrentStep] = useState<LeadStep>("name");
   const [isTyping, setIsTyping] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+
+  // Hide chatbot on internship page
+  if (pathname === "/internship") return null;
+
   
   const [messages, setMessages] = useState<Message[]>([
     {
