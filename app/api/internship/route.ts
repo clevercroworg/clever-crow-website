@@ -1,5 +1,15 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { 
+  Calendar, 
+  MapPin, 
+  GraduationCap, 
+  Code2, 
+  CheckCircle2, 
+  Loader2,
+  ArrowRight,
+  Globe
+} from "lucide-react";
 
 export async function POST(req: Request) {
   try {

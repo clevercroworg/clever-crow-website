@@ -13,7 +13,8 @@ import {
   CheckCircle2,
   Loader2,
   ArrowRight,
-  Globe
+  Globe,
+  Sparkles
 } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 
@@ -129,7 +130,7 @@ export default function InternshipPage() {
           <div className="absolute -bottom-24 -left-24 h-64 w-64 bg-indigo-500/5 blur-[60px] rounded-full pointer-events-none" />
 
           <form onSubmit={handleSubmit} className="relative z-10 space-y-10">
-
+            
             {/* --- PERSONAL DETAILS --- */}
             <section className="space-y-6">
               <div className="flex items-center gap-3 mb-2">
