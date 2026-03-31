@@ -15,8 +15,8 @@ export default function OrganizationSchema() {
       "addressCountry": "IN"
     },
     "sameAs": [
-      "https://www.instagram.com/clevercrow.strategies/",
-      "https://www.facebook.com/profile.php?id=61579261586907",
+      "https://www.instagram.com/clevercrow.strategies",
+      "https://www.facebook.com/people/Clever-Crow-Strategies/61579261586907/",
       "https://www.linkedin.com/company/clever-crow-strategies/"
     ]
   };

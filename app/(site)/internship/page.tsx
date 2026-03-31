@@ -1,415 +1,263 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
-  User,
-  Mail,
-  Phone,
-  Calendar,
-  MapPin,
-  GraduationCap,
-  Code2,
-  CheckCircle2,
-  Loader2,
   ArrowRight,
-  Globe,
-  Sparkles
+  Clock,
+  Users,
+  Code2,
+  BrainCircuit,
+  Search,
+  Smartphone,
+  Palette,
+  Database,
+  BarChart3,
+  PenTool,
+  Cloud,
+  ShieldCheck,
+  MonitorPlay,
+  Sparkles,
+  Lock
 } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 
-const INDIAN_STATES = [
-  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa",
-  "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala",
-  "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland",
-  "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
-  "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands",
-  "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu and Kashmir",
-  "Ladakh", "Lakshadweep", "Puducherry"
+const INTERNSHIPS = [
+  {
+    id: "1",
+    title: "Full Stack / AI-ML Development",
+    posted: "1 day ago",
+    filled: 14,
+    total: 15,
+    icon: <div className="flex -space-x-2"><Code2 /><BrainCircuit /></div>,
+    color: "bg-blue-50 text-blue-600",
+    description: "Architect cutting-edge web platforms powered by artificial intelligence and machine learning models.",
+    active: true
+  },
+  {
+    id: "10",
+    title: "Content Writing",
+    posted: "2 days ago",
+    filled: 12,
+    total: 15,
+    icon: <PenTool className="w-6 h-6" />,
+    color: "bg-lime-50 text-lime-600",
+    description: "Craft compelling stories and high-quality content for various platforms.",
+    active: true
+  },
+  {
+    id: "7",
+    title: "Web Design",
+    posted: "1 day ago",
+    filled: 11,
+    total: 15,
+    icon: <Palette className="w-6 h-6" />,
+    color: "bg-pink-50 text-pink-600",
+    description: "Design intuitive and aesthetically pleasing digital products and modern websites.",
+    active: true
+  },
+  {
+    id: "3",
+    title: "Google Ads / Facebook Ads",
+    posted: "2 days ago",
+    filled: 15,
+    total: 15,
+    icon: <MonitorPlay className="w-6 h-6" />,
+    color: "bg-orange-50 text-orange-600",
+    description: "Master performance marketing and campaign optimization across major platforms.",
+    active: false
+  },
+  {
+    id: "4",
+    title: "Backend (Node.js/Python)",
+    posted: "1 day ago",
+    filled: 15,
+    total: 15,
+    icon: <Database className="w-6 h-6" />,
+    color: "bg-emerald-50 text-emerald-600",
+    description: "Architect robust server-side systems and manage complex databases.",
+    active: false
+  },
+  {
+    id: "5",
+    title: "Frontend (React/Next.js)",
+    posted: "3 days ago",
+    filled: 15,
+    total: 15,
+    icon: <MonitorPlay className="w-6 h-6" />,
+    color: "bg-cyan-50 text-cyan-600",
+    description: "Create stunning, high-performance user interfaces with modern web technologies.",
+    active: false
+  },
+  {
+    id: "6",
+    title: "Mobile App (React Native)",
+    posted: "2 days ago",
+    filled: 15,
+    total: 15,
+    icon: <Smartphone className="w-6 h-6" />,
+    color: "bg-indigo-50 text-indigo-600",
+    description: "Build cross-platform mobile experiences for iOS and Android.",
+    active: false
+  },
+  {
+    id: "8",
+    title: "Data Science",
+    posted: "2 days ago",
+    filled: 15,
+    total: 15,
+    icon: <BarChart3 className="w-6 h-6" />,
+    color: "bg-amber-50 text-amber-600",
+    description: "Extract insights from data and drive decision-making through analytics.",
+    active: false
+  },
+  {
+    id: "9",
+    title: "Digital Marketing",
+    posted: "4 days ago",
+    filled: 15,
+    total: 15,
+    icon: <Search className="w-6 h-6" />,
+    color: "bg-red-50 text-red-600",
+    description: "Grow brands and reach audiences through strategic digital channels.",
+    active: false
+  },
+  {
+    id: "11",
+    title: "Cloud (AWS/Azure)",
+    posted: "1 day ago",
+    filled: 15,
+    total: 15,
+    icon: <Cloud className="w-6 h-6" />,
+    color: "bg-sky-50 text-sky-600",
+    description: "Deploy and manage scalable infrastructure in the cloud.",
+    active: false
+  },
+  {
+    id: "12",
+    title: "Cybersecurity",
+    posted: "3 days ago",
+    filled: 15,
+    total: 15,
+    icon: <ShieldCheck className="w-6 h-6" />,
+    color: "bg-rose-50 text-rose-600",
+    description: "Protect systems and data from cyber threats and vulnerabilities.",
+    active: false
+  },
 ];
 
-const SKILLS = [
-  { id: "mongodb", name: "MongoDB" },
-  { id: "react_native", name: "React Native" },
-  { id: "nodejs", name: "Node.js" },
-  { id: "server", name: "Server" },
-  { id: "ai_ml", name: "AI/ML" },
-];
-
-const LEVELS = ["Beginner", "Intermediate", "Experienced"];
-
-const EDUCATION_OPTIONS = [
-  "PUC", "BCA", "Engineering", "BSC CS", "MCA", "MSC CS", "Other"
-];
-
-const DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
-const MONTHS = [
-  "January", "February", "March", "April", "May", "June", 
-  "July", "August", "September", "October", "November", "December"
-];
-const YEARS = Array.from({ length: 16 }, (_, i) => 2000 + i);
-
-
-export default function InternshipPage() {
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
-  const [country, setCountry] = useState("India");
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
-    try {
-      const res = await fetch("/api/internship", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (!res.ok) throw new Error("Failed to submit");
-
-      setSuccess(true);
-      form.reset();
-    } catch (err) {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-
-  if (success) {
-    return (
-      <main className="pt-32 pb-20 min-h-screen bg-gray-50 flex items-center justify-center px-6">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="max-w-md w-full bg-white rounded-[2.5rem] p-12 text-center shadow-2xl border border-gray-100"
-        >
-          <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 size={40} />
-          </div>
-          <h2 className="text-3xl font-black text-gray-900 mb-4">Application Received!</h2>
-          <p className="text-gray-600 font-medium mb-8">
-            Thank you for applying. Our talent acquisition team will review your profile and get back to you soon.
-          </p>
-          <button
-            onClick={() => setSuccess(false)}
-            className="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-black uppercase tracking-widest py-4 rounded-2xl transition-all"
-          >
-            Submit Another
-          </button>
-        </motion.div>
-      </main>
-    );
-  }
-
+export default function InternshipListingPage() {
   return (
     <main className="bg-white selection:bg-yellow-500/30 min-h-screen pt-32 pb-20 overflow-x-hidden">
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
-          badge="Join Our Pack"
-          title="Internship"
-          titleAccent="Program"
-          description="Scale your skills with real-world projects. We are looking for ambitious minds ready to engineer the future of AI/ML and Full stack development."
+          badge="Limited Opportunities"
+          title="Explore Our"
+          titleAccent="Internships"
+          description="Join our dynamic team and kickstart your career. We are looking for passionate individuals for our active roles."
         />
 
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {INTERNSHIPS.map((internship, index) => (
+            <motion.div
+              key={internship.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.05 }}
+              whileHover={internship.active ? { y: -5 } : {}}
+              className={`group relative h-full bg-white rounded-[2rem] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.1)] p-8 transition-all overflow-hidden`}
+            >
+
+              {/* Background Glow */}
+              <div className={`absolute -right-4 -top-4 w-24 h-24 rounded-full blur-3xl opacity-0 group-hover:opacity-20 transition-opacity ${internship.color}`} />
+
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="flex items-start justify-between mb-6">
+                  <div className={`p-4 rounded-2xl ${internship.color} shadow-sm`}>
+                    {internship.icon}
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <span className="flex items-center gap-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">
+                      <Clock size={12} />
+                      {internship.posted}
+                    </span>
+                    <div className={`flex items-center gap-1.5 ${internship.filled === internship.total ? "bg-red-50 border-red-100" : "bg-gray-50 border-gray-100"} px-3 py-1 rounded-full border`}>
+                      <Users size={12} className={internship.filled === internship.total ? "text-red-400" : "text-gray-400"} />
+                      <span className={`text-[12px] font-bold ${internship.filled === internship.total ? "text-red-600" : "text-gray-600"}`}>
+                        {internship.filled}/{internship.total} <span className="text-[10px] opacity-70 font-medium">FILLED</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <h3 className={`font-black mb-3 ${internship.active ? "text-gray-900 group-hover:text-yellow-600" : "text-gray-900"} transition-colors leading-tight ${internship.title.length > 25 ? "text-lg" : "text-xl"}`}>
+                  {internship.title}
+                </h3>
+
+                <p className={`text-sm font-medium text-gray-500 leading-relaxed mb-8`}>
+                  {internship.description}
+                </p>
+
+                <div className="mt-auto pt-6 border-t border-gray-50">
+                  {internship.active ? (
+                    <Link
+                      href={`/internship/${internship.id}`}
+                      className="flex items-center justify-between w-full group/btn"
+                    >
+                      <span className="text-sm font-black uppercase tracking-widest text-gray-900 group-hover/btn:text-yellow-600 transition-colors">
+                        Apply Now
+                      </span>
+                      <div className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white transition-all group-hover/btn:bg-yellow-400 group-hover/btn:text-black">
+                        <ArrowRight size={18} className="transition-transform group-hover/btn:translate-x-1" />
+                      </div>
+                    </Link>
+                  ) : (
+                    <div className="flex items-center justify-between w-full cursor-not-allowed">
+                      <span className="text-sm font-black uppercase tracking-widest text-gray-400">
+                        Filled
+                      </span>
+                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-300">
+                        <Lock size={18} />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Feature Banner */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="relative mt-8 sm:mt-12 bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-gray-100 p-6 sm:p-12 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.1)] overflow-hidden"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-24 relative overflow-hidden rounded-[2.5rem] bg-gray-900 p-12 text-center"
         >
-          {/* Decorative elements */}
-          <div className="absolute -top-24 -right-24 h-64 w-64 bg-yellow-400/10 blur-[60px] rounded-full pointer-events-none" />
-          <div className="absolute -bottom-24 -left-24 h-64 w-64 bg-indigo-500/5 blur-[60px] rounded-full pointer-events-none" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-400 opacity-5 blur-[100px]" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500 opacity-5 blur-[100px]" />
 
-          <form onSubmit={handleSubmit} className="relative z-10 space-y-10">
-            
-            {/* --- PERSONAL DETAILS --- */}
-            <section className="space-y-6">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-yellow-100 rounded-lg text-yellow-600">
-                  <User size={18} />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">Personal Details</h3>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-6">
-                <FormField label="Full Name" id="name" required placeholder="Enter a name" />
-                <FormField label="Email Address" id="email" type="email" required placeholder="Enter email" />
-                <FormField label="Phone Number" id="phone" type="tel" required placeholder="+91 99887 76655" />
-                
-                <div className="space-y-4">
-                  <label className="text-[10px] font-black uppercase tracking-[0.1em] text-gray-500 ml-1">Date of Birth *</label>
-                  <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                    {/* Day */}
-                    <div className="relative">
-                      <select
-                        name="dob_day"
-                        required
-                        defaultValue=""
-                        className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-3 sm:px-4 py-4 text-gray-900 appearance-none focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium text-[13px] sm:text-sm"
-                      >
-                        <option value="" disabled>Day</option>
-                        {DAYS.map(d => <option key={d} value={d}>{d}</option>)}
-                      </select>
-                      <div className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
-                      </div>
-                    </div>
-                    {/* Month */}
-                    <div className="relative">
-                      <select
-                        name="dob_month"
-                        required
-                        defaultValue=""
-                        className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-3 sm:px-4 py-4 text-gray-900 appearance-none focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium text-[13px] sm:text-sm"
-                      >
-                        <option value="" disabled>Month</option>
-                        {MONTHS.map((m) => (
-                          <option key={m} value={m}>
-                            {m}
-                          </option>
-                        ))}
-                      </select>
-                      <div className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
-                      </div>
-                    </div>
-                    {/* Year */}
-                    <div className="relative">
-                      <select
-                        name="dob_year"
-                        required
-                        defaultValue=""
-                        className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-3 sm:px-4 py-4 text-gray-900 appearance-none focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium text-[13px] sm:text-sm"
-                      >
-                        <option value="" disabled>Year</option>
-                        {YEARS.map(y => <option key={y} value={y}>{y}</option>)}
-                      </select>
-                      <div className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* --- EDUCATION --- */}
-            <section className="space-y-6">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-indigo-100 rounded-lg text-indigo-600">
-                  <GraduationCap size={18} />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">Education</h3>
-              </div>
-              <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.1em] text-gray-500 ml-1">Highest Degree *</label>
-                <div className="relative">
-                  <select
-                    id="education"
-                    name="education"
-                    required
-                    defaultValue=""
-                    className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 appearance-none focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium"
-                  >
-                    <option value="" disabled>Select your education...</option>
-                    {EDUCATION_OPTIONS.map(opt => <option key={opt}>{opt}</option>)}
-                  </select>
-                  <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* --- SKILLS --- */}
-            <section className="space-y-6">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-emerald-100 rounded-lg text-emerald-600">
-                  <Code2 size={18} />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">Skills Assessment</h3>
-              </div>
-              <p className="text-sm text-gray-600 font-medium ml-1">Rate your expertise level in the following technologies:</p>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {SKILLS.map(skill => (
-                  <div key={skill.id} className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-[0.1em] text-gray-500 ml-1">{skill.name}</label>
-                    <div className="relative">
-                      <select
-                        name={`skill_${skill.id}`}
-                        defaultValue=""
-                        className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 appearance-none focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium"
-                      >
-                        <option value="">Not Applicable</option>
-                        {LEVELS.map(lvl => <option key={lvl}>{lvl}</option>)}
-                      </select>
-                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* --- LOCATION --- */}
-            <section className="space-y-6">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
-                  <Globe size={18} />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">Location</h3>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.1em] text-gray-500 ml-1">Country *</label>
-                  <div className="relative">
-                    <select
-                      id="country"
-                      name="country"
-                      required
-                      value={country}
-                      onChange={(e) => setCountry(e.target.value)}
-                      className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 appearance-none focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium"
-                    >
-                      <option value="India">India</option>
-                      <option value="USA">USA</option>
-                      <option value="UK">UK</option>
-                      <option value="Other">Other</option>
-                    </select>
-                    <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.1em] text-gray-500 ml-1">State *</label>
-                  <div className="relative">
-                    <select
-                      id="state"
-                      name="state"
-                      required={country === "India"}
-                      disabled={country !== "India"}
-                      defaultValue=""
-                      className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 appearance-none focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium disabled:opacity-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
-                    >
-                      <option value="" disabled>Select state...</option>
-                      {INDIAN_STATES.map(s => <option key={s}>{s}</option>)}
-                    </select>
-                    <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.1em] text-gray-500 ml-1">Full Address *</label>
-                <textarea
-                  id="address"
-                  name="address"
-                  required
-                  rows={3}
-                  placeholder="Street, Landmark, City, Pincode"
-                  className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 placeholder:text-gray-500 focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all resize-none font-medium text-sm"
-                />
-              </div>
-            </section>
-
-            {/* --- OPTIONS --- */}
-            <section className="space-y-8 pt-4">
-              <div className="space-y-4">
-                <label className="text-[10px] font-black uppercase tracking-[0.1em] text-gray-500 ml-1">I want to run from the beginning *</label>
-                <div className="flex flex-wrap gap-6">
-                  {["Yes", "No", "Partially"].map((opt) => (
-                    <label key={opt} className="flex items-center gap-3 cursor-pointer group">
-                      <div className="relative flex items-center justify-center">
-                        <input
-                          type="radio"
-                          name="run_beginning"
-                          value={opt}
-                          required
-                          className="peer appearance-none w-6 h-6 rounded-full border-2 border-gray-200 checked:border-yellow-400 transition-all focus:outline-none focus:ring-4 focus:ring-yellow-400/10"
-                        />
-                        <div className="absolute w-2.5 h-2.5 bg-yellow-400 rounded-full scale-0 peer-checked:scale-100 transition-transform" />
-                      </div>
-                      <span className="text-sm font-bold text-gray-800 group-hover:text-gray-950 transition-colors uppercase tracking-wider">{opt}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <label className="flex items-start gap-4 cursor-pointer group">
-                <div className="relative flex items-center justify-center">
-                  <input
-                    type="checkbox"
-                    name="consent"
-                    required
-                    className="peer appearance-none w-6 h-6 rounded-lg border-2 border-gray-200 checked:border-yellow-400 transition-all focus:outline-none focus:ring-4 focus:ring-yellow-400/10"
-                  />
-                  <div className="absolute w-3 h-3 bg-yellow-400 rounded-sm scale-0 peer-checked:scale-100 transition-transform" />
-                </div>
-                <span className="text-sm font-medium text-gray-800 group-hover:text-gray-950 transition-colors">
-                  I consent to the processing of my data and agree to the terms and conditions.
-                </span>
-              </label>
-            </section>
-
-            {/* --- SUBMIT --- */}
-            <div className="pt-6">
-              <button
-                type="submit"
-                disabled={loading}
-                className="group relative flex w-full items-center justify-center gap-3 rounded-2xl bg-yellow-400 px-8 py-5 font-black uppercase tracking-widest text-black transition-all hover:bg-yellow-300 hover:shadow-[0_15px_40px_rgba(250,204,21,0.3)] hover:-translate-y-1 disabled:opacity-70 disabled:pointer-events-none overflow-hidden"
-              >
-                {loading ? (
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                ) : (
-                  <>
-                    <span className="relative z-10">Submit Application</span>
-                    <ArrowRight className="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-                  </>
-                )}
-              </button>
+          <div className="relative z-10 max-w-2xl mx-auto">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-yellow-400 text-xs font-black uppercase tracking-widest mb-6">
+              <Sparkles size={14} />
+              Future Focused
             </div>
-
-
-            {error && (
-              <p className="text-center text-sm font-bold text-red-500 bg-red-50 py-3 rounded-xl border border-red-100 animate-shake">
-                {error}
-              </p>
-            )}
-
-          </form>
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-6">
+              Can't find the right role?
+            </h2>
+            <p className="text-gray-400 font-medium text-lg mb-10">
+              We are always on the lookout for exceptional talent. If you have a passion for engineering and innovation, reach out to us directly.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-3 bg-yellow-400 px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-black hover:bg-yellow-300 transition-all hover:scale-105"
+            >
+              Contact Our Team
+              <ArrowRight size={20} />
+            </Link>
+          </div>
         </motion.div>
       </div>
     </main>
-  );
-}
-
-function FormField({ label, id, type = "text", required = false, placeholder }: any) {
-  return (
-    <div className="space-y-2">
-        <label htmlFor={id} className="text-[10px] font-black uppercase tracking-[0.1em] text-gray-500 ml-1">
-        {label} {required && "*"}
-      </label>
-      <input
-        id={id}
-        name={id}
-        type={type}
-        required={required}
-        placeholder={placeholder}
-        className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 sm:px-5 py-3.5 sm:py-4 text-gray-900 placeholder:text-gray-500 focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium text-[15px] sm:text-sm"
-      />
-    </div>
   );
 }

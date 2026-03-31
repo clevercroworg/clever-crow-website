@@ -25,8 +25,8 @@ export default function SectionHeader({ badge, title, titleAccent, description }
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
-        className="font-black text-gray-900 tracking-[-0.03em] pb-2"
-        style={{ fontSize: "clamp(48px, 4.5vw, 65px)", lineHeight: "1" }}
+        className="font-black text-gray-900 tracking-[-0.03em] pb-2 leading-[1.1]"
+        style={{ fontSize: "clamp(32px, 4.5vw, 65px)" }}
       >
         {title} <span className="text-yellow-500">{titleAccent}</span>
       </motion.h2>

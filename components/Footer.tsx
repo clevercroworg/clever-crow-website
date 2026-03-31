@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import {
   Linkedin,
   Instagram,
-  Twitter,
+  Facebook,
   Phone,
   Bot
 } from "lucide-react";
@@ -17,7 +17,7 @@ export default function Footer() {
   return (
     <footer className="relative w-full bg-white text-gray-600 border-t border-gray-100 overflow-hidden">
       {/* ───────────────── CONVERSION STRIP ───────────────── */}
-      {pathname !== "/internship" && (
+      {!pathname.startsWith("/internship") && (
         <div className="border-b border-black/5 bg-yellow-400">
           <div className="mx-auto max-w-7xl px-6 py-5 sm:py-6 lg:py-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-col gap-1">
@@ -77,13 +77,14 @@ export default function Footer() {
               {/* Social - Unique Circle Style */}
               <div className="mt-6 flex gap-4">
                 {[
-                  { Icon: Linkedin, href: "#", label: "LinkedIn" },
-                  { Icon: Instagram, href: "#", label: "Instagram" },
-                  { Icon: Twitter, href: "#", label: "Twitter" }
+                  { Icon: Linkedin, href: "https://www.linkedin.com/company/clever-crow-strategies/", label: "LinkedIn" },
+                  { Icon: Instagram, href: "https://www.instagram.com/clevercrow.strategies", label: "Instagram" },
+                  { Icon: Facebook, href: "https://www.facebook.com/people/Clever-Crow-Strategies/61579261586907/", label: "Facebook" }
                 ].map(({ Icon, href, label }, i) => (
                   <Link
                     key={i}
                     href={href}
+                    target="_blank"
                     aria-label={label}
                     className="group flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-gray-50 transition-all hover:bg-yellow-400 hover:border-yellow-400 hover:-translate-y-1 shadow-sm"
                   >
@@ -103,21 +104,21 @@ export default function Footer() {
             </div>
 
             {/* ───── NAVIGATION GRID ───── */}
-            <div className={`lg:col-span-8 grid gap-6 sm:gap-8 ${pathname === "/internship" ? "lg:grid-cols-1" : "sm:grid-cols-3"}`}>
+            <div className="lg:col-span-8 grid gap-6 sm:gap-8 sm:grid-cols-3">
               
-              {/* ───── SERVICES & EXPERIENCE ───── */}
-              {pathname !== "/internship" && (
+              {/* ───── SERVICES & EXPERIENCE / INTERNSHIP TRACKS ───── */}
+              {!pathname.startsWith("/internship") ? (
                 <>
                   <div>
                     <h4 className="mb-4 sm:mb-6 text-[10px] font-black uppercase tracking-[0.2em] text-gray-900">
                       Growth Stack
                     </h4>
                     <ul className="space-y-3 sm:space-y-4 text-sm font-bold text-gray-600">
-                      <li><Link href="/services/digital-marketing" className="transition-colors hover:text-yellow-600">Digital Marketing</Link></li>
-                      <li><Link href="/services/paid-ads" className="transition-colors hover:text-yellow-600">Google & Meta Ads</Link></li>
+                      <li><Link href="/services/marketing-strategy" className="transition-colors hover:text-yellow-600">Digital Marketing</Link></li>
+                      <li><Link href="/services/google-ads" className="transition-colors hover:text-yellow-600">Google & Meta Ads</Link></li>
                       <li><Link href="/services/seo" className="transition-colors hover:text-yellow-600">Strategic SEO</Link></li>
-                      <li><Link href="/services/social-media" className="transition-colors hover:text-yellow-600">Brand Identity</Link></li>
-                      <li><Link href="/services/ai-automation" className="transition-colors tracking-tight text-gray-900 hover:text-yellow-600 underline decoration-yellow-400/50 decoration-2 underline-offset-4">AI Systems</Link></li>
+                      <li><Link href="/services/logo-design" className="transition-colors hover:text-yellow-600">Brand Identity</Link></li>
+                      <li><Link href="/services/ai-seo" className="transition-colors tracking-tight text-gray-900 hover:text-yellow-600 underline decoration-yellow-400/50 decoration-2 underline-offset-4">AI Systems</Link></li>
                     </ul>
                   </div>
 
@@ -126,11 +127,39 @@ export default function Footer() {
                       Experience
                     </h4>
                     <ul className="space-y-3 sm:space-y-4 text-sm font-bold text-gray-600">
-                      <li><Link href="/about" className="transition-colors hover:text-yellow-600">Company Story</Link></li>
-                      <li><Link href="/case-studies" className="transition-colors hover:text-yellow-600">Case Results</Link></li>
-                      <li><Link href="/reviews" className="transition-colors hover:text-yellow-600">Client Reviews</Link></li>
+                      <li><Link href="/contact" className="transition-colors hover:text-yellow-600">Company Story</Link></li>
+                      <li><Link href="/services" className="transition-colors hover:text-yellow-600">Case Results</Link></li>
+                      <li><Link href="/" className="transition-colors hover:text-yellow-600">Client Reviews</Link></li>
                       <li><Link href="/contact" className="transition-colors hover:text-yellow-600">Contact Hub</Link></li>
-                      <li><Link href="/careers" className="transition-colors hover:text-yellow-600">Careers</Link></li>
+                      <li><Link href="/internship" className="transition-colors hover:text-yellow-600">Careers</Link></li>
+                    </ul>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <h4 className="mb-4 sm:mb-6 text-[10px] font-black uppercase tracking-[0.2em] text-gray-900">
+                      Active Tracks
+                    </h4>
+                    <ul className="space-y-3 sm:space-y-4 text-sm font-bold text-gray-600">
+                      <li><Link href="/internship/1" className="transition-colors hover:text-yellow-600">AI-ML Development</Link></li>
+                      <li><Link href="/internship/1" className="transition-colors hover:text-yellow-600">Full Stack Web</Link></li>
+                      <li><Link href="/internship/10" className="transition-colors hover:text-yellow-600">Content Writing</Link></li>
+                      <li><Link href="/internship/7" className="transition-colors hover:text-yellow-600">Web Design</Link></li>
+                      <li><Link href="/internship" className="transition-colors text-gray-900 hover:text-yellow-600 underline decoration-yellow-400/50 decoration-2 underline-offset-4">View All Tracks</Link></li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="mb-4 sm:mb-6 text-[10px] font-black uppercase tracking-[0.2em] text-gray-900">
+                      Information
+                    </h4>
+                    <ul className="space-y-3 sm:space-y-4 text-sm font-bold text-gray-600">
+                      <li><Link href="/about" className="transition-colors hover:text-yellow-600">About Clever Crow</Link></li>
+                      <li><Link href="/internship" className="transition-colors hover:text-yellow-600">How to Apply</Link></li>
+                      <li><Link href="/terms" className="transition-colors hover:text-yellow-600">Internship Terms</Link></li>
+                      <li><Link href="/privacy" className="transition-colors hover:text-yellow-600">Data Privacy</Link></li>
+                      <li><Link href="/contact" className="transition-colors hover:text-yellow-600">Help Desk</Link></li>
                     </ul>
                   </div>
                 </>
@@ -190,7 +219,7 @@ export default function Footer() {
       </div>
 
       {/* ───────────── STICKY MOBILE CTA ───────────── */}
-      {pathname !== "/internship" && (
+      {!pathname.startsWith("/internship") && (
         <div className="fixed bottom-4 left-4 right-4 z-[100] flex gap-2 rounded-3xl sm:rounded-full bg-white/95 backdrop-blur-xl px-3 py-3 shadow-[0_12px_40px_rgba(0,0,0,0.15)] sm:hidden border border-gray-100">
           <a
             href="tel:+919986389444"

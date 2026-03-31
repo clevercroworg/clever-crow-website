@@ -59,8 +59,6 @@ export default function Chatbot() {
   const [isTyping, setIsTyping] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
-  // Hide chatbot on internship page
-  if (pathname === "/internship") return null;
 
   
   const [messages, setMessages] = useState<Message[]>([
@@ -96,6 +94,9 @@ export default function Chatbot() {
       window.removeEventListener("open-chat", handleOpen);
     };
   }, []);
+
+  // Hide chatbot on all internship-related pages
+  if (pathname.startsWith("/internship")) return null;
 
   const addMessage = (message: Omit<Message, "id">) => {
     setMessages((prev) => [

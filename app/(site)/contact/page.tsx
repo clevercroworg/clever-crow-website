@@ -41,10 +41,9 @@ export default function ContactPage() {
   ];
 
   const socialLinks = [
-    { icon: FaLinkedinIn, href: "#", color: "hover:bg-[#0077B5]" },
-    { icon: FaInstagram, href: "#", color: "hover:bg-[#E4405F]" },
-    { icon: FaFacebookF, href: "#", color: "hover:bg-[#1877F2]" },
-    { icon: FaTwitter, href: "#", color: "hover:bg-[#1DA1F2]" },
+    { icon: FaLinkedinIn, href: "https://www.linkedin.com/company/clever-crow-strategies/", color: "hover:bg-[#0077B5]" },
+    { icon: FaInstagram, href: "https://www.instagram.com/clevercrow.strategies", color: "hover:bg-[#E4405F]" },
+    { icon: FaFacebookF, href: "https://www.facebook.com/people/Clever-Crow-Strategies/61579261586907/", color: "hover:bg-[#1877F2]" },
   ];
 
   return (

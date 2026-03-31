@@ -67,7 +67,7 @@ export default function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="space-y-2">
-              <label htmlFor="name" className="text-[10px] font-black uppercase tracking-[0.1em] text-gray-400 ml-1">
+              <label htmlFor="name" className="text-[12px] font-black uppercase tracking-[0.1em] text-gray-700 ml-1">
                 Your Name *
               </label>
               <input
@@ -80,7 +80,7 @@ export default function ContactForm() {
             </div>
             
             <div className="space-y-2">
-              <label htmlFor="phone" className="text-[10px] font-black uppercase tracking-[0.1em] text-gray-400 ml-1">
+              <label htmlFor="phone" className="text-[12px] font-black uppercase tracking-[0.1em] text-gray-700 ml-1">
                 Phone Number *
               </label>
               <input
@@ -95,7 +95,7 @@ export default function ContactForm() {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="service" className="text-[10px] font-black uppercase tracking-[0.1em] text-gray-400 ml-1">
+            <label htmlFor="service" className="text-[12px] font-black uppercase tracking-[0.1em] text-gray-700 ml-1">
               What are you looking for? *
             </label>
             <div className="relative">
@@ -103,9 +103,10 @@ export default function ContactForm() {
                 id="service"
                 name="service"
                 required
+                defaultValue=""
                 className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 appearance-none focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium"
               >
-                <option value="" disabled selected className="text-gray-400">Select a service...</option>
+                <option value="" disabled className="text-gray-400">Select a service...</option>
                 <option>Digital Marketing (Comprehensive)</option>
                 <option>Google & Meta Ads (PPC)</option>
                 <option>Search Engine Optimisation (SEO)</option>
@@ -121,7 +122,7 @@ export default function ContactForm() {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="message" className="text-[10px] font-black uppercase tracking-[0.1em] text-gray-400 ml-1">
+            <label htmlFor="message" className="text-[12px] font-black uppercase tracking-[0.1em] text-gray-700 ml-1">
               Project Details
             </label>
             <textarea
