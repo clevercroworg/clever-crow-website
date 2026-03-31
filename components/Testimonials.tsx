@@ -129,7 +129,7 @@ const Row = ({
 
 export default function Testimonials() {
   return (
-    <section className="relative isolate overflow-hidden bg-slate-50 py-16 sm:py-32">
+    <section id="testimonials" className="relative isolate overflow-hidden bg-slate-50 py-16 sm:py-32">
       {/* Background Artwork Design */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         {/* Simple Mesh Gradient */}

@@ -46,8 +46,8 @@ export default function ResultsCarousel({
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent" />
 
-        <div className="flex w-max gap-8 px-6 animate-marquee">
-          {[...items, ...items].map((item, index) => (
+        <div className="flex w-max gap-8 px-6 animate-marquee will-change-transform hover:![animation-play-state:paused]">
+          {[...items, ...items, ...items, ...items].map((item, index) => (
             <div
               key={index}
               className="w-[360px] shrink-0 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg"

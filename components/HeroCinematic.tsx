@@ -133,23 +133,23 @@ export default function HeroCinematic({ onCallbackClick }: HeroCinematicProps) {
             className="lg:col-span-5 flex flex-col gap-6"
           >
             <div className="relative group">
-              {/* Main Growth Card - Lighter & Airier */}
+              {/* Main Growth Card - Solid White */}
               <motion.div 
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="rounded-[2.5rem] border border-white/10 bg-white/[0.04] backdrop-blur-[40px] p-6 sm:p-10 shadow-[0_40px_100px_rgba(0,0,0,0.3)] ring-1 ring-white/5"
+                className="rounded-[2.5rem] bg-white p-6 sm:p-10 shadow-[0_40px_100px_rgba(0,0,0,0.4)] ring-1 ring-black/5 will-change-transform"
               >
                 <div className="flex items-center justify-between mb-8 sm:mb-12">
                   <div className="flex items-center gap-4 sm:gap-6">
-                    <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-yellow-500/10 flex items-center justify-center text-yellow-500 ring-1 ring-yellow-500/30">
+                    <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-yellow-100 flex items-center justify-center text-yellow-600 ring-1 ring-yellow-200">
                       <TrendingUp className="h-6 w-6 sm:h-7 sm:w-7" />
                     </div>
                     <div>
-                      <h4 className="text-[10px] sm:text-[11px] font-black text-yellow-500 uppercase tracking-[0.15em]">Growth Trajectory</h4>
-                      <p className="text-2xl sm:text-3xl md:text-[2.75rem] font-black text-white leading-tight">+412%</p>
+                      <h4 className="text-[10px] sm:text-[11px] font-black text-yellow-600 uppercase tracking-[0.15em]">Growth Trajectory</h4>
+                      <p className="text-2xl sm:text-3xl md:text-[2.75rem] font-black text-gray-900 leading-tight">+412%</p>
                     </div>
                   </div>
-                  <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-white/5 flex items-center justify-center text-white/50 text-sm sm:text-base font-light">
+                  <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 text-sm sm:text-base font-bold bg-gray-50">
                     01
                   </div>
                 </div>
@@ -163,7 +163,7 @@ export default function HeroCinematic({ onCallbackClick }: HeroCinematicProps) {
                       animate={{ height: `${h}%` }}
                       transition={{ duration: 1, delay: 1 + i * 0.04, ease: "easeOut" }}
                       className={`flex-1 rounded-full transition-all duration-500 ${
-                        i === 9 ? "bg-yellow-500 shadow-[0_0_25px_rgba(234,179,8,0.4)]" : "bg-white/10 hover:bg-white/20"
+                        i === 9 ? "bg-yellow-500 shadow-[0_0_20px_rgba(234,179,8,0.3)]" : "bg-gray-200 hover:bg-gray-300"
                       }`}
                     />
                   ))}
@@ -175,48 +175,48 @@ export default function HeroCinematic({ onCallbackClick }: HeroCinematicProps) {
                 <motion.div 
                   animate={{ x: [0, -5, 0] }}
                   transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="rounded-2xl border border-white/5 bg-white/[0.03] p-5 sm:p-6 shadow-xl backdrop-blur-3xl ring-1 ring-white/5"
+                  className="rounded-2xl bg-white p-5 sm:p-6 shadow-xl ring-1 ring-black/5 will-change-transform"
                 >
                   <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                    <Users className="h-4 w-4 text-blue-400/80" />
-                    <span className="text-[9px] sm:text-[10px] font-extrabold text-white/60 uppercase tracking-widest">Global Reach</span>
+                    <Users className="h-4 w-4 text-blue-600" />
+                    <span className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-widest">Global Reach</span>
                   </div>
-                  <p className="text-lg sm:text-xl md:text-2xl font-black text-white/90">1.8M+</p>
+                  <p className="text-lg sm:text-xl md:text-2xl font-black text-gray-900">1.8M+</p>
                 </motion.div>
 
                 <motion.div 
                    animate={{ x: [0, 5, 0] }}
                    transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                   className="rounded-2xl border border-white/5 bg-white/[0.03] p-5 sm:p-6 shadow-xl backdrop-blur-3xl ring-1 ring-white/5"
+                   className="rounded-2xl bg-white p-5 sm:p-6 shadow-xl ring-1 ring-black/5 will-change-transform"
                 >
                   <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                    <Zap className="h-4 w-4 text-emerald-400/80" />
-                    <span className="text-[9px] sm:text-[10px] font-extrabold text-white/60 uppercase tracking-widest">Efficiency</span>
+                    <Zap className="h-4 w-4 text-emerald-600" />
+                    <span className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-widest">Efficiency</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <p className="text-lg sm:text-xl md:text-2xl font-black text-white/90">24/7</p>
+                    <p className="text-lg sm:text-xl md:text-2xl font-black text-gray-900">24/7</p>
                     <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                   </div>
                 </motion.div>
               </div>
 
-              {/* Conversion Performance - Extra Light Layer */}
+              {/* Conversion Performance - Solid White */}
               <motion.div 
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
-                className="mt-4 sm:mt-6 rounded-3xl border border-white/5 bg-black/40 p-5 sm:p-6 backdrop-blur-[50px] flex items-center justify-between ring-1 ring-white/5 shadow-2xl"
+                className="mt-4 sm:mt-6 rounded-3xl bg-white p-5 sm:p-6 flex items-center justify-between ring-1 ring-black/5 shadow-2xl will-change-transform"
               >
                 <div className="flex items-center gap-4 sm:gap-6">
-                  <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 ring-1 ring-purple-500/20">
+                  <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 ring-1 ring-purple-200">
                     <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6" />
                   </div>
                   <div>
-                    <p className="text-[9px] sm:text-[10px] font-bold text-white/60 uppercase tracking-[0.15em]">Conv. Performance</p>
-                    <p className="text-lg sm:text-xl md:text-2xl font-black text-white">8.42%</p>
+                    <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em]">Conv. Performance</p>
+                    <p className="text-lg sm:text-xl md:text-2xl font-black text-gray-900">8.42%</p>
                   </div>
                 </div>
                 <div className="hidden sm:block">
-                  <span className="text-[10px] font-black text-yellow-500 px-3 py-1.5 rounded-full border border-yellow-500/20 bg-yellow-500/5 tracking-tighter">PREMIUM LEVEL</span>
+                  <span className="text-[10px] font-black text-yellow-600 px-3 py-1.5 rounded-full border border-yellow-200 bg-yellow-50 tracking-tighter">PREMIUM LEVEL</span>
                 </div>
               </motion.div>
             </div>

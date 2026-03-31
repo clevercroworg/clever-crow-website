@@ -63,43 +63,36 @@ export default function Footer() {
           <div className="grid gap-6 sm:gap-8 lg:grid-cols-12">
 
             {/* ───── BRAND ───── */}
-            <div className="lg:col-span-4 flex flex-col items-start">
-              <Link href="/" className="inline-block transition-transform hover:scale-105 active:scale-95">
-                <Image
-                  src="/logo-dark.svg"
-                  alt="Clever Crow"
-                  width={180}
-                  height={50}
-                  className="h-9 w-auto select-none"
-                />
-              </Link>
+            <div className="lg:col-span-4 flex flex-col items-center lg:items-start">
+              <div className="flex flex-col items-center">
+                <Link href="/" className="inline-block">
+                  <Image
+                    src="/logo-dark.svg"
+                    alt="Clever Crow"
+                    width={220}
+                    height={60}
+                    className="h-12 sm:h-14 w-auto select-none"
+                  />
+                </Link>
 
-              {/* Social - Unique Circle Style */}
-              <div className="mt-6 flex gap-4">
-                {[
-                  { Icon: Linkedin, href: "https://www.linkedin.com/company/clever-crow-strategies/", label: "LinkedIn" },
-                  { Icon: Instagram, href: "https://www.instagram.com/clevercrow.strategies", label: "Instagram" },
-                  { Icon: Facebook, href: "https://www.facebook.com/people/Clever-Crow-Strategies/61579261586907/", label: "Facebook" }
-                ].map(({ Icon, href, label }, i) => (
-                  <Link
-                    key={i}
-                    href={href}
-                    target="_blank"
-                    aria-label={label}
-                    className="group flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-gray-50 transition-all hover:bg-yellow-400 hover:border-yellow-400 hover:-translate-y-1 shadow-sm"
-                  >
-                    <Icon size={18} className="text-gray-500 transition-colors group-hover:text-black" />
-                  </Link>
-                ))}
-              </div>
-
-              <div className="mt-6 flex items-center gap-4 p-4 rounded-2xl bg-gray-50 backdrop-blur-sm border border-gray-100">
-                 <div className="h-10 w-10 rounded-lg bg-white shadow-sm border border-gray-100 flex items-center justify-center">
-                    <span className="text-[9px] font-black text-gray-400">ISO</span>
-                 </div>
-                 <p className="text-[8px] font-black uppercase tracking-[0.2em] text-gray-500 leading-tight">
-                   Certified Growth <br /> Excellence Systems
-                 </p>
+                {/* Social - Unique Circle Style */}
+                <div className="mt-6 flex gap-4 pl-0 sm:pl-2">
+                  {[
+                    { Icon: Linkedin, href: "https://www.linkedin.com/company/clever-crow-strategies/", label: "LinkedIn" },
+                    { Icon: Instagram, href: "https://www.instagram.com/clevercrow.strategies", label: "Instagram" },
+                    { Icon: Facebook, href: "https://www.facebook.com/people/Clever-Crow-Strategies/61579261586907/", label: "Facebook" }
+                  ].map(({ Icon, href, label }, i) => (
+                    <Link
+                      key={i}
+                      href={href}
+                      target="_blank"
+                      aria-label={label}
+                      className="group flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-gray-50 transition-all hover:bg-yellow-400 hover:border-yellow-400 hover:-translate-y-1 shadow-sm"
+                    >
+                      <Icon size={18} className="text-gray-500 transition-colors group-hover:text-black" />
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -129,7 +122,7 @@ export default function Footer() {
                     <ul className="space-y-3 sm:space-y-4 text-sm font-bold text-gray-600">
                       <li><Link href="/contact" className="transition-colors hover:text-yellow-600">Company Story</Link></li>
                       <li><Link href="/services" className="transition-colors hover:text-yellow-600">Case Results</Link></li>
-                      <li><Link href="/" className="transition-colors hover:text-yellow-600">Client Reviews</Link></li>
+                      <li><Link href="/#testimonials" className="transition-colors hover:text-yellow-600">Client Reviews</Link></li>
                       <li><Link href="/contact" className="transition-colors hover:text-yellow-600">Contact Hub</Link></li>
                       <li><Link href="/internship" className="transition-colors hover:text-yellow-600">Careers</Link></li>
                     </ul>

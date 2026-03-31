@@ -64,18 +64,17 @@ export default function WhatYouGet({ title, subtitle, items }: WhatYouGetProps) 
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="group relative flex items-start gap-5 p-5 sm:p-6 rounded-2xl bg-white/40 border border-transparent transition-all duration-300 hover:bg-white hover:border-gray-100 hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)]"
+                className="group relative flex items-start gap-5 p-5 sm:p-6 rounded-2xl bg-white/40 border border-transparent transition-all duration-300 hover:bg-white hover:border-gray-100 hover:shadow-lg hover:z-10 hover:-translate-y-1"
               >
-                {/* Minimal Left-Accent Bar */}
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-indigo-600 rounded-r-full transition-all duration-300 group-hover:h-3/5" />
+                {/* Minimal Left-Accent Bar Removed base on feedback */}
                 
                 {/* Icon Circle */}
-                <div className="flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-lg bg-gray-50 text-gray-400 transition-all duration-300 group-hover:bg-indigo-600 group-hover:text-white group-hover:scale-110 group-hover:rotate-12">
+                <div className="flex-shrink-0 flex h-8 w-8 items-center justify-center rounded-lg bg-gray-50 text-gray-400 transition-all duration-300 group-hover:scale-110 group-hover:text-gray-900 group-hover:bg-yellow-100">
                   <Check className="h-4 w-4 stroke-[3]" />
                 </div>
                 
                 <div className="flex flex-col gap-1">
-                   <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover:text-indigo-400 transition-colors">
+                   <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest transition-colors">
                      Step {String(index + 1).padStart(2, '0')}
                    </span>
                    <h3 className="text-[15px] sm:text-[16px] font-bold text-gray-900 leading-snug tracking-tight">

@@ -46,7 +46,7 @@ export default function MarketingStrategyPage() {
         badge="Strategic Growth"
         title="Clarity Before Execution"
         description="Most marketing fails due to lack of direction. Our marketing strategy services bring clarity on what to do, where to invest, and how to scale sustainably."
-        imageSrc="/images/marketing-strategy-visual.jpg"
+        imageSrc="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
         imageAlt="Marketing strategy planning illustration"
         pills={[
           "Clear market positioning",
@@ -64,7 +64,7 @@ export default function MarketingStrategyPage() {
             client: "B2B SaaS Brand",
             industry: "SaaS",
             headline: "From Scattered Efforts to Focused Growth",
-            image: "/images/case-studies/saas.jpg",
+            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
             metrics: [
               { value: "3×", label: "Pipeline Growth" },
               { value: "42%", label: "Lower CAC" },
@@ -75,7 +75,7 @@ export default function MarketingStrategyPage() {
             client: "D2C Brand",
             industry: "Ecommerce",
             headline: "Clear Strategy That Scaled Profitably",
-            image: "/images/case-studies/ecommerce.jpg",
+            image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800",
             metrics: [
               { value: "180%", label: "Revenue Growth" },
               { value: "35%", label: "Higher ROAS" },

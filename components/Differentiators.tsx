@@ -41,16 +41,6 @@ function useCountUp(target: number, duration = 1400) {
   return { ref, value };
 }
 
-/* ── Stagger helpers ── */
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
-};
-
 /* ── Shared card style ── */
 const card = "group relative rounded-3xl bg-white/70 backdrop-blur-xl border p-7 sm:p-9 transition-all duration-500 hover:-translate-y-1";
 
@@ -60,9 +50,9 @@ export default function Differentiators() {
     <section
       className="relative overflow-hidden bg-slate-50 py-16 sm:py-32"
     >
-      {/* Decorative orbs */}
-      <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-yellow-300/15 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
+      {/* Decorative orbs - Hardware Accelerated to prevent scroll jank */}
+      <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-yellow-300/15 rounded-full blur-[120px] pointer-events-none will-change-transform transform-gpu" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-orange-200/20 rounded-full blur-[100px] pointer-events-none will-change-transform transform-gpu" />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
 
@@ -102,23 +92,16 @@ export default function Differentiators() {
           </motion.p>
         </div>
 
-        {/* ── Bento Grid ──
-             Desktop (lg): 12-col grid for precise sizing
-             Tablet (md): 2 cols
-             Mobile: 1 col stacked
-        */}
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 sm:gap-6"
-        >
+        {/* ── Bento Grid ── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 sm:gap-6">
 
           {/* ── Card 1: Strategy (lg: 5 cols, tall) ── */}
           <motion.div
-            variants={fadeUp}
-            className={`${card} border-yellow-100 hover:shadow-[0_24px_48px_rgba(234,179,8,0.1)] lg:col-span-5 lg:row-span-2 flex flex-col`}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className={`${card} border-yellow-100 hover:shadow-[0_24px_48px_rgba(234,179,8,0.1)] lg:col-span-5 lg:row-span-2 flex flex-col will-change-transform transform-gpu`}
           >
             <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-yellow-100 text-yellow-700 transition-transform group-hover:scale-110">
               <Lightbulb className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -130,33 +113,26 @@ export default function Differentiators() {
               <div className="absolute -top-24 -right-12 w-32 h-32 flex items-center justify-center pointer-events-none select-none">
                 {/* Outer Glow 1 */}
                 <motion.div
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    opacity: [0.1, 0.2, 0.1]
-                  }}
+                  animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute inset-0 rounded-full bg-yellow-400 blur-2xl"
+                  className="absolute inset-0 rounded-full bg-yellow-400 blur-2xl flex-shrink-0 will-change-transform transform-gpu"
+                  style={{ transformOrigin: "center center" }}
                 />
                 {/* Outer Glow 2 */}
                 <motion.div
-                  animate={{ 
-                    scale: [1.2, 1, 1.2],
-                    opacity: [0.05, 0.15, 0.05]
-                  }}
+                  animate={{ scale: [1.2, 1, 1.2], opacity: [0.05, 0.15, 0.05] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute inset-0 rounded-full bg-orange-400 blur-3xl"
+                  className="absolute inset-0 rounded-full bg-orange-400 blur-3xl flex-shrink-0 will-change-transform transform-gpu"
+                  style={{ transformOrigin: "center center" }}
                 />
                 {/* Core Pulsating Orb */}
                 <motion.div
-                  animate={{ 
-                    scale: [0.8, 1.1, 0.8],
-                    rotate: [0, 90, 180, 270, 360]
-                  }}
+                  animate={{ scale: [0.8, 1.1, 0.8], rotate: [0, 90, 180, 270, 360] }}
                   transition={{ 
                     scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
                     rotate: { duration: 10, repeat: Infinity, ease: "linear" }
                   }}
-                  className="relative h-16 w-16 rounded-full bg-gradient-to-tr from-yellow-300 via-yellow-500 to-orange-400 shadow-[0_0_40px_rgba(251,191,36,0.5)] flex items-center justify-center overflow-hidden"
+                  className="relative h-16 w-16 rounded-full bg-gradient-to-tr from-yellow-300 via-yellow-500 to-orange-400 shadow-[0_0_40px_rgba(251,191,36,0.5)] flex items-center justify-center overflow-hidden flex-shrink-0 will-change-transform transform-gpu"
                 >
                    {/* Internal "Siri" waves */}
                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.4),transparent_60%)] animate-pulse" />
@@ -167,7 +143,8 @@ export default function Differentiators() {
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                  className="absolute h-24 w-24"
+                  className="absolute h-24 w-24 flex-shrink-0"
+                  style={{ transformOrigin: "center center" }}
                 >
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 h-1.5 w-1.5 rounded-full bg-yellow-200 shadow-[0_0_10px_#fef08a]" />
                 </motion.div>
@@ -188,8 +165,8 @@ export default function Differentiators() {
                   key={i}
                   initial={{ opacity: 0, x: -16 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 + i * 0.12 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ delay: i * 0.12, duration: 0.5 }}
                   className="flex gap-4 items-start"
                 >
                   <span className="text-[10px] font-black text-yellow-500 bg-yellow-50 rounded-lg px-2.5 py-1.5 shrink-0">{item.step}</span>
@@ -209,8 +186,8 @@ export default function Differentiators() {
                     key={i}
                     initial={{ height: 0 }}
                     whileInView={{ height: `${h}%` }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 + i * 0.06, duration: 0.5 }}
+                    viewport={{ once: true, margin: "-10px" }}
+                    transition={{ delay: i * 0.05, duration: 0.5 }}
                     className={`flex-1 rounded-md sm:rounded-lg ${i === 9 ? "bg-yellow-500" : "bg-yellow-200/60"}`}
                   />
                 ))}
@@ -219,10 +196,13 @@ export default function Differentiators() {
             </div>
           </motion.div>
 
-          {/* ── Card 2: Under One Roof (lg: 7 cols) — ENRICHED ── */}
+          {/* ── Card 2: Under One Roof (lg: 7 cols) ── */}
           <motion.div
-            variants={fadeUp}
-            className={`${card} border-orange-100 hover:shadow-[0_24px_48px_rgba(251,146,60,0.08)] lg:col-span-7 flex flex-col`}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+            className={`${card} border-orange-100 hover:shadow-[0_24px_48px_rgba(251,146,60,0.08)] lg:col-span-7 flex flex-col will-change-transform transform-gpu`}
           >
             <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-orange-100 text-orange-700 transition-transform group-hover:scale-110">
               <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -248,8 +228,8 @@ export default function Differentiators() {
                     key={i}
                     initial={{ opacity: 0, scale: 0.5 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.6 + i * 0.12 }}
+                    viewport={{ once: true, margin: "-10px" }}
+                    transition={{ delay: i * 0.1, duration: 0.4 }}
                     className="relative z-10 flex flex-col items-center gap-2 flex-1"
                   >
                     <div className={`h-9 w-9 sm:h-11 sm:w-11 rounded-full border-2 flex items-center justify-center text-[9px] sm:text-[10px] font-black shadow-sm ${i === 0 ? "border-orange-400 bg-orange-50 text-orange-600" : "border-gray-200 bg-white text-gray-400"}`}>
@@ -263,7 +243,7 @@ export default function Differentiators() {
 
               {/* Bottom highlight */}
               <div className="mt-6 flex items-center gap-3 rounded-xl bg-orange-50/60 border border-orange-100/50 px-4 py-3">
-                <span className="h-2 w-2 rounded-full bg-orange-400 animate-pulse" />
+                <span className="h-2 w-2 rounded-full bg-orange-400 animate-pulse flex-shrink-0" />
                 <span className="text-[11px] sm:text-xs font-bold text-orange-600">All services connected in a single workflow</span>
               </div>
             </div>
@@ -271,8 +251,11 @@ export default function Differentiators() {
 
           {/* ── Card 3: Transparent Reporting (lg: 7 cols) ── */}
           <motion.div
-            variants={fadeUp}
-            className={`${card} border-emerald-100 hover:shadow-[0_24px_48px_rgba(16,185,129,0.08)] lg:col-span-7`}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className={`${card} border-emerald-100 hover:shadow-[0_24px_48px_rgba(16,185,129,0.08)] lg:col-span-7 will-change-transform transform-gpu`}
           >
             <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700 transition-transform group-hover:scale-110">
               <LineChart className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -297,8 +280,8 @@ export default function Differentiators() {
                     <motion.div
                       initial={{ width: 0 }}
                       whileInView={{ width: m.width }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.6 + i * 0.15, duration: 0.6 }}
+                      viewport={{ once: true, margin: "-10px" }}
+                      transition={{ delay: i * 0.1, duration: 0.6 }}
                       className={`h-full rounded-full ${m.color}`}
                     />
                   </div>
@@ -309,8 +292,11 @@ export default function Differentiators() {
 
           {/* ── Card 4: Long-Term Growth (lg: 6 cols) ── */}
           <motion.div
-            variants={fadeUp}
-            className={`${card} border-blue-100 hover:shadow-[0_24px_48px_rgba(59,130,246,0.08)] lg:col-span-6`}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+            className={`${card} border-blue-100 hover:shadow-[0_24px_48px_rgba(59,130,246,0.08)] lg:col-span-6 will-change-transform transform-gpu`}
           >
             <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-blue-100 text-blue-700 transition-transform group-hover:scale-110">
               <Layers className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -326,8 +312,8 @@ export default function Differentiators() {
                   key={i}
                   initial={{ opacity: 0, x: -16 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.6 + i * 0.1 }}
+                  viewport={{ once: true, margin: "-10px" }}
+                  transition={{ delay: i * 0.1, duration: 0.4 }}
                   className="flex items-center gap-3"
                 >
                   <div className={`h-2 w-2 rounded-full shrink-0 ${i === 3 ? "bg-blue-500" : "bg-blue-200"}`} />
@@ -340,8 +326,11 @@ export default function Differentiators() {
 
           {/* ── Card 5: Proven Track Record (lg: 6 cols) ── */}
           <motion.div
-            variants={fadeUp}
-            className={`${card} border-violet-100 hover:shadow-[0_24px_48px_rgba(139,92,246,0.08)] lg:col-span-6`}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className={`${card} border-violet-100 hover:shadow-[0_24px_48px_rgba(139,92,246,0.08)] lg:col-span-6 will-change-transform transform-gpu`}
           >
             <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-violet-100 text-violet-700 transition-transform group-hover:scale-110">
               <ShieldCheck className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -362,8 +351,8 @@ export default function Differentiators() {
                   key={i}
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.6 + i * 0.12 }}
+                  viewport={{ once: true, margin: "-10px" }}
+                  transition={{ delay: i * 0.1, duration: 0.4 }}
                   className="flex items-center gap-3"
                 >
                   <span className="text-[10px] font-black text-violet-500 bg-violet-50 px-2 py-1 rounded-md whitespace-nowrap shrink-0">{m.year}</span>
@@ -373,7 +362,7 @@ export default function Differentiators() {
             </div>
           </motion.div>
 
-        </motion.div>
+        </div>
 
         {/* ── Stats Strip ── */}
         <motion.div
@@ -381,7 +370,7 @@ export default function Differentiators() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="mt-16 sm:mt-20 rounded-3xl bg-white/50 backdrop-blur-xl border border-yellow-100/60 p-8 sm:p-12"
+          className="mt-16 sm:mt-20 rounded-3xl bg-white/50 backdrop-blur-xl border border-yellow-100/60 p-8 sm:p-12 transform-gpu will-change-transform"
         >
           <StatsStrip />
         </motion.div>
