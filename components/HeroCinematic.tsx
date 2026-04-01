@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useRef, Suspense } from "react";
+import { useRef, Suspense, useState } from "react";
 import { ArrowRight, TrendingUp, Users, Zap, BarChart3, Globe, Shield } from "lucide-react";
 import dynamic from 'next/dynamic';
 import { GradientButton } from "@/components/ui/gradient-button";
@@ -23,6 +23,7 @@ const fadeUp = (delay: number = 0) => ({
 });
 
 export default function HeroCinematic({ onCallbackClick }: HeroCinematicProps) {
+  const [hasLoaded, setHasLoaded] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -36,14 +37,37 @@ export default function HeroCinematic({ onCallbackClick }: HeroCinematicProps) {
       
       {/* ── 3D SPLINE SCENE BACKGROUND ── */}
       <motion.div 
-        className="absolute inset-0"
+        className="absolute inset-0 z-0"
         style={{ y: bgY }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: hasLoaded ? 1 : 0 }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
       >
         <Spline
           scene="https://prod.spline.design/D0av0Bp8E9JYYVEv/scene.splinecode" 
           className="w-full h-full scale-105"
+          onLoad={() => setHasLoaded(true)}
         />
       </motion.div>
+
+      {/* ── FALLBACK / LOADING BACKGROUND ── */}
+      {!hasLoaded && (
+        <motion.div 
+          className="absolute inset-0 z-[1] bg-[#05070a]"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+        >
+          {/* A high-end radial gradient to mimic the Spline atmosphere while it loads */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#1a1f2e_0%,#05070a_100%)] opacity-60" />
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
+          
+          {/* Subtle pulse loader */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-32 h-32 rounded-full bg-yellow-500/5 animate-ping" />
+          </div>
+        </motion.div>
+      )}
 
       {/* ── MAIN CONTENT ── */}
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">

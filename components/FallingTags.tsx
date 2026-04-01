@@ -23,40 +23,38 @@ const TAGS = [
 const ROTATIONS = [-6, 4, -10, 2, 8, -3, 5, -8, 12, -4, 7, -15, 3, 9];
 
 export default function FallingTags() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.15 });
-
   return (
-    <div ref={ref} className="absolute inset-0 z-20 pointer-events-none">
+    <div className="absolute inset-0 z-20 pointer-events-none">
       {TAGS.map((tag, i) => (
         <motion.span
           key={i}
-          animate={isInView ? {
-            top: "calc(100% - 56px)",
-            opacity: 1,
-            rotate: ROTATIONS[i % ROTATIONS.length],
-            scale: 1,
-          } : {
+          initial={{
             top: "0%",
             opacity: 0,
             rotate: 0,
             scale: 0.5,
           }}
+          whileInView={{
+            top: "calc(100% - 56px)",
+            opacity: 1,
+            rotate: ROTATIONS[i % ROTATIONS.length],
+            scale: 1,
+          }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{
             duration: 0.55,
-            delay: isInView ? 0.2 * i : 0,
+            delay: 0.1 * i,
             ease: [0.33, 0, 0.97, 0.36],
           }}
           style={{
             position: "absolute",
             left: `clamp(2%, ${tag.left}, calc(100% - 130px))`,
-            top: "0%",
           }}
           className={`
             ${tag.hideOnMobile ? 'hidden sm:inline-flex' : 'inline-flex'} 
             align-middle px-3 py-1.5 sm:px-6 sm:py-3 rounded-full text-[10px] sm:text-base font-extrabold
             shadow-lg border border-white/50 backdrop-blur-md
-            whitespace-nowrap select-none opacity-0
+            whitespace-nowrap select-none overflow-hidden
             ${tag.color}
           `}
         >

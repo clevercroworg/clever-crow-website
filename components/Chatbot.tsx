@@ -95,8 +95,8 @@ export default function Chatbot() {
     };
   }, []);
 
-  // Hide chatbot on all internship-related pages
-  if (pathname.startsWith("/internship")) return null;
+  // Hide chatbot on all internship-related pages and specific landing pages
+  if (pathname.startsWith("/internship") || pathname.startsWith("/landing-page/google-ads")) return null;
 
   const addMessage = (message: Omit<Message, "id">) => {
     setMessages((prev) => [
