@@ -40,26 +40,32 @@ type SuccessStoriesProps = {
   data?: CaseStudy[];
   title?: string;
   subtitle?: string;
+  filterBy?: string;
 };
 
-export default function SuccessStories({ data, title, subtitle }: SuccessStoriesProps) {
+export default function SuccessStories({ data, title, subtitle, filterBy }: SuccessStoriesProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const displayCaseStudies = data ?? defaultCaseStudies;
 
   // Extract unique categories if there are more than 10 items (indicating a large portfolio)
+  const filterMode = filterBy ?? "category";
   const categories = useMemo(() => {
     if (displayCaseStudies.length <= 10) return null;
-    const cats = Array.from(new Set(displayCaseStudies.map(cs => cs.category)));
-    return ["All", ...cats];
-  }, [displayCaseStudies]);
+    const items = filterMode === "platform"
+      ? Array.from(new Set(displayCaseStudies.map(cs => cs.platform)))
+      : Array.from(new Set(displayCaseStudies.map(cs => cs.category)));
+    return ["All", ...items];
+  }, [displayCaseStudies, filterMode]);
 
   const [activeCategory, setActiveCategory] = useState("All");
 
   const filteredCaseStudies = useMemo(() => {
     if (activeCategory === "All") return displayCaseStudies;
-    return displayCaseStudies.filter(cs => cs.category === activeCategory);
-  }, [displayCaseStudies, activeCategory]);
+    return displayCaseStudies.filter(cs => {
+      return filterMode === "platform" ? cs.platform === activeCategory : cs.category === activeCategory;
+    });
+  }, [displayCaseStudies, activeCategory, filterMode]);
 
   const selectedCase = displayCaseStudies.find(cs => cs.id === selectedId);
 

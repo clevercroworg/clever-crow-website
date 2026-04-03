@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import "../landing-page.css";
+import "../lp.css";
 
 // Components
 import Header from "../components/Header";
