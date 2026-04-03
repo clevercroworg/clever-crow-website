@@ -2,7 +2,31 @@
 
 import React from "react";
 
-export default function HeroSection() {
+type HeroMeta = {
+  badges: string[];
+  title: string;
+  accentTitle: string;
+  subtitle: string;
+  highlights: string[];
+  ctaLabel?: string;
+};
+
+type HeroSectionProps = {
+  data?: HeroMeta;
+};
+
+const defaultHero: HeroMeta = {
+  badges: ["Google Ads Experts", "Google Certified", "Performance Focused", "Lead Generation"],
+  title: "Google Ads Management",
+  accentTitle: "@ Just ₹7,999",
+  subtitle: "Get More Qualified Leads with Google Ads Management",
+  highlights: ["15+ Years of Experience", "Certified Professionals", "550+ Happy Clients", "Best Customer Support"],
+  ctaLabel: "View Pricing",
+};
+
+export default function HeroSection({ data }: HeroSectionProps) {
+  const hero = data ?? defaultHero;
+
   return (
     <section className="hero-section relative overflow-hidden pt-20 sm:pt-24">
       <div className="hero-grid"></div>
@@ -11,51 +35,31 @@ export default function HeroSection() {
       <div className="mx-auto grid max-w-7xl gap-7 px-4 pb-8 pt-5 sm:px-6 lg:grid-cols-[1.34fr_0.66fr] lg:items-start lg:px-8 lg:pb-9">
         <div className="relative z-10 max-w-3xl">
           <div className="hero-badge-row">
-            <div className="hero-top-badge hero-top-badge-primary">Google Ads Experts</div>
-            <div className="hero-top-badge">Google Certified</div>
-            <div className="hero-top-badge">Performance Focused</div>
-            <div className="hero-top-badge">Lead Generation</div>
+            {hero.badges.map((badge) => (
+              <div
+                key={badge}
+                className={`hero-top-badge ${badge === hero.badges[0] ? "hero-top-badge-primary" : ""}`}
+              >
+                {badge}
+              </div>
+            ))}
           </div>
           <h1 className="mt-6 text-4xl tracking-tight text-white sm:text-5xl lg:text-[3.1rem] lg:leading-[1.08]">
-            <span className="font-light text-white">Google Ads Management</span>
-            <span className="block font-extrabold offer-highlight">@ Just ₹7,999</span>
+            <span className="font-light text-white">{hero.title}</span>
+            <span className="block font-extrabold offer-highlight">{hero.accentTitle}</span>
           </h1>
-          <p className="mt-3 text-xl font-medium text-white/86 sm:text-2xl">
-            Get More Qualified Leads with Google Ads Management
-          </p>
+          <p className="mt-3 text-xl font-medium text-white/86 sm:text-2xl">{hero.subtitle}</p>
           <ul className="hero-checklist mt-9 grid gap-4 sm:grid-cols-2">
-            <li className="hero-check-item">
-              <span className="hero-check-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg>
-              </span>
-              <span>15+ Years of Experience</span>
-            </li>
-            <li className="hero-check-item">
-              <span className="hero-check-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg>
-              </span>
-              <span>Certified Professionals</span>
-            </li>
-            <li className="hero-check-item">
-              <span className="hero-check-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg>
-              </span>
-              <span>550+ Happy Clients</span>
-            </li>
-            <li className="hero-check-item">
-              <span className="hero-check-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="m5 12 5 5L20 7"></path>
-                </svg>
-              </span>
-              <span>Best Customer Support</span>
-            </li>
+            {hero.highlights.map((item) => (
+              <li key={item} className="hero-check-item">
+                <span className="hero-check-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="m5 12 5 5L20 7"></path>
+                  </svg>
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="relative z-10">
@@ -80,7 +84,7 @@ export default function HeroSection() {
       </div>
       <div className="hero-scroll-cue">
         <a href="#pricing" className="hero-scroll-link">
-          <span>View Pricing</span>
+          <span>{hero.ctaLabel || "View Pricing"}</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M12 5v14"></path>
             <path d="m6 13 6 6 6-6"></path>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../landing-page.css";
 
 // Components
@@ -15,20 +15,37 @@ import ClientReviews from "../components/ClientReviews";
 import Footer from "../components/Footer";
 import CallbackModal from "../components/CallbackModal";
 
-export default function GoogleAdsLandingPage() {
+import type { WebsiteLandingData } from "./website-data";
+
+type WebsiteLandingClientProps = {
+  data: WebsiteLandingData;
+};
+
+export default function WebsiteLandingClient({ data }: WebsiteLandingClientProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) return null;
 
   return (
     <main className="landing-page-container">
       <div className="site-shell">
         <Header />
         <main id="top">
-          <HeroSection />
+          <HeroSection data={data.hero} />
           <LogoMarquee />
-          <PricingSection />
+          <PricingSection data={data.pricing} />
           <PerformanceExperts />
-          <SuccessStories />
-          <FaqSection />
+          <SuccessStories 
+            data={data.caseStudies} 
+            title="Our Website Portfolio"
+            subtitle="Live projects across real estate, education, healthcare, industrial, e-commerce, hospitality, IT, corporate, and wellness segments."
+          />
+          <FaqSection data={data.faqs} />
           <ClientReviews />
         </main>
         <Footer />
