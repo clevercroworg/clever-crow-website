@@ -14,6 +14,7 @@ import FaqSection from "../components/FaqSection";
 import ClientReviews from "../components/ClientReviews";
 import Footer from "../components/Footer";
 import CallbackModal from "../components/CallbackModal";
+import WhatsAppButton from "../components/WhatsAppButton";
 
 export default function GoogleAdsLandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,6 +36,7 @@ export default function GoogleAdsLandingPage() {
       </div>
 
       <CallbackModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <WhatsAppButton message="Hi Clever Crow Team, I'm interested in Google Ads management services." />
     </main>
   );
 }

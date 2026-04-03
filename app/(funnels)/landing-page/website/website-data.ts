@@ -100,7 +100,7 @@ export function getWebsiteLandingData(): WebsiteLandingData {
           label: "Most Popular",
           name: "Premium Website",
           oldPrice: "₹35,000",
-          price: "₹28,000",
+          price: "₹29,999",
           description: "",
           features: ["Up to 30 Pages + CMS", "Blog, Gallery, Advanced Forms", "Basic On-page SEO", "Delivery in 8-10 Days"],
           featured: true,
