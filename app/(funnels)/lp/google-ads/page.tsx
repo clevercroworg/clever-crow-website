@@ -9,6 +9,7 @@ import HeroSection from "../components/HeroSection";
 import LogoMarquee from "../components/LogoMarquee";
 import PerformanceExperts from "../components/PerformanceExperts";
 import SuccessStories from "../components/SuccessStories";
+import { googleAdsData } from "./google-ads-data";
 import PricingSection from "../components/PricingSection";
 import FaqSection from "../components/FaqSection";
 import ClientReviews from "../components/ClientReviews";
@@ -28,7 +29,12 @@ export default function GoogleAdsLandingPage() {
           <LogoMarquee />
           <PricingSection />
           <PerformanceExperts />
-          <SuccessStories />
+          <SuccessStories 
+            data={googleAdsData.caseStudies} 
+            title="Success Stories by Platform"
+            subtitle="Proven performance across search, social, and organic channels."
+            filterBy="platform"
+          />
           <FaqSection />
           <ClientReviews />
         </main>
