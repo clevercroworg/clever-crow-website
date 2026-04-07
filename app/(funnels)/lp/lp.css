@@ -33,6 +33,11 @@ body {
     radial-gradient(circle at top right, rgba(255, 226, 122, 0.08), transparent 20%),
     linear-gradient(180deg, #06080d 0%, #07090f 38%, #0b1018 100%);
   color: var(--text);
+  overflow-x: hidden;
+}
+
+.landing-page-container {
+  overflow-x: hidden;
 }
 
 a {
@@ -1055,7 +1060,7 @@ a {
 
 @media (max-width: 767px) {
   .section-padding {
-    padding: 4.4rem 0;
+    padding: 3.5rem 0;
   }
 
   .pricing-card-featured {
@@ -1063,17 +1068,21 @@ a {
   }
 
   .feature-chip {
-    padding: 0.85rem 0.95rem;
+    padding: 0.75rem 0.85rem;
   }
 
   .hero-orb-one {
-    width: 12rem;
-    height: 12rem;
+    width: 10rem;
+    height: 10rem;
   }
 
   .hero-orb-two {
-    width: 10rem;
-    height: 10rem;
+    width: 8rem;
+    height: 8rem;
+  }
+  
+  .hero-badge-row {
+    gap: 0.4rem;
   }
 }
 

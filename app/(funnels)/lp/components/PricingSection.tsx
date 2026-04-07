@@ -13,7 +13,7 @@ type PackageInfo = {
 };
 
 type PricingMeta = {
-  preTitle: string;
+  preTitle?: string;
   title: string;
   subtitle: string;
   packages: PackageInfo[];
@@ -40,7 +40,7 @@ const defaultPricing: PricingMeta = {
     {
       label: "Growth",
       name: "Growth",
-      price: "₹19,999",
+      price: "₹29,999",
       description: "Best if: Aggressively dominate your local market.",
       features: ["Everything in Basic", "Ongoing campaign optimisation", "Weekly testing and improvements", "Budget optimisation", "Reporting support"],
       featured: true,
@@ -61,7 +61,7 @@ export default function PricingSection({ data }: PricingSectionProps) {
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{pricing.title}</h2>
           <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">{pricing.subtitle}</p>
         </div>
-        <div className="mx-auto mt-10 grid max-w-5xl gap-6 lg:grid-cols-2">
+        <div className={`mx-auto mt-10 grid gap-8 ${pricing.packages.length === 1 ? "max-w-md" : "max-w-5xl lg:grid-cols-2"}`}>
           {pricing.packages.map((pkg) => (
             <article className={`package-card ${pkg.featured ? "package-card-featured" : ""}`} key={pkg.name}>
               <div className="package-card-body">
