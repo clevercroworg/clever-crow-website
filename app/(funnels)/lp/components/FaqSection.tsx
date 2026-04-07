@@ -14,8 +14,8 @@ const googleAdsFaqs: FaqData[] = [
     answer: "Most campaigns start generating leads within 3–7 days after going live. Google’s algorithm usually takes about a week to fully optimise for your target audience."
   },
   {
-    question: "Is ₹7,999 the ad spend or your service fee?",
-    answer: "₹7,999 is our professional management fee for the Basic package. Your ad spend is paid directly to Google from your own account."
+    question: "Is ₹8,999 the ad spend or your service fee?",
+    answer: "₹8,999 is our professional management fee for the Basic package. Your ad spend is paid directly to Google from your own account."
   },
   {
     question: "Will I get guaranteed leads or sales?",
@@ -54,11 +54,11 @@ export default function FaqSection({ data }: FaqSectionProps) {
           <h2 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">Frequently Asked Questions</h2>
           <p className="mt-4 text-lg text-slate-600">Quick answers about delivery timelines, process, and support.</p>
         </div>
-        
+
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50/30 transition-all hover:bg-slate-50"
             >
               <button
@@ -72,11 +72,10 @@ export default function FaqSection({ data }: FaqSectionProps) {
                   </svg>
                 </span>
               </button>
-              
-              <div 
-                className={`transition-all duration-300 ease-in-out ${
-                  openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                }`}
+
+              <div
+                className={`transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                  }`}
               >
                 <div className="p-5 sm:p-6 pt-0 text-slate-600 leading-relaxed text-sm sm:text-base border-t border-slate-100/50">
                   {faq.answer}

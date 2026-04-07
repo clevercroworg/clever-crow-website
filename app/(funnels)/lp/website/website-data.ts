@@ -94,7 +94,7 @@ export function getWebsiteLandingData(): WebsiteLandingData {
           label: "Starter",
           name: "Basic Website",
           oldPrice: "₹10,000",
-          price: "₹7,999",
+          price: "₹8,999",
           description: "",
           features: ["Up to 6 Pages", "Contact Form + WhatsApp Chat", "Google Map + Gallery", "Delivery in 2-3 Days"],
         },

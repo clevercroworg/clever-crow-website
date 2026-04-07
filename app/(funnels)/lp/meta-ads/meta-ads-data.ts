@@ -4,7 +4,7 @@ export const metaAdsData = {
   hero: {
     badges: ["Meta Ads Experts", "FB & Instagram Certified", "Performance Focused", "Lead Generation"],
     title: "Meta Ads Management",
-    accentTitle: "@ Just ₹7,999",
+    accentTitle: "@ Just ₹8,999",
     subtitle: "Get More Qualified Leads with Facebook & Instagram Ads Management",
     highlights: ["15+ Years of Experience", "Certified Professionals", "550+ Happy Clients", "Best Customer Support"],
     ctaLabel: "View Pricing",
@@ -16,7 +16,7 @@ export const metaAdsData = {
       {
         label: "Basic",
         name: "Meta Ads Management",
-        price: "₹7,999",
+        price: "₹8,999",
         description: "Best if: Best-in-budget social marketing for instant leads.",
         features: ["Campaign setup", "Audience targeting", "Ad creative support", "Conversion tracking setup", "7 days basic optimisation"],
       },
@@ -40,8 +40,8 @@ export const metaAdsData = {
       answer: "Most Meta campaigns start generating leads within 2–5 days. The algorithm usually finds your target audience quickly once the initial learning phase begins."
     },
     {
-      question: "Is ₹7,999 the ad spend or your service fee?",
-      answer: "₹7,999 is our professional management fee for the Basic package. Your ad spend is paid directly to Meta (Facebook) from your own account."
+      question: "Is ₹8,999 the ad spend or your service fee?",
+      answer: "₹8,999 is our professional management fee for the Basic package. Your ad spend is paid directly to Meta (Facebook) from your own account."
     },
     {
       question: "Will I get guaranteed leads or sales?",
