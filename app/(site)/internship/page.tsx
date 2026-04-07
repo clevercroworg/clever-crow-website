@@ -13,7 +13,6 @@ import {
   Palette,
   Database,
   BarChart3,
-  PenTool,
   Cloud,
   ShieldCheck,
   MonitorPlay,
@@ -27,44 +26,36 @@ const INTERNSHIPS = [
     id: "1",
     title: "Full Stack / AI-ML Development",
     posted: "1 day ago",
-    filled: 14,
+    filled: 11,
     total: 15,
+    fee: "8,999",
     icon: <div className="flex -space-x-2"><Code2 /><BrainCircuit /></div>,
     color: "bg-blue-50 text-blue-600",
     description: "Architect cutting-edge web platforms powered by artificial intelligence and machine learning models.",
     active: true
   },
   {
-    id: "10",
-    title: "Content Writing",
-    posted: "2 days ago",
-    filled: 12,
-    total: 15,
-    icon: <PenTool className="w-6 h-6" />,
-    color: "bg-lime-50 text-lime-600",
-    description: "Craft compelling stories and high-quality content for various platforms.",
-    active: true
-  },
-  {
     id: "7",
-    title: "Web Design",
-    posted: "1 day ago",
+    title: "Data Analysis and Power BI analytics",
+    posted: "4 days ago",
     filled: 11,
     total: 15,
-    icon: <Palette className="w-6 h-6" />,
-    color: "bg-pink-50 text-pink-600",
-    description: "Design intuitive and aesthetically pleasing digital products and modern websites.",
+    fee: "12,999",
+    icon: <BarChart3 className="w-6 h-6" />,
+    color: "bg-violet-50 text-violet-600",
+    description: "Master data visualization, business intelligence, and analytical decision-making using Power BI and advanced tools.",
     active: true
   },
   {
     id: "3",
     title: "Google Ads / Facebook Ads",
-    posted: "2 days ago",
+    posted: "7 days ago",
     filled: 15,
     total: 15,
+    fee: "12,999",
     icon: <MonitorPlay className="w-6 h-6" />,
     color: "bg-orange-50 text-orange-600",
-    description: "Master performance marketing and campaign optimization across major platforms.",
+    description: "Master performance marketing and campaign optimization across major platforms. Drive measurable growth and ROI through data-driven advertising strategies.",
     active: false
   },
   {
@@ -73,6 +64,7 @@ const INTERNSHIPS = [
     posted: "1 day ago",
     filled: 15,
     total: 15,
+    fee: "8,999",
     icon: <Database className="w-6 h-6" />,
     color: "bg-emerald-50 text-emerald-600",
     description: "Architect robust server-side systems and manage complex databases.",
@@ -84,6 +76,7 @@ const INTERNSHIPS = [
     posted: "3 days ago",
     filled: 15,
     total: 15,
+    fee: "8,999",
     icon: <MonitorPlay className="w-6 h-6" />,
     color: "bg-cyan-50 text-cyan-600",
     description: "Create stunning, high-performance user interfaces with modern web technologies.",
@@ -92,9 +85,10 @@ const INTERNSHIPS = [
   {
     id: "6",
     title: "Mobile App (React Native)",
-    posted: "2 days ago",
+    posted: "11 days ago",
     filled: 15,
     total: 15,
+    fee: "8,999",
     icon: <Smartphone className="w-6 h-6" />,
     color: "bg-indigo-50 text-indigo-600",
     description: "Build cross-platform mobile experiences for iOS and Android.",
@@ -106,6 +100,7 @@ const INTERNSHIPS = [
     posted: "2 days ago",
     filled: 15,
     total: 15,
+    fee: "19,999",
     icon: <BarChart3 className="w-6 h-6" />,
     color: "bg-amber-50 text-amber-600",
     description: "Extract insights from data and drive decision-making through analytics.",
@@ -117,6 +112,7 @@ const INTERNSHIPS = [
     posted: "4 days ago",
     filled: 15,
     total: 15,
+    fee: "11,999",
     icon: <Search className="w-6 h-6" />,
     color: "bg-red-50 text-red-600",
     description: "Grow brands and reach audiences through strategic digital channels.",
@@ -125,9 +121,10 @@ const INTERNSHIPS = [
   {
     id: "11",
     title: "Cloud (AWS/Azure)",
-    posted: "1 day ago",
+    posted: "19 days ago",
     filled: 15,
     total: 15,
+    fee: "12,999",
     icon: <Cloud className="w-6 h-6" />,
     color: "bg-sky-50 text-sky-600",
     description: "Deploy and manage scalable infrastructure in the cloud.",
@@ -136,9 +133,10 @@ const INTERNSHIPS = [
   {
     id: "12",
     title: "Cybersecurity",
-    posted: "3 days ago",
+    posted: "13 days ago",
     filled: 15,
     total: 15,
+    fee: "4,999",
     icon: <ShieldCheck className="w-6 h-6" />,
     color: "bg-rose-50 text-rose-600",
     description: "Protect systems and data from cyber threats and vulnerabilities.",
@@ -194,9 +192,16 @@ export default function InternshipListingPage() {
                   {internship.title}
                 </h3>
 
-                <p className={`text-sm font-medium text-gray-500 leading-relaxed mb-8`}>
+                <p className={`text-sm font-medium text-gray-500 leading-relaxed mb-4`}>
                   {internship.description}
                 </p>
+
+                {internship.id !== "10" && (
+                  <div className="flex items-center justify-between mb-8">
+                    <span className="text-[12px] font-black uppercase tracking-widest text-gray-400">Tool Charges/Fees</span>
+                    <span className="text-lg font-black text-gray-900 group-hover:text-yellow-600 transition-colors">₹{internship.fee}</span>
+                  </div>
+                )}
 
                 <div className="mt-auto pt-6 border-t border-gray-50">
                   {internship.active ? (

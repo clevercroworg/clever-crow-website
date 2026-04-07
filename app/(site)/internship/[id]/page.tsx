@@ -20,18 +20,16 @@ import {
 import SectionHeader from "@/components/SectionHeader";
 
 const INTERNSHIPS = [
-  { id: "1", title: "Full Stack / AI-ML Development" },
-  { id: "10", title: "Content Writing" },
-  { id: "7", title: "Web Design" },
-  // Others are disabled on the listing page, but let's keep them here for safety if someone has a direct link
-  { id: "3", title: "Google Ads / Facebook Ads" },
-  { id: "4", title: "Backend (Node.js/Python)" },
-  { id: "5", title: "Frontend (React/Next.js)" },
-  { id: "6", title: "Mobile App (React Native)" },
-  { id: "8", title: "Data Science" },
-  { id: "9", title: "Digital Marketing" },
-  { id: "11", title: "Cloud (AWS/Azure)" },
-  { id: "12", title: "Cybersecurity" },
+  { id: "1", title: "Full Stack / AI-ML Development", fee: "8,999", filled: 11 },
+  { id: "7", title: "Data Analysis and Power BI analytics", fee: "12,999", filled: 11 },
+  { id: "3", title: "Google Ads / Facebook Ads", fee: "12,999", filled: 15 },
+  { id: "4", title: "Backend (Node.js/Python)", fee: "8,999", filled: 15 },
+  { id: "5", title: "Frontend (React/Next.js)", fee: "8,999", filled: 15 },
+  { id: "6", title: "Mobile App (React Native)", fee: "8,999", filled: 15 },
+  { id: "8", title: "Data Science", fee: "19,999", filled: 15 },
+  { id: "9", title: "Digital Marketing", fee: "11,999", filled: 15 },
+  { id: "11", title: "Cloud (AWS/Azure)", fee: "12,999", filled: 15 },
+  { id: "12", title: "Cybersecurity", fee: "4,999", filled: 15 },
 ];
 
 const INDIAN_STATES = [
@@ -52,19 +50,12 @@ const SKILLS_MAPPING: Record<string, { id: string; name: string }[]> = {
     { id: "ai_ml_algo", name: "AI-ML Algorithms" },
     { id: "sys_design", name: "System Architecture" },
   ],
-  "10": [
-    { id: "creative_write", name: "Creative Writing" },
-    { id: "seo_opt", name: "SEO Optimization" },
-    { id: "research", name: "Research Ability" },
-    { id: "edit_proof", name: "Editing & Proofreading" },
-    { id: "social_media", name: "Social Media Strategy" },
-  ],
   "7": [
-    { id: "figma_ui_ux", name: "Figma / UI-UX" },
-    { id: "resp_layout", name: "Responsive Layouts" },
-    { id: "color_theory", name: "Color Theory" },
-    { id: "branding_logo", name: "Branding & Logos" },
-    { id: "html_css_basic", name: "HTML/CSS Basics" },
+    { id: "pbi_viz", name: "Power BI / Tableau" },
+    { id: "sql_db", name: "SQL & Databases" },
+    { id: "stat_analysis", name: "Statistical Analysis" },
+    { id: "data_clean", name: "Data Cleaning / ETL" },
+    { id: "bus_intel", name: "Business Intelligence" },
   ],
   "default": [
     { id: "comm_skill", name: "Communication" },
@@ -217,6 +208,19 @@ export default function InternshipApplicationPage({ params }: { params: Promise<
                   </div>
                 </div>
               </div>
+
+              {/* Fee and Availability summary placed at the end of Personal Details */}
+              {id !== "10" && (
+                <div className="mt-8 p-6 bg-gray-50/50 border border-gray-100 rounded-[2rem] flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="flex flex-col">
+                    <span className="text-[12px] font-black uppercase tracking-widest text-gray-500">Registration Fee</span>
+                    <span className="text-2xl font-black text-gray-900">₹{(internship as any).fee}</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-yellow-100 px-4 py-2 rounded-full border border-yellow-200">
+                    <span className="text-[12px] font-black text-yellow-700 uppercase tracking-wider">{(internship as any).filled}/15 FILLED</span>
+                  </div>
+                </div>
+              )}
             </section>
 
             {/* --- EDUCATION --- */}
