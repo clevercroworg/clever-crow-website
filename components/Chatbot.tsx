@@ -96,7 +96,7 @@ export default function Chatbot() {
   }, []);
 
   // Hide chatbot on all internship and landing pages
-  if (pathname.startsWith("/internship") || pathname.startsWith("/landing-page")) return null;
+  if (pathname.startsWith("/internship") || pathname.startsWith("/landing-page") || pathname.startsWith("/lp")) return null;
 
   const addMessage = (message: Omit<Message, "id">) => {
     setMessages((prev) => [

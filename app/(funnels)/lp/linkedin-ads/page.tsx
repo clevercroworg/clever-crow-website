@@ -10,6 +10,7 @@ import PricingSection from "../components/PricingSection";
 import FaqSection from "../components/FaqSection";
 import Footer from "../components/Footer";
 import CallbackModal from "../components/CallbackModal";
+import WhatsAppButton from "../components/WhatsAppButton";
 
 export default function LinkedInAdsLandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,10 +43,25 @@ export default function LinkedInAdsLandingPage() {
               <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
                 Most professionals post randomly on LinkedIn but don’t see results.
               </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 mb-10">
-                <div className="px-6 py-4 bg-red-50 rounded-xl text-red-700 font-bold border border-red-100 shadow-sm">No strategy</div>
-                <div className="px-6 py-4 bg-red-50 rounded-xl text-red-700 font-bold border border-red-100 shadow-sm">No positioning</div>
-                <div className="px-6 py-4 bg-red-50 rounded-xl text-red-700 font-bold border border-red-100 shadow-sm">No consistency</div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
+                <div className="flex flex-col items-center p-6 bg-gradient-to-b from-white to-red-50/30 border border-red-100/50 rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-red-200">
+                  <div className="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4 shadow-sm">
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  </div>
+                  <h3 className="font-extrabold text-slate-800 text-xl tracking-tight">No Strategy</h3>
+                </div>
+                <div className="flex flex-col items-center p-6 bg-gradient-to-b from-white to-red-50/30 border border-red-100/50 rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-red-200">
+                  <div className="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4 shadow-sm">
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  </div>
+                  <h3 className="font-extrabold text-slate-800 text-xl tracking-tight">No Positioning</h3>
+                </div>
+                <div className="flex flex-col items-center p-6 bg-gradient-to-b from-white to-red-50/30 border border-red-100/50 rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-red-200">
+                  <div className="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4 shadow-sm">
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  </div>
+                  <h3 className="font-extrabold text-slate-800 text-xl tracking-tight">No Consistency</h3>
+                </div>
               </div>
               <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-6">
                 That’s why LinkedIn doesn’t convert.
@@ -197,6 +213,7 @@ export default function LinkedInAdsLandingPage() {
       </div>
 
       <CallbackModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <WhatsAppButton message="Hi Clever Crow Team, I'm interested in LinkedIn Growth services." />
     </main>
   );
 }
