@@ -6,6 +6,7 @@ import { useRef, Suspense, useState } from "react";
 import { ArrowRight, TrendingUp, Users, Zap, BarChart3, Globe, Shield } from "lucide-react";
 import dynamic from 'next/dynamic';
 import { GradientButton } from "@/components/ui/gradient-button";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 const Spline = dynamic(() => import('@splinetool/react-spline'), { 
   ssr: false,
@@ -90,15 +91,16 @@ export default function HeroCinematic({ onCallbackClick }: HeroCinematicProps) {
               className="text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[5.5rem] font-black tracking-[-0.03em] text-white"
             >
               We Build The <br className="hidden sm:block" />
-              <span className="relative inline-block text-yellow-500">
+              <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-600 drop-shadow-[0_0_30px_rgba(245,158,11,0.3)]">
                 Future
                 <motion.span
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-                  className="absolute -bottom-1 sm:-bottom-2 left-0 h-1.5 sm:h-2 w-full origin-left bg-yellow-400/20 rounded-full"
+                  className="absolute -bottom-1 sm:-bottom-2 left-0 h-1.5 sm:h-2 w-full origin-left bg-gradient-to-r from-yellow-500/80 to-transparent rounded-full"
                 />
-              </span> of Digital luxury
+              </span>{" "}
+              <span className="text-white/90">of Digital luxury</span>
             </motion.h1>
 
             {/* Subtext */}
@@ -156,41 +158,44 @@ export default function HeroCinematic({ onCallbackClick }: HeroCinematicProps) {
             transition={{ duration: 1, delay: 0.4 }}
             className="lg:col-span-5 flex flex-col gap-6"
           >
-            <div className="relative group">
-              {/* Main Growth Card - Solid White */}
+            <div className="relative group perspective-1000">
+              {/* Main Growth Card with Glowing Effect */}
               <motion.div 
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="rounded-[2.5rem] bg-white p-6 sm:p-10 shadow-[0_40px_100px_rgba(0,0,0,0.4)] ring-1 ring-black/5 will-change-transform"
+                className="group/card relative rounded-[2.5rem] bg-white/95 backdrop-blur-2xl p-6 sm:p-10 shadow-[0_40px_100px_rgba(0,0,0,0.4)] ring-1 ring-black/5 will-change-transform overflow-hidden"
               >
-                <div className="flex items-center justify-between mb-8 sm:mb-12">
-                  <div className="flex items-center gap-4 sm:gap-6">
-                    <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-yellow-100 flex items-center justify-center text-yellow-600 ring-1 ring-yellow-200">
-                      <TrendingUp className="h-6 w-6 sm:h-7 sm:w-7" />
+                <GlowingEffect blur={0} glow={true} inactiveZone={0.65} proximity={80} spread={25} disabled={false} borderWidth={2} variant="default" />
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-8 sm:mb-12">
+                    <div className="flex items-center gap-4 sm:gap-6">
+                      <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-yellow-100/80 flex items-center justify-center text-yellow-600 ring-1 ring-yellow-200 backdrop-blur-sm group-hover/card:scale-105 transition-transform duration-500">
+                        <TrendingUp className="h-6 w-6 sm:h-7 sm:w-7" />
+                      </div>
+                      <div>
+                        <h4 className="text-[10px] sm:text-[11px] font-black text-yellow-600 uppercase tracking-[0.15em]">Growth Trajectory</h4>
+                        <p className="text-2xl sm:text-3xl md:text-[2.75rem] font-black text-gray-900 leading-tight">+412%</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="text-[10px] sm:text-[11px] font-black text-yellow-600 uppercase tracking-[0.15em]">Growth Trajectory</h4>
-                      <p className="text-2xl sm:text-3xl md:text-[2.75rem] font-black text-gray-900 leading-tight">+412%</p>
+                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 text-sm sm:text-base font-bold bg-gray-50/50 backdrop-blur-sm shadow-sm group-hover/card:bg-yellow-50 group-hover/card:text-yellow-600 group-hover/card:border-yellow-200 transition-colors duration-500">
+                      01
                     </div>
                   </div>
-                  <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 text-sm sm:text-base font-bold bg-gray-50">
-                    01
-                  </div>
-                </div>
 
-                {/* Adaptive Geometric Visualization */}
-                <div className="flex items-end gap-1.5 sm:gap-2 h-20 sm:h-28">
-                  {[35, 55, 45, 75, 60, 95, 80, 115, 100, 140].map((h, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ height: 0 }}
-                      animate={{ height: `${h}%` }}
-                      transition={{ duration: 1, delay: 1 + i * 0.04, ease: "easeOut" }}
-                      className={`flex-1 rounded-full transition-all duration-500 ${
-                        i === 9 ? "bg-yellow-500 shadow-[0_0_20px_rgba(234,179,8,0.3)]" : "bg-gray-200 hover:bg-gray-300"
-                      }`}
-                    />
-                  ))}
+                  {/* Adaptive Geometric Visualization */}
+                  <div className="flex items-end gap-1.5 sm:gap-2 h-20 sm:h-28">
+                    {[35, 55, 45, 75, 60, 95, 80, 115, 100, 140].map((h, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ height: 0 }}
+                        animate={{ height: `${h}%` }}
+                        transition={{ duration: 1, delay: 1 + i * 0.04, ease: "easeOut" }}
+                        className={`flex-1 rounded-full transition-all duration-500 ${
+                          i === 9 ? "bg-gradient-to-t from-yellow-400 to-yellow-500 shadow-[0_0_20px_rgba(234,179,8,0.3)]" : "bg-gray-200 hover:bg-gray-300"
+                        }`}
+                      />
+                    ))}
+                  </div>
                 </div>
               </motion.div>
 
@@ -199,48 +204,61 @@ export default function HeroCinematic({ onCallbackClick }: HeroCinematicProps) {
                 <motion.div 
                   animate={{ x: [0, -5, 0] }}
                   transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="rounded-2xl bg-white p-5 sm:p-6 shadow-xl ring-1 ring-black/5 will-change-transform"
+                  className="group/card relative rounded-2xl bg-white/95 backdrop-blur-2xl p-5 sm:p-6 shadow-xl ring-1 ring-black/5 will-change-transform overflow-hidden"
                 >
-                  <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                    <Users className="h-4 w-4 text-blue-600" />
-                    <span className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-widest">Global Reach</span>
+                  <GlowingEffect blur={0} glow={true} inactiveZone={0.6} proximity={60} spread={20} disabled={false} borderWidth={1.5} variant="default" />
+                  <div className="relative z-10 flex flex-col justify-between h-full">
+                    <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                      <div className="h-8 w-8 rounded-full bg-blue-50 flex flex-shrink-0 items-center justify-center ring-1 ring-blue-100 group-hover/card:scale-110 transition-transform duration-500">
+                        <Users className="h-4 w-4 text-blue-600" />
+                      </div>
+                      <span className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-widest leading-none">Global Reach</span>
+                    </div>
+                    <p className="text-xl sm:text-2xl md:text-3xl font-black text-gray-900 tracking-tight">1.8M+</p>
                   </div>
-                  <p className="text-lg sm:text-xl md:text-2xl font-black text-gray-900">1.8M+</p>
                 </motion.div>
 
                 <motion.div 
                    animate={{ x: [0, 5, 0] }}
                    transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                   className="rounded-2xl bg-white p-5 sm:p-6 shadow-xl ring-1 ring-black/5 will-change-transform"
+                   className="group/card relative rounded-2xl bg-white/95 backdrop-blur-2xl p-5 sm:p-6 shadow-xl ring-1 ring-black/5 will-change-transform overflow-hidden"
                 >
-                  <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                    <Zap className="h-4 w-4 text-emerald-600" />
-                    <span className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-widest">Efficiency</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <p className="text-lg sm:text-xl md:text-2xl font-black text-gray-900">24/7</p>
-                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                  <GlowingEffect blur={0} glow={true} inactiveZone={0.6} proximity={60} spread={20} disabled={false} borderWidth={1.5} variant="default" />
+                  <div className="relative z-10 flex flex-col justify-between h-full">
+                    <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                      <div className="h-8 w-8 rounded-full bg-emerald-50 flex flex-shrink-0 items-center justify-center ring-1 ring-emerald-100 group-hover/card:scale-110 transition-transform duration-500">
+                        <Zap className="h-4 w-4 text-emerald-600" />
+                      </div>
+                      <span className="text-[9px] sm:text-[10px] font-black text-gray-500 uppercase tracking-widest leading-none">Efficiency</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <p className="text-xl sm:text-2xl md:text-3xl font-black text-gray-900 tracking-tight">24/7</p>
+                      <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                    </div>
                   </div>
                 </motion.div>
               </div>
 
-              {/* Conversion Performance - Solid White */}
+              {/* Conversion Performance - Glowing */}
               <motion.div 
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
-                className="mt-4 sm:mt-6 rounded-3xl bg-white p-5 sm:p-6 flex items-center justify-between ring-1 ring-black/5 shadow-2xl will-change-transform"
+                className="group/card relative mt-4 sm:mt-6 rounded-3xl bg-white/95 backdrop-blur-2xl p-5 sm:p-6 shadow-2xl ring-1 ring-black/5 will-change-transform overflow-hidden"
               >
-                <div className="flex items-center gap-4 sm:gap-6">
-                  <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 ring-1 ring-purple-200">
-                    <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6" />
+                <GlowingEffect blur={0} glow={true} inactiveZone={0.6} proximity={70} spread={25} disabled={false} borderWidth={2} variant="default" />
+                <div className="relative z-10 flex items-center justify-between w-full">
+                  <div className="flex items-center gap-4 sm:gap-6">
+                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-purple-100/80 flex items-center justify-center text-purple-600 ring-1 ring-purple-200 backdrop-blur-sm group-hover/card:scale-110 transition-transform duration-500">
+                      <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6" />
+                    </div>
+                    <div>
+                      <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em] mb-1">Conv. Performance</p>
+                      <p className="text-lg sm:text-xl md:text-2xl font-black text-gray-900 leading-none">8.42%</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em]">Conv. Performance</p>
-                    <p className="text-lg sm:text-xl md:text-2xl font-black text-gray-900">8.42%</p>
+                  <div className="hidden sm:block">
+                    <span className="text-[10px] font-black text-yellow-600 px-3 py-1.5 rounded-full border border-yellow-200/50 bg-yellow-50/80 backdrop-blur-md tracking-tighter">PREMIUM LEVEL</span>
                   </div>
-                </div>
-                <div className="hidden sm:block">
-                  <span className="text-[10px] font-black text-yellow-600 px-3 py-1.5 rounded-full border border-yellow-200 bg-yellow-50 tracking-tighter">PREMIUM LEVEL</span>
                 </div>
               </motion.div>
             </div>

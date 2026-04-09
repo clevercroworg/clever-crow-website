@@ -12,6 +12,29 @@ import Footer from "../components/Footer";
 import CallbackModal from "../components/CallbackModal";
 import WhatsAppButton from "../components/WhatsAppButton";
 
+const portfolioClients = [
+  { name: "Apsara Ice Creams", stat: "15+", metric: "B2B Franchise Leads/mo" },
+  { name: "Snacket", stat: "30+", metric: "Retail Dist. Inquiries" },
+  { name: "Dil Foods", stat: "120+", metric: "Cloud Kitchen Leads" },
+  { name: "Foodstories", stat: "4x", metric: "Organic brand reach" },
+  { name: "Curefoods", stat: "35%", metric: "Drop in Hiring CPL" },
+  { name: "Truffles Hospitality", stat: "40+", metric: "Corporate Catering Leads" },
+  { name: "Loyal Hospitality", stat: "60+", metric: "Strategic connections" },
+  { name: "Shangri-La", stat: "150+", metric: "HNI event inquiries" },
+  { name: "Dan Hospitality", stat: "2x", metric: "Employer brand engagement" },
+  { name: "AA Hospitality", stat: "45+", metric: "Partnership Discussions" },
+  { name: "Svaraa Jewels", stat: "12x", metric: "ROAS on HNI campaigns" },
+  { name: "Paresh Lamba", stat: "80+", metric: "Bespoke styling appts" },
+  { name: "Aquarelle India", stat: "200+", metric: "Leadership Applications" },
+  { name: "Speedo", stat: "3x", metric: "Distributor engagement" },
+  { name: "Trigen Wealth", stat: "50+", metric: "Qualified HNI discussions" },
+  { name: "MAC Sources", stat: "180+", metric: "Global B2B leads" },
+  { name: "Agnile", stat: "45", metric: "Enterprise Demos Booked" },
+  { name: "HVAC Contractors", stat: "30+", metric: "Commercial site visits" },
+  { name: "Orange & Teal", stat: "3x", metric: "Agency profile views" },
+  { name: "Mirchi Excellence", stat: "250+", metric: "Coaching Signups" }
+];
+
 export default function LinkedInAdsLandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -78,6 +101,52 @@ export default function LinkedInAdsLandingPage() {
               <p className="text-xl sm:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
                 We handle everything — from profile optimization to content creation — so your LinkedIn starts bringing real business.
               </p>
+            </div>
+          </section>
+
+          {/* SECTION PORTFOLIO */}
+          <section className="py-20 sm:py-28 bg-slate-50 relative border-b border-slate-200 overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#f4c542]/5 blur-3xl rounded-full pointer-events-none"></div>
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 mb-5">
+                  Our Portfolio
+                </h2>
+                <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">
+                  Measured, scaled, and delivered for top brands across industries.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {portfolioClients.map((client, idx) => (
+                  <div key={idx} className="group relative w-full h-[360px] rounded-3xl overflow-hidden shadow-lg border border-slate-200 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-amber-300">
+                    
+                    {/* The "Image" Layer (Logo Placeholder) */}
+                    <div className="absolute inset-0 flex flex-col items-center pt-24 bg-gradient-to-br from-slate-100 to-white transition-transform duration-700 ease-out group-hover:scale-105 z-0">
+                      <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                      <h3 className="text-slate-800 text-2xl lg:text-3xl font-black tracking-tight text-center z-10 px-6 drop-shadow-sm">
+                        {client.name}
+                      </h3>
+                    </div>
+
+                    {/* Gradient Overlay (Darkens the bottom for stats contrast without affecting top logo) */}
+                    <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-slate-900 via-slate-900/70 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100 z-10 pointer-events-none"></div>
+                    
+                    {/* The Stats Overlay Block */}
+                    <div className="absolute bottom-0 left-0 w-full p-6 z-20">
+                      <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                         <div className="backdrop-blur-md bg-white/10 p-6 rounded-2xl border border-white/20 shadow-2xl flex flex-col gap-2 relative overflow-hidden">
+                           {/* Hover Effect Light Streak */}
+                           <div className="absolute top-0 right-0 w-32 h-full bg-white/10 -skew-x-12 translate-x-[200%] group-hover:translate-x-[-200%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+
+                           <span className="text-4xl md:text-5xl font-extrabold text-[#f4c542] tracking-tight leading-none drop-shadow-md">{client.stat}</span>
+                           <span className="text-sm sm:text-base font-semibold text-white/90 leading-snug drop-shadow-sm">{client.metric}</span>
+                         </div>
+                      </div>
+                    </div>
+
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 
