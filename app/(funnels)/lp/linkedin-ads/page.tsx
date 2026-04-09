@@ -23,8 +23,8 @@ export default function LinkedInAdsLandingPage() {
           {/* SECTION 1 - HERO */}
           <HeroSection data={{
             badges: ["LinkedIn Experts", "Lead Generation", "Brand Building", "Organic Growth"],
-            title: "Get Leads from LinkedIn",
-            accentTitle: "@ ₹8,999/month",
+            title: "LinkedIn Management",
+            accentTitle: "@ Just ₹8,999",
             subtitle: "Build Authority. Attract Clients. Grow Organically.",
             highlights: [
               "8 Professional Posts Every Month",
@@ -83,7 +83,7 @@ export default function LinkedInAdsLandingPage() {
 
           {/* SECTION 4 - WHAT YOU GET */}
           <PricingSection data={{
-            title: "What’s Included in ₹8,999/month",
+            title: "What’s Included in Just ₹8,999",
             subtitle: "Everything you need to build authority and drive leads on LinkedIn.",
             packages: [
               {
