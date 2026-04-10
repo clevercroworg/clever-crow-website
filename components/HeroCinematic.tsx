@@ -4,8 +4,10 @@ import { useRef, useState, useMemo, useEffect } from "react";
 import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { ArrowRight, Globe, TrendingUp, Megaphone, CheckCircle2, Users, Star, Code2 } from "lucide-react";
 import * as THREE from "three";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
+import { MeshSurfaceSampler } from "three/examples/jsm/math/MeshSurfaceSampler.js";
 
 // ──────────────────────────────────────────────
 // MORPHING PARTICLE SYSTEM
@@ -15,63 +17,189 @@ const PARTICLE_COUNT = 14000;
 function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
   const pointsRef = useRef<THREE.Points>(null);
 
-  const { positionsSphere, positionsFunnel, positionsDiamond, colors } = useMemo(() => {
-    const pS = new Float32Array(PARTICLE_COUNT * 3);
-    const pF = new Float32Array(PARTICLE_COUNT * 3); // Funnel (marketing pipeline)
-    const pD = new Float32Array(PARTICLE_COUNT * 3); // Diamond (premium brand)
+  // Safely load the Crow object without blocking render via Suspense abstraction in Canvas
+  const crowObj = useLoader(OBJLoader, '/crow.obj');
+
+  const { positionsCrow, positionsFunnel, positionsPhone, colors } = useMemo(() => {
+    const pCrow = new Float32Array(PARTICLE_COUNT * 3); // Phase 1
+    const pFunnel = new Float32Array(PARTICLE_COUNT * 3); // Phase 2
+    const pPhone = new Float32Array(PARTICLE_COUNT * 3); // Phase 3
     const c  = new Float32Array(PARTICLE_COUNT * 3);
+
+    // Setup Crow Geometry Sampler
+    let crowGeometry: THREE.BufferGeometry | null = null;
+    crowObj.traverse((child: any) => {
+      if (child.isMesh && !crowGeometry) crowGeometry = child.geometry;
+    });
+
+    let sampler: MeshSurfaceSampler | null = null;
+    let crowCenter = new THREE.Vector3();
+    let crowScale = 1;
+
+    if (crowGeometry) {
+      const mesh = new THREE.Mesh(crowGeometry, new THREE.MeshBasicMaterial());
+      sampler = new MeshSurfaceSampler(mesh).build();
+      
+      crowGeometry.computeBoundingBox();
+      const bbox = crowGeometry.boundingBox!;
+      const size = bbox.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      // Scale to match our roughly ~8 height space
+      crowScale = 7.5 / maxDim;
+      bbox.getCenter(crowCenter);
+    }
+
+    const tempP = new THREE.Vector3();
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const i3 = i * 3;
 
-      // ── SPHERE (Phase 1: Digital Products / Globe) ──
-      const r = 3.5 + Math.random() * 0.9;
-      const theta = Math.random() * Math.PI * 2;
-      const phi   = Math.acos(Math.random() * 2 - 1);
-      pS[i3]     = r * Math.sin(phi) * Math.cos(theta);
-      pS[i3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      pS[i3 + 2] = r * Math.cos(phi);
+      // ── SMARTPHONE (Phase 3: Digital Products / Apps) ──
+      // Models an upright smartphone with flawlessly curved rounded corners and floating apps array
+      const pW = 3.6; 
+      const pH = 7.4; 
+      const pDepth = 0.4; 
+      const r = 0.8; // Corner radius
 
-      // ── FUNNEL (Phase 2: Marketing Pipeline) ──
-      // Wide at top (leads in), narrows to bottom (conversions out)
-      const funnelH = 8;
-      const fy = (Math.random() - 0.3) * funnelH; // skew upward for wider top
-      const fNorm = (fy + funnelH * 0.3) / funnelH; // 0 at bottom, 1 at top
-      const fRadius = 0.4 + fNorm * 3.8; // narrow at bottom, wide at top
-      const fAngle = Math.random() * Math.PI * 2;
-      const fNoise = (Math.random() - 0.5) * 0.2;
-      pF[i3]     = fRadius * Math.cos(fAngle) + fNoise;
-      pF[i3 + 1] = fy + fNoise;
-      pF[i3 + 2] = fRadius * Math.sin(fAngle) + fNoise;
+      let px = (Math.random() - 0.5) * pW;
+      let py = (Math.random() - 0.5) * pH;
+      let pz = (Math.random() - 0.5) * pDepth;
 
-      // ── DIAMOND (Phase 3: Premium Brand / Trust) ──
-      // Note: `rotation.x` reaches Math.PI at scroll=1.0, meaning Phase 3 renders 180 deg flipped.
-      // We must model an INVERTED gem with a closed flat table so it appears UPRIGHT to the user!
-      const dAngle = Math.random() * Math.PI * 2;
-      const maxR = 4.2;
-      let dY, dRadius;
-      const randPart = Math.random();
-      
-      if (randPart < 0.15) {
-        // 15% of particles form the solid flat table (Inverted: at y = -2.8, which becomes the top)
-        dY = -2.8;
-        dRadius = Math.sqrt(Math.random()) * (maxR * 0.55); 
+      const w2 = pW / 2;
+      const h2 = pH / 2;
+      let dx = Math.max(0, Math.abs(px) - (w2 - r));
+      let dy = Math.max(0, Math.abs(py) - (h2 - r));
+
+      const rolePhone = Math.random();
+      if (rolePhone < 0.55) {
+        // [55%] Divert a massive chunk of particles into an ambient background "Data Cloud"
+        // This prevents all 14,000 particles from clustering into a dense, blinding rectangle!
+        px = (Math.random() - 0.5) * 16.0;
+        py = (Math.random() - 0.5) * 16.0;
+        pz = (Math.random() - 0.5) * 8.0 - 2.0; 
       } else {
-        // 85% of particles form the outer shell (Y ranges from -2.8 to +5.0)
-        dY = (Math.random() * 7.8) - 2.8;
-        if (dY > 0) {
-          // Pavilion: equator(y=0) to point(y=5). Flipped, this is the downward point.
-          dRadius = maxR * (1 - dY / 5.0);
-        } else {
-          // Crown: equator(y=0) to table(y=-2.8). Flipped, this is the slanted upper edge.
-          dRadius = maxR * (1 - (-dY) / 2.8 * 0.45);
+        // [45%] Construct the ultra-sharp Smartphone casing
+        
+        // Contstrain to inside the rounded rectangle boundary
+        if (dx > 0 && dy > 0) {
+          let dist = Math.hypot(dx, dy);
+          if (dist > r) { // clamp strictly to the curved edge
+            px = Math.sign(px) * ((w2 - r) + dx * (r / dist));
+            py = Math.sign(py) * ((h2 - r) + dy * (r / dist));
+          }
+        }
+
+        // Push particles heavily to the Outer Edges (Wireframe) to maximize sharpness 
+        const faceRand = Math.random();
+        if (faceRand < 0.15) { pz = pDepth / 2; }       // 15% Front Glass    
+        else if (faceRand < 0.20) { pz = -pDepth / 2; } // 5% Back Casing
+        else { 
+          // 80% forced permanently to the exact vertical/horizontal/curved outer rim (Razor-Sharp Wireframe)
+          if (dx > 0 && dy > 0) {
+             let dist = Math.hypot(dx, dy);
+             px = Math.sign(px) * ((w2 - r) + dx * (r / dist));
+             py = Math.sign(py) * ((h2 - r) + dy * (r / dist));
+          } else if (Math.abs(px) > (w2 - r)) {
+             px = Math.sign(px) * w2;
+          } else {
+             py = Math.sign(py) * h2;
+          }
+        }
+
+        // Array the central particles of the front glass into an app grid UI
+        if (pz === pDepth / 2 && Math.abs(px) < (w2 - 0.3) && Math.abs(py) < (h2 - 0.4)) {
+            const cols = 5;
+            const rows = 7;
+            const colIdx = Math.floor((px / pW + 0.5) * cols);
+            const rowIdx = Math.floor((py / pH + 0.5) * rows);
+            
+            const cellCenterX = (colIdx + 0.5) / cols * pW - pW/2;
+            const cellCenterY = (rowIdx + 0.5) / rows * pH - pH/2;
+
+            px = cellCenterX + (Math.random() - 0.5) * 0.25;
+            py = cellCenterY + (Math.random() - 0.5) * 0.25;
         }
       }
+
+      // Micro noise for the cinematic dust illusion - extremely tight to preserve absolute geometric sharpness
+      const phoneNoise = 0.01;
+      pPhone[i3]     = px + (Math.random() - 0.5) * phoneNoise;
+      pPhone[i3 + 1] = py + (Math.random() - 0.5) * phoneNoise;
+      pPhone[i3 + 2] = pz + (Math.random() - 0.5) * phoneNoise;
+
+      // ── ANALYTICS CHART (Phase 2: Marketing Pipeline) ──
+      // An unmistakable 3D Ascending Bar Chart + Growth Arrow representing Data/ROI/Growth
+      const bars = 4;
+      const bW = 0.8; // Thinner pillars for maximum clarity
+      const gap = 1.6; // Extremely wide gaps to permanently prevent light-bleeding and overlapping
+      const totalW = bars * bW + (bars - 1) * gap;
       
-      const dNoise = (Math.random() - 0.5) * 0.15;
-      pD[i3]     = dRadius * Math.cos(dAngle) + dNoise;
-      pD[i3 + 1] = dY + dNoise;
-      pD[i3 + 2] = dRadius * Math.sin(dAngle) + dNoise;
+      const bIdx = Math.floor(Math.random() * bars);
+      const bHeight = ((bIdx + 1) / bars) * 6.0; 
+      
+      let fx = (Math.random() - 0.5) * bW;
+      let fy = Math.random() * bHeight - 3.0; // Base rooted at y=-3
+      let fz = (Math.random() - 0.5) * bW;
+
+      // Enforce absolute hollow surfaces so the pillars act like glowing glass outlines, not solid blinding blocks
+      const fS = Math.random();
+      if (fS < 0.25) { fx = (Math.random() > 0.5 ? 1 : -1) * bW/2; } // Left/Right Wall Exact
+      else if (fS < 0.50) { fz = (Math.random() > 0.5 ? 1 : -1) * bW/2; } // Front/Back Wall Exact
+      else if (fS < 0.75) { fy = bHeight - 3.0; } // Top Roof
+      else { fy = -3.0; } // Base floor
+      
+      const barCenterX = (bIdx * (bW + gap)) - totalW/2 + bW/2;
+      fx += barCenterX;
+
+      // Distribute the 14,000 particles heavily away from the pillars to prevent solid density
+      const rRole = Math.random();
+      if (rRole < 0.25) {
+        // [25%] Hijack particles to draw a sweeping 3D "Growth Arrow" 
+        const t = Math.random(); // 0 to 1 along the curve
+        fx = (t * totalW * 1.3) - (totalW * 1.3)/2;
+        fy = (t * 6.0 * 1.3) - 3.0; 
+        fz = Math.sin(t * Math.PI * 1.5) * 2.0; 
+        
+        // Make the swoosh beautifully clean and sharp without fuzzy distortion
+        const arrowNoise = 0.15;
+        fx += (Math.random() - 0.5) * arrowNoise;
+        fy += (Math.random() - 0.5) * arrowNoise;
+        fz += (Math.random() - 0.5) * arrowNoise;
+      } else if (rRole < 0.60) {
+        // [35%] Divert a massive chunk of particles into an ambient background "Data Cloud"
+        // This thins the pillars tremendously and adds insane 3D depth to the cinematic!
+        fx = (Math.random() - 0.5) * 16.0;
+        fy = (Math.random() - 0.5) * 16.0;
+        fz = (Math.random() - 0.5) * 8.0 - 2.0; 
+      }
+      // The remaining 40% naturally stay bound to construct the strictly hollow bar pillars
+
+      // Rotate the chart 35 degrees around Y-axis so it holds a dramatic, static 3D isometric pose!
+      const isoAngle = Math.PI * 0.20; 
+      const isoX = fx * Math.cos(isoAngle) - fz * Math.sin(isoAngle);
+      const isoZ = fx * Math.sin(isoAngle) + fz * Math.cos(isoAngle);
+
+      pFunnel[i3]     = isoX;
+      pFunnel[i3 + 1] = fy;
+      pFunnel[i3 + 2] = isoZ;
+
+      // ── CROW MASCOT (Phase 3: Premium Brand / Trust) ──
+      // Presenting a brilliantly sharp, static side-profile of the mascot
+      if (sampler) {
+        sampler.sample(tempP);
+
+        // Perfectly exact coordinates for maximum sharpness (no noise)
+        const cx = (tempP.x - crowCenter.x) * crowScale;
+        const cy = (tempP.y - crowCenter.y) * crowScale;
+        const cz = (tempP.z - crowCenter.z) * crowScale;
+
+        // Rotate 90 degrees around Y axis to show the crisp side profile to the camera
+        pCrow[i3]     = -cz;
+        pCrow[i3 + 1] = cy; 
+        pCrow[i3 + 2] = cx; 
+      } else {
+        pCrow[i3] = 0; pCrow[i3+1] = 0; pCrow[i3+2] = 0;
+      }
 
       // Colors
       const m = Math.random();
@@ -79,10 +207,10 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
       else if (m > 0.3) { c[i3] = 0.6; c[i3+1] = 0;    c[i3+2] = 1;    }
       else              { c[i3] = 1;   c[i3+1] = 0.6;  c[i3+2] = 0;    }
     }
-    return { positionsSphere: pS, positionsFunnel: pF, positionsDiamond: pD, colors: c };
-  }, []);
+    return { positionsCrow: pCrow, positionsFunnel: pFunnel, positionsPhone: pPhone, colors: c };
+  }, [crowObj]);
 
-  const [currentPos] = useState(() => new Float32Array(positionsSphere));
+  const [currentPos] = useState(() => new Float32Array(positionsCrow));
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -97,30 +225,41 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
     const time   = state.clock.getElapsedTime();
 
     const inFirst = scroll < 0.5;
-    const t1 = inFirst ? positionsSphere : positionsFunnel;
-    const t2 = inFirst ? positionsFunnel : positionsDiamond;
+    // New Order: 1. Crow, 2. Funnel, 3. Phone
+    const t1 = inFirst ? positionsCrow : positionsFunnel;
+    const t2 = inFirst ? positionsFunnel  : positionsPhone;
     const raw = inFirst ? scroll / 0.5 : (scroll - 0.5) / 0.5;
-    const lerp = raw * raw * (3 - 2 * raw);
+    
+    // CUSTOM TRANSITION PHYSICS: 
+    // Resist breaking apart until 20% scroll (slow dissolve) and aggressively snap to 100% form by 80% scroll (forms faster)
+    let lerpWindow = (raw - 0.2) / 0.6; // squishes 0-1 into the 0.2-0.8 band
+    lerpWindow = Math.max(0, Math.min(1, lerpWindow)); 
+    const lerp = lerpWindow * lerpWindow * (3 - 2 * lerpWindow); // Smoothstep curve over the accelerated window
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const i3 = i * 3;
       const tx = t1[i3]   * (1 - lerp) + t2[i3]   * lerp;
       const ty = t1[i3+1] * (1 - lerp) + t2[i3+1] * lerp;
       const tz = t1[i3+2] * (1 - lerp) + t2[i3+2] * lerp;
-      const n  = Math.sin(time * 1.5 + i * 0.01) * 0.04;
-      currentPos[i3]   = THREE.MathUtils.lerp(currentPos[i3],   tx + n, 0.1);
-      currentPos[i3+1] = THREE.MathUtils.lerp(currentPos[i3+1], ty + n, 0.1);
-      currentPos[i3+2] = THREE.MathUtils.lerp(currentPos[i3+2], tz + n, 0.1);
+      
+      // Bumped physics kinetic speed up to 0.14 so the particles whip into place beautifully
+      currentPos[i3]   = THREE.MathUtils.lerp(currentPos[i3],   tx, 0.14);
+      currentPos[i3+1] = THREE.MathUtils.lerp(currentPos[i3+1], ty, 0.14);
+      currentPos[i3+2] = THREE.MathUtils.lerp(currentPos[i3+2], tz, 0.14);
     }
 
     if (pointsRef.current) {
       pointsRef.current.geometry.attributes.position.needsUpdate = true;
-      pointsRef.current.rotation.y = time * 0.14 + scroll * Math.PI * 2.5;
-      pointsRef.current.rotation.x = Math.sin(time * 0.2) * 0.2 + scroll * Math.PI;
-      // Desktop: push right. Mobile: move properly UP into the top clear area
+      
+      // Removed global continuous spin to keep shapes readable in their static posed orientations.
+      // Apply an ultra-subtle floating wobble so it feels alive but permanently holds the designed profile.
+      pointsRef.current.rotation.y = Math.sin(time * 0.3) * 0.06;
+      pointsRef.current.rotation.x = Math.cos(time * 0.4) * 0.04;
+
+      // Desktop: push right. Mobile: move properly UP into the top clear area (but lower so the head doesn't clip!)
       const px = isMobile ? 0 : 4.4;
-      const py = isMobile ? 3.0 : 0;
-      const pScale = isMobile ? 0.52 : 1.0;
+      const py = isMobile ? 2.4 : 0;
+      const pScale = isMobile ? 0.46 : 1.0;
       pointsRef.current.position.x = THREE.MathUtils.lerp(pointsRef.current.position.x, px, 0.05);
       pointsRef.current.position.y = THREE.MathUtils.lerp(pointsRef.current.position.y, py, 0.05);
       pointsRef.current.scale.setScalar(pScale);
@@ -247,111 +386,10 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
             <div className="relative w-full md:w-[50%] lg:w-[46%] h-[420px] md:h-[500px]">
 
               <AnimatePresence initial={false}>
-                {/* ═══════ STAGE 1 ═══════ */}
+                {/* ═══════ STAGE 1 (CROW / BRAND) ═══════ */}
                 {activePhase === 0 && (
                   <motion.div
-                    key="p1"
-                    variants={textVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    className="absolute inset-x-0 bottom-0 md:top-1/2 md:bottom-auto md:-translate-y-1/2 pointer-events-auto"
-                  >
-                    <GlassCard>
-                      <div className="mb-4 md:mb-5 inline-flex items-center gap-2 rounded-full border border-blue-400/50 bg-blue-500/15 px-3 md:px-4 py-1.5 backdrop-blur-sm w-fit">
-                        <Globe className="h-3 md:h-3.5 w-3 md:w-3.5 text-blue-300" />
-                        <span className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] text-blue-100 uppercase">
-                          Websites · Apps · Marketing
-                        </span>
-                      </div>
-
-                      <h1 className="text-[2.4rem] sm:text-[3rem] md:text-[4.8rem] lg:text-[6rem] leading-[1.05] font-black tracking-tight text-white mb-4">
-                        We Build Digital
-                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-sky-200 to-indigo-200">
-                          Products That Sell.
-                        </span>
-                      </h1>
-
-                      <p className="max-w-[440px] text-[0.95rem] md:text-[1.05rem] leading-relaxed text-gray-200 mb-5 md:mb-8 font-medium">
-                        From a conversion-optimised website to a full mobile app — we design, build, and launch
-                        digital products that turn visitors into paying customers.
-                      </p>
-
-                      <div className="grid grid-cols-2 md:flex md:flex-wrap gap-x-6 gap-y-3 md:gap-7 mb-5 md:mb-8 border-t border-white/15 pt-4 md:pt-6">
-                        {[
-                          { icon: Code2,        value: "120+", label: "Projects Delivered" },
-                          { icon: Users,        value: "80+",  label: "Happy Clients"      },
-                          { icon: Star,         value: "5.0",  label: "Average Rating"     },
-                          { icon: CheckCircle2, value: "6+",   label: "Years Experience"   },
-                        ].map(({ icon: Icon, value, label }) => (
-                          <div key={label} className="flex flex-col">
-                            <div className="flex items-center gap-1.5 mb-0.5">
-                              <Icon className="h-3 md:h-3.5 w-3 md:w-3.5 text-blue-300" />
-                              <span className="text-lg md:text-2xl font-black text-white">{value}</span>
-                            </div>
-                            <span className="text-[10px] md:text-xs text-gray-400 font-semibold">{label}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-[0.18em] flex items-center gap-2">
-                        <span className="w-5 h-px bg-gray-500 block" /> Scroll to see what we do
-                      </span>
-                    </GlassCard>
-                  </motion.div>
-                )}
-
-                {/* ═══════ STAGE 2 ═══════ */}
-                {activePhase === 1 && (
-                  <motion.div
-                    key="p2"
-                    variants={textVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    className="absolute inset-x-0 bottom-0 md:top-1/2 md:bottom-auto md:-translate-y-1/2 pointer-events-auto"
-                  >
-                    <GlassCard>
-                      <div className="mb-4 md:mb-5 inline-flex items-center gap-2 rounded-full border border-violet-400/50 bg-violet-500/15 px-3 md:px-4 py-1.5 backdrop-blur-sm w-fit">
-                        <TrendingUp className="h-3 md:h-3.5 w-3 md:w-3.5 text-violet-300" />
-                        <span className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] text-violet-100 uppercase">
-                          SEO · Ads · Social · Analytics
-                        </span>
-                      </div>
-
-                      <h1 className="text-[2.4rem] sm:text-[3rem] md:text-[4.8rem] lg:text-[6rem] leading-[1.05] font-black tracking-tight text-white mb-4">
-                        Marketing That
-                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-violet-300 to-fuchsia-200">
-                          Fills Your Pipeline.
-                        </span>
-                      </h1>
-
-                      <p className="max-w-[440px] text-[0.95rem] md:text-[1.05rem] leading-relaxed text-gray-200 mb-5 md:mb-7 font-medium">
-                        We run data-driven campaigns that put you in front of the right audience — consistently
-                        generating leads, enquiries, and sales every month.
-                      </p>
-
-                      <ul className="space-y-2 md:space-y-3">
-                        {[
-                          "Google Ads & Meta Ads Management",
-                          "Search Engine Optimisation (SEO)",
-                          "Social Media Growth & Content",
-                          "Monthly Reports With Real ROI Data",
-                        ].map(item => (
-                          <li key={item} className="flex items-center gap-2 md:gap-3 text-[0.82rem] md:text-sm lg:text-[0.95rem] text-gray-200 font-medium">
-                            <CheckCircle2 className="h-3.5 md:h-4 w-3.5 md:w-4 text-violet-300 shrink-0" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </GlassCard>
-                  </motion.div>
-                )}
-
-                {/* ═══════ STAGE 3 ═══════ */}
-                {activePhase === 2 && (
-                  <motion.div
-                    key="p3"
+                    key="p1-crow"
                     variants={textVariants}
                     initial="initial"
                     animate="animate"
@@ -404,6 +442,107 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
                           View our portfolio →
                         </a>
                       </div>
+                    </GlassCard>
+                  </motion.div>
+                )}
+
+                {/* ═══════ STAGE 2 ═══════ */}
+                {activePhase === 1 && (
+                  <motion.div
+                    key="p2"
+                    variants={textVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    className="absolute inset-x-0 bottom-0 md:top-1/2 md:bottom-auto md:-translate-y-1/2 pointer-events-auto"
+                  >
+                    <GlassCard>
+                      <div className="mb-4 md:mb-5 inline-flex items-center gap-2 rounded-full border border-violet-400/50 bg-violet-500/15 px-3 md:px-4 py-1.5 backdrop-blur-sm w-fit">
+                        <TrendingUp className="h-3 md:h-3.5 w-3 md:w-3.5 text-violet-300" />
+                        <span className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] text-violet-100 uppercase">
+                          SEO · Ads · Social · Analytics
+                        </span>
+                      </div>
+
+                      <h1 className="text-[2.4rem] sm:text-[3rem] md:text-[4.8rem] lg:text-[6rem] leading-[1.05] font-black tracking-tight text-white mb-4">
+                        Marketing That
+                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-violet-300 to-fuchsia-200">
+                          Fills Your Pipeline.
+                        </span>
+                      </h1>
+
+                      <p className="max-w-[440px] text-[0.95rem] md:text-[1.05rem] leading-relaxed text-gray-200 mb-5 md:mb-7 font-medium">
+                        We run data-driven campaigns that put you in front of the right audience — consistently
+                        generating leads, enquiries, and sales every month.
+                      </p>
+
+                      <ul className="space-y-2 md:space-y-3">
+                        {[
+                          "Google Ads & Meta Ads Management",
+                          "Search Engine Optimisation (SEO)",
+                          "Social Media Growth & Content",
+                          "Monthly Reports With Real ROI Data",
+                        ].map(item => (
+                          <li key={item} className="flex items-center gap-2 md:gap-3 text-[0.82rem] md:text-sm lg:text-[0.95rem] text-gray-200 font-medium">
+                            <CheckCircle2 className="h-3.5 md:h-4 w-3.5 md:w-4 text-violet-300 shrink-0" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </GlassCard>
+                  </motion.div>
+                )}
+
+                {/* ═══════ STAGE 3 (GLOBE / DIGITAL PRODUCTS) ═══════ */}
+                {activePhase === 2 && (
+                  <motion.div
+                    key="p3-globe"
+                    variants={textVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    className="absolute inset-x-0 bottom-0 md:top-1/2 md:bottom-auto md:-translate-y-1/2 pointer-events-auto"
+                  >
+                    <GlassCard>
+                      <div className="mb-4 md:mb-5 inline-flex items-center gap-2 rounded-full border border-blue-400/50 bg-blue-500/15 px-3 md:px-4 py-1.5 backdrop-blur-sm w-fit">
+                        <Globe className="h-3 md:h-3.5 w-3 md:w-3.5 text-blue-300" />
+                        <span className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] text-blue-100 uppercase">
+                          Websites · Apps · Marketing
+                        </span>
+                      </div>
+
+                      <h1 className="text-[2.4rem] sm:text-[3rem] md:text-[4.8rem] lg:text-[6rem] leading-[1.05] font-black tracking-tight text-white mb-4">
+                        We Build Digital
+                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-sky-200 to-indigo-200">
+                          Products That Sell.
+                        </span>
+                      </h1>
+
+                      <p className="max-w-[440px] text-[0.95rem] md:text-[1.05rem] leading-relaxed text-gray-200 mb-5 md:mb-8 font-medium">
+                        From a conversion-optimised website to a full mobile app — we design, build, and launch
+                        digital products that turn visitors into paying customers.
+                      </p>
+
+                      <div className="grid grid-cols-2 md:flex md:flex-wrap gap-x-6 gap-y-3 md:gap-7 mb-5 md:mb-8 border-t border-white/15 pt-4 md:pt-6">
+                        {[
+                          { icon: Code2,        value: "120+", label: "Projects Delivered" },
+                          { icon: Users,        value: "80+",  label: "Happy Clients"      },
+                          { icon: Star,         value: "5.0",  label: "Average Rating"     },
+                          { icon: CheckCircle2, value: "6+",   label: "Years Experience"   },
+                        ].map(({ icon: Icon, value, label }) => (
+                          <div key={label} className="flex flex-col">
+                            <div className="flex items-center gap-1.5 mb-0.5">
+                              <Icon className="h-3 md:h-3.5 w-3 md:w-3.5 text-blue-300" />
+                              <span className="text-lg md:text-2xl font-black text-white">{value}</span>
+                            </div>
+                            <span className="text-[10px] md:text-xs text-gray-400 font-semibold">{label}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-[0.18em] flex items-center gap-2">
+                        <span className="w-5 h-px bg-gray-500 block" /> Scroll back to top
+                      </span>
                     </GlassCard>
                   </motion.div>
                 )}
