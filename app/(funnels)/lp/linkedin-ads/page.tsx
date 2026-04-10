@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import "../lp.css";
 
 // Components
@@ -12,31 +13,103 @@ import Footer from "../components/Footer";
 import CallbackModal from "../components/CallbackModal";
 import WhatsAppButton from "../components/WhatsAppButton";
 
-const portfolioClients = [
-  { name: "Apsara Ice Creams", stat: "15+", metric: "B2B Franchise Leads/mo" },
-  { name: "Snacket", stat: "30+", metric: "Retail Dist. Inquiries" },
-  { name: "Dil Foods", stat: "120+", metric: "Cloud Kitchen Leads" },
-  { name: "Foodstories", stat: "4x", metric: "Organic brand reach" },
-  { name: "Curefoods", stat: "35%", metric: "Drop in Hiring CPL" },
-  { name: "Truffles Hospitality", stat: "40+", metric: "Corporate Catering Leads" },
-  { name: "Loyal Hospitality", stat: "60+", metric: "Strategic connections" },
-  { name: "Shangri-La", stat: "150+", metric: "HNI event inquiries" },
-  { name: "Dan Hospitality", stat: "2x", metric: "Employer brand engagement" },
-  { name: "AA Hospitality", stat: "45+", metric: "Partnership Discussions" },
-  { name: "Svaraa Jewels", stat: "12x", metric: "ROAS on HNI campaigns" },
-  { name: "Paresh Lamba", stat: "80+", metric: "Bespoke styling appts" },
-  { name: "Aquarelle India", stat: "200+", metric: "Leadership Applications" },
-  { name: "Speedo", stat: "3x", metric: "Distributor engagement" },
-  { name: "Trigen Wealth", stat: "50+", metric: "Qualified HNI discussions" },
-  { name: "MAC Sources", stat: "180+", metric: "Global B2B leads" },
-  { name: "Agnile", stat: "45", metric: "Enterprise Demos Booked" },
-  { name: "HVAC Contractors", stat: "30+", metric: "Commercial site visits" },
-  { name: "Orange & Teal", stat: "3x", metric: "Agency profile views" },
-  { name: "Mirchi Excellence", stat: "250+", metric: "Coaching Signups" }
+/* ──────────── LOGO BASE PATH ──────────── */
+const LOGO_DIR = "/linkedin-ads/logos";
+
+/* ──────────── PORTFOLIO DATA (categorised) ──────────── */
+interface PortfolioClient {
+  name: string;
+  stat: string;
+  metric: string;
+  logo: string;
+}
+
+interface PortfolioCategory {
+  category: string;
+  icon: string;          // emoji or unicode icon
+  color: string;         // accent colour for category pill
+  clients: PortfolioClient[];
+}
+
+const portfolioData: PortfolioCategory[] = [
+  {
+    category: "Food & Beverage",
+    icon: "🍽️",
+    color: "#ef4444",
+    clients: [
+      { name: "Apsara Ice Creams", stat: "15+", metric: "B2B Franchise Leads/mo", logo: `${LOGO_DIR}/apsara-ice-creams.png` },
+      { name: "Snacket", stat: "30+", metric: "Retail Dist. Inquiries", logo: `${LOGO_DIR}/snacket.png` },
+      { name: "Dil Foods", stat: "120+", metric: "Cloud Kitchen Leads", logo: `${LOGO_DIR}/dil-foods.png` },
+      { name: "Foodstories", stat: "4x", metric: "Organic brand reach", logo: `${LOGO_DIR}/foodstories.png` },
+      { name: "Curefoods", stat: "35%", metric: "Drop in Hiring CPL", logo: `${LOGO_DIR}/curefoods.png` },
+      { name: "Truffles", stat: "40+", metric: "Corporate Catering Leads", logo: `${LOGO_DIR}/truffles.png` },
+    ],
+  },
+  {
+    category: "Hospitality",
+    icon: "🏨",
+    color: "#8b5cf6",
+    clients: [
+      { name: "Loyal Hospitality", stat: "60+", metric: "Strategic connections", logo: `${LOGO_DIR}/loyal-hospitality.png` },
+      { name: "Shangri-La", stat: "150+", metric: "HNI event inquiries", logo: `${LOGO_DIR}/shangri-la.png` },
+      { name: "Dan Hospitality", stat: "2x", metric: "Employer brand engagement", logo: `${LOGO_DIR}/dan-hospitality.png` },
+      { name: "AA Hospitality", stat: "45+", metric: "Partnership Discussions", logo: `${LOGO_DIR}/aa-hospitality.png` },
+    ],
+  },
+  {
+    category: "Luxury & Lifestyle",
+    icon: "💎",
+    color: "#ec4899",
+    clients: [
+      { name: "Svaraa Jewels", stat: "12x", metric: "ROAS on HNI campaigns", logo: `${LOGO_DIR}/svaraa-jewels.png` },
+      { name: "Paresh Lamba", stat: "80+", metric: "Bespoke styling appts", logo: `${LOGO_DIR}/paresh-lamba.png` },
+      { name: "Aquarelle India", stat: "200+", metric: "Leadership Applications", logo: `${LOGO_DIR}/aquarelle-india.png` },
+      { name: "Speedo", stat: "3x", metric: "Distributor engagement", logo: `${LOGO_DIR}/speedo.png` },
+    ],
+  },
+  {
+    category: "Finance & Consulting",
+    icon: "📊",
+    color: "#0ea5e9",
+    clients: [
+      { name: "Trigen Wealth", stat: "50+", metric: "Qualified HNI discussions", logo: `${LOGO_DIR}/trigen-wealth.png` },
+    ],
+  },
+  {
+    category: "Corporate & B2B Tech",
+    icon: "🏢",
+    color: "#0284c7",
+    clients: [
+      { name: "MAC Sources", stat: "180+", metric: "Global B2B leads", logo: `${LOGO_DIR}/mac-sources.png` },
+      { name: "Agnile", stat: "45", metric: "Enterprise Demos Booked", logo: `${LOGO_DIR}/agnile.png` },
+      { name: "HVAC Contractors", stat: "30+", metric: "Commercial site visits", logo: `${LOGO_DIR}/hvac-contractors.png` },
+    ],
+  },
+  {
+    category: "Marketing & Creative",
+    icon: "🎨",
+    color: "#f59e0b",
+    clients: [
+      { name: "Orange & Teal", stat: "3x", metric: "Agency profile views", logo: `${LOGO_DIR}/orange-and-teal.png` },
+    ],
+  },
+  {
+    category: "Personal Brand & Coaching",
+    icon: "🎤",
+    color: "#10b981",
+    clients: [
+      { name: "Mirchi Excellence", stat: "250+", metric: "Coaching Signups", logo: `${LOGO_DIR}/mirchi-excellence.png` },
+    ],
+  },
 ];
 
 export default function LinkedInAdsLandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<string | null>("Food & Beverage");
+
+  const visibleCategories = activeCategory
+    ? portfolioData.filter((c) => c.category === activeCategory)
+    : portfolioData;
 
   return (
     <main className="landing-page-container">
@@ -64,7 +137,7 @@ export default function LinkedInAdsLandingPage() {
                 Not Getting Leads from LinkedIn?
               </h2>
               <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
-                Most professionals post randomly on LinkedIn but don’t see results.
+                Most professionals post randomly on LinkedIn but don't see results.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
                 <div className="flex flex-col items-center p-6 bg-gradient-to-b from-white to-red-50/30 border border-red-100/50 rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-red-200">
@@ -87,7 +160,7 @@ export default function LinkedInAdsLandingPage() {
                 </div>
               </div>
               <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-6">
-                That’s why LinkedIn doesn’t convert.
+                That's why LinkedIn doesn't convert.
               </p>
             </div>
           </section>
@@ -104,11 +177,14 @@ export default function LinkedInAdsLandingPage() {
             </div>
           </section>
 
-          {/* SECTION PORTFOLIO */}
+          {/* ══════════════════ SECTION PORTFOLIO ══════════════════ */}
           <section className="py-20 sm:py-28 bg-slate-50 relative border-b border-slate-200 overflow-hidden">
+            {/* Ambient glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#f4c542]/5 blur-3xl rounded-full pointer-events-none"></div>
+
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-              <div className="text-center mb-16">
+              {/* Section Header */}
+              <div className="text-center mb-12">
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 mb-5">
                   Our Portfolio
                 </h2>
@@ -116,34 +192,106 @@ export default function LinkedInAdsLandingPage() {
                   Measured, scaled, and delivered for top brands across industries.
                 </p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {portfolioClients.map((client, idx) => (
-                  <div key={idx} className="group relative w-full h-[360px] rounded-3xl overflow-hidden shadow-lg border border-slate-200 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-amber-300">
-                    
-                    {/* The "Image" Layer (Logo Placeholder) */}
-                    <div className="absolute inset-0 flex flex-col items-center pt-24 bg-gradient-to-br from-slate-100 to-white transition-transform duration-700 ease-out group-hover:scale-105 z-0">
-                      <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                      <h3 className="text-slate-800 text-2xl lg:text-3xl font-black tracking-tight text-center z-10 px-6 drop-shadow-sm">
-                        {client.name}
+
+              {/* Category Filter Pills */}
+              <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-14">
+                <button
+                  onClick={() => setActiveCategory(null)}
+                  className={`px-4 py-2 rounded-full text-sm font-bold border transition-all duration-300 ${
+                    activeCategory === null
+                      ? "bg-slate-900 text-white border-slate-900 shadow-lg"
+                      : "bg-white text-slate-600 border-slate-200 hover:border-slate-400 hover:text-slate-900"
+                  }`}
+                >
+                  All Industries
+                </button>
+                {portfolioData.map((cat) => (
+                  <button
+                    key={cat.category}
+                    onClick={() => setActiveCategory(cat.category === activeCategory ? null : cat.category)}
+                    className={`px-4 py-2 rounded-full text-sm font-bold border transition-all duration-300 flex items-center gap-1.5 ${
+                      activeCategory === cat.category
+                        ? "text-white shadow-lg"
+                        : "bg-white text-slate-600 border-slate-200 hover:border-slate-400 hover:text-slate-900"
+                    }`}
+                    style={activeCategory === cat.category ? { backgroundColor: cat.color, borderColor: cat.color } : {}}
+                  >
+                    <span>{cat.icon}</span>
+                    {cat.category}
+                  </button>
+                ))}
+              </div>
+
+              {/* Category Groups */}
+              <div className="space-y-16">
+                {visibleCategories.map((cat) => (
+                  <div key={cat.category}>
+                    {/* Category Label */}
+                    <div className="flex items-center gap-3 mb-8">
+                      <span className="text-2xl">{cat.icon}</span>
+                      <h3 className="text-xl sm:text-2xl font-extrabold text-slate-800 tracking-tight">
+                        {cat.category}
                       </h3>
+                      <div className="flex-1 h-px bg-gradient-to-r from-slate-200 to-transparent ml-2"></div>
+                      <span
+                        className="text-xs font-bold px-3 py-1 rounded-full text-white"
+                        style={{ backgroundColor: cat.color }}
+                      >
+                        {cat.clients.length} {cat.clients.length === 1 ? "client" : "clients"}
+                      </span>
                     </div>
 
-                    {/* Gradient Overlay (Darkens the bottom for stats contrast without affecting top logo) */}
-                    <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-slate-900 via-slate-900/70 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100 z-10 pointer-events-none"></div>
-                    
-                    {/* The Stats Overlay Block */}
-                    <div className="absolute bottom-0 left-0 w-full p-6 z-20">
-                      <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                         <div className="backdrop-blur-md bg-white/10 p-6 rounded-2xl border border-white/20 shadow-2xl flex flex-col gap-2 relative overflow-hidden">
-                           {/* Hover Effect Light Streak */}
-                           <div className="absolute top-0 right-0 w-32 h-full bg-white/10 -skew-x-12 translate-x-[200%] group-hover:translate-x-[-200%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                    {/* Client Cards Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      {cat.clients.map((client, idx) => (
+                        <div
+                          key={idx}
+                          className="group relative w-full h-[360px] rounded-3xl overflow-hidden shadow-lg border border-slate-200 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-amber-300"
+                        >
+                          {/* Logo / Image Layer */}
+                          <div className="absolute inset-0 flex flex-col items-center pt-8 bg-gradient-to-br from-slate-50 via-white to-slate-100 transition-transform duration-700 ease-out group-hover:scale-105 z-0">
+                            {/* Dot pattern */}
+                            <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
 
-                           <span className="text-4xl md:text-5xl font-extrabold text-[#f4c542] tracking-tight leading-none drop-shadow-md">{client.stat}</span>
-                           <span className="text-sm sm:text-base font-semibold text-white/90 leading-snug drop-shadow-sm">{client.metric}</span>
-                         </div>
-                      </div>
+                            {/* Logo */}
+                            <div className="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center z-10 mb-2">
+                              <Image
+                                src={client.logo}
+                                alt={`${client.name} logo`}
+                                fill
+                                className="object-contain drop-shadow-sm"
+                                sizes="256px"
+                              />
+                            </div>
+
+                            {/* Client Name below logo */}
+                            <h4 className="text-slate-700 text-base sm:text-lg font-bold tracking-tight text-center z-10 px-6 mt-1">
+                              {client.name}
+                            </h4>
+                          </div>
+
+                          {/* Gradient Overlay for stats contrast */}
+                          <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-slate-900 via-slate-900/70 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100 z-10 pointer-events-none"></div>
+
+                          {/* Stats Overlay Block */}
+                          <div className="absolute bottom-0 left-0 w-full p-6 z-20">
+                            <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                              <div className="backdrop-blur-md bg-white/10 p-5 sm:p-6 rounded-2xl border border-white/20 shadow-2xl flex flex-col gap-1.5 relative overflow-hidden">
+                                {/* Light streak hover effect */}
+                                <div className="absolute top-0 right-0 w-32 h-full bg-white/10 -skew-x-12 translate-x-[200%] group-hover:translate-x-[-200%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+
+                                <span className="text-4xl md:text-5xl font-extrabold text-[#f4c542] tracking-tight leading-none drop-shadow-md">
+                                  {client.stat}
+                                </span>
+                                <span className="text-sm sm:text-base font-semibold text-white/90 leading-snug drop-shadow-sm">
+                                  {client.metric}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-
                   </div>
                 ))}
               </div>
@@ -152,7 +300,7 @@ export default function LinkedInAdsLandingPage() {
 
           {/* SECTION 4 - WHAT YOU GET */}
           <PricingSection data={{
-            title: "What’s Included in Just ₹8,999",
+            title: "What's Included in Just ₹8,999",
             subtitle: "Everything you need to build authority and drive leads on LinkedIn.",
             packages: [
               {
