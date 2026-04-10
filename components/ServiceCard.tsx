@@ -44,7 +44,7 @@ export default function ServiceCard({
   icon,
   href,
 }: ServiceCardProps) {
-  const Icon = ICONS[icon];
+  const Icon: React.ElementType | undefined = ICONS[icon];
 
   return (
     <motion.div
@@ -94,7 +94,7 @@ export default function ServiceCard({
                 group-hover:border-yellow-400/50 group-hover:bg-yellow-50 group-hover:scale-105 group-hover:shadow-md
               "
             >
-              {Icon && <Icon className="h-6 w-6 transition-colors duration-500 text-gray-600 group-hover:text-yellow-600" />}
+              {Icon ? (() => { const I = Icon as any; return <I className="h-6 w-6 transition-colors duration-500 text-gray-600 group-hover:text-yellow-600" />; })() : null}
             </div>
 
             {/* Typography - Structured Authority */}

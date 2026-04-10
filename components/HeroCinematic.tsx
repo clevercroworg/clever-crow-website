@@ -29,7 +29,7 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
     const cFunnel = new Float32Array(PARTICLE_COUNT * 3); // Chart Green + Background (Phase 2)
 
     // Setup Crow Geometry Sampler
-    let crowGeometry: THREE.BufferGeometry | null = null;
+    let crowGeometry: THREE.BufferGeometry | null = null as THREE.BufferGeometry | null;
     crowObj.traverse((child: any) => {
       if (child.isMesh && !crowGeometry) crowGeometry = child.geometry;
     });
@@ -39,11 +39,12 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
     let crowScale = 1;
 
     if (crowGeometry) {
-      const mesh = new THREE.Mesh(crowGeometry, new THREE.MeshBasicMaterial());
+      const geo = crowGeometry as THREE.BufferGeometry;
+      const mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial());
       sampler = new MeshSurfaceSampler(mesh).build();
       
-      crowGeometry.computeBoundingBox();
-      const bbox = crowGeometry.boundingBox!;
+      geo.computeBoundingBox();
+      const bbox = geo.boundingBox!;
       const size = bbox.getSize(new THREE.Vector3());
       const maxDim = Math.max(size.x, size.y, size.z);
       // Scale to match our roughly ~8 height space
@@ -408,8 +409,8 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
   // Animation variants for cross-fading text
   const textVariants = {
     initial: { opacity: 0, y: 30, filter: "blur(8px)" },
-    animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.4, ease: "easeOut" } },
-    exit: { opacity: 0, y: -30, filter: "blur(8px)", transition: { duration: 0.3, ease: "easeIn" } }
+    animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.4, ease: "easeOut" as const } },
+    exit: { opacity: 0, y: -30, filter: "blur(8px)", transition: { duration: 0.3, ease: "easeIn" as const } }
   };
 
   return (
@@ -432,7 +433,7 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
           >
             <color attach="background" args={["#020202"]} />
             <MorphingParticles scrollProgress={smoothScroll} />
-            <EffectComposer disableNormalPass>
+            <EffectComposer enableNormalPass={false}>
               <Bloom luminanceThreshold={0.18} mipmapBlur intensity={2.0} radius={0.85} />
             </EffectComposer>
           </Canvas>
