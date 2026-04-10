@@ -4,65 +4,76 @@ import { useRef, useState, useMemo, useEffect } from "react";
 import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { ArrowRight, Globe, TrendingUp, Megaphone, CheckCircle2, Users, Star, Code2 } from "lucide-react";
 import * as THREE from "three";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
-import { MeshSurfaceSampler } from "three/examples/jsm/math/MeshSurfaceSampler.js";
 
 // ──────────────────────────────────────────────
 // MORPHING PARTICLE SYSTEM
 // ──────────────────────────────────────────────
 const PARTICLE_COUNT = 14000;
 
-function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
+function MorphingParticles({ scrollProgress, pointerActive }: { scrollProgress: any; pointerActive: React.RefObject<boolean> }) {
   const pointsRef = useRef<THREE.Points>(null);
+  const { pointer, viewport } = useThree();
 
-  // Safely load the Crow object without blocking render via Suspense abstraction in Canvas
-  const crowObj = useLoader(OBJLoader, '/crow.obj');
-
-  const { positionsCrow, positionsFunnel, positionsPhone, colorsGeneric, colorsCrow, colorsFunnel } = useMemo(() => {
-    const pCrow = new Float32Array(PARTICLE_COUNT * 3); // Phase 1
+  const { positionsGlobe, positionsFunnel, positionsPhone, colorsGeneric, colorsGlobe, colorsFunnel } = useMemo(() => {
+    const pGlobe = new Float32Array(PARTICLE_COUNT * 3); // Phase 1: Interactive Globe
     const pFunnel = new Float32Array(PARTICLE_COUNT * 3); // Phase 2
     const pPhone = new Float32Array(PARTICLE_COUNT * 3); // Phase 3
     const cGen  = new Float32Array(PARTICLE_COUNT * 3); // Generic Space Brand Colors (Phase 3)
-    const cCrow = new Float32Array(PARTICLE_COUNT * 3); // Mascot Yellow/Gold Brand Colors (Phase 1)
+    const cGlobe = new Float32Array(PARTICLE_COUNT * 3); // Globe Cyan/Blue/Teal Colors (Phase 1)
     const cFunnel = new Float32Array(PARTICLE_COUNT * 3); // Chart Green + Background (Phase 2)
 
-    // Setup Crow Geometry Sampler
-    let crowGeometry: THREE.BufferGeometry | null = null as THREE.BufferGeometry | null;
-    crowObj.traverse((child: any) => {
-      if (child.isMesh && !crowGeometry) crowGeometry = child.geometry;
-    });
-
-    let sampler: MeshSurfaceSampler | null = null;
-    let crowCenter = new THREE.Vector3();
-    let crowScale = 1;
-
-    if (crowGeometry) {
-      const geo = crowGeometry as THREE.BufferGeometry;
-      const mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial());
-      sampler = new MeshSurfaceSampler(mesh).build();
-      
-      geo.computeBoundingBox();
-      const bbox = geo.boundingBox!;
-      const size = bbox.getSize(new THREE.Vector3());
-      const maxDim = Math.max(size.x, size.y, size.z);
-      // Scale to match our roughly ~8 height space
-      crowScale = 7.5 / maxDim;
-      bbox.getCenter(crowCenter);
-    }
-
-    const tempP = new THREE.Vector3();
+    const GLOBE_R = 4.2; // Globe radius
+    const LAT_LINES = 12;   // Latitude rings
+    const LON_LINES = 18;   // Longitude meridians
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const i3 = i * 3;
 
+      // ── INTERACTIVE GLOBE (Phase 1: Global Digital Reach) ──
+      const globeRole = Math.random();
+      let gx: number, gy: number, gz: number;
+
+      if (globeRole < 0.30) {
+        // [30%] Latitude rings — horizontal circles at fixed declinations
+        const latIdx = Math.floor(Math.random() * LAT_LINES);
+        const phi = (Math.PI / (LAT_LINES + 1)) * (latIdx + 1); // avoid poles
+        const theta = Math.random() * Math.PI * 2;
+        gx = GLOBE_R * Math.sin(phi) * Math.cos(theta);
+        gy = GLOBE_R * Math.cos(phi);
+        gz = GLOBE_R * Math.sin(phi) * Math.sin(theta);
+      } else if (globeRole < 0.55) {
+        // [25%] Longitude meridians — vertical great circles
+        const lonIdx = Math.floor(Math.random() * LON_LINES);
+        const theta = (Math.PI * 2 / LON_LINES) * lonIdx;
+        const phi = Math.random() * Math.PI;
+        gx = GLOBE_R * Math.sin(phi) * Math.cos(theta);
+        gy = GLOBE_R * Math.cos(phi);
+        gz = GLOBE_R * Math.sin(phi) * Math.sin(theta);
+      } else if (globeRole < 0.72) {
+        // [17%] Random surface scatter — dots on the sphere surface
+        const phi = Math.acos(2 * Math.random() - 1);
+        const theta = Math.random() * Math.PI * 2;
+        gx = GLOBE_R * Math.sin(phi) * Math.cos(theta);
+        gy = GLOBE_R * Math.cos(phi);
+        gz = GLOBE_R * Math.sin(phi) * Math.sin(theta);
+      } else {
+        // [28%] Ambient background cloud for depth
+        gx = (Math.random() - 0.5) * 16.0;
+        gy = (Math.random() - 0.5) * 16.0;
+        gz = (Math.random() - 0.5) * 8.0 - 2.0;
+      }
+
+      pGlobe[i3]     = gx;
+      pGlobe[i3 + 1] = gy;
+      pGlobe[i3 + 2] = gz;
+
       // ── SMARTPHONE (Phase 3: Digital Products / Apps) ──
-      // Models an upright smartphone with flawlessly curved rounded corners and floating apps array
       const pW = 3.6; 
       const pH = 7.4; 
       const pDepth = 0.4; 
-      const r = 0.8; // Corner radius
+      const r = 0.8;
 
       let px = (Math.random() - 0.5) * pW;
       let py = (Math.random() - 0.5) * pH;
@@ -75,29 +86,22 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
 
       const rolePhone = Math.random();
       if (rolePhone < 0.55) {
-        // [55%] Divert a massive chunk of particles into an ambient background "Data Cloud"
-        // This prevents all 14,000 particles from clustering into a dense, blinding rectangle!
         px = (Math.random() - 0.5) * 16.0;
         py = (Math.random() - 0.5) * 16.0;
         pz = (Math.random() - 0.5) * 8.0 - 2.0; 
       } else {
-        // [45%] Construct the ultra-sharp Smartphone casing
-        
-        // Contstrain to inside the rounded rectangle boundary
         if (dx > 0 && dy > 0) {
           let dist = Math.hypot(dx, dy);
-          if (dist > r) { // clamp strictly to the curved edge
+          if (dist > r) {
             px = Math.sign(px) * ((w2 - r) + dx * (r / dist));
             py = Math.sign(py) * ((h2 - r) + dy * (r / dist));
           }
         }
 
-        // Push particles heavily to the Outer Edges (Wireframe) to maximize sharpness 
         const faceRand = Math.random();
-        if (faceRand < 0.15) { pz = pDepth / 2; }       // 15% Front Glass    
-        else if (faceRand < 0.20) { pz = -pDepth / 2; } // 5% Back Casing
+        if (faceRand < 0.15) { pz = pDepth / 2; }
+        else if (faceRand < 0.20) { pz = -pDepth / 2; }
         else { 
-          // 80% forced permanently to the exact vertical/horizontal/curved outer rim (Razor-Sharp Wireframe)
           if (dx > 0 && dy > 0) {
              let dist = Math.hypot(dx, dy);
              px = Math.sign(px) * ((w2 - r) + dx * (r / dist));
@@ -109,86 +113,67 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
           }
         }
 
-        // Array the central particles of the front glass into an app grid UI
         if (pz === pDepth / 2 && Math.abs(px) < (w2 - 0.3) && Math.abs(py) < (h2 - 0.4)) {
             const cols = 5;
             const rows = 7;
             const colIdx = Math.floor((px / pW + 0.5) * cols);
             const rowIdx = Math.floor((py / pH + 0.5) * rows);
-            
             const cellCenterX = (colIdx + 0.5) / cols * pW - pW/2;
             const cellCenterY = (rowIdx + 0.5) / rows * pH - pH/2;
-
             px = cellCenterX + (Math.random() - 0.5) * 0.25;
             py = cellCenterY + (Math.random() - 0.5) * 0.25;
         }
       }
 
-      // Micro noise for the cinematic dust illusion - extremely tight to preserve absolute geometric sharpness
       const phoneNoise = 0.01;
       pPhone[i3]     = px + (Math.random() - 0.5) * phoneNoise;
       pPhone[i3 + 1] = py + (Math.random() - 0.5) * phoneNoise;
       pPhone[i3 + 2] = pz + (Math.random() - 0.5) * phoneNoise;
 
       // ── ANALYTICS CHART (Phase 2: Marketing Pipeline) ──
-      // An unmistakable 3D Ascending Bar Chart + Growth Arrow representing Data/ROI/Growth
       const bars = 4;
-      const bW = 0.8; // Thinner pillars for maximum clarity
-      const gap = 1.6; // Extremely wide gaps to permanently prevent light-bleeding and overlapping
+      const bW = 0.8;
+      const gap = 1.6;
       const totalW = bars * bW + (bars - 1) * gap;
       
       const bIdx = Math.floor(Math.random() * bars);
       const bHeight = ((bIdx + 1) / bars) * 6.0; 
       
       let fx = (Math.random() - 0.5) * bW;
-      let fy = Math.random() * bHeight - 3.0; // Base rooted at y=-3
+      let fy = Math.random() * bHeight - 3.0;
       let fz = (Math.random() - 0.5) * bW;
 
-      // Enforce absolute hollow surfaces so the pillars act like glowing glass outlines, not solid blinding blocks
       const fS = Math.random();
-      if (fS < 0.25) { fx = (Math.random() > 0.5 ? 1 : -1) * bW/2; } // Left/Right Wall Exact
-      else if (fS < 0.50) { fz = (Math.random() > 0.5 ? 1 : -1) * bW/2; } // Front/Back Wall Exact
-      else if (fS < 0.75) { fy = bHeight - 3.0; } // Top Roof
-      else { fy = -3.0; } // Base floor
+      if (fS < 0.25) { fx = (Math.random() > 0.5 ? 1 : -1) * bW/2; }
+      else if (fS < 0.50) { fz = (Math.random() > 0.5 ? 1 : -1) * bW/2; }
+      else if (fS < 0.75) { fy = bHeight - 3.0; }
+      else { fy = -3.0; }
       
       const barCenterX = (bIdx * (bW + gap)) - totalW/2 + bW/2;
       fx += barCenterX;
 
-      // Distribute the 14,000 particles heavily away from the pillars to prevent solid density
       const rRole = Math.random();
       if (rRole < 0.25) {
-        // [25%] Hijack particles to draw a sweeping 3D "Growth Arrow" 
-        const t = Math.random(); // 0 to 1 along the curve
+        const t = Math.random();
         fx = (t * totalW * 1.3) - (totalW * 1.3)/2;
         fy = (t * 6.0 * 1.3) - 3.0; 
         fz = Math.sin(t * Math.PI * 1.5) * 2.0; 
-        
-        // Make the swoosh beautifully clean and sharp without fuzzy distortion
         const arrowNoise = 0.15;
         fx += (Math.random() - 0.5) * arrowNoise;
         fy += (Math.random() - 0.5) * arrowNoise;
         fz += (Math.random() - 0.5) * arrowNoise;
-
-        // Color Arrow Neon Green
         cFunnel[i3] = 0.2; cFunnel[i3+1] = 1.0; cFunnel[i3+2] = 0.4;
       } else if (rRole < 0.60) {
-        // [35%] Divert a massive chunk of particles into an ambient background "Data Cloud"
-        // This thins the pillars tremendously and adds insane 3D depth to the cinematic!
         fx = (Math.random() - 0.5) * 16.0;
         fy = (Math.random() - 0.5) * 16.0;
         fz = (Math.random() - 0.5) * 8.0 - 2.0; 
-
-        // Color Background Tech Blue/Purple
         const bgM = Math.random();
-        if (bgM > 0.5) { cFunnel[i3] = 0;   cFunnel[i3+1] = 0.55; cFunnel[i3+2] = 1; } // Tech Blue
-        else           { cFunnel[i3] = 0.6; cFunnel[i3+1] = 0;    cFunnel[i3+2] = 1; } // Tech Purple
+        if (bgM > 0.5) { cFunnel[i3] = 0;   cFunnel[i3+1] = 0.55; cFunnel[i3+2] = 1; }
+        else           { cFunnel[i3] = 0.6; cFunnel[i3+1] = 0;    cFunnel[i3+2] = 1; }
       } else {
-        // The remaining 40% naturally stay bound to construct the strictly hollow bar pillars
-        // Color Pillars Emerald Green
         cFunnel[i3] = 0.0; cFunnel[i3+1] = 0.85; cFunnel[i3+2] = 0.35; 
       }
 
-      // Rotate the chart 35 degrees around Y-axis so it holds a dramatic, static 3D isometric pose!
       const isoAngle = Math.PI * 0.20; 
       const isoX = fx * Math.cos(isoAngle) - fz * Math.sin(isoAngle);
       const isoZ = fx * Math.sin(isoAngle) + fz * Math.cos(isoAngle);
@@ -197,41 +182,26 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
       pFunnel[i3 + 1] = fy;
       pFunnel[i3 + 2] = isoZ;
 
-      // ── CROW MASCOT (Phase 3: Premium Brand / Trust) ──
-      // Presenting a brilliantly sharp, static side-profile of the mascot
-      if (sampler) {
-        sampler.sample(tempP);
-
-        // Perfectly exact coordinates for maximum sharpness (no noise)
-        const cx = (tempP.x - crowCenter.x) * crowScale;
-        const cy = (tempP.y - crowCenter.y) * crowScale;
-        const cz = (tempP.z - crowCenter.z) * crowScale;
-
-        // Rotate 90 degrees around Y axis to show the crisp side profile to the camera
-        pCrow[i3]     = -cz;
-        pCrow[i3 + 1] = cy; 
-        pCrow[i3 + 2] = cx; 
-      } else {
-        pCrow[i3] = 0; pCrow[i3+1] = 0; pCrow[i3+2] = 0;
-      }
-
       // Generic Tech Brand Colors (Phase 3)
       const m = Math.random();
       if (m > 0.7)      { cGen[i3] = 0;   cGen[i3+1] = 0.55; cGen[i3+2] = 1;    }
       else if (m > 0.3) { cGen[i3] = 0.6; cGen[i3+1] = 0;    cGen[i3+2] = 1;    }
       else              { cGen[i3] = 1;   cGen[i3+1] = 0.6;  cGen[i3+2] = 0;    }
 
-      // Clever Crow Gold Colors (Phase 1 Mascot)
+      // Globe Cyan/Blue/Teal Colors (Phase 1)
       const cM = Math.random();
-      if (cM > 0.6)      { cCrow[i3] = 1.0; cCrow[i3+1] = 0.75; cCrow[i3+2] = 0.0; } // Core Gold
-      else if (cM > 0.2) { cCrow[i3] = 1.0; cCrow[i3+1] = 0.55; cCrow[i3+2] = 0.0; } // Deep Orange-Gold
-      else               { cCrow[i3] = 1.0; cCrow[i3+1] = 0.90; cCrow[i3+2] = 0.3; } // Bright Yellow/White
+      if (cM > 0.5)      { cGlobe[i3] = 0.0;  cGlobe[i3+1] = 0.85; cGlobe[i3+2] = 1.0;  } // Bright Cyan
+      else if (cM > 0.2) { cGlobe[i3] = 0.15; cGlobe[i3+1] = 0.55; cGlobe[i3+2] = 1.0;  } // Deep Blue
+      else               { cGlobe[i3] = 0.0;  cGlobe[i3+1] = 1.0;  cGlobe[i3+2] = 0.75; } // Teal Green
     }
-    return { positionsCrow: pCrow, positionsFunnel: pFunnel, positionsPhone: pPhone, colorsGeneric: cGen, colorsCrow: cCrow, colorsFunnel: cFunnel };
-  }, [crowObj]);
+    return { positionsGlobe: pGlobe, positionsFunnel: pFunnel, positionsPhone: pPhone, colorsGeneric: cGen, colorsGlobe: cGlobe, colorsFunnel: cFunnel };
+  }, []);
 
-  const [currentPos] = useState(() => new Float32Array(positionsCrow));
-  const [currentCol] = useState(() => new Float32Array(colorsCrow));
+  const [currentPos] = useState(() => new Float32Array(positionsGlobe));
+  const [currentCol] = useState(() => new Float32Array(colorsGlobe));
+
+  // Store the base (home) positions for mouse interaction restoration
+  const basePos = useRef(new Float32Array(positionsGlobe));
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -248,40 +218,66 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
     let t1: Float32Array, t2: Float32Array, c1: Float32Array, c2: Float32Array, raw: number;
 
     // Timeline Architecture with "Breathing Windows" (Deadzones)
-    // 0.00 - 0.20: Solid Phase 1 (Crow Mascot)
+    // 0.00 - 0.20: Solid Phase 1 (Interactive Globe)
     // 0.20 - 0.40: Transition 1 -> 2
     // 0.40 - 0.60: Solid Phase 2 (Analytics Chart)
     // 0.60 - 0.80: Transition 2 -> 3
     // 0.80 - 1.00: Solid Phase 3 (Smartphone)
 
     if (scroll < 0.5) {
-      t1 = positionsCrow;
+      t1 = positionsGlobe;
       t2 = positionsFunnel;
-      c1 = colorsCrow;
+      c1 = colorsGlobe;
       c2 = colorsFunnel;
-      // Calculate transition specifically mapped between 0.20 and 0.40
       raw = (scroll - 0.20) / 0.20; 
     } else {
       t1 = positionsFunnel;
       t2 = positionsPhone;
       c1 = colorsFunnel;
       c2 = colorsGeneric;
-      // Calculate transition specifically mapped between 0.60 and 0.80
       raw = (scroll - 0.60) / 0.20;
     }
 
-    // Clamp aggressively to force the particles to remain static during the breathing windows
     raw = Math.max(0, Math.min(1, raw));
-    // Apply a velvety smoothstep curve to the transition itself so it gracefully accelerates/decelerates
     const lerp = raw * raw * (3 - 2 * raw);
+
+    // ── MOUSE INTERACTION (Active only during Phase 1 Globe) ──
+    // Convert screen pointer to 3D world-space coordinates using viewport
+    const isGlobePhase = scroll < 0.20;
+    const mouseWorld = new THREE.Vector3(
+      (pointer.x * viewport.width) / 2,
+      (pointer.y * viewport.height) / 2,
+      0
+    );
+    // Offset to match the globe's desktop position (pushed right by 4.4 units)
+    const globeOffset = isMobile ? new THREE.Vector3(0, 2.4, 0) : new THREE.Vector3(4.4, 0, 0);
+    const REPULSE_RADIUS = 2.5;  // How close the mouse must be to affect particles
+    const REPULSE_STRENGTH = 1.8; // How strongly particles are pushed away
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const i3 = i * 3;
-      const tx = t1[i3]   * (1 - lerp) + t2[i3]   * lerp;
-      const ty = t1[i3+1] * (1 - lerp) + t2[i3+1] * lerp;
-      const tz = t1[i3+2] * (1 - lerp) + t2[i3+2] * lerp;
+      let tx = t1[i3]   * (1 - lerp) + t2[i3]   * lerp;
+      let ty = t1[i3+1] * (1 - lerp) + t2[i3+1] * lerp;
+      let tz = t1[i3+2] * (1 - lerp) + t2[i3+2] * lerp;
+
+      // Apply mouse/touch repulsion only during the Globe phase AND only when pointer is actively engaged
+      if (isGlobePhase && pointerActive.current) {
+        const worldX = tx + globeOffset.x;
+        const worldY = ty + globeOffset.y;
+        const distToMouse = Math.hypot(
+          worldX - mouseWorld.x,
+          worldY - mouseWorld.y
+        );
+        if (distToMouse < REPULSE_RADIUS && distToMouse > 0.01) {
+          const force = (1 - distToMouse / REPULSE_RADIUS) * REPULSE_STRENGTH;
+          const dirX = (worldX - mouseWorld.x) / distToMouse;
+          const dirY = (worldY - mouseWorld.y) / distToMouse;
+          tx += dirX * force;
+          ty += dirY * force;
+          tz += (Math.random() - 0.5) * force * 0.3; // Slight Z scatter for 3D feel
+        }
+      }
       
-      // Bumped physics kinetic speed up to 0.14 so the particles whip into place beautifully
       currentPos[i3]   = THREE.MathUtils.lerp(currentPos[i3],   tx, 0.14);
       currentPos[i3+1] = THREE.MathUtils.lerp(currentPos[i3+1], ty, 0.14);
       currentPos[i3+2] = THREE.MathUtils.lerp(currentPos[i3+2], tz, 0.14);
@@ -302,10 +298,13 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
         pointsRef.current.geometry.attributes.color.needsUpdate = true;
       }
       
-      // Removed global continuous spin to keep shapes readable in their static posed orientations.
-      // Apply an ultra-subtle floating wobble so it feels alive but permanently holds the designed profile.
-      pointsRef.current.rotation.y = Math.sin(time * 0.3) * 0.06;
-      pointsRef.current.rotation.x = Math.cos(time * 0.4) * 0.04;
+      // Globe: hold initial face during Phase 1. Only wobble during transitions/other phases.
+      // Scrolling back up returns it smoothly to its original orientation.
+      const globeActive = scroll < 0.20;
+      const targetRotY = globeActive ? 0 : Math.sin(time * 0.3) * 0.06;
+      const targetRotX = globeActive ? 0 : Math.cos(time * 0.4) * 0.04;
+      pointsRef.current.rotation.y = THREE.MathUtils.lerp(pointsRef.current.rotation.y, targetRotY, 0.06);
+      pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, targetRotX, 0.06);
 
       // Desktop: push right. Mobile: move properly UP into the top clear area (but lower so the head doesn't clip!)
       const px = isMobile ? 0 : 4.4;
@@ -403,6 +402,9 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
     });
   }, [smoothScroll]);
 
+  // Pointer interaction state: desktop = hovering over canvas, mobile = finger touching
+  const pointerActive = useRef(false);
+
   // Phase indicator dots active state logic
   const dots = [0, 1, 2];
 
@@ -426,13 +428,20 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
         </div>
 
         {/* Full-Screen 3D Canvas */}
-        <div className="absolute inset-0 z-[1]">
+        <div 
+          className="absolute inset-0 z-[1]"
+          onPointerEnter={() => { if (!isMobileLayout) pointerActive.current = true; }}
+          onPointerLeave={() => { pointerActive.current = false; }}
+          onPointerDown={() => { if (isMobileLayout) pointerActive.current = true; }}
+          onPointerUp={() => { if (isMobileLayout) pointerActive.current = false; }}
+          onPointerCancel={() => { if (isMobileLayout) pointerActive.current = false; }}
+        >
           <Canvas
             camera={{ position: [0, 0, 14], fov: 42 }}
             gl={{ antialias: false, powerPreference: "high-performance" }}
           >
             <color attach="background" args={["#020202"]} />
-            <MorphingParticles scrollProgress={smoothScroll} />
+            <MorphingParticles scrollProgress={smoothScroll} pointerActive={pointerActive} />
             <EffectComposer enableNormalPass={false}>
               <Bloom luminanceThreshold={0.18} mipmapBlur intensity={2.0} radius={0.85} />
             </EffectComposer>
@@ -454,10 +463,10 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
             <div className="relative w-full md:w-[50%] lg:w-[46%] h-[420px] md:h-[500px]">
 
               <AnimatePresence initial={false}>
-                {/* ═══════ STAGE 1 (CROW / BRAND) ═══════ */}
+                {/* ═══════ STAGE 1 (GLOBE / GLOBAL REACH) ═══════ */}
                 {activePhase === 0 && (
                   <motion.div
-                    key="p1-crow"
+                    key="p1-globe"
                     variants={textVariants}
                     initial="initial"
                     animate="animate"
@@ -465,34 +474,34 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
                     className="absolute inset-x-0 bottom-0 md:top-1/2 md:bottom-auto md:-translate-y-1/2 pointer-events-auto"
                   >
                     <GlassCard>
-                      <div className="mb-4 md:mb-5 inline-flex items-center gap-2 rounded-full border border-amber-400/50 bg-amber-500/15 px-3 md:px-4 py-1.5 backdrop-blur-sm w-fit">
-                        <Megaphone className="h-3 md:h-3.5 w-3 md:w-3.5 text-amber-300" />
-                        <span className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] text-amber-100 uppercase">
-                          Logo · Brand Identity · UI/UX Design
+                      <div className="mb-4 md:mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/50 bg-cyan-500/15 px-3 md:px-4 py-1.5 backdrop-blur-sm w-fit">
+                        <Globe className="h-3 md:h-3.5 w-3 md:w-3.5 text-cyan-300" />
+                        <span className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] text-cyan-100 uppercase">
+                          Websites · Apps · Digital Products
                         </span>
                       </div>
 
                       <h1 className="text-[2.4rem] sm:text-[3rem] md:text-[4.8rem] lg:text-[6rem] leading-[1.05] font-black tracking-tight text-white mb-4">
-                        A Brand Your
-                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-100">
-                          Customers Trust.
+                        Your Digital
+                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-blue-200">
+                          Presence, Worldwide.
                         </span>
                       </h1>
 
                       <p className="max-w-[440px] text-[0.95rem] md:text-[1.05rem] leading-relaxed text-gray-200 mb-5 md:mb-7 font-medium">
-                        First impressions are everything online. We craft a consistent visual identity — logo,
-                        colours, typography, and UI — that makes you look premium from day one.
+                        We design and build conversion-optimised websites, mobile apps, and digital experiences
+                        that put your brand in front of customers across the globe.
                       </p>
 
                       <ul className="space-y-2 md:space-y-3 mb-6 md:mb-9">
                         {[
-                          "Logo & Visual Identity Design",
-                          "High-Converting UI/UX for Web & Apps",
-                          "Brand Guidelines & Asset Kits",
-                          "Pitch Decks & Marketing Collateral",
+                          "Custom Websites & Web Applications",
+                          "Mobile App Development (iOS & Android)",
+                          "E-Commerce & SaaS Platforms",
+                          "UI/UX Design & Brand Identity",
                         ].map(item => (
                           <li key={item} className="flex items-center gap-2 md:gap-3 text-[0.82rem] md:text-sm lg:text-[0.95rem] text-gray-200 font-medium">
-                            <CheckCircle2 className="h-3.5 md:h-4 w-3.5 md:w-4 text-amber-300 shrink-0" />
+                            <CheckCircle2 className="h-3.5 md:h-4 w-3.5 md:w-4 text-cyan-300 shrink-0" />
                             {item}
                           </li>
                         ))}
@@ -501,7 +510,7 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
                       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 md:gap-4">
                         <button
                           onClick={onCallbackClick}
-                          className="group flex h-14 md:h-12 items-center justify-center gap-3 rounded-full bg-white hover:bg-amber-50 px-7 text-[14px] md:text-[15px] font-bold text-black shadow-[0_0_28px_rgba(255,255,255,0.14)] transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+                          className="group flex h-14 md:h-12 items-center justify-center gap-3 rounded-full bg-white hover:bg-cyan-50 px-7 text-[14px] md:text-[15px] font-bold text-black shadow-[0_0_28px_rgba(255,255,255,0.14)] transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                         >
                           Get a Free Consultation
                           <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
