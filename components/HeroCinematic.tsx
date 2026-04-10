@@ -20,11 +20,13 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
   // Safely load the Crow object without blocking render via Suspense abstraction in Canvas
   const crowObj = useLoader(OBJLoader, '/crow.obj');
 
-  const { positionsCrow, positionsFunnel, positionsPhone, colors } = useMemo(() => {
+  const { positionsCrow, positionsFunnel, positionsPhone, colorsGeneric, colorsCrow, colorsFunnel } = useMemo(() => {
     const pCrow = new Float32Array(PARTICLE_COUNT * 3); // Phase 1
     const pFunnel = new Float32Array(PARTICLE_COUNT * 3); // Phase 2
     const pPhone = new Float32Array(PARTICLE_COUNT * 3); // Phase 3
-    const c  = new Float32Array(PARTICLE_COUNT * 3);
+    const cGen  = new Float32Array(PARTICLE_COUNT * 3); // Generic Space Brand Colors (Phase 3)
+    const cCrow = new Float32Array(PARTICLE_COUNT * 3); // Mascot Yellow/Gold Brand Colors (Phase 1)
+    const cFunnel = new Float32Array(PARTICLE_COUNT * 3); // Chart Green + Background (Phase 2)
 
     // Setup Crow Geometry Sampler
     let crowGeometry: THREE.BufferGeometry | null = null;
@@ -165,14 +167,25 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
         fx += (Math.random() - 0.5) * arrowNoise;
         fy += (Math.random() - 0.5) * arrowNoise;
         fz += (Math.random() - 0.5) * arrowNoise;
+
+        // Color Arrow Neon Green
+        cFunnel[i3] = 0.2; cFunnel[i3+1] = 1.0; cFunnel[i3+2] = 0.4;
       } else if (rRole < 0.60) {
         // [35%] Divert a massive chunk of particles into an ambient background "Data Cloud"
         // This thins the pillars tremendously and adds insane 3D depth to the cinematic!
         fx = (Math.random() - 0.5) * 16.0;
         fy = (Math.random() - 0.5) * 16.0;
         fz = (Math.random() - 0.5) * 8.0 - 2.0; 
+
+        // Color Background Tech Blue/Purple
+        const bgM = Math.random();
+        if (bgM > 0.5) { cFunnel[i3] = 0;   cFunnel[i3+1] = 0.55; cFunnel[i3+2] = 1; } // Tech Blue
+        else           { cFunnel[i3] = 0.6; cFunnel[i3+1] = 0;    cFunnel[i3+2] = 1; } // Tech Purple
+      } else {
+        // The remaining 40% naturally stay bound to construct the strictly hollow bar pillars
+        // Color Pillars Emerald Green
+        cFunnel[i3] = 0.0; cFunnel[i3+1] = 0.85; cFunnel[i3+2] = 0.35; 
       }
-      // The remaining 40% naturally stay bound to construct the strictly hollow bar pillars
 
       // Rotate the chart 35 degrees around Y-axis so it holds a dramatic, static 3D isometric pose!
       const isoAngle = Math.PI * 0.20; 
@@ -201,16 +214,23 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
         pCrow[i3] = 0; pCrow[i3+1] = 0; pCrow[i3+2] = 0;
       }
 
-      // Colors
+      // Generic Tech Brand Colors (Phase 3)
       const m = Math.random();
-      if (m > 0.7)      { c[i3] = 0;   c[i3+1] = 0.55; c[i3+2] = 1;    }
-      else if (m > 0.3) { c[i3] = 0.6; c[i3+1] = 0;    c[i3+2] = 1;    }
-      else              { c[i3] = 1;   c[i3+1] = 0.6;  c[i3+2] = 0;    }
+      if (m > 0.7)      { cGen[i3] = 0;   cGen[i3+1] = 0.55; cGen[i3+2] = 1;    }
+      else if (m > 0.3) { cGen[i3] = 0.6; cGen[i3+1] = 0;    cGen[i3+2] = 1;    }
+      else              { cGen[i3] = 1;   cGen[i3+1] = 0.6;  cGen[i3+2] = 0;    }
+
+      // Clever Crow Gold Colors (Phase 1 Mascot)
+      const cM = Math.random();
+      if (cM > 0.6)      { cCrow[i3] = 1.0; cCrow[i3+1] = 0.75; cCrow[i3+2] = 0.0; } // Core Gold
+      else if (cM > 0.2) { cCrow[i3] = 1.0; cCrow[i3+1] = 0.55; cCrow[i3+2] = 0.0; } // Deep Orange-Gold
+      else               { cCrow[i3] = 1.0; cCrow[i3+1] = 0.90; cCrow[i3+2] = 0.3; } // Bright Yellow/White
     }
-    return { positionsCrow: pCrow, positionsFunnel: pFunnel, positionsPhone: pPhone, colors: c };
+    return { positionsCrow: pCrow, positionsFunnel: pFunnel, positionsPhone: pPhone, colorsGeneric: cGen, colorsCrow: cCrow, colorsFunnel: cFunnel };
   }, [crowObj]);
 
   const [currentPos] = useState(() => new Float32Array(positionsCrow));
+  const [currentCol] = useState(() => new Float32Array(colorsCrow));
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -224,17 +244,35 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
     const scroll = (scrollProgress as any).get() as number;
     const time   = state.clock.getElapsedTime();
 
-    const inFirst = scroll < 0.5;
-    // New Order: 1. Crow, 2. Funnel, 3. Phone
-    const t1 = inFirst ? positionsCrow : positionsFunnel;
-    const t2 = inFirst ? positionsFunnel  : positionsPhone;
-    const raw = inFirst ? scroll / 0.5 : (scroll - 0.5) / 0.5;
-    
-    // CUSTOM TRANSITION PHYSICS: 
-    // Resist breaking apart until 20% scroll (slow dissolve) and aggressively snap to 100% form by 80% scroll (forms faster)
-    let lerpWindow = (raw - 0.2) / 0.6; // squishes 0-1 into the 0.2-0.8 band
-    lerpWindow = Math.max(0, Math.min(1, lerpWindow)); 
-    const lerp = lerpWindow * lerpWindow * (3 - 2 * lerpWindow); // Smoothstep curve over the accelerated window
+    let t1: Float32Array, t2: Float32Array, c1: Float32Array, c2: Float32Array, raw: number;
+
+    // Timeline Architecture with "Breathing Windows" (Deadzones)
+    // 0.00 - 0.20: Solid Phase 1 (Crow Mascot)
+    // 0.20 - 0.40: Transition 1 -> 2
+    // 0.40 - 0.60: Solid Phase 2 (Analytics Chart)
+    // 0.60 - 0.80: Transition 2 -> 3
+    // 0.80 - 1.00: Solid Phase 3 (Smartphone)
+
+    if (scroll < 0.5) {
+      t1 = positionsCrow;
+      t2 = positionsFunnel;
+      c1 = colorsCrow;
+      c2 = colorsFunnel;
+      // Calculate transition specifically mapped between 0.20 and 0.40
+      raw = (scroll - 0.20) / 0.20; 
+    } else {
+      t1 = positionsFunnel;
+      t2 = positionsPhone;
+      c1 = colorsFunnel;
+      c2 = colorsGeneric;
+      // Calculate transition specifically mapped between 0.60 and 0.80
+      raw = (scroll - 0.60) / 0.20;
+    }
+
+    // Clamp aggressively to force the particles to remain static during the breathing windows
+    raw = Math.max(0, Math.min(1, raw));
+    // Apply a velvety smoothstep curve to the transition itself so it gracefully accelerates/decelerates
+    const lerp = raw * raw * (3 - 2 * raw);
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const i3 = i * 3;
@@ -246,10 +284,22 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
       currentPos[i3]   = THREE.MathUtils.lerp(currentPos[i3],   tx, 0.14);
       currentPos[i3+1] = THREE.MathUtils.lerp(currentPos[i3+1], ty, 0.14);
       currentPos[i3+2] = THREE.MathUtils.lerp(currentPos[i3+2], tz, 0.14);
+
+      // Color Interpolation Engine
+      const ctx = c1[i3]   * (1 - lerp) + c2[i3]   * lerp;
+      const cty = c1[i3+1] * (1 - lerp) + c2[i3+1] * lerp;
+      const ctz = c1[i3+2] * (1 - lerp) + c2[i3+2] * lerp;
+
+      currentCol[i3]   = THREE.MathUtils.lerp(currentCol[i3],   ctx, 0.10);
+      currentCol[i3+1] = THREE.MathUtils.lerp(currentCol[i3+1], cty, 0.10);
+      currentCol[i3+2] = THREE.MathUtils.lerp(currentCol[i3+2], ctz, 0.10);
     }
 
     if (pointsRef.current) {
       pointsRef.current.geometry.attributes.position.needsUpdate = true;
+      if (pointsRef.current.geometry.attributes.color) {
+        pointsRef.current.geometry.attributes.color.needsUpdate = true;
+      }
       
       // Removed global continuous spin to keep shapes readable in their static posed orientations.
       // Apply an ultra-subtle floating wobble so it feels alive but permanently holds the designed profile.
@@ -270,7 +320,7 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
     <points ref={pointsRef}>
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={PARTICLE_COUNT} args={[currentPos, 3]} />
-        <bufferAttribute attach="attributes-color"    count={PARTICLE_COUNT} args={[colors, 3]} />
+        <bufferAttribute attach="attributes-color"    count={PARTICLE_COUNT} args={[currentCol, 3]} />
       </bufferGeometry>
       <pointsMaterial
         size={0.085} vertexColors transparent opacity={0.95}
@@ -308,6 +358,15 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
   const scrollYProgress = useMotionValue(0);
   const [activePhase, setActivePhase] = useState(0);
 
+  // Detect mobile for touch-specific scroll physics
+  const [isMobileLayout, setIsMobileLayout] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobileLayout(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       const el = containerRef.current;
@@ -324,13 +383,21 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrollYProgress]);
 
-  const smoothScroll = useSpring(scrollYProgress, { stiffness: 60, damping: 18, restDelta: 0.001 });
+  // Mobile touch: softer spring (lower stiffness, higher damping) to absorb inertia flicks gracefully
+  // Desktop mouse: snappier spring for precise wheel control
+  const smoothScroll = useSpring(scrollYProgress, 
+    isMobileLayout 
+      ? { stiffness: 40, damping: 24, restDelta: 0.001 }
+      : { stiffness: 60, damping: 18, restDelta: 0.001 }
+  );
 
-  // Perfectly sync the text phase strictly to the animated 3D spring state to prevent skipping
+  // Perfectly sync the text phase strictly to the exact middle of the 3D transitional deadzones
   useEffect(() => {
     return smoothScroll.onChange((v) => {
-      if (v < 0.35) setActivePhase(0);
-      else if (v < 0.65) setActivePhase(1);
+      // 0.30 is exactly halfway through the 0.20-0.40 visual transition
+      if (v < 0.30) setActivePhase(0);
+      // 0.70 is exactly halfway through the 0.60-0.80 visual transition
+      else if (v < 0.70) setActivePhase(1);
       else setActivePhase(2);
     });
   }, [smoothScroll]);
@@ -346,7 +413,7 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
   };
 
   return (
-    <section ref={containerRef} className="relative w-full h-[250vh] bg-[#020202] text-white">
+    <section ref={containerRef} className="relative w-full h-[470vh] md:h-[330vh] bg-[#020202] text-white">
       
       <div className="sticky top-0 h-[100vh] w-full overflow-hidden">
 

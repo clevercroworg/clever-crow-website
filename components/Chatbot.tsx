@@ -18,36 +18,92 @@ type Message = {
 type ChatMode = "chat" | "lead_gen";
 type LeadStep = "name" | "email" | "phone" | "message" | "done";
 
-// Custom Animated Bot Component
-const AnimatedBot = ({ isSpeaking }: { isSpeaking: boolean }) => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
-    <rect x="5" y="10" width="30" height="25" rx="6" fill="#18181b" stroke="#fbbf24" strokeWidth="2"/>
-    <circle cx="13" cy="20" r="2.5" fill="#fbbf24">
-      <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
+// Premium Fully 3D Animated Bot Component with Speech, Smile, and Lighting Engine
+const AnimatedBot = ({ isSpeaking, className }: { isSpeaking: boolean, className?: string }) => (
+  <svg viewBox="0 0 50 50" fill="none" overflow="visible" xmlns="http://www.w3.org/2000/svg" className={`drop-shadow-[0_4px_16px_rgba(251,191,36,0.5)] ${className || "w-10 h-10"}`}>
+    <defs>
+      {/* Gunmetal 3D Metallic Effect */}
+      <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#52525b" />
+        <stop offset="50%" stopColor="#27272a" />
+        <stop offset="100%" stopColor="#09090b" />
+      </linearGradient>
+      {/* 24K Gold 3D Metallic Shading */}
+      <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#fde047" />
+        <stop offset="50%" stopColor="#fbbf24" />
+        <stop offset="100%" stopColor="#b45309" />
+      </linearGradient>
+      {/* Depth Shadow Filter */}
+      <filter id="meshShadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="1" dy="2" stdDeviation="1.5" floodColor="#000" floodOpacity="0.8"/>
+      </filter>
+    </defs>
+    
+    {/* Left Arm (Static, resting in shadow) */}
+    <path d="M 15 36 L 7 46 L 11 48 L 17 40 Z" fill="url(#bodyGrad)" stroke="url(#goldGrad)" strokeWidth="1.5" strokeLinejoin="round" filter="url(#meshShadow)" />
+
+    {/* Right Arm (Waving Animation every 3 seconds) */}
+    <g>
+      <animateTransform 
+         attributeName="transform" 
+         type="rotate" 
+         values="0 35 36; -130 35 36; -70 35 36; -130 35 36; -70 35 36; 0 35 36; 0 35 36" 
+         keyTimes="0; 0.1; 0.15; 0.2; 0.25; 0.35; 1"
+         dur="3s" 
+         repeatCount="indefinite" 
+      />
+      <path d="M 35 36 L 43 46 L 39 48 L 33 40 Z" fill="url(#bodyGrad)" stroke="url(#goldGrad)" strokeWidth="1.5" strokeLinejoin="round" filter="url(#meshShadow)" />
+    </g>
+
+    {/* Body Base Casing */}
+    <rect x="15" y="34" width="20" height="15" rx="5" fill="url(#bodyGrad)" stroke="url(#goldGrad)" strokeWidth="1.5" filter="url(#meshShadow)" />
+    
+    {/* Neck Joint Assembly */}
+    <rect x="22" y="32" width="6" height="3" fill="url(#goldGrad)" filter="url(#meshShadow)" />
+
+    {/* Main Head Structure */}
+    <rect x="14" y="15" width="22" height="17" rx="6" fill="url(#bodyGrad)" stroke="url(#goldGrad)" strokeWidth="1.5" filter="url(#meshShadow)" />
+
+    {/* Laser Antenna Unit */}
+    <rect x="23" y="12" width="4" height="3" fill="url(#goldGrad)" />
+    <line x1="25" y1="12" x2="25" y2="6" stroke="url(#goldGrad)" strokeWidth="1.5" strokeLinecap="round" />
+    <circle cx="25" cy="5" r="2.5" fill="#ef4444">
+      <animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" />
     </circle>
-    <circle cx="27" cy="20" r="2.5" fill="#fbbf24">
-      <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
+
+    {/* Integrated Black Glass Visor */}
+    <rect x="17" y="17" width="16" height="13" rx="3" fill="#000000" />
+
+    {/* Holographic Glowing Eyes Inside Visor */}
+    <circle cx="21" cy="21" r="2.5" fill="#fbbf24">
+      <animate attributeName="opacity" values="1;0.4;1" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="21;20;21" dur="2s" repeatCount="indefinite" />
     </circle>
-    {/* Animated Mouth */}
-    <rect x="15" y="28" width="10" height="2" rx="1" fill="#fbbf24">
-      {isSpeaking && (
-        <animate 
-          attributeName="height" 
-          values="2;6;2" 
-          dur="0.4s" 
-          repeatCount="indefinite" 
-        />
+    <circle cx="29" cy="21" r="2.5" fill="#fbbf24">
+      <animate attributeName="opacity" values="1;0.4;1" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="21;20;21" dur="2s" repeatCount="indefinite" />
+    </circle>
+
+    {/* 3D Organic Smiling Mouth Interface */}
+    <path d="M 22 26 Q 25 29 28 26" fill="none" stroke="#fbbf24" strokeWidth="1.5" strokeLinecap="round">
+      {isSpeaking ? (
+        <animate attributeName="d" values="M 22 26 Q 25 30 28 26; M 21 27 Q 25 32 29 27; M 22 26 Q 25 30 28 26" dur="0.4s" repeatCount="indefinite" />
+      ) : (
+        <animate attributeName="d" values="M 22 26 Q 25 28.5 28 26; M 22 26.5 Q 25 29.5 28 26.5; M 22 26 Q 25 28.5 28 26" dur="3s" repeatCount="indefinite" />
       )}
-      {isSpeaking && (
-        <animate 
-          attributeName="y" 
-          values="28;26;28" 
-          dur="0.4s" 
-          repeatCount="indefinite" 
-        />
-      )}
-    </rect>
-    <path d="M15 5L25 5L20 10L15 5Z" fill="#fbbf24" />
+    </path>
+
+    {/* Full 3D Speech Bubble ("Hi!") */}
+    {!isSpeaking && (
+      <g opacity="0">
+        <animate attributeName="opacity" values="0; 1; 1; 0; 0" keyTimes="0; 0.1; 0.3; 0.4; 1" dur="3s" repeatCount="indefinite" />
+        <animateTransform attributeName="transform" type="translate" values="0 5; 0 0; 0 0; 0 5; 0 5" keyTimes="0; 0.1; 0.3; 0.4; 1" dur="3s" repeatCount="indefinite" />
+        <rect x="29" y="3" width="20" height="13" rx="4" fill="url(#goldGrad)" filter="url(#meshShadow)" />
+        <polygon points="33,16 37,20 37,16" fill="url(#goldGrad)" />
+        <text x="39" y="11.5" fontSize="7" fontFamily="sans-serif" fontWeight="900" fill="#000" textAnchor="middle">Hi!</text>
+      </g>
+    )}
   </svg>
 );
 
@@ -305,7 +361,7 @@ export default function Chatbot() {
             {/* Header - Compact */}
             <div className="p-4 flex justify-between items-center bg-zinc-950 border-b border-zinc-900">
               <div className="flex items-center gap-2">
-                <AnimatedBot isSpeaking={isTyping} />
+                <AnimatedBot isSpeaking={isTyping} className="w-10 h-10" />
                 <div>
                   <h3 className="font-bold text-[15px] text-white tracking-tight">Clever Crow</h3>
                   <div className="flex items-center gap-1.5">
@@ -392,16 +448,16 @@ export default function Chatbot() {
 
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-[10000] hidden sm:flex items-center justify-center w-[60px] h-[60px] rounded-full shadow-2xl transition-all duration-500 hover:scale-110 border-2 ${
-          isOpen ? 'bg-zinc-900 border-zinc-800' : 'bg-black border-yellow-500'
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[10000] flex items-center justify-center w-[54px] h-[54px] sm:w-[60px] sm:h-[60px] rounded-full shadow-2xl transition-all duration-500 hover:scale-110 border-[1.5px] ${
+          isOpen ? 'bg-zinc-900 border-zinc-800' : 'bg-black border-yellow-500 hover:shadow-[0_10px_40px_rgba(251,191,36,0.3)]'
         }`}
       >
         {isOpen ? (
           <X size={24} className="text-white" />
         ) : (
-          <div className="relative">
-            <MessageCircleMore size={30} className="text-yellow-500" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-black animate-pulse"></span>
+          <div className="relative flex items-center justify-center">
+            <AnimatedBot isSpeaking={false} className="w-[40px] h-[40px] sm:w-[44px] sm:h-[44px]" />
+            <span className="absolute top-0 right-auto -left-1 w-3 h-3 bg-red-500 rounded-full border border-black animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.8)]"></span>
           </div>
         )}
       </button>
