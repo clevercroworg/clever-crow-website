@@ -120,16 +120,18 @@ function MorphingParticles({ scrollProgress }: { scrollProgress: any }) {
       // Desktop: push right. Mobile: move properly UP into the top clear area
       const px = isMobile ? 0 : 4.4;
       const py = isMobile ? 3.0 : 0;
+      const pScale = isMobile ? 0.65 : 1.0;
       pointsRef.current.position.x = THREE.MathUtils.lerp(pointsRef.current.position.x, px, 0.05);
       pointsRef.current.position.y = THREE.MathUtils.lerp(pointsRef.current.position.y, py, 0.05);
+      pointsRef.current.scale.setScalar(pScale);
     }
   });
 
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={PARTICLE_COUNT} array={currentPos} itemSize={3} />
-        <bufferAttribute attach="attributes-color"    count={PARTICLE_COUNT} array={colors}     itemSize={3} />
+        <bufferAttribute attach="attributes-position" count={PARTICLE_COUNT} args={[currentPos, 3]} />
+        <bufferAttribute attach="attributes-color"    count={PARTICLE_COUNT} args={[colors, 3]} />
       </bufferGeometry>
       <pointsMaterial
         size={0.085} vertexColors transparent opacity={0.95}
