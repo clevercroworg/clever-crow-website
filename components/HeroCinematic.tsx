@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef, useState, useMemo, useEffect } from "react";
-import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from "framer-motion";
-import { ArrowRight, Globe, TrendingUp, Megaphone, CheckCircle2, Users, Star, Code2 } from "lucide-react";
+import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import { ArrowRight, Target, TrendingUp, Users, Briefcase, CheckCircle } from "lucide-react";
 import * as THREE from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
@@ -16,35 +16,31 @@ function MorphingParticles({ scrollProgress, pointerActive }: { scrollProgress: 
   const pointsRef = useRef<THREE.Points>(null);
   const { pointer, viewport } = useThree();
 
-  const { positionsGlobe, positionsFunnel, positionsPhone, colorsGeneric, colorsGlobe, colorsFunnel } = useMemo(() => {
-    const pGlobe = new Float32Array(PARTICLE_COUNT * 3); // Phase 1: Interactive Globe
-    const pFunnel = new Float32Array(PARTICLE_COUNT * 3); // Phase 2
-    const pPhone = new Float32Array(PARTICLE_COUNT * 3); // Phase 3
-    const cGen  = new Float32Array(PARTICLE_COUNT * 3); // Generic Space Brand Colors (Phase 3)
-    const cGlobe = new Float32Array(PARTICLE_COUNT * 3); // Globe Cyan/Blue/Teal Colors (Phase 1)
-    const cFunnel = new Float32Array(PARTICLE_COUNT * 3); // Chart Green + Background (Phase 2)
+  const { positionsGlobe, positionsFunnel, colorsGlobe, colorsFunnel } = useMemo(() => {
+    const pGlobe = new Float32Array(PARTICLE_COUNT * 3);
+    const pFunnel = new Float32Array(PARTICLE_COUNT * 3);
+    const cGlobe = new Float32Array(PARTICLE_COUNT * 3);
+    const cFunnel = new Float32Array(PARTICLE_COUNT * 3);
 
-    const GLOBE_R = 4.2; // Globe radius
-    const LAT_LINES = 12;   // Latitude rings
-    const LON_LINES = 18;   // Longitude meridians
+    const GLOBE_R = 5.5; // Large, immersive background size
+    const LAT_LINES = 12;
+    const LON_LINES = 18;
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const i3 = i * 3;
 
-      // ── INTERACTIVE GLOBE (Phase 1: Global Digital Reach) ──
+      // ── INTERACTIVE GLOBE (Phase 1) ──
       const globeRole = Math.random();
       let gx: number, gy: number, gz: number;
 
       if (globeRole < 0.30) {
-        // [30%] Latitude rings — horizontal circles at fixed declinations
         const latIdx = Math.floor(Math.random() * LAT_LINES);
-        const phi = (Math.PI / (LAT_LINES + 1)) * (latIdx + 1); // avoid poles
+        const phi = (Math.PI / (LAT_LINES + 1)) * (latIdx + 1);
         const theta = Math.random() * Math.PI * 2;
         gx = GLOBE_R * Math.sin(phi) * Math.cos(theta);
         gy = GLOBE_R * Math.cos(phi);
         gz = GLOBE_R * Math.sin(phi) * Math.sin(theta);
       } else if (globeRole < 0.55) {
-        // [25%] Longitude meridians — vertical great circles
         const lonIdx = Math.floor(Math.random() * LON_LINES);
         const theta = (Math.PI * 2 / LON_LINES) * lonIdx;
         const phi = Math.random() * Math.PI;
@@ -52,156 +48,96 @@ function MorphingParticles({ scrollProgress, pointerActive }: { scrollProgress: 
         gy = GLOBE_R * Math.cos(phi);
         gz = GLOBE_R * Math.sin(phi) * Math.sin(theta);
       } else if (globeRole < 0.72) {
-        // [17%] Random surface scatter — dots on the sphere surface
         const phi = Math.acos(2 * Math.random() - 1);
         const theta = Math.random() * Math.PI * 2;
         gx = GLOBE_R * Math.sin(phi) * Math.cos(theta);
         gy = GLOBE_R * Math.cos(phi);
         gz = GLOBE_R * Math.sin(phi) * Math.sin(theta);
       } else {
-        // [28%] Ambient background cloud for depth
-        gx = (Math.random() - 0.5) * 16.0;
-        gy = (Math.random() - 0.5) * 16.0;
-        gz = (Math.random() - 0.5) * 8.0 - 2.0;
+        // Ambient background particles filling the space around the globe evenly
+        const radius = GLOBE_R + Math.pow(Math.random(), 1.6) * 18.0; 
+        const phi = Math.acos(2 * Math.random() - 1);
+        const theta = Math.random() * Math.PI * 2;
+        gx = radius * Math.sin(phi) * Math.cos(theta);
+        gy = radius * Math.cos(phi);
+        gz = (radius * Math.sin(phi) * Math.sin(theta)) - 3.0; // Pushed slightly back from camera
       }
 
       pGlobe[i3]     = gx;
       pGlobe[i3 + 1] = gy;
       pGlobe[i3 + 2] = gz;
 
-      // ── SMARTPHONE (Phase 3: Digital Products / Apps) ──
-      const pW = 3.6; 
-      const pH = 7.4; 
-      const pDepth = 0.4; 
-      const r = 0.8;
+      // Globe Colors (Yellow/Blue mix)
+      const cM = Math.random();
+      if (cM > 0.7)      { cGlobe[i3] = 1.0;  cGlobe[i3+1] = 0.8; cGlobe[i3+2] = 0.1;  } 
+      else if (cM > 0.4) { cGlobe[i3] = 0.1;  cGlobe[i3+1] = 0.5; cGlobe[i3+2] = 0.9;  } 
+      else if (cM > 0.1) { cGlobe[i3] = 0.0;  cGlobe[i3+1] = 0.3; cGlobe[i3+2] = 0.7;  } 
+      else               { cGlobe[i3] = 1.0;  cGlobe[i3+1] = 0.9; cGlobe[i3+2] = 0.3;  } 
 
-      let px = (Math.random() - 0.5) * pW;
-      let py = (Math.random() - 0.5) * pH;
-      let pz = (Math.random() - 0.5) * pDepth;
-
-      const w2 = pW / 2;
-      const h2 = pH / 2;
-      let dx = Math.max(0, Math.abs(px) - (w2 - r));
-      let dy = Math.max(0, Math.abs(py) - (h2 - r));
-
-      const rolePhone = Math.random();
-      if (rolePhone < 0.55) {
-        px = (Math.random() - 0.5) * 16.0;
-        py = (Math.random() - 0.5) * 16.0;
-        pz = (Math.random() - 0.5) * 8.0 - 2.0; 
-      } else {
-        if (dx > 0 && dy > 0) {
-          let dist = Math.hypot(dx, dy);
-          if (dist > r) {
-            px = Math.sign(px) * ((w2 - r) + dx * (r / dist));
-            py = Math.sign(py) * ((h2 - r) + dy * (r / dist));
-          }
-        }
-
-        const faceRand = Math.random();
-        if (faceRand < 0.15) { pz = pDepth / 2; }
-        else if (faceRand < 0.20) { pz = -pDepth / 2; }
-        else { 
-          if (dx > 0 && dy > 0) {
-             let dist = Math.hypot(dx, dy);
-             px = Math.sign(px) * ((w2 - r) + dx * (r / dist));
-             py = Math.sign(py) * ((h2 - r) + dy * (r / dist));
-          } else if (Math.abs(px) > (w2 - r)) {
-             px = Math.sign(px) * w2;
-          } else {
-             py = Math.sign(py) * h2;
-          }
-        }
-
-        if (pz === pDepth / 2 && Math.abs(px) < (w2 - 0.3) && Math.abs(py) < (h2 - 0.4)) {
-            const cols = 5;
-            const rows = 7;
-            const colIdx = Math.floor((px / pW + 0.5) * cols);
-            const rowIdx = Math.floor((py / pH + 0.5) * rows);
-            const cellCenterX = (colIdx + 0.5) / cols * pW - pW/2;
-            const cellCenterY = (rowIdx + 0.5) / rows * pH - pH/2;
-            px = cellCenterX + (Math.random() - 0.5) * 0.25;
-            py = cellCenterY + (Math.random() - 0.5) * 0.25;
-        }
-      }
-
-      const phoneNoise = 0.01;
-      pPhone[i3]     = px + (Math.random() - 0.5) * phoneNoise;
-      pPhone[i3 + 1] = py + (Math.random() - 0.5) * phoneNoise;
-      pPhone[i3 + 2] = pz + (Math.random() - 0.5) * phoneNoise;
-
-      // ── ANALYTICS CHART (Phase 2: Marketing Pipeline) ──
-      const bars = 4;
-      const bW = 0.8;
-      const gap = 1.6;
+      // ── ANALYTICS CHART (Phase 2 - Stat Illusion) ──
+      const bars = 5;
+      const bW = 1.0;
+      const gap = 1.8;
       const totalW = bars * bW + (bars - 1) * gap;
       
       const bIdx = Math.floor(Math.random() * bars);
-      const bHeight = ((bIdx + 1) / bars) * 6.0; 
+      const bHeight = ((bIdx + 1) / bars) * 7.0; 
       
       let fx = (Math.random() - 0.5) * bW;
-      let fy = Math.random() * bHeight - 3.0;
+      let fy = Math.random() * bHeight - 3.5;
       let fz = (Math.random() - 0.5) * bW;
 
       const fS = Math.random();
       if (fS < 0.25) { fx = (Math.random() > 0.5 ? 1 : -1) * bW/2; }
       else if (fS < 0.50) { fz = (Math.random() > 0.5 ? 1 : -1) * bW/2; }
-      else if (fS < 0.75) { fy = bHeight - 3.0; }
-      else { fy = -3.0; }
+      else if (fS < 0.75) { fy = bHeight - 3.5; }
+      else { fy = -3.5; }
       
       const barCenterX = (bIdx * (bW + gap)) - totalW/2 + bW/2;
       fx += barCenterX;
 
       const rRole = Math.random();
       if (rRole < 0.25) {
+        // Trend line sweeping through
         const t = Math.random();
         fx = (t * totalW * 1.3) - (totalW * 1.3)/2;
-        fy = (t * 6.0 * 1.3) - 3.0; 
-        fz = Math.sin(t * Math.PI * 1.5) * 2.0; 
-        const arrowNoise = 0.15;
+        fy = (t * 7.0 * 1.3) - 3.5; 
+        fz = Math.sin(t * Math.PI * 1.5) * 2.5; 
+        const arrowNoise = 0.2;
         fx += (Math.random() - 0.5) * arrowNoise;
         fy += (Math.random() - 0.5) * arrowNoise;
         fz += (Math.random() - 0.5) * arrowNoise;
-        cFunnel[i3] = 0.2; cFunnel[i3+1] = 1.0; cFunnel[i3+2] = 0.4;
+        cFunnel[i3] = 0.3; cFunnel[i3+1] = 0.8; cFunnel[i3+2] = 1.0;
       } else if (rRole < 0.60) {
-        fx = (Math.random() - 0.5) * 16.0;
-        fy = (Math.random() - 0.5) * 16.0;
-        fz = (Math.random() - 0.5) * 8.0 - 2.0; 
+        // Vast ambient background for chart phase
+        const radius = Math.pow(Math.random(), 1.5) * 22.0;
+        const phi = Math.acos(2 * Math.random() - 1);
+        const theta = Math.random() * Math.PI * 2;
+        fx = radius * Math.sin(phi) * Math.cos(theta);
+        fy = radius * Math.cos(phi);
+        fz = (radius * Math.sin(phi) * Math.sin(theta)) - 3.0;
         const bgM = Math.random();
-        if (bgM > 0.5) { cFunnel[i3] = 0;   cFunnel[i3+1] = 0.55; cFunnel[i3+2] = 1; }
-        else           { cFunnel[i3] = 0.6; cFunnel[i3+1] = 0;    cFunnel[i3+2] = 1; }
+        if (bgM > 0.5) { cFunnel[i3] = 0.1; cFunnel[i3+1] = 0.3; cFunnel[i3+2] = 0.8; }
+        else           { cFunnel[i3] = 0.4; cFunnel[i3+1] = 0.1; cFunnel[i3+2] = 0.9; }
       } else {
-        cFunnel[i3] = 0.0; cFunnel[i3+1] = 0.85; cFunnel[i3+2] = 0.35; 
+        // Bar solid color
+        cFunnel[i3] = 0.2; cFunnel[i3+1] = 0.5; cFunnel[i3+2] = 0.9; 
       }
 
-      const isoAngle = Math.PI * 0.20; 
+      // Isometric tilt for chart
+      const isoAngle = Math.PI * 0.15; 
       const isoX = fx * Math.cos(isoAngle) - fz * Math.sin(isoAngle);
       const isoZ = fx * Math.sin(isoAngle) + fz * Math.cos(isoAngle);
 
       pFunnel[i3]     = isoX;
       pFunnel[i3 + 1] = fy;
       pFunnel[i3 + 2] = isoZ;
-
-      // Generic Tech Brand Colors (Phase 3)
-      const m = Math.random();
-      if (m > 0.7)      { cGen[i3] = 0;   cGen[i3+1] = 0.55; cGen[i3+2] = 1;    }
-      else if (m > 0.3) { cGen[i3] = 0.6; cGen[i3+1] = 0;    cGen[i3+2] = 1;    }
-      else              { cGen[i3] = 1;   cGen[i3+1] = 0.6;  cGen[i3+2] = 0;    }
-
-      // Globe Cyan/Blue/Teal Colors (Phase 1)
-      const cM = Math.random();
-      if (cM > 0.5)      { cGlobe[i3] = 0.0;  cGlobe[i3+1] = 0.85; cGlobe[i3+2] = 1.0;  } // Bright Cyan
-      else if (cM > 0.2) { cGlobe[i3] = 0.15; cGlobe[i3+1] = 0.55; cGlobe[i3+2] = 1.0;  } // Deep Blue
-      else               { cGlobe[i3] = 0.0;  cGlobe[i3+1] = 1.0;  cGlobe[i3+2] = 0.75; } // Teal Green
     }
-    return { positionsGlobe: pGlobe, positionsFunnel: pFunnel, positionsPhone: pPhone, colorsGeneric: cGen, colorsGlobe: cGlobe, colorsFunnel: cFunnel };
+    return { positionsGlobe: pGlobe, positionsFunnel: pFunnel, colorsGlobe: cGlobe, colorsFunnel: cFunnel };
   }, []);
 
   const [currentPos] = useState(() => new Float32Array(positionsGlobe));
   const [currentCol] = useState(() => new Float32Array(colorsGlobe));
-
-  // Store the base (home) positions for mouse interaction restoration
-  const basePos = useRef(new Float32Array(positionsGlobe));
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -215,81 +151,52 @@ function MorphingParticles({ scrollProgress, pointerActive }: { scrollProgress: 
     const scroll = (scrollProgress as any).get() as number;
     const time   = state.clock.getElapsedTime();
 
-    let t1: Float32Array, t2: Float32Array, c1: Float32Array, c2: Float32Array, raw: number;
-
-    // Timeline Architecture with "Breathing Windows" (Deadzones)
-    // 0.00 - 0.20: Solid Phase 1 (Interactive Globe)
-    // 0.20 - 0.40: Transition 1 -> 2
-    // 0.40 - 0.60: Solid Phase 2 (Analytics Chart)
-    // 0.60 - 0.80: Transition 2 -> 3
-    // 0.80 - 1.00: Solid Phase 3 (Smartphone)
-
-    if (scroll < 0.5) {
-      t1 = positionsGlobe;
-      t2 = positionsFunnel;
-      c1 = colorsGlobe;
-      c2 = colorsFunnel;
-      raw = (scroll - 0.20) / 0.20; 
-    } else {
-      t1 = positionsFunnel;
-      t2 = positionsPhone;
-      c1 = colorsFunnel;
-      c2 = colorsGeneric;
-      raw = (scroll - 0.60) / 0.20;
-    }
-
+    // Mapping 0-1 scroll to 0-1 lerp factor
+    // 0.0 - 0.15 = Globe
+    // 0.15 - 0.40 = Transition
+    // 0.40 - 1.0 = Chart (Very long holding period fully formed for mobile)
+    let raw = (scroll - 0.15) / 0.25;
     raw = Math.max(0, Math.min(1, raw));
-    const lerp = raw * raw * (3 - 2 * raw);
+    const lerp = raw * raw * (3 - 2 * raw); // Smoothstep
 
-    // ── MOUSE INTERACTION (Active only during Phase 1 Globe) ──
-    // Convert screen pointer to 3D world-space coordinates using viewport
-    const isGlobePhase = scroll < 0.20;
     const mouseWorld = new THREE.Vector3(
       (pointer.x * viewport.width) / 2,
       (pointer.y * viewport.height) / 2,
       0
     );
-    // Offset to match the globe's desktop position (pushed right by 4.4 units)
-    const globeOffset = isMobile ? new THREE.Vector3(0, 2.4, 0) : new THREE.Vector3(4.4, 0, 0);
-    const REPULSE_RADIUS = 2.5;  // How close the mouse must be to affect particles
-    const REPULSE_STRENGTH = 1.8; // How strongly particles are pushed away
+    const REPULSE_RADIUS = 3.5;  
+    const REPULSE_STRENGTH = 1.5;
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const i3 = i * 3;
-      let tx = t1[i3]   * (1 - lerp) + t2[i3]   * lerp;
-      let ty = t1[i3+1] * (1 - lerp) + t2[i3+1] * lerp;
-      let tz = t1[i3+2] * (1 - lerp) + t2[i3+2] * lerp;
-
-      // Apply mouse/touch repulsion only during the Globe phase AND only when pointer is actively engaged
-      if (isGlobePhase && pointerActive.current) {
-        const worldX = tx + globeOffset.x;
-        const worldY = ty + globeOffset.y;
-        const distToMouse = Math.hypot(
-          worldX - mouseWorld.x,
-          worldY - mouseWorld.y
-        );
-        if (distToMouse < REPULSE_RADIUS && distToMouse > 0.01) {
-          const force = (1 - distToMouse / REPULSE_RADIUS) * REPULSE_STRENGTH;
-          const dirX = (worldX - mouseWorld.x) / distToMouse;
-          const dirY = (worldY - mouseWorld.y) / distToMouse;
-          tx += dirX * force;
-          ty += dirY * force;
-          tz += (Math.random() - 0.5) * force * 0.3; // Slight Z scatter for 3D feel
+        const i3 = i * 3;
+        let tx = positionsGlobe[i3]   * (1 - lerp) + positionsFunnel[i3]   * lerp;
+        let ty = positionsGlobe[i3+1] * (1 - lerp) + positionsFunnel[i3+1] * lerp;
+        let tz = positionsGlobe[i3+2] * (1 - lerp) + positionsFunnel[i3+2] * lerp;
+  
+        // Only repulse during Globe phase
+        if (scroll < 0.4 && pointerActive.current) {
+          const distToMouse = Math.hypot(tx - mouseWorld.x, ty - mouseWorld.y);
+          if (distToMouse < REPULSE_RADIUS && distToMouse > 0.01) {
+            const force = (1 - distToMouse / REPULSE_RADIUS) * REPULSE_STRENGTH;
+            const dirX = (tx - mouseWorld.x) / distToMouse;
+            const dirY = (ty - mouseWorld.y) / distToMouse;
+            tx += dirX * force;
+            ty += dirY * force;
+            tz += (Math.random() - 0.5) * force * 0.3; 
+          }
         }
-      }
-      
-      currentPos[i3]   = THREE.MathUtils.lerp(currentPos[i3],   tx, 0.14);
-      currentPos[i3+1] = THREE.MathUtils.lerp(currentPos[i3+1], ty, 0.14);
-      currentPos[i3+2] = THREE.MathUtils.lerp(currentPos[i3+2], tz, 0.14);
-
-      // Color Interpolation Engine
-      const ctx = c1[i3]   * (1 - lerp) + c2[i3]   * lerp;
-      const cty = c1[i3+1] * (1 - lerp) + c2[i3+1] * lerp;
-      const ctz = c1[i3+2] * (1 - lerp) + c2[i3+2] * lerp;
-
-      currentCol[i3]   = THREE.MathUtils.lerp(currentCol[i3],   ctx, 0.10);
-      currentCol[i3+1] = THREE.MathUtils.lerp(currentCol[i3+1], cty, 0.10);
-      currentCol[i3+2] = THREE.MathUtils.lerp(currentCol[i3+2], ctz, 0.10);
+        
+        currentPos[i3]   = THREE.MathUtils.lerp(currentPos[i3],   tx, 0.1);
+        currentPos[i3+1] = THREE.MathUtils.lerp(currentPos[i3+1], ty, 0.1);
+        currentPos[i3+2] = THREE.MathUtils.lerp(currentPos[i3+2], tz, 0.1);
+  
+        const ctx = colorsGlobe[i3]   * (1 - lerp) + colorsFunnel[i3]   * lerp;
+        const cty = colorsGlobe[i3+1] * (1 - lerp) + colorsFunnel[i3+1] * lerp;
+        const ctz = colorsGlobe[i3+2] * (1 - lerp) + colorsFunnel[i3+2] * lerp;
+  
+        currentCol[i3]   = THREE.MathUtils.lerp(currentCol[i3],   ctx, 0.08);
+        currentCol[i3+1] = THREE.MathUtils.lerp(currentCol[i3+1], cty, 0.08);
+        currentCol[i3+2] = THREE.MathUtils.lerp(currentCol[i3+2], ctz, 0.08);
     }
 
     if (pointsRef.current) {
@@ -298,21 +205,16 @@ function MorphingParticles({ scrollProgress, pointerActive }: { scrollProgress: 
         pointsRef.current.geometry.attributes.color.needsUpdate = true;
       }
       
-      // Globe: hold initial face during Phase 1. Only wobble during transitions/other phases.
-      // Scrolling back up returns it smoothly to its original orientation.
-      const globeActive = scroll < 0.20;
-      const targetRotY = globeActive ? 0 : Math.sin(time * 0.3) * 0.06;
-      const targetRotX = globeActive ? 0 : Math.cos(time * 0.4) * 0.04;
+      // Gentle ambient wiggle instead of continuous spin to avoid transition unwinding
+      const targetRotY = Math.sin(time * 0.15) * 0.05 + (pointer.x * 0.05);
+      const targetRotX = Math.cos(time * 0.2)  * 0.03 - (pointer.y * 0.05);
+      
       pointsRef.current.rotation.y = THREE.MathUtils.lerp(pointsRef.current.rotation.y, targetRotY, 0.06);
       pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, targetRotX, 0.06);
 
-      // Desktop: push right. Mobile: move properly UP into the top clear area (but lower so the head doesn't clip!)
-      const px = isMobile ? 0 : 4.4;
-      const py = isMobile ? 2.4 : 0;
-      const pScale = isMobile ? 0.46 : 1.0;
-      pointsRef.current.position.x = THREE.MathUtils.lerp(pointsRef.current.position.x, px, 0.05);
-      pointsRef.current.position.y = THREE.MathUtils.lerp(pointsRef.current.position.y, py, 0.05);
+      const pScale = isMobile ? 0.7 : 1.0;
       pointsRef.current.scale.setScalar(pScale);
+      pointsRef.current.position.set(0, 0, -2); // Pushed back slightly
     }
   });
 
@@ -323,30 +225,10 @@ function MorphingParticles({ scrollProgress, pointerActive }: { scrollProgress: 
         <bufferAttribute attach="attributes-color"    count={PARTICLE_COUNT} args={[currentCol, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.085} vertexColors transparent opacity={0.95}
+        size={0.075} vertexColors transparent opacity={0.65}
         blending={THREE.AdditiveBlending} depthWrite={false} sizeAttenuation
       />
     </points>
-  );
-}
-
-// ──────────────────────────────────────────────
-// GLASSMORPHISM CARD WRAPPER
-// On mobile: frosted glass container for text readability
-// On desktop (md+): completely transparent/invisible
-// ──────────────────────────────────────────────
-function GlassCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return (
-    <div className={`
-      relative w-full
-      md:bg-[#050505]/40 md:backdrop-blur-xl md:border md:border-white/[0.08] 
-      md:rounded-2xl md:p-8 md:shadow-[0_8px_40px_rgba(0,0,0,0.5)]
-      ${className}
-    `}>
-      <div className="relative z-10 w-full">
-        {children}
-      </div>
-    </div>
   );
 }
 
@@ -358,7 +240,6 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
   const scrollYProgress = useMotionValue(0);
   const [activePhase, setActivePhase] = useState(0);
 
-  // Detect mobile for touch-specific scroll physics
   const [isMobileLayout, setIsMobileLayout] = useState(false);
   useEffect(() => {
     const check = () => setIsMobileLayout(window.innerWidth < 768);
@@ -383,53 +264,42 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrollYProgress]);
 
-  // Mobile touch: softer spring (lower stiffness, higher damping) to absorb inertia flicks gracefully
-  // Desktop mouse: snappier spring for precise wheel control
   const smoothScroll = useSpring(scrollYProgress, 
     isMobileLayout 
-      ? { stiffness: 40, damping: 24, restDelta: 0.001 }
-      : { stiffness: 60, damping: 18, restDelta: 0.001 }
+      ? { stiffness: 90, damping: 20, restDelta: 0.001 }
+      : { stiffness: 65, damping: 18, restDelta: 0.001 }
   );
 
-  // Perfectly sync the text phase strictly to the exact middle of the 3D transitional deadzones
   useEffect(() => {
     return smoothScroll.onChange((v) => {
-      // 0.30 is exactly halfway through the 0.20-0.40 visual transition
-      if (v < 0.30) setActivePhase(0);
-      // 0.70 is exactly halfway through the 0.60-0.80 visual transition
-      else if (v < 0.70) setActivePhase(1);
-      else setActivePhase(2);
+      // Transition midpoint is around 0.28 so text comes in slightly after animation starts
+      if (v < 0.28) setActivePhase(0);
+      else setActivePhase(1);
     });
   }, [smoothScroll]);
 
-  // Pointer interaction state: desktop = hovering over canvas, mobile = finger touching
   const pointerActive = useRef(false);
 
-  // Phase indicator dots active state logic
-  const dots = [0, 1, 2];
-
-  // Animation variants for cross-fading text
   const textVariants = {
-    initial: { opacity: 0, y: 30, filter: "blur(8px)" },
-    animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.4, ease: "easeOut" as const } },
-    exit: { opacity: 0, y: -30, filter: "blur(8px)", transition: { duration: 0.3, ease: "easeIn" as const } }
+    initial: { opacity: 0, y: 30, filter: "blur(10px)" },
+    animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.5, ease: "easeOut" } },
+    exit: { opacity: 0, y: -30, filter: "blur(10px)", transition: { duration: 0.4, ease: "easeIn" } }
   };
 
   return (
-    <section ref={containerRef} className="relative w-full h-[470vh] md:h-[330vh] bg-[#020202] text-white">
+    <section ref={containerRef} className="relative w-full h-[350vh] md:h-[400vh] bg-[#020202] text-white">
       
-      <div className="sticky top-0 h-[100vh] w-full overflow-hidden">
+      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden flex flex-col justify-center">
 
         {/* Ambient Glow */}
         <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute top-[-15%] left-[5%] w-[700px] h-[700px] rounded-full bg-blue-700/15 blur-[160px]" />
-          <div className="absolute bottom-[-10%] right-[5%] w-[800px] h-[800px] rounded-full bg-violet-700/12 blur-[160px]" />
-          <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:30px_30px]" />
+          <div className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] rounded-full bg-blue-700/15 blur-[160px]" />
+          <div className="absolute bottom-[-10%] right-[-5%] w-[700px] h-[700px] rounded-full bg-violet-700/15 blur-[160px]" />
         </div>
 
         {/* Full-Screen 3D Canvas */}
         <div 
-          className="absolute inset-0 z-[1]"
+          className="absolute inset-0 z-[1] flex items-center justify-center opacity-80"
           onPointerEnter={() => { if (!isMobileLayout) pointerActive.current = true; }}
           onPointerLeave={() => { pointerActive.current = false; }}
           onPointerDown={() => { if (isMobileLayout) pointerActive.current = true; }}
@@ -443,206 +313,175 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
             <color attach="background" args={["#020202"]} />
             <MorphingParticles scrollProgress={smoothScroll} pointerActive={pointerActive} />
             <EffectComposer enableNormalPass={false}>
-              <Bloom luminanceThreshold={0.18} mipmapBlur intensity={2.0} radius={0.85} />
+              <Bloom luminanceThreshold={0.2} mipmapBlur intensity={1.8} radius={0.8} />
             </EffectComposer>
           </Canvas>
-          {/* Desktop vignette: offset right. Mobile: centered */}
-          <div className="absolute inset-0 pointer-events-none hidden md:block bg-[radial-gradient(ellipse_80%_80%_at_65%_50%,transparent_40%,#020202_100%)]" />
-          <div className="absolute inset-x-0 bottom-0 top-[30%] pointer-events-none bg-gradient-to-t from-[#020202] via-[#020202] to-transparent md:hidden" />
-          {/* Subtle mobile radial to darken edges slightly around the top */}
-          <div className="absolute inset-0 pointer-events-none md:hidden bg-[radial-gradient(ellipse_100%_100%_at_50%_0%,transparent_40%,#020202_100%)]" />
+          <div className="absolute inset-0 pointer-events-none z-[2] bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,2,2,0.6)_100%)]" />
         </div>
 
         {/* ─────────────────────────────────── */}
         {/* TEXT OVERLAY                        */}
-        {/* Desktop: left 46%, no glass card    */}
-        {/* Mobile: bottom text overlay         */}
         {/* ─────────────────────────────────── */}
-        <div className="absolute inset-0 z-10 flex flex-col justify-end pb-[7vh] md:pb-0 md:justify-center pointer-events-none">
-          <div className="w-full max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14">
-            <div className="relative w-full md:w-[50%] lg:w-[46%] h-[420px] md:h-[500px]">
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5 sm:px-10 pointer-events-none">
+          <div className="relative w-full min-h-[400px] flex items-center justify-center text-center">
 
-              <AnimatePresence initial={false}>
-                {/* ═══════ STAGE 1 (GLOBE / GLOBAL REACH) ═══════ */}
-                {activePhase === 0 && (
-                  <motion.div
-                    key="p1-globe"
-                    variants={textVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    className="absolute inset-x-0 bottom-0 md:top-1/2 md:bottom-auto md:-translate-y-1/2 pointer-events-auto"
-                  >
-                    <GlassCard>
-                      <div className="mb-4 md:mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/50 bg-cyan-500/15 px-3 md:px-4 py-1.5 backdrop-blur-sm w-fit">
-                        <Globe className="h-3 md:h-3.5 w-3 md:w-3.5 text-cyan-300" />
-                        <span className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] text-cyan-100 uppercase">
-                          Websites · Apps · Digital Products
-                        </span>
-                      </div>
+            <AnimatePresence mode="wait">
+              {/* STAGE 1: OBJECTIVE */}
+              {activePhase === 0 && (
+                <motion.div
+                  key="phase-1"
+                  variants={textVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-auto px-4"
+                >
+                  <div className="w-full max-w-4xl mx-auto px-5 py-8 sm:px-6 sm:py-16 md:px-10 flex flex-col items-center text-center rounded-[2rem] sm:rounded-[2.5rem] bg-[#020202]/50 backdrop-blur-3xl saturate-150 border border-white/[0.12] shadow-[0_20px_50px_0_rgba(0,0,0,0.7),inset_0_1px_1px_0_rgba(255,255,255,0.3)] relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] to-transparent pointer-events-none" />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
+                    <div className="relative z-10 flex flex-col items-center w-full">
+                      <div className="mb-4 sm:mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-500/10 px-4 py-1.5 backdrop-blur-sm">
+                    <Target className="h-4 w-4 text-cyan-400" />
+                    <span className="text-[10px] sm:text-sm font-bold tracking-widest text-cyan-100 uppercase">
+                      Our Objective
+                    </span>
+                  </div>
 
-                      <h1 className="text-[2.4rem] sm:text-[3rem] md:text-[4.8rem] lg:text-[6rem] leading-[1.05] font-black tracking-tight text-white mb-4">
-                        Your Digital
-                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-blue-200">
-                          Presence, Worldwide.
-                        </span>
-                      </h1>
+                  <h1 className="text-[2.75rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5rem] leading-[1.05] font-black tracking-tight text-white mb-4 sm:mb-6">
+                    Your Digital
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-blue-300">
+                      Presence, Worldwide.
+                    </span>
+                  </h1>
 
-                      <p className="max-w-[440px] text-[0.95rem] md:text-[1.05rem] leading-relaxed text-gray-200 mb-5 md:mb-7 font-medium">
-                        We design and build conversion-optimised websites, mobile apps, and digital experiences
-                        that put your brand in front of customers across the globe.
-                      </p>
+                  <p className="text-[0.95rem] sm:text-[1.05rem] md:text-xl leading-relaxed text-gray-300 mb-8 sm:mb-10 max-w-2xl font-medium text-balance">
+                    We build <strong className="text-white font-bold">conversion-optimised websites and digital experiences</strong> that put your brand in front of customers&nbsp;worldwide.
+                  </p>
 
-                      <ul className="space-y-2 md:space-y-3 mb-6 md:mb-9">
-                        {[
-                          "Custom Websites & Web Applications",
-                          "Mobile App Development (iOS & Android)",
-                          "E-Commerce & SaaS Platforms",
-                          "UI/UX Design & Brand Identity",
-                        ].map(item => (
-                          <li key={item} className="flex items-center gap-2 md:gap-3 text-[0.82rem] md:text-sm lg:text-[0.95rem] text-gray-200 font-medium">
-                            <CheckCircle2 className="h-3.5 md:h-4 w-3.5 md:w-4 text-cyan-300 shrink-0" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
+                  <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 justify-center w-full">
+                     <button
+                        onClick={onCallbackClick}
+                        className="group flex h-12 sm:h-14 items-center justify-center gap-3 rounded-full bg-yellow-500 hover:bg-yellow-400 px-8 text-[15px] font-bold text-white shadow-[0_0_30px_rgba(234,179,8,0.25)] transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+                      >
+                        Get a Free Consultation
+                        <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                     </button>
+                     <a href="#portfolio" className="text-[15px] font-bold text-gray-300 hover:text-white underline underline-offset-4 transition-colors h-14 flex items-center justify-center">
+                       View our portfolio
+                     </a>
+                  </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
 
-                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 md:gap-4">
-                        <button
-                          onClick={onCallbackClick}
-                          className="group flex h-14 md:h-12 items-center justify-center gap-3 rounded-full bg-white hover:bg-cyan-50 px-7 text-[14px] md:text-[15px] font-bold text-black shadow-[0_0_28px_rgba(255,255,255,0.14)] transition-all duration-300 hover:scale-105 w-full sm:w-auto"
-                        >
-                          Get a Free Consultation
-                          <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                        </button>
-                        <a href="#portfolio" className="text-sm font-bold text-gray-400 hover:text-white underline underline-offset-4 transition-colors text-center sm:text-left">
-                          View our portfolio →
-                        </a>
-                      </div>
-                    </GlassCard>
-                  </motion.div>
-                )}
+              {/* STAGE 2: GROWTH / PIPELINE */}
+              {activePhase === 1 && (
+                <motion.div
+                  key="phase-2"
+                  variants={textVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center pointer-events-auto px-4"
+                >
+                  <div className="w-full max-w-4xl mx-auto px-5 py-8 sm:px-6 sm:py-16 md:px-10 flex flex-col items-center text-center rounded-[2rem] sm:rounded-[2.5rem] bg-[#020202]/50 backdrop-blur-3xl saturate-150 border border-white/[0.12] shadow-[0_20px_50px_0_rgba(0,0,0,0.7),inset_0_1px_1px_0_rgba(255,255,255,0.3)] relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] to-transparent pointer-events-none" />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
+                    <div className="relative z-10 flex flex-col items-center w-full">
+                      <div className="mb-4 sm:mb-6 inline-flex items-center gap-2 rounded-full border border-violet-400/25 bg-violet-500/10 px-4 py-1.5 backdrop-blur-sm">
+                    <TrendingUp className="h-4 w-4 text-violet-400" />
+                    <span className="text-[10px] sm:text-sm font-bold tracking-widest text-violet-100 uppercase">
+                      What You Get
+                    </span>
+                  </div>
 
-                {/* ═══════ STAGE 2 ═══════ */}
-                {activePhase === 1 && (
-                  <motion.div
-                    key="p2"
-                    variants={textVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    className="absolute inset-x-0 bottom-0 md:top-1/2 md:bottom-auto md:-translate-y-1/2 pointer-events-auto"
-                  >
-                    <GlassCard>
-                      <div className="mb-4 md:mb-5 inline-flex items-center gap-2 rounded-full border border-violet-400/50 bg-violet-500/15 px-3 md:px-4 py-1.5 backdrop-blur-sm w-fit">
-                        <TrendingUp className="h-3 md:h-3.5 w-3 md:w-3.5 text-violet-300" />
-                        <span className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] text-violet-100 uppercase">
-                          SEO · Ads · Social · Analytics
-                        </span>
-                      </div>
+                  <h1 className="text-[2.75rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5rem] leading-[1.05] font-black tracking-tight text-white mb-4 sm:mb-6">
+                    Marketing That
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-violet-300 via-fuchsia-200 to-indigo-300">
+                      Fills Your Pipeline.
+                    </span>
+                  </h1>
 
-                      <h1 className="text-[2.4rem] sm:text-[3rem] md:text-[4.8rem] lg:text-[6rem] leading-[1.05] font-black tracking-tight text-white mb-4">
-                        Marketing That
-                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-violet-300 to-fuchsia-200">
-                          Fills Your Pipeline.
-                        </span>
-                      </h1>
+                  <p className="text-[0.95rem] sm:text-[1.05rem] md:text-xl leading-relaxed text-gray-300 mb-8 sm:mb-10 max-w-2xl font-medium text-balance">
+                    We build <strong className="text-white font-bold">scalable, data-driven systems</strong> to capture intent, generate leads, and maximize&nbsp;ROI.
+                  </p>
 
-                      <p className="max-w-[440px] text-[0.95rem] md:text-[1.05rem] leading-relaxed text-gray-200 mb-5 md:mb-7 font-medium">
-                        We run data-driven campaigns that put you in front of the right audience — consistently
-                        generating leads, enquiries, and sales every month.
-                      </p>
+                  <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 justify-center w-full">
+                     <button
+                        onClick={onCallbackClick}
+                        className="group flex h-12 sm:h-14 items-center justify-center gap-3 rounded-full bg-violet-500 hover:bg-violet-400 px-8 text-[15px] font-bold text-white shadow-[0_0_30px_rgba(139,92,246,0.25)] transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+                      >
+                        Start Scaling Today
+                        <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                     </button>
+                     <a href="#services" className="text-[15px] font-bold text-gray-300 hover:text-white underline underline-offset-4 transition-colors h-14 flex items-center justify-center">
+                       Explore our services
+                     </a>
+                  </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-                      <ul className="space-y-2 md:space-y-3">
-                        {[
-                          "Google Ads & Meta Ads Management",
-                          "Search Engine Optimisation (SEO)",
-                          "Social Media Growth & Content",
-                          "Monthly Reports With Real ROI Data",
-                        ].map(item => (
-                          <li key={item} className="flex items-center gap-2 md:gap-3 text-[0.82rem] md:text-sm lg:text-[0.95rem] text-gray-200 font-medium">
-                            <CheckCircle2 className="h-3.5 md:h-4 w-3.5 md:w-4 text-violet-300 shrink-0" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </GlassCard>
-                  </motion.div>
-                )}
-
-                {/* ═══════ STAGE 3 (GLOBE / DIGITAL PRODUCTS) ═══════ */}
-                {activePhase === 2 && (
-                  <motion.div
-                    key="p3-globe"
-                    variants={textVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    className="absolute inset-x-0 bottom-0 md:top-1/2 md:bottom-auto md:-translate-y-1/2 pointer-events-auto"
-                  >
-                    <GlassCard>
-                      <div className="mb-4 md:mb-5 inline-flex items-center gap-2 rounded-full border border-blue-400/50 bg-blue-500/15 px-3 md:px-4 py-1.5 backdrop-blur-sm w-fit">
-                        <Globe className="h-3 md:h-3.5 w-3 md:w-3.5 text-blue-300" />
-                        <span className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] text-blue-100 uppercase">
-                          Websites · Apps · Marketing
-                        </span>
-                      </div>
-
-                      <h1 className="text-[2.4rem] sm:text-[3rem] md:text-[4.8rem] lg:text-[6rem] leading-[1.05] font-black tracking-tight text-white mb-4">
-                        We Build Digital
-                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-sky-200 to-indigo-200">
-                          Products That Sell.
-                        </span>
-                      </h1>
-
-                      <p className="max-w-[440px] text-[0.95rem] md:text-[1.05rem] leading-relaxed text-gray-200 mb-5 md:mb-8 font-medium">
-                        From a conversion-optimised website to a full mobile app — we design, build, and launch
-                        digital products that turn visitors into paying customers.
-                      </p>
-
-                      <div className="grid grid-cols-2 md:flex md:flex-wrap gap-x-6 gap-y-3 md:gap-7 mb-5 md:mb-8 border-t border-white/15 pt-4 md:pt-6">
-                        {[
-                          { icon: Code2,        value: "120+", label: "Projects Delivered" },
-                          { icon: Users,        value: "80+",  label: "Happy Clients"      },
-                          { icon: Star,         value: "5.0",  label: "Average Rating"     },
-                          { icon: CheckCircle2, value: "6+",   label: "Years Experience"   },
-                        ].map(({ icon: Icon, value, label }) => (
-                          <div key={label} className="flex flex-col">
-                            <div className="flex items-center gap-1.5 mb-0.5">
-                              <Icon className="h-3 md:h-3.5 w-3 md:w-3.5 text-blue-300" />
-                              <span className="text-lg md:text-2xl font-black text-white">{value}</span>
-                            </div>
-                            <span className="text-[10px] md:text-xs text-gray-400 font-semibold">{label}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-[0.18em] flex items-center gap-2">
-                        <span className="w-5 h-px bg-gray-500 block" /> Scroll back to top
-                      </span>
-                    </GlassCard>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-            </div>
           </div>
         </div>
 
-        {/* Phase Indicator Dots */}
-        <div className="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
-          {dots.map((dotIndex) => (
+        {/* Scroll Progress Indicator */}
+        <div className="absolute right-5 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
+          {[0, 1].map((dotIndex) => (
             <motion.div
               key={dotIndex}
               initial={false}
-              animate={{ opacity: activePhase === dotIndex ? 1 : 0.3 }}
+              animate={{ opacity: activePhase === dotIndex ? 1 : 0.2, scale: activePhase === dotIndex ? 1.2 : 1 }}
               transition={{ duration: 0.3 }}
               className="w-1.5 h-1.5 rounded-full bg-white"
             />
           ))}
         </div>
 
+        {/* STATS BANNER */}
+        <div className="absolute bottom-0 left-0 w-full border-t border-white/[0.05] bg-black/40 backdrop-blur-md z-30">
+          <div className="max-w-[1200px] mx-auto px-4 py-4 sm:py-5 grid grid-cols-2 lg:flex lg:items-center lg:justify-center gap-y-4 gap-x-2 sm:gap-x-6 lg:gap-14">
+            
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <Users className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-cyan-400 shrink-0" />
+              <div className="text-[11.5px] sm:text-sm lg:text-base font-medium text-gray-300 tracking-wide leading-tight">
+                <strong className="text-white font-bold text-sm sm:text-base lg:text-lg block lg:inline lg:mr-1">8+</strong> 
+                Years of Experience
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-cyan-400 shrink-0" />
+              <div className="text-[11.5px] sm:text-sm lg:text-base font-medium text-gray-300 tracking-wide leading-tight">
+                <strong className="text-white font-bold text-sm sm:text-base lg:text-lg block lg:inline lg:mr-1">35+</strong> 
+                In-House Experts
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-violet-400 shrink-0" />
+              <div className="text-[11.5px] sm:text-sm lg:text-base font-medium text-gray-300 tracking-wide leading-tight">
+                <strong className="text-white font-bold text-sm sm:text-base lg:text-lg block lg:inline lg:mr-1">100k+</strong> 
+                Hours Delivered
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-violet-400 shrink-0" />
+              <div className="text-[11.5px] sm:text-sm lg:text-base font-medium text-gray-300 tracking-wide leading-tight">
+                <strong className="text-white font-bold text-sm sm:text-base lg:text-lg block lg:inline lg:mr-1">500+</strong> 
+                Projects Delivered
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </section>
   );
 }
+
