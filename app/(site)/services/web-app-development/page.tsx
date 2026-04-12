@@ -1,4 +1,4 @@
-import ServicePageHero from "@/components/service/ServicePageHero";
+import ServiceHero from "@/components/service/ServiceHero";
 import DynamicCTA from "@/components/DynamicCTA";
 import FaqSection from "@/components/service/FaqSection";
 import WebAppSections from "@/components/service/WebAppSections";
@@ -45,15 +45,12 @@ export default function WebAppDevelopmentPage() {
   return (
     <main>
       {/* ═══════════ HERO ═══════════ */}
-      <ServicePageHero
+      <ServiceHero
         eyebrow="Web Application Development"
         title="Build Powerful Web Applications for Your Business"
         subtitle="We design and develop custom web applications that streamline operations, improve efficiency, and scale with your business."
         serviceName="Web Application Development"
-        primaryCta="Get Free Consultation"
-        secondaryCta="Start Your Web App Project"
-        secondaryCtaHref="#process"
-        trustPoints={[
+        highlights={[
           "Custom-Built Solutions",
           "Secure & Scalable Architecture",
           "Modern UI/UX",

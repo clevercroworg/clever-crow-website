@@ -1,4 +1,4 @@
-import ServicePageHero from "@/components/service/ServicePageHero";
+import ServiceHero from "@/components/service/ServiceHero";
 import DynamicCTA from "@/components/DynamicCTA";
 import FaqSection from "@/components/service/FaqSection";
 import GraphicDesignSections from "@/components/service/GraphicDesignSections";
@@ -21,15 +21,12 @@ export const metadata = {
 export default function GraphicDesignPage() {
   return (
     <main>
-      <ServicePageHero
+      <ServiceHero
         eyebrow="Graphic Design"
         title="Designs That Capture Attention & Drive Action"
         subtitle="We create high-impact visual designs for ads, social media, and marketing that help your brand stand out and convert."
         serviceName="Graphic Design"
-        primaryCta="Get a Free Consultation"
-        secondaryCta="See Our Process"
-        secondaryCtaHref="#process"
-        trustPoints={["Social Media Creatives", "Ad-Optimized Designs", "Brand Consistency", "Fast Delivery"]}
+        highlights={["Social Media Creatives", "Ad-Optimized Designs", "Brand Consistency", "Fast Delivery"]}
       />
       <GraphicDesignSections />
       <DynamicCTA />

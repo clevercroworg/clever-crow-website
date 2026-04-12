@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  CheckCircle2,
+  ArrowRight,
+  ShieldCheck,
+  Zap,
+} from "lucide-react";
 
 type LogoItem = {
   src: string;
@@ -12,32 +18,27 @@ type ServiceHeroProps = {
   title: string;
   subtitle: string;
   serviceName: string;
-    eyebrow?: string; // ✅  
-
-  /* PAGE-SPECIFIC (OPTIONAL) */
-  highlights?: string[]; // ✅ optional
-  tools?: LogoItem[];    // ✅ optional
+  eyebrow?: string;
+  highlights?: string[];
+  tools?: LogoItem[];
 };
 
 export default function ServiceHero({
   title,
   subtitle,
   serviceName,
-    eyebrow = "",
-  highlights = [], // ✅ SAFE DEFAULT
-  tools = [],      // ✅ SAFE DEFAULT
+  eyebrow = "",
+  highlights = [],
+  tools = [],
 }: ServiceHeroProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
-
     const formData = new FormData(e.currentTarget);
-
     try {
       const response = await fetch("/api/send-lead-email", {
         method: "POST",
@@ -49,13 +50,9 @@ export default function ServiceHero({
           pageUrl: window.location.href,
         }),
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to send");
-      }
-
+      if (!response.ok) throw new Error("Failed to send");
       window.location.href = "/thank-you";
-    } catch (err) {
+    } catch {
       setError("Failed to send request. Please try again.");
     } finally {
       setIsLoading(false);
@@ -63,210 +60,167 @@ export default function ServiceHero({
   };
 
   return (
-    <section className="relative overflow-hidden pt-[150px] pb-24">
-      {/* BACKGROUND */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute inset-0 bg-[#fafafa]" />
-        <div className="absolute -top-40 -left-40 h-[600px] w-[600px] rounded-full bg-purple-200/30 blur-[120px]" />
-        <div className="absolute -top-32 right-[-200px] h-[500px] w-[500px] rounded-full bg-indigo-200/30 blur-[120px]" />
-        <div className="absolute bottom-0 left-0 right-0 h-[300px] bg-gradient-to-t from-white to-transparent" />
-        <div className="hero-noise absolute inset-0 opacity-[0.35]" />
+    <section className="relative min-h-[85vh] overflow-hidden pt-[120px] pb-24 selection:bg-yellow-500/30">
+      {/* ───────────────── BACKGROUND (Premium Dark Cinematic) ───────────────── */}
+      <div className="absolute inset-0 z-0">
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(circle at 8% 10%, rgba(82, 168, 255, 0.12), transparent 25%),
+              radial-gradient(circle at 82% 78%, rgba(122, 63, 194, 0.1), transparent 25%),
+              radial-gradient(circle at 52% 52%, rgba(255, 255, 255, 0.02), transparent 26%),
+              linear-gradient(180deg, #0f172a 0%, #111827 44%, #020617 100%)
+            `
+          }}
+        />
+        <div 
+          className="absolute inset-0 opacity-20 pointer-events-none"
+          style={{
+            backgroundImage: `
+              radial-gradient(circle at left center, rgba(255, 255, 255, 0.04) 1.5px, transparent 2px),
+              radial-gradient(circle at right center, rgba(255, 255, 255, 0.04) 1.5px, transparent 2px),
+              radial-gradient(circle at center, rgba(255, 255, 255, 0.01) 0.8px, transparent 1.2px)
+            `,
+            backgroundSize: "26px 26px, 26px 26px, 18px 18px"
+          }}
+        />
       </div>
 
-      {/* CONTENT */}
-      <div className="mx-auto max-w-7xl px-6 relative z-10">
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.2fr_1fr] lg:gap-20">
-
-
-          {/* LEFT */}
-          <div>
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-20 items-center">
+          
+          {/* ── LEFT COLUMN ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
             {eyebrow && (
-              <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-purple-600">
-                {eyebrow}
-              </p>
+              <div className="inline-flex items-center gap-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 px-4 py-2 mb-8 backdrop-blur-md">
+                <div className="h-1.5 w-1.5 rounded-full bg-yellow-500 animate-pulse shadow-[0_0_8px_rgba(234,179,8,0.5)]" />
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-yellow-500">
+                  {eyebrow}
+                </span>
+              </div>
             )}
 
-
-
-            <h1 
-              className="text-3xl font-black leading-[1.12] text-gray-950 sm:text-4xl lg:text-[40px] tracking-tight"
-              style={{ maxWidth: "900px", fontSize: "clamp(32px, 4.5vw, 38px)" }}
-            >
+            <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-black text-white leading-[1.05] tracking-tight">
               {title}
             </h1>
-            
-            <p className="mt-6 max-w-2xl text-base sm:text-[17px] text-gray-600 font-medium leading-relaxed">
+
+            <p className="mt-8 max-w-xl text-lg sm:text-xl text-slate-400 font-medium leading-relaxed opacity-90">
               {subtitle}
             </p>
 
-            {/* HIGHLIGHTS (SAFE) */}
+            {/* Highlights */}
             {highlights.length > 0 && (
-              <div className="mt-5 flex flex-wrap gap-3">
-                {highlights.map((item, idx) => (
-                  <span
-                    key={idx}
-                    className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm"
-                  >
-                    {item}
-                  </span>
+              <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {highlights.map((point, i) => (
+                  <div key={i} className="flex items-center gap-3 text-[15px] text-slate-300 font-bold">
+                    <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-green-500/10 text-green-400">
+                      <CheckCircle2 size={14} />
+                    </div>
+                    {point}
+                  </div>
                 ))}
               </div>
             )}
 
-            <p className="mt-8 text-sm text-gray-500">
-              Trusted by service businesses & growth-focused brands across India
-            </p>
-
-            {/* TOOLS / LOGOS (SAFE) */}
+            {/* Tools/Logos Display */}
             {tools.length > 0 && (
-              <div className="mt-6 flex flex-wrap items-center gap-8 opacity-80">
-                {tools.map((tool, idx) => (
-                  <img
-                    key={idx}
-                    src={tool.src}
-                    alt={tool.alt}
-                    className="h-7"
-                    loading="lazy"
-                  />
-                ))}
+              <div className="mt-12 flex flex-col gap-4">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600">Engineered with</span>
+                <div className="flex flex-wrap items-center gap-6 opacity-60 grayscale hover:grayscale-0 transition-all">
+                  {tools.map((tool, idx) => (
+                    <img key={idx} src={tool.src} alt={tool.alt} className="h-6 md:h-7 object-contain" />
+                  ))}
+                </div>
               </div>
             )}
-          </div>
+          </motion.div>
 
-          {/* RIGHT SIDE CTA CARD WITH INLINE FORM TRANSITION */}
-          <div className="relative w-full max-w-md mx-auto lg:ml-auto lg:mr-0 z-20">
-            {/* Decorative background aura for the card */}
-            <div className="absolute -inset-1 rounded-[2.5rem] bg-gradient-to-br from-yellow-400/30 via-purple-400/20 to-pink-400/30 blur-2xl opacity-70" />
-            
-            <motion.div layout className="relative rounded-[2rem] border border-white/60 bg-white/70 backdrop-blur-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden">
-              {/* Internal decorative shapes */}
-              <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-yellow-300/30 blur-2xl pointer-events-none" />
-              <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-purple-300/30 blur-2xl pointer-events-none" />
+          {/* ── RIGHT COLUMN: GLASS CARD ── */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="relative w-full max-w-lg mx-auto lg:ml-auto"
+          >
+            <div className="absolute -inset-4 rounded-[3rem] bg-gradient-to-br from-yellow-500/10 via-transparent to-blue-500/10 blur-3xl opacity-50" />
 
-              <AnimatePresence mode="wait" initial={false}>
-                {!isModalOpen ? (
-                  <motion.div
-                    key="cta"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="relative z-10 text-center p-8 sm:p-10"
-                  >
-                    <div className="inline-flex items-center justify-center rounded-full bg-purple-100/80 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-purple-700 mb-6 border border-purple-200/50">
-                      Priority Access
+            <div className="relative rounded-[2.5rem] border border-white/10 bg-white/5 shadow-2xl backdrop-blur-2xl overflow-hidden group">
+              {/* Form Header */}
+              <div className="p-8 sm:p-10 text-center border-b border-white/5">
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-blue-100/60 border border-white/10 mb-6">
+                  <ShieldCheck size={12} />
+                  Precision Performance
+                </div>
+                <h3 className="text-2xl sm:text-[28px] font-black text-white tracking-tight leading-tight mb-4">
+                  Unlock Your <span className="text-yellow-500 italic">Growth Plan</span>
+                </h3>
+                <p className="text-[14px] text-slate-400 font-medium">
+                  Receive a custom-engineered strategy within 24 hours.
+                </p>
+              </div>
+
+              {/* Form Body */}
+              <div className="p-8 sm:p-10 bg-white/[0.02]">
+                <form className="space-y-5" onSubmit={handleSubmit}>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 ml-2">Full Name</label>
+                    <input
+                      name="name"
+                      required
+                      placeholder="Your Name"
+                      className="h-14 w-full rounded-2xl border border-white/10 bg-white/5 px-6 text-sm font-bold text-white placeholder:text-slate-600 focus:border-yellow-500 focus:bg-white/10 focus:outline-none transition-all ring-1 ring-white/5"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 ml-2">Phone Number</label>
+                    <input
+                      name="phone"
+                      required
+                      placeholder="+91 XXX XXX XXXX"
+                      className="h-14 w-full rounded-2xl border border-white/10 bg-white/5 px-6 text-sm font-bold text-white placeholder:text-slate-600 focus:border-yellow-500 focus:bg-white/10 focus:outline-none transition-all ring-1 ring-white/5"
+                    />
+                  </div>
+
+                  {error && (
+                    <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm font-bold text-red-400">
+                      {error}
                     </div>
-                    
-                    <h3 className="text-2xl sm:text-[28px] font-extrabold text-gray-900 tracking-tight leading-tight mb-4">
-                      Unlock Your Free <br />
-                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Growth Strategy</span>
-                    </h3>
-                    
-                    <p className="text-[15px] font-medium text-gray-600 mb-8 leading-relaxed">
-                      Get a comprehensive audit and a custom execution plan designed to scale your ROI.
-                    </p>
+                  )}
 
-                    <div className="flex flex-col items-center justify-center gap-5">
-                      {/* The Button */}
-                      <div className="relative group w-full">
-                        {/* Minimal Outer Glow / Ripple */}
-                        <div className="absolute -inset-1 rounded-full bg-yellow-400/10 blur-sm group-hover:bg-yellow-400/20 transition-all duration-700 animate-pulse" />
-                        <div className="absolute inset-0 rounded-full bg-yellow-400/15 animate-ping [animation-duration:3s]" />
-                        
-                        <button
-                          onClick={() => setIsModalOpen(true)}
-                          className="relative z-10 w-full flex items-center justify-center gap-2 sm:gap-3 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500 px-6 py-3.5 sm:px-8 sm:py-5 text-[16px] sm:text-lg font-black text-gray-900 shadow-[0_0_20px_rgba(250,204,21,0.3)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(250,204,21,0.5)]"
-                        >
-                          <span>Request a Call Back</span>
-                          <svg className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 object-contain" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                          </svg>
-                        </button>
-                      </div>
-                      
-                      {/* Trust Indicators */}
-                      <div className="flex items-center justify-center gap-8 mt-2 opacity-80">
-                        <div className="flex flex-col items-center gap-1">
-                          <span className="text-xl sm:text-2xl font-black text-gray-900 leading-none">24<span className="text-sm">H</span></span>
-                          <span className="text-[9px] font-bold uppercase tracking-widest text-gray-500">Response</span>
-                        </div>
-                        <div className="h-8 w-px bg-gray-300" />
-                        <div className="flex flex-col items-center gap-1">
-                          <span className="text-xl sm:text-2xl font-black text-gray-900 leading-none">0</span>
-                          <span className="text-[9px] font-bold uppercase tracking-widest text-gray-500">Obligation</span>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="form"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="relative z-10 p-8 sm:p-10"
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="group relative h-16 w-full overflow-hidden rounded-2xl bg-yellow-500 text-[14px] font-black uppercase tracking-widest text-slate-900 shadow-xl shadow-yellow-500/20 transition-all hover:scale-[1.02] hover:bg-yellow-400 active:scale-[0.98] disabled:opacity-70"
                   >
-                    <button
-                      onClick={() => setIsModalOpen(false)}
-                      className="absolute right-0 top-0 p-2 text-gray-400 hover:text-gray-900 transition-colors bg-white/50 hover:bg-white rounded-full"
-                    >
-                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      {isLoading ? "Analyzing..." : "Get Growth Audit"}
+                      <Zap size={16} fill="currentColor" />
+                    </span>
+                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                  </button>
+                </form>
 
-                    <h3 className="text-2xl font-black text-gray-900 tracking-tight">Request a Call Back</h3>
-                    <p className="mt-2 text-sm text-gray-600 font-medium">
-                      Speak with a specialist within 24 hours.
-                    </p>
-
-                    <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
-                      <input
-                        name="name"
-                        required
-                        placeholder="Your Name *"
-                        className="h-12 w-full rounded-xl border border-gray-200 bg-white/50 px-4 text-sm font-medium text-gray-900 placeholder:text-gray-400 focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400/20 transition-all"
-                      />
-                      <input
-                        name="phone"
-                        required
-                        placeholder="Phone number *"
-                        className="h-12 w-full rounded-xl border border-gray-200 bg-white/50 px-4 text-sm font-medium text-gray-900 placeholder:text-gray-400 focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400/20 transition-all"
-                      />
-
-                      {error && (
-                        <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
-                          {error}
-                        </div>
-                      )}
-
-                      <button
-                        type="submit"
-                        disabled={isLoading}
-                        className={`mt-4 h-14 w-full rounded-xl text-[15px] font-bold tracking-wide transition-all text-gray-900 ${
-                          isLoading
-                            ? "cursor-not-allowed bg-yellow-300 opacity-70"
-                            : "bg-yellow-400 hover:bg-yellow-500 shadow-[0_0_20px_rgba(250,204,21,0.3)] hover:shadow-[0_0_30px_rgba(250,204,21,0.5)] hover:-translate-y-0.5"
-                        }`}
-                      >
-                        {isLoading ? "Sending..." : "Request a Call Back"}
-                      </button>
-                    </form>
-
-                    <p className="mt-6 text-center text-xs font-semibold uppercase tracking-wider text-gray-500">
-                      No spam • No obligation • Clear guidance
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          </div>
-
+                <div className="mt-8 flex items-center justify-between text-center border-t border-white/5 pt-8">
+                  <div className="flex-1">
+                    <div className="text-xl font-black text-white">24<span className="text-xs text-yellow-500 ml-0.5">H</span></div>
+                    <div className="text-[9px] font-black uppercase tracking-widest text-slate-500 mt-1">SLA Response</div>
+                  </div>
+                  <div className="h-8 w-px bg-white/10" />
+                  <div className="flex-1">
+                    <div className="text-xl font-black text-white">100<span className="text-xs text-yellow-500 ml-0.5">%</span></div>
+                    <div className="text-[9px] font-black uppercase tracking-widest text-slate-500 mt-1">Free Audit</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
-
-      {/* Form modal is now completely inline within the right column. */}
     </section>
   );
 }

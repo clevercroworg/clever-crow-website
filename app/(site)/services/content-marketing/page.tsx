@@ -1,4 +1,4 @@
-import ServicePageHero from "@/components/service/ServicePageHero";
+import ServiceHero from "@/components/service/ServiceHero";
 import DynamicCTA from "@/components/DynamicCTA";
 import FaqSection from "@/components/service/FaqSection";
 import ContentMarketingSections from "@/components/service/ContentMarketingSections";
@@ -21,15 +21,12 @@ export const metadata = {
 export default function ContentMarketingPage() {
   return (
     <main>
-      <ServicePageHero
+      <ServiceHero
         eyebrow="Content Marketing"
         title="Grow Your Business with Strategic Content Marketing"
         subtitle="We build content marketing systems that attract the right audience, establish your authority, and drive consistent business growth."
         serviceName="Content Marketing"
-        primaryCta="Get a Free Consultation"
-        secondaryCta="See Our Process"
-        secondaryCtaHref="#process"
-        trustPoints={["Strategy-Driven", "Multi-Channel Approach", "Data-Backed Results", "Consistent Growth"]}
+        highlights={["Strategy-Driven", "Multi-Channel Approach", "Data-Backed Results", "Consistent Growth"]}
       />
       <ContentMarketingSections />
       <DynamicCTA />

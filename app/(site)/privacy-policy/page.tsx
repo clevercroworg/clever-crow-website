@@ -5,24 +5,41 @@ export const metadata = {
 export default function PrivacyPolicy() {
   return (
     <>
-      {/* Header Section */}
-      <section className="min-h-[400px] bg-gray-50 flex items-center">
-        <div className="max-w-4xl mx-auto px-6 pt-40 text-center">
+      {/* ═══════════ CINEMATIC HERO ═══════════ */}
+      <section className="relative pt-40 pb-20 overflow-hidden">
+        {/* Background Styling */}
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0"
+            style={{
+              background: `
+                radial-gradient(circle at 10% 20%, rgba(82, 168, 255, 0.08), transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(122, 63, 194, 0.05), transparent 25%),
+                linear-gradient(180deg, #0f172a 0%, #111827 44%, #020617 100%)
+              `
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <a
             href="/"
-            className="text-sm text-gray-500 underline inline-block mb-4"
+            className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 hover:text-yellow-500 transition-colors inline-block mb-8"
           >
             ← Back to Home
           </a>
 
-          <h1 className="text-4xl md:text-5xl font-bold">
-            Privacy Policy
+          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight">
+            Privacy <span className="text-yellow-500 italic">Policy</span>
           </h1>
 
-          <p className="mt-3 text-sm text-gray-500">
+          <p className="mt-8 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">
             Last updated: January 2026
           </p>
         </div>
+
+        {/* Soft bottom fade to white section */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
       </section>
 
       {/* Content */}

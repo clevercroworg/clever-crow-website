@@ -1,4 +1,4 @@
-import ServicePageHero from "@/components/service/ServicePageHero";
+import ServiceHero from "@/components/service/ServiceHero";
 import DynamicCTA from "@/components/DynamicCTA";
 import FaqSection from "@/components/service/FaqSection";
 import ContentWritingSections from "@/components/service/ContentWritingSections";
@@ -21,15 +21,12 @@ export const metadata = {
 export default function ContentWritingPage() {
   return (
     <main>
-      <ServicePageHero
+      <ServiceHero
         eyebrow="Content Writing"
         title="Content That Builds Trust & Drives Results"
         subtitle="We write clear, compelling, and SEO-friendly content that helps your business communicate value and convert visitors."
         serviceName="Content Writing"
-        primaryCta="Get a Free Consultation"
-        secondaryCta="See Our Process"
-        secondaryCtaHref="#process"
-        trustPoints={["Website & Blog Copy", "SEO-Optimized", "Brand Voice Aligned", "Fast Delivery"]}
+        highlights={["Website & Blog Copy", "SEO-Optimized", "Brand Voice Aligned", "Fast Delivery"]}
       />
       <ContentWritingSections />
       <DynamicCTA />

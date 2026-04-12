@@ -1,4 +1,4 @@
-import ServicePageHero from "@/components/service/ServicePageHero";
+import ServiceHero from "@/components/service/ServiceHero";
 import DynamicCTA from "@/components/DynamicCTA";
 import FaqSection from "@/components/service/FaqSection";
 import EcommerceSections from "@/components/service/EcommerceSections";
@@ -45,15 +45,12 @@ export default function EcommerceWebsiteDevelopmentPage() {
   return (
     <main>
       {/* ═══════════ HERO ═══════════ */}
-      <ServicePageHero
+      <ServiceHero
         eyebrow="E-commerce Website Development"
         title="Build an E-commerce Website That Drives Sales"
         subtitle="We design and develop high-performance e-commerce websites that are fast, user-friendly, and optimized to convert visitors into customers."
         serviceName="E-commerce Website Development"
-        primaryCta="Get Free Consultation"
-        secondaryCta="Start Your E-commerce Project"
-        secondaryCtaHref="#process"
-        trustPoints={[
+        highlights={[
           "Mobile-Optimized Design",
           "Secure Payment Integration",
           "Fast Loading Speed",

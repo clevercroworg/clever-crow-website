@@ -1,4 +1,4 @@
-import ServicePageHero from "@/components/service/ServicePageHero";
+import ServiceHero from "@/components/service/ServiceHero";
 import DynamicCTA from "@/components/DynamicCTA";
 import FaqSection from "@/components/service/FaqSection";
 import BusinessWebsiteSections from "@/components/service/BusinessWebsiteSections";
@@ -45,15 +45,12 @@ export default function BusinessWebsiteDevelopmentPage() {
   return (
     <main>
       {/* ═══════════ HERO ═══════════ */}
-      <ServicePageHero
+      <ServiceHero
         eyebrow="Business Website Development"
         title="Professional Business Websites That Convert Visitors into Customers"
         subtitle="We design and develop modern, fast, and mobile-friendly websites that help your business attract leads, build trust, and grow online."
         serviceName="Business Website Development"
-        primaryCta="Get Free Consultation"
-        secondaryCta="Start Your Website Project"
-        secondaryCtaHref="#process"
-        trustPoints={[
+        highlights={[
           "Mobile Responsive Design",
           "SEO-Ready Structure",
           "Fast Loading Speed",

@@ -1,4 +1,4 @@
-import ServicePageHero from "@/components/service/ServicePageHero";
+import ServiceHero from "@/components/service/ServiceHero";
 import DynamicCTA from "@/components/DynamicCTA";
 import FaqSection from "@/components/service/FaqSection";
 import ScriptWritingSections from "@/components/service/ScriptWritingSections";
@@ -21,15 +21,12 @@ export const metadata = {
 export default function ScriptWritingPage() {
   return (
     <main>
-      <ServicePageHero
+      <ServiceHero
         eyebrow="Script Writing"
         title="Scripts That Capture Attention & Drive Engagement"
         subtitle="We write powerful scripts for ads, reels, and videos that hook your audience and deliver your message effectively."
         serviceName="Script Writing"
-        primaryCta="Get a Free Consultation"
-        secondaryCta="See Our Process"
-        secondaryCtaHref="#process"
-        trustPoints={["Short-form & Long-form", "Ad Script Specialists", "Hook-Driven Approach", "Fast Turnaround"]}
+        highlights={["Short-form & Long-form", "Ad Script Specialists", "Hook-Driven Approach", "Fast Turnaround"]}
       />
       <ScriptWritingSections />
       <DynamicCTA />

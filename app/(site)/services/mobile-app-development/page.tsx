@@ -1,4 +1,4 @@
-import ServicePageHero from "@/components/service/ServicePageHero";
+import ServiceHero from "@/components/service/ServiceHero";
 import DynamicCTA from "@/components/DynamicCTA";
 import FaqSection from "@/components/service/FaqSection";
 import MobileAppSections from "@/components/service/MobileAppSections";
@@ -45,15 +45,12 @@ export default function MobileAppDevelopmentPage() {
   return (
     <main>
       {/* ═══════════ HERO ═══════════ */}
-      <ServicePageHero
+      <ServiceHero
         eyebrow="Mobile App Development"
         title="Build a Mobile App That Grows Your Business"
         subtitle="We design and develop custom mobile apps for startups, service businesses, and growing brands. From idea to launch, we create apps that are fast, user-friendly, and built to scale."
         serviceName="Mobile App Development"
-        primaryCta="Get Free Consultation"
-        secondaryCta="View Our Process"
-        secondaryCtaHref="#process"
-        trustPoints={[
+        highlights={[
           "Android & iOS App Development",
           "Modern UI/UX Design",
           "Scalable Architecture",

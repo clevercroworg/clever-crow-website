@@ -1,4 +1,4 @@
-import ServicePageHero from "@/components/service/ServicePageHero";
+import ServiceHero from "@/components/service/ServiceHero";
 import DynamicCTA from "@/components/DynamicCTA";
 import FaqSection from "@/components/service/FaqSection";
 import LogoDesignSections from "@/components/service/LogoDesignSections";
@@ -21,15 +21,12 @@ export const metadata = {
 export default function LogoDesignPage() {
   return (
     <main>
-      <ServicePageHero
+      <ServiceHero
         eyebrow="Logo Design"
         title="Design a Logo That People Remember"
         subtitle="We create powerful, timeless logos that build trust, recognition, and strong brand recall for your business."
         serviceName="Logo Design"
-        primaryCta="Get a Free Consultation"
-        secondaryCta="See Our Process"
-        secondaryCtaHref="#process"
-        trustPoints={["Custom Logo Concepts", "Brand-Aligned Design", "Scalable Vector Files", "Fast Turnaround"]}
+        highlights={["Custom Logo Concepts", "Brand-Aligned Design", "Scalable Vector Files", "Fast Turnaround"]}
       />
       <LogoDesignSections />
       <DynamicCTA />

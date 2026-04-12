@@ -1,4 +1,4 @@
-import ServicePageHero from "@/components/service/ServicePageHero";
+import ServiceHero from "@/components/service/ServiceHero";
 import DynamicCTA from "@/components/DynamicCTA";
 import FaqSection from "@/components/service/FaqSection";
 import StrategyPlanningSections from "@/components/service/StrategyPlanningSections";
@@ -21,15 +21,12 @@ export const metadata = {
 export default function StrategyPlanningPage() {
   return (
     <main>
-      <ServicePageHero
+      <ServiceHero
         eyebrow="Strategy & Planning"
         title="Build a Brand with Clear Direction & Purpose"
         subtitle="We help you define your positioning, messaging, and growth roadmap so your brand stands out and scales with confidence."
         serviceName="Strategy & Planning"
-        primaryCta="Book a Strategy Call"
-        secondaryCta="See Our Process"
-        secondaryCtaHref="#process"
-        trustPoints={["Brand Positioning", "Competitor Analysis", "Messaging Framework", "Growth Roadmap"]}
+        highlights={["Brand Positioning", "Competitor Analysis", "Messaging Framework", "Growth Roadmap"]}
       />
       <StrategyPlanningSections />
       <DynamicCTA />
