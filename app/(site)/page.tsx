@@ -1,13 +1,15 @@
+import dynamic from "next/dynamic";
 import SimpleHero from "@/components/SimpleHero";
 import TechStack from "@/components/TechStack";
 import SectionHeader from "@/components/SectionHeader";
-import FallingTags from "@/components/FallingTags";
-import Testimonials from "@/components/Testimonials";
-import ServiceGrid from "@/components/ServiceGrid";
-import StrategicEcosystem from "@/components/StrategicEcosystem";
-import Differentiators from "@/components/Differentiators";
-import DynamicCTA from "@/components/DynamicCTA";
-import PrimaryCTA from "@/components/PrimaryCTA";
+
+// Lazy load below-the-fold components
+const FallingTags = dynamic(() => import("@/components/FallingTags"), { ssr: true });
+const ServiceGrid = dynamic(() => import("@/components/ServiceGrid"), { ssr: true });
+const StrategicEcosystem = dynamic(() => import("@/components/StrategicEcosystem"), { ssr: true });
+const Differentiators = dynamic(() => import("@/components/Differentiators"), { ssr: true });
+const DynamicCTA = dynamic(() => import("@/components/DynamicCTA"), { ssr: true });
+const Testimonials = dynamic(() => import("@/components/Testimonials"), { ssr: true });
 
 export const metadata = {
   title: "Clever Crow – AI Digital Marketing & Automation",
@@ -64,7 +66,7 @@ export default function HomePage() {
 
       {/* ================= WHAT WE BUILD ================= */}
       <section className="relative bg-gray-50 pt-16 sm:pt-32 pb-20 sm:pb-44 overflow-hidden">
-        {/* Falling Tags overlay — rains over the cards, lands at section floor */}
+        {/* Falling Tags overlay */}
         <FallingTags />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6">

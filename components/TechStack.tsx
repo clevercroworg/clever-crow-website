@@ -51,7 +51,7 @@ export default function TechStack() {
           }}
           transition={{
             duration: 35,
-            delay: 0.5,
+            delay: 0,
             ease: "linear",
             repeat: Infinity,
           }}

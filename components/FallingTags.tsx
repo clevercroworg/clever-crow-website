@@ -43,7 +43,7 @@ export default function FallingTags() {
           viewport={{ once: true, amount: 0.1 }}
           transition={{
             duration: 0.55,
-            delay: 0.1 * i,
+            delay: 0,
             ease: [0.33, 0, 0.97, 0.36],
           }}
           style={{

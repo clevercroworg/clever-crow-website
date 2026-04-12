@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Metadata } from "next";
-import Chatbot from "@/components/Chatbot";
+import dynamic from "next/dynamic";
+import ClientChatbot from "@/components/ClientChatbot";
 
 export const metadata: Metadata = {
   title: "Clever Crow | Result Demanding Marketing Agency",
@@ -19,7 +20,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
         {children}
-        <Chatbot />
+        <ClientChatbot />
       </body>
     </html>
   );
