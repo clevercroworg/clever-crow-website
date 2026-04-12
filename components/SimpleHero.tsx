@@ -54,7 +54,15 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
 
   const [stage, setStage] = useState<HeroStage>(HeroStage.LOADING);
   const [holdProgress, setHoldProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const hasBrokenRef = useRef(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     setStage(HeroStage.LOADING);
@@ -65,7 +73,7 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
     let t2: NodeJS.Timeout;
 
     if (stage === HeroStage.LOADING) {
-      t1 = setTimeout(() => setStage(HeroStage.READY), 500);
+      t1 = setTimeout(() => setStage(HeroStage.READY), 100);
     }
 
     if (stage === HeroStage.READY && !hasBrokenRef.current) {
@@ -207,8 +215,13 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
 
         {/* ───────────────── LAYERED ANIMATION SYSTEM ───────────────── */}
         <div className="z-2 relative">
-          <FloatingGlowOrbs />
-          <LightSweep />
+          {!isMobile && (
+            <>
+              <FloatingGlowOrbs />
+              <SimpleSlabs />
+              <LightSweep />
+            </>
+          )}
         </div>
 
         {/* Layer 1: Deep Slow Blobs (Far) */}
@@ -238,8 +251,8 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
         </div>
 
         <div className="z-3 relative">
-          <ParticleSystem />
-          <NeuralWeb mousePosRef={mousePosRef} />
+          <ParticleSystem isMobile={isMobile} />
+          <NeuralWeb mousePosRef={mousePosRef} isMobile={isMobile} />
         </div>
 
         {/* Layer 5: Simple Moving Slabs */}
@@ -248,11 +261,13 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
         </div>
 
         {/* ───────────────── SWEEPING LIGHT BEAMS ───────────────── */}
-        <div className="absolute inset-0 z-0">
-          {[...Array(3)].map((_, i) => (
-            <LightBeam key={i} index={i} />
-          ))}
-        </div>
+        {!isMobile && (
+          <div className="absolute inset-0 z-0">
+            {[...Array(3)].map((_, i) => (
+              <LightBeam key={i} index={i} />
+            ))}
+          </div>
+        )}
 
         {/* Static Grid with Grain */}
         <div className="absolute inset-0 bg-[radial-gradient(rgba(234,179,8,0.1)_1.5px,transparent_1.5px)] [background-size:80px_80px] opacity-40" />
@@ -538,15 +553,17 @@ function SimpleSlabs() {
   );
 }
 
-function ParticleSystem() {
+function ParticleSystem({ isMobile }: { isMobile: boolean }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
   if (!mounted) return null;
 
+  const count = isMobile ? 12 : 35;
+
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      {[...Array(35)].map((_, i) => (
+      {[...Array(count)].map((_, i) => (
         <motion.div
           key={i}
           initial={{
@@ -595,7 +612,7 @@ function LightSweep() {
   );
 }
 
-function NeuralWeb({ mousePosRef }: { mousePosRef: React.RefObject<{ x: number, y: number }> }) {
+function NeuralWeb({ mousePosRef, isMobile }: { mousePosRef: React.RefObject<{ x: number, y: number }>, isMobile: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -611,7 +628,7 @@ function NeuralWeb({ mousePosRef }: { mousePosRef: React.RefObject<{ x: number, 
 
     let animationFrameId: number;
     let particles: any[] = [];
-    const particleCount = 45;
+    const particleCount = isMobile ? 20 : 45;
 
     const resize = () => {
       canvas.width = window.innerWidth;
