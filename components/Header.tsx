@@ -1,58 +1,53 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Bars3Icon,
-  XMarkIcon,
-  ChevronDownIcon,
-  ArrowRightIcon,
-  PhoneIcon,
-} from "@heroicons/react/24/outline";
+  X,
+  Menu,
+  ChevronDown,
+  ArrowRight,
+  Phone,
+} from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
 const navLinks = [
   {
     label: "App Development",
-    key: "app-dev",
+    key: "apps",
     items: [
-      { href: "/services/mobile-app-development", label: "Mobile App Development", accent: true },
+      { href: "/services/mobile-app-development", label: "Mobile App Development" },
       { href: "/services/web-app-development", label: "Web Application Development" },
     ],
   },
   {
     label: "Website Development",
-    key: "web-dev",
+    key: "web",
     items: [
-      { href: "/services/business-websites", label: "Business Websites", accent: true },
+      { href: "/services/business-websites", label: "Business Websites" },
       { href: "/services/ecommerce", label: "E-commerce Websites" },
     ],
   },
   {
     label: "Digital Marketing",
-    key: "digi-marketing",
+    key: "marketing",
     items: [
       { href: "/services/google-ads", label: "Google Ads" },
       { href: "/services/meta-ads", label: "Meta Ads" },
-      { href: "/services/social-media-management", label: "Social Media Management" },
       { href: "/services/linkedin-ads", label: "LinkedIn Advertising" },
-      { href: "/services/seo", label: "Search Engine Optimisation" },
-      { href: "/services/ai-seo", label: "AI SEO Algorithms", accent: true },
+      { href: "/services/seo", label: "Search Engine Optimization" },
     ],
   },
   {
     label: "Branding",
     key: "branding",
     items: [
-      { href: "/services/content-writing", label: "Content Writing" },
-      { href: "/services/script-writing", label: "Script Writing" },
-      { href: "/services/content-marketing", label: "Content Marketing" },
-      { href: "/services/logo-design", label: "Logo Design", accent: true },
-      { href: "/services/graphic-design", label: "Graphic Design" },
-      { href: "/services/strategy-planning", label: "Strategy & Planning", accent: true },
+      { href: "/services/strategy-planning", label: "Branding & Strategy" },
+      { href: "/services/content-writing", label: "Content Creation" },
+      { href: "/services/logo-design", label: "Logo Design" },
     ],
   },
 ];
@@ -62,180 +57,167 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
-  const [scrolled, setScrolled] = useState(false);
+  const dropdownTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const phoneNumber = "9986389444";
   const whatsappLink = `https://wa.me/91${phoneNumber}`;
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  let dropdownTimer: NodeJS.Timeout;
   const openDropdown = (key: string) => {
-    clearTimeout(dropdownTimer);
+    if (dropdownTimerRef.current) clearTimeout(dropdownTimerRef.current);
     setActiveDropdown(key);
   };
+
   const closeDropdown = () => {
-    dropdownTimer = setTimeout(() => setActiveDropdown(null), 120);
+    dropdownTimerRef.current = setTimeout(() => setActiveDropdown(null), 150);
   };
 
+  // Close menus on path change
+  useEffect(() => {
+    setMenuOpen(false);
+    setActiveDropdown(null);
+  }, [pathname]);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-[100] pointer-events-none">
-      <div className="mx-auto max-w-7xl px-4 pt-2 sm:pt-3">
-        <motion.div
-          initial={false}
-          animate={{
-            backgroundColor: scrolled ? "rgba(255,255,255,0.98)" : "rgba(255,255,255,0.85)",
-            boxShadow: scrolled
-              ? "0 20px 48px rgba(0,0,0,0.12)"
-              : "0 10px 30px rgba(0,0,0,0.06)",
-            height: scrolled ? "64px" : "76px",
-            y: 0,
-          }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="pointer-events-auto rounded-3xl sm:rounded-full backdrop-blur-xl border border-gray-200/50 shadow-2xl"
-        >
-          <div className="mx-auto px-6 h-full flex items-center justify-between">
-            
-            {/* LOGO: Exclusive usage of logo-dark.svg */}
-            <Link href="/" className="relative z-10 flex shrink-0 items-center">
-              <Image
-                src="/logo-dark.svg"
-                alt="Clever Crow"
-                width={160}
-                height={50}
-                className="h-8 xl:h-9 w-auto object-contain transition-transform duration-300"
-                priority
-              />
-            </Link>
+    <header className="fixed inset-x-0 top-4 z-[100] flex justify-center px-4 pointer-events-none">
+      <div className="pointer-events-auto flex w-full max-w-[95%] items-center justify-between gap-2 rounded-full border border-white/40 bg-white/80 px-5 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-2xl transition-all hover:bg-white/90 ring-1 ring-white/20">
+        
+        {/* LOGO */}
+        <Link href="/" className="flex items-center shrink-0 transition-transform hover:scale-105 active:scale-95">
+          <Image
+            src="/logo-dark.svg"
+            alt="Clever Crow"
+            width={100}
+            height={28}
+            className="h-6 md:h-7 w-auto object-contain"
+            priority
+          />
+        </Link>
 
-            {/* DESKTOP NAV */}
-            <nav className="hidden xl:flex items-center gap-0.5" onMouseLeave={closeDropdown}>
-              {navLinks.map((group) => (
-                <div key={group.key} className="relative" onMouseEnter={() => openDropdown(group.key)}>
-                  <button
-                    className={`flex items-center gap-1 rounded-full px-3 2xl:px-4 py-2 text-[13px] 2xl:text-[14px] font-semibold tracking-tight transition-all duration-200 ${
-                      activeDropdown === group.key || group.items.some(item => item.href === pathname)
-                        ? "text-yellow-600 bg-yellow-50"
-                        : "text-gray-700 hover:text-gray-900"
-                    }`}
+        {/* DESKTOP NAV */}
+        <nav className="hidden xl:flex items-center gap-0.5" onMouseLeave={closeDropdown}>
+          {navLinks.map((group) => (
+            <div key={group.key} className="relative" onMouseEnter={() => openDropdown(group.key)}>
+              <button
+                className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase ${
+                  activeDropdown === group.key || group.items.some(item => item.href === pathname)
+                    ? "text-yellow-600 bg-black/5"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                {group.label}
+                <ChevronDown
+                  size={10}
+                  className={`transition-transform duration-300 ${
+                    activeDropdown === group.key || group.items.some(item => item.href === pathname) ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {activeDropdown === group.key && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.99 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="absolute left-1/2 top-[calc(100%+12px)] -translate-x-1/2"
+                    onMouseEnter={() => openDropdown(group.key)}
                   >
-                    {group.label}
-                    <ChevronDownIcon
-                      className={`h-3 w-3 transition-transform duration-300 ${
-                        activeDropdown === group.key || group.items.some(item => item.href === pathname) ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-
-                  <AnimatePresence>
-                    {activeDropdown === group.key && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 8, scale: 0.99 }}
-                        transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute left-1/2 top-[calc(100%+8px)] -translate-x-1/2"
-                        onMouseEnter={() => openDropdown(group.key)}
-                      >
-                        <div className="w-[300px] rounded-[1.75rem] bg-white ring-1 ring-black/[0.08] shadow-[0_20px_48px_rgba(0,0,0,0.12)] overflow-hidden">
-                          <div className="h-1.5 bg-gradient-to-r from-yellow-400 to-yellow-600" />
-                          <div className="p-3">
-                            {group.items.map((item, i) => (
-                              <Link
-                                key={i}
-                                href={item.href}
-                                className={`group flex items-center justify-between rounded-2xl px-4 py-3 text-[14px] font-medium transition-all duration-150 ${
-                                  pathname === item.href
-                                    ? "bg-yellow-50 text-yellow-700"
-                                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-                                }`}
-                              >
-                                {item.label}
-                                <ArrowRightIcon className={`h-4 w-4 transition-all duration-200 ${pathname === item.href ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1 group-hover:opacity-60 group-hover:translate-x-0"}`} />
-                              </Link>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
-
-                <DesktopLink href="/contact" active={pathname === "/contact"}>Contact</DesktopLink>
-            </nav>
-
-            {/* DESKTOP CTAs */}
-            <div className={`hidden xl:flex items-center gap-2.5 ${pathname.startsWith("/internship") ? "opacity-0 pointer-events-none" : ""}`}>
-              <a
-                href={`tel:${phoneNumber}`}
-                className="flex items-center gap-1.5 rounded-full border border-gray-200/80 bg-white/50 px-4 2xl:px-5 py-2.5 text-[13px] 2xl:text-[14px] font-bold text-gray-700 shadow-sm transition-all hover:bg-gray-50 hover:shadow-md hover:-translate-y-px active:scale-95"
-              >
-                <PhoneIcon className="h-4.5 w-4.5 text-yellow-500" />
-                {phoneNumber}
-              </a>
-              <a
-                href={whatsappLink}
-                target="_blank"
-                className="flex items-center gap-1.5 rounded-full bg-[#25D366] px-5 2xl:px-6 py-2.5 text-[13px] 2xl:text-[14px] font-black text-white shadow-lg shadow-[#25D366]/20 transition-all hover:bg-[#128C7E] hover:shadow-[#25D366]/30 hover:-translate-y-px active:scale-[0.98] ring-4 ring-[#25D366]/10"
-              >
-                <FaWhatsapp className="h-4 w-4 2xl:h-4.5 2xl:w-4.5" />
-                WhatsApp
-              </a>
+                    <div className="w-[280px] rounded-[2rem] bg-white ring-1 ring-black/[0.05] shadow-[0_20px_48px_rgba(0,0,0,0.15)] overflow-hidden p-2">
+                        {group.items.map((item, i) => (
+                          <Link
+                            key={i}
+                            href={item.href}
+                            className={`group flex items-center justify-between rounded-2xl px-4 py-3 text-[13px] font-bold transition-all duration-150 ${
+                              pathname === item.href
+                                ? "bg-yellow-50 text-yellow-600"
+                                : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                            }`}
+                          >
+                            {item.label}
+                            <ArrowRight size={14} className={`transition-all duration-200 ${pathname === item.href ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1 group-hover:opacity-60 group-hover:translate-x-0"}`} />
+                          </Link>
+                        ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
+          ))}
 
-            {/* MOBILE TOGGLE */}
-            {!pathname.startsWith("/internship") && (
-              <div className="flex items-center gap-2.5 xl:hidden relative z-10">
-                <a
-                  href={whatsappLink}
-                  target="_blank"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/25 transition-transform hover:scale-105"
-                >
-                  <FaWhatsapp className="h-5 w-5" />
-                </a>
-                <button
-                  onClick={() => setMenuOpen(!menuOpen)}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-900 border border-gray-100 shadow-sm transition-transform hover:scale-105"
-                >
-                  {menuOpen ? <XMarkIcon className="h-5 w-5" /> : <Bars3Icon className="h-5 w-5" />}
-                </button>
-              </div>
-            )}
-          </div>
-        </motion.div>
+          <Link 
+            href="/contact" 
+            className={`rounded-full px-3 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase ${
+                pathname === "/contact" ? "text-yellow-600 bg-black/5" : "text-slate-600 hover:text-slate-900"
+            }`}
+          >
+            Contact
+          </Link>
+        </nav>
+
+        {/* DESKTOP CTAs */}
+        <div className="hidden lg:flex items-center gap-2 ml-2">
+          <a
+            href={`tel:${phoneNumber}`}
+            className="flex items-center gap-2 rounded-full border border-black/5 bg-black/[0.03] px-4 py-2 text-[11px] font-black text-slate-700 hover:bg-black/[0.08] transition-all tracking-tight uppercase"
+          >
+            <div className="flex h-5 w-5 items-center justify-center rounded-full bg-yellow-500 text-slate-900 shadow-md shadow-yellow-500/20">
+              <Phone size={10} fill="currentColor" />
+            </div>
+            {phoneNumber}
+          </a>
+          <a
+            href={whatsappLink}
+            target="_blank"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/20 transition-all hover:scale-110 active:scale-95"
+          >
+            <FaWhatsapp size={18} />
+          </a>
+        </div>
+
+        {/* MOBILE TOGGLE */}
+        <div className="flex items-center gap-2 xl:hidden">
+          <a
+            href={whatsappLink}
+            target="_blank"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/25 transition-transform active:scale-95"
+          >
+            <FaWhatsapp size={20} />
+          </a>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-900 border border-slate-100 shadow-sm active:scale-90 transition-transform"
+          >
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       {/* MOBILE MENU */}
-      <div className="mx-auto max-w-7xl px-4 pointer-events-none">
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0, y: -10 }}
-              animate={{ opacity: 1, height: "auto", y: 0 }}
-              exit={{ opacity: 0, height: 0, y: -10 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="xl:hidden overflow-hidden bg-white/95 backdrop-blur-xl border border-gray-200/50 shadow-2xl rounded-3xl mt-3 pointer-events-auto"
-            >
-              <div className="px-5 py-6 space-y-2">
-                {navLinks.map((group) => (
-                <div key={group.key} className="border-b border-gray-100 last:border-0 pb-1 mb-1">
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-20 left-4 right-4 z-50 rounded-[2rem] border border-black/10 bg-white shadow-2xl xl:hidden max-h-[75vh] overflow-y-auto pointer-events-auto"
+          >
+            <nav className="p-6 flex flex-col gap-2">
+              {navLinks.map((group) => (
+                <div key={group.key} className="border-b border-slate-50 last:border-0 pb-1">
                   <button
                     onClick={() => setMobileAccordion(mobileAccordion === group.key ? null : group.key)}
-                    className={`flex w-full items-center justify-between rounded-2xl px-4 py-3.5 text-[16px] font-semibold transition-colors ${
+                    className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-[14px] font-bold transition-colors ${
                       mobileAccordion === group.key || group.items.some(item => item.href === pathname)
                         ? "text-yellow-600 bg-yellow-50"
-                        : "text-gray-900"
+                        : "text-slate-900"
                     }`}
                   >
                     {group.label}
-                    <ChevronDownIcon
-                      className={`h-5 w-5 transition-transform duration-300 ${
-                        mobileAccordion === group.key || group.items.some(item => item.href === pathname) ? "rotate-180 text-yellow-500" : "text-gray-400"
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-300 ${
+                        mobileAccordion === group.key || group.items.some(item => item.href === pathname) ? "rotate-180" : "text-slate-400"
                       }`}
                     />
                   </button>
@@ -245,19 +227,17 @@ export default function Header() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
                         className="overflow-hidden"
                       >
-                        <div className="ml-5 border-l-2 border-yellow-400/30 pl-4 pb-4 space-y-1">
+                        <div className="ml-4 border-l-2 border-slate-50 pl-4 py-2 flex flex-col gap-1">
                           {group.items.map((item, i) => (
                             <Link
                               key={i}
                               href={item.href}
-                              onClick={() => setMenuOpen(false)}
-                              className={`block py-2.5 text-[15px] font-medium transition-colors ${
+                              className={`block py-2 text-[13px] font-medium transition-colors ${
                                 pathname === item.href
-                                  ? "text-yellow-700 bg-yellow-50/50 px-3 -mx-3 rounded-lg"
-                                  : "text-gray-500 hover:text-gray-900"
+                                  ? "text-yellow-600 font-bold"
+                                  : "text-slate-500 hover:text-slate-900"
                               }`}
                             >
                               {item.label}
@@ -269,59 +249,34 @@ export default function Header() {
                   </AnimatePresence>
                 </div>
               ))}
+              <Link
+                href="/contact"
+                className={`block rounded-2xl px-4 py-3 text-[14px] font-bold transition-colors ${
+                  pathname === "/contact" ? "text-yellow-600 bg-yellow-50" : "text-slate-900"
+                }`}
+              >
+                Contact Us
+              </Link>
+            </nav>
 
-              <MobileNavLink href="/contact" active={pathname === "/contact"} setOpen={setMenuOpen}>Contact Us</MobileNavLink>
-
-              {/* Mobile CTAs */}
-              <div className="pt-6 mt-4 border-t border-gray-100 grid grid-cols-2 gap-4">
-                <a
-                  href={`tel:${phoneNumber}`}
-                  className="flex items-center justify-center gap-2 rounded-2xl bg-gray-100 py-4 text-[15px] font-semibold text-gray-900 transition-transform hover:scale-[0.98] active:scale-95"
-                >
-                  <PhoneIcon className="h-4.5 w-4.5" /> Call
-                </a>
-                <a
-                  href={whatsappLink}
-                  target="_blank"
-                  className="flex items-center justify-center gap-2 rounded-2xl bg-[#25D366] py-4 text-[15px] font-bold text-white shadow-lg shadow-[#25D366]/20 transition-transform hover:scale-[0.98] active:scale-95"
-                >
-                  <FaWhatsapp className="h-4.5 w-4.5" /> WhatsApp
-                </a>
-              </div>
+            <div className="pt-6 mt-4 border-t border-slate-100 flex gap-4">
+              <a
+                href={`tel:${phoneNumber}`}
+                className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-slate-50 py-4 text-[13px] font-bold text-slate-900 active:scale-95 transition-transform"
+              >
+                <Phone size={16} /> Call
+              </a>
+              <a
+                href={whatsappLink}
+                target="_blank"
+                className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#25D366] py-4 text-[13px] font-black text-white shadow-lg active:scale-95 transition-transform"
+              >
+                <FaWhatsapp size={18} /> WhatsApp
+              </a>
             </div>
           </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+        )}
+      </AnimatePresence>
     </header>
-  );
-}
-
-function DesktopLink({ href, active, children }: { href: string; active?: boolean; children: React.ReactNode }) {
-  return (
-    <Link
-      href={href}
-      className={`rounded-full px-3 2xl:px-4 py-2 text-[13px] 2xl:text-[14px] font-semibold tracking-tight transition-all duration-200 ${
-        active
-          ? "text-yellow-600 bg-yellow-50"
-          : "text-gray-700 hover:text-gray-900"
-      }`}
-    >
-      {children}
-    </Link>
-  );
-}
-
-function MobileNavLink({ href, active, setOpen, children }: { href: string; active?: boolean; setOpen: (v: boolean) => void; children: React.ReactNode }) {
-  return (
-    <Link
-      href={href}
-      onClick={() => setOpen(false)}
-      className={`block rounded-2xl px-4 py-3.5 text-[16px] font-semibold transition-colors ${
-        active ? "text-yellow-600 bg-yellow-50" : "text-gray-900"
-      }`}
-    >
-      {children}
-    </Link>
   );
 }

@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   CheckCircle2,
   ArrowRight,
+  ShieldCheck,
+  Zap,
 } from "lucide-react";
 
 type ServicePageHeroProps = {
@@ -58,220 +60,165 @@ export default function ServicePageHero({
   };
 
   return (
-    <section className="relative overflow-hidden pt-[140px] sm:pt-[160px] pb-20 sm:pb-28">
-      {/* ── background ── */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute inset-0 bg-white" />
-        {/* grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
+    <section className="relative min-h-[85vh] overflow-hidden pt-[120px] pb-24 selection:bg-yellow-500/30">
+      {/* ───────────────── BACKGROUND (Same as Homepage) ───────────────── */}
+      <div className="absolute inset-0 z-0">
+        <div 
+          className="absolute inset-0"
           style={{
-            backgroundImage:
-              "linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
+            background: `
+              radial-gradient(circle at 8% 10%, rgba(82, 168, 255, 0.1), transparent 25%),
+              radial-gradient(circle at 82% 78%, rgba(122, 63, 194, 0.08), transparent 25%),
+              radial-gradient(circle at 52% 52%, rgba(255, 255, 255, 0.02), transparent 26%),
+              linear-gradient(180deg, #0f172a 0%, #111827 44%, #020617 100%)
+            `
           }}
         />
-        {/* ambient glows */}
-        <div className="absolute top-[-20%] left-[-10%] h-[600px] w-[600px] rounded-full bg-yellow-200/30 blur-[150px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] h-[500px] w-[500px] rounded-full bg-purple-200/20 blur-[150px]" />
-
+        <div 
+          className="absolute inset-0 opacity-20 pointer-events-none"
+          style={{
+            backgroundImage: `
+              radial-gradient(circle at 50% 26%, rgba(255, 255, 255, 0.03), transparent 16%),
+              radial-gradient(circle at left center, rgba(255, 255, 255, 0.04) 1.5px, transparent 2px),
+              radial-gradient(circle at right center, rgba(255, 255, 255, 0.04) 1.5px, transparent 2px),
+              radial-gradient(circle at center, rgba(255, 255, 255, 0.01) 0.8px, transparent 1.2px)
+            `,
+            backgroundSize: "auto, 26px 26px, 26px 26px, 18px 18px"
+          }}
+        />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-14 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-20 items-center">
+          
           {/* ── LEFT COLUMN ── */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* eyebrow */}
-            <div className="inline-flex items-center gap-2 rounded-full bg-gray-100 border border-gray-200 px-4 py-1.5 mb-6">
-              <div className="h-1.5 w-1.5 rounded-full bg-yellow-500 animate-pulse" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-gray-700">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-4 py-2 mb-8 backdrop-blur-md">
+              <div className="h-1.5 w-1.5 rounded-full bg-yellow-500 animate-pulse shadow-[0_0_8px_rgba(234,179,8,0.5)]" />
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100/60">
                 {eyebrow}
               </span>
             </div>
 
             {/* title */}
-            <h1 className="text-3xl sm:text-4xl lg:text-[46px] font-black text-gray-900 leading-[1.1] tracking-tight max-w-[600px]">
+            <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-black text-white leading-[1.05] tracking-tight text-balance">
               {title}
             </h1>
 
             {/* subtitle */}
-            <p className="mt-6 max-w-xl text-[16px] sm:text-[17px] text-gray-600 font-medium leading-relaxed">
+            <p className="mt-8 max-w-xl text-lg sm:text-xl text-slate-400 font-medium leading-relaxed opacity-90">
               {subtitle}
             </p>
 
-            {/* CTAs */}
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={() => setIsFormOpen(true)}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-yellow-400 px-7 py-4 text-[15px] font-black text-gray-900 shadow-lg shadow-yellow-400/20 transition-all duration-300 hover:bg-yellow-300 hover:shadow-yellow-400/30"
-              >
-                {primaryCta}
-                <ArrowRight className="h-4 w-4" />
-              </button>
-              <a
-                href={secondaryCtaHref}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-7 py-4 text-[15px] font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50 hover:border-gray-300"
-              >
-                {secondaryCta}
-              </a>
-            </div>
-
             {/* trust points */}
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {trustPoints.map((point, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-3 text-[14px] text-gray-700 font-medium"
+                  className="flex items-center gap-3 text-[15px] text-slate-300 font-bold"
                 >
-                  <CheckCircle2 className="h-4 w-4 text-yellow-500 shrink-0" />
+                  <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-green-500/10 text-green-400">
+                    <CheckCircle2 size={14} />
+                  </div>
                   {point}
                 </div>
               ))}
             </div>
+
+            {/* Bottom Actions for Mobile (Optional, currently button triggers form) */}
+            <div className="mt-12 flex flex-col sm:flex-row gap-5 lg:hidden">
+              <button
+                onClick={() => setIsFormOpen(true)}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-yellow-500 px-8 py-5 text-[14px] font-black uppercase tracking-widest text-slate-900 shadow-xl shadow-yellow-500/20 transition-all hover:scale-105 active:scale-95"
+              >
+                {primaryCta}
+                <ArrowRight size={18} />
+              </button>
+            </div>
           </motion.div>
 
-          {/* ── RIGHT COLUMN: CTA CARD ── */}
+          {/* ── RIGHT COLUMN: GLASS CARD ── */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
-            className="relative w-full max-w-md mx-auto lg:ml-auto"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="relative w-full max-w-lg mx-auto lg:ml-auto"
           >
-            {/* card glow */}
-            <div className="absolute -inset-2 rounded-[2rem] bg-gradient-to-br from-yellow-200/40 via-purple-200/20 to-blue-200/20 blur-2xl opacity-60" />
+            {/* Ambient Background Glow for Card */}
+            <div className="absolute -inset-4 rounded-[3rem] bg-gradient-to-br from-yellow-500/10 via-transparent to-blue-500/10 blur-3xl opacity-50" />
 
-            <div className="relative rounded-[1.75rem] border border-gray-200 bg-white shadow-2xl shadow-gray-200/50 overflow-hidden">
-              {/* top accent */}
-              <div className="h-1 bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-500" />
+            <div className="relative rounded-[2.5rem] border border-white/10 bg-white/5 shadow-2xl backdrop-blur-2xl overflow-hidden">
+              {/* Form Header */}
+              <div className="p-8 sm:p-10 text-center border-b border-white/5">
+                <div className="inline-flex items-center gap-2 rounded-full bg-yellow-500/10 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-yellow-500 border border-yellow-500/20 mb-6">
+                  <ShieldCheck size={12} />
+                  Growth Engineering
+                </div>
+                <h3 className="text-2xl sm:text-[28px] font-black text-white tracking-tight leading-tight mb-4">
+                  Request a <span className="text-yellow-500 italic">Call Back</span>
+                </h3>
+                <p className="text-[14px] text-slate-400 font-medium">
+                  Speak with a growth engineer within 24 hours. No cost, no obligation.
+                </p>
+              </div>
 
-              <AnimatePresence mode="wait" initial={false}>
-                {!isFormOpen ? (
-                  <motion.div
-                    key="cta"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.25 }}
-                    className="p-8 sm:p-10 text-center"
-                  >
-                    <div className="inline-flex items-center rounded-full bg-yellow-50 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-yellow-700 border border-yellow-200 mb-6">
-                      Priority Access
+              {/* Form Body */}
+              <div className="p-8 sm:p-10 bg-white/[0.02]">
+                <form className="space-y-5" onSubmit={handleSubmit}>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 ml-2">Full Name</label>
+                    <input
+                      name="name"
+                      required
+                      placeholder="e.g. John Doe"
+                      className="h-14 w-full rounded-2xl border border-white/10 bg-white/5 px-6 text-sm font-bold text-white placeholder:text-slate-600 focus:border-yellow-500 focus:bg-white/10 focus:outline-none transition-all ring-1 ring-white/5"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 ml-2">Phone Number</label>
+                    <input
+                      name="phone"
+                      required
+                      placeholder="+91 XXX XXX XXXX"
+                      className="h-14 w-full rounded-2xl border border-white/10 bg-white/5 px-6 text-sm font-bold text-white placeholder:text-slate-600 focus:border-yellow-500 focus:bg-white/10 focus:outline-none transition-all ring-1 ring-white/5"
+                    />
+                  </div>
+
+                  {error && (
+                    <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm font-bold text-red-400">
+                      {error}
                     </div>
+                  )}
 
-                    <h3 className="text-2xl sm:text-[26px] font-extrabold text-gray-900 tracking-tight leading-tight mb-3">
-                      Unlock Your Free{" "}
-                      <span className="text-yellow-500">Growth Strategy</span>
-                    </h3>
-
-                    <p className="text-[15px] text-gray-500 font-medium mb-8 leading-relaxed">
-                      Get a comprehensive audit and a custom execution plan
-                      designed to scale your ROI.
-                    </p>
-
-                    <button
-                      onClick={() => setIsFormOpen(true)}
-                      className="w-full flex items-center justify-center gap-2 rounded-xl bg-yellow-400 px-6 py-4 text-[15px] font-black text-gray-900 shadow-lg shadow-yellow-400/20 transition-all duration-300 hover:bg-yellow-300"
-                    >
-                      Request a Call Back
-                      <ArrowRight className="h-4 w-4" />
-                    </button>
-
-                    <div className="flex items-center justify-center gap-8 mt-6">
-                      <div className="flex flex-col items-center gap-1">
-                        <span className="text-xl font-black text-gray-900">
-                          24<span className="text-sm">H</span>
-                        </span>
-                        <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400">
-                          Response
-                        </span>
-                      </div>
-                      <div className="h-8 w-px bg-gray-200" />
-                      <div className="flex flex-col items-center gap-1">
-                        <span className="text-xl font-black text-gray-900">0</span>
-                        <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400">
-                          Obligation
-                        </span>
-                      </div>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="form"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.25 }}
-                    className="p-8 sm:p-10"
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="group relative h-16 w-full overflow-hidden rounded-2xl bg-yellow-500 text-[14px] font-black uppercase tracking-widest text-slate-900 shadow-lg shadow-yellow-500/20 transition-all hover:scale-[1.02] hover:bg-yellow-400 active:scale-[0.98] disabled:opacity-70"
                   >
-                    <button
-                      onClick={() => setIsFormOpen(false)}
-                      className="absolute right-4 top-6 p-1.5 text-gray-400 hover:text-gray-700 transition-colors"
-                    >
-                      <svg
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2.5}
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      {isLoading ? "Sending..." : "Submit Inquiry"}
+                      <Zap size={16} fill="currentColor" />
+                    </span>
+                  </button>
+                </form>
 
-                    <h3 className="text-2xl font-black text-gray-900 tracking-tight">
-                      Request a Call Back
-                    </h3>
-                    <p className="mt-2 text-sm text-gray-500 font-medium">
-                      Speak with a specialist within 24 hours.
-                    </p>
-
-                    <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
-                      <input
-                        name="name"
-                        required
-                        placeholder="Your Name *"
-                        className="h-12 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm font-medium text-gray-900 placeholder:text-gray-400 focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/20 transition-all"
-                      />
-                      <input
-                        name="phone"
-                        required
-                        placeholder="Phone number *"
-                        className="h-12 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 text-sm font-medium text-gray-900 placeholder:text-gray-400 focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/20 transition-all"
-                      />
-
-                      {error && (
-                        <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600">
-                          {error}
-                        </div>
-                      )}
-
-                      <button
-                        type="submit"
-                        disabled={isLoading}
-                        className={`mt-2 h-14 w-full rounded-xl text-[15px] font-bold tracking-wide transition-all text-gray-900 ${
-                          isLoading
-                            ? "cursor-not-allowed bg-yellow-300 opacity-70"
-                            : "bg-yellow-400 hover:bg-yellow-300 shadow-lg shadow-yellow-400/20"
-                        }`}
-                      >
-                        {isLoading ? "Sending..." : "Request a Call Back"}
-                      </button>
-                    </form>
-
-                    <p className="mt-5 text-center text-xs font-semibold uppercase tracking-wider text-gray-400">
-                      No spam · No obligation · Clear guidance
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                <div className="mt-8 flex items-center justify-between text-center border-t border-white/5 pt-8">
+                  <div className="flex-1">
+                    <div className="text-xl font-black text-white">24<span className="text-xs text-yellow-500 ml-0.5">H</span></div>
+                    <div className="text-[9px] font-black uppercase tracking-widest text-slate-500 mt-1">SLA Response</div>
+                  </div>
+                  <div className="h-8 w-px bg-white/10" />
+                  <div className="flex-1">
+                    <div className="text-xl font-black text-white">100<span className="text-xs text-yellow-500 ml-0.5">%</span></div>
+                    <div className="text-[9px] font-black uppercase tracking-widest text-slate-500 mt-1">Free Audit</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

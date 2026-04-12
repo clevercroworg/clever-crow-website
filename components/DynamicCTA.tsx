@@ -33,7 +33,7 @@ export default function DynamicCTA({
   ];
 
   return (
-    <section className="relative isolate bg-neutral-950 bg-square-checks px-4 sm:px-6 py-8 sm:py-12 overflow-hidden">
+    <section className="relative isolate bg-white px-4 sm:px-6 py-12 sm:py-24 overflow-hidden">
       <motion.div 
         initial="hidden"
         whileInView="visible"
@@ -65,24 +65,6 @@ export default function DynamicCTA({
             </span>
           </motion.div>
 
-          {/* Heading */}
-          <motion.h2 
-            variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.6 } } }}
-            className="mx-auto max-w-4xl font-black text-gray-950 tracking-[-0.03em] pb-2"
-            style={{ fontSize: "clamp(35px, 7vw, 95px)", lineHeight: "0.98" }}
-          >
-            Build Your <br />
-            <span className="text-white">Growth Engine.</span>
-          </motion.h2>
-
-          {/* Supporting text */}
-          <motion.p 
-            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { delay: 0.4 } } }}
-            className="mx-auto mt-5 max-w-2xl text-base sm:text-xl font-bold text-gray-900 leading-snug"
-          >
-            Stop experimenting. Start engineering growth with 
-            integrated ads, performant code, and AI.
-          </motion.p>
 
           {/* Buttons */}
           <motion.div 

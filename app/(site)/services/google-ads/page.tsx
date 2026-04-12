@@ -140,7 +140,7 @@ export default function GoogleAdsPage() {
       client: "Baatu",
       industry: "Ecommerce",
       headline: "From Confusion to Conversion",
-      image: "/images/case-studies/baatu.jpg",
+      image: "/landing-page/google-ads/case-studies/baatu.jpg",
       metrics: [
         { value: "₹25L", label: "Revenue" },
         { value: "120%", label: "Conversion Growth" },
@@ -151,7 +151,7 @@ export default function GoogleAdsPage() {
       client: "Wedding Planning Unzipped",
       industry: "Professional Wedding Planner",
       headline: "Clarity That Changed Everything",
-      image: "/images/case-studies/wedding-planning-unzipped.jpg",
+      image: "/landing-page/google-ads/case-studies/wedding.jpg",
       metrics: [
         { value: "₹8.9L", label: "Revenue" },
         { value: "190%", label: "Conversion Rate" },
@@ -162,7 +162,7 @@ export default function GoogleAdsPage() {
       client: "Site Surgery Center",
       industry: "Healthcare Operations & Clinical Services",
       headline: "Efficiency Without Disruption",
-      image: "/images/case-studies/site-surgery-center.jpg",
+      image: "/landing-page/google-ads/case-studies/lakeview.jpg",
       metrics: [
         { value: "₹84L", label: "Revenue" },
         { value: "58%", label: "Conversion Rate" },
@@ -173,7 +173,7 @@ export default function GoogleAdsPage() {
       client: "DTC Dentals",
       industry: "Healthcare & Dental Services",
       headline: "Smiles That Convert",
-      image: "/images/case-studies/dtc-dentals.jpg",
+      image: "/landing-page/google-ads/case-studies/ddcsmiles.jpg",
       metrics: [
         { value: "₹35L", label: "Monthly Revenue" },
         { value: "15×", label: "Conversion Growth" },
@@ -184,7 +184,7 @@ export default function GoogleAdsPage() {
       client: "BGS Global Institute of Medical",
       industry: "Education",
       headline: "Making Admissions Effortless",
-      image: "/images/case-studies/bgs-global-institute.jpg",
+      image: "/landing-page/google-ads/case-studies/bgs-global.jpg",
       metrics: [
         { value: "₹2.4Cr", label: "Revenue" },
         { value: "25%", label: "Admission Increase" },
@@ -195,7 +195,7 @@ export default function GoogleAdsPage() {
       client: "Asthitva – The Venue",
       industry: "Event Venues & Hospitality",
       headline: "From Clicks to Celebration",
-      image: "/images/case-studies/asthitva-the-venue.jpg",
+      image: "/landing-page/google-ads/case-studies/ashray.jpg",
       metrics: [
         { value: "180%", label: "Website Conversion" },
         { value: "450+", label: "Venue Inquiries" },

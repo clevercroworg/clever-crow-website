@@ -18,7 +18,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative w-full bg-[#0d121d] text-gray-400 overflow-hidden font-sans">
+    <footer className="relative w-full bg-[#020617] text-slate-400 overflow-hidden font-sans border-t border-white/5">
       {/* ───────────────── TOP NAV SECTION ───────────────── */}
       <div className="mx-auto max-w-7xl px-6 pt-20 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
@@ -39,9 +39,9 @@ export default function Footer() {
             <h3 className="text-white text-lg font-bold mb-8 tracking-tight">Company</h3>
             <ul className="space-y-4 text-sm font-medium">
               <li><Link href="/" className="hover:text-yellow-400 transition-colors">About Us</Link></li>
-              <li><Link href="/services" className="hover:text-yellow-400 transition-colors">Our Work / Case Studies</Link></li>
+              <li><Link href="/#portfolio" className="hover:text-yellow-400 transition-colors">Our Work / Case Studies</Link></li>
               <li><Link href="/contact" className="hover:text-yellow-400 transition-colors">Contact Us</Link></li>
-              <li><Link href="/internship" className="hover:text-yellow-400 transition-colors">Careers</Link></li>
+              <li><Link href="/careers" className="hover:text-yellow-400 transition-colors">Careers</Link></li>
             </ul>
           </div>
 
@@ -49,10 +49,10 @@ export default function Footer() {
           <div>
             <h3 className="text-white text-lg font-bold mb-8 tracking-tight">Resources</h3>
             <ul className="space-y-4 text-sm font-medium">
-              <li><Link href="#" className="hover:text-yellow-400 transition-colors">FAQs</Link></li>
-              <li><Link href="#" className="hover:text-yellow-400 transition-colors">Blog</Link></li>
-              <li><Link href="/services" className="hover:text-yellow-400 transition-colors">Case Studies</Link></li>
-              <li><Link href="/contact" className="hover:text-yellow-400 transition-colors">Free Consultation</Link></li>
+              <li><Link href="/#faq" className="hover:text-yellow-400 transition-colors">FAQs</Link></li>
+              <li><Link href="/#blog" className="hover:text-yellow-400 transition-colors">Blog</Link></li>
+              <li><Link href="/#portfolio" className="hover:text-yellow-400 transition-colors">Case Studies</Link></li>
+              <li><a href="tel:+919986389444" className="hover:text-yellow-400 transition-colors">Free Consultation</a></li>
             </ul>
           </div>
 
@@ -63,12 +63,12 @@ export default function Footer() {
             {/* Phone Button */}
             <a
               href="tel:+919986389444"
-              className="flex items-center gap-3 w-full bg-[#161b2b] border border-white/5 hover:border-white/10 px-6 py-4 rounded-2xl text-white transition-all group shadow-lg"
+              className="flex items-center gap-3 w-full bg-white/5 border border-white/10 hover:border-yellow-400/50 px-6 py-4 rounded-2xl text-white transition-all group shadow-lg"
             >
-              <div className="bg-white/10 p-2 rounded-lg group-hover:scale-110 transition-transform">
-                <Phone size={18} />
+              <div className="bg-white/10 p-2 rounded-lg group-hover:scale-110 group-hover:bg-yellow-400/20 transition-transform">
+                <Phone size={18} className="group-hover:text-yellow-400" />
               </div>
-              <span className="font-bold tracking-tight text-sm">+91 99863 89444</span>
+              <span className="font-bold tracking-tight text-sm text-white">+91 99863 89444</span>
             </a>
 
             {/* Request a Quote Button */}
@@ -109,7 +109,7 @@ export default function Footer() {
               />
             </Link>
             
-            <p className="text-[#4b5563] text-sm md:text-base leading-relaxed font-medium text-center md:text-left max-w-2xl">
+            <p className="text-slate-600 text-sm md:text-base leading-relaxed font-medium text-center md:text-left max-w-2xl">
               Clever Crow Strategies helps ambitious brands grow with premium websites, sharper campaigns, and creative systems built to convert.
             </p>
           </div>
@@ -127,9 +127,9 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={label}
-                className="group flex h-12 w-12 items-center justify-center rounded-full bg-white border border-gray-100 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl hover:border-yellow-400"
+                className="group flex h-12 w-12 items-center justify-center rounded-full bg-slate-50 border border-slate-200 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl hover:border-yellow-400"
               >
-                <Icon size={20} className="text-[#374151] group-hover:text-yellow-600 transition-colors" />
+                <Icon size={20} className="text-slate-700 group-hover:text-yellow-600 transition-colors" />
               </a>
             ))}
           </div>
@@ -137,8 +137,8 @@ export default function Footer() {
       </div>
 
       {/* ───────────────── BOTTOM LEGAL BAR ───────────────── */}
-      <div className="border-t border-white/5 py-10">
-        <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-[11px] md:text-xs font-bold uppercase tracking-widest text-gray-500">
+      <div className="border-t border-white/5 py-10 bg-black/20">
+        <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-[11px] md:text-xs font-bold uppercase tracking-widest text-slate-500">
           
           <p className="flex items-center gap-3">
             © {currentYear} Clever Crow Strategies LLP. All rights reserved.
@@ -150,7 +150,7 @@ export default function Footer() {
             <Link href="#" className="hover:text-white transition-colors">Refund Policy</Link>
             <button 
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="group flex items-center gap-2 text-gray-400 hover:text-yellow-400 transition-colors"
+              className="group flex items-center gap-2 text-slate-500 hover:text-yellow-400 transition-colors"
             >
               Back to Top
               <ArrowRight size={14} className="-rotate-90 group-hover:-translate-y-1 transition-transform" />
@@ -161,4 +161,3 @@ export default function Footer() {
     </footer>
   );
 }
-

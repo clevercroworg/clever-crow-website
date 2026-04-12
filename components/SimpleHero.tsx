@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { ArrowRight, Bot, TrendingUp, Users, Briefcase, CheckCircle } from "lucide-react";
 
 export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () => void }) {
@@ -115,8 +116,8 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
             className="flex items-center gap-2 mb-14 px-4 py-1.5 rounded-full bg-white/5 border border-white/10"
           >
             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-            <span className="text-[10px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-widest">
-              This page loaded in <span className="text-emerald-400">{loadTime}s</span>
+            <span className="text-[10px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-widest leading-relaxed">
+              We proudly claim this is one of the <span className="text-yellow-500">fastest-loading</span> websites in the <span className="text-yellow-500">world</span>, loading in just <span className="text-emerald-400">{loadTime} seconds</span>.
             </span>
           </motion.div>
         )}
@@ -127,8 +128,8 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
           transition={{ duration: 0.3 }}
           className="flex flex-col sm:flex-row items-center gap-7"
         >
-          <button
-            onClick={onCallbackClick}
+          <a
+            href="tel:+919986389444"
             className="group relative flex w-full sm:w-auto h-18 py-5 items-center justify-center gap-4 rounded-2xl bg-yellow-500 px-8 sm:px-14 text-[16px] sm:text-[18px] font-black text-black transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden"
           >
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -136,7 +137,7 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
               Get a Free Consultation
               <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
             </span>
-          </button>
+          </a>
 
           <a
             href="#portfolio"

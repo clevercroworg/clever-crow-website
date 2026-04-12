@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2, Sparkles } from "lucide-react";
 
 export default function ContactForm() {
   const router = useRouter();
@@ -49,17 +49,21 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="relative rounded-[2.5rem] border border-gray-100 bg-white p-8 sm:p-12 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.1)] overflow-hidden">
-      {/* Soft Glow Effects for Light Background */}
-      <div className="absolute -top-24 -right-24 h-64 w-64 bg-yellow-400/10 blur-[60px] rounded-full pointer-events-none" />
-      <div className="absolute -bottom-24 -left-24 h-64 w-64 bg-indigo-500/5 blur-[60px] rounded-full pointer-events-none" />
+    <div className="relative rounded-[3rem] border border-white/10 bg-white/5 p-8 sm:p-12 shadow-2xl backdrop-blur-2xl overflow-hidden group">
+      {/* Background Orbs */}
+      <div className="absolute -top-24 -right-24 h-64 w-64 bg-yellow-400/10 blur-[80px] rounded-full pointer-events-none transition-opacity group-hover:opacity-20" />
+      <div className="absolute -bottom-24 -left-24 h-64 w-64 bg-indigo-500/10 blur-[80px] rounded-full pointer-events-none transition-opacity group-hover:opacity-20" />
 
       <div className="relative z-10">
         <div className="mb-10">
-          <h3 className="text-3xl font-black text-gray-950 tracking-tight">
-            Send us a message
+          <div className="inline-flex items-center gap-2 rounded-full bg-yellow-500/10 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-yellow-500 border border-yellow-500/20 mb-6">
+            <Sparkles size={12} />
+            Growth Audit
+          </div>
+          <h3 className="text-3xl font-black text-white tracking-tight">
+            Send us a <span className="text-yellow-500 italic">message</span>
           </h3>
-          <p className="mt-3 text-gray-600 font-medium leading-relaxed">
+          <p className="mt-3 text-slate-400 font-medium leading-relaxed">
             Tell us about your next project, and our growth engineers will get back to you within 24 hours.
           </p>
         </div>
@@ -67,36 +71,36 @@ export default function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="space-y-2">
-              <label htmlFor="name" className="text-[12px] font-black uppercase tracking-[0.1em] text-gray-700 ml-1">
-                Your Name *
+              <label htmlFor="name" className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 ml-2">
+                Full Name
               </label>
               <input
                 id="name"
                 name="name"
                 required
                 placeholder="John Doe"
-                className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 placeholder:text-gray-400 focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium"
+                className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-white placeholder:text-slate-600 focus:border-yellow-500 focus:bg-white/10 focus:outline-none transition-all ring-1 ring-white/5"
               />
             </div>
             
             <div className="space-y-2">
-              <label htmlFor="phone" className="text-[12px] font-black uppercase tracking-[0.1em] text-gray-700 ml-1">
-                Phone Number *
+              <label htmlFor="phone" className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 ml-2">
+                Phone Number
               </label>
               <input
                 id="phone"
                 name="phone"
                 type="tel"
                 required
-                placeholder="+91 98765 43210"
-                className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 placeholder:text-gray-400 focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium"
+                placeholder="+91 XXX XXX XXXX"
+                className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-white placeholder:text-slate-600 focus:border-yellow-500 focus:bg-white/10 focus:outline-none transition-all ring-1 ring-white/5"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="service" className="text-[12px] font-black uppercase tracking-[0.1em] text-gray-700 ml-1">
-              What are you looking for? *
+            <label htmlFor="service" className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 ml-2">
+              What are you looking for?
             </label>
             <div className="relative">
               <select
@@ -104,25 +108,25 @@ export default function ContactForm() {
                 name="service"
                 required
                 defaultValue=""
-                className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 appearance-none focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all font-medium"
+                className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-white appearance-none focus:border-yellow-500 focus:bg-white/10 focus:outline-none transition-all ring-1 ring-white/5"
               >
-                <option value="" disabled className="text-gray-400">Select a service...</option>
-                <option>Digital Marketing (Comprehensive)</option>
-                <option>Google & Meta Ads (PPC)</option>
-                <option>Search Engine Optimisation (SEO)</option>
-                <option>Social Media Management</option>
-                <option>Website Design & Development</option>
-                <option>AI Lead Automation</option>
-                <option>Not Sure / Need Guidance</option>
+                <option value="" disabled className="bg-[#020617]">Select a service...</option>
+                <option value="Digital Marketing" className="bg-[#020617]">Digital Marketing (Comprehensive)</option>
+                <option value="Google & Meta Ads" className="bg-[#020617]">Google & Meta Ads (PPC)</option>
+                <option value="SEO" className="bg-[#020617]">Search Engine Optimisation (SEO)</option>
+                <option value="Social Media" className="bg-[#020617]">Social Media Management</option>
+                <option value="Website Development" className="bg-[#020617]">Website Design & Development</option>
+                <option value="AI Lead Automation" className="bg-[#020617]">AI Lead Automation</option>
+                <option value="Not Sure" className="bg-[#020617]">Not Sure / Need Guidance</option>
               </select>
-              <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+              <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
               </div>
             </div>
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="message" className="text-[12px] font-black uppercase tracking-[0.1em] text-gray-700 ml-1">
+            <label htmlFor="message" className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 ml-2">
               Project Details
             </label>
             <textarea
@@ -130,39 +134,39 @@ export default function ContactForm() {
               name="message"
               rows={4}
               placeholder="Tell us about your goals, current challenges, and timeline..."
-              className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-gray-900 placeholder:text-gray-400 focus:border-yellow-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-yellow-400/10 transition-all resize-none font-medium"
+              className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-white placeholder:text-slate-600 focus:border-yellow-500 focus:bg-white/10 focus:outline-none transition-all resize-none ring-1 ring-white/5"
             />
           </div>
 
           {error && (
-            <p className="text-sm font-bold text-red-600 bg-red-50 py-3 px-4 rounded-xl border border-red-100">
+            <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm font-bold text-red-400">
               {error}
-            </p>
+            </div>
           )}
 
           {success && (
-            <p className="text-sm font-bold text-emerald-600 bg-emerald-50 py-3 px-4 rounded-xl border border-emerald-100">
+            <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm font-bold text-emerald-400">
               Message sent successfully! Redirecting...
-            </p>
+            </div>
           )}
 
           <button
             type="submit"
             disabled={loading || success}
-            className="group relative flex w-full items-center justify-center gap-3 rounded-2xl bg-yellow-400 px-8 py-5 font-black uppercase tracking-widest text-black transition-all hover:bg-yellow-300 hover:shadow-[0_15px_40px_rgba(250,204,21,0.3)] hover:-translate-y-1 disabled:opacity-70 disabled:pointer-events-none overflow-hidden"
+            className="group relative flex w-full items-center justify-center gap-3 rounded-2xl bg-yellow-500 px-8 py-5 font-black uppercase tracking-widest text-slate-900 shadow-xl shadow-yellow-500/20 transition-all hover:scale-[1.02] hover:bg-yellow-400 active:scale-[0.98] disabled:opacity-70 disabled:pointer-events-none overflow-hidden"
           >
             {loading ? (
               <Loader2 className="h-5 w-5 animate-spin" />
             ) : (
               <>
-                <span className="relative z-10">Get Growth Audit</span>
-                <ArrowRight className="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <span className="relative z-10 text-[14px]">Get Growth Audit</span>
+                <ArrowRight size={18} className="relative z-10 transition-transform group-hover:translate-x-1" />
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
               </>
             )}
           </button>
           
-          <p className="text-center text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">
+          <p className="text-center text-[10px] font-black uppercase tracking-[0.2em] text-slate-600">
             Secure • Confidential • 24H Response
           </p>
         </form>

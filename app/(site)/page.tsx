@@ -1,14 +1,11 @@
 import dynamic from "next/dynamic";
-import SimpleHero from "@/components/SimpleHero";
+import PremiumHero from "@/components/PremiumHero";
 import TechStack from "@/components/TechStack";
 import SectionHeader from "@/components/SectionHeader";
 
 // Lazy load below-the-fold components
-const FallingTags = dynamic(() => import("@/components/FallingTags"), { ssr: true });
 const ServiceGrid = dynamic(() => import("@/components/ServiceGrid"), { ssr: true });
-const StrategicEcosystem = dynamic(() => import("@/components/StrategicEcosystem"), { ssr: true });
 const Differentiators = dynamic(() => import("@/components/Differentiators"), { ssr: true });
-const DynamicCTA = dynamic(() => import("@/components/DynamicCTA"), { ssr: true });
 const Testimonials = dynamic(() => import("@/components/Testimonials"), { ssr: true });
 
 export const metadata = {
@@ -61,32 +58,29 @@ export default function HomePage() {
   return (
     <main>
       {/* ================= HERO ================= */}
-      <SimpleHero />
+      <PremiumHero />
       <TechStack />
 
       {/* ================= WHAT WE BUILD ================= */}
-      <section className="relative bg-gray-50 pt-16 sm:pt-32 pb-20 sm:pb-44 overflow-hidden">
-        {/* Falling Tags overlay */}
-        <FallingTags />
-
+      <section id="portfolio" className="relative bg-gray-50 pt-16 sm:pt-32 pb-20 sm:pb-44 overflow-hidden">
+        <div id="about" className="absolute top-[-100px]" />
+        <div id="services" className="absolute top-[-100px]" />
         <div className="relative z-10 mx-auto max-w-7xl px-6">
           <SectionHeader 
             badge="Precision Engineering"
             title="What We"
             titleAccent="Build"
-            description="From high-converting ad campaigns to full-stack web and mobile applications — we engineer digital growth systems that scale with your ambition."
+            description="From high-converting ad campaigns to full-stack web and mobile applications we engineer digital growth systems that scale with your ambition."
           />
           <ServiceGrid services={services} />
         </div>
       </section>
 
-      {/* ================= STRATEGIC ECOSYSTEM ================= */}
-      <StrategicEcosystem />
-
       {/* ================= TESTIMONIALS ================= */}
       <Differentiators />
-      <DynamicCTA />
-      <Testimonials />
+      <div id="faq">
+        <Testimonials />
+      </div>
 
     </main>
   );

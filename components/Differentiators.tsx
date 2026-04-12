@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import Image from "next/image";
+
 /* ── Count-up hook ── */
 function useCountUp(target: number, duration = 1400) {
   const [value, setValue] = useState(0);
@@ -42,19 +43,32 @@ function useCountUp(target: number, duration = 1400) {
 }
 
 /* ── Shared card style ── */
-const card = "group relative rounded-3xl bg-white/70 backdrop-blur-xl border p-7 sm:p-9 transition-all duration-500 hover:-translate-y-1";
+const card = "group relative rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-7 sm:p-9 transition-all duration-500 hover:-translate-y-1 hover:bg-white/[0.08]";
 
 /* ── Main Component ── */
 export default function Differentiators() {
   return (
     <section
-      className="relative overflow-hidden bg-slate-50 py-16 sm:py-32"
+      className="relative overflow-hidden bg-[#020617] py-16 sm:py-32"
     >
-      {/* Decorative orbs - Hardware Accelerated to prevent scroll jank */}
-      <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-yellow-300/15 rounded-full blur-[120px] pointer-events-none will-change-transform transform-gpu" />
-      <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-orange-200/20 rounded-full blur-[100px] pointer-events-none will-change-transform transform-gpu" />
+      {/* Background Glows */}
+      <div className="absolute inset-0 z-0">
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.8), transparent 80%),
+              linear-gradient(180deg, #020617 0%, #0f172a 50%, #020617 100%)
+            `
+          }}
+        />
+      </div>
+      
+      {/* Decorative orbs - Bottom Layer */}
+      <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-yellow-400/5 rounded-full blur-[120px] pointer-events-none will-change-transform transform-gpu" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-orange-400/5 rounded-full blur-[100px] pointer-events-none will-change-transform transform-gpu" />
 
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6">
 
         {/* ── Section Header ── */}
         <div className="mx-auto mb-16 sm:mb-20 max-w-4xl text-center">
@@ -62,7 +76,7 @@ export default function Differentiators() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[10px] sm:text-xs font-black uppercase tracking-[0.4em] text-yellow-600 mb-5"
+            className="text-[10px] sm:text-xs font-black uppercase tracking-[0.4em] text-yellow-400 mb-5"
           >
             Why Choose Us
           </motion.p>
@@ -72,12 +86,12 @@ export default function Differentiators() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-black text-gray-900 tracking-[-0.03em] pb-2"
+            className="font-black text-white tracking-[-0.03em] pb-2"
             style={{ fontSize: "clamp(35px, 4.5vw, 65px)", lineHeight: "1" }}
           >
             What Makes{" "}
-            <span className="text-yellow-500">Clever&nbsp;Crow</span>{" "}
-            <span className="italic text-gray-400">Different</span>
+            <span className="text-yellow-500">Clever Crow</span>{" "}
+            <span className="italic text-slate-300">Different</span>
           </motion.h2>
 
           <motion.p
@@ -85,7 +99,7 @@ export default function Differentiators() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="mx-auto mt-8 sm:mt-10 max-w-2xl text-[19px] sm:text-[21px] md:text-[23px] text-gray-500 font-medium leading-relaxed"
+            className="mx-auto mt-8 sm:mt-10 max-w-2xl text-[19px] sm:text-[21px] md:text-[23px] text-slate-200 font-medium leading-relaxed"
           >
             We don't operate like a traditional agency. We build marketing 
             and technology systems that compound results over time.
@@ -95,71 +109,47 @@ export default function Differentiators() {
         {/* ── Bento Grid ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 sm:gap-6">
 
-          {/* ── Card 1: Strategy (lg: 5 cols, tall) ── */}
+          {/* ── Card 1: Strategy ── */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className={`${card} border-yellow-100 hover:shadow-[0_24px_48px_rgba(234,179,8,0.1)] lg:col-span-5 lg:row-span-2 flex flex-col will-change-transform transform-gpu`}
+            className={`${card} lg:col-span-5 lg:row-span-2 flex flex-col will-change-transform transform-gpu`}
           >
-            <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-yellow-100 text-yellow-700 transition-transform group-hover:scale-110">
+            <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-yellow-400/10 text-yellow-400 transition-transform group-hover:scale-110 shadow-inner">
               <Lightbulb className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <h3 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight relative">
+            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight relative">
               Strategy-Led Execution
               
-              {/* The "Siri-style" Strategic Orb */}
               <div className="absolute -top-24 -right-12 w-32 h-32 flex items-center justify-center pointer-events-none select-none">
-                {/* Outer Glow 1 */}
                 <motion.div
                   animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute inset-0 rounded-full bg-yellow-400 blur-2xl flex-shrink-0 will-change-transform transform-gpu"
-                  style={{ transformOrigin: "center center" }}
+                  className="absolute inset-0 rounded-full bg-yellow-400 blur-2xl flex-shrink-0"
                 />
-                {/* Outer Glow 2 */}
-                <motion.div
-                  animate={{ scale: [1.2, 1, 1.2], opacity: [0.05, 0.15, 0.05] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute inset-0 rounded-full bg-orange-400 blur-3xl flex-shrink-0 will-change-transform transform-gpu"
-                  style={{ transformOrigin: "center center" }}
-                />
-                {/* Core Pulsating Orb */}
                 <motion.div
                   animate={{ scale: [0.8, 1.1, 0.8], rotate: [0, 90, 180, 270, 360] }}
                   transition={{ 
                     scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
                     rotate: { duration: 10, repeat: Infinity, ease: "linear" }
                   }}
-                  className="relative h-16 w-16 rounded-full bg-gradient-to-tr from-yellow-300 via-yellow-500 to-orange-400 shadow-[0_0_40px_rgba(251,191,36,0.5)] flex items-center justify-center overflow-hidden flex-shrink-0 will-change-transform transform-gpu"
+                  className="relative h-16 w-16 rounded-full bg-gradient-to-tr from-yellow-300 via-yellow-500 to-orange-400 shadow-[0_0_40px_rgba(251,191,36,0.5)] flex items-center justify-center overflow-hidden"
                 >
-                   {/* Internal "Siri" waves */}
                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.4),transparent_60%)] animate-pulse" />
-                   <div className="h-full w-full opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
-                </motion.div>
-                
-                {/* Orbiting Particle */}
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                  className="absolute h-24 w-24 flex-shrink-0"
-                  style={{ transformOrigin: "center center" }}
-                >
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 h-1.5 w-1.5 rounded-full bg-yellow-200 shadow-[0_0_10px_#fef08a]" />
                 </motion.div>
               </div>
             </h3>
-            <p className="mt-3 text-[17px] sm:text-[19px] leading-relaxed text-gray-500">
-              Every campaign starts with a clear strategy. We plan, execute, and refine in disciplined cycles to maximise every rupee spent.
+            <p className="mt-3 text-[17px] sm:text-[19px] leading-relaxed text-slate-200">
+              Every campaign starts with a clear strategy. We plan, execute, and refine in disciplined cycles to maximize every rupee spent.
             </p>
 
-            {/* Strategy Steps — fills the mid section */}
             <div className="mt-6 sm:mt-8 space-y-4">
               {[
-                { step: "01", label: "Research & Audit", desc: "Deep-dive into your market, competitors, and current funnel performance.", pct: 100 },
-                { step: "02", label: "Plan & Architect", desc: "Define KPIs, channels, budgets, and a 90-day execution roadmap.", pct: 75 },
-                { step: "03", label: "Execute & Optimise", desc: "Launch campaigns, A/B test creatives, and iterate weekly for compounding results.", pct: 50 },
+                { step: "01", label: "Research & Audit", desc: "Deep-dive into your market, competitors, and current funnel performance." },
+                { step: "02", label: "Plan & Architect", desc: "Define KPIs, channels, budgets, and a 90-day execution roadmap." },
+                { step: "03", label: "Execute & Optimize", desc: "Launch campaigns, A/B test creatives, and iterate weekly for compounding results." },
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -169,16 +159,15 @@ export default function Differentiators() {
                   transition={{ delay: i * 0.12, duration: 0.5 }}
                   className="flex gap-4 items-start"
                 >
-                  <span className="text-[10px] font-black text-yellow-500 bg-yellow-50 rounded-lg px-2.5 py-1.5 shrink-0">{item.step}</span>
+                  <span className="text-[10px] font-black text-yellow-400 bg-yellow-400/10 rounded-lg px-2.5 py-1.5 shrink-0">{item.step}</span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[17px] font-bold text-gray-800">{item.label}</p>
-                    <p className="text-[15px] text-gray-400 mt-0.5 leading-relaxed">{item.desc}</p>
+                    <p className="text-[17px] font-bold text-white">{item.label}</p>
+                    <p className="text-[15px] text-slate-300 mt-0.5 leading-relaxed">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* Mini Growth Chart — bottom */}
             <div className="mt-6 sm:mt-8 flex-1 flex flex-col justify-end">
               <div className="flex items-end gap-1.5 sm:gap-2 h-24 sm:h-32">
                 {[25, 40, 35, 55, 50, 70, 65, 85, 80, 100].map((h, i) => (
@@ -188,36 +177,33 @@ export default function Differentiators() {
                     whileInView={{ height: `${h}%` }}
                     viewport={{ once: true, margin: "-10px" }}
                     transition={{ delay: i * 0.05, duration: 0.5 }}
-                    className={`flex-1 rounded-md sm:rounded-lg ${i === 9 ? "bg-yellow-500" : "bg-yellow-200/60"}`}
+                    className={`flex-1 rounded-md sm:rounded-lg ${i === 9 ? "bg-yellow-500 shadow-[0_0_20px_rgba(234,179,8,0.3)]" : "bg-yellow-500/20"}`}
                   />
                 ))}
               </div>
-              <p className="mt-3 text-[10px] font-bold text-yellow-600/50 uppercase tracking-widest">Quarterly Growth Trajectory</p>
+              <p className="mt-3 text-[10px] font-bold text-yellow-500/50 uppercase tracking-widest">Quarterly Growth Trajectory</p>
             </div>
           </motion.div>
 
-          {/* ── Card 2: Under One Roof (lg: 7 cols) ── */}
+          {/* ── Card 2: Under One Roof ── */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className={`${card} border-orange-100 hover:shadow-[0_24px_48px_rgba(251,146,60,0.08)] lg:col-span-7 flex flex-col will-change-transform transform-gpu`}
+            className={`${card} lg:col-span-7 flex flex-col will-change-transform transform-gpu`}
           >
-            <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-orange-100 text-orange-700 transition-transform group-hover:scale-110">
+            <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-orange-400/10 text-orange-400 transition-transform group-hover:scale-110 shadow-inner">
               <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <h3 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Everything Under One Roof</h3>
-            <p className="mt-3 text-[17px] sm:text-[19px] leading-relaxed text-gray-500">
+            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">Everything Under One Roof</h3>
+            <p className="mt-3 text-[17px] sm:text-[19px] leading-relaxed text-slate-200">
               No handoffs. Strategy, creatives, ads, web, and mobile development work as one unified system.
             </p>
 
-            {/* Connected Pipeline with lines */}
             <div className="mt-6 sm:mt-8 flex-1 flex flex-col justify-end">
               <div className="relative flex items-start justify-between">
-                {/* Connecting line behind the dots */}
-                <div className="absolute top-[18px] sm:top-[22px] left-[12%] right-[12%] h-[2px] bg-gradient-to-r from-orange-300 via-orange-200 to-gray-200" />
-
+                <div className="absolute top-[18px] sm:top-[22px] left-[12%] right-[12%] h-[2px] bg-gradient-to-r from-orange-400/50 via-orange-400/30 to-slate-800" />
                 {[
                   { label: "Ads", desc: "Paid campaigns" },
                   { label: "Web", desc: "Sites & apps" },
@@ -232,57 +218,54 @@ export default function Differentiators() {
                     transition={{ delay: i * 0.1, duration: 0.4 }}
                     className="relative z-10 flex flex-col items-center gap-2 flex-1"
                   >
-                    <div className={`h-9 w-9 sm:h-11 sm:w-11 rounded-full border-2 flex items-center justify-center text-[9px] sm:text-[10px] font-black shadow-sm ${i === 0 ? "border-orange-400 bg-orange-50 text-orange-600" : "border-gray-200 bg-white text-gray-400"}`}>
+                    <div className={`h-9 w-9 sm:h-11 sm:w-11 rounded-full border-2 flex items-center justify-center text-[9px] sm:text-[10px] font-black shadow-lg ${i === 0 ? "border-orange-400 bg-orange-400/20 text-orange-400" : "border-slate-800 bg-slate-900/50 text-slate-400"}`}>
                       {String(i + 1).padStart(2, "0")}
                     </div>
-                    <span className="text-[9px] sm:text-[10px] font-bold text-gray-700 uppercase tracking-wider">{item.label}</span>
-                    <span className="text-[8px] sm:text-[9px] font-medium text-gray-400 hidden sm:block">{item.desc}</span>
+                    <span className="text-[9px] sm:text-[10px] font-bold text-slate-200 uppercase tracking-wider">{item.label}</span>
+                    <span className="text-[8px] sm:text-[9px] font-medium text-slate-400 hidden sm:block">{item.desc}</span>
                   </motion.div>
                 ))}
               </div>
-
-              {/* Bottom highlight */}
-              <div className="mt-6 flex items-center gap-3 rounded-xl bg-orange-50/60 border border-orange-100/50 px-4 py-3">
+              <div className="mt-6 flex items-center gap-3 rounded-xl bg-orange-400/5 border border-orange-400/10 px-4 py-3">
                 <span className="h-2 w-2 rounded-full bg-orange-400 animate-pulse flex-shrink-0" />
-                <span className="text-[11px] sm:text-xs font-bold text-orange-600">All services connected in a single workflow</span>
+                <span className="text-[11px] sm:text-xs font-bold text-orange-400">All services connected in a single workflow</span>
               </div>
             </div>
           </motion.div>
 
-          {/* ── Card 3: Transparent Reporting (lg: 7 cols) ── */}
+          {/* ── Card 3: Transparent Reporting ── */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className={`${card} border-emerald-100 hover:shadow-[0_24px_48px_rgba(16,185,129,0.08)] lg:col-span-7 will-change-transform transform-gpu`}
+            className={`${card} lg:col-span-7 will-change-transform transform-gpu`}
           >
-            <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700 transition-transform group-hover:scale-110">
+            <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-emerald-400/10 text-emerald-400 transition-transform group-hover:scale-110 shadow-inner">
               <LineChart className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <h3 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Transparent Reporting</h3>
-            <p className="mt-3 text-[17px] sm:text-[19px] leading-relaxed text-gray-500">
+            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">Transparent Reporting</h3>
+            <p className="mt-3 text-[17px] sm:text-[19px] leading-relaxed text-slate-200">
               Clear metrics, shared dashboards, and decisions driven by real data — never opinions.
             </p>
-            {/* Live Metrics */}
             <div className="mt-6 sm:mt-8 space-y-3">
               {[
                 { label: "ROAS", value: "12.4×", width: "85%", color: "bg-emerald-400" },
-                { label: "CTR", value: "4.2%", width: "60%", color: "bg-emerald-300" },
-                { label: "CPA", value: "₹42", width: "40%", color: "bg-emerald-200" },
+                { label: "CTR", value: "4.2%", width: "60%", color: "bg-emerald-400" },
+                { label: "CPA", value: "₹42", width: "40%", color: "bg-emerald-400" },
               ].map((m, i) => (
                 <div key={i}>
-                  <div className="flex justify-between text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">
+                  <div className="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
                     <span>{m.label}</span>
-                    <span className="text-gray-700">{m.value}</span>
+                    <span className="text-emerald-400">{m.value}</span>
                   </div>
-                  <div className="h-2 rounded-full bg-gray-100 overflow-hidden">
+                  <div className="h-2 rounded-full bg-slate-900 overflow-hidden shadow-inner">
                     <motion.div
                       initial={{ width: 0 }}
                       whileInView={{ width: m.width }}
                       viewport={{ once: true, margin: "-10px" }}
                       transition={{ delay: i * 0.1, duration: 0.6 }}
-                      className={`h-full rounded-full ${m.color}`}
+                      className={`h-full rounded-full ${m.color} shadow-[0_0_10px_rgba(16,185,129,0.3)]`}
                     />
                   </div>
                 </div>
@@ -290,24 +273,23 @@ export default function Differentiators() {
             </div>
           </motion.div>
 
-          {/* ── Card 4: Long-Term Growth (lg: 6 cols) ── */}
+          {/* ── Card 4: Long-Term Growth ── */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className={`${card} border-blue-100 hover:shadow-[0_24px_48px_rgba(59,130,246,0.08)] lg:col-span-6 will-change-transform transform-gpu`}
+            className={`${card} lg:col-span-6 will-change-transform transform-gpu`}
           >
-            <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-blue-100 text-blue-700 transition-transform group-hover:scale-110">
+            <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-blue-400/10 text-blue-400 transition-transform group-hover:scale-110 shadow-inner">
               <Layers className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <h3 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Built for Long-Term Growth</h3>
-            <p className="mt-3 text-[17px] sm:text-[19px] leading-relaxed text-gray-500">
+            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">Built for Long-Term Growth</h3>
+            <p className="mt-3 text-[17px] sm:text-[19px] leading-relaxed text-slate-200">
               We build systems that improve every month — not short-term hacks or one-off campaigns.
             </p>
-            {/* Stacking Layers */}
             <div className="mt-6 sm:mt-8 flex flex-col gap-2.5">
-              {["Foundation", "Optimisation", "Scale", "Compound"].map((step, i) => (
+              {["Foundation", "Optimization", "Scale", "Compound"].map((step, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, x: -16 }}
@@ -316,31 +298,30 @@ export default function Differentiators() {
                   transition={{ delay: i * 0.1, duration: 0.4 }}
                   className="flex items-center gap-3"
                 >
-                  <div className={`h-2 w-2 rounded-full shrink-0 ${i === 3 ? "bg-blue-500" : "bg-blue-200"}`} />
-                  <span className={`text-[17px] font-bold ${i === 3 ? "text-blue-700" : "text-gray-400"}`}>{step}</span>
-                  {i === 3 && <span className="ml-auto text-[10px] font-black text-blue-500 bg-blue-50 px-2.5 py-1 rounded-full">ACTIVE</span>}
+                  <div className={`h-2 w-2 rounded-full shrink-0 ${i === 3 ? "bg-blue-400 shadow-[0_0_8px_rgba(59,130,246,0.5)]" : "bg-slate-700"}`} />
+                  <span className={`text-[17px] font-bold ${i === 3 ? "text-blue-400" : "text-slate-500"}`}>{step}</span>
+                  {i === 3 && <span className="ml-auto text-[10px] font-black text-blue-400 bg-blue-400/10 px-2.5 py-1 rounded-full border border-blue-400/20">ACTIVE</span>}
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* ── Card 5: Proven Track Record (lg: 6 cols) ── */}
+          {/* ── Card 5: Proven Track Record ── */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className={`${card} border-violet-100 hover:shadow-[0_24px_48px_rgba(139,92,246,0.08)] lg:col-span-6 will-change-transform transform-gpu`}
+            className={`${card} lg:col-span-6 will-change-transform transform-gpu`}
           >
-            <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-violet-100 text-violet-700 transition-transform group-hover:scale-110">
+            <div className="mb-5 inline-flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-violet-400/10 text-violet-400 transition-transform group-hover:scale-110 shadow-inner">
               <ShieldCheck className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <h3 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Proven Track Record</h3>
-            <p className="mt-3 text-[17px] sm:text-[19px] leading-relaxed text-gray-500">
+            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">Proven Track Record</h3>
+            <p className="mt-3 text-[17px] sm:text-[19px] leading-relaxed text-slate-200">
               120+ campaigns delivered with measurable outcomes. Our clients stay because results compound over time.
             </p>
-            {/* Milestone Timeline */}
-            <div className="mt-6 sm:mt-8 flex flex-col gap-3 border-l-2 border-violet-100 pl-5">
+            <div className="mt-6 sm:mt-8 flex flex-col gap-3 border-l-2 border-slate-800 pl-5">
               {[
                 { year: "2021", event: "Founded & first 10 clients" },
                 { year: "2022", event: "50+ campaigns, 5× growth" },
@@ -355,8 +336,8 @@ export default function Differentiators() {
                   transition={{ delay: i * 0.1, duration: 0.4 }}
                   className="flex items-center gap-3"
                 >
-                  <span className="text-[10px] font-black text-violet-500 bg-violet-50 px-2 py-1 rounded-md whitespace-nowrap shrink-0">{m.year}</span>
-                  <span className="text-[17px] text-gray-500 font-medium">{m.event}</span>
+                  <span className="text-[10px] font-black text-violet-400 bg-violet-400/10 px-2 py-1 rounded-md whitespace-nowrap shrink-0 border border-violet-400/20">{m.year}</span>
+                  <span className="text-[17px] text-slate-300 font-medium">{m.event}</span>
                 </motion.div>
               ))}
             </div>
@@ -370,7 +351,7 @@ export default function Differentiators() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="mt-16 sm:mt-20 rounded-3xl bg-white/50 backdrop-blur-xl border border-yellow-100/60 p-8 sm:p-12 transform-gpu will-change-transform"
+          className="mt-16 sm:mt-20 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 sm:p-12 transform-gpu will-change-transform shadow-2xl"
         >
           <StatsStrip />
         </motion.div>
@@ -397,10 +378,10 @@ function StatsStrip() {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 text-center">
       {stats.map((s, i) => (
         <div key={i} className="flex flex-col items-center">
-          <span ref={s.ref} className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight">
+          <span ref={s.ref} className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight drop-shadow-sm">
             {s.value}
           </span>
-          <span className="mt-2 text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-widest">
+          <span className="mt-2 text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest">
             {s.label}
           </span>
         </div>

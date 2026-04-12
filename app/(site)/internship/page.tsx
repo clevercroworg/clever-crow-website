@@ -8,16 +8,14 @@ import {
   Users,
   Code2,
   BrainCircuit,
-  Search,
   Smartphone,
-  Palette,
-  Database,
   BarChart3,
   Cloud,
   ShieldCheck,
   MonitorPlay,
   Sparkles,
-  Lock
+  Lock,
+  Search
 } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 
@@ -144,18 +142,51 @@ const INTERNSHIPS = [
   },
 ];
 
+function Database(props: any) {
+  return (
+    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+    </svg>
+  );
+}
+
 export default function InternshipListingPage() {
   return (
-    <main className="bg-white selection:bg-yellow-500/30 min-h-screen pt-32 pb-20 overflow-x-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <SectionHeader
-          badge="Limited Opportunities"
-          title="Explore Our"
-          titleAccent="Internships"
-          description="Join our dynamic team and kickstart your career. We are looking for passionate individuals for our active roles."
-        />
+    <main className="bg-white selection:bg-yellow-500/30 min-h-screen">
+      
+      {/* ═══════════ CINEMATIC HERO ═══════════ */}
+      <section className="relative pt-36 pb-20 overflow-hidden">
+        {/* Background Styling */}
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0"
+            style={{
+              background: `
+                radial-gradient(circle at 15% 25%, rgba(82, 168, 255, 0.1), transparent 25%),
+                radial-gradient(circle at 85% 75%, rgba(122, 63, 194, 0.08), transparent 25%),
+                linear-gradient(180deg, #0f172a 0%, #111827 44%, #020617 100%)
+              `
+            }}
+          />
+        </div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
+          <SectionHeader
+            badge="Limited Opportunities"
+            title="Explore Our"
+            titleAccent="Internships"
+            description="Join our dynamic team and kickstart your career. We are looking for passionate individuals for our active roles."
+            theme="dark"
+          />
+        </div>
+
+        {/* Soft bottom fade to white section */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
+      </section>
+
+      {/* ═══════════ LISTING SECTION ═══════════ */}
+      <div className="max-w-7xl mx-auto px-6 pb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {INTERNSHIPS.map((internship, index) => (
             <motion.div
               key={internship.id}
@@ -165,8 +196,6 @@ export default function InternshipListingPage() {
               whileHover={internship.active ? { y: -5 } : {}}
               className={`group relative h-full bg-white rounded-[2rem] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.1)] p-8 transition-all overflow-hidden`}
             >
-
-              {/* Background Glow */}
               <div className={`absolute -right-4 -top-4 w-24 h-24 rounded-full blur-3xl opacity-0 group-hover:opacity-20 transition-opacity ${internship.color}`} />
 
               <div className="relative z-10 flex flex-col h-full">
@@ -196,12 +225,10 @@ export default function InternshipListingPage() {
                   {internship.description}
                 </p>
 
-                {internship.id !== "10" && (
-                  <div className="flex items-center justify-between mb-8">
-                    <span className="text-[12px] font-black uppercase tracking-widest text-gray-400">Tool Charges/Fees</span>
-                    <span className="text-lg font-black text-gray-900 group-hover:text-yellow-600 transition-colors">₹{internship.fee}</span>
-                  </div>
-                )}
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-[12px] font-black uppercase tracking-widest text-gray-400">Tool Charges/Fees</span>
+                  <span className="text-lg font-black text-gray-900 group-hover:text-yellow-600 transition-colors">₹{internship.fee}</span>
+                </div>
 
                 <div className="mt-auto pt-6 border-t border-gray-50">
                   {internship.active ? (
