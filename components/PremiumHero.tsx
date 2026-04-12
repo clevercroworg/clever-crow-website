@@ -26,7 +26,7 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
   }, []);
 
   return (
-    <section className="relative min-h-[90vh] pb-20 pt-12 md:pb-24 md:pt-16 overflow-hidden font-sans selection:bg-yellow-500/30">
+    <section className="relative min-h-[85vh] md:min-h-[90vh] pb-10 md:pb-16 pt-12 md:pt-16 overflow-hidden font-sans selection:bg-yellow-500/30">
       {/* ───────────────── BACKGROUND ───────────────── */}
       <div className="absolute inset-0 z-0">
         <div 
@@ -86,20 +86,20 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
           </motion.div>
 
           {/* Kickers */}
-          <div className="inline-flex flex-wrap items-center justify-center gap-3 mb-10">
+          <div className="hidden md:inline-flex items-center justify-center gap-2 md:gap-3 mb-10 w-full overflow-x-auto pb-2 scrollbar-hide px-4">
              {[
-               { icon: <Zap size={15} />, text: "Build Fast", color: "text-amber-400" },
-               { icon: <TrendingUp size={15} />, text: "Rank Higher", color: "text-emerald-400" },
-               { icon: <Layers size={15} />, text: "Grow Faster", color: "text-blue-400" }
+               { icon: <Zap className="w-3.5 h-3.5 md:w-[15px] md:h-[15px]" />, text: "Build Fast", color: "text-amber-400" },
+               { icon: <TrendingUp className="w-3.5 h-3.5 md:w-[15px] md:h-[15px]" />, text: "Rank Higher", color: "text-emerald-400" },
+               { icon: <Layers className="w-3.5 h-3.5 md:w-[15px] md:h-[15px]" />, text: "Grow Faster", color: "text-blue-400" }
              ].map((kicker, i) => (
                <motion.div
                  key={i}
                  initial={{ opacity: 0, y: 20 }}
                  animate={{ opacity: 1, y: 0 }}
                  transition={{ delay: i * 0.1, duration: 0.8 }}
-                 className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 py-2.5 pl-2.5 pr-6 text-[12px] font-black tracking-widest text-white/80 uppercase backdrop-blur shadow-xl hover:bg-white/[0.08] transition-colors cursor-default"
+                 className="flex flex-none items-center gap-2 md:gap-3 rounded-full border border-white/10 bg-white/5 py-1.5 md:py-2.5 pl-1.5 md:pl-2.5 pr-3 md:pr-6 text-[10px] md:text-[12px] font-black tracking-widest text-white/80 uppercase backdrop-blur shadow-xl hover:bg-white/[0.08] transition-colors cursor-default whitespace-nowrap"
                >
-                 <div className={`flex h-8 w-8 items-center justify-center rounded-full bg-white/5 ${kicker.color} shadow-lg`}>
+                 <div className={`flex h-6 w-6 md:h-8 md:w-8 items-center justify-center rounded-full bg-white/5 ${kicker.color} shadow-lg`}>
                     {kicker.icon}
                  </div>
                  {kicker.text}
@@ -158,10 +158,10 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-[10px] uppercase tracking-[0.3em] font-black text-white/20">Scroll to Explore</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-white/20 to-transparent" />
+        <span className="text-[9px] uppercase tracking-[0.3em] font-black text-white/40">Scroll to Explore</span>
+        <div className="w-[1px] h-8 bg-gradient-to-b from-white/30 to-transparent" />
       </motion.div>
     </section>
   );
