@@ -65,7 +65,7 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
     let t2: NodeJS.Timeout;
 
     if (stage === HeroStage.LOADING) {
-      t1 = setTimeout(() => setStage(HeroStage.READY), 2000);
+      t1 = setTimeout(() => setStage(HeroStage.READY), 500);
     }
 
     if (stage === HeroStage.READY && !hasBrokenRef.current) {
@@ -213,8 +213,8 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
 
         {/* Layer 1: Deep Slow Blobs (Far) */}
         <div className="absolute inset-0 z-0 opacity-40">
-          <div className="absolute top-[-10%] left-[-5%] w-[800px] h-[800px] rounded-full bg-yellow-600/10 blur-[150px] animate-pulse" />
-          <div className="absolute bottom-[-15%] right-[-5%] w-[900px] h-[900px] rounded-full bg-yellow-500/10 blur-[180px] animate-pulse" />
+          <div className="absolute top-[-10%] left-[-5%] w-[800px] h-[800px] rounded-full bg-yellow-600/5 blur-[150px] animate-pulse" />
+          <div className="absolute bottom-[-15%] right-[-5%] w-[900px] h-[900px] rounded-full bg-yellow-500/5 blur-[180px] animate-pulse" />
         </div>
 
         {/* Layer 2: Middle Drifting Accents */}
@@ -410,7 +410,7 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="relative text-4xl sm:text-7xl md:text-8xl font-extrabold tracking-tight leading-tight mb-10"
         >
           <span className="text-white">Smart Strategies. </span>
@@ -434,7 +434,7 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-4xl mb-14"
         >
           <p className="text-lg sm:text-2xl md:text-3xl text-gray-300 leading-relaxed font-bold">
@@ -530,7 +530,7 @@ function SimpleSlabs() {
             repeat: Infinity,
             ease: "linear",
           }}
-          className="absolute h-32 w-full bg-yellow-500/10 blur-[80px]"
+          className="absolute h-32 w-full bg-yellow-500/[0.03] blur-[80px]"
           style={{ top: `${25 + i * 40}%` }}
         />
       ))}
@@ -566,7 +566,7 @@ function ParticleSystem() {
             delay: Math.random() * 5,
             ease: "easeInOut"
           }}
-          className="absolute w-1.5 h-1.5 bg-yellow-400 rounded-full shadow-[0_0_10px_rgba(234,179,8,0.8)]"
+          className="absolute w-1.5 h-1.5 bg-yellow-400/40 rounded-full shadow-[0_0_8px_rgba(234,179,8,0.3)]"
         />
       ))}
     </div>
@@ -586,9 +586,9 @@ function LightSweep() {
           repeatDelay: 8,
           ease: "linear",
         }}
-        className="absolute inset-0 opacity-[0.25]"
+        className="absolute inset-0 opacity-[0.1]"
         style={{
-          background: "linear-gradient(110deg, transparent 35%, rgba(234,179,8,0.6) 50%, transparent 65%)",
+          background: "linear-gradient(110deg, transparent 35%, rgba(234,179,8,0.3) 50%, transparent 65%)",
         }}
       />
     </div>
@@ -611,7 +611,7 @@ function NeuralWeb({ mousePosRef }: { mousePosRef: React.RefObject<{ x: number, 
 
     let animationFrameId: number;
     let particles: any[] = [];
-    const particleCount = 85;
+    const particleCount = 45;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -662,15 +662,15 @@ function NeuralWeb({ mousePosRef }: { mousePosRef: React.RefObject<{ x: number, 
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Web connections base - EVEN BRIGHTER
-      ctx.strokeStyle = "rgba(234, 179, 8, 0.6)";
+      // Web connections base - More Subtle
+      ctx.strokeStyle = "rgba(234, 179, 8, 0.2)";
       ctx.lineWidth = 1.1;
 
       particles.forEach((p, i) => {
         p.update(mousePosRef.current || { x: 0, y: 0 });
 
-        // Nodes (Points) - Brighter
-        ctx.fillStyle = "rgba(234, 179, 8, 1.0)";
+        // Nodes (Points) - Softer
+        ctx.fillStyle = "rgba(234, 179, 8, 0.4)";
         ctx.beginPath();
         ctx.arc(p.x, p.y, 2.0, 0, Math.PI * 2);
         ctx.fill();
@@ -683,7 +683,7 @@ function NeuralWeb({ mousePosRef }: { mousePosRef: React.RefObject<{ x: number, 
 
           if (dist < 220) {
             // Adjust opacity based on distance for a "webbing" feel - Brighter connections
-            const opacity = (1 - dist / 220) * 0.7;
+            const opacity = (1 - dist / 220) * 0.25;
             ctx.strokeStyle = `rgba(234, 179, 8, ${opacity})`;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
@@ -732,7 +732,7 @@ function FloatingGlowOrbs() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute w-[900px] h-[900px] bg-[radial-gradient(circle,rgba(234,179,8,0.2),transparent_70%)] blur-[140px]"
+          className="absolute w-[900px] h-[900px] bg-[radial-gradient(circle,rgba(234,179,8,0.06),transparent_70%)] blur-[140px]"
           style={{
             top: `${5 + i * 35}%`,
             left: `${-15 + i * 45}%`,
