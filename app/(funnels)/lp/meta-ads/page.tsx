@@ -13,7 +13,7 @@ import { metaAdsData } from "./meta-ads-data";
 import PricingSection from "../components/PricingSection";
 import FaqSection from "../components/FaqSection";
 import ClientReviews from "../components/ClientReviews";
-import Footer from "../components/Footer";
+import Footer from "@/components/Footer";
 import CallbackModal from "../components/CallbackModal";
 // WhatsAppButton removed as per request
 

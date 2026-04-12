@@ -394,7 +394,7 @@ function StatsStrip() {
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 text-center">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 text-center">
       {stats.map((s, i) => (
         <div key={i} className="flex flex-col items-center">
           <span ref={s.ref} className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight">

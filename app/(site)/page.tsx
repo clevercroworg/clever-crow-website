@@ -1,4 +1,4 @@
-import HeroCinematic from "@/components/HeroCinematic";
+import SimpleHero from "@/components/SimpleHero";
 import TechStack from "@/components/TechStack";
 import SectionHeader from "@/components/SectionHeader";
 import FallingTags from "@/components/FallingTags";
@@ -59,7 +59,7 @@ export default function HomePage() {
   return (
     <main>
       {/* ================= HERO ================= */}
-      <HeroCinematic />
+      <SimpleHero />
       <TechStack />
 
       {/* ================= WHAT WE BUILD ================= */}

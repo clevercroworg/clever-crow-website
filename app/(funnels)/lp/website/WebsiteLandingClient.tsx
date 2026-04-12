@@ -12,7 +12,7 @@ import SuccessStories from "../components/SuccessStories";
 import PricingSection from "../components/PricingSection";
 import FaqSection from "../components/FaqSection";
 import ClientReviews from "../components/ClientReviews";
-import Footer from "../components/Footer";
+import Footer from "@/components/Footer";
 import CallbackModal from "../components/CallbackModal";
 import WhatsAppButton from "../components/WhatsAppButton";
 

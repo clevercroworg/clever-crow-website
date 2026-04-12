@@ -78,7 +78,7 @@ const Row = ({
             className={`
               relative flex flex-col justify-between rounded-3xl border border-gray-100 bg-white/70 backdrop-blur-md 
               p-6 transition-all duration-300 hover:border-yellow-400/40 hover:shadow-2xl hover:-translate-y-1
-              ${isBig ? "w-[380px] sm:w-[450px]" : "w-[280px] sm:w-[320px]"}
+              ${isBig ? "w-[85vw] sm:w-[450px]" : "w-[280px] sm:w-[320px]"}
             `}
           >
             {/* Quote Icon */}
@@ -182,7 +182,7 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="mb-16 flex justify-center"
         >
-          <div className="inline-flex items-center gap-6 rounded-3xl bg-white/50 backdrop-blur-md border border-white/80 p-6 shadow-xl">
+          <div className="inline-flex flex-wrap sm:flex-nowrap items-center justify-center gap-6 rounded-3xl bg-white/50 backdrop-blur-md border border-white/80 p-6 shadow-xl">
             <div className="flex flex-col items-center">
               <span className="text-3xl font-black text-gray-950">4.9/5</span>
               <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Total Score</span>

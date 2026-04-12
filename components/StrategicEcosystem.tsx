@@ -168,7 +168,7 @@ export default function StrategicEcosystem() {
                     {pillar.metrics.map((metric, mi) => (
                       <div key={mi} className="flex items-center gap-2 sm:gap-2.5 group/item">
                         <div className="h-1 sm:h-1.5 w-1 sm:w-1.5 rounded-full bg-white opacity-40 group-hover/item:opacity-100 group-hover/item:scale-150 transition-all group-hover/item:shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
-                        <span className="text-[8px] sm:text-[11px] font-black uppercase tracking-[0.12em] text-white/70 transition-colors group-hover/item:text-white leading-tight">
+                        <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.12em] text-white/70 transition-colors group-hover/item:text-white leading-tight">
                           {metric}
                         </span>
                       </div>

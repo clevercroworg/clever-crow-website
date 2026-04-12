@@ -9,7 +9,7 @@ import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import PricingSection from "../components/PricingSection";
 import FaqSection from "../components/FaqSection";
-import Footer from "../components/Footer";
+import Footer from "@/components/Footer";
 import CallbackModal from "../components/CallbackModal";
 import WhatsAppButton from "../components/WhatsAppButton";
 

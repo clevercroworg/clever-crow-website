@@ -57,15 +57,6 @@ export default function ServiceCard({
       <Link href={href} className="group relative block h-full">
         <div className="relative h-full rounded-[2.2rem] border border-gray-200/50 p-1.5 sm:p-2 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg bg-gray-50/50">
           
-          <GlowingEffect
-            spread={40}
-            glow={true}
-            disabled={false}
-            proximity={64}
-            inactiveZone={0.01}
-            borderWidth={3}
-          />
-          
           {/* Main Card Shell - Premium Precision Aesthetic */}
           <div
             className="
@@ -73,17 +64,9 @@ export default function ServiceCard({
               bg-white p-8 sm:p-10 z-10
               transition-all duration-500 ease-[0.16,1,0.3,1]
               shadow-[0_4px_20px_rgba(0,0,0,0.02)]
+              group-hover:border-gray-200
             "
           >
-            {/* Animated Accent Line */}
-            <span
-              className="
-                absolute top-0 left-0 w-full h-[2px] 
-                bg-gradient-to-r from-transparent via-gray-100 to-transparent
-                transition-all duration-700
-                group-hover:via-yellow-400
-              "
-            />
 
             {/* Icon - Professional Aesthetic */}
             <div

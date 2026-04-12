@@ -118,15 +118,15 @@ export default function Header() {
                 <div key={group.key} className="relative" onMouseEnter={() => openDropdown(group.key)}>
                   <button
                     className={`flex items-center gap-1 rounded-full px-3 2xl:px-4 py-2 text-[13px] 2xl:text-[14px] font-semibold tracking-tight transition-all duration-200 ${
-                      activeDropdown === group.key
+                      activeDropdown === group.key || group.items.some(item => item.href === pathname)
                         ? "text-yellow-600 bg-yellow-50"
-                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-100/50"
+                        : "text-gray-700 hover:text-gray-900"
                     }`}
                   >
                     {group.label}
                     <ChevronDownIcon
                       className={`h-3 w-3 transition-transform duration-300 ${
-                        activeDropdown === group.key ? "rotate-180" : ""
+                        activeDropdown === group.key || group.items.some(item => item.href === pathname) ? "rotate-180" : ""
                       }`}
                     />
                   </button>
@@ -148,14 +148,14 @@ export default function Header() {
                               <Link
                                 key={i}
                                 href={item.href}
-                                className={`group flex items-center justify-between rounded-2xl px-4 py-3 text-[14px] font-medium transition-all duration-150 hover:bg-gray-50 ${
-                                  item.accent
-                                    ? "text-yellow-600 hover:text-yellow-700 font-bold"
-                                    : "text-gray-600 hover:text-gray-900"
+                                className={`group flex items-center justify-between rounded-2xl px-4 py-3 text-[14px] font-medium transition-all duration-150 ${
+                                  pathname === item.href
+                                    ? "bg-yellow-50 text-yellow-700"
+                                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                                 }`}
                               >
                                 {item.label}
-                                <ArrowRightIcon className="h-4 w-4 opacity-0 -translate-x-1 transition-all duration-200 group-hover:opacity-60 group-hover:translate-x-0" />
+                                <ArrowRightIcon className={`h-4 w-4 transition-all duration-200 ${pathname === item.href ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1 group-hover:opacity-60 group-hover:translate-x-0"}`} />
                               </Link>
                             ))}
                           </div>
@@ -166,7 +166,7 @@ export default function Header() {
                 </div>
               ))}
 
-              <DesktopLink href="/contact">Contact</DesktopLink>
+                <DesktopLink href="/contact" active={pathname === "/contact"}>Contact</DesktopLink>
             </nav>
 
             {/* DESKTOP CTAs */}
@@ -226,12 +226,16 @@ export default function Header() {
                 <div key={group.key} className="border-b border-gray-100 last:border-0 pb-1 mb-1">
                   <button
                     onClick={() => setMobileAccordion(mobileAccordion === group.key ? null : group.key)}
-                    className="flex w-full items-center justify-between rounded-2xl px-4 py-3.5 text-[16px] font-semibold text-gray-900 transition-colors hover:bg-gray-50"
+                    className={`flex w-full items-center justify-between rounded-2xl px-4 py-3.5 text-[16px] font-semibold transition-colors ${
+                      mobileAccordion === group.key || group.items.some(item => item.href === pathname)
+                        ? "text-yellow-600 bg-yellow-50"
+                        : "text-gray-900"
+                    }`}
                   >
                     {group.label}
                     <ChevronDownIcon
-                      className={`h-5 w-5 text-gray-400 transition-transform duration-300 ${
-                        mobileAccordion === group.key ? "rotate-180 text-yellow-500" : ""
+                      className={`h-5 w-5 transition-transform duration-300 ${
+                        mobileAccordion === group.key || group.items.some(item => item.href === pathname) ? "rotate-180 text-yellow-500" : "text-gray-400"
                       }`}
                     />
                   </button>
@@ -251,7 +255,9 @@ export default function Header() {
                               href={item.href}
                               onClick={() => setMenuOpen(false)}
                               className={`block py-2.5 text-[15px] font-medium transition-colors ${
-                                item.accent ? "text-yellow-600" : "text-gray-500 hover:text-gray-900"
+                                pathname === item.href
+                                  ? "text-yellow-700 bg-yellow-50/50 px-3 -mx-3 rounded-lg"
+                                  : "text-gray-500 hover:text-gray-900"
                               }`}
                             >
                               {item.label}
@@ -264,7 +270,7 @@ export default function Header() {
                 </div>
               ))}
 
-              <MobileNavLink href="/contact" setOpen={setMenuOpen}>Contact Us</MobileNavLink>
+              <MobileNavLink href="/contact" active={pathname === "/contact"} setOpen={setMenuOpen}>Contact Us</MobileNavLink>
 
               {/* Mobile CTAs */}
               <div className="pt-6 mt-4 border-t border-gray-100 grid grid-cols-2 gap-4">
@@ -291,23 +297,29 @@ export default function Header() {
   );
 }
 
-function DesktopLink({ href, children }: { href: string; children: React.ReactNode }) {
+function DesktopLink({ href, active, children }: { href: string; active?: boolean; children: React.ReactNode }) {
   return (
     <Link
       href={href}
-      className="rounded-full px-3 2xl:px-4 py-2 text-[13px] 2xl:text-[14px] font-semibold tracking-tight text-gray-700 transition-all duration-200 hover:text-gray-900 hover:bg-gray-100/50"
+      className={`rounded-full px-3 2xl:px-4 py-2 text-[13px] 2xl:text-[14px] font-semibold tracking-tight transition-all duration-200 ${
+        active
+          ? "text-yellow-600 bg-yellow-50"
+          : "text-gray-700 hover:text-gray-900"
+      }`}
     >
       {children}
     </Link>
   );
 }
 
-function MobileNavLink({ href, setOpen, children }: { href: string; setOpen: (v: boolean) => void; children: React.ReactNode }) {
+function MobileNavLink({ href, active, setOpen, children }: { href: string; active?: boolean; setOpen: (v: boolean) => void; children: React.ReactNode }) {
   return (
     <Link
       href={href}
       onClick={() => setOpen(false)}
-      className="block rounded-2xl px-4 py-3.5 text-[16px] font-semibold text-gray-900 hover:bg-gray-50"
+      className={`block rounded-2xl px-4 py-3.5 text-[16px] font-semibold transition-colors ${
+        active ? "text-yellow-600 bg-yellow-50" : "text-gray-900"
+      }`}
     >
       {children}
     </Link>
