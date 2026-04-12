@@ -9,14 +9,26 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
   const [loadTime, setLoadTime] = useState<string | null>(null);
 
   useEffect(() => {
-    // Calculate performance load time
-    if (typeof window !== "undefined") {
-      const perf = window.performance;
-      if (perf) {
-        const time = perf.now() / 1000;
-        setLoadTime(time.toFixed(2));
+    const calculateLoadTime = () => {
+      if (typeof window !== "undefined") {
+        const perf = window.performance;
+        const nav = perf.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
+        
+        if (nav) {
+          // Time from start of fetch to site being interactive
+          const time = nav.domInteractive - nav.fetchStart;
+          setLoadTime((time / 1000).toFixed(2));
+        } else {
+          // Fallback for older browsers
+          const time = perf.now() / 1000;
+          setLoadTime(time.toFixed(2));
+        }
       }
-    }
+    };
+
+    // The navigation entry might not be ready immediately on mount
+    const timer = setTimeout(calculateLoadTime, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
