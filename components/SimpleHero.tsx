@@ -104,7 +104,7 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
                 transition={{ duration: 0.8 }}
                 className="absolute bottom-1 left-0 h-[3px] bg-yellow-500" 
               />
-            </span> and <span className="text-white">AI driven marketing strategies</span> to help you <span className="text-yellow-500 italic underline underline-offset-4 decoration-yellow-500/20">scale faster worldwide.</span>
+            </span> and <span className="text-white">AI driven Digital Marketing Strategies</span> to help you <span className="text-yellow-500 italic underline underline-offset-4 decoration-yellow-500/20">scale faster worldwide.</span>
           </p>
         </motion.div>
 
@@ -128,23 +128,25 @@ export default function SimpleHero({ onCallbackClick }: { onCallbackClick?: () =
           transition={{ duration: 0.3 }}
           className="flex flex-col sm:flex-row items-center gap-7"
         >
-          <a
-            href="tel:+919986389444"
-            className="group relative flex w-full sm:w-auto h-18 py-5 items-center justify-center gap-4 rounded-2xl bg-yellow-500 px-8 sm:px-14 text-[16px] sm:text-[18px] font-black text-black transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden"
+          <button
+            onClick={onCallbackClick}
+            className="group relative flex w-full sm:w-auto h-18 py-5 items-center justify-center gap-4 rounded-2xl bg-yellow-500 px-8 sm:px-14 text-[16px] sm:text-[18px] font-black text-black transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden shadow-[0_20px_40px_rgba(234,179,8,0.2)]"
           >
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             <span className="relative z-10 flex items-center gap-2">
-              Get a Free Consultation
+              Request a Call Back
               <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
             </span>
-          </a>
+          </button>
 
-          <a
-            href="#portfolio"
+          <button
+            onClick={() => {
+              window.dispatchEvent(new CustomEvent('open-chat'));
+            }}
             className="group flex w-full sm:w-auto h-18 py-5 items-center justify-center px-8 sm:px-12 text-[16px] sm:text-[18px] font-bold text-white border-2 border-white/20 hover:border-yellow-500 rounded-2xl backdrop-blur-3xl transition-all duration-300"
           >
-            View Our Portfolio
-          </a>
+            Chat With Us
+          </button>
         </motion.div>
       </div>
     </section>

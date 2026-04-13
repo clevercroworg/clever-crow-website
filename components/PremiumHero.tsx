@@ -131,8 +131,7 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
             transition={{ delay: 0.2, duration: 0.8 }}
             className="mx-auto mt-10 max-w-5xl text-lg leading-relaxed text-slate-400 md:text-2xl md:leading-[1.7] text-balance font-medium px-4"
           >
-            Top-tier performance and sharply engineered strategies to scale your digital presence. 
-            We build growth systems that don't just look good &mdash; they convert.
+            We create <span className="text-white">high performance websites</span> and <span className="text-white">AI driven Digital Marketing Strategies</span> to help you <span className="text-yellow-500 font-bold">scale faster worldwide.</span>
           </motion.p>
 
           <motion.div
@@ -141,13 +140,22 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
             transition={{ delay: 0.3, duration: 0.8 }}
             className="mt-12 flex flex-col items-center justify-center gap-5 sm:flex-row px-4"
           >
-            <Link
-              href="/contact"
+            <button
+              onClick={onCallbackClick}
               className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-yellow-500 px-8 py-5 text-[15px] font-black uppercase tracking-widest text-slate-900 transition-all hover:scale-105 active:scale-95 sm:w-auto shadow-[0_20px_40px_rgba(234,179,8,0.3)]"
             >
-              Start Engineering Growth
+              Request a Call Back
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Link>
+            </button>
+
+            <button
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('open-chat'));
+              }}
+              className="group flex w-full items-center justify-center gap-3 rounded-full border-2 border-white/20 bg-white/5 px-8 py-5 text-[15px] font-black uppercase tracking-widest text-white transition-all hover:bg-white/10 hover:border-white/40 active:scale-95 sm:w-auto"
+            >
+              Chat With Us
+            </button>
           </motion.div>
 
         </div>

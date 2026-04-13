@@ -36,9 +36,7 @@ export default function HeroSection({ onCallbackClick }: HeroSectionProps) {
 
         {/* Subheading */}
         <p className="mx-auto mt-6 max-w-3xl text-lg text-gray-600 md:text-xl">
-          We design and operate AI-powered digital marketing systems 
-          from social media and ads to websites and content focused on
-          predictable business growth.
+          We create <span className="text-gray-900 font-bold">high performance websites</span> and <span className="text-gray-900 font-bold">AI driven Digital Marketing Strategies</span> to help you <span className="text-yellow-600 font-bold">scale faster worldwide.</span>
         </p>
 
         {/* CTAs */}
@@ -50,36 +48,29 @@ export default function HeroSection({ onCallbackClick }: HeroSectionProps) {
             className="
               group inline-flex items-center gap-3
               rounded-2xl bg-yellow-400 px-8 py-4
-              font-semibold text-black
+              font-extrabold text-[15px] uppercase tracking-wider text-black
               transition-all duration-300
               hover:bg-yellow-500 hover:-translate-y-0.5 hover:shadow-xl
               focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400
             "
           >
-            {/* Animated intent icon (hover only) */}
-            <PhoneCall
-              size={18}
-              className="transition-transform duration-300 group-hover:rotate-[-8deg]"
-            />
-            Request a Call
+            Request a Call Back
           </button>
 
-          {/* SECONDARY CTA — View Services */}
-          <a
-            href="/services"
+          {/* SECONDARY CTA — Chat */}
+          <button
+            onClick={() => {
+              window.dispatchEvent(new CustomEvent('open-chat'));
+            }}
             className="
               group inline-flex items-center gap-2
-              rounded-2xl px-6 py-4
-              font-semibold text-gray-700
-              transition hover:text-gray-900
+              rounded-2xl border-2 border-gray-200 px-8 py-4
+              font-extrabold text-[15px] uppercase tracking-wider text-gray-700
+              transition-all hover:bg-gray-50 hover:border-yellow-400 hover:text-gray-900
             "
           >
-            View Our Services
-            <ArrowRight
-              size={18}
-              className="transition-transform duration-300 group-hover:translate-x-1"
-            />
-          </a>
+            Chat With Us
+          </button>
 
         </div>
 

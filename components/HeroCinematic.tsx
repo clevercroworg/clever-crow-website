@@ -334,14 +334,21 @@ export default function HeroCinematic({ onCallbackClick }: { onCallbackClick?: (
                         <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-blue-300">Presence, Worldwide.</span>
                       </h1>
                       <p className="text-[0.95rem] sm:text-[1.05rem] md:text-xl leading-relaxed text-gray-300 mb-8 sm:mb-10 max-w-2xl font-medium text-balance">
-                        We build <strong className="text-white font-bold">conversion-optimised websites and digital experiences</strong> that put your brand in front of customers&nbsp;worldwide.
+                        We create <strong className="text-white font-bold">high performance websites</strong> and <strong className="text-white font-bold">AI driven Digital Marketing Strategies</strong> to help you <span className="text-cyan-400 font-bold">scale faster worldwide.</span>
                       </p>
                       <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 justify-center w-full">
                         <button onClick={onCallbackClick} className="group flex h-12 sm:h-14 items-center justify-center gap-3 rounded-full bg-yellow-500 hover:bg-yellow-400 px-8 text-[15px] font-bold text-white shadow-[0_0_30px_rgba(234,179,8,0.25)] transition-all duration-300 hover:scale-105 w-full sm:w-auto">
-                          Get a Free Consultation
+                          Request a Call Back
                           <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                         </button>
-                        <a href="#portfolio" className="text-[15px] font-bold text-gray-300 hover:text-white underline underline-offset-4 transition-colors h-14 flex items-center justify-center">View our portfolio</a>
+                        <button 
+                          onClick={() => {
+                            window.dispatchEvent(new CustomEvent('open-chat'));
+                          }}
+                          className="group flex h-12 sm:h-14 items-center justify-center gap-3 rounded-full border-2 border-white/20 bg-white/5 hover:bg-white/10 px-8 text-[15px] font-bold text-white transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+                        >
+                          Chat With Us
+                        </button>
                       </div>
                     </div>
                   </div>
