@@ -30,6 +30,19 @@ export default function WebsiteLandingClient({ data }: WebsiteLandingClientProps
     setHasMounted(true);
   }, []);
 
+  useEffect(() => {
+    if (hasMounted && window.location.hash) {
+      const id = window.location.hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        // Small timeout to ensure all components have rendered
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [hasMounted]);
+
   if (!hasMounted) return null;
 
   return (
