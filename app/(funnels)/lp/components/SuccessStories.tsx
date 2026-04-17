@@ -120,7 +120,13 @@ export default function SuccessStories({ data, title, subtitle, filterBy }: Succ
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 key={cs.id}
-                onClick={() => setSelectedId(cs.id)}
+                onClick={() => {
+                  if (cs.link) {
+                    window.open(cs.link, "_blank", "noopener,noreferrer");
+                  } else {
+                    setSelectedId(cs.id);
+                  }
+                }}
                 className="group relative cursor-pointer bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 flex flex-col"
                 whileHover={{ y: -8 }}
               >
