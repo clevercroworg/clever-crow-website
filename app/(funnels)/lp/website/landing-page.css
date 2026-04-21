@@ -373,6 +373,7 @@ a {
 .package-list {
   margin-top: 1rem;
   display: grid;
+  align-content: start;
   gap: 0.7rem;
   padding: 0;
   list-style: none;

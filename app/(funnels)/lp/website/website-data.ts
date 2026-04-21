@@ -86,8 +86,8 @@ export function getWebsiteLandingData(): WebsiteLandingData {
       ctaLabel: "View Prices",
     },
     pricing: {
-      preTitle: "February Special Offer",
-      title: "Valentine Website Packages",
+      preTitle: "Transparent Pricing",
+      title: "High-Performance Website Packages",
       subtitle: "Get conversion-focused websites with launch-ready setup and fast delivery.",
       packages: [
         {
@@ -97,6 +97,21 @@ export function getWebsiteLandingData(): WebsiteLandingData {
           price: "₹9,999",
           description: "",
           features: ["Up to 6 Pages", "Contact Form + WhatsApp Chat", "Google Map + Gallery", "Delivery in 2-3 Days"],
+        },
+        {
+          label: "Professional",
+          name: "Website Package",
+          price: "₹18,000",
+          description: "",
+          features: [
+            "Custom premium website design",
+            "Up to 20 pages",
+            "Mobile responsive design",
+            "Fast loading website",
+            "Modern UI with clean layout",
+            "Basic animations and smooth section transitions",
+            "Conversion-focused page structure"
+          ],
         },
         {
           label: "Most Popular",
