@@ -78,7 +78,13 @@ export default function PricingSection({ data }: PricingSectionProps) {
                   <p className="mt-4 text-[14px] font-medium leading-relaxed text-slate-700">{pkg.description}</p>
                 )}
                 <ul className="package-list mt-4">
-                  {pkg.features.map((feature) => (<li key={feature}>{feature}</li>))}
+                  {pkg.features.map((feature) => (
+                    <li 
+                      key={feature} 
+                      className={feature.includes('<div') ? '!pl-0 before:!content-none before:!hidden' : ''}
+                      dangerouslySetInnerHTML={{ __html: feature }} 
+                    />
+                  ))}
                 </ul>
               </div>
             </article>

@@ -96,7 +96,14 @@ export function getWebsiteLandingData(): WebsiteLandingData {
           oldPrice: "₹10,000",
           price: "₹9,999",
           description: "",
-          features: ["Up to 6 Pages", "Contact Form + WhatsApp Chat", "Google Map + Gallery", "Delivery in 2-3 Days"],
+          features: [
+            "Up to 6 pages",
+            "100% mobile responsive",
+            "WhatsApp chat",
+            "Google forms",
+            "Gallery",
+            "Delivery within 4 days"
+          ],
         },
         {
           label: "Professional",
@@ -104,13 +111,13 @@ export function getWebsiteLandingData(): WebsiteLandingData {
           price: "₹18,000",
           description: "",
           features: [
-            "Custom premium website design",
-            "Up to 20 pages",
-            "Mobile responsive design",
-            "Fast loading website",
-            "Modern UI with clean layout",
-            "Basic animations and smooth section transitions",
-            "Conversion-focused page structure"
+             "Everything in Basic plan",
+             "Up to 20 pages",
+             "Basic SEO",
+             "Sitemap setup",
+             "Google Analytics",
+             "Social media integration",
+             "Delivery within 6 days"
           ],
         },
         {
@@ -119,7 +126,16 @@ export function getWebsiteLandingData(): WebsiteLandingData {
           oldPrice: "₹35,000",
           price: "₹29,999",
           description: "",
-          features: ["Up to 30 Pages + CMS", "Blog, Gallery, Advanced Forms", "Basic On-page SEO", "Delivery in 8-10 Days"],
+          features: [
+            "Everything in Pro plan",
+            "Up to 30 pages",
+            "Blog posts",
+            "Admin dashboard",
+            "Advanced SEO",
+            "Speed Optimization",
+            "Delivery within 12 days",
+            "<div class='mt-2 p-3.5 rounded-xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50 shadow-sm relative overflow-hidden'><div class='flex items-center justify-between mb-1.5'><span class='text-[11px] font-extrabold uppercase tracking-widest text-amber-700'>Bonus Included 🎁</span><span class='text-[10px] font-bold px-2 py-0.5 bg-white border border-amber-100 text-amber-600 rounded-full shadow-sm'>Value ₹6,000</span></div><p class='text-[14.5px] font-extrabold text-slate-900 leading-snug'>6 Free Instagram Posts</p><p class='text-[12.5px] text-slate-600 font-medium leading-tight mt-1'>Kickstart your digital presence seamlessly alongside your website launch—completely free!</p></div>"
+          ],
           featured: true,
         },
       ],
