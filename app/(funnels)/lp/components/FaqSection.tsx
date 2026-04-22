@@ -14,8 +14,8 @@ const googleAdsFaqs: FaqData[] = [
     answer: "Most campaigns start generating leads within 3–7 days after going live. Google’s algorithm usually takes about a week to fully optimise for your target audience."
   },
   {
-    question: "Is ₹8,999 the ad spend or your service fee?",
-    answer: "₹8,999 is our professional management fee for the Basic package. Your ad spend is paid directly to Google from your own account."
+    question: "Is ₹9,999 the ad spend or your service fee?",
+    answer: "₹9,999 is our professional management fee for the Basic package. Your ad spend is paid directly to Google from your own account."
   },
   {
     question: "Will I get guaranteed leads or sales?",

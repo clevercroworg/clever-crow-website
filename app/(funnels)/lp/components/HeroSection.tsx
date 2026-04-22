@@ -18,7 +18,7 @@ type HeroSectionProps = {
 const defaultHero: HeroMeta = {
   badges: ["Google Ads Experts", "Google Certified", "Performance Focused", "Lead Generation"],
   title: "Google Ads Management",
-  accentTitle: "@ Just ₹8,999",
+  accentTitle: "@ Just ₹9,999",
   subtitle: "Get More Qualified Leads with Google Ads Management",
   highlights: ["15+ Years of Experience", "Certified Professionals", "550+ Happy Clients", "Best Customer Support"],
   ctaLabel: "View Pricing",

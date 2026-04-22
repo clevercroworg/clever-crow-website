@@ -33,7 +33,7 @@ const defaultPricing: PricingMeta = {
     {
       label: "Basic",
       name: "Basic",
-      price: "₹8,999",
+      price: "₹9,999",
       description: "Best if: Best-in-budget marketing for instant leads.",
       features: ["Campaign setup", "Keyword research", "Ad copy creation", "Conversion tracking setup", "7 days basic optimisation"],
     },
