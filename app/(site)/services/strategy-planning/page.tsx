@@ -14,8 +14,10 @@ const faqs = [
 ];
 
 export const metadata = {
-  title: "Strategy & Planning Services | Clever Crow",
-  description: "We help you define your positioning, messaging, and growth roadmap so your brand stands out and scales with confidence.",
+  title: "Brand Strategy & Development - Data-Driven Brand Building  | Clever Crow",
+  description:
+    "Complete brand strategy and development services. Data-driven approach to brand positioning, messaging, and visual identity creation.",
+  keywords: "brand strategy, brand positioning, brand strategy consulting, strategic branding, brand strategy services, brand development strategy",
 };
 
 export default function StrategyPlanningPage() {

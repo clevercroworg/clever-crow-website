@@ -34,9 +34,10 @@ const webAppFaqs = [
 /* ---------------- METADATA ---------------- */
 
 export const metadata = {
-  title: "Web Application Development Services | Clever Crow",
+  title: "Web Application Development - Custom SaaS & Enterprise Apps | Clever Crow",
   description:
-    "We design and develop custom web applications that streamline operations, improve efficiency, and scale with your business.",
+    "Custom web application development with React, Next.js, and TypeScript. Scalable SaaS platforms and enterprise solutions. Get started today.",
+  keywords: "web application development, custom web app development, React web development, Next.js development services, scalable web applications, SaaS web development",
 };
 
 /* ---------------- PAGE ---------------- */

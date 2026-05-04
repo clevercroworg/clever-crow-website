@@ -56,17 +56,10 @@ const googleAdsFaqs = [
 /* ---------------- METADATA ---------------- */
 
 export const metadata = {
-  title: "Google Ads Management Services in India | Clever Crow",
+  title: "Google Ads Management Services - PPC Campaign Experts | Clever Crow",
   description:
-    "Professional Google Ads & PPC management services in India focused on lead generation, conversion tracking, and ROI-driven growth.",
-  keywords: [
-    "google ads management services",
-    "ppc management services india",
-    "google ads agency india",
-    "ppc agency india",
-    "paid search management india",
-    "performance marketing agency india",
-  ],
+    "Professional Google Ads management with precision targeting. Capture high-intent traffic and dominate search results. Free audit available.",
+  keywords: "Google Ads management, PPC advertising services, Google Ads agency, paid search marketing, Google Ads expert, search engine marketing",
 };
 
 /* ---------------- PAGE ---------------- */

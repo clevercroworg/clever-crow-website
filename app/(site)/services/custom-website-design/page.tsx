@@ -42,9 +42,10 @@ const customWebsiteFaqs = [
 /* ---------------- METADATA ---------------- */
 
 export const metadata = {
-  title: "Custom Website Design Services in India | Clever Crow",
+  title: "Website Development Services - Business & E-commerce | Clever Crow",
   description:
-    "Custom website design services in India. High-performance, conversion-focused websites tailored to your brand and business goals.",
+    "Custom website development with React, Next.js & modern tech stack. High-converting business websites and e-commerce stores. Get started now.",
+  keywords: "website development company, custom website development, business website design, responsive website development, high performance websites, corporate website development",
 };
 
 /* ---------------- PAGE ---------------- */

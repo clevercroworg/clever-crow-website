@@ -10,16 +10,10 @@ import ServiceSchema from "@/components/seo/ServiceSchema";
 /* ---------------- METADATA ---------------- */
 
 export const metadata = {
-  title: "Marketing Strategy & Growth Consulting Services | Clever Crow",
+  title: "Digital Marketing Services - Google Ads & SEO Agency | Clever Crow",
   description:
-    "Data-driven marketing strategy services to help brands grow faster with clear positioning, channel planning, and scalable growth frameworks.",
-  keywords: [
-    "marketing strategy services",
-    "growth marketing strategy",
-    "go-to-market strategy",
-    "digital marketing strategy consulting",
-    "marketing planning services india",
-  ],
+    "Data-driven digital marketing with Google Ads, Meta Ads, and SEO. 12.4× average ROAS and proven growth strategies. Start your campaign today.",
+  keywords: "digital marketing agency, online marketing services, performance marketing agency, lead generation services, internet marketing company, growth marketing agency",
 };
 
 /* ---------------- PAGE ---------------- */

@@ -42,16 +42,10 @@ const linkedinAdsFaqs = [
 /* ---------------- METADATA ---------------- */
 
 export const metadata = {
-  title: "LinkedIn Ads Management Services in India | Clever Crow",
+  title: "LinkedIn Advertising Services - B2B Lead Generation Campaigns | Clever Crow",
   description:
-    "Professional LinkedIn Ads management services in India focused on B2B lead generation, decision-maker targeting, and ROI-driven growth.",
-  keywords: [
-    "linkedin ads management services",
-    "linkedin advertising agency india",
-    "b2b lead generation linkedin",
-    "linkedin marketing services",
-    "paid social advertising india",
-  ],
+    "Professional LinkedIn advertising for B2B lead generation. Targeted campaigns to reach decision-makers and grow your business network.",
+  keywords: "LinkedIn Ads services, B2B lead generation, LinkedIn advertising agency, professional audience targeting, LinkedIn marketing services, B2B advertising campaigns",
 };
 
 /* ---------------- PAGE ---------------- */

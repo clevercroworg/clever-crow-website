@@ -34,9 +34,10 @@ const ecommerceFaqs = [
 /* ---------------- METADATA ---------------- */
 
 export const metadata = {
-  title: "E-commerce Website Development Services | Clever Crow",
+  title: "E-commerce Website Development - Shopify & Custom Stores | Clever Crow",
   description:
-    "We design and develop high-performance e-commerce websites that are fast, user-friendly, and optimized to convert visitors into customers.",
+    "Powerful e-commerce websites built for scale and speed. Shopify development and custom online stores with seamless shopping experiences.",
+  keywords: "ecommerce website development, online store development, Shopify website development, ecommerce web design, ecommerce development company, online shopping website",
 };
 
 /* ---------------- PAGE ---------------- */

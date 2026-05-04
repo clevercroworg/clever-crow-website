@@ -34,9 +34,10 @@ const businessWebsiteFaqs = [
 /* ---------------- METADATA ---------------- */
 
 export const metadata = {
-  title: "Business Website Development Services | Clever Crow",
+  title: "Business Website Development - Lead Generation Sites | Clever Crow",
   description:
-    "We design and develop modern, fast, and mobile-friendly websites that help your business attract leads, build trust, and grow online.",
+    "Professional business websites designed for lead generation and brand authority. Custom-built, mobile-optimized, and conversion-focused. Get a quote.",
+  keywords: "business website development, small business website design, corporate website services, lead generation website, professional business websites, company website development",
 };
 
 /* ---------------- PAGE ---------------- */

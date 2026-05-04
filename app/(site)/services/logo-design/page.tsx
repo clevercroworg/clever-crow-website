@@ -14,8 +14,10 @@ const faqs = [
 ];
 
 export const metadata = {
-  title: "Logo Design Services | Clever Crow",
-  description: "We create powerful, timeless logos that build trust, recognition, and strong brand recall for your business.",
+  title: "Logo Design Services - Professional Brand Identity Design | Clever Crow",
+  description:
+    "Custom logo design and brand identity creation. Professional logos that represent your brand values and stand out in the market.",
+  keywords: "logo design services, professional logo design, brand logo design, custom logo creation, business logo design, creative logo agency",
 };
 
 export default function LogoDesignPage() {

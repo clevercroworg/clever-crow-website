@@ -51,16 +51,10 @@ const metaAdsFaqs = [
 /* ---------------- METADATA ---------------- */
 
 export const metadata = {
-  title: "Meta Ads Management Services in India | Clever Crow",
+  title: "Meta Ads Management - Facebook & Instagram Advertising | Clever Crow",
   description:
-    "ROI-driven Meta (Facebook & Instagram) Ads management services in India focused on lead generation, lower CPL, and scalable growth.",
-  keywords: [
-    "meta ads management services",
-    "facebook ads agency india",
-    "instagram ads management",
-    "paid social advertising india",
-    "performance marketing agency india",
-  ],
+    "Targeted Facebook and Instagram advertising to reach your ideal audience. Expert Meta Ads management with proven ROI. Get started today.",
+  keywords: "Meta Ads services, Facebook Ads agency, Instagram Ads marketing, social media advertising, paid social media campaigns, Meta advertising agency",
 };
 
 /* ---------------- PAGE ---------------- */

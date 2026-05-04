@@ -14,8 +14,10 @@ const faqs = [
 ];
 
 export const metadata = {
-  title: "Graphic Design Services | Clever Crow",
-  description: "We create high-impact visual designs for ads, social media, and marketing that help your brand stand out and convert.",
+  title: "Branding Services - Complete Brand Identity & Strategy | Clever Crow",
+  description:
+    "Professional branding services including brand strategy, visual identity, and positioning. Build a memorable brand that drives growth.",
+  keywords: "branding services, brand identity design, logo design services, brand development, corporate branding, brand design agency",
 };
 
 export default function GraphicDesignPage() {

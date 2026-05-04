@@ -34,9 +34,10 @@ const mobileAppFaqs = [
 /* ---------------- METADATA ---------------- */
 
 export const metadata = {
-  title: "Mobile App Development Services | Clever Crow",
+  title: "Mobile App Development Services - iOS & Android | Clever Crow",
   description:
-    "We design and develop custom mobile apps for startups, service businesses, and growing brands. Fast, user-friendly, and built to scale.",
+    "Custom mobile app development for iOS and Android. Full-stack solutions built for scale and performance. Request a quote for your app project today.",
+  keywords: "mobile app development company, Android app development, iOS app development, custom mobile app development, app development services, cross platform app development",
 };
 
 /* ---------------- PAGE ---------------- */

@@ -1,9 +1,10 @@
 import HomePageClient from "./HomePageClient";
 
 export const metadata = {
-  title: "Clever Crow – AI Digital Marketing & Automation",
+  title: "Digital Marketing & Web Development | Clever Crow",
   description:
-    "Clever Crow helps businesses grow with AI-powered digital marketing, SEO, automation, and high-conversion websites.",
+    "High-performance websites, AI-driven digital marketing & Google Ads management. 120+ campaigns delivered with 12.4× ROAS. Get your free consultation today.",
+  keywords: "digital marketing company, web development company, AI marketing agency, website and marketing services, digital growth agency, performance marketing company",
 };
 
 /* ================= SERVICES DATA ================= */

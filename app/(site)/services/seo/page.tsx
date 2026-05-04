@@ -47,18 +47,10 @@ const seoFaqs = [
 /* ---------------- METADATA ---------------- */
 
 export const metadata = {
-  title:
-    "SEO Services in India | Website SEO Content & Optimization – Clever Crow",
+  title: "SEO Services - Organic Traffic & Search Rankings | Clever Crow",
   description:
-    "Professional SEO services in India focused on rankings, organic traffic, and lead generation. Website SEO content, on-page & technical SEO.",
-  keywords: [
-    "seo services india",
-    "website seo content",
-    "search engine optimization services",
-    "seo agency india",
-    "local seo services india",
-    "technical seo services",
-  ],
+    "Data-driven SEO services for long-term organic growth. Sustainable traffic increase and higher search rankings. Free SEO audit available.",
+  keywords: "SEO services company, search engine optimization, organic traffic growth, Google ranking services, SEO agency, technical SEO services",
 };
 
 /* ---------------- PAGE ---------------- */

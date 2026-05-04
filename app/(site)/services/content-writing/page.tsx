@@ -14,8 +14,10 @@ const faqs = [
 ];
 
 export const metadata = {
-  title: "Content Writing Services | Clever Crow",
-  description: "Professional content writing services for websites, blogs, emails, and marketing — strategically crafted to connect with your audience.",
+  title: "Content Creation Services - Marketing Content & Copywriting | Clever Crow",
+  description:
+    "Professional content creation for digital marketing campaigns. Engaging copy, social media content, and marketing materials that convert.",
+  keywords: "content creation services, social media content, marketing content creation, blog writing services, creative content agency, digital content strategy",
 };
 
 export default function ContentWritingPage() {
