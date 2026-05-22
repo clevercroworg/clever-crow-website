@@ -45,13 +45,13 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Resources Column */}
+          {/* Explore Column */}
           <div>
-            <h3 className="text-white text-lg font-bold mb-8 tracking-tight">Resources</h3>
+            <h3 className="text-white text-lg font-bold mb-8 tracking-tight">Explore</h3>
             <ul className="space-y-4 text-sm font-medium">
-              <li><Link href="/#faq" className="hover:text-yellow-400 transition-colors">FAQs</Link></li>
-              <li><Link href="/#blog" className="hover:text-yellow-400 transition-colors">Blog</Link></li>
-              <li><Link href="/#portfolio" className="hover:text-yellow-400 transition-colors">Case Studies</Link></li>
+              <li><Link href="/internship" className="hover:text-yellow-400 transition-colors">Internships</Link></li>
+              <li><Link href="/services/seo" className="hover:text-yellow-400 transition-colors">SEO Services</Link></li>
+              <li><Link href="/services/social-media-marketing" className="hover:text-yellow-400 transition-colors">Social Media Marketing</Link></li>
               <li><a href="tel:+919986389444" className="hover:text-yellow-400 transition-colors">Free Consultation</a></li>
             </ul>
           </div>
