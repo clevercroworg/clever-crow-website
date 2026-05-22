@@ -52,7 +52,7 @@ export default function Footer() {
               <li><Link href="/internship" className="hover:text-yellow-400 transition-colors">Internships</Link></li>
               <li><Link href="/services/seo" className="hover:text-yellow-400 transition-colors">SEO Services</Link></li>
               <li><Link href="/services/social-media-marketing" className="hover:text-yellow-400 transition-colors">Social Media Marketing</Link></li>
-              <li><a href="tel:+919986389444" className="hover:text-yellow-400 transition-colors">Free Consultation</a></li>
+              <li><Link href="/services/content-writing" className="hover:text-yellow-400 transition-colors">Content Writing</Link></li>
             </ul>
           </div>
 
