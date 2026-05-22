@@ -147,7 +147,7 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
             <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms & Conditions</Link>
-            <Link href="#" className="hover:text-white transition-colors">Refund Policy</Link>
+            <Link href="/refund-policy" className="hover:text-white transition-colors">Refund Policy</Link>
             <button 
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="group flex items-center gap-2 text-slate-500 hover:text-yellow-400 transition-colors"
