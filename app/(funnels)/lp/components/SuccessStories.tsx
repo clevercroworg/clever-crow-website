@@ -41,9 +41,10 @@ type SuccessStoriesProps = {
   title?: string;
   subtitle?: string;
   filterBy?: string;
+  hideMetrics?: boolean;
 };
 
-export default function SuccessStories({ data, title, subtitle, filterBy }: SuccessStoriesProps) {
+export default function SuccessStories({ data, title, subtitle, filterBy, hideMetrics = false }: SuccessStoriesProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const displayCaseStudies = data ?? defaultCaseStudies;
@@ -166,21 +167,28 @@ export default function SuccessStories({ data, title, subtitle, filterBy }: Succ
                     <p className="text-[10px] font-bold text-brand-main uppercase tracking-widest">{cs.category}</p>
                   </div>
 
-                  <div className="mb-6">
+                  <div className={hideMetrics ? "mb-4" : "mb-6"}>
                     <h3 className="text-lg font-bold text-slate-900 group-hover:text-brand-main transition-colors mb-1">{cs.title}</h3>
+                    {hideMetrics && cs.summary && (
+                      <p className="mt-2 text-xs text-slate-500 line-clamp-2 leading-relaxed font-medium">
+                        {cs.summary}
+                      </p>
+                    )}
                   </div>
 
                   {/* Metrics Grid */}
-                  <div className="grid grid-cols-2 gap-3 mb-6">
-                    <div className="rounded-xl bg-slate-50 p-3 border border-slate-100 group-hover:bg-white group-hover:border-slate-200 transition-all">
-                      <p className="text-[9px] font-bold text-slate-400 uppercase mb-0.5">Impact</p>
-                      <p className="text-sm font-black text-slate-900">{cs.primaryMetric}</p>
+                  {!hideMetrics && (
+                    <div className="grid grid-cols-2 gap-3 mb-6">
+                      <div className="rounded-xl bg-slate-50 p-3 border border-slate-100 group-hover:bg-white group-hover:border-slate-200 transition-all">
+                        <p className="text-[9px] font-bold text-slate-400 uppercase mb-0.5">Impact</p>
+                        <p className="text-sm font-black text-slate-900">{cs.primaryMetric}</p>
+                      </div>
+                      <div className="rounded-xl bg-emerald-50 p-3 border border-emerald-100 group-hover:bg-emerald-100/20 transition-all">
+                        <p className="text-[9px] font-bold text-emerald-500 uppercase mb-0.5">Growth</p>
+                        <p className="text-sm font-black text-emerald-700">{cs.secondaryMetric}</p>
+                      </div>
                     </div>
-                    <div className="rounded-xl bg-emerald-50 p-3 border border-emerald-100 group-hover:bg-emerald-100/20 transition-all">
-                      <p className="text-[9px] font-bold text-emerald-500 uppercase mb-0.5">Growth</p>
-                      <p className="text-sm font-black text-emerald-700">{cs.secondaryMetric}</p>
-                    </div>
-                  </div>
+                  )}
 
                   {/* Bottom Info */}
                   <div className="mt-auto flex items-center justify-between pt-5 border-t border-slate-50">
@@ -248,16 +256,18 @@ export default function SuccessStories({ data, title, subtitle, filterBy }: Succ
               </div>
 
               <div className="p-8 sm:p-10">
-                <div className="grid grid-cols-2 gap-4 mb-10">
-                  <div className="rounded-3xl bg-slate-50 p-6 border border-slate-100">
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Primary Outcome</p>
-                    <p className="text-2xl font-black text-slate-900">{selectedCase.primaryMetric}</p>
+                {!hideMetrics && (
+                  <div className="grid grid-cols-2 gap-4 mb-10">
+                    <div className="rounded-3xl bg-slate-50 p-6 border border-slate-100">
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Primary Outcome</p>
+                      <p className="text-2xl font-black text-slate-900">{selectedCase.primaryMetric}</p>
+                    </div>
+                    <div className="rounded-3xl bg-emerald-50 p-6 border border-emerald-100">
+                      <p className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest mb-2">Growth Lift</p>
+                      <p className="text-2xl font-black text-emerald-700">{selectedCase.secondaryMetric}</p>
+                    </div>
                   </div>
-                  <div className="rounded-3xl bg-emerald-50 p-6 border border-emerald-100">
-                    <p className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest mb-2">Growth Lift</p>
-                    <p className="text-2xl font-black text-emerald-700">{selectedCase.secondaryMetric}</p>
-                  </div>
-                </div>
+                )}
 
                 <div className="space-y-8">
                   <div>

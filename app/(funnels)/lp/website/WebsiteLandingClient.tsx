@@ -58,6 +58,7 @@ export default function WebsiteLandingClient({ data }: WebsiteLandingClientProps
             data={data.caseStudies} 
             title="Our Website Portfolio"
             subtitle="Live projects across real estate, education, healthcare, industrial, e-commerce, hospitality, IT, corporate, and wellness segments."
+            hideMetrics={true}
           />
           <FaqSection data={data.faqs} />
           <ClientReviews />
