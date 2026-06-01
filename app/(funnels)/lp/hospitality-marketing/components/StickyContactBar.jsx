@@ -72,24 +72,21 @@ const StickyContactBar = () => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ y: 80, x: "-50%", opacity: 0 }}
-          animate={{ y: 0, x: "-50%", opacity: 1 }}
-          exit={{ y: 80, x: "-50%", opacity: 0 }}
+          initial={{ y: 80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 80, opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between gap-3 bg-[#0a0e0b]/90 backdrop-blur-xl border border-white/10 px-4 py-3 rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.6)] w-[90%] sm:w-auto max-w-[24rem]"
+          className="fixed bottom-6 left-4 right-4 mx-auto z-50 flex items-center justify-between gap-3 bg-[#0a0e0b]/90 backdrop-blur-xl border border-white/10 p-2 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.5)] w-[calc(100%-2rem)] max-w-sm"
         >
           {/* Call Option */}
           <a
             href="tel:09986389444"
             onClick={trackCallClick}
-            className="flex-1 sm:flex-initial flex items-center justify-center gap-2.5 bg-[#22c55e] hover:bg-[#16a34a] text-white px-6 py-3 rounded-full font-heading font-bold text-sm tracking-wider uppercase transition-all duration-300 active:scale-95 shadow-md shadow-[#22c55e]/25 shrink-0"
+            className="flex-1 flex items-center justify-center gap-2 bg-[#22c55e] hover:bg-[#16a34a] text-white py-3 px-4 rounded-full font-heading font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 active:scale-95 shadow-md shadow-[#22c55e]/25 shrink-0"
           >
             <Phone className="w-4 h-4 stroke-[2.5]" />
             <span>Call Us</span>
           </a>
-
-          {/* Divider Dot */}
-          <div className="w-1.5 h-1.5 rounded-full bg-white/20 hidden sm:block shrink-0"></div>
 
           {/* WhatsApp Option */}
           <a
@@ -97,7 +94,7 @@ const StickyContactBar = () => {
             onClick={trackWhatsAppClick}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 sm:flex-initial flex items-center justify-center gap-2.5 bg-[#25d366] hover:bg-[#20ba5a] text-white px-6 py-3 rounded-full font-heading font-bold text-sm tracking-wider uppercase transition-all duration-300 active:scale-95 shadow-md shadow-[#25d366]/25 shrink-0"
+            className="flex-1 flex items-center justify-center gap-2 bg-[#25d366] hover:bg-[#20ba5a] text-white py-3 px-4 rounded-full font-heading font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 active:scale-95 shadow-md shadow-[#25d366]/25 shrink-0"
           >
             <FaWhatsapp className="w-4.5 h-4.5" />
             <span>WhatsApp</span>
