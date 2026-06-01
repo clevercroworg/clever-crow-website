@@ -90,10 +90,10 @@ const ProblemSection = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto mb-14 px-4">
-          <h3 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3.5 uppercase tracking-wide leading-tight">
+          <h3 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3.5 uppercase tracking-wide leading-tight font-bold-important">
             Your Property May Be Good.
           </h3>
-          <h3 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-accent uppercase tracking-wide leading-[1.15] sm:leading-tight">
+          <h3 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-brand-accent uppercase tracking-wide leading-[1.15] sm:leading-tight font-bold-important">
             But Is Your Booking Flow Good Enough?
           </h3>
         </div>
@@ -116,9 +116,9 @@ const ProblemSection = () => {
               </div>
 
               {/* Title Stacked */}
-              <h4 className="font-heading text-[22px] sm:text-[24px] font-bold text-white uppercase tracking-wider leading-snug flex flex-col justify-center mt-3">
+              <h4 className="font-heading text-[26px] sm:text-[30px] font-bold text-white uppercase tracking-wider leading-snug flex flex-col justify-center mt-3 font-bold-important">
                 <span>{problem.titleLine1}</span>
-                <span className="text-brand-accent">{problem.titleLine2}</span>
+                <span className="text-brand-accent font-bold-important">{problem.titleLine2}</span>
               </h4>
             </motion.div>
           ))}

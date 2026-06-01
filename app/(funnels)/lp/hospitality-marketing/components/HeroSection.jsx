@@ -199,9 +199,9 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
           >
             {/* Tagline using Formula Condensed in weight 300, copper color accent */}
-            <h1 className="font-heading text-5xl md:text-7xl lg:text-[4.5rem] xl:text-[5rem] text-white mb-6 hero-heading tracking-wide leading-[1.05]" style={{ fontWeight: 300 }}>
+            <h1 className="font-heading text-5xl md:text-7xl lg:text-[4.5rem] xl:text-[5rem] text-white mb-3 hero-heading tracking-wide leading-[1.05]" style={{ fontWeight: 300 }}>
               Get More Direct <br className="block lg:hidden"/>
-              <span className="text-brand-accent font-bold-important">Enquiries & Bookings</span> <br className="block lg:hidden"/>
+              <span className="text-brand-accent font-bold-important">Bookings</span> <br className="block lg:hidden"/>
               For Your Property
             </h1>
           </motion.div>
@@ -210,7 +210,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-body text-base md:text-lg text-white/95 mb-8 max-w-xl font-light"
+            className="font-body text-base md:text-lg text-white/95 mb-5 max-w-xl font-light"
           >
             More direct bookings. Better visibility. Stronger enquiry flow.
           </motion.p>
@@ -220,14 +220,14 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35 }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full max-w-xl mb-10"
+            className="grid grid-cols-2 gap-3 w-full max-w-xl mb-6"
           >
             {trustBadges.map((badge, idx) => {
               const IconComp = badge.icon;
               return (
                 <div 
                   key={idx} 
-                  className="flex items-center gap-3.5 bg-white/[0.05] border border-white/10 px-5.5 py-3 rounded-full backdrop-blur-md hover:border-brand-accent/50 hover:bg-white/[0.09] transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.02)] group"
+                  className="flex items-center gap-3 bg-white/[0.05] border border-white/10 px-5.5 py-3 rounded-full backdrop-blur-md hover:border-brand-accent/50 hover:bg-white/[0.09] transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.02)] group"
                 >
                   <div className="flex-shrink-0 w-9 h-9 rounded-full bg-brand-accent/20 border border-brand-accent/40 flex items-center justify-center text-brand-accent shadow-[0_0_12px_rgba(200,127,76,0.15)] group-hover:scale-110 transition-transform duration-300">
                     <IconComp className="w-4.5 h-4.5 stroke-[2]" />
@@ -248,7 +248,7 @@ const HeroSection = () => {
             <a 
               href="tel:09986389444"
               onClick={trackCallClick}
-              className="glow-btn bg-brand-accent text-brand-dark hover:bg-white font-heading text-lg font-bold px-10 py-4.5 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer tracking-[0.08em] shadow-lg shadow-brand-accent/15 w-full sm:w-auto"
+              className="glow-btn bg-brand-accent text-brand-dark hover:bg-white font-heading text-lg font-bold px-7 py-3 md:py-3.5 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer tracking-[0.08em] shadow-lg shadow-brand-accent/15 w-full sm:w-auto"
             >
               <Phone className="w-5 h-5 stroke-[2.5]" />
               <span className="font-bold-important">09986389444</span>
@@ -267,12 +267,9 @@ const HeroSection = () => {
             {/* Top copper highlight border */}
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-brand-accent/30 via-brand-accent to-brand-accent/30"></div>
             
-            <h3 className="font-heading text-3xl font-bold text-[#0a0e0b] mb-2 leading-none" style={{ fontWeight: 300 }}>
-              Request Your <span className="text-brand-accent font-bold-important">Call Back</span>
+            <h3 className="font-heading text-3xl font-bold text-[#0a0e0b] mb-6 leading-none" style={{ fontWeight: 300 }}>
+              Request <span className="text-brand-accent font-bold-important">Call Back</span>
             </h3>
-            <p className="font-body text-xs text-slate-500 leading-relaxed mb-6 font-light">
-              Leave your details below and our team will get back to you to discuss your property marketing needs.
-            </p>
 
             <AnimatePresence mode="wait">
               {status.success ? (

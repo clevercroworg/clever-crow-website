@@ -81,10 +81,10 @@ const IndustryCategories = () => {
       
       {/* ───────────────── 1. BUILT FOR HOSPITALITY EXCELLENCE GRID ───────────────── */}
       <div className="max-w-7xl mx-auto mb-16 text-center">
-        <h3 className="font-heading text-3xl md:text-5xl font-bold tracking-[0.06em] text-white uppercase mb-3" style={{ fontWeight: 300 }}>
+        <h3 className="font-heading text-[32px] sm:text-[42px] md:text-[54px] lg:text-[60px] font-bold tracking-[0.06em] text-white uppercase mb-3 font-bold-important">
           Built For <span className="text-brand-accent font-bold-important">Hospitality Excellence</span>
         </h3>
-        <p className="font-body text-xs md:text-sm text-brand-textSecondary max-w-xl mx-auto font-light">
+        <p className="font-body text-sm md:text-base text-brand-textSecondary max-w-2xl mx-auto font-light">
           We construct tailored visual and performance marketing channels for luxury stays and recreational experiences.
         </p>
       </div>
@@ -113,7 +113,7 @@ const IndustryCategories = () => {
 
             {/* Label below Card */}
             <div className="text-center mt-4 min-h-[3.2rem] flex flex-col justify-start px-1">
-              <h4 className="font-heading text-[16px] md:text-[18px] font-bold text-white uppercase tracking-[0.06em] leading-tight group-hover:text-brand-accent transition-colors duration-300" style={{ fontWeight: 300 }}>
+              <h4 className="font-heading text-[20px] sm:text-[22px] md:text-[24px] font-bold text-white uppercase tracking-[0.06em] leading-tight group-hover:text-brand-accent transition-colors duration-300 font-bold-important">
                 <span className="block">{cat.titleLine1}</span>
                 {cat.titleLine2 && <span className="block mt-0.5 text-white/90">{cat.titleLine2}</span>}
               </h4>
