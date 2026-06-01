@@ -37,15 +37,15 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-brand-dark">
       
-      {/* Desktop Background Image (Covering the right 65% from the very top to bottom) */}
-      <div className="absolute inset-y-0 right-0 w-full lg:w-[65%] z-0 lg:block hidden">
+      {/* Desktop Background Image (Covering the right 70% from the very top to bottom) */}
+      <div className="absolute inset-y-0 right-0 w-full lg:w-[70%] z-0 lg:block hidden">
         <img 
           src="/lp/hospitality/resort_hero.png" 
           alt="Luxury Resort Building at Night" 
           className="w-full h-full object-cover"
         />
         {/* Subtle gradient overlay to blend into the left column's solid black background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/50 to-transparent w-[45%]"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/40 to-transparent w-[30%]"></div>
         {/* Ambient shadow gradient at the bottom */}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"></div>
       </div>
