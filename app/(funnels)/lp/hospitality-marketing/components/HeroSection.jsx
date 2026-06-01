@@ -9,6 +9,31 @@ import {
 } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 
+// Custom filled SVG Icons matching the mockup exactly
+const CustomUsersIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={props.className} xmlns="http://www.w3.org/2000/svg">
+    <circle cx="6.5" cy="10" r="3" />
+    <path d="M6.5 14.5c-2.2 0-4 1.3-4 3v1h8v-1c0-1.7-1.8-3-4-3z" />
+    <circle cx="17.5" cy="10" r="3" />
+    <path d="M17.5 14.5c-2.2 0-4 1.3-4 3v1h8v-1c0-1.7-1.8-3-4-3z" />
+    <circle cx="12" cy="7.5" r="3.6" />
+    <path d="M12 12.8c-2.8 0-5 1.6-5 3.6v1.2h10v-1.2c0-2-2.2-3.6-5-3.6z" />
+  </svg>
+);
+
+const CustomInfinityIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" className={props.className} xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4Z" />
+  </svg>
+);
+
+const CustomShieldStarIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={props.className} xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    <polygon points="12,8.5 13.5,11.5 16.8,11.8 14.3,14 15.1,17.2 12,15.5 8.9,17.2 9.7,14 7.2,11.8 10.5,11.5" fill="currentColor" stroke="none" />
+  </svg>
+);
+
 const HeroSection = () => {
   const router = useRouter();
   
@@ -159,9 +184,9 @@ const HeroSection = () => {
 
   // Centered premium stats
   const stats = [
-    { label: "145+ Clients", icon: Users },
-    { label: "Google & Meta Experts", icon: Award },
-    { label: "Hospitality-Focused", icon: CheckCircle }
+    { label: "145+ Clients", icon: CustomUsersIcon },
+    { label: "Google & Meta Experts", icon: CustomInfinityIcon },
+    { label: "Hospitality-Focused", icon: CustomShieldStarIcon }
   ];
 
   return (
@@ -174,8 +199,8 @@ const HeroSection = () => {
           alt="Luxury Resort Pool at Night" 
           className="w-full h-full object-cover"
         />
-        {/* Dark overlay gradients to make centering typography extremely legible */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e0b]/90 via-[#0a0e0b]/80 to-[#0a0e0b]/95"></div>
+        {/* Premium flat 25% theme overlay for elegant contrast control */}
+        <div className="absolute inset-0 bg-[#0a0e0b]/25 z-[1]"></div>
       </div>
       
       {/* Top Header Bar */}
@@ -212,11 +237,15 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col items-center"
         >
-          {/* Tagline using Poppins font, copper color accent */}
-          <h1 className="font-heading font-black text-[25px] xs:text-[31px] sm:text-[42px] md:text-[54px] lg:text-[3.2rem] xl:text-[3.8rem] 2xl:text-[4.4rem] text-white tracking-tight uppercase leading-[1.08] mb-6 max-w-5xl">
-            Hospitality Digital Marketing <br className="hidden sm:block"/>
-            <span className="text-brand-accent font-bold-important text-[0.82em] sm:text-[0.88em] block mt-1.5 leading-[1.05]">
-              For Hotels, Resorts, <br className="block sm:hidden"/> Homestays & Villas
+          {/* Tagline using Poppins font, copper color accent with high-end drop shadow */}
+          <h1 className="font-heading font-black text-[8.2vw] xs:text-[8vw] sm:text-[42px] md:text-[54px] lg:text-[3.2rem] xl:text-[3.8rem] 2xl:text-[4.4rem] text-white tracking-tighter uppercase leading-[1.08] mb-6 max-w-5xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
+            <span className="block whitespace-nowrap">Hospitality</span>
+            <span className="block whitespace-nowrap">Digital Marketing</span>
+            <span className="text-brand-accent font-bold-important block mt-1.5 leading-[1.05] whitespace-nowrap">
+              For Hotels, Resorts,
+            </span>
+            <span className="text-brand-accent font-bold-important block leading-[1.05] whitespace-nowrap">
+              Homestays & Villas
             </span>
           </h1>
         </motion.div>
@@ -231,9 +260,9 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-body text-sm xs:text-base sm:text-lg md:text-xl text-white/80 mb-10 max-w-2xl font-normal leading-relaxed tracking-wide"
+          className="font-body text-base xs:text-lg sm:text-xl md:text-2xl text-white mb-10 max-w-2xl font-medium leading-relaxed tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
         >
-          More visibility. More enquiries. Better growth.
+          More visibility. More enquiries. <br className="block sm:hidden" />Better growth.
         </motion.p>
 
         {/* CTA Buttons - Stacked on Mobile, Row on Desktop */}
@@ -249,37 +278,39 @@ const HeroSection = () => {
             onClick={trackWhatsAppClick}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-3 border border-[#c87f4c]/50 hover:border-[#c87f4c] bg-[#0a0e0b]/55 hover:bg-[#0a0e0b]/75 text-white font-heading text-xs sm:text-sm font-bold py-3.5 px-8 rounded-xl transition-all duration-300 shadow-md hover:shadow-[#c87f4c]/10 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
+            className="flex items-center justify-center gap-3.5 border border-[#c87f4c]/50 hover:border-[#c87f4c] bg-[#0a0e0b]/55 hover:bg-[#0a0e0b]/75 text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4.5 px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-[#c87f4c]/10 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
           >
-            <FaWhatsapp className="w-5 h-5 text-[#25d366]" />
+            <FaWhatsapp className="w-5.5 h-5.5 text-[#25d366] shrink-0" />
             <span>Talk on WhatsApp</span>
           </a>
 
           {/* Request a Call Back */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center justify-center gap-3 border border-[#c87f4c]/50 hover:border-[#c87f4c] bg-[#0a0e0b]/55 hover:bg-[#0a0e0b]/75 text-white font-heading text-xs sm:text-sm font-bold py-3.5 px-8 rounded-xl transition-all duration-300 shadow-md hover:shadow-[#c87f4c]/10 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
+            className="flex items-center justify-center gap-3.5 border border-[#c87f4c]/50 hover:border-[#c87f4c] bg-[#0a0e0b]/55 hover:bg-[#0a0e0b]/75 text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4.5 px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-[#c87f4c]/10 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
           >
-            <Phone className="w-4 h-4 text-[#c87f4c] stroke-[2.5]" />
+            <Phone className="w-4.5 h-4.5 text-[#c87f4c] stroke-[2.5] shrink-0" />
             <span>Request a Call Back</span>
           </button>
         </motion.div>
 
-        {/* Desktop-Only Stats Bar */}
+        {/* Horizontal Stats Bar (Mobile & Desktop) */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="w-full max-w-3xl mt-12 bg-white/[0.02] border border-white/5 backdrop-blur-md rounded-2xl p-5 flex flex-col sm:flex-row justify-around items-center gap-6 shadow-[0_4px_30px_rgba(0,0,0,0.1)] border-t-white/[0.07]"
+          className="w-full max-w-3xl mt-12 bg-[#0a0e0b]/55 border border-[#c87f4c]/30 backdrop-blur-md rounded-2xl py-3.5 px-2.5 sm:py-5 sm:px-8 flex flex-row justify-around items-center gap-1 sm:gap-6 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
         >
           {stats.map((stat, idx) => {
             const IconComp = stat.icon;
             return (
               <React.Fragment key={idx}>
-                {idx > 0 && <div className="hidden sm:block w-[1px] h-8 bg-white/10"></div>}
-                <div className="flex items-center gap-3">
-                  <IconComp className="w-5 h-5 text-[#c87f4c] stroke-[2]" />
-                  <span className="font-heading text-sm sm:text-base font-semibold tracking-wide text-white select-none">{stat.label}</span>
+                {idx > 0 && <div className="w-[1px] h-6 sm:h-8 bg-white/20 shrink-0"></div>}
+                <div className="flex items-center gap-1.5 sm:gap-3.5 py-0.5 w-auto">
+                  <IconComp className="w-4 h-4 sm:w-5.5 sm:h-5.5 text-[#c87f4c] shrink-0" />
+                  <span className="font-heading text-[9px] xs:text-[10px] sm:text-sm md:text-base font-semibold tracking-wide text-white select-none leading-tight sm:whitespace-nowrap">
+                    {stat.label}
+                  </span>
                 </div>
               </React.Fragment>
             );
