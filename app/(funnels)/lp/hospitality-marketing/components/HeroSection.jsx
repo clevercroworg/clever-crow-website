@@ -249,7 +249,7 @@ const HeroSection = () => {
               href="tel:09986389444"
               onClick={trackCallClick}
               className="glow-btn bg-brand-accent text-brand-dark hover:bg-white font-heading text-[28px] sm:text-[32px] font-bold rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer tracking-[0.08em] shadow-lg shadow-brand-accent/15 w-full sm:w-auto font-bold-important leading-none"
-              style={{ padding: '1.5rem 3.25rem' }}
+              style={{ padding: '1.125rem 2.5rem' }}
             >
               <Phone className="w-6 h-6 stroke-[3] text-brand-dark" />
               <span className="font-bold-important">09986389444</span>
