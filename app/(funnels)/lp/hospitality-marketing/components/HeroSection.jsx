@@ -135,7 +135,7 @@ const HeroSection = () => {
   const trustBadges = [
     { label: "15+ Years Exp", icon: Award },
     { label: "Certified Experts", icon: GraduationCap },
-    { label: "550+ Happy Clients", icon: Users },
+    { label: "145+ Clients", icon: Users },
     { label: "24/7 Support", icon: Headphones }
   ];
 
