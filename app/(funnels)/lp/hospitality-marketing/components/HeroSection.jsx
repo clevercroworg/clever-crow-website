@@ -194,13 +194,19 @@ const HeroSection = () => {
       
       {/* Full Page Luxury Background Image */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src="/lp/hospitality/resort_hero.png" 
-          alt="Luxury Resort Pool at Night" 
-          className="w-full h-full object-cover"
-        />
+        {/* Mobile-optimized warm copper hotel bg */}
+        <picture>
+          <source media="(max-width: 639px)" srcSet="/lp/hospitality/resort_hero_mobile.png" />
+          <img 
+            src="/lp/hospitality/resort_hero.png" 
+            alt="Luxury Resort Pool at Night" 
+            className="w-full h-full object-cover"
+          />
+        </picture>
         {/* Darker overlay on mobile for text contrast, lighter on desktop */}
-        <div className="absolute inset-0 bg-[#0a0e0b]/70 sm:bg-[#0a0e0b]/25 z-[1]"></div>
+        <div className="absolute inset-0 bg-[#0a0e0b]/65 sm:bg-[#0a0e0b]/25 z-[1]"></div>
+        {/* Warm copper tint overlay on mobile for color harmony */}
+        <div className="absolute inset-0 bg-[#c87f4c]/8 sm:bg-transparent z-[1]"></div>
       </div>
       
       {/* Top Header Bar */}
