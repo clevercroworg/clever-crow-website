@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Target, Eye, Image, Monitor, 
@@ -8,6 +9,7 @@ import {
 } from 'lucide-react';
 
 const ReviewFormSection = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     contactName: '',
     hotelName: '',
@@ -88,7 +90,7 @@ const ReviewFormSection = () => {
     e.preventDefault();
     
     // Basic verification
-    if (!formData.contactName || !formData.hotelName || !formData.propertyType || !formData.phone || !formData.email) {
+    if (!formData.contactName || !formData.propertyType || !formData.phone) {
       setStatus({ loading: false, success: false, error: 'Please fill in all fields.' });
       return;
     }
@@ -99,8 +101,8 @@ const ReviewFormSection = () => {
       const payload = {
         name: formData.contactName,
         phone: formData.phone,
-        email: formData.email,
-        message: `Property Growth Review Request\nProperty Name: ${formData.hotelName}\nProperty Type: ${formData.propertyType}`,
+        email: `${formData.contactName.toLowerCase().replace(/\s+/g, '')}@clevercrow-lead.in`,
+        message: `Property Growth Review Request\nProperty Type: ${formData.propertyType}`,
         source: "Hospitality Landing Page"
       };
 
@@ -143,6 +145,11 @@ const ReviewFormSection = () => {
           phone: '',
           email: ''
         });
+
+        // Smooth redirect to top-level thank you page
+        setTimeout(() => {
+          router.push('/thank-you');
+        }, 1200);
       } else {
         throw new Error(data.error || 'Something went wrong. Please try again.');
       }
@@ -175,17 +182,14 @@ const ReviewFormSection = () => {
                 return (
                   <div 
                     key={index} 
-                    className="flex flex-col items-center text-center py-8 px-5 bg-white border border-neutral-100/80 rounded-2xl shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.04)] hover:border-brand-accent/40 transition-all duration-300 group"
+                    className="flex flex-col items-center text-center py-10 px-4 bg-white border border-neutral-100/80 rounded-2xl shadow-[0_4px_25px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.04)] hover:border-brand-accent/40 transition-all duration-300 group min-h-[170px] justify-center"
                   >
-                    <div className="text-brand-accent mb-4 transition-transform duration-300 group-hover:scale-110">
+                    <div className="text-brand-accent mb-3.5 transition-transform duration-300 group-hover:scale-110">
                       <IconComponent className="w-10 h-10 stroke-[1.4]" />
                     </div>
-                    <h4 className="font-heading text-[15px] md:text-[17px] font-bold text-[#0a0e0b] uppercase tracking-wider mb-2.5 leading-tight">
+                    <h4 className="font-heading text-[18px] md:text-[21px] lg:text-[22px] font-bold text-[#0a0e0b] uppercase tracking-wider leading-snug">
                       {check.title}
                     </h4>
-                    <p className="font-body text-[12px] md:text-[13px] text-neutral-600 leading-relaxed">
-                      {check.desc}
-                    </p>
                   </div>
                 );
               })}
@@ -258,37 +262,6 @@ const ReviewFormSection = () => {
                       />
                     </div>
 
-                    {/* Property / Business Name */}
-                    <div>
-                      <input 
-                        type="text"
-                        name="hotelName"
-                        value={formData.hotelName}
-                        onChange={handleInputChange}
-                        placeholder="Property / Business Name"
-                        required
-                        disabled={status.loading}
-                        className="w-full bg-[#161d19] border border-[#26312a] focus:border-brand-accent text-white px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-[#5c6e63] disabled:opacity-50"
-                      />
-                    </div>
-
-                    {/* Property Type Dropdown */}
-                    <div>
-                      <select 
-                        name="propertyType"
-                        value={formData.propertyType}
-                        onChange={handleInputChange}
-                        required
-                        disabled={status.loading}
-                        className="w-full bg-[#161d19] border border-[#26312a] focus:border-brand-accent text-white px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-[#5c6e63] appearance-none disabled:opacity-50"
-                      >
-                        <option value="" disabled className="bg-[#0f1411] text-white/50">Select Property Type</option>
-                        {propertyTypes.map((type, index) => (
-                          <option key={index} value={type} className="bg-[#0f1411] text-white">{type}</option>
-                        ))}
-                      </select>
-                    </div>
-
                     {/* Phone Number */}
                     <div>
                       <input 
@@ -303,18 +276,26 @@ const ReviewFormSection = () => {
                       />
                     </div>
 
-                    {/* Email */}
-                    <div>
-                      <input 
-                        type="email"
-                        name="email"
-                        value={formData.email}
+                    {/* Property Type Dropdown */}
+                    <div className="relative">
+                      <select 
+                        name="propertyType"
+                        value={formData.propertyType}
                         onChange={handleInputChange}
-                        placeholder="Email Address"
                         required
                         disabled={status.loading}
-                        className="w-full bg-[#161d19] border border-[#26312a] focus:border-brand-accent text-white px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-[#5c6e63] disabled:opacity-50"
-                      />
+                        className="w-full bg-[#161d19] border border-[#26312a] focus:border-brand-accent text-white px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-[#5c6e63] appearance-none disabled:opacity-50 cursor-pointer"
+                      >
+                        <option value="" disabled className="bg-[#0f1411] text-white/50">Select Property Type</option>
+                        {propertyTypes.map((type, index) => (
+                          <option key={index} value={type} className="bg-[#0f1411] text-white">{type}</option>
+                        ))}
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-[#5c6e63]">
+                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        </svg>
+                      </div>
                     </div>
 
                     {/* Submit Button */}

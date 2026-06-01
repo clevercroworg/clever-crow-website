@@ -63,24 +63,22 @@ const HeroSection = () => {
       <header className="relative z-20 w-full max-w-[95rem] mx-auto px-6 py-6 flex justify-between items-center bg-transparent">
         {/* Logo Branding */}
         <div className="flex items-center">
-          <div className="font-heading text-2xl leading-none font-bold tracking-wider text-white">BEYOND REACH</div>
+          <div className="font-heading text-lg md:text-xl leading-none font-bold tracking-wider text-white">BEYOND REACH</div>
         </div>
 
         {/* Right Phone Button */}
         <a 
           href="tel:09986389444" 
           onClick={trackCallClick}
-          className="flex items-center gap-3 bg-brand-accent hover:bg-white text-brand-dark font-heading text-sm font-bold px-5 py-3 rounded-xl transition-all duration-300 tracking-[0.06em]"
+          className="flex items-center justify-center bg-brand-accent hover:bg-white text-brand-dark w-11 h-11 rounded-xl transition-all duration-300 shadow-md hover:shadow-brand-accent/25 cursor-pointer"
+          title="Call 09986389444"
         >
-          <div className="w-5 h-5 rounded-full border border-brand-dark/30 flex items-center justify-center">
-            <Phone className="w-3 h-3 stroke-[2.5]" />
-          </div>
-          <span>09986389444</span>
+          <Phone className="w-5 h-5 stroke-[2.5]" />
         </a>
       </header>
 
       {/* Main Split Grid (Content Left, Right side is overlaid by the background image) */}
-      <div className="relative z-10 flex-grow grid grid-cols-1 lg:grid-cols-12 items-center max-w-[95rem] w-full mx-auto px-6 py-12 lg:py-0">
+      <div className="relative z-10 flex-grow grid grid-cols-1 lg:grid-cols-12 items-center lg:items-start lg:pt-28 max-w-[95rem] w-full mx-auto px-6 py-12 lg:py-0">
         
         {/* Left Side: Headings & CTA Buttons (Col Span 7) */}
         <div className="lg:col-span-7 flex flex-col justify-center items-start text-left lg:pr-12">
@@ -112,28 +110,25 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           >
-            {/* Primary solid callback button */}
+            {/* Primary Phone button (Direct Call link + event track) */}
+            <a 
+              href="tel:09986389444"
+              onClick={trackCallClick}
+              className="glow-btn bg-brand-accent text-brand-dark hover:bg-white font-heading text-lg font-bold px-10 py-4 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer tracking-[0.08em] shadow-lg shadow-brand-accent/15"
+              style={{ padding: '1.125rem 2.5rem' }}
+            >
+              <Phone className="w-5 h-5 stroke-[2.5]" />
+              <span>09986389444</span>
+            </a>
+            
+            {/* Secondary Request Call Back button (Scrolls to form) */}
             <button 
-              onClick={() => {
-                scrollToForm();
-                trackCallClick();
-              }}
-              className="glow-btn bg-brand-accent text-brand-dark hover:bg-white font-heading text-base font-bold px-10 py-4.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer tracking-[0.05em]"
+              onClick={scrollToForm}
+              className="border border-brand-accent/40 hover:border-brand-accent text-brand-accent hover:text-white bg-transparent font-heading text-base font-bold px-10 py-4 rounded-xl flex items-center justify-center gap-2.5 transition-all duration-300 cursor-pointer tracking-[0.05em]"
               style={{ padding: '1.125rem 2.5rem' }}
             >
               <span>Request a Call Back</span>
-              <span className="font-body text-xs ml-3">09986389444</span>
-              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-            </button>
-            
-            {/* Secondary bordered schedule button */}
-            <button 
-              onClick={scrollToForm}
-              className="border border-brand-accent/50 hover:border-brand-accent text-brand-accent hover:text-white bg-transparent font-heading text-base font-bold px-10 py-4.5 rounded-xl flex items-center justify-center gap-2.5 transition-all duration-300 cursor-pointer tracking-[0.05em]"
-              style={{ padding: '1.125rem 2.5rem' }}
-            >
-              <Calendar className="w-4.5 h-4.5 text-brand-accent" />
-              <span>Schedule a Meeting</span>
+              <ArrowRight className="w-4.5 h-4.5 text-brand-accent" />
             </button>
           </motion.div>
         </div>

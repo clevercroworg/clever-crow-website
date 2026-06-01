@@ -89,11 +89,11 @@ const ProblemSection = () => {
       <div className="max-w-[95rem] mx-auto">
         
         {/* Section Header */}
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          <h3 className="font-heading text-3xl md:text-4xl font-bold text-white mb-2 uppercase leading-none">
+        <div className="text-center max-w-4xl mx-auto mb-14 px-4">
+          <h3 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3.5 uppercase tracking-wide leading-tight">
             Your Property May Be Good.
           </h3>
-          <h3 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-accent uppercase leading-none">
+          <h3 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-accent uppercase tracking-wide leading-[1.15] sm:leading-tight">
             But Is Your Booking Flow Good Enough?
           </h3>
         </div>
@@ -108,23 +108,18 @@ const ProblemSection = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               variants={cardVariants}
-              className="group relative bg-brand-card/90 border border-brand-border/60 hover:border-brand-accent/40 rounded-2xl pt-12 pb-6 px-3 text-center flex flex-col justify-start items-center transition-all duration-500 hover:translate-y-[-4px] min-h-[220px] w-full"
+              className="group relative bg-brand-card/90 border border-brand-border/60 hover:border-brand-accent/40 rounded-2xl pt-10 pb-8 px-4 text-center flex flex-col justify-center items-center transition-all duration-500 hover:translate-y-[-4px] min-h-[160px] w-full"
             >
               {/* Overlapping Hexagon Badge on Top border */}
               <div className="absolute -top-8 left-1/2 -translate-x-1/2 z-10 transition-transform duration-500 group-hover:scale-110">
                 <HexagonIcon icon={problem.icon} />
               </div>
 
-              {/* Title Stacked (Uniform 2-line height via min-h-[3rem] and text-[20.4px]) */}
-              <h4 className="font-heading text-[20.4px] font-bold text-white uppercase tracking-wider leading-tight min-h-[3rem] flex flex-col justify-center mb-3">
+              {/* Title Stacked */}
+              <h4 className="font-heading text-[22px] sm:text-[24px] font-bold text-white uppercase tracking-wider leading-snug flex flex-col justify-center mt-3">
                 <span>{problem.titleLine1}</span>
-                <span className="text-white/90">{problem.titleLine2}</span>
+                <span className="text-brand-accent">{problem.titleLine2}</span>
               </h4>
-
-              {/* Description (Uniform 3-line wrapper utilizing body font text-[12.2px] and 165px max-width) */}
-              <p className="font-body text-[12.2px] leading-normal text-brand-textSecondary px-1 max-w-[165px] mx-auto">
-                {problem.desc}
-              </p>
             </motion.div>
           ))}
         </div>

@@ -6,12 +6,12 @@
 }
 
 .glow-btn:hover {
-  box-shadow: 0 0 25px rgba(209, 255, 54, 0.45);
+  box-shadow: 0 0 25px rgba(142, 168, 0, 0.45);
 }
 
 .border-glow:hover {
   border-color: var(--color-brand-border);
-  box-shadow: 0 0 15px rgba(209, 255, 54, 0.1);
+  box-shadow: 0 0 15px rgba(142, 168, 0, 0.1);
 }
 
 .card-glass {
