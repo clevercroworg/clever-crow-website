@@ -227,12 +227,12 @@ const HeroSection = () => {
               return (
                 <div 
                   key={idx} 
-                  className="flex items-center gap-3.5 bg-white/[0.04] border border-white/10 px-5 py-3 rounded-full backdrop-blur-md hover:border-brand-accent/40 hover:bg-white/[0.08] transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.02)]"
+                  className="flex items-center gap-3.5 bg-white/[0.05] border border-white/10 px-5.5 py-3 rounded-full backdrop-blur-md hover:border-brand-accent/50 hover:bg-white/[0.09] transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.02)] group"
                 >
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-accent/15 border border-brand-accent/35 flex items-center justify-center text-brand-accent shadow-[0_0_10px_rgba(200,127,76,0.1)]">
-                    <IconComp className="w-4 h-4" />
+                  <div className="flex-shrink-0 w-9 h-9 rounded-full bg-brand-accent/20 border border-brand-accent/40 flex items-center justify-center text-brand-accent shadow-[0_0_12px_rgba(200,127,76,0.15)] group-hover:scale-110 transition-transform duration-300">
+                    <IconComp className="w-4.5 h-4.5 stroke-[2]" />
                   </div>
-                  <span className="font-body text-xs md:text-sm text-white/90 font-light select-none tracking-wide">{badge.label}</span>
+                  <span className="font-body text-sm md:text-[15px] text-white font-medium select-none tracking-wide">{badge.label}</span>
                 </div>
               );
             })}
