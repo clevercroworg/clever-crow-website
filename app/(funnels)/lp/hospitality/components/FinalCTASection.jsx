@@ -6,7 +6,7 @@ import { Phone, MessageCircle, ArrowUp } from 'lucide-react';
 
 const FinalCTASection = () => {
   const scrollToForm = () => {
-    const element = document.getElementById('review-form-section');
+    const element = document.getElementById('callback-form-box');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
