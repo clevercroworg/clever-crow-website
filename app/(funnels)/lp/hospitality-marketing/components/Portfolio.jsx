@@ -212,7 +212,7 @@ const Portfolio = () => {
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto mb-16">
           <h3 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-white uppercase tracking-[0.06em] leading-none mb-4">
-            GROWTH <span className="text-brand-accent font-bold-important">STORIES</span>
+            OUR <span className="text-brand-accent font-bold-important">PORTFOLIO</span>
           </h3>
           <div className="w-24 h-[3px] bg-brand-accent mx-auto mt-6"></div>
         </div>
