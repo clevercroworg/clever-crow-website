@@ -232,7 +232,7 @@ const HeroSection = () => {
                   <div className="flex-shrink-0 w-11 h-11 rounded-full bg-brand-accent/15 border border-brand-accent/30 flex items-center justify-center text-brand-accent shadow-[0_0_15px_rgba(200,127,76,0.1)] group-hover:scale-110 transition-transform duration-300">
                     <IconComp className="w-5 h-5 stroke-[2]" />
                   </div>
-                  <span className="font-body text-xs sm:text-[13px] md:text-sm text-white font-medium select-none tracking-wide leading-tight">{badge.label}</span>
+                  <span className="font-body text-[13.5px] xs:text-sm sm:text-[15px] md:text-base text-white font-medium select-none tracking-wide leading-tight">{badge.label}</span>
                 </div>
               );
             })}
