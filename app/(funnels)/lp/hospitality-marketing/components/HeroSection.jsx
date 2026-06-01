@@ -140,7 +140,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-brand-dark">
+    <section className="relative min-h-screen lg:min-h-[85vh] lg:h-[85vh] flex flex-col justify-between overflow-hidden bg-brand-dark">
       
       {/* Desktop Background Image (Covering the right 55% of the screen) */}
       <div className="absolute inset-y-0 right-0 w-full lg:w-[55%] z-0 lg:block hidden">
@@ -165,7 +165,7 @@ const HeroSection = () => {
       </div>
       
       {/* Top Header Bar */}
-      <header className="relative z-20 w-full max-w-[95rem] mx-auto px-6 py-6 flex justify-between items-center bg-transparent">
+      <header className="relative z-20 w-full max-w-[95rem] mx-auto px-6 py-6 lg:py-4 flex justify-between items-center bg-transparent">
         {/* Logo Branding */}
         <div className="bg-white/95 px-4.5 py-2.5 rounded-full shadow-md flex items-center justify-center border border-white/10 backdrop-blur-md">
           <Link href="/" className="flex items-center transition-transform hover:scale-105 active:scale-95 shrink-0">
@@ -189,7 +189,7 @@ const HeroSection = () => {
       </header>
 
       {/* Main 2-Column Split Grid */}
-      <div className="relative z-10 flex-grow grid grid-cols-1 lg:grid-cols-12 items-center lg:pt-16 max-w-[95rem] w-full mx-auto px-6 py-12 lg:py-0 gap-12">
+      <div className="relative z-10 flex-grow grid grid-cols-1 lg:grid-cols-12 items-center lg:pt-8 max-w-[95rem] w-full mx-auto px-6 py-12 lg:py-0 gap-12 lg:-mt-4">
         
         {/* Left Column: Heading, Badges, Direct Dial (Col Span 7) */}
         <div className="lg:col-span-7 flex flex-col justify-center items-start text-left lg:pr-6">
@@ -199,9 +199,9 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
           >
             {/* Tagline using Formula Condensed in weight 300, copper color accent */}
-            <h1 className="font-heading text-5xl md:text-7xl lg:text-[4.5rem] xl:text-[5rem] text-white mb-3 hero-heading tracking-wide leading-[1.05]" style={{ fontWeight: 300 }}>
+            <h1 className="font-heading text-5xl md:text-7xl lg:text-[4.5rem] xl:text-[5rem] text-white mb-3 hero-heading tracking-wide leading-[0.88]" style={{ fontWeight: 300 }}>
               Get More Direct <br className="block"/>
-              <span className="text-brand-accent font-bold-important text-[1.3em] inline-block my-2 md:my-3">Bookings</span> <br className="block"/>
+              <span className="text-brand-accent font-bold-important text-[1.3em] inline-block my-1 md:my-1.5">Bookings</span> <br className="block"/>
               For Your Property
             </h1>
           </motion.div>
@@ -387,7 +387,7 @@ const HeroSection = () => {
       </div>
 
       {/* Spacer */}
-      <div className="relative z-10 w-full h-8"></div>
+      <div className="relative z-10 w-full h-8 lg:h-2"></div>
     </section>
   );
 };
