@@ -116,7 +116,7 @@ const ProblemSection = () => {
               </div>
 
               {/* Title Stacked */}
-              <h4 className="font-heading text-[26px] sm:text-[30px] font-bold text-white uppercase tracking-wider leading-snug flex flex-col justify-center mt-3 font-bold-important">
+              <h4 className="font-heading text-[32px] sm:text-[34px] font-bold text-white uppercase tracking-wider leading-none flex flex-col justify-center mt-3 font-bold-important">
                 <span>{problem.titleLine1}</span>
                 <span className="text-brand-accent font-bold-important">{problem.titleLine2}</span>
               </h4>

@@ -127,7 +127,6 @@
 
 .hero-heading {
   letter-spacing: 0.02em !important;
-  word-spacing: 0.08em !important;
   line-height: 1.05 !important;
 }
 
@@ -142,7 +141,6 @@
   text-transform: uppercase !important;
   line-height: 1.05 !important;
   letter-spacing: 0.04em !important;
-  word-spacing: 0.18em !important;
   font-weight: 300 !important; /* Elegant non-thick Formula Condensed */
 }
 
