@@ -165,7 +165,7 @@ const HeroSection = () => {
       </div>
       
       {/* Top Header Bar */}
-      <header className="relative z-20 w-full max-w-[95rem] mx-auto px-6 py-6 lg:py-4 flex justify-between items-center bg-transparent">
+      <header className="relative z-20 w-full max-w-[95rem] mx-auto px-6 pt-4 pb-2 lg:py-4 flex justify-between items-center bg-transparent">
         {/* Logo Branding */}
         <div className="bg-white/95 px-4.5 py-2.5 rounded-full shadow-md flex items-center justify-center border border-white/10 backdrop-blur-md">
           <Link href="/" className="flex items-center transition-transform hover:scale-105 active:scale-95 shrink-0">
@@ -189,7 +189,7 @@ const HeroSection = () => {
       </header>
 
       {/* Main 2-Column Split Grid */}
-      <div className="relative z-10 flex-grow grid grid-cols-1 lg:grid-cols-12 items-center lg:pt-8 max-w-[95rem] w-full mx-auto px-6 py-12 lg:py-0 gap-12 lg:-mt-5">
+      <div className="relative z-10 flex-grow grid grid-cols-1 lg:grid-cols-12 items-center lg:pt-8 max-w-[95rem] w-full mx-auto px-6 pt-3 pb-12 lg:py-0 gap-12 lg:-mt-5">
         
         {/* Left Column: Heading, Badges, Direct Dial (Col Span 7) */}
         <div className="lg:col-span-7 flex flex-col justify-center items-start text-left lg:pr-6">
@@ -199,7 +199,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
           >
             {/* Tagline using Poppins font, copper color accent */}
-            <h1 className="font-heading text-[25px] xs:text-[31px] sm:text-[36px] md:text-[46px] lg:text-[2.0rem] xl:text-[2.4rem] 2xl:text-[2.8rem] text-white mb-4 hero-heading tracking-tight lg:tracking-wide leading-[1.15]" style={{ fontWeight: 300 }}>
+            <h1 className="font-heading text-[28px] xs:text-[34px] sm:text-[36px] md:text-[46px] lg:text-[2.0rem] xl:text-[2.4rem] 2xl:text-[2.8rem] text-white mb-4 hero-heading tracking-tight lg:tracking-wide leading-[1.15]" style={{ fontWeight: 300 }}>
               <span className="block">Hospitality Digital Marketing</span>
               <span className="block mt-1 sm:mt-1.5">Built for More</span>
               <span className="text-brand-accent font-bold-important text-[1.45em] sm:text-[1.4em] block leading-[1.05] mt-1.5 sm:mt-2">Direct Bookings</span>
