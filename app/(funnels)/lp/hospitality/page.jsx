@@ -1,6 +1,5 @@
 import React from 'react';
 import HeroSection from './components/HeroSection';
-import ProblemSection from './components/ProblemSection';
 import ReviewFormSection from './components/ReviewFormSection';
 import IndustryCategories from './components/IndustryCategories';
 import GrowthSystemTimeline from './components/GrowthSystemTimeline';
@@ -14,9 +13,6 @@ export default function HospitalityLandingPage() {
     <main className="min-h-screen bg-brand-dark text-white overflow-x-hidden">
       {/* Hero Header & Intro */}
       <HeroSection />
-
-      {/* Section 1: The Problem Cards */}
-      <ProblemSection />
 
       {/* Section 2: Before Call Review & Form Inquiry Submission */}
       <ReviewFormSection />

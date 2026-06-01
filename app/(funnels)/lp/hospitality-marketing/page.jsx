@@ -1,7 +1,6 @@
 import React from 'react';
 import HeroSection from './components/HeroSection';
 import BrandsWeWorkWith from './components/BrandsWeWorkWith';
-import ProblemSection from './components/ProblemSection';
 import IndustryCategories from './components/IndustryCategories';
 import OurWork from './components/OurWork';
 import TestimonialsStats from './components/TestimonialsStats';
@@ -18,10 +17,7 @@ export default function HospitalityLandingPage() {
       {/* 2. Brand Marquee Section (NEW, light background, right below Hero) */}
       <BrandsWeWorkWith />
 
-      {/* 3. Section 1: The Problem Cards */}
-      <ProblemSection />
-
-      {/* 4. Section 2: Built for Hospitality Grid & Merged Performance Stats */}
+      {/* 3. Section 2: Built for Hospitality Grid & Merged Performance Stats */}
       <IndustryCategories />
 
       {/* 5. Section 3: Our Work Video Showcase (Replacing the process timeline) */}

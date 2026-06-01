@@ -44,16 +44,6 @@ const TestimonialsStats = () => {
           <h3 className="font-heading text-4xl md:text-5xl font-bold text-[#0a0e0b] uppercase">
             What Our <span className="text-brand-accent font-bold-important">Clients Say</span>
           </h3>
-          
-          {/* Premium Glowing Golden 5-Stars Badge */}
-          <div className="flex justify-center items-center gap-2 mt-5">
-            {[...Array(5)].map((_, i) => (
-              <Star 
-                key={i} 
-                className="w-7.5 h-7.5 fill-amber-400 text-amber-400 drop-shadow-[0_3px_8px_rgba(251,191,36,0.4)] transition-transform duration-300 hover:scale-110" 
-              />
-            ))}
-          </div>
         </div>
 
         {/* Testimonials Grid (White background styled cards) */}
@@ -68,8 +58,18 @@ const TestimonialsStats = () => {
               className="bg-white border-2 border-[#c87f4c]/35 p-6 rounded-2xl flex flex-col justify-between hover:border-[#c87f4c]/75 hover:shadow-[0_12px_40px_rgba(200,127,76,0.08)] transition-all duration-300 group"
             >
               <div>
-                <div className="text-brand-accent mb-4">
-                  <Quote className="w-8 h-8 opacity-25 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="flex justify-between items-center mb-4">
+                  <div className="flex items-center gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star 
+                        key={i} 
+                        className="w-4 h-4 fill-amber-400 text-amber-400" 
+                      />
+                    ))}
+                  </div>
+                  <div className="text-brand-accent">
+                    <Quote className="w-6 h-6 opacity-25 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
                 </div>
                 <p className="font-body text-[15px] md:text-base text-neutral-700 leading-[1.7] mb-6 font-normal">
                   "{test.quote}"

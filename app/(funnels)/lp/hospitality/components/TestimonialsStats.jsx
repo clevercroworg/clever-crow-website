@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote, Sparkles, TrendingUp, Users, Percent, GitPullRequest } from 'lucide-react';
+import { Quote, Sparkles, TrendingUp, Users, Percent, GitPullRequest, Star } from 'lucide-react';
 
 const TestimonialsStats = () => {
   const testimonials = [
@@ -88,8 +88,18 @@ const TestimonialsStats = () => {
               className="bg-brand-card/50 border border-brand-border p-6 rounded-2xl flex flex-col justify-between hover:border-brand-accent/30 transition-all duration-300 group"
             >
               <div>
-                <div className="text-brand-accent mb-4">
-                  <Quote className="w-8 h-8 opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="flex justify-between items-center mb-4">
+                  <div className="flex items-center gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star 
+                        key={i} 
+                        className="w-4 h-4 fill-amber-400 text-amber-400" 
+                      />
+                    ))}
+                  </div>
+                  <div className="text-brand-accent">
+                    <Quote className="w-6 h-6 opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
                 </div>
                 <p className="font-body text-sm text-white/90 leading-relaxed mb-6 font-light">
                   "{test.quote}"

@@ -41,7 +41,7 @@ const WhyExperience = () => {
             <h2 className="font-body text-xs md:text-sm tracking-[0.3em] text-brand-accent mb-3 font-bold uppercase">
               Why Choose Us
             </h2>
-            <h3 className="font-heading text-[38px] sm:text-[52px] md:text-[64px] lg:text-[76px] font-bold text-white mb-6 uppercase leading-[1.05] tracking-[0.02em] font-bold-important">
+            <h3 className="font-heading text-[28px] sm:text-[36px] md:text-[44px] lg:text-[48px] xl:text-[54px] font-bold text-white mb-6 uppercase leading-[1.1] tracking-[0.02em] font-bold-important">
               Results Driven. <br/>
               Hospitality Focused. <br/>
               <span className="text-brand-accent font-bold-important">Growth Oriented.</span>
