@@ -268,25 +268,13 @@ const HeroSection = () => {
           More visibility. More enquiries. Better growth.
         </motion.p>
 
-        {/* CTA Buttons - 3 Stacked on Mobile, Row on Desktop */}
+        {/* CTA Buttons - 2 Stacked on Mobile, Row on Desktop */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.35 }}
           className="flex flex-col sm:flex-row gap-3.5 sm:gap-4.5 w-full sm:w-auto items-center justify-center max-w-md sm:max-w-none mx-auto"
         >
-          {/* Call Now — Amber/Copper Gradient Fill (Primary CTA, mobile only full-width) */}
-          <a
-            href="tel:09986389444"
-            onClick={trackCallClick}
-            className="flex items-center justify-center gap-3 bg-gradient-to-r from-[#c87f4c] via-[#d4944f] to-[#c87f4c] hover:from-[#b06a3a] hover:via-[#c87f4c] hover:to-[#b06a3a] text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4 sm:py-4.5 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg shadow-[#c87f4c]/30 hover:shadow-[#c87f4c]/50 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
-          >
-            <Phone className="w-5 h-5 stroke-[2.5] shrink-0" />
-            <span>Call Now</span>
-            <span className="w-[1px] h-5 bg-white/40 mx-1"></span>
-            <span className="text-[12px] xs:text-[13px] sm:text-sm font-semibold tracking-wide">+91 99863 89444</span>
-          </a>
-
           {/* Talk on WhatsApp — Outlined/Bordered */}
           <a
             href="https://wa.me/919986389444"
@@ -299,12 +287,12 @@ const HeroSection = () => {
             <span>Talk on WhatsApp</span>
           </a>
 
-          {/* Request a Call Back — Outlined/Bordered */}
+          {/* Request a Call Back — Copper Gradient Fill */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center justify-center gap-3.5 border border-[#c87f4c]/40 hover:border-[#c87f4c] bg-[#0a0e0b]/50 hover:bg-[#0a0e0b]/70 text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4 sm:py-4.5 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-[#c87f4c]/10 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
+            className="flex items-center justify-center gap-3.5 bg-gradient-to-r from-[#c87f4c] via-[#d4944f] to-[#c87f4c] hover:from-[#b06a3a] hover:via-[#c87f4c] hover:to-[#b06a3a] text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4 sm:py-4.5 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg shadow-[#c87f4c]/30 hover:shadow-[#c87f4c]/50 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
           >
-            <Phone className="w-4.5 h-4.5 text-[#c87f4c] stroke-[2.5] shrink-0" />
+            <Phone className="w-4.5 h-4.5 stroke-[2.5] shrink-0" />
             <span>Request a Call Back</span>
           </button>
         </motion.div>
