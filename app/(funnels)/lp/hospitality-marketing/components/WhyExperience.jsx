@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Target, Users, Sparkles, ShieldCheck } from 'lucide-react';
+import { Target, Users, Sparkles, ShieldCheck } from 'lucide-react';
 
 const WhyExperience = () => {
   const differentiators = [
@@ -81,28 +81,28 @@ const WhyExperience = () => {
             </div>
           </div>
 
-          {/* Right Side: Elite Resort Visual Frame (Col Span 5) */}
-          <div className="lg:col-span-5 w-full">
+          {/* Right Side: Elite Tall Lobby Visual Panel (Col Span 5) - Lengthy frame as requested */}
+          <div className="lg:col-span-5 w-full flex items-stretch">
             <motion.div 
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group"
+              className="relative w-full h-[450px] sm:h-[550px] lg:h-[620px] rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.55)] group"
             >
-              {/* Image */}
+              {/* Tall Lobby Image */}
               <img 
-                src="/lp/hospitality/hotel_card.png" 
+                src="/lp/hospitality/luxury_lobby.png" 
                 alt="Luxury Hotel Guest Room Experience" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               
               {/* Warm copper radial overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e0b]/90 via-[#0a0e0b]/20 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e0b]/95 via-[#0a0e0b]/20 to-transparent"></div>
               
               {/* Premium Floating Badge inside the image */}
-              <div className="absolute bottom-6 left-6 right-6 bg-[#0a0e0b]/80 border border-brand-accent/30 p-5 rounded-xl backdrop-blur-md">
-                <h4 className="font-heading text-lg font-bold text-white uppercase leading-none mb-1" style={{ fontWeight: 300 }}>
+              <div className="absolute bottom-6 left-6 right-6 bg-[#0a0e0b]/85 border border-[#c87f4c]/20 p-5 rounded-xl backdrop-blur-md">
+                <h4 className="font-heading text-lg font-bold text-white uppercase leading-none mb-1.5" style={{ fontWeight: 300 }}>
                   Driven by <span className="text-brand-accent font-bold-important">Data & Insights</span>
                 </h4>
                 <p className="font-body text-[11px] text-brand-textSecondary leading-relaxed font-light">

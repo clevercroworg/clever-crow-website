@@ -256,21 +256,21 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Right Column: Embedded Callback Form (Col Span 5) */}
+        {/* Right Column: Embedded Callback Form (Col Span 5) - Overhauled to White background, black text, and copper highlights */}
         <div id="contact-form" className="lg:col-span-5 w-full relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="bg-[#0a0e0b]/80 border border-white/10 p-8 md:p-9 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-md relative overflow-hidden"
+            className="bg-white border border-[#c87f4c]/20 p-8 md:p-9 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.25)] relative overflow-hidden"
           >
             {/* Top copper highlight border */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-accent/30 via-brand-accent to-brand-accent/30"></div>
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-brand-accent/30 via-brand-accent to-brand-accent/30"></div>
             
-            <h3 className="font-heading text-3xl font-bold text-white mb-2 leading-none" style={{ fontWeight: 300 }}>
+            <h3 className="font-heading text-3xl font-bold text-[#0a0e0b] mb-2 leading-none" style={{ fontWeight: 300 }}>
               Request Your <span className="text-brand-accent font-bold-important">Call Back</span>
             </h3>
-            <p className="font-body text-xs text-brand-textSecondary leading-relaxed mb-6">
+            <p className="font-body text-xs text-slate-500 leading-relaxed mb-6 font-light">
               Leave your details below and our team will get back to you to discuss your property marketing needs.
             </p>
 
@@ -283,13 +283,13 @@ const HeroSection = () => {
                   className="flex flex-col items-center text-center py-10"
                 >
                   <CheckCircle className="w-14 h-14 text-brand-accent mb-6 animate-pulse" />
-                  <h4 className="font-heading text-2xl font-bold text-white mb-2" style={{ fontWeight: 300 }}>Review Requested!</h4>
-                  <p className="font-body text-sm text-brand-textSecondary max-w-xs mb-8 font-light">
+                  <h4 className="font-heading text-2xl font-bold text-[#0a0e0b] mb-2" style={{ fontWeight: 300 }}>Review Requested!</h4>
+                  <p className="font-body text-sm text-slate-500 max-w-xs mb-8 font-light">
                     Thank you! Our growth desk is reviewing your online presence and will call you back shortly.
                   </p>
                   <button
                     onClick={() => setStatus({ loading: false, success: false, error: null })}
-                    className="border border-white/20 hover:border-brand-accent text-white hover:text-brand-accent font-body font-bold text-xs uppercase px-6 py-2.5 rounded-full transition-all duration-300"
+                    className="border border-slate-200 hover:border-brand-accent text-slate-600 hover:text-brand-accent font-body font-bold text-xs uppercase px-6 py-2.5 rounded-full transition-all duration-300"
                   >
                     Submit Another
                   </button>
@@ -303,7 +303,7 @@ const HeroSection = () => {
                   exit={{ opacity: 0 }}
                 >
                   {status.error && (
-                    <div className="flex items-center gap-2 p-4 bg-red-500/10 border border-red-500/30 text-red-400 rounded-lg text-xs font-body">
+                    <div className="flex items-center gap-2 p-4 bg-red-50 border border-red-200 text-red-500 rounded-lg text-xs font-body">
                       <AlertCircle className="w-4 h-4 flex-shrink-0" />
                       <span>{status.error}</span>
                     </div>
@@ -319,7 +319,7 @@ const HeroSection = () => {
                       placeholder="Full Name"
                       required
                       disabled={status.loading}
-                      className="w-full bg-[#111613] border border-white/5 focus:border-brand-accent text-white px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-[#5c6e63] disabled:opacity-50 font-light"
+                      className="w-full bg-[#f8fafc] border border-slate-200 focus:border-brand-accent text-[#0a0e0b] px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-slate-400 disabled:opacity-50 font-light"
                     />
                   </div>
 
@@ -333,7 +333,7 @@ const HeroSection = () => {
                       placeholder="Phone Number"
                       required
                       disabled={status.loading}
-                      className="w-full bg-[#111613] border border-white/5 focus:border-brand-accent text-white px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-[#5c6e63] disabled:opacity-50 font-light"
+                      className="w-full bg-[#f8fafc] border border-slate-200 focus:border-brand-accent text-[#0a0e0b] px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-slate-400 disabled:opacity-50 font-light"
                     />
                   </div>
 
@@ -345,14 +345,14 @@ const HeroSection = () => {
                       onChange={handleInputChange}
                       required
                       disabled={status.loading}
-                      className="w-full bg-[#111613] border border-white/5 focus:border-brand-accent text-white px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-[#5c6e63] appearance-none disabled:opacity-50 cursor-pointer font-light"
+                      className="w-full bg-[#f8fafc] border border-slate-200 focus:border-brand-accent text-[#0a0e0b] px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-slate-400 appearance-none disabled:opacity-50 cursor-pointer font-light"
                     >
-                      <option value="" disabled className="bg-[#0a0e0b] text-white/40">Select Property Type</option>
+                      <option value="" disabled className="text-slate-400">Select Property Type</option>
                       {propertyTypes.map((type, index) => (
-                        <option key={index} value={type} className="bg-[#0a0e0b] text-white font-light">{type}</option>
+                        <option key={index} value={type} className="bg-white text-[#0a0e0b] font-light">{type}</option>
                       ))}
                     </select>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-[#5c6e63]">
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
                       <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                       </svg>
@@ -363,22 +363,22 @@ const HeroSection = () => {
                   <button
                     type="submit"
                     disabled={status.loading}
-                    className="glow-btn w-full bg-brand-accent text-brand-dark font-body font-bold text-sm uppercase py-4.5 rounded-xl flex items-center justify-center gap-2 hover:bg-white transition-all duration-300 cursor-pointer disabled:opacity-50 tracking-[0.05em]"
+                    className="glow-btn w-full bg-brand-accent text-white font-body font-bold text-sm uppercase py-4.5 rounded-xl flex items-center justify-center gap-2 hover:bg-[#0a0e0b] transition-all duration-300 cursor-pointer disabled:opacity-50 tracking-[0.05em]"
                   >
                     {status.loading ? (
                       <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        <span className="font-bold-important">Requesting...</span>
+                        <Loader2 className="w-4 h-4 animate-spin text-white" />
+                        <span className="font-bold-important text-white text-sm uppercase">Requesting...</span>
                       </>
                     ) : (
                       <>
-                        <span className="font-bold-important">Request Call Back</span>
-                        <span className="font-bold-important">→</span>
+                        <span className="font-bold-important text-white text-sm uppercase">Request Call Back</span>
+                        <span className="font-bold-important text-white">→</span>
                       </>
                     )}
                   </button>
                   
-                  <p className="text-center font-body text-[10px] text-brand-textSecondary/50 mt-4 font-light tracking-wide">
+                  <p className="text-center font-body text-[10px] text-slate-400 mt-4 font-light tracking-wide">
                     We respect your privacy. No spam, ever.
                   </p>
                 </motion.form>

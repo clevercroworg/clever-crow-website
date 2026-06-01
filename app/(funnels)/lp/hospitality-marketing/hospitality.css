@@ -6,6 +6,67 @@
   --color-brand-card: #0f1411; /* dark luxury background for card components */
 }
 
+/* Scoped Copper Accents & Translucent Overrides */
+.hospitality-funnel .text-brand-accent {
+  color: #c87f4c !important; /* Solid copper fallback for small text */
+}
+
+/* Premium Metallic Copper Text Gradient for Large Headings */
+.hospitality-funnel h1 .text-brand-accent,
+.hospitality-funnel h2 .text-brand-accent,
+.hospitality-funnel h3 .text-brand-accent,
+.hospitality-funnel h4 .text-brand-accent {
+  background: linear-gradient(135deg, #ffd1b3 0%, #c87f4c 55%, #9c5d34 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  display: inline-block;
+}
+
+.hospitality-funnel .bg-brand-accent {
+  background-color: #c87f4c !important;
+}
+.hospitality-funnel .border-brand-accent {
+  border-color: #c87f4c !important;
+}
+.hospitality-funnel .hover\:text-brand-accent:hover {
+  color: #c87f4c !important;
+}
+.hospitality-funnel .hover\:bg-brand-accent:hover {
+  background-color: #c87f4c !important;
+}
+.hospitality-funnel .hover\:border-brand-accent:hover {
+  border-color: #c87f4c !important;
+}
+
+/* Translucent Scoped Copper Overrides for Overlays & Borders */
+.hospitality-funnel .bg-brand-accent\/5 {
+  background-color: rgba(200, 127, 76, 0.05) !important;
+}
+.hospitality-funnel .bg-brand-accent\/10 {
+  background-color: rgba(200, 127, 76, 0.1) !important;
+}
+.hospitality-funnel .bg-brand-accent\/15 {
+  background-color: rgba(200, 127, 76, 0.15) !important;
+}
+.hospitality-funnel .border-brand-accent\/20 {
+  border-color: rgba(200, 127, 76, 0.2) !important;
+}
+.hospitality-funnel .border-brand-accent\/25 {
+  border-color: rgba(200, 127, 76, 0.25) !important;
+}
+.hospitality-funnel .border-brand-accent\/30 {
+  border-color: rgba(200, 127, 76, 0.3) !important;
+}
+.hospitality-funnel .border-brand-accent\/35 {
+  border-color: rgba(200, 127, 76, 0.35) !important;
+}
+.hospitality-funnel .border-brand-accent\/40 {
+  border-color: rgba(200, 127, 76, 0.4) !important;
+}
+.hospitality-funnel .border-brand-accent\/60 {
+  border-color: rgba(200, 127, 76, 0.15) !important; /* elegant soft copper grid lines */
+}
+
 /* Custom styles for our landing page */
 .accent-gradient-text {
   background: linear-gradient(135deg, #ffffff 40%, var(--color-brand-accent) 100%);
@@ -13,8 +74,21 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Premium Brushed Copper Metallic Buttons */
+.glow-btn {
+  background: linear-gradient(135deg, #ffd1b3 0%, #c87f4c 50%, #9c5d34 100%) !important;
+  color: #0a0e0b !important;
+  border: none !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 18px rgba(200, 127, 76, 0.35) !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
 .glow-btn:hover {
-  box-shadow: 0 0 25px rgba(200, 127, 76, 0.45);
+  background: linear-gradient(135deg, #ffffff 0%, #ffd1b3 50%, #c87f4c 100%) !important;
+  color: #0a0e0b !important;
+  box-shadow: 0 0 30px rgba(200, 127, 76, 0.65) !important;
+  transform: translateY(-1px);
 }
 
 .border-glow:hover {

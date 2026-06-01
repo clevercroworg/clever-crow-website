@@ -2,8 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Target, Eye, Image as ImageIcon, Monitor, 
-  MessageSquare, Globe, Tag, Star 
+  TrendingUp, Users, Percent, GitPullRequest
 } from 'lucide-react';
 
 const IndustryCategories = () => {
@@ -50,38 +49,30 @@ const IndustryCategories = () => {
     }
   ];
 
-  const checks = [
+  const stats = [
     {
-      title: "Brand Positioning",
-      icon: Target
+      value: "+40%",
+      label: "Direct Bookings",
+      desc: "Increase in direct bookings with Google Ads.",
+      icon: TrendingUp,
     },
     {
-      title: "Online Visibility",
-      icon: Eye
+      value: "3.2x",
+      label: "More Enquiries",
+      desc: "Higher volume of quality enquiries that convert.",
+      icon: Users,
     },
     {
-      title: "Content Quality",
-      icon: ImageIcon
+      value: "28%",
+      label: "Lower OTA Dependency",
+      desc: "Reduced reliance on OTAs and commissions.",
+      icon: Percent,
     },
     {
-      title: "Website Experience",
-      icon: Monitor
-    },
-    {
-      title: "Enquiry Flow",
-      icon: MessageSquare
-    },
-    {
-      title: "Booking Channels",
-      icon: Globe
-    },
-    {
-      title: "Pricing Strategy",
-      icon: Tag
-    },
-    {
-      title: "Reputation & Reviews",
-      icon: Star
+      value: "2.5x",
+      label: "Better Lead Flow",
+      desc: "Stronger & more consistent lead pipeline.",
+      icon: GitPullRequest,
     }
   ];
 
@@ -94,7 +85,7 @@ const IndustryCategories = () => {
           Built For <span className="text-brand-accent font-bold-important">Hospitality Excellence</span>
         </h3>
         <p className="font-body text-xs md:text-sm text-brand-textSecondary max-w-xl mx-auto font-light">
-          We construct tailored visual and performance marketing channels for luxurystays and recreational experiences.
+          We construct tailored visual and performance marketing channels for luxury stays and recreational experiences.
         </p>
       </div>
       
@@ -134,35 +125,41 @@ const IndustryCategories = () => {
       {/* Elegant Horizontal Divider with copper gradient */}
       <div className="max-w-7xl mx-auto h-[1px] bg-gradient-to-r from-transparent via-brand-accent/20 to-transparent mb-24"></div>
 
-      {/* ───────────────── 2. WHAT WE REVIEW FOR YOUR PROPERTY GRID ───────────────── */}
+      {/* ───────────────── 2. PROVEN RESULTS STATS GRID ───────────────── */}
       <div className="max-w-7xl mx-auto mb-16 text-center">
         <h3 className="font-heading text-3xl md:text-5xl font-bold tracking-[0.06em] text-white uppercase mb-3" style={{ fontWeight: 300 }}>
-          What We <span className="text-brand-accent font-bold-important">Review</span> For Your Property
+          Proven Results That <span className="text-brand-accent font-bold-important">Drive Growth</span>
         </h3>
         <p className="font-body text-xs md:text-sm text-brand-textSecondary max-w-xl mx-auto font-light">
-          A comprehensive digital and commercial audit of your brand assets before our growth alignment strategy call.
+          Real numbers and measurable growth delivered for premium hotel, resort, and lifestyle brands.
         </p>
       </div>
 
-      {/* 4-Column Grid for the 8 review cards */}
-      <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-5 px-4">
-        {checks.map((check, index) => {
-          const IconComponent = check.icon;
+      {/* 4-Column Grid for the 4 Performance Stats cards */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+        {stats.map((stat, index) => {
+          const IconComponent = stat.icon;
           return (
-            <motion.div 
-              key={index} 
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.04 }}
-              className="flex flex-col items-center text-center py-10 px-5 bg-brand-card/45 border border-brand-border/60 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:shadow-[0_12px_40px_rgba(200,127,76,0.06)] hover:border-brand-accent/35 hover:bg-brand-card/75 transition-all duration-300 group min-h-[180px] justify-center"
+              transition={{ duration: 0.6, delay: index * 0.05 }}
+              className="bg-brand-card/35 border border-brand-border/60 p-8 rounded-2xl text-center flex flex-col items-center hover:border-brand-accent/35 hover:bg-brand-card/50 transition-all duration-300"
             >
-              <div className="text-brand-accent mb-4 transition-transform duration-300 group-hover:scale-110">
-                <IconComponent className="w-9 h-9 stroke-[1.25]" />
+              <div className="w-10 h-10 rounded-lg bg-brand-accent/10 border border-brand-accent/25 flex items-center justify-center text-brand-accent mb-5">
+                <IconComponent className="w-5 h-5" />
               </div>
-              <h4 className="font-heading text-[18px] md:text-[21px] font-bold text-white uppercase tracking-wider leading-snug" style={{ fontWeight: 300 }}>
-                {check.title}
+              <div className="font-heading text-4xl lg:text-5xl font-bold text-brand-accent mb-2 font-bold-important">
+                {stat.value}
+              </div>
+              <h4 className="font-heading text-lg font-bold text-white uppercase tracking-wider mb-2 font-bold-important">
+                {stat.label}
               </h4>
+              <p className="font-body text-xs text-brand-textSecondary leading-relaxed font-light">
+                {stat.desc}
+              </p>
             </motion.div>
           );
         })}
