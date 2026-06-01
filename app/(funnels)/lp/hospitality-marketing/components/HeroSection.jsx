@@ -253,9 +253,16 @@ const HeroSection = () => {
           </h1>
         </motion.div>
 
-        {/* Golden Horizontal Glowing Divider */}
-        <div className="relative w-48 sm:w-64 h-[1px] bg-gradient-to-r from-transparent via-[#c87f4c] to-transparent mx-auto mb-6 shrink-0">
-          <div className="absolute inset-0 bg-[#c87f4c] blur-[3px] opacity-80"></div>
+        {/* Dramatic Lens Flare / Light Streak Effect */}
+        <div className="relative w-full max-w-2xl h-[2px] mx-auto mb-6 shrink-0">
+          {/* Wide warm amber glow */}
+          <div className="absolute inset-y-0 left-0 right-0 bg-gradient-to-r from-transparent via-[#e8943a] to-transparent blur-[6px] opacity-90"></div>
+          {/* Bright hot center flare */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-[3px] bg-gradient-to-r from-transparent via-white to-transparent blur-[2px] opacity-95"></div>
+          {/* Outer soft glow halo */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-[8px] bg-gradient-to-r from-transparent via-[#c87f4c]/60 to-transparent blur-[10px]"></div>
+          {/* Core line */}
+          <div className="absolute inset-y-0 left-0 right-0 bg-gradient-to-r from-transparent via-[#d4944f] to-transparent"></div>
         </div>
 
         {/* Centered Grey Subtext */}
