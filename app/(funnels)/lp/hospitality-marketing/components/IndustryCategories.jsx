@@ -90,7 +90,7 @@ const IndustryCategories = () => {
       </div>
       
       {/* 8-Column Categories Grid layout */}
-      <div className="w-full max-w-[95rem] mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-5 px-4 mb-28">
+      <div className="w-full max-w-[95rem] mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-5 px-4">
         {categories.map((cat, index) => (
           <motion.div
             key={index}
@@ -122,21 +122,13 @@ const IndustryCategories = () => {
         ))}
       </div>
 
-      {/* Elegant Horizontal Divider with copper gradient */}
-      <div className="max-w-7xl mx-auto h-[1px] bg-gradient-to-r from-transparent via-brand-accent/20 to-transparent mb-24"></div>
-
-      {/* ───────────────── 2. PROVEN RESULTS STATS GRID ───────────────── */}
-      <div className="max-w-7xl mx-auto mb-16 text-center">
-        <h3 className="font-heading text-3xl md:text-5xl font-bold tracking-[0.06em] text-white uppercase mb-3" style={{ fontWeight: 300 }}>
-          Proven Results That <span className="text-brand-accent font-bold-important">Drive Growth</span>
-        </h3>
-        <p className="font-body text-xs md:text-sm text-brand-textSecondary max-w-xl mx-auto font-light">
-          Real numbers and measurable growth delivered for premium hotel, resort, and lifestyle brands.
-        </p>
+      {/* Subtle delicate copper horizontal divider line to visually group them as one singular merged section */}
+      <div className="w-full max-w-[95rem] mx-auto my-14 px-4">
+        <div className="border-t border-brand-accent/25 w-full"></div>
       </div>
 
-      {/* 4-Column Grid for the 4 Performance Stats cards */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+      {/* ───────────────── 2. PERFORMANCE STATS CARDS (MERGED DIRECTLY HERE) ───────────────── */}
+      <div className="w-full max-w-[95rem] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
         {stats.map((stat, index) => {
           const IconComponent = stat.icon;
           return (

@@ -3,7 +3,7 @@ import HeroSection from './components/HeroSection';
 import BrandsWeWorkWith from './components/BrandsWeWorkWith';
 import ProblemSection from './components/ProblemSection';
 import IndustryCategories from './components/IndustryCategories';
-import GrowthSystemTimeline from './components/GrowthSystemTimeline';
+import OurWork from './components/OurWork';
 import TestimonialsStats from './components/TestimonialsStats';
 import WhyExperience from './components/WhyExperience';
 import FinalCTASection from './components/FinalCTASection';
@@ -21,11 +21,11 @@ export default function HospitalityLandingPage() {
       {/* 3. Section 1: The Problem Cards */}
       <ProblemSection />
 
-      {/* 4. Section 2: Built for Hospitality Grid & What We Review Audit Grid */}
+      {/* 4. Section 2: Built for Hospitality Grid & Merged Performance Stats */}
       <IndustryCategories />
 
-      {/* 5. Section 3: Process System Roadmap */}
-      <GrowthSystemTimeline />
+      {/* 5. Section 3: Our Work Video Showcase (Replacing the process timeline) */}
+      <OurWork />
 
       {/* 6. Section 4: Why Beyond Reach & Experience Stats (Minimalized layout) */}
       <WhyExperience />
