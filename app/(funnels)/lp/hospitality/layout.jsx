@@ -8,8 +8,8 @@ export const metadata = {
 
 export default function HospitalityLayout({ children }) {
   return (
-    <>
+    <div className="hospitality-funnel min-h-screen bg-brand-dark text-white font-body">
       {children}
-    </>
+    </div>
   );
 }

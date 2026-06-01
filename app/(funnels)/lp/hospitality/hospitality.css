@@ -48,3 +48,18 @@
   word-spacing: 0.08em !important;
   line-height: 1.05 !important;
 }
+
+/* Scoped headings override to preserve landing page design settings */
+.hospitality-funnel h1,
+.hospitality-funnel h2,
+.hospitality-funnel h3,
+.hospitality-funnel h4,
+.hospitality-funnel h5,
+.hospitality-funnel h6 {
+  font-family: var(--font-heading) !important;
+  text-transform: uppercase !important;
+  line-height: 1.05 !important;
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.18em !important;
+}
+
