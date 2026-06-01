@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote, Sparkles } from 'lucide-react';
+import { Quote, Sparkles, Star } from 'lucide-react';
 
 const TestimonialsStats = () => {
   const testimonials = [
@@ -44,6 +44,16 @@ const TestimonialsStats = () => {
           <h3 className="font-heading text-4xl md:text-5xl font-bold text-[#0a0e0b] uppercase" style={{ fontWeight: 300 }}>
             What Our <span className="text-brand-accent font-bold-important">Clients Say</span>
           </h3>
+          
+          {/* Premium Glowing Golden 5-Stars Badge */}
+          <div className="flex justify-center items-center gap-2 mt-5">
+            {[...Array(5)].map((_, i) => (
+              <Star 
+                key={i} 
+                className="w-7.5 h-7.5 fill-amber-400 text-amber-400 drop-shadow-[0_3px_8px_rgba(251,191,36,0.4)] transition-transform duration-300 hover:scale-110" 
+              />
+            ))}
+          </div>
         </div>
 
         {/* Testimonials Grid (White background styled cards) */}

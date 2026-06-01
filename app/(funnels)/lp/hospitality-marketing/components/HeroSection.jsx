@@ -133,10 +133,10 @@ const HeroSection = () => {
 
   // Trust badges from 4th image
   const trustBadges = [
-    { label: "15+ Years of Experience", icon: Award },
-    { label: "Certified Professionals", icon: GraduationCap },
+    { label: "15+ Years Exp", icon: Award },
+    { label: "Certified Experts", icon: GraduationCap },
     { label: "550+ Happy Clients", icon: Users },
-    { label: "Best Customer Support", icon: Headphones }
+    { label: "24/7 Support", icon: Headphones }
   ];
 
   return (
@@ -220,19 +220,19 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35 }}
-            className="grid grid-cols-2 gap-3 w-full max-w-xl mb-6"
+            className="grid grid-cols-2 gap-2.5 w-full max-w-xl mb-6"
           >
             {trustBadges.map((badge, idx) => {
               const IconComp = badge.icon;
               return (
                 <div 
                   key={idx} 
-                  className="flex items-center gap-3 bg-white/[0.05] border border-white/10 px-5.5 py-3 rounded-full backdrop-blur-md hover:border-brand-accent/50 hover:bg-white/[0.09] transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.02)] group"
+                  className="flex items-center gap-2 bg-white/[0.05] border border-white/10 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full backdrop-blur-md hover:border-brand-accent/50 hover:bg-white/[0.09] transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.02)] group"
                 >
-                  <div className="flex-shrink-0 w-9 h-9 rounded-full bg-brand-accent/20 border border-brand-accent/40 flex items-center justify-center text-brand-accent shadow-[0_0_12px_rgba(200,127,76,0.15)] group-hover:scale-110 transition-transform duration-300">
-                    <IconComp className="w-4.5 h-4.5 stroke-[2]" />
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-accent/20 border border-brand-accent/40 flex items-center justify-center text-brand-accent shadow-[0_0_12px_rgba(200,127,76,0.15)] group-hover:scale-110 transition-transform duration-300">
+                    <IconComp className="w-4 h-4 stroke-[2]" />
                   </div>
-                  <span className="font-body text-sm md:text-[15px] text-white font-medium select-none tracking-wide">{badge.label}</span>
+                  <span className="font-body text-[11.5px] xs:text-xs sm:text-sm text-white font-medium select-none tracking-wide leading-tight">{badge.label}</span>
                 </div>
               );
             })}

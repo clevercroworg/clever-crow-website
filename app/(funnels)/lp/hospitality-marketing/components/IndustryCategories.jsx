@@ -130,7 +130,6 @@ const IndustryCategories = () => {
       {/* ───────────────── 2. PERFORMANCE STATS CARDS (MERGED DIRECTLY HERE) ───────────────── */}
       <div className="w-full max-w-[95rem] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
         {stats.map((stat, index) => {
-          const IconComponent = stat.icon;
           return (
             <motion.div
               key={index}
@@ -138,20 +137,14 @@ const IndustryCategories = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.05 }}
-              className="bg-brand-card/35 border border-brand-border/60 p-8 rounded-2xl text-center flex flex-col items-center hover:border-brand-accent/35 hover:bg-brand-card/50 transition-all duration-300"
+              className="bg-brand-card/35 border border-brand-border/60 py-10 px-6 rounded-2xl text-center flex flex-col items-center justify-center hover:border-brand-accent/35 hover:bg-brand-card/50 transition-all duration-300 min-h-[170px]"
             >
-              <div className="w-10 h-10 rounded-lg bg-brand-accent/10 border border-brand-accent/25 flex items-center justify-center text-brand-accent mb-5">
-                <IconComponent className="w-5 h-5" />
-              </div>
-              <div className="font-heading text-4xl lg:text-5xl font-bold text-brand-accent mb-2 font-bold-important">
+              <div className="font-heading text-[54px] sm:text-[62px] md:text-[70px] font-bold text-brand-accent mb-2 font-bold-important leading-none">
                 {stat.value}
               </div>
-              <h4 className="font-heading text-lg font-bold text-white uppercase tracking-wider mb-2 font-bold-important">
+              <h4 className="font-heading text-[22px] sm:text-[24px] md:text-[26px] font-bold text-white uppercase tracking-wider font-bold-important leading-tight mt-1">
                 {stat.label}
               </h4>
-              <p className="font-body text-xs text-brand-textSecondary leading-relaxed font-light">
-                {stat.desc}
-              </p>
             </motion.div>
           );
         })}
