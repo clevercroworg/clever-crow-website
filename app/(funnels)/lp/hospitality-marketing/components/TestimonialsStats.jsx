@@ -44,9 +44,6 @@ const TestimonialsStats = () => {
           <h3 className="font-heading text-4xl md:text-5xl font-bold text-[#0a0e0b] uppercase" style={{ fontWeight: 300 }}>
             What Our <span className="text-brand-accent font-bold-important">Clients Say</span>
           </h3>
-          <p className="font-body text-xs md:text-sm text-neutral-500 max-w-xl mx-auto mt-2 font-light">
-            We help hospitality brands grow enquiries, direct bookings, and premium visibility that lasts.
-          </p>
         </div>
 
         {/* Testimonials Grid (White background styled cards) */}
@@ -64,7 +61,7 @@ const TestimonialsStats = () => {
                 <div className="text-brand-accent mb-4">
                   <Quote className="w-8 h-8 opacity-25 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <p className="font-body text-sm text-neutral-700 leading-relaxed mb-6 font-light">
+                <p className="font-body text-[15px] md:text-base text-neutral-700 leading-relaxed mb-6 font-light">
                   "{test.quote}"
                 </p>
               </div>
