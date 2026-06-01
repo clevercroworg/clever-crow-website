@@ -189,7 +189,7 @@ const HeroSection = () => {
       </header>
 
       {/* Main 2-Column Split Grid */}
-      <div className="relative z-10 flex-grow grid grid-cols-1 lg:grid-cols-12 items-center lg:pt-0 max-w-[95rem] w-full mx-auto px-6 py-12 lg:py-0 gap-12 lg:-mt-14">
+      <div className="relative z-10 flex-grow grid grid-cols-1 lg:grid-cols-12 items-center lg:pt-8 max-w-[95rem] w-full mx-auto px-6 py-12 lg:py-0 gap-12 lg:-mt-5">
         
         {/* Left Column: Heading, Badges, Direct Dial (Col Span 7) */}
         <div className="lg:col-span-7 flex flex-col justify-center items-start text-left lg:pr-6">
