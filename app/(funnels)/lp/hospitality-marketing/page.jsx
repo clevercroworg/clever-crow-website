@@ -7,7 +7,7 @@ import Portfolio from './components/Portfolio';
 import TestimonialsStats from './components/TestimonialsStats';
 import WhyExperience from './components/WhyExperience';
 import FinalCTASection from './components/FinalCTASection';
-import WhatsAppFloatingBtn from './components/WhatsAppFloatingBtn';
+import StickyContactBar from './components/StickyContactBar';
 
 export default function HospitalityLandingPage() {
   return (
@@ -36,8 +36,8 @@ export default function HospitalityLandingPage() {
       {/* 8. Final CTA & Footer */}
       <FinalCTASection />
 
-      {/* Floating Interactive WhatsApp CTA */}
-      <WhatsAppFloatingBtn />
+      {/* Bottom Sticky Action Bar (appears after scrolling past Hero) */}
+      <StickyContactBar />
     </main>
   );
 }
