@@ -189,7 +189,7 @@ const HeroSection = () => {
       </header>
 
       {/* Main 2-Column Split Grid */}
-      <div className="relative z-10 flex-grow grid grid-cols-1 lg:grid-cols-12 items-center lg:pt-8 max-w-[95rem] w-full mx-auto px-6 py-12 lg:py-0 gap-12 lg:-mt-4">
+      <div className="relative z-10 flex-grow grid grid-cols-1 lg:grid-cols-12 items-center lg:pt-0 max-w-[95rem] w-full mx-auto px-6 py-12 lg:py-0 gap-12 lg:-mt-14">
         
         {/* Left Column: Heading, Badges, Direct Dial (Col Span 7) */}
         <div className="lg:col-span-7 flex flex-col justify-center items-start text-left lg:pr-6">
@@ -199,10 +199,10 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
           >
             {/* Tagline using Poppins font, copper color accent */}
-            <h1 className="font-heading text-[31px] xs:text-[37px] sm:text-[48px] md:text-[62px] lg:text-[2.8rem] xl:text-[3.4rem] 2xl:text-[4rem] text-white mb-3 hero-heading tracking-tight lg:tracking-wide leading-[1.0]" style={{ fontWeight: 300 }}>
-              Get More Direct <br className="block"/>
-              <span className="text-brand-accent font-bold-important text-[1.4em] lg:text-[1.3em] inline-block my-0.5 md:my-1">Bookings</span> <br className="block"/>
-              For Your Property
+            <h1 className="font-heading text-[31px] xs:text-[37px] sm:text-[48px] md:text-[62px] lg:text-[2.6rem] xl:text-[3.2rem] 2xl:text-[3.8rem] text-white mb-3 hero-heading tracking-tight lg:tracking-wide leading-[1.1]" style={{ fontWeight: 300 }}>
+              Hospitality Digital Marketing <br className="hidden sm:block"/>
+              Built for More <br className="block"/>
+              <span className="text-brand-accent font-bold-important text-[1.25em] lg:text-[1.2em] inline-block my-0.5 md:my-1">Direct Bookings</span>
             </h1>
           </motion.div>
 
@@ -210,9 +210,9 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-body text-[15px] md:text-[16px] text-white/95 mb-5 max-w-xl font-normal leading-[1.7]"
+            className="font-body text-[14px] sm:text-[15px] md:text-[16px] text-white/95 mb-5 max-w-xl font-normal leading-[1.7]"
           >
-            More direct bookings. Better visibility. Stronger enquiry flow.
+            For resorts, homestays, villas and hotels looking to attract better guests and increase direct enquiries.
           </motion.p>
 
           {/* 4-Badge Trust Grid from 4th image (2x2 grid layout, custom translucent cards with icon on top) */}
