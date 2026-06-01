@@ -6,7 +6,7 @@ import { Phone, MessageCircle, ArrowUp } from 'lucide-react';
 
 const FinalCTASection = () => {
   const scrollToForm = () => {
-    const element = document.getElementById('callback-form-box');
+    const element = document.getElementById('contact-form');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -77,10 +77,19 @@ const FinalCTASection = () => {
         </div>
 
         {/* Footer Brand Info */}
-        <div className="w-full border-t border-brand-border/40 pt-8 flex flex-col items-center justify-center">
+        <div className="w-full border-t border-brand-border/40 pt-8 flex flex-col items-center justify-center gap-4">
           <p className="font-body text-[11px] text-brand-textSecondary/50 uppercase tracking-[0.2em] text-center font-bold">
             &copy; 2026 CLEVER CROW STRATEGIES LLP. ALL RIGHTS RESERVED.
           </p>
+          <div className="flex gap-6 text-[10px] font-body text-brand-textSecondary/40 uppercase tracking-[0.2em] font-bold">
+            <Link href="/lp/hospitality/privacy-policy" className="hover:text-brand-accent transition-colors duration-300">
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link href="/lp/hospitality/terms-conditions" className="hover:text-brand-accent transition-colors duration-300">
+              Terms & Conditions
+            </Link>
+          </div>
         </div>
 
       </div>

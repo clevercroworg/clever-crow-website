@@ -6,7 +6,7 @@ import { Phone, Calendar, ArrowRight } from 'lucide-react';
 
 const HeroSection = () => {
   const scrollToForm = () => {
-    const element = document.getElementById('callback-form-box');
+    const element = document.getElementById('contact-form');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }

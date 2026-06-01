@@ -42,7 +42,7 @@ const WhyExperience = () => {
               Hospitality Focused. <br/>
               <span className="text-brand-accent">Growth Oriented.</span>
             </h3>
-            <p className="font-body text-sm text-brand-textSecondary max-w-xl mb-10 leading-relaxed">
+            <p className="font-body text-base md:text-lg text-brand-textSecondary max-w-xl mb-10 leading-relaxed">
               Beyond Reach is built for hospitality growth, not generic marketing. We understand stays, guest intent, location demand, seasonality, pricing, experience value and booking hesitation.
             </p>
 
