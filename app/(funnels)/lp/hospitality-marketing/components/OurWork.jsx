@@ -12,7 +12,7 @@ const OurWork = () => {
       title: "The Grand Horizon Resort",
       subtitle: "Cinematic Resort Tour",
       desc: "Highlighting premium sea-facing villas & infinity pools to increase high-value conversions.",
-      videoUrl: "/lp/hospitality/work_video_1.mp4",
+      videoUrl: "/lp/hospitality/reel1.mp4",
       poster: "/lp/hospitality/hotel_card.png",
       metric: "+40% Direct Bookings",
       category: "Luxury Resort"
@@ -22,7 +22,7 @@ const OurWork = () => {
       title: "Amanpuri Retreat Villas",
       subtitle: "Direct Booking Campaign",
       desc: "Driving direct guest interest and eliminating costly OTA intermediaries.",
-      videoUrl: "/lp/hospitality/work_video_2.mp4",
+      videoUrl: "/lp/hospitality/reel2.mp4",
       poster: "/lp/hospitality/resort_card.png",
       metric: "3.2x More Enquiries",
       category: "Boutique Villa"
@@ -32,7 +32,7 @@ const OurWork = () => {
       title: "Boutique St. Regis Lounge",
       subtitle: "Social Media Showcase",
       desc: "Dynamic micro-storytelling and visual content tailored for the modern premium traveler.",
-      videoUrl: "/lp/hospitality/work_video_3.mp4",
+      videoUrl: "/lp/hospitality/reel7.mp4",
       poster: "/lp/hospitality/boutique_card.png",
       metric: "2.5x Lead Flow",
       category: "Hotel & Lounge"
@@ -42,7 +42,7 @@ const OurWork = () => {
       title: "Azure Luxury Charters",
       subtitle: "Yacht Experience Campaign",
       desc: "Capturing direct booking enquiries for exclusive summer cruise experiences.",
-      videoUrl: "/lp/hospitality/work_video_4.mp4",
+      videoUrl: "/lp/hospitality/reel8.mp4",
       poster: "/lp/hospitality/yacht_card.png",
       metric: "28% Lower OTA Cost",
       category: "Yacht & Boat"
@@ -52,7 +52,7 @@ const OurWork = () => {
       title: "Whispering Pines Cabin",
       subtitle: "Hidden Retreat Visuals",
       desc: "Enchanting forest retreat cinematography and rustic-luxe drone perspectives.",
-      videoUrl: "/lp/hospitality/work_video_5.mp4",
+      videoUrl: "/lp/hospitality/reel18.mp4",
       poster: "/lp/hospitality/cabin_card.png",
       metric: "94% Occupancy",
       category: "Cabins & Retreats"
@@ -62,7 +62,7 @@ const OurWork = () => {
       title: "Nurture & Taste Beach Club",
       subtitle: "Sunset Dining Showcase",
       desc: "Vibrant beach club evening gastronomy and club teaser campaigns.",
-      videoUrl: "/lp/hospitality/work_video_6.mp4",
+      videoUrl: "/lp/hospitality/reel20.mp4",
       poster: "/lp/hospitality/restaurant_card.png",
       metric: "+150% Table Reservations",
       category: "Beach Club"
