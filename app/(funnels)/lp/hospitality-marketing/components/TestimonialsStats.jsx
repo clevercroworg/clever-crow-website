@@ -55,7 +55,7 @@ const TestimonialsStats = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.05 }}
-              className="bg-white border border-neutral-200/60 p-6 rounded-2xl flex flex-col justify-between hover:border-brand-accent/40 hover:shadow-[0_12px_40px_rgba(200,127,76,0.06)] transition-all duration-300 group"
+              className="bg-white border-2 border-[#c87f4c]/35 p-6 rounded-2xl flex flex-col justify-between hover:border-[#c87f4c]/75 hover:shadow-[0_12px_40px_rgba(200,127,76,0.08)] transition-all duration-300 group"
             >
               <div>
                 <div className="text-brand-accent mb-4">
