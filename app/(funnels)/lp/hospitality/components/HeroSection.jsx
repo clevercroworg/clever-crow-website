@@ -124,7 +124,7 @@ const HeroSection = () => {
               className="glow-btn bg-brand-accent text-brand-dark hover:bg-white font-heading text-lg font-bold px-10 py-4 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer tracking-[0.08em] shadow-lg shadow-brand-accent/15"
               style={{ padding: '1.125rem 2.5rem' }}
             >
-              <Phone className="w-5 h-5 stroke-[2.5]" />
+              <Phone className="w-5 h-5 stroke-[2.5] text-brand-dark" />
               <span>09986389444</span>
             </a>
             

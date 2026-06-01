@@ -16,8 +16,7 @@ const HeroSection = () => {
   const [formData, setFormData] = useState({
     contactName: '',
     propertyType: '',
-    phone: '',
-    email: ''
+    phone: ''
   });
 
   const [status, setStatus] = useState({
@@ -48,7 +47,7 @@ const HeroSection = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     
-    if (!formData.contactName || !formData.propertyType || !formData.phone || !formData.email) {
+    if (!formData.contactName || !formData.propertyType || !formData.phone) {
       setStatus({ loading: false, success: false, error: 'Please fill in all fields.' });
       return;
     }
@@ -59,7 +58,7 @@ const HeroSection = () => {
       const payload = {
         name: formData.contactName,
         phone: formData.phone,
-        email: formData.email,
+        email: `${formData.contactName.toLowerCase().replace(/\s+/g, '')}@clevercrow-lead.in`,
         message: `Property Growth Review Request\nProperty Type: ${formData.propertyType}`,
         source: "Hospitality Marketing Landing Page"
       };
@@ -96,7 +95,7 @@ const HeroSection = () => {
         }
 
         setStatus({ loading: false, success: true, error: null });
-        setFormData({ contactName: '', propertyType: '', phone: '', email: '' });
+        setFormData({ contactName: '', propertyType: '', phone: '' });
 
         // Redirect after a brief success delay
         setTimeout(() => {
@@ -250,9 +249,9 @@ const HeroSection = () => {
               href="tel:09986389444"
               onClick={trackCallClick}
               className="glow-btn bg-brand-accent text-brand-dark hover:bg-white font-heading text-[28px] sm:text-[32px] font-bold rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer tracking-[0.08em] shadow-lg shadow-brand-accent/15 w-full sm:w-auto font-bold-important leading-none"
-              style={{ padding: '1.625rem 4.5rem' }}
+              style={{ padding: '1.5rem 3.25rem' }}
             >
-              <Phone className="w-6 h-6 stroke-[3]" />
+              <Phone className="w-6 h-6 stroke-[3] text-brand-dark" />
               <span className="font-bold-important">09986389444</span>
             </a>
           </motion.div>
@@ -316,20 +315,6 @@ const HeroSection = () => {
                       value={formData.contactName}
                       onChange={handleInputChange}
                       placeholder="Full Name"
-                      required
-                      disabled={status.loading}
-                      className="w-full bg-[#f8fafc] border border-slate-200 focus:border-brand-accent text-[#0a0e0b] px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-slate-400 disabled:opacity-50 font-normal"
-                    />
-                  </div>
-
-                  {/* Email Input */}
-                  <div>
-                    <input 
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="Email Address"
                       required
                       disabled={status.loading}
                       className="w-full bg-[#f8fafc] border border-slate-200 focus:border-brand-accent text-[#0a0e0b] px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-slate-400 disabled:opacity-50 font-normal"
