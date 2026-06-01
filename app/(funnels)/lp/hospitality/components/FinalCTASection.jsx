@@ -1,0 +1,94 @@
+"use client";
+import React from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Phone, MessageCircle, ArrowUp } from 'lucide-react';
+
+const FinalCTASection = () => {
+  const scrollToForm = () => {
+    const element = document.getElementById('review-form-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <footer className="relative py-16 px-6 bg-brand-dark overflow-hidden border-t border-brand-border/40 text-center">
+      {/* Background radial glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] bg-brand-accent/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
+
+      <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+        
+        {/* Call to Action Content */}
+        <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white uppercase mb-6 leading-none tracking-[0.015em]" style={{ wordSpacing: '0.06em' }}>
+          Request Your Free <br/>
+          <span className="text-brand-accent">Property Growth Review</span>
+        </h2>
+        
+        <p className="font-body text-sm md:text-base text-brand-textSecondary max-w-xl mb-8 leading-relaxed">
+          Share your property details and our hospitality marketing team will review your online visibility, brand positioning, photos/videos, ads readiness, and booking flow.
+        </p>
+
+        {/* Call CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-10">
+          <button 
+            onClick={scrollToForm}
+            className="glow-btn bg-brand-accent text-brand-dark hover:bg-white font-body font-bold text-sm uppercase px-8 py-4 rounded-full flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer tracking-[0.05em]"
+          >
+            <span>Get Free Property Growth Review</span>
+          </button>
+          
+          <a 
+            href="https://wa.me/918876563231"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border border-white/20 hover:border-brand-accent text-white hover:text-brand-accent font-body font-bold text-sm uppercase px-8 py-4 rounded-full flex items-center justify-center gap-2 transition-all duration-300 tracking-[0.05em]"
+          >
+            <MessageCircle className="w-4 h-4" />
+            <span>Talk on WhatsApp</span>
+          </a>
+        </div>
+
+        {/* Footer Brand Info */}
+        <div className="w-full border-t border-brand-border/60 pt-8 flex flex-col sm:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded border border-brand-accent flex items-center justify-center font-heading text-sm font-bold text-brand-accent">
+              BR
+            </div>
+            <span className="font-heading text-lg font-bold tracking-wider text-white">BEYOND REACH</span>
+          </div>
+          
+          <div className="flex flex-col items-center gap-2">
+            <p className="font-body text-[11px] text-brand-textSecondary/60">
+              &copy; 2026 Beyond Reach Hospitality Marketing. All rights reserved.
+            </p>
+            <div className="flex gap-4 text-[11px] font-body text-brand-textSecondary/60">
+              <Link href="/lp/hospitality/privacy-policy" className="hover:text-brand-accent transition-colors duration-300">
+                Privacy Policy
+              </Link>
+              <span>•</span>
+              <Link href="/lp/hospitality/terms-conditions" className="hover:text-brand-accent transition-colors duration-300">
+                Terms & Conditions
+              </Link>
+            </div>
+          </div>
+
+          <button
+            onClick={scrollToTop}
+            className="w-8 h-8 rounded-full border border-brand-border/80 flex items-center justify-center text-brand-textSecondary hover:text-brand-accent hover:border-brand-accent transition-colors duration-300"
+            title="Scroll to Top"
+          >
+            <ArrowUp className="w-4 h-4" />
+          </button>
+        </div>
+
+      </div>
+    </footer>
+  );
+};
+
+export default FinalCTASection;

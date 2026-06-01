@@ -1,0 +1,74 @@
+@theme {
+  --color-brand-dark: #0a0e0b;
+  --color-brand-card: #131915;
+  --color-brand-accent: #d1ff36;
+  --color-brand-border: #2a332d;
+  --color-brand-textSecondary: #9ca3af;
+  --font-heading: 'Formula Condensed', 'Anton', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+@font-face {
+  font-family: 'Formula Condensed';
+  src: url('/lp/hospitality/fonts/FormulaCondensed-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Formula Condensed';
+  src: url('/lp/hospitality/fonts/FormulaCondensed-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Custom styles for our landing page */
+.accent-gradient-text {
+  background: linear-gradient(135deg, #ffffff 40%, var(--color-brand-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glow-btn:hover {
+  box-shadow: 0 0 25px rgba(209, 255, 54, 0.45);
+}
+
+.border-glow:hover {
+  border-color: var(--color-brand-border);
+  box-shadow: 0 0 15px rgba(209, 255, 54, 0.1);
+}
+
+.card-glass {
+  background: rgba(19, 25, 21, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-brand-border);
+}
+
+.timeline-dot {
+  position: relative;
+}
+
+.timeline-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: calc(100% - 24px);
+  height: 1px;
+  border-bottom: 1px dashed var(--color-brand-border);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+@media (max-width: 1024px) {
+  .timeline-dot::after {
+    display: none;
+  }
+}
+
+.hero-heading {
+  letter-spacing: 0.015em !important;
+  word-spacing: 0.08em !important;
+  line-height: 1.05 !important;
+}
