@@ -36,7 +36,7 @@ export default function PrivacyPolicy() {
               1. Overview
             </h2>
             <p>
-              At <span className="text-brand-accent font-medium">Beyond Reach</span>, we are committed to safeguarding the privacy of our clients, partners, and visitors. This Privacy Policy details how we collect, process, secure, and share your information when you interact with our website, digital offerings, brand audits, or direct communications channels.
+              At <span className="text-brand-accent font-medium">Clever Crow Strategies LLP</span>, we are committed to safeguarding the privacy of our clients, partners, and visitors. This Privacy Policy details how we collect, process, secure, and share your information when you interact with our website, digital offerings, brand audits, or direct communications channels.
             </p>
           </section>
 
@@ -104,10 +104,10 @@ export default function PrivacyPolicy() {
               For any questions, privacy audits, or details regarding data security, please contact our data desk directly at:
               <br />
               <a 
-                href="mailto:hello@beyondreachagency.com" 
+                href="mailto:hello@clevercrow.in" 
                 className="text-brand-accent hover:underline font-medium transition-all duration-300"
               >
-                hello@beyondreachagency.com
+                hello@clevercrow.in
               </a>
             </p>
           </section>

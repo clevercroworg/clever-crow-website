@@ -7,6 +7,7 @@ import GrowthSystemTimeline from './components/GrowthSystemTimeline';
 import TestimonialsStats from './components/TestimonialsStats';
 import WhyExperience from './components/WhyExperience';
 import FinalCTASection from './components/FinalCTASection';
+import WhatsAppFloatingBtn from './components/WhatsAppFloatingBtn';
 
 export default function HospitalityLandingPage() {
   return (
@@ -34,6 +35,9 @@ export default function HospitalityLandingPage() {
 
       {/* Final CTA & Footer */}
       <FinalCTASection />
+
+      {/* Floating Interactive WhatsApp CTA */}
+      <WhatsAppFloatingBtn />
     </main>
   );
 }

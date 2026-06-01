@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Phone, Calendar, ArrowRight } from 'lucide-react';
 
@@ -62,9 +63,13 @@ const HeroSection = () => {
       {/* Top Header Bar (Transparent background) */}
       <header className="relative z-20 w-full max-w-[95rem] mx-auto px-6 py-6 flex justify-between items-center bg-transparent">
         {/* Logo Branding */}
-        <div className="flex items-center">
-          <div className="font-heading text-lg md:text-xl leading-none font-bold tracking-wider text-white">BEYOND REACH</div>
-        </div>
+        <Link href="/" className="flex items-center transition-transform hover:scale-105 active:scale-95">
+          <img 
+            src="/logo-light.svg" 
+            alt="Clever Crow" 
+            className="h-6 md:h-7 w-auto object-contain"
+          />
+        </Link>
 
         {/* Right Phone Button */}
         <a 

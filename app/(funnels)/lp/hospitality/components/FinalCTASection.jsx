@@ -77,31 +77,10 @@ const FinalCTASection = () => {
         </div>
 
         {/* Footer Brand Info */}
-        <div className="w-full border-t border-brand-border/60 pt-8 flex flex-col sm:flex-row justify-between items-center gap-6">
-          <div className="hidden sm:block w-8"></div>
-          
-          <div className="flex flex-col items-center gap-2">
-            <p className="font-body text-[11px] text-brand-textSecondary/60">
-              &copy; 2026 Beyond Reach Hospitality Marketing. All rights reserved.
-            </p>
-            <div className="flex gap-4 text-[11px] font-body text-brand-textSecondary/60">
-              <Link href="/lp/hospitality/privacy-policy" className="hover:text-brand-accent transition-colors duration-300">
-                Privacy Policy
-              </Link>
-              <span>•</span>
-              <Link href="/lp/hospitality/terms-conditions" className="hover:text-brand-accent transition-colors duration-300">
-                Terms & Conditions
-              </Link>
-            </div>
-          </div>
-
-          <button
-            onClick={scrollToTop}
-            className="w-8 h-8 rounded-full border border-brand-border/80 flex items-center justify-center text-brand-textSecondary hover:text-brand-accent hover:border-brand-accent transition-colors duration-300"
-            title="Scroll to Top"
-          >
-            <ArrowUp className="w-4 h-4" />
-          </button>
+        <div className="w-full border-t border-brand-border/40 pt-8 flex flex-col items-center justify-center">
+          <p className="font-body text-[11px] text-brand-textSecondary/50 uppercase tracking-[0.2em] text-center font-bold">
+            &copy; 2026 CLEVER CROW STRATEGIES LLP. ALL RIGHTS RESERVED.
+          </p>
         </div>
 
       </div>

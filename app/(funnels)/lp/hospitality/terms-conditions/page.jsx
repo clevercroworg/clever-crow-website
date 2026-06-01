@@ -36,7 +36,7 @@ export default function TermsConditions() {
               1. Acceptance of Terms
             </h2>
             <p>
-              By accessing this website, initiating a brand audit, or engaging the services of <span className="text-brand-accent font-medium">Beyond Reach</span>, you agree to be bound by these General Terms and Conditions, all applicable laws, and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site and our digital offerings.
+              By accessing this website, initiating a brand audit, or engaging the services of <span className="text-brand-accent font-medium">Clever Crow Strategies LLP</span>, you agree to be bound by these General Terms and Conditions, all applicable laws, and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site and our digital offerings.
             </p>
           </section>
 
@@ -45,7 +45,7 @@ export default function TermsConditions() {
               2. Scope of Services
             </h2>
             <p>
-              Beyond Reach provides premium digital marketing, creative storytelling, SEO strategy, direct booking engines, and brand consulting tailored for luxury hospitality properties. Specific deliverables, timelines, and budgets will be outlined in separate mutually executed Statements of Work (SOW) or Service Agreements.
+              Clever Crow Strategies LLP provides premium digital marketing, creative storytelling, SEO strategy, direct booking engines, and brand consulting tailored for luxury hospitality properties. Specific deliverables, timelines, and budgets will be outlined in separate mutually executed Statements of Work (SOW) or Service Agreements.
             </p>
           </section>
 
@@ -54,7 +54,7 @@ export default function TermsConditions() {
               3. Intellectual Property Rights
             </h2>
             <p>
-              All intellectual property rights, including but not limited to design concepts, custom software code, cinematic video assets, copywriting, and marketing strategies developed by Beyond Reach remain our proprietary property until all project fees are settled in full:
+              All intellectual property rights, including but not limited to design concepts, custom software code, cinematic video assets, copywriting, and marketing strategies developed by Clever Crow Strategies LLP remain our proprietary property until all project fees are settled in full:
             </p>
             <ul className="list-disc pl-6 space-y-3">
               <li>
@@ -83,7 +83,7 @@ export default function TermsConditions() {
               5. Performance Disclaimer & OTA Limitations
             </h2>
             <p>
-              While Beyond Reach architects full-funnel marketing campaigns designed to significantly increase direct booking yields and reduce OTA dependency (with past campaigns averaging a 40% growth), digital performance is influenced by external variables. We do not guarantee specific conversion rates, occupancy metrics, or revenue targets as they are subject to market conditions, seasonal fluctuations, and client operational compliance.
+              While Clever Crow Strategies LLP architects full-funnel marketing campaigns designed to significantly increase direct booking yields and reduce OTA dependency (with past campaigns averaging a 40% growth), digital performance is influenced by external variables. We do not guarantee specific conversion rates, occupancy metrics, or revenue targets as they are subject to market conditions, seasonal fluctuations, and client operational compliance.
             </p>
           </section>
 
@@ -101,7 +101,7 @@ export default function TermsConditions() {
               7. Limitation of Liability
             </h2>
             <p>
-              In no event shall Beyond Reach, its directors, or its global team be liable for any indirect, incidental, special, or consequential damages (including, without limitation, loss of business data, booking revenue, or digital platform downtime) arising out of the use or inability to use our website or marketing services, even if notified of the possibility of such damages.
+              In no event shall Clever Crow Strategies LLP, its directors, or its global team be liable for any indirect, incidental, special, or consequential damages (including, without limitation, loss of business data, booking revenue, or digital platform downtime) arising out of the use or inability to use our website or marketing services, even if notified of the possibility of such damages.
             </p>
           </section>
 
@@ -113,10 +113,10 @@ export default function TermsConditions() {
               We reserve the right to revise these General Terms at any time without notice. By using this website, you are agreeing to be bound by the then-current version of these terms. For inquiries regarding legal agreements, please reach out to our legal desk at:
               <br />
               <a 
-                href="mailto:hello@beyondreachagency.com" 
+                href="mailto:hello@clevercrow.in" 
                 className="text-brand-accent hover:underline font-medium transition-all duration-300"
               >
-                hello@beyondreachagency.com
+                hello@clevercrow.in
               </a>
             </p>
           </section>

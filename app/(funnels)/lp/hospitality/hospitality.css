@@ -63,3 +63,20 @@
   word-spacing: 0.18em !important;
 }
 
+/* WhatsApp Floating button pulsating glow animation */
+@keyframes whatsappPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.whatsapp-pulsate {
+  animation: whatsappPulse 2s infinite;
+}
+
