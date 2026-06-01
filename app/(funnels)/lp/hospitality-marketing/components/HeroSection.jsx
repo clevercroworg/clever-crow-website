@@ -253,8 +253,8 @@ const HeroSection = () => {
           </h1>
         </motion.div>
 
-        {/* Golden Horizontal Glowing Divider — hidden on mobile */}
-        <div className="relative w-48 sm:w-64 h-[1px] bg-gradient-to-r from-transparent via-[#c87f4c] to-transparent mx-auto mb-6 shrink-0 hidden sm:block">
+        {/* Golden Horizontal Glowing Divider */}
+        <div className="relative w-48 sm:w-64 h-[1px] bg-gradient-to-r from-transparent via-[#c87f4c] to-transparent mx-auto mb-6 shrink-0">
           <div className="absolute inset-0 bg-[#c87f4c] blur-[3px] opacity-80"></div>
         </div>
 
@@ -263,9 +263,9 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-body text-base xs:text-lg sm:text-xl md:text-2xl text-white mb-10 max-w-2xl font-medium leading-relaxed tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
+          className="font-body text-sm xs:text-base sm:text-xl md:text-2xl text-white mb-10 max-w-2xl font-medium leading-relaxed tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] whitespace-nowrap"
         >
-          More visibility. More enquiries. <br className="block sm:hidden" />Better growth.
+          More visibility. More enquiries. Better growth.
         </motion.p>
 
         {/* CTA Buttons - 3 Stacked on Mobile, Row on Desktop */}
