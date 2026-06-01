@@ -361,16 +361,16 @@ const HeroSection = () => {
                   <button
                     type="submit"
                     disabled={status.loading}
-                    className="glow-btn w-full bg-brand-accent text-white font-body font-bold text-sm uppercase py-4.5 rounded-xl flex items-center justify-center gap-2 hover:bg-[#0a0e0b] transition-all duration-300 cursor-pointer disabled:opacity-50 tracking-[0.05em]"
+                    className="w-full bg-brand-accent text-white font-body font-bold text-sm uppercase py-4.5 rounded-xl flex items-center justify-center gap-2 hover:bg-[#b06a3a] transition-all duration-300 cursor-pointer disabled:opacity-50 tracking-[0.05em] shadow-md hover:shadow-lg"
                   >
                     {status.loading ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin text-white" />
-                        <span className="font-bold-important text-white text-sm uppercase">Requesting...</span>
+                        <span className="font-bold-important text-white text-sm uppercase">Submitting...</span>
                       </>
                     ) : (
                       <>
-                        <span className="font-bold-important text-white text-sm uppercase">Request Call Back</span>
+                        <span className="font-bold-important text-white text-sm uppercase">Submit</span>
                         <span className="font-bold-important text-white">→</span>
                       </>
                     )}
