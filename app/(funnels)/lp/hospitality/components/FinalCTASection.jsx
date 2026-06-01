@@ -55,12 +55,7 @@ const FinalCTASection = () => {
 
         {/* Footer Brand Info */}
         <div className="w-full border-t border-brand-border/60 pt-8 flex flex-col sm:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded border border-brand-accent flex items-center justify-center font-heading text-sm font-bold text-brand-accent">
-              BR
-            </div>
-            <span className="font-heading text-lg font-bold tracking-wider text-white">BEYOND REACH</span>
-          </div>
+          <div className="hidden sm:block w-8"></div>
           
           <div className="flex flex-col items-center gap-2">
             <p className="font-body text-[11px] text-brand-textSecondary/60">
