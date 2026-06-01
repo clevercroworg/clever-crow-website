@@ -94,9 +94,9 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[4.2rem] xl:text-[4.6rem] text-white uppercase mb-6 hero-heading leading-[1.08] tracking-wide">
-              Get More Direct <br className="hidden sm:block"/>
-              <span className="text-brand-accent">Enquiries & Bookings</span> <br className="hidden sm:block"/>
+            <h1 className="font-heading text-5xl md:text-7xl lg:text-[4.2rem] xl:text-[4.6rem] text-white uppercase mb-6 hero-heading leading-[1.08] tracking-wide">
+              Get More Direct <br className="block lg:hidden"/>
+              <span className="text-brand-accent">Enquiries & Bookings</span> <br className="block lg:hidden"/>
               For Your Property
             </h1>
           </motion.div>
