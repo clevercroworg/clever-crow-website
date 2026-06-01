@@ -64,7 +64,7 @@ const FinalCTASection = () => {
       <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
         
         {/* Call to Action Content */}
-        <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white uppercase mb-6 leading-none tracking-[0.015em]" style={{ wordSpacing: '0.06em' }}>
+        <h2 className="font-heading text-[21px] xs:text-[26px] sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white uppercase mb-6 leading-[1.15] tracking-tight sm:tracking-normal" style={{ wordSpacing: '0.06em' }}>
           Request Your Free <br/>
           <span className="text-brand-accent">Property Growth Review</span>
         </h2>

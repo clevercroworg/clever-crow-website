@@ -76,7 +76,7 @@
 
 /* Premium Brushed Copper Metallic Buttons */
 .glow-btn {
-  background: linear-gradient(135deg, #ffd1b3 0%, #c87f4c 50%, #9c5d34 100%) !important;
+  background-color: var(--color-brand-accent) !important;
   color: #0a0e0b !important;
   border: none !important;
   font-weight: 700 !important;
@@ -85,7 +85,7 @@
 }
 
 .glow-btn:hover {
-  background: linear-gradient(135deg, #ffffff 0%, #ffd1b3 50%, #c87f4c 100%) !important;
+  background-color: #ffffff !important;
   color: #0a0e0b !important;
   box-shadow: 0 0 30px rgba(200, 127, 76, 0.65) !important;
   transform: translateY(-1px);
