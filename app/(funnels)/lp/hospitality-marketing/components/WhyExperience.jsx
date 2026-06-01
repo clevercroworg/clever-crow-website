@@ -1,114 +1,118 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Award, Calendar, ChevronRight } from 'lucide-react';
+import { Check, Target, Users, Sparkles, ShieldCheck } from 'lucide-react';
 
 const WhyExperience = () => {
-  const reasons = [
-    "Hospitality-first thinking",
-    "Strategy tailored to your property",
-    "Focus on direct bookings & ROI",
-    "Transparent reporting",
-    "Google & Meta certified experts",
-    "Premium content that converts",
-    "Data-driven growth approach",
-    "End-to-end campaign management",
-    "Long-term growth partner",
-    "Trusted by top hospitality brands"
-  ];
-
-  const stats = [
-    { value: "50+", label: "Hospitality Brands" },
-    { value: "35+", label: "Destinations Served" },
-    { value: "120+", label: "Successful Campaigns" },
-    { value: "5+", label: "Years of Marketing Expertise" }
+  const differentiators = [
+    {
+      title: "Hospitality-First Thinking",
+      desc: "Deep understanding of stays, guest intent, location demand, seasonality, and booking hesitation.",
+      icon: Target
+    },
+    {
+      title: "Direct Booking Focus",
+      desc: "Performance-driven campaigns designed to slash OTA commission costs and maximize your direct yield.",
+      icon: Users
+    },
+    {
+      title: "Premium Content Production",
+      desc: "Elite cinematic video, high-end photography direction, and ads crafted specifically to convert.",
+      icon: Sparkles
+    },
+    {
+      title: "End-to-End Execution",
+      desc: "Full campaign management, tracking setups, and transparent reporting from certified strategists.",
+      icon: ShieldCheck
+    }
   ];
 
   return (
-    <section id="why-beyond-reach" className="py-24 px-6 bg-brand-card/20 relative overflow-hidden border-t border-brand-border/40">
-      {/* Background soft blur */}
-      <div className="absolute right-0 bottom-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <section id="why-beyond-reach" className="py-24 px-6 bg-brand-card/25 relative overflow-hidden border-t border-brand-border/40">
+      
+      {/* Premium back glow */}
+      <div className="absolute right-0 bottom-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[130px] pointer-events-none z-0"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
-          {/* Left Column: Why Choose Us */}
-          <div className="lg:col-span-7">
-            <h2 className="font-heading text-xs tracking-widest text-brand-accent mb-2 font-semibold">
+          {/* Left Side: Minimalist Differentiators Grid (Col Span 7) */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            <h2 className="font-heading text-xs tracking-[0.25em] text-brand-accent mb-2 font-semibold uppercase">
               Why Choose Us
             </h2>
-            <h3 className="font-heading text-4xl md:text-5xl font-bold text-white mb-6 uppercase leading-none">
+            <h3 className="font-heading text-4xl md:text-5xl font-bold text-white mb-6 uppercase leading-tight tracking-[0.02em]" style={{ fontWeight: 300 }}>
               Results Driven. <br/>
               Hospitality Focused. <br/>
-              <span className="text-brand-accent">Growth Oriented.</span>
+              <span className="text-brand-accent font-bold-important">Growth Oriented.</span>
             </h3>
-            <p className="font-body text-base md:text-lg text-brand-textSecondary max-w-xl mb-10 leading-relaxed">
-              Beyond Reach is built for hospitality growth, not generic marketing. We understand stays, guest intent, location demand, seasonality, pricing, experience value and booking hesitation.
+            
+            <p className="font-body text-base md:text-lg text-brand-textSecondary max-w-xl mb-10 leading-relaxed font-light">
+              Beyond Reach is engineered exclusively for hospitality growth, not generic marketing. We understand stays, guest behavior, and what triggers direct bookings.
             </p>
 
-            {/* Grid of Reasons */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-              {reasons.map((reason, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-accent/10 flex items-center justify-center text-brand-accent">
-                    <Check className="w-3 h-3" />
-                  </div>
-                  <span className="font-body text-xs md:text-sm text-white/95">{reason}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Bottom Trust Badge */}
-            <div className="inline-flex items-center gap-4 bg-brand-dark border border-brand-border p-5 rounded-xl max-w-md">
-              <div className="w-12 h-12 rounded-lg bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent">
-                <Calendar className="w-6 h-6" />
-              </div>
-              <div>
-                <h4 className="font-heading text-lg font-bold text-white uppercase leading-none mb-1">
-                  Trusted by 50+ Brands
-                </h4>
-                <p className="font-body text-xs text-brand-textSecondary">
-                  Across resorts, hotels, and luxury villa rentals in India and the Middle East.
-                </p>
-              </div>
+            {/* Differentiators Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              {differentiators.map((diff, index) => {
+                const IconComponent = diff.icon;
+                return (
+                  <motion.div 
+                    key={index}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                    className="flex flex-col items-start gap-3.5 group"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent transition-transform duration-300 group-hover:scale-105">
+                      <IconComponent className="w-5 h-5 stroke-[1.5]" />
+                    </div>
+                    <div>
+                      <h4 className="font-heading text-[18px] font-bold text-white uppercase tracking-wider mb-1" style={{ fontWeight: 300 }}>
+                        {diff.title}
+                      </h4>
+                      <p className="font-body text-xs md:text-sm text-brand-textSecondary leading-relaxed font-light">
+                        {diff.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
 
-          {/* Right Column: Experience Stats */}
-          <div id="our-experience" className="lg:col-span-5 bg-brand-dark/40 border border-brand-border p-8 md:p-10 rounded-2xl relative overflow-hidden">
-            <h2 className="font-heading text-xs tracking-widest text-brand-accent mb-2 font-semibold">
-              Our Experience
-            </h2>
-            <h3 className="font-heading text-3xl font-bold text-white uppercase mb-8">
-              Experience Across Hospitality & Leisure
-            </h3>
-
-            {/* Experience Stats Grid */}
-            <div className="grid grid-cols-2 gap-8 border-b border-brand-border/60 pb-8 mb-8">
-              {stats.map((stat, index) => (
-                <div key={index}>
-                  <div className="font-heading text-4xl font-bold text-brand-accent leading-none mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="font-body text-xs uppercase tracking-wider text-white font-medium">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Right Column Footer Info */}
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-2.5 h-2.5 rounded-full bg-brand-accent mt-1.5 animate-pulse"></div>
-              <div>
-                <h4 className="font-heading text-lg font-bold text-white uppercase tracking-wider mb-2">
-                  Driven by Data & Insights
+          {/* Right Side: Elite Resort Visual Frame (Col Span 5) */}
+          <div className="lg:col-span-5 w-full">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group"
+            >
+              {/* Image */}
+              <img 
+                src="/lp/hospitality/hotel_card.png" 
+                alt="Luxury Hotel Guest Room Experience" 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+              
+              {/* Warm copper radial overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e0b]/90 via-[#0a0e0b]/20 to-transparent"></div>
+              
+              {/* Premium Floating Badge inside the image */}
+              <div className="absolute bottom-6 left-6 right-6 bg-[#0a0e0b]/80 border border-brand-accent/30 p-5 rounded-xl backdrop-blur-md">
+                <h4 className="font-heading text-lg font-bold text-white uppercase leading-none mb-1" style={{ fontWeight: 300 }}>
+                  Driven by <span className="text-brand-accent font-bold-important">Data & Insights</span>
                 </h4>
-                <p className="font-body text-xs text-brand-textSecondary leading-relaxed">
-                  We focus exclusively on direct bookings and measurable growth. Our strategy is built around stays, guest intent, seasonality, pricing, and experience value.
+                <p className="font-body text-[11px] text-brand-textSecondary leading-relaxed font-light">
+                  We focus exclusively on direct bookings, higher margins, and measurable growth.
                 </p>
               </div>
-            </div>
+
+              {/* Glowing copper framing border */}
+              <div className="absolute inset-0 border border-brand-accent/20 rounded-2xl pointer-events-none group-hover:border-brand-accent/40 transition-colors duration-500"></div>
+            </motion.div>
           </div>
 
         </div>

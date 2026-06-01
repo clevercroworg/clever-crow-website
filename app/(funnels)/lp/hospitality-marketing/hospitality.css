@@ -1,3 +1,11 @@
+/* Scoped styling overrides for hospitality-marketing funnel */
+.hospitality-funnel {
+  --color-brand-accent: #c87f4c; /* Warm, rich metallic copper */
+  --color-brand-border: rgba(200, 127, 76, 0.2); /* elegant copper tint border */
+  --font-heading: 'Formula Condensed', sans-serif;
+  --color-brand-card: #0f1411; /* dark luxury background for card components */
+}
+
 /* Custom styles for our landing page */
 .accent-gradient-text {
   background: linear-gradient(135deg, #ffffff 40%, var(--color-brand-accent) 100%);
@@ -6,18 +14,18 @@
 }
 
 .glow-btn:hover {
-  box-shadow: 0 0 25px rgba(142, 168, 0, 0.45);
+  box-shadow: 0 0 25px rgba(200, 127, 76, 0.45);
 }
 
 .border-glow:hover {
-  border-color: var(--color-brand-border);
-  box-shadow: 0 0 15px rgba(142, 168, 0, 0.1);
+  border-color: var(--color-brand-accent);
+  box-shadow: 0 0 15px rgba(200, 127, 76, 0.15);
 }
 
 .card-glass {
-  background: rgba(19, 25, 21, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(15, 20, 17, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-brand-border);
 }
 
@@ -44,7 +52,7 @@
 }
 
 .hero-heading {
-  letter-spacing: 0.015em !important;
+  letter-spacing: 0.02em !important;
   word-spacing: 0.08em !important;
   line-height: 1.05 !important;
 }
@@ -61,6 +69,30 @@
   line-height: 1.05 !important;
   letter-spacing: 0.04em !important;
   word-spacing: 0.18em !important;
+  font-weight: 300 !important; /* Elegant non-thick Formula Condensed */
+}
+
+/* Specific heading overrides to preserve bold accents where absolutely required */
+.hospitality-funnel .font-bold-important {
+  font-weight: 700 !important;
+}
+
+/* Infinite client logo scroll */
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-marquee {
+  animation: scrollMarquee 35s linear infinite;
+}
+
+.animate-scroll-marquee:hover {
+  animation-play-state: paused;
 }
 
 /* WhatsApp Floating button pulsating glow animation */
@@ -79,4 +111,3 @@
 .whatsapp-pulsate {
   animation: whatsappPulse 2s infinite;
 }
-
