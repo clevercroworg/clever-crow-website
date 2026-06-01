@@ -2,7 +2,7 @@
 .hospitality-funnel {
   --color-brand-accent: #c87f4c; /* Warm, rich metallic copper */
   --color-brand-border: rgba(200, 127, 76, 0.2); /* elegant copper tint border */
-  --font-heading: 'Formula Condensed', sans-serif;
+  --font-heading: 'Poppins', sans-serif;
   --color-brand-card: #0f1411; /* dark luxury background for card components */
 }
 
