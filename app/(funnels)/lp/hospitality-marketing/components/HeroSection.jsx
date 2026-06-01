@@ -215,45 +215,27 @@ const HeroSection = () => {
             More direct bookings. Better visibility. Stronger enquiry flow.
           </motion.p>
 
-          {/* 4-Badge Trust Grid from 4th image (2x2 grid layout, custom translucent pills) */}
+          {/* 4-Badge Trust Grid from 4th image (2x2 grid layout, custom translucent cards with icon on top) */}
           <motion.div 
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35 }}
-            className="grid grid-cols-2 gap-2.5 w-full max-w-xl mb-6"
+            className="grid grid-cols-2 gap-3 w-full max-w-xl mb-2"
           >
             {trustBadges.map((badge, idx) => {
               const IconComp = badge.icon;
               return (
                 <div 
                   key={idx} 
-                  className="flex items-center gap-2 bg-white/[0.05] border border-white/10 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full backdrop-blur-md hover:border-brand-accent/50 hover:bg-white/[0.09] transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.02)] group"
+                  className="flex flex-col items-center justify-center text-center gap-3 bg-white/[0.04] border border-white/10 p-5 rounded-2xl backdrop-blur-md hover:border-brand-accent/50 hover:bg-white/[0.08] transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.02)] group"
                 >
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-accent/20 border border-brand-accent/40 flex items-center justify-center text-brand-accent shadow-[0_0_12px_rgba(200,127,76,0.15)] group-hover:scale-110 transition-transform duration-300">
-                    <IconComp className="w-4 h-4 stroke-[2]" />
+                  <div className="flex-shrink-0 w-11 h-11 rounded-full bg-brand-accent/15 border border-brand-accent/30 flex items-center justify-center text-brand-accent shadow-[0_0_15px_rgba(200,127,76,0.1)] group-hover:scale-110 transition-transform duration-300">
+                    <IconComp className="w-5 h-5 stroke-[2]" />
                   </div>
-                  <span className="font-body text-[11.5px] xs:text-xs sm:text-sm text-white font-medium select-none tracking-wide leading-tight">{badge.label}</span>
+                  <span className="font-body text-xs sm:text-[13px] md:text-sm text-white font-medium select-none tracking-wide leading-tight">{badge.label}</span>
                 </div>
               );
             })}
-          </motion.div>
-
-          {/* Dial Button CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="w-full sm:w-auto"
-          >
-            <a 
-              href="tel:09986389444"
-              onClick={trackCallClick}
-              className="bg-[#22c55e] hover:bg-[#16a34a] text-white font-heading text-[28px] sm:text-[32px] font-bold rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer tracking-[0.08em] shadow-lg shadow-[#22c55e]/25 hover:shadow-[#22c55e]/40 w-full sm:w-auto font-bold-important leading-none"
-              style={{ padding: '1.125rem 2.5rem' }}
-            >
-              <Phone className="w-6 h-6 stroke-[3] text-white" />
-              <span className="font-bold-important">09986389444</span>
-            </a>
           </motion.div>
         </div>
 
