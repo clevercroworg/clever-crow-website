@@ -63,19 +63,21 @@ const HeroSection = () => {
       {/* Top Header Bar (Transparent background) */}
       <header className="relative z-20 w-full max-w-[95rem] mx-auto px-6 py-6 flex justify-between items-center bg-transparent">
         {/* Logo Branding */}
-        <Link href="/" className="flex items-center transition-transform hover:scale-105 active:scale-95">
-          <img 
-            src="/logo-light.svg" 
-            alt="Clever Crow" 
-            className="h-6 md:h-7 w-auto object-contain"
-          />
-        </Link>
+        <div className="bg-white/95 px-4.5 py-2.5 rounded-full shadow-md flex items-center justify-center border border-white/10 backdrop-blur-md">
+          <Link href="/" className="flex items-center transition-transform hover:scale-105 active:scale-95 shrink-0">
+            <img 
+              src="/logo-dark.svg" 
+              alt="Clever Crow" 
+              className="h-6 md:h-6.5 w-auto object-contain"
+            />
+          </Link>
+        </div>
 
         {/* Right Phone Button */}
         <a 
           href="tel:09986389444" 
           onClick={trackCallClick}
-          className="flex items-center justify-center bg-brand-accent hover:bg-white text-brand-dark w-11 h-11 rounded-xl transition-all duration-300 shadow-md hover:shadow-brand-accent/25 cursor-pointer"
+          className="flex items-center justify-center bg-brand-accent hover:bg-white text-brand-dark w-11 h-11 rounded-full transition-all duration-300 shadow-md hover:shadow-brand-accent/25 cursor-pointer"
           title="Call 09986389444"
         >
           <Phone className="w-5 h-5 stroke-[2.5]" />
@@ -85,16 +87,16 @@ const HeroSection = () => {
       {/* Main Split Grid (Content Left, Right side is overlaid by the background image) */}
       <div className="relative z-10 flex-grow grid grid-cols-1 lg:grid-cols-12 items-center lg:items-start lg:pt-28 max-w-[95rem] w-full mx-auto px-6 py-12 lg:py-0">
         
-        {/* Left Side: Headings & CTA Buttons (Col Span 7) */}
-        <div className="lg:col-span-7 flex flex-col justify-center items-start text-left lg:pr-12">
+        {/* Left Side: Headings & CTA Buttons (Col Span 8) */}
+        <div className="lg:col-span-8 flex flex-col justify-center items-start text-left lg:pr-12">
           <motion.div
             initial={{ opacity: 0, y: 35 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="font-heading text-5xl md:text-7xl lg:text-[5.5rem] text-white uppercase mb-6 hero-heading">
-              Get More Direct <br/>
-              <span className="text-brand-accent">Enquiries & Bookings</span> <br/>
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[4.2rem] xl:text-[4.6rem] text-white uppercase mb-6 hero-heading leading-[1.08] tracking-wide">
+              Get More Direct <br className="hidden sm:block"/>
+              <span className="text-brand-accent">Enquiries & Bookings</span> <br className="hidden sm:block"/>
               For Your Property
             </h1>
           </motion.div>
