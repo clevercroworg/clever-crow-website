@@ -11,6 +11,28 @@ const HeroSection = () => {
     }
   };
 
+  const trackCallClick = () => {
+    if (typeof window !== 'undefined') {
+      if (window.gtag) {
+        window.gtag('event', 'click', {
+          'event_category': 'Contact',
+          'event_label': 'Phone Call Click',
+          'phone_number': '09986389444'
+        });
+        window.gtag('event', 'Contact', {
+          'phone_number': '09986389444',
+          'method': 'Phone'
+        });
+      }
+      if (window.fbq) {
+        window.fbq('track', 'Contact', {
+          'content_name': 'Phone Call Click',
+          'phone_number': '09986389444'
+        });
+      }
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-brand-dark">
       
@@ -40,20 +62,20 @@ const HeroSection = () => {
       {/* Top Header Bar (Transparent background) */}
       <header className="relative z-20 w-full max-w-[95rem] mx-auto px-6 py-6 flex justify-between items-center bg-transparent">
         {/* Logo Branding */}
-        <div className="flex flex-col justify-center">
+        <div className="flex items-center">
           <div className="font-heading text-2xl leading-none font-bold tracking-wider text-white">BEYOND REACH</div>
-          <div className="font-body text-[8px] uppercase tracking-widest text-brand-textSecondary font-semibold leading-none mt-1">Hospitality Marketing</div>
         </div>
 
         {/* Right Phone Button */}
         <a 
-          href="tel:+919986389444" 
+          href="tel:09986389444" 
+          onClick={trackCallClick}
           className="flex items-center gap-3 bg-brand-accent hover:bg-white text-brand-dark font-heading text-sm font-bold px-5 py-3 rounded-xl transition-all duration-300 tracking-[0.06em]"
         >
           <div className="w-5 h-5 rounded-full border border-brand-dark/30 flex items-center justify-center">
             <Phone className="w-3 h-3 stroke-[2.5]" />
           </div>
-          <span>+91 99863 89444</span>
+          <span>09986389444</span>
         </a>
       </header>
 
@@ -92,12 +114,15 @@ const HeroSection = () => {
           >
             {/* Primary solid callback button */}
             <button 
-              onClick={scrollToForm}
+              onClick={() => {
+                scrollToForm();
+                trackCallClick();
+              }}
               className="glow-btn bg-brand-accent text-brand-dark hover:bg-white font-heading text-base font-bold px-10 py-4.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer tracking-[0.05em]"
               style={{ padding: '1.125rem 2.5rem' }}
             >
               <span>Request a Call Back</span>
-              <span className="font-body text-xs ml-3">+91 99863 89444</span>
+              <span className="font-body text-xs ml-3">09986389444</span>
               <ArrowRight className="w-4 h-4 stroke-[2.5]" />
             </button>
             

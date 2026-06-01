@@ -16,6 +16,28 @@ const FinalCTASection = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const trackWhatsAppClick = () => {
+    if (typeof window !== 'undefined') {
+      if (window.gtag) {
+        window.gtag('event', 'click', {
+          'event_category': 'Contact',
+          'event_label': 'WhatsApp Click',
+          'whatsapp_number': '09986389444'
+        });
+        window.gtag('event', 'Contact', {
+          'phone_number': '09986389444',
+          'method': 'WhatsApp'
+        });
+      }
+      if (window.fbq) {
+        window.fbq('track', 'Contact', {
+          'content_name': 'WhatsApp Click',
+          'phone_number': '09986389444'
+        });
+      }
+    }
+  };
+
   return (
     <footer className="relative py-16 px-6 bg-brand-dark overflow-hidden border-t border-brand-border/40 text-center">
       {/* Background radial glow */}
@@ -44,6 +66,7 @@ const FinalCTASection = () => {
           
           <a 
             href="https://wa.me/919986389444"
+            onClick={trackWhatsAppClick}
             target="_blank"
             rel="noopener noreferrer"
             className="border border-white/20 hover:border-brand-accent text-white hover:text-brand-accent font-body font-bold text-sm uppercase px-8 py-4 rounded-full flex items-center justify-center gap-2 transition-all duration-300 tracking-[0.05em]"

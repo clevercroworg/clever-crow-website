@@ -115,6 +115,26 @@ const ReviewFormSection = () => {
       const data = await response.json();
 
       if (response.ok) {
+        // Track Form Conversion in Google Ads / Meta Ads
+        if (typeof window !== 'undefined') {
+          if (window.gtag) {
+            window.gtag('event', 'conversion', {
+              'send_to': 'AW-17335403082',
+              'event_category': 'Lead',
+              'event_label': 'Hospitality Form Submission'
+            });
+            window.gtag('event', 'GenerateLead', {
+              'phone_number': '09986389444'
+            });
+          }
+          if (window.fbq) {
+            window.fbq('track', 'Lead', {
+              'content_name': 'Hospitality Form Submission',
+              'phone_number': '09986389444'
+            });
+          }
+        }
+
         setStatus({ loading: false, success: true, error: null });
         setFormData({
           contactName: '',
