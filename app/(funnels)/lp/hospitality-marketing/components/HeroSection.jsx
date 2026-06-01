@@ -199,9 +199,9 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
           >
             {/* Tagline using Formula Condensed in weight 300, copper color accent */}
-            <h1 className="font-heading text-[26px] xs:text-[32px] sm:text-[42px] md:text-[56px] lg:text-[4.5rem] xl:text-[5rem] text-white mb-3 hero-heading tracking-wide leading-[1.0]" style={{ fontWeight: 300 }}>
+            <h1 className="font-heading text-[29px] xs:text-[35px] sm:text-[45px] md:text-[58px] lg:text-[4.5rem] xl:text-[5rem] text-white mb-3 hero-heading tracking-wide leading-[1.0]" style={{ fontWeight: 300 }}>
               Get More Direct <br className="block"/>
-              <span className="text-brand-accent font-bold-important text-[1.2em] inline-block my-0.5 md:my-1">Bookings</span> <br className="block"/>
+              <span className="text-brand-accent font-bold-important text-[1.25em] inline-block my-0.5 md:my-1">Bookings</span> <br className="block"/>
               For Your Property
             </h1>
           </motion.div>
@@ -267,7 +267,7 @@ const HeroSection = () => {
             {/* Top copper highlight border */}
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-brand-accent/30 via-brand-accent to-brand-accent/30"></div>
             
-            <h3 className="font-heading text-3xl font-bold text-[#0a0e0b] mb-6 leading-none">
+            <h3 className="font-heading text-[22px] sm:text-[26px] md:text-3xl font-bold text-[#0a0e0b] mb-6 leading-none whitespace-nowrap">
               Request <span className="text-brand-accent font-bold-important">Call Back</span>
             </h3>
 
@@ -280,7 +280,7 @@ const HeroSection = () => {
                   className="flex flex-col items-center text-center py-10"
                 >
                   <CheckCircle className="w-14 h-14 text-brand-accent mb-6 animate-pulse" />
-                  <h4 className="font-heading text-2xl font-bold text-[#0a0e0b] mb-2">Review Requested!</h4>
+                  <h4 className="font-heading text-xl sm:text-2xl font-bold text-[#0a0e0b] mb-2 whitespace-nowrap">Review Requested!</h4>
                   <p className="font-body text-sm text-slate-500 max-w-xs mb-8 font-normal">
                     Thank you! Our growth desk is reviewing your online presence and will call you back shortly.
                   </p>
