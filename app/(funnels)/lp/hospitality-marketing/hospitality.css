@@ -1,0 +1,82 @@
+/* Custom styles for our landing page */
+.accent-gradient-text {
+  background: linear-gradient(135deg, #ffffff 40%, var(--color-brand-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glow-btn:hover {
+  box-shadow: 0 0 25px rgba(142, 168, 0, 0.45);
+}
+
+.border-glow:hover {
+  border-color: var(--color-brand-border);
+  box-shadow: 0 0 15px rgba(142, 168, 0, 0.1);
+}
+
+.card-glass {
+  background: rgba(19, 25, 21, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-brand-border);
+}
+
+.timeline-dot {
+  position: relative;
+}
+
+.timeline-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: calc(100% - 24px);
+  height: 1px;
+  border-bottom: 1px dashed var(--color-brand-border);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+@media (max-width: 1024px) {
+  .timeline-dot::after {
+    display: none;
+  }
+}
+
+.hero-heading {
+  letter-spacing: 0.015em !important;
+  word-spacing: 0.08em !important;
+  line-height: 1.05 !important;
+}
+
+/* Scoped headings override to preserve landing page design settings */
+.hospitality-funnel h1,
+.hospitality-funnel h2,
+.hospitality-funnel h3,
+.hospitality-funnel h4,
+.hospitality-funnel h5,
+.hospitality-funnel h6 {
+  font-family: var(--font-heading) !important;
+  text-transform: uppercase !important;
+  line-height: 1.05 !important;
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.18em !important;
+}
+
+/* WhatsApp Floating button pulsating glow animation */
+@keyframes whatsappPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.whatsapp-pulsate {
+  animation: whatsappPulse 2s infinite;
+}
+
