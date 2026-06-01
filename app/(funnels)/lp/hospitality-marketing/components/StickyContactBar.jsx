@@ -82,7 +82,7 @@ const StickyContactBar = () => {
           <a
             href="tel:09986389444"
             onClick={trackCallClick}
-            className="flex-1 flex items-center justify-center gap-2 bg-[#c87f4c] hover:bg-[#b06a3a] text-white py-3 px-4 rounded-full font-heading font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 active:scale-95 shadow-md shadow-[#c87f4c]/25 shrink-0"
+            className="flex-1 flex items-center justify-center gap-2 bg-[#c1781f] hover:bg-[#9a6118] text-white py-3 px-4 rounded-full font-heading font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 active:scale-95 shadow-md shadow-[#c1781f]/25 shrink-0"
           >
             <Phone className="w-4 h-4 stroke-[2.5]" />
             <span>Call Us</span>

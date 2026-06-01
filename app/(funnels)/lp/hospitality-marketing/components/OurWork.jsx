@@ -75,7 +75,7 @@ const OurWork = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.05 }}
-              className="w-full aspect-[9/16] bg-black rounded-[1.8rem] overflow-hidden shadow-[0_15px_45px_rgba(0,0,0,0.06)] border border-neutral-200/50 hover:border-brand-accent/45 hover:shadow-[0_20px_50px_rgba(200,127,76,0.12)] hover:scale-[1.01] transition-all duration-500 ease-out"
+              className="w-full aspect-[9/16] bg-black rounded-[1.8rem] overflow-hidden shadow-[0_15px_45px_rgba(0,0,0,0.06)] border border-neutral-200/50 hover:border-brand-accent/45 hover:shadow-[0_20px_50px_rgba(193,120,31,0.12)] hover:scale-[1.01] transition-all duration-500 ease-out"
             >
               <AutoplayVideo src={videoPath} />
             </motion.div>

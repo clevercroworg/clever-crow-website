@@ -28,8 +28,8 @@ const BrandsWeWorkWith = () => {
 
       <div className="relative flex overflow-hidden">
         {/* Soft copper edge gradients for smooth premium transition */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-[#c87f4c]/20 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-[#c87f4c]/20 to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-[#c1781f]/20 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-[#c1781f]/20 to-transparent z-10 pointer-events-none" />
 
         <div className="flex items-center whitespace-nowrap gap-8 sm:gap-14 py-1.5 animate-scroll-marquee select-none">
           {duplicatedLogos.map((name, i) => (
@@ -39,7 +39,7 @@ const BrandsWeWorkWith = () => {
             >
               <span className="text-neutral-300 text-[10px] select-none">●</span>
               <span 
-                className="text-sm sm:text-lg font-normal text-neutral-500 uppercase tracking-[0.25em] transition-colors duration-300 group-hover:text-[#c87f4c] cursor-pointer"
+                className="text-sm sm:text-lg font-normal text-neutral-500 uppercase tracking-[0.25em] transition-colors duration-300 group-hover:text-[#c1781f] cursor-pointer"
                 style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
               >
                 {name}

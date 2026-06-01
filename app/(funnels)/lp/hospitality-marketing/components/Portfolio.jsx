@@ -236,7 +236,7 @@ const Portfolio = () => {
                   onClick={() => setActiveFilter(cat)}
                   className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
                     isActive
-                      ? "bg-brand-accent text-brand-dark shadow-[0_4px_20px_rgba(200,127,76,0.35)]"
+                      ? "bg-brand-accent text-brand-dark shadow-[0_4px_20px_rgba(193,120,31,0.35)]"
                       : "bg-brand-card/50 text-neutral-400 hover:text-white border border-brand-border/30 hover:border-brand-accent/40"
                   }`}
                 >
@@ -261,7 +261,7 @@ const Portfolio = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-brand-card border border-brand-border/40 hover:border-brand-accent/30 rounded-[1.5rem] overflow-hidden hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(200,127,76,0.06)] transition-all duration-500 flex flex-col h-full"
+                className="bg-brand-card border border-brand-border/40 hover:border-brand-accent/30 rounded-[1.5rem] overflow-hidden hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(193,120,31,0.06)] transition-all duration-500 flex flex-col h-full"
               >
                 {/* Card Property Photo Header */}
                 <div className="relative w-full h-[220px] overflow-hidden group">

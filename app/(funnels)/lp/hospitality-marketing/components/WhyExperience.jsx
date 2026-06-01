@@ -101,7 +101,7 @@ const WhyExperience = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e0b]/95 via-[#0a0e0b]/20 to-transparent"></div>
               
               {/* Premium Floating Badge inside the image */}
-              <div className="absolute bottom-6 left-6 right-6 bg-[#0a0e0b]/85 border border-[#c87f4c]/20 p-5 rounded-xl backdrop-blur-md">
+              <div className="absolute bottom-6 left-6 right-6 bg-[#0a0e0b]/85 border border-[#c1781f]/20 p-5 rounded-xl backdrop-blur-md">
                 <h4 className="font-heading text-lg font-bold text-white uppercase leading-none mb-1.5">
                   Driven by <span className="text-brand-accent font-bold-important">Data & Insights</span>
                 </h4>

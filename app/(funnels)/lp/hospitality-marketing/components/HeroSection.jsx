@@ -204,9 +204,9 @@ const HeroSection = () => {
           />
         </picture>
         {/* Darker overlay on mobile for text contrast, lighter on desktop */}
-        <div className="absolute inset-0 bg-[#0a0e0b]/65 sm:bg-[#0a0e0b]/25 z-[1]"></div>
+        <div className="absolute inset-0 bg-[#0a0e0b]/80 sm:bg-[#0a0e0b]/25 z-[1]"></div>
         {/* Warm copper tint overlay on mobile for color harmony */}
-        <div className="absolute inset-0 bg-[#c87f4c]/8 sm:bg-transparent z-[1]"></div>
+        <div className="absolute inset-0 bg-[#c1781f]/8 sm:bg-transparent z-[1]"></div>
       </div>
       
       {/* Top Header Bar */}
@@ -228,7 +228,7 @@ const HeroSection = () => {
           onClick={trackWhatsAppClick}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 bg-[#0a0e0b]/70 hover:bg-[#0a0e0b]/90 border border-[#c87f4c]/50 hover:border-[#c87f4c] text-white px-4.5 py-2.5 rounded-full transition-all duration-300 shadow-md backdrop-blur-md cursor-pointer"
+          className="flex items-center justify-center gap-2 bg-[#0a0e0b]/70 hover:bg-[#0a0e0b]/90 border border-[#c1781f]/50 hover:border-[#c1781f] text-white px-4.5 py-2.5 rounded-full transition-all duration-300 shadow-md backdrop-blur-md cursor-pointer"
           title="WhatsApp Us"
         >
           <FaWhatsapp className="w-4.5 h-4.5 text-[#25d366]" />
@@ -260,15 +260,23 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Dramatic Lens Flare / Light Streak Effect */}
-        <div className="relative w-full max-w-2xl h-[2px] mx-auto mb-6 shrink-0">
-          {/* Wide warm amber glow */}
-          <div className="absolute inset-y-0 left-0 right-0 bg-gradient-to-r from-transparent via-[#e8943a] to-transparent blur-[6px] opacity-90"></div>
-          {/* Bright hot center flare */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-[3px] bg-gradient-to-r from-transparent via-white to-transparent blur-[2px] opacity-95"></div>
-          {/* Outer soft glow halo */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-[8px] bg-gradient-to-r from-transparent via-[#c87f4c]/60 to-transparent blur-[10px]"></div>
-          {/* Core line */}
-          <div className="absolute inset-y-0 left-0 right-0 bg-gradient-to-r from-transparent via-[#d4944f] to-transparent"></div>
+        <div className="relative w-full max-w-2xl h-8 mx-auto mb-6 shrink-0 flex items-center justify-center">
+          {/* Outer soft glow halo (wide warm amber glow) */}
+          <div className="absolute inset-y-0 left-0 right-0 bg-gradient-to-r from-transparent via-[#e89030]/50 to-transparent blur-[12px] opacity-90"></div>
+          {/* Ambient wide radial amber flare at the center */}
+          <div className="absolute w-48 h-8 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.7)_0%,transparent_70%)] blur-[4px]"></div>
+          {/* Golden glow line */}
+          <div className="absolute w-[90%] h-[3px] bg-gradient-to-r from-transparent via-[#d48a2a] to-transparent blur-[0.5px]"></div>
+          {/* The main sharp copper accent line */}
+          <div className="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-[#c1781f] to-transparent"></div>
+          {/* Intense focal center glow (radial amber flare) */}
+          <div className="absolute w-32 h-6 bg-[radial-gradient(ellipse_at_center,rgba(255,201,138,0.65)_0%,transparent_60%)] blur-[2px]"></div>
+          {/* Central white-hot diamond/ellipse flare */}
+          <div className="absolute w-28 h-2.5 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,1)_0%,rgba(193,120,31,0.5)_40%,transparent_70%)] blur-[0.5px]"></div>
+          {/* Lens flare horizontal streak (thin sharp white core) */}
+          <div className="absolute w-48 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent shadow-[0_0_8px_#fff]"></div>
+          {/* Subtle vertical glint sparkle to make it pop like a bright star/spark */}
+          <div className="absolute w-[1.5px] h-6 bg-gradient-to-b from-transparent via-white/90 to-transparent blur-[0.5px]"></div>
         </div>
 
         {/* Centered Grey Subtext */}
@@ -294,7 +302,7 @@ const HeroSection = () => {
             onClick={trackWhatsAppClick}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-3.5 border border-[#c87f4c]/40 hover:border-[#c87f4c] bg-[#0a0e0b]/50 hover:bg-[#0a0e0b]/70 text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4 sm:py-4.5 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-[#c87f4c]/10 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
+            className="flex items-center justify-center gap-3.5 border border-[#c1781f]/40 hover:border-[#c1781f] bg-[#0a0e0b]/50 hover:bg-[#0a0e0b]/70 text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4 sm:py-4.5 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-[#c1781f]/10 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
           >
             <FaWhatsapp className="w-5.5 h-5.5 text-[#25d366] shrink-0" />
             <span>Talk on WhatsApp</span>
@@ -303,7 +311,7 @@ const HeroSection = () => {
           {/* Request a Call Back — Copper Gradient Fill */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center justify-center gap-3.5 bg-gradient-to-r from-[#c87f4c] via-[#d4944f] to-[#c87f4c] hover:from-[#b06a3a] hover:via-[#c87f4c] hover:to-[#b06a3a] text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4 sm:py-4.5 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg shadow-[#c87f4c]/30 hover:shadow-[#c87f4c]/50 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
+            className="flex items-center justify-center gap-3.5 bg-gradient-to-r from-[#c1781f] via-[#d48a2a] to-[#c1781f] hover:from-[#9a6118] hover:via-[#c1781f] hover:to-[#9a6118] text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4 sm:py-4.5 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg shadow-[#c1781f]/30 hover:shadow-[#c1781f]/50 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
           >
             <Phone className="w-4.5 h-4.5 stroke-[2.5] shrink-0" />
             <span>Request a Call Back</span>
@@ -315,7 +323,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="w-full max-w-3xl mt-12 bg-[#0a0e0b]/55 border border-[#c87f4c]/30 backdrop-blur-md rounded-2xl py-3.5 px-2.5 sm:py-5 sm:px-8 hidden sm:flex flex-row justify-around items-center gap-1 sm:gap-6 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+          className="w-full max-w-3xl mt-12 bg-[#0a0e0b]/55 border border-[#c1781f]/30 backdrop-blur-md rounded-2xl py-3.5 px-2.5 sm:py-5 sm:px-8 hidden sm:flex flex-row justify-around items-center gap-1 sm:gap-6 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
         >
           {stats.map((stat, idx) => {
             const IconComp = stat.icon;
@@ -323,7 +331,7 @@ const HeroSection = () => {
               <React.Fragment key={idx}>
                 {idx > 0 && <div className="w-[1px] h-6 sm:h-8 bg-white/20 shrink-0"></div>}
                 <div className="flex items-center gap-1.5 sm:gap-3.5 py-0.5 w-auto">
-                  <IconComp className="w-4 h-4 sm:w-5.5 sm:h-5.5 text-[#c87f4c] shrink-0" />
+                  <IconComp className="w-4 h-4 sm:w-5.5 sm:h-5.5 text-[#c1781f] shrink-0" />
                   <span className="font-heading text-[9px] xs:text-[10px] sm:text-sm md:text-base font-semibold tracking-wide text-white select-none leading-tight sm:whitespace-nowrap">
                     {stat.label}
                   </span>
@@ -352,7 +360,7 @@ const HeroSection = () => {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 15 }}
               transition={{ duration: 0.3 }}
-              className="bg-white border border-[#c87f4c]/20 p-8 md:p-9 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.5)] relative overflow-hidden w-full max-w-md"
+              className="bg-white border border-[#c1781f]/20 p-8 md:p-9 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.5)] relative overflow-hidden w-full max-w-md"
             >
               {/* Close Button */}
               <button 
@@ -452,7 +460,7 @@ const HeroSection = () => {
                     <button
                       type="submit"
                       disabled={status.loading}
-                      className="w-full bg-brand-accent text-white font-body font-bold text-sm uppercase py-4.5 rounded-xl flex items-center justify-center gap-2 hover:bg-[#b06a3a] transition-all duration-300 cursor-pointer disabled:opacity-50 tracking-[0.05em] shadow-md hover:shadow-lg"
+                      className="w-full bg-brand-accent text-white font-body font-bold text-sm uppercase py-4.5 rounded-xl flex items-center justify-center gap-2 hover:bg-[#9a6118] transition-all duration-300 cursor-pointer disabled:opacity-50 tracking-[0.05em] shadow-md hover:shadow-lg"
                     >
                       {status.loading ? (
                         <>
