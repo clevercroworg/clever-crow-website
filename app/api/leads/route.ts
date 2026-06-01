@@ -31,7 +31,7 @@ export async function POST(req: Request) {
 
       const info = await transporter.sendMail({
         from: `"clever crow" <${process.env.SMTP_USER}>`,
-        to: process.env.TO_EMAIL || "sanjay@clevercrow.in",
+        to: process.env.TO_EMAIL || "manojvg900@gmail.com",
         subject: `New Lead: ${name}`,
         html: `
           <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
