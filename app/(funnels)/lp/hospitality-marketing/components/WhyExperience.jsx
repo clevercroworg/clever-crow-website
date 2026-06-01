@@ -38,7 +38,7 @@ const WhyExperience = () => {
           
           {/* Left Side: Minimalist Differentiators Grid (Col Span 7) */}
           <div className="lg:col-span-7 flex flex-col justify-center">
-            <h2 className="font-heading text-sm sm:text-base md:text-lg tracking-[0.25em] text-brand-accent mb-2.5 font-semibold uppercase font-bold-important">
+            <h2 className="font-body text-xs md:text-sm tracking-[0.3em] text-brand-accent mb-3 font-bold uppercase">
               Why Choose Us
             </h2>
             <h3 className="font-heading text-[38px] sm:text-[52px] md:text-[64px] lg:text-[76px] font-bold text-white mb-6 uppercase leading-[1.05] tracking-[0.02em] font-bold-important">
@@ -47,7 +47,7 @@ const WhyExperience = () => {
               <span className="text-brand-accent font-bold-important">Growth Oriented.</span>
             </h3>
             
-            <p className="font-body text-base md:text-lg text-brand-textSecondary max-w-xl mb-10 leading-relaxed font-light">
+            <p className="font-body text-[15.8px] md:text-[16px] text-brand-textSecondary max-w-xl mb-10 leading-[1.7] font-normal">
               Beyond Reach is engineered exclusively for hospitality growth, not generic marketing. We understand stays, guest behavior, and what triggers direct bookings.
             </p>
 
@@ -68,10 +68,10 @@ const WhyExperience = () => {
                       <IconComponent className="w-5 h-5 stroke-[1.5]" />
                     </div>
                     <div>
-                      <h4 className="font-heading text-[18px] font-bold text-white uppercase tracking-wider mb-1" style={{ fontWeight: 300 }}>
+                      <h4 className="font-heading text-[22px] sm:text-[24px] md:text-[26px] font-bold text-white uppercase tracking-[0.02em] mb-2 font-bold-important">
                         {diff.title}
                       </h4>
-                      <p className="font-body text-xs md:text-sm text-brand-textSecondary leading-relaxed font-light">
+                      <p className="font-body text-[13px] md:text-[14.7px] text-brand-textSecondary leading-[1.6] font-normal">
                         {diff.desc}
                       </p>
                     </div>
@@ -102,10 +102,10 @@ const WhyExperience = () => {
               
               {/* Premium Floating Badge inside the image */}
               <div className="absolute bottom-6 left-6 right-6 bg-[#0a0e0b]/85 border border-[#c87f4c]/20 p-5 rounded-xl backdrop-blur-md">
-                <h4 className="font-heading text-lg font-bold text-white uppercase leading-none mb-1.5" style={{ fontWeight: 300 }}>
+                <h4 className="font-heading text-lg font-bold text-white uppercase leading-none mb-1.5">
                   Driven by <span className="text-brand-accent font-bold-important">Data & Insights</span>
                 </h4>
-                <p className="font-body text-[11px] text-brand-textSecondary leading-relaxed font-light">
+                <p className="font-body text-[11px] text-brand-textSecondary leading-relaxed font-normal">
                   We focus exclusively on direct bookings, higher margins, and measurable growth.
                 </p>
               </div>

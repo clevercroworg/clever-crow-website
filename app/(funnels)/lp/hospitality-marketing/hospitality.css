@@ -139,9 +139,9 @@
 .hospitality-funnel h6 {
   font-family: var(--font-heading) !important;
   text-transform: uppercase !important;
-  line-height: 1.05 !important;
-  letter-spacing: 0.04em !important;
-  font-weight: 300 !important; /* Elegant non-thick Formula Condensed */
+  line-height: 1.1 !important;
+  letter-spacing: 0.02em !important;
+  font-weight: 700 !important; /* Bold headings matching home page */
 }
 
 /* Specific heading overrides to preserve bold accents where absolutely required */

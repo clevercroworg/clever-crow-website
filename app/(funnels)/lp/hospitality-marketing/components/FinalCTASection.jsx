@@ -69,7 +69,7 @@ const FinalCTASection = () => {
           <span className="text-brand-accent">Property Growth Review</span>
         </h2>
         
-        <p className="font-body text-sm md:text-base text-brand-textSecondary max-w-xl mb-8 leading-relaxed">
+        <p className="font-body text-sm md:text-base text-brand-textSecondary max-w-xl mb-8 font-normal leading-[1.7]">
           Share your property details and our hospitality marketing team will review your online visibility, brand positioning, photos/videos, ads readiness, and booking flow.
         </p>
 

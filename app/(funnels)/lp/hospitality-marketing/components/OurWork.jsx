@@ -68,7 +68,6 @@ const OurWork = () => {
         <div className="text-center max-w-4xl mx-auto mb-16">
           <h3 
             className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#0a0e0b] uppercase tracking-[0.06em] leading-none mb-4" 
-            style={{ fontWeight: 300 }}
           >
             Our <span className="text-brand-accent font-bold-important">Works</span>
           </h3>

@@ -84,7 +84,7 @@ const IndustryCategories = () => {
         <h3 className="font-heading text-[38px] sm:text-[46px] md:text-[56px] lg:text-[66px] xl:text-[72px] font-bold tracking-[0.06em] text-white uppercase mb-3 font-bold-important">
           Built For <span className="text-brand-accent font-bold-important">Hospitality Excellence</span>
         </h3>
-        <p className="font-body text-sm md:text-base text-brand-textSecondary max-w-2xl mx-auto font-light">
+        <p className="font-body text-[15px] md:text-[16px] text-brand-textSecondary max-w-2xl mx-auto font-normal leading-[1.7]">
           We construct tailored visual and performance marketing channels for luxury stays and recreational experiences.
         </p>
       </div>

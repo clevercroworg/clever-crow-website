@@ -37,11 +37,11 @@ const TestimonialsStats = () => {
         
         {/* Testimonials Title (Styled for light background) */}
         <div className="text-center max-w-4xl mx-auto mb-16">
-          <div className="flex items-center justify-center gap-2 text-brand-accent text-xs font-heading font-semibold tracking-widest uppercase mb-2">
+          <div className="flex items-center justify-center gap-2 text-brand-accent text-xs sm:text-sm font-body font-bold tracking-[0.3em] uppercase mb-2.5">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Trusted By Hospitality Brands</span>
           </div>
-          <h3 className="font-heading text-4xl md:text-5xl font-bold text-[#0a0e0b] uppercase" style={{ fontWeight: 300 }}>
+          <h3 className="font-heading text-4xl md:text-5xl font-bold text-[#0a0e0b] uppercase">
             What Our <span className="text-brand-accent font-bold-important">Clients Say</span>
           </h3>
           
@@ -71,14 +71,14 @@ const TestimonialsStats = () => {
                 <div className="text-brand-accent mb-4">
                   <Quote className="w-8 h-8 opacity-25 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <p className="font-body text-[15px] md:text-base text-neutral-700 leading-relaxed mb-6 font-light">
+                <p className="font-body text-[15px] md:text-base text-neutral-700 leading-[1.7] mb-6 font-normal">
                   "{test.quote}"
                 </p>
               </div>
 
               <div>
                 <div className="border-t border-neutral-100 pt-4 mb-4">
-                  <h4 className="font-heading text-lg font-bold text-[#0a0e0b] uppercase leading-none mb-1" style={{ fontWeight: 300 }}>
+                  <h4 className="font-heading text-lg font-bold text-[#0a0e0b] uppercase leading-none mb-1">
                     {test.clientName}
                   </h4>
                   <span className="font-body text-[10px] text-neutral-400 uppercase tracking-widest font-bold">

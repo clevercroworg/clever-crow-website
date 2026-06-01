@@ -210,7 +210,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-body text-base md:text-lg text-white/95 mb-5 max-w-xl font-light"
+            className="font-body text-[15px] md:text-[16px] text-white/95 mb-5 max-w-xl font-normal leading-[1.7]"
           >
             More direct bookings. Better visibility. Stronger enquiry flow.
           </motion.p>
@@ -267,7 +267,7 @@ const HeroSection = () => {
             {/* Top copper highlight border */}
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-brand-accent/30 via-brand-accent to-brand-accent/30"></div>
             
-            <h3 className="font-heading text-3xl font-bold text-[#0a0e0b] mb-6 leading-none" style={{ fontWeight: 300 }}>
+            <h3 className="font-heading text-3xl font-bold text-[#0a0e0b] mb-6 leading-none">
               Request <span className="text-brand-accent font-bold-important">Call Back</span>
             </h3>
 
@@ -280,8 +280,8 @@ const HeroSection = () => {
                   className="flex flex-col items-center text-center py-10"
                 >
                   <CheckCircle className="w-14 h-14 text-brand-accent mb-6 animate-pulse" />
-                  <h4 className="font-heading text-2xl font-bold text-[#0a0e0b] mb-2" style={{ fontWeight: 300 }}>Review Requested!</h4>
-                  <p className="font-body text-sm text-slate-500 max-w-xs mb-8 font-light">
+                  <h4 className="font-heading text-2xl font-bold text-[#0a0e0b] mb-2">Review Requested!</h4>
+                  <p className="font-body text-sm text-slate-500 max-w-xs mb-8 font-normal">
                     Thank you! Our growth desk is reviewing your online presence and will call you back shortly.
                   </p>
                   <button
@@ -316,7 +316,7 @@ const HeroSection = () => {
                       placeholder="Full Name"
                       required
                       disabled={status.loading}
-                      className="w-full bg-[#f8fafc] border border-slate-200 focus:border-brand-accent text-[#0a0e0b] px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-slate-400 disabled:opacity-50 font-light"
+                      className="w-full bg-[#f8fafc] border border-slate-200 focus:border-brand-accent text-[#0a0e0b] px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-slate-400 disabled:opacity-50 font-normal"
                     />
                   </div>
 
@@ -330,7 +330,7 @@ const HeroSection = () => {
                       placeholder="Phone Number"
                       required
                       disabled={status.loading}
-                      className="w-full bg-[#f8fafc] border border-slate-200 focus:border-brand-accent text-[#0a0e0b] px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-slate-400 disabled:opacity-50 font-light"
+                      className="w-full bg-[#f8fafc] border border-slate-200 focus:border-brand-accent text-[#0a0e0b] px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-slate-400 disabled:opacity-50 font-normal"
                     />
                   </div>
 
@@ -342,11 +342,11 @@ const HeroSection = () => {
                       onChange={handleInputChange}
                       required
                       disabled={status.loading}
-                      className="w-full bg-[#f8fafc] border border-slate-200 focus:border-brand-accent text-[#0a0e0b] px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-slate-400 appearance-none disabled:opacity-50 cursor-pointer font-light"
+                      className="w-full bg-[#f8fafc] border border-slate-200 focus:border-brand-accent text-[#0a0e0b] px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-slate-400 appearance-none disabled:opacity-50 cursor-pointer font-normal"
                     >
                       <option value="" disabled className="text-slate-400">Select Property Type</option>
                       {propertyTypes.map((type, index) => (
-                        <option key={index} value={type} className="bg-white text-[#0a0e0b] font-light">{type}</option>
+                        <option key={index} value={type} className="bg-white text-[#0a0e0b] font-normal">{type}</option>
                       ))}
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
@@ -375,7 +375,7 @@ const HeroSection = () => {
                     )}
                   </button>
                   
-                  <p className="text-center font-body text-[10px] text-slate-400 mt-4 font-light tracking-wide">
+                  <p className="text-center font-body text-[10px] text-slate-400 mt-4 font-normal tracking-wide">
                     We respect your privacy. No spam, ever.
                   </p>
                 </motion.form>

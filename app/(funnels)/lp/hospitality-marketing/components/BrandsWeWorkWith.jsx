@@ -21,7 +21,7 @@ const BrandsWeWorkWith = () => {
   return (
     <section className="relative bg-[#fafbfa] py-4 sm:py-6 overflow-hidden border-b border-neutral-200/40 z-10">
       <div className="mx-auto max-w-7xl px-6 mb-3 text-center">
-        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-neutral-400">
+        <span className="font-body text-[10px] font-bold uppercase tracking-[0.3em] text-neutral-400">
           Brands We Work With
         </span>
       </div>
