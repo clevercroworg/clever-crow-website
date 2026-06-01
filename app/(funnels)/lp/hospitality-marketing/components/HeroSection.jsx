@@ -199,10 +199,10 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
           >
             {/* Tagline using Poppins font, copper color accent */}
-            <h1 className="font-heading text-[28px] xs:text-[34px] sm:text-[36px] md:text-[46px] lg:text-[2.0rem] xl:text-[2.4rem] 2xl:text-[2.8rem] text-white mb-4 hero-heading tracking-tight lg:tracking-wide leading-[1.15]" style={{ fontWeight: 300 }}>
+            <h1 className="font-heading text-[26px] xs:text-[32px] sm:text-[36px] md:text-[46px] lg:text-[2.0rem] xl:text-[2.4rem] 2xl:text-[2.8rem] text-white mb-4 hero-heading tracking-tight lg:tracking-wide leading-[1.15]" style={{ fontWeight: 300 }}>
               <span className="block">Hospitality Digital Marketing</span>
               <span className="block mt-1 sm:mt-1.5">Built for More</span>
-              <span className="text-brand-accent font-bold-important text-[1.45em] sm:text-[1.4em] block leading-[1.05] mt-1.5 sm:mt-2">Direct Bookings</span>
+              <span className="text-brand-accent font-bold-important text-[1.2em] xs:text-[1.3em] sm:text-[1.4em] block leading-[1.05] mt-1.5 sm:mt-2">Direct Bookings</span>
             </h1>
           </motion.div>
 
