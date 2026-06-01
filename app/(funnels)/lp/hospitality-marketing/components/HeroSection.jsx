@@ -201,7 +201,7 @@ const HeroSection = () => {
             {/* Tagline using Formula Condensed in weight 300, copper color accent */}
             <h1 className="font-heading text-5xl md:text-7xl lg:text-[4.5rem] xl:text-[5rem] text-white mb-3 hero-heading tracking-wide leading-[1.05]" style={{ fontWeight: 300 }}>
               Get More Direct <br className="block"/>
-              <span className="text-brand-accent font-bold-important text-[1.12em] block my-1.5 md:my-2">Bookings</span>
+              <span className="text-brand-accent font-bold-important text-[1.12em] inline-block my-1.5 md:my-2">Bookings</span> <br className="block"/>
               For Your Property
             </h1>
           </motion.div>
