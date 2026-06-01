@@ -1,6 +1,51 @@
 "use client";
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
+
+const AutoplayVideo = ({ src }) => {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Direct failsafe play trigger
+    const attemptPlay = () => {
+      video.play().catch((err) => {
+        // Muted videos are allowed to autoplay by 99% of browsers,
+        // but this handles any extreme power-saving or user-restriction states gracefully.
+        console.log("Muted autoplay attempt logged:", err);
+      });
+    };
+
+    attemptPlay();
+
+    // Trigger replay when window gains visibility (prevents videos from halting in background)
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        attemptPlay();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, [src]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+      className="w-full h-full object-cover pointer-events-none"
+    />
+  );
+};
 
 const OurWork = () => {
   const videoReels = [
@@ -17,7 +62,7 @@ const OurWork = () => {
       {/* Background soft radial glow */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[350px] h-[350px] bg-brand-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
 
-      <div className="max-w-[95rem] mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Section Header with Massive Typographic Font */}
         <div className="text-center max-w-4xl mx-auto mb-16">
@@ -30,8 +75,8 @@ const OurWork = () => {
           <div className="w-24 h-[3px] bg-brand-accent mx-auto mt-6 rounded-full"></div>
         </div>
 
-        {/* Clean, direct 6-video grid layout in portrait aspect-[9/16] (reels format) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+        {/* Clean, direct 6-video grid layout in 3x2 portrait aspect-[9/16] autoplaying */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {videoReels.map((videoPath, index) => (
             <motion.div
               key={index}
@@ -39,15 +84,9 @@ const OurWork = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.05 }}
-              className="w-full aspect-[9/16] bg-black rounded-[1.8rem] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-neutral-200/50 hover:border-brand-accent/45 hover:shadow-[0_15px_45px_rgba(200,127,76,0.12)] hover:scale-[1.02] transition-all duration-500 ease-out"
+              className="w-full aspect-[9/16] bg-black rounded-[1.8rem] overflow-hidden shadow-[0_15px_45px_rgba(0,0,0,0.06)] border border-neutral-200/50 hover:border-brand-accent/45 hover:shadow-[0_20px_50px_rgba(200,127,76,0.12)] hover:scale-[1.01] transition-all duration-500 ease-out"
             >
-              <video
-                src={videoPath}
-                controls
-                playsInline
-                preload="metadata"
-                className="w-full h-full object-cover"
-              />
+              <AutoplayVideo src={videoPath} />
             </motion.div>
           ))}
         </div>
