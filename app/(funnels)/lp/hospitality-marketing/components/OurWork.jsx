@@ -30,8 +30,8 @@ const OurWork = () => {
           <div className="w-24 h-[3px] bg-brand-accent mx-auto mt-6 rounded-full"></div>
         </div>
 
-        {/* Clean, direct 6-video grid layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Clean, direct 6-video grid layout in portrait aspect-[9/16] (reels format) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
           {videoReels.map((videoPath, index) => (
             <motion.div
               key={index}
@@ -39,7 +39,7 @@ const OurWork = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.05 }}
-              className="w-full aspect-[16/10] bg-black rounded-2xl overflow-hidden shadow-md border border-neutral-200/40 hover:border-brand-accent/40 hover:shadow-lg hover:shadow-brand-accent/5 transition-all duration-500 ease-out"
+              className="w-full aspect-[9/16] bg-black rounded-[1.8rem] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-neutral-200/50 hover:border-brand-accent/45 hover:shadow-[0_15px_45px_rgba(200,127,76,0.12)] hover:scale-[1.02] transition-all duration-500 ease-out"
             >
               <video
                 src={videoPath}
