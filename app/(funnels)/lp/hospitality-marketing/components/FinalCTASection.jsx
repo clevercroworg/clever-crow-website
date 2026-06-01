@@ -78,9 +78,9 @@ const FinalCTASection = () => {
           <a 
             href="tel:09986389444"
             onClick={trackCallClick}
-            className="glow-btn bg-brand-accent text-brand-dark hover:bg-white font-heading text-[28px] sm:text-[32px] font-bold px-8 py-2.5 md:py-3.5 rounded-full flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer tracking-[0.08em] shadow-lg shadow-brand-accent/15 w-full sm:w-auto font-bold-important leading-none"
+            className="bg-[#22c55e] hover:bg-[#16a34a] text-white font-heading text-[28px] sm:text-[32px] font-bold px-10 py-4 rounded-full flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer tracking-[0.08em] shadow-lg shadow-[#22c55e]/25 hover:shadow-[#22c55e]/40 w-full sm:w-auto font-bold-important leading-none"
           >
-            <Phone className="w-6 h-6 stroke-[3]" />
+            <Phone className="w-6 h-6 stroke-[3] text-white" />
             <span className="font-bold-important">09986389444</span>
           </a>
           

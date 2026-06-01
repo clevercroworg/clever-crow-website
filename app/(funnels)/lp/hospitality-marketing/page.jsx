@@ -3,6 +3,7 @@ import HeroSection from './components/HeroSection';
 import BrandsWeWorkWith from './components/BrandsWeWorkWith';
 import IndustryCategories from './components/IndustryCategories';
 import OurWork from './components/OurWork';
+import Portfolio from './components/Portfolio';
 import TestimonialsStats from './components/TestimonialsStats';
 import WhyExperience from './components/WhyExperience';
 import FinalCTASection from './components/FinalCTASection';
@@ -22,6 +23,9 @@ export default function HospitalityLandingPage() {
 
       {/* 5. Section 3: Our Work Video Showcase (Replacing the process timeline) */}
       <OurWork />
+
+      {/* 5b. Section 3b: Metrics Case-Study Snap Portfolio */}
+      <Portfolio />
 
       {/* 6. Section 4: Why Beyond Reach & Experience Stats (Minimalized layout) */}
       <WhyExperience />

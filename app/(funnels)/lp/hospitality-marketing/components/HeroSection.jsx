@@ -181,7 +181,7 @@ const HeroSection = () => {
         <a 
           href="tel:09986389444" 
           onClick={trackCallClick}
-          className="flex items-center justify-center bg-brand-accent hover:bg-white text-brand-dark w-11 h-11 rounded-full transition-all duration-300 shadow-md hover:shadow-brand-accent/25 cursor-pointer"
+          className="flex items-center justify-center bg-[#22c55e] hover:bg-[#16a34a] text-white w-11 h-11 rounded-full transition-all duration-300 shadow-md hover:shadow-[#22c55e]/30 cursor-pointer"
           title="Call 09986389444"
         >
           <Phone className="w-5 h-5 stroke-[2.5]" />
@@ -248,10 +248,10 @@ const HeroSection = () => {
             <a 
               href="tel:09986389444"
               onClick={trackCallClick}
-              className="glow-btn bg-brand-accent text-brand-dark hover:bg-white font-heading text-[28px] sm:text-[32px] font-bold rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer tracking-[0.08em] shadow-lg shadow-brand-accent/15 w-full sm:w-auto font-bold-important leading-none"
+              className="bg-[#22c55e] hover:bg-[#16a34a] text-white font-heading text-[28px] sm:text-[32px] font-bold rounded-xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer tracking-[0.08em] shadow-lg shadow-[#22c55e]/25 hover:shadow-[#22c55e]/40 w-full sm:w-auto font-bold-important leading-none"
               style={{ padding: '1.125rem 2.5rem' }}
             >
-              <Phone className="w-6 h-6 stroke-[3] text-brand-dark" />
+              <Phone className="w-6 h-6 stroke-[3] text-white" />
               <span className="font-bold-important">09986389444</span>
             </a>
           </motion.div>
