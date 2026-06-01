@@ -16,7 +16,8 @@ const HeroSection = () => {
   const [formData, setFormData] = useState({
     contactName: '',
     propertyType: '',
-    phone: ''
+    phone: '',
+    email: ''
   });
 
   const [status, setStatus] = useState({
@@ -47,7 +48,7 @@ const HeroSection = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     
-    if (!formData.contactName || !formData.propertyType || !formData.phone) {
+    if (!formData.contactName || !formData.propertyType || !formData.phone || !formData.email) {
       setStatus({ loading: false, success: false, error: 'Please fill in all fields.' });
       return;
     }
@@ -58,7 +59,7 @@ const HeroSection = () => {
       const payload = {
         name: formData.contactName,
         phone: formData.phone,
-        email: `${formData.contactName.toLowerCase().replace(/\s+/g, '')}@clevercrow-lead.in`,
+        email: formData.email,
         message: `Property Growth Review Request\nProperty Type: ${formData.propertyType}`,
         source: "Hospitality Marketing Landing Page"
       };
@@ -95,7 +96,7 @@ const HeroSection = () => {
         }
 
         setStatus({ loading: false, success: true, error: null });
-        setFormData({ contactName: '', propertyType: '', phone: '' });
+        setFormData({ contactName: '', propertyType: '', phone: '', email: '' });
 
         // Redirect after a brief success delay
         setTimeout(() => {
@@ -314,6 +315,20 @@ const HeroSection = () => {
                       value={formData.contactName}
                       onChange={handleInputChange}
                       placeholder="Full Name"
+                      required
+                      disabled={status.loading}
+                      className="w-full bg-[#f8fafc] border border-slate-200 focus:border-brand-accent text-[#0a0e0b] px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-slate-400 disabled:opacity-50 font-normal"
+                    />
+                  </div>
+
+                  {/* Email Input */}
+                  <div>
+                    <input 
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="Email Address"
                       required
                       disabled={status.loading}
                       className="w-full bg-[#f8fafc] border border-slate-200 focus:border-brand-accent text-[#0a0e0b] px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-slate-400 disabled:opacity-50 font-normal"

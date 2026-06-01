@@ -90,7 +90,7 @@ const ReviewFormSection = () => {
     e.preventDefault();
     
     // Basic verification
-    if (!formData.contactName || !formData.propertyType || !formData.phone) {
+    if (!formData.contactName || !formData.propertyType || !formData.phone || !formData.email) {
       setStatus({ loading: false, success: false, error: 'Please fill in all fields.' });
       return;
     }
@@ -101,7 +101,7 @@ const ReviewFormSection = () => {
       const payload = {
         name: formData.contactName,
         phone: formData.phone,
-        email: `${formData.contactName.toLowerCase().replace(/\s+/g, '')}@clevercrow-lead.in`,
+        email: formData.email,
         message: `Property Growth Review Request\nProperty Type: ${formData.propertyType}`,
         source: "Hospitality Landing Page"
       };
@@ -256,6 +256,20 @@ const ReviewFormSection = () => {
                         value={formData.contactName}
                         onChange={handleInputChange}
                         placeholder="Full Name"
+                        required
+                        disabled={status.loading}
+                        className="w-full bg-[#161d19] border border-[#26312a] focus:border-brand-accent text-white px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-[#5c6e63] disabled:opacity-50"
+                      />
+                    </div>
+
+                    {/* Email */}
+                    <div>
+                      <input 
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="Email Address"
                         required
                         disabled={status.loading}
                         className="w-full bg-[#161d19] border border-[#26312a] focus:border-brand-accent text-white px-5 py-4 rounded-xl font-body text-sm transition-colors duration-300 outline-none placeholder:text-[#5c6e63] disabled:opacity-50"
