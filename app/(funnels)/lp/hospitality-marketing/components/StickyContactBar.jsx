@@ -9,8 +9,8 @@ const StickyContactBar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show bar once scrolled past the hero section (approx. 80% viewport height)
-      const threshold = window.innerHeight * 0.8;
+      // Show bar as soon as user starts scrolling down (past 100px)
+      const threshold = 100;
       if (window.scrollY > threshold) {
         setIsVisible(true);
       } else {
@@ -82,7 +82,7 @@ const StickyContactBar = () => {
           <a
             href="tel:09986389444"
             onClick={trackCallClick}
-            className="flex-1 flex items-center justify-center gap-2 bg-[#22c55e] hover:bg-[#16a34a] text-white py-3 px-4 rounded-full font-heading font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 active:scale-95 shadow-md shadow-[#22c55e]/25 shrink-0"
+            className="flex-1 flex items-center justify-center gap-2 bg-[#c87f4c] hover:bg-[#b06a3a] text-white py-3 px-4 rounded-full font-heading font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 active:scale-95 shadow-md shadow-[#c87f4c]/25 shrink-0"
           >
             <Phone className="w-4 h-4 stroke-[2.5]" />
             <span>Call Us</span>
