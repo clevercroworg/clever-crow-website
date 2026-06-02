@@ -1,0 +1,381 @@
+/* ==================================================
+   Clevercrow Landing — Consolidated External Styles
+   (All inline <style> blocks extracted without HTML/JS changes)
+================================================== */
+
+/* ------------------------------
+   GLOBAL
+------------------------------ */
+body {  font-family: 'Manrope', sans-serif; }
+h2 { font-size: 2.32rem; font-weight: 300 !important; }
+ .navbar { background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,.1); }
+ 
+ 
+ /* Headings */
+ h1, h2, h3 {
+   font-weight: 700;
+   
+  
+ }
+ 
+ 
+ h4, h5 {
+    font-weight: 300;
+    letter-spacing: -0.5px;
+  }
+ 
+
+/* ------------------------------
+   HERO (original .hero + used .hero-parallex)
+   Note: HTML uses class 'hero-parallex'; keeping both to preserve intent
+------------------------------ */
+  .hero-parallex {
+    position: relative;
+    background:
+      linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(244, 180, 0, 0.4)),
+      url('banner.jpg') center center / cover no-repeat;
+     color: #fff;
+    padding: 100px 0;
+  }
+ 
+ 
+
+
+ 
+.btn-mustard { background-color: #f4b400; color: #fff; }
+.btn-mustard:hover { background-color: #d99a00; color: #fff; }
+
+/* ------------------------------
+   LOGO TICKER
+------------------------------ */
+.logo-ticker { position: relative; width: 100%; overflow: hidden; }
+.logo-track { display: flex; gap: 2rem; animation: ticker 20s linear infinite; }
+.logo-track img { height: 60px; object-fit: contain; }
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-80%); } }
+.fade-left, .fade-right { position: absolute; top: 0; width: 100px; height: 100%; pointer-events: none; z-index: 10; }
+.fade-left  { left: 0;  background: linear-gradient(to right, #f8f9fa, transparent); }
+.fade-right { right: 0; background: linear-gradient(to left,  #f8f9fa, transparent); }
+
+/* ------------------------------
+   WHY CHOOSE US — PARTNER HIGHLIGHT
+------------------------------ */
+.partner-highlight {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 1rem 2rem; background: rgba(0, 123, 255, 0.05);
+  border-radius: 12px; width: 100%; max-width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.partner-highlight img { max-width: 150px; height: auto; }
+.partner-highlight:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+.partner-highlight p { margin-top: 0.5rem; font-size: 1.1rem; }
+
+/* ------------------------------
+   SERVICES — CARDS
+------------------------------ */
+.service-card { transition: all 0.3s ease; background: #fff; }
+.service-card:hover { transform: translateY(-5px); box-shadow: 0px 6px 20px rgba(0,0,0,0.1); }
+.service-card i { background: linear-gradient(135deg, #ffc107, #ff5722); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* ------------------------------
+   CTA GRADIENT + GLOW BUTTON
+------------------------------ */
+.cta-gradient { background: linear-gradient(270deg, #1e1e2f, #232946, #3a3f58, #1a1a2e); background-size: 800% 800%; animation: gradientMove 18s ease infinite; }
+@keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.glow-btn { position: relative; transition: all 0.3s ease-in-out; box-shadow: 0 0 10px rgba(255,255,255,0.3); }
+.glow-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,255,255,0.6); }
+ 
+/* ------------------------------
+   FAQ — MUSTARD THEME
+------------------------------ */
+.accordion-button:not(.collapsed) { background-color: #ffc107; color: #000; box-shadow: none; }
+.accordion-button:focus { border-color: #ffc107; box-shadow: none; }
+.accordion-button { font-weight: 500; }
+
+/* ------------------------------
+   Pricing Section (Clevercrow)
+------------------------------ */
+
+.pricing-section {
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafc 100%);
+  font-family: "Manrope", sans-serif;
+  color: #1a1a1a;
+  padding: 60px 0;
+}
+
+/* Section Headings */
+.section-title {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  color: #555;
+  max-width: 720px;
+  margin: 0 auto 2rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Pricing Card Base */
+.pricing-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* ensures image touches all edges */
+  height: 100%;
+  text-align: left;
+}
+
+.pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Full-bleed Image (top edge-to-edge) */
+.pricing-image {
+  display: block;
+  width: 100%;
+  height: 120px; /* recommended for balance */
+  object-fit: cover; /* ensures image fills container */
+  object-position: top center; /* keeps image anchored to the top */
+  margin: 0;
+  padding: 0;
+  border: none;
+  line-height: 0; /* removes inline whitespace in some browsers */
+}
+
+
+/* Card Content */
+.pricing-card h3 {
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  color: #000;
+}
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  color: #444;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+}
+
+.pricing-card ul li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.pricing-card ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00b67a;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Price Section */
+.price-box {
+  background-color: #f9f9f9;
+  border-top: 3px solid #f4b400;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: auto;
+}
+
+.badge.bg-warning {
+  background-color: #f4b400 !important;
+}
+
+.price {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 0;
+  letter-spacing: -0.3px;
+}
+
+.price span {
+  font-size: 0.9rem;
+  color: #777;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+/* Custom Quote CTA */
+.custom-quote {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.custom-quote p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Hover Interaction */
+.pricing-card:hover .pricing-image {
+  transform: scale(1.04);
+  transition: transform 0.4s ease;
+}
+
+ /* Enquiry Form Container */
+.enquiry-form {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  max-width: 420px;
+  margin: auto;
+}
+
+/* Form Group */
+.enquiry-form .form-group {
+  margin-bottom: 18px;
+}
+
+/* Labels */
+.enquiry-form label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+/* Inputs */
+.enquiry-form input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+/* Input Focus */
+.enquiry-form input:focus {
+  border-color: #f4b400; /* brand yellow */
+  box-shadow: 0 0 0 3px rgba(244, 180, 0, 0.15);
+}
+
+/* Submit Button */
+.enquiry-form .btn-submit {
+  width: 100%;
+  background: linear-gradient(135deg, #f4b400, #ffcc33);
+  color: #000;
+  border: none;
+  padding: 14px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+/* Button Hover */
+.enquiry-form .btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(244, 180, 0, 0.4);
+}
+
+/* Button Disabled (optional for JS) */
+.enquiry-form .btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Privacy Note */
+.enquiry-form .form-note {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: center;
+  margin-top: 12px;
+}
+
+ 
+ 
+ /* Wrapper (optional if placed on hero) */
+.callback-form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form Card */
+.callback-form {
+  background: #ffffff;
+  padding: 32px 30px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Heading */
+.callback-form .form-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 22px;
+  color: #111;
+}
+
+/* Inputs */
+.callback-form input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 2px solid #d9dfe6;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+/* Input focus */
+.callback-form input:focus {
+  border-color: #4f7cff;
+  box-shadow: 0 0 0 3px rgba(79, 124, 255, 0.15);
+}
+
+/* Button */
+.callback-btn {
+  width: 100%;
+  background: #177d3f; /* green like image */
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Button hover */
+.callback-btn:hover {
+  background: #136a35;
+  transform: translateY(-1px);
+}
+
+/* Disabled state (for JS submit) */
+.callback-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

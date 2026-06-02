@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Media Management Packages | Clevercrow</title>
+  <meta name="description" content="Scale your brand with Clevercrow social media management packages for Facebook, Instagram, LinkedIn and X. Transparent pricing and monthly growth reporting." />
+  <meta name="keywords" content="social media management packages, instagram management agency, facebook content management, social media agency India" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#0f172a",
+              ink: "#0b1220",
+              accent: "#f59e0b",
+              mint: "#10b981"
+            }
+          },
+          boxShadow: {
+            soft: "0 20px 40px rgba(15, 23, 42, 0.12)"
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", sans-serif;
+      padding-bottom: 76px;
+    }
+    h1, h2 {
+      font-family: "Poppins", sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .hero-point {
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      line-height: 1.25;
+    }
+    @media (max-width: 640px) {
+      .hero-point {
+        font-size: 0.95rem;
+        line-height: 1.3;
+      }
+    }
+    .reels-section {
+      background:
+        radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.18), transparent 30%),
+        radial-gradient(circle at 80% 0%, rgba(15, 23, 42, 0.7), transparent 35%),
+        linear-gradient(135deg, #020617 0%, #0f172a 45%, #111827 100%);
+    }
+    .reel-card {
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.55);
+    }
+    .reel-hidden {
+      display: none;
+    }
+
+    .hero-bg {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(37, 99, 235, 0.22), transparent 35%),
+        radial-gradient(circle at 85% 0%, rgba(56, 189, 248, 0.2), transparent 35%),
+        linear-gradient(140deg, #0f172a 0%, #1e293b 50%, #0b1220 100%);
+    }
+    .hero-bg::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle, rgba(37, 99, 235, 0.28) 0%, rgba(37, 99, 235, 0) 42%),
+        radial-gradient(circle, rgba(56, 189, 248, 0.24) 0%, rgba(56, 189, 248, 0) 40%),
+        radial-gradient(circle, rgba(59, 130, 246, 0.24) 0%, rgba(59, 130, 246, 0) 38%);
+      filter: blur(42px);
+      animation: heroBlurDrift 12s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at 50% 40%, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.25) 70%, transparent 100%);
+      animation: gridFloat 18s linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero-orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(8px);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .hero-orb.o1 {
+      top: 8%;
+      left: 9%;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.38), rgba(37, 99, 235, 0));
+      animation: orbFloatA 10s ease-in-out infinite alternate;
+    }
+    .hero-orb.o2 {
+      top: 20%;
+      right: 12%;
+      width: 210px;
+      height: 210px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.3), rgba(56, 189, 248, 0));
+      animation: orbFloatB 14s ease-in-out infinite alternate;
+    }
+    .hero-orb.o3 {
+      bottom: 4%;
+      left: 32%;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.28), rgba(59, 130, 246, 0));
+      animation: orbFloatC 12s ease-in-out infinite alternate;
+    }
+    @keyframes heroBlurDrift {
+      0% { transform: translate3d(-6%, -2%, 0) scale(1); }
+      50% { transform: translate3d(3%, 4%, 0) scale(1.05); }
+      100% { transform: translate3d(8%, -3%, 0) scale(1.1); }
+    }
+    @keyframes gridFloat {
+      from { background-position: 0 0, 0 0; }
+      to { background-position: 44px 44px, 44px 44px; }
+    }
+    @keyframes orbFloatA {
+      0% { transform: translate3d(0, 0, 0); opacity: 0.45; }
+      100% { transform: translate3d(24px, -18px, 0); opacity: 0.75; }
+    }
+    @keyframes orbFloatB {
+      0% { transform: translate3d(0, 0, 0); opacity: 0.35; }
+      100% { transform: translate3d(-28px, 22px, 0); opacity: 0.65; }
+    }
+    @keyframes orbFloatC {
+      0% { transform: translate3d(0, 0, 0); opacity: 0.3; }
+      100% { transform: translate3d(20px, -24px, 0); opacity: 0.55; }
+    }
+
+    .logo-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 28s linear infinite;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .fade-edge::before,
+    .fade-edge::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 90px;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .fade-edge::before {
+      left: 0;
+      background: linear-gradient(to right, #f8fafc, transparent);
+    }
+
+    .fade-edge::after {
+      right: 0;
+      background: linear-gradient(to left, #f8fafc, transparent);
+    }
+
+    .modal-hidden { display: none; }
+  </style>
+
+
+<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17335403082"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-17335403082');
+  </script>
+  
+  
+  <script>
+    gtag('config', 'AW-17335403082/uHSsCKf5i_QaEMqElcpA', {
+      'phone_conversion_number': '09986389444'
+    });
+  </script>
+  
+  
+  <!-- Event snippet for Click to Call conversion page
+  In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+  <script>
+  function gtag_report_conversion(url) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') {
+        window.location = url;
+      }
+    };
+    gtag('event', 'conversion', {
+        'send_to': 'AW-17335403082/ul0ECKr5i_QaEMqElcpA',
+        'value': 200.0,
+        'currency': 'INR',
+        'event_callback': callback
+    });
+    return false;
+  }
+  </script>
+
+</head>
+<body class="bg-slate-50 pb-24 text-slate-800">
+  <nav class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+      <a href="#" class="inline-flex items-center gap-3">
+        <img src="images/logo-dark.svg" alt="Clevercrow" class="h-11 w-auto" />
+      </a>
+      <div class="flex items-center gap-2">
+        <a href="tel:09986389444" class="inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-4 py-2 text-sm font-bold text-slate-900 shadow-sm transition hover:bg-[#d99a00]">
+          <ion-icon name="call" class="text-base"></ion-icon>
+          <span class="hidden sm:inline">09986389444</span>
+        </a>
+        <a href="https://wa.me/919986389444" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-400">
+          <ion-icon name="logo-whatsapp" class="text-base"></ion-icon>
+          <span class="hidden sm:inline">Chat</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-bg py-16 text-white sm:py-20">
+    <div class="hero-grid"></div>
+    <span class="hero-orb o1"></span>
+    <span class="hero-orb o2"></span>
+    <span class="hero-orb o3"></span>
+    <div class="relative z-10 mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+      <div class="lg:col-span-8">
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em]">Social media growth systems</span>
+        <h1 class="mt-5 text-3xl leading-tight sm:text-5xl"><span class="font-medium">Build a Strong Brand Presence with</span> <span class="font-extrabold">Social Media Management</span></h1>
+        <p class="mt-4 max-w-2xl text-base text-slate-200 sm:text-lg">From content strategy to publishing and reporting, we manage your social media end-to-end so you can focus on business growth.</p>
+
+        <div class="mt-8 grid grid-cols-2 gap-2">
+          <div class="rounded-2xl border border-white/20 bg-white/10 p-3"><p class="hero-point"><ion-icon name="megaphone-outline" class="mr-2 align-middle"></ion-icon>FB + IG + LinkedIn + X</p></div>
+          <div class="rounded-2xl border border-white/20 bg-white/10 p-3"><p class="hero-point"><ion-icon name="videocam-outline" class="mr-2 align-middle"></ion-icon>Reels, Posts & Stories</p></div>
+          <div class="rounded-2xl border border-white/20 bg-white/10 p-3"><p class="hero-point"><ion-icon name="stats-chart-outline" class="mr-2 align-middle"></ion-icon>Weekly Reports</p></div>
+          <div class="rounded-2xl border border-white/20 bg-white/10 p-3"><p class="hero-point"><ion-icon name="sparkles-outline" class="mr-2 align-middle"></ion-icon>No Hidden Fees</p></div>
+        </div>
+      </div>
+
+      <div class="rounded-3xl border border-white/25 bg-white/75 p-6 text-slate-900 shadow-soft backdrop-blur-xl lg:col-span-4">
+        <h2 class="text-xl font-bold">Request a Call Back</h2>
+        <p class="mt-1 text-sm text-slate-600">Share your details and our team will call you shortly.</p>
+        <form id="callbackForm" class="mt-5 space-y-3">
+          <input type="text" id="name" name="name" required placeholder="Enter your name" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-100" />
+          <input type="tel" id="phone" name="phone" required placeholder="Enter your phone" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-100" />
+          <button type="submit" class="w-full rounded-xl bg-slate-900 px-4 py-3 text-sm font-bold text-white transition hover:bg-slate-700">Submit</button>
+          <p id="callbackStatus" class="text-xs text-slate-500"></p>
+        </form>
+        <p class="mt-3 text-center text-xs text-slate-500"><ion-icon name="shield-checkmark" class="mr-1 align-middle"></ion-icon>We respect your privacy</p>
+        <p class="mt-2 text-center text-sm text-slate-600">
+          हम हिंदी में बात कर सकते हैं | ನಾವು ಕನ್ನಡದಲ್ಲಿ ಮಾತನಾಡಬಹುದು | మేము తెలుగులో మాట్లాడగలం
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden bg-slate-50 py-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center text-xl font-bold text-slate-900 sm:text-2xl">Brands We Work With</h2>
+      <div class="fade-edge relative mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white py-4">
+        <div class="logo-track">
+          <div class="flex items-center gap-10 px-8">
+            <img src="client1.png" alt="Client 1" class="h-12 w-auto" />
+            <img src="client2.png" alt="Client 2" class="h-12 w-auto" />
+            <img src="client3.png" alt="Client 3" class="h-12 w-auto" />
+            <img src="client4.png" alt="Client 4" class="h-12 w-auto" />
+            <img src="client5.png" alt="Client 5" class="h-12 w-auto" />
+            <img src="client6.png" alt="Client 6" class="h-12 w-auto" />
+            <img src="client7.png" alt="Client 7" class="h-12 w-auto" />
+            <img src="client8.png" alt="Client 8" class="h-12 w-auto" />
+            <img src="client9.png" alt="Client 9" class="h-12 w-auto" />
+            <img src="client10.png" alt="Client 10" class="h-12 w-auto" />
+            <img src="client11.png" alt="Client 11" class="h-12 w-auto" />
+            <img src="client12.png" alt="Client 12" class="h-12 w-auto" />
+            <img src="client13.png" alt="Client 13" class="h-12 w-auto" />
+            <img src="client14.png" alt="Client 14" class="h-12 w-auto" />
+            <img src="client16.png" alt="Client 16" class="h-12 w-auto" />
+            <img src="client18.png" alt="Client 18" class="h-12 w-auto" />
+          </div>
+          <div class="flex items-center gap-10 px-8" aria-hidden="true">
+            <img src="client1.png" alt="" class="h-12 w-auto" />
+            <img src="client2.png" alt="" class="h-12 w-auto" />
+            <img src="client3.png" alt="" class="h-12 w-auto" />
+            <img src="client4.png" alt="" class="h-12 w-auto" />
+            <img src="client5.png" alt="" class="h-12 w-auto" />
+            <img src="client6.png" alt="" class="h-12 w-auto" />
+            <img src="client7.png" alt="" class="h-12 w-auto" />
+            <img src="client8.png" alt="" class="h-12 w-auto" />
+            <img src="client9.png" alt="" class="h-12 w-auto" />
+            <img src="client10.png" alt="" class="h-12 w-auto" />
+            <img src="client11.png" alt="" class="h-12 w-auto" />
+            <img src="client12.png" alt="" class="h-12 w-auto" />
+            <img src="client13.png" alt="" class="h-12 w-auto" />
+            <img src="client14.png" alt="" class="h-12 w-auto" />
+            <img src="client16.png" alt="" class="h-12 w-auto" />
+            <img src="client18.png" alt="" class="h-12 w-auto" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="py-14 sm:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold sm:text-4xl">Social Media Management Packages</h2>
+        <p class="mx-auto mt-3 max-w-2xl text-slate-600">Choose the plan that fits your current stage and scale with clear deliverables.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <img src="images/smm.jpg" alt="Essential Social Media Package" class="h-32 w-full object-cover object-top" />
+          <div class="p-6">
+            <h3 class="inline-flex items-center gap-2 text-lg font-black uppercase tracking-[0.06em] text-slate-900"><ion-icon name="leaf-outline" class="text-base"></ion-icon>Essential</h3>
+            <p class="mt-2 text-sm text-slate-600">Ideal for startups and small businesses building their online presence.</p>
+            <ul class="mt-4 space-y-2 text-sm text-slate-700">
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>Platforms: Facebook & Instagram</li>
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>12-15 posts/month (Static + Carousel)</li>
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>Content calendar + captions + hashtags</li>
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>Basic design, scheduling & publishing</li>
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>Monthly performance report</li>
+            </ul>
+            <div class="mt-4 rounded-xl border border-[#FFCE1B]/60 bg-[#fff9e3] px-4 py-3">
+              <p class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-500">Starting Price</p>
+              <p class="mt-1 flex items-end gap-1.5 text-2xl font-bold leading-none tracking-tight text-slate-900"><span class="text-[#d99a00]">₹</span>10,000 <span class="text-sm font-semibold text-slate-500">/ month</span></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <img src="images/metabg.jpg" alt="Advanced Social Media Package" class="h-32 w-full object-cover object-top" />
+          <div class="p-6">
+            <h3 class="inline-flex items-center gap-2 text-lg font-black uppercase tracking-[0.06em] text-slate-900"><ion-icon name="trending-up-outline" class="text-base"></ion-icon>Advanced</h3>
+            <p class="mt-2 text-sm text-slate-600">Ideal for growing brands focused on engagement and audience expansion.</p>
+            <ul class="mt-4 space-y-2 text-sm text-slate-700">
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>Everything in Essential package</li>
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>Platforms: FB, Instagram & LinkedIn</li>
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>20-25 posts/month + 4-5 reels/month</li>
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>Weekly analytics + monthly strategy call</li>
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>Engagement support (comments/messages)</li>
+            </ul>
+            <div class="mt-4 rounded-xl border border-[#FFCE1B]/60 bg-[#fff9e3] px-4 py-3">
+              <p class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-500">Starting Price</p>
+              <p class="mt-1 flex items-end gap-1.5 text-2xl font-bold leading-none tracking-tight text-slate-900"><span class="text-[#d99a00]">₹</span>18,000 <span class="text-sm font-semibold text-slate-500">/ month</span></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <img src="images/aibg.jpg" alt="Performance Social Media Package" class="h-32 w-full object-cover object-top" />
+          <div class="p-6">
+            <h3 class="inline-flex items-center gap-2 text-lg font-black uppercase tracking-[0.06em] text-slate-900"><ion-icon name="rocket-outline" class="text-base"></ion-icon>Performance</h3>
+            <p class="mt-2 text-sm text-slate-600">Ideal for established brands scaling multi-platform communication.</p>
+            <ul class="mt-4 space-y-2 text-sm text-slate-700">
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>Everything in Advanced package</li>
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>Platforms: FB, Instagram, LinkedIn & X</li>
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>30-35 posts/month + 8-10 reels/month</li>
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>Brand/community management + collaboration support</li>
+              <li class="flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-500"></ion-icon>Dedicated manager + priority support</li>
+            </ul>
+            <div class="mt-4 rounded-xl border border-[#FFCE1B]/60 bg-[#fff9e3] px-4 py-3">
+              <p class="text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-500">Starting Price</p>
+              <p class="mt-1 flex items-end gap-1.5 text-2xl font-bold leading-none tracking-tight text-slate-900"><span class="text-[#d99a00]">₹</span>35,000 <span class="text-sm font-semibold text-slate-500">/ month</span></p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="mt-6 rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-600 sm:p-5">
+        <p><strong>Note:</strong> Pricing covers service fees only. Paid promotions and ad boosts are billed separately based on campaign goals.</p>
+      </div>
+
+      <div class="mt-12 rounded-3xl border border-amber-200 bg-amber-50 p-8 text-center">
+        <p class="text-lg text-slate-700">Not every business fits into a box. Let’s build a custom strategy tailored to your growth goals.</p>
+        <button id="openQuoteModal" class="mt-4 inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-6 py-3 text-sm font-extrabold text-slate-900 transition hover:bg-[#d99a00]">
+          Get a Custom Proposal
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-14 sm:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold sm:text-4xl">Our Process</h2>
+        <p class="mx-auto mt-3 max-w-2xl text-slate-600">A clear execution system to plan, create, publish, and scale your social media results.</p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+        <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.12em] text-amber-600">Step 01</p>
+          <h3 class="mt-2 text-lg font-extrabold text-slate-900">Discovery</h3>
+          <p class="mt-2 text-sm text-slate-600">Business goals, audience and content direction alignment.</p>
+        </article>
+        <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.12em] text-amber-600">Step 02</p>
+          <h3 class="mt-2 text-lg font-extrabold text-slate-900">Planning</h3>
+          <p class="mt-2 text-sm text-slate-600">Monthly calendar, platform mix, and topic buckets finalized.</p>
+        </article>
+        <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.12em] text-amber-600">Step 03</p>
+          <h3 class="mt-2 text-lg font-extrabold text-slate-900">Creation</h3>
+          <p class="mt-2 text-sm text-slate-600">Designs, captions, hashtags, reels and motion creatives produced.</p>
+        </article>
+        <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.12em] text-amber-600">Step 04</p>
+          <h3 class="mt-2 text-lg font-extrabold text-slate-900">Publishing</h3>
+          <p class="mt-2 text-sm text-slate-600">Approval-based scheduling, posting, and engagement support.</p>
+        </article>
+        <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.12em] text-amber-600">Step 05</p>
+          <h3 class="mt-2 text-lg font-extrabold text-slate-900">Optimization</h3>
+          <p class="mt-2 text-sm text-slate-600">Weekly/monthly insights and next-cycle improvements.</p>
+        </article>
+      </div>
+
+      <div class="mt-10 rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+        <h3 class="text-2xl font-extrabold text-slate-900">Micro Process</h3>
+        <p class="mt-2 text-sm text-slate-600">Detailed workflow we follow each month for consistent quality and growth.</p>
+        <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div>
+            <p class="text-sm font-bold text-slate-900">1) Onboarding & Audit</p>
+            <ul class="mt-2 space-y-1 text-sm text-slate-600">
+              <li>Brand questionnaire and kickoff call</li>
+              <li>Profile and content audit</li>
+              <li>Competitor benchmark setup</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-sm font-bold text-slate-900">2) Monthly Strategy Setup</p>
+            <ul class="mt-2 space-y-1 text-sm text-slate-600">
+              <li>Content pillars and campaign themes</li>
+              <li>Posting frequency and format plan</li>
+              <li>KPI and reporting structure lock</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-sm font-bold text-slate-900">3) Content Production</p>
+            <ul class="mt-2 space-y-1 text-sm text-slate-600">
+              <li>Static, carousel, story and reel creation</li>
+              <li>Caption writing and hashtag mapping</li>
+              <li>Brand consistency quality check</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-sm font-bold text-slate-900">4) Review & Scheduling</p>
+            <ul class="mt-2 space-y-1 text-sm text-slate-600">
+              <li>Internal QA and client approvals</li>
+              <li>Publishing calendar and slot optimization</li>
+              <li>Cross-platform scheduling</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-sm font-bold text-slate-900">5) Engagement & Monitoring</p>
+            <ul class="mt-2 space-y-1 text-sm text-slate-600">
+              <li>Comment/message support (as per plan)</li>
+              <li>Trend and content performance tracking</li>
+              <li>Escalation for priority responses</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-sm font-bold text-slate-900">6) Reporting & Scale</p>
+            <ul class="mt-2 space-y-1 text-sm text-slate-600">
+              <li>Weekly/monthly analytics report</li>
+              <li>What worked / what to improve</li>
+              <li>Next-month optimization roadmap</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-12 sm:py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+        <div class="grid items-start gap-8 lg:grid-cols-12">
+          <div class="lg:col-span-8">
+            <h2 class="text-3xl font-extrabold text-slate-900 sm:text-4xl">Performance Marketing Experts</h2>
+            <p class="mt-3 max-w-3xl text-slate-600">With over 15 years of experience helping brands grow online, Clevercrow creates marketing systems that drive ROI, not just traffic.</p>
+            <ul class="mt-5 space-y-2.5 text-[18px] text-slate-700">
+              <li><ion-icon name="checkmark-circle" class="mr-2 align-middle text-emerald-500"></ion-icon>15+ Years of Marketing Experience</li>
+              <li><ion-icon name="checkmark-circle" class="mr-2 align-middle text-emerald-500"></ion-icon>Google & Meta Certified Professionals</li>
+              <li><ion-icon name="checkmark-circle" class="mr-2 align-middle text-emerald-500"></ion-icon>100+ Businesses Grown Across India</li>
+              <li><ion-icon name="checkmark-circle" class="mr-2 align-middle text-emerald-500"></ion-icon>Transparent Reporting & Real ROI Tracking</li>
+            </ul>
+          </div>
+
+          <div class="lg:col-span-4">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">Certified Partners</p>
+            <div class="mt-3 space-y-3">
+              <div class="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+                <div class="flex h-16 items-center justify-center rounded-xl bg-slate-50">
+                  <img src="images/google-partner25.svg" alt="Google Partner" class="h-8 w-32 object-contain" />
+                </div>
+                <p class="mt-2 text-center text-sm font-semibold text-slate-800">Google Partner</p>
+              </div>
+              <div class="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+                <div class="flex h-16 items-center justify-center rounded-xl bg-slate-50">
+                  <img src="images/meta.png" alt="Meta Certified" class="h-8 w-32 object-contain" />
+                </div>
+                <p class="mt-2 text-center text-sm font-semibold text-slate-800">Meta Certified</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-14 text-white">
+    <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold sm:text-4xl">Grow Your Business with Digital Marketing</h2>
+      <p class="mt-3 text-slate-200">SEO, Social Media, Google Ads, and conversion-focused strategy.</p>
+      <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="tel:09986389444" class="inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-6 py-3 font-bold text-slate-900 transition hover:bg-[#d99a00]"><ion-icon name="call"></ion-icon>09986389444</a>
+        <a href="https://wa.me/919986389444" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 font-bold text-white transition hover:bg-emerald-400"><ion-icon name="logo-whatsapp"></ion-icon>Chat with Us on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="our-work" class="reels-section py-14 sm:py-16 text-slate-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center text-3xl font-extrabold text-white">Our Work: Trending Reels</h2>
+      <ul class="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-slate-200">
+        <li class="inline-flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-400"></ion-icon>High-retention edits</li>
+        <li class="inline-flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-400"></ion-icon>Platform-native hooks</li>
+        <li class="inline-flex items-center gap-2"><ion-icon name="checkmark-circle" class="text-emerald-400"></ion-icon>Trend + brand balance</li>
+      </ul>
+      <div id="reelsGrid" class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel1.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel2.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel3.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel4.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel5.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel6.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel7.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel8.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel9.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel10.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel11.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel12.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel13.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel14.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel15.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel16.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel17.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel18.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel19.mp4" type="video/mp4"></video>
+        <video class="reel-card reel-item w-full rounded-2xl shadow-sm" autoplay muted loop playsinline><source src="assets/reels/reel20.mp4" type="video/mp4"></video>
+      </div>
+      <div class="mt-6 text-center">
+        <button id="reelsToggleBtn" type="button" class="inline-flex items-center gap-2 rounded-full border border-slate-600 bg-slate-800/80 px-5 py-2.5 text-sm font-semibold text-slate-100 transition hover:bg-slate-700/80">
+          View more
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-14 sm:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center text-3xl font-extrabold">Our Clients Get Results</h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 p-6 text-center"><p class="text-3xl font-extrabold text-blue-600">+218%</p><p class="mt-1 text-slate-600">eCommerce Orders</p><img src="images/client1.png" alt="Electronics Store" class="mx-auto mt-3 h-10" /></div>
+        <div class="rounded-2xl border border-slate-200 p-6 text-center"><p class="text-3xl font-extrabold text-emerald-600">+343.2%</p><p class="mt-1 text-slate-600">Conversion Rate</p><img src="images/client2.png" alt="Private Dental Clinic" class="mx-auto mt-3 h-10" /></div>
+        <div class="rounded-2xl border border-slate-200 p-6 text-center"><p class="text-3xl font-extrabold text-rose-600">+147%</p><p class="mt-1 text-slate-600">Top 5 Keyword Rankings</p><img src="images/client3.png" alt="Education Consulting" class="mx-auto mt-3 h-10" /></div>
+        <div class="rounded-2xl border border-slate-200 p-6 text-center"><p class="text-3xl font-extrabold text-amber-600">+120%</p><p class="mt-1 text-slate-600">Lead Generation</p><img src="images/client4.png" alt="Real Estate Company" class="mx-auto mt-3 h-10" /></div>
+        <div class="rounded-2xl border border-slate-200 p-6 text-center"><p class="text-3xl font-extrabold text-cyan-600">+85%</p><p class="mt-1 text-slate-600">Organic Traffic</p><img src="images/client5.png" alt="Healthcare Brand" class="mx-auto mt-3 h-10" /></div>
+        <div class="rounded-2xl border border-slate-200 p-6 text-center"><p class="text-3xl font-extrabold text-indigo-600">+200%</p><p class="mt-1 text-slate-600">Social Media Engagement</p><img src="images/client6.png" alt="Fashion Brand" class="mx-auto mt-3 h-10" /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center text-3xl font-extrabold">Join Our Success Stories</h2>
+      <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <article class="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><span class="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-sm font-extrabold text-slate-700">G</span><p class="text-amber-500">★★★★★</p><p class="mt-3 text-slate-600">"After Clever Crow took over our Google Ads, we started seeing 8–10 solid leads per day. Within 3 weeks, we sold 4 units directly from ad-generated leads."</p><p class="mt-4 text-sm font-semibold">Arun R., Director, Riva Builders (Bangalore)</p></article>
+        <article class="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><span class="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-sm font-extrabold text-slate-700">G</span><p class="text-amber-500">★★★★★</p><p class="mt-3 text-slate-600">"The team delivered 300+ leads in less than a month. The creatives and messaging felt tailor-made for our audience."</p><p class="mt-4 text-sm font-semibold">Ramesh Shetty, Founder, BrightEdge Academy (Udupi)</p></article>
+        <article class="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><span class="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-sm font-extrabold text-slate-700">G</span><p class="text-amber-500">★★★★★</p><p class="mt-3 text-slate-600">"Within 2 months of SEO work, we ranked in top results for our target terms and started getting 5–6 new patients weekly."</p><p class="mt-4 text-sm font-semibold">Dr. Priya B., DDC Smiles Dental Clinic (Bangalore)</p></article>
+        <article class="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><span class="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-sm font-extrabold text-slate-700">G</span><p class="text-amber-500">★★★★★</p><p class="mt-3 text-slate-600">"Clevercrow restructured our campaign tracking and CPL dropped by 37% in under 6 weeks. Reporting is very clear and actionable."</p><p class="mt-4 text-sm font-semibold">Neha M., Marketing Lead, Apex Interiors (Hyderabad)</p></article>
+        <article class="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><span class="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-sm font-extrabold text-slate-700">G</span><p class="text-amber-500">★★★★★</p><p class="mt-3 text-slate-600">"From website revamp to lead funnel setup, everything was handled end-to-end. We now get consistent inbound enquiries every week."</p><p class="mt-4 text-sm font-semibold">Karthik S., Founder, EduSpring Consultants (Mysuru)</p></article>
+        <article class="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><span class="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-sm font-extrabold text-slate-700">G</span><p class="text-amber-500">★★★★★</p><p class="mt-3 text-slate-600">"Their SEO and content strategy helped us rank for multiple local keywords. Organic enquiries have gone up steadily month after month."</p><p class="mt-4 text-sm font-semibold">Faizan A., Director, PrimeCare Clinics (Bangalore)</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-14 sm:py-16">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center text-3xl font-extrabold">FAQs</h2>
+      <div class="mt-8 space-y-3">
+        <details class="rounded-xl border border-slate-200 bg-slate-50 p-4" open><summary class="cursor-pointer font-semibold">How long before results show?</summary><p class="mt-2 text-sm text-slate-600">Usually 3–6 months for SEO and faster with Ads.</p></details>
+        <details class="rounded-xl border border-slate-200 bg-slate-50 p-4"><summary class="cursor-pointer font-semibold">Is ad spend included?</summary><p class="mt-2 text-sm text-slate-600">No, ad spend is billed separately from management fees.</p></details>
+        <details class="rounded-xl border border-slate-200 bg-slate-50 p-4"><summary class="cursor-pointer font-semibold">Do you guarantee leads or sales?</summary><p class="mt-2 text-sm text-slate-600">We do not guarantee sales, but we optimize campaigns for lead quality and ROI.</p></details>
+        <details class="rounded-xl border border-slate-200 bg-slate-50 p-4"><summary class="cursor-pointer font-semibold">Can I pause or cancel anytime?</summary><p class="mt-2 text-sm text-slate-600">Yes, campaigns can be paused or cancelled with prior notice.</p></details>
+        <details class="rounded-xl border border-slate-200 bg-slate-50 p-4"><summary class="cursor-pointer font-semibold">Do you provide monthly reports?</summary><p class="mt-2 text-sm text-slate-600">Yes, we share monthly performance reports with insights and actions.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-slate-900 py-10 text-center text-white">
+    <h3 class="text-2xl font-extrabold">Start Building Your Digital Presence Today</h3>
+    <div class="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <a href="tel:09986389444" class="inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-6 py-3 font-bold text-slate-900 transition hover:bg-[#d99a00]"><ion-icon name="call"></ion-icon>09986389444</a>
+      <a href="https://wa.me/919986389444" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 font-bold text-white"><ion-icon name="logo-whatsapp"></ion-icon>Chat with Us on WhatsApp</a>
+    </div>
+    <p class="mt-6 text-sm text-slate-400">Clever Crow Strategies LLP. © All rights reserved.</p>
+    <p class="mt-1 text-xs text-slate-500"><a class="underline" href="https://clevercrow.in/privacy-policy/">Privacy Policy</a> | <a class="underline" href="https://clevercrow.in/terms-and-conditions/">Terms & Conditions</a></p>
+  </footer>
+
+  <div class="fixed inset-x-0 bottom-4 z-50 px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto flex w-fit items-center justify-center gap-3 rounded-full border border-slate-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur">
+      <a href="tel:09986389444" class="inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-[#d99a00]" aria-label="Call now">
+        <ion-icon name="call" class="text-base"></ion-icon>
+        09986389444
+      </a>
+      <a href="https://wa.me/919986389444" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-400" aria-label="Chat on WhatsApp">
+        <ion-icon name="logo-whatsapp" class="text-base"></ion-icon>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <div id="quoteModal" class="modal-hidden fixed inset-0 z-50 items-center justify-center bg-slate-900/70 p-4">
+    <div class="w-full max-w-lg rounded-3xl bg-white p-6 shadow-soft">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-extrabold">Request a Custom Quote</h3>
+        <button id="closeQuoteModal" class="rounded-full p-2 text-slate-500 hover:bg-slate-100" aria-label="Close">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </div>
+      <form id="quoteForm" class="mt-4 space-y-3">
+        <input type="text" id="quoteName" required placeholder="Enter your name" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100" />
+        <input type="email" id="quoteEmail" required placeholder="Enter your email" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100" />
+        <input type="tel" id="quotePhone" required placeholder="Enter your phone number" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100" />
+
+        <fieldset class="rounded-xl border border-slate-200 p-4">
+          <legend class="px-1 text-sm font-semibold">Service Required</legend>
+          <div class="mt-2 grid grid-cols-2 gap-2 text-sm text-slate-700">
+            <label><input class="serviceOption mr-2" type="checkbox" value="SEO" />SEO</label>
+            <label><input class="serviceOption mr-2" type="checkbox" value="Google Ads" />Google Ads</label>
+            <label><input class="serviceOption mr-2" type="checkbox" value="Meta Ads" />Meta Ads</label>
+            <label><input class="serviceOption mr-2" type="checkbox" value="Website Design" />Website Design</label>
+            <label><input class="serviceOption mr-2" type="checkbox" value="Social Media Management" />Social Media</label>
+            <label><input class="serviceOption mr-2" type="checkbox" value="Content Marketing" />Content</label>
+          </div>
+        </fieldset>
+
+        <textarea id="quoteMessage" rows="3" placeholder="Write a short note (optional)" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100"></textarea>
+        <button id="quoteSubmit" type="submit" class="w-full rounded-xl bg-slate-900 px-4 py-3 text-sm font-bold text-white transition hover:bg-slate-700">Submit Request</button>
+        <p id="quoteStatus" class="text-xs text-slate-500"></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const FORM_ENDPOINT = "./resend-form.php";
+    const THANK_YOU_URL = "https://clevercrow.in/thankyou/";
+
+    async function sendLead(payload) {
+      if (window.location.protocol === "file:") {
+        throw new Error("Open this page from your server URL, not as a local file.");
+      }
+
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const raw = await response.text();
+      let data = null;
+      try {
+        data = JSON.parse(raw);
+      } catch (_) {
+        throw new Error("Form endpoint response is invalid. Check resend-form.php on server.");
+      }
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Something went wrong");
+      }
+      return data;
+    }
+
+    const callbackForm = document.getElementById("callbackForm");
+    const callbackStatus = document.getElementById("callbackStatus");
+    callbackForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+
+      if (!name || !phone) {
+        callbackStatus.textContent = "Please fill all required fields.";
+        callbackStatus.className = "text-xs text-rose-600";
+        return;
+      }
+
+      callbackStatus.textContent = "Submitting...";
+      callbackStatus.className = "text-xs text-slate-500";
+
+      try {
+        const result = await sendLead({
+          formType: "Callback Request",
+          name,
+          phone,
+          page: window.location.href
+        });
+
+        window.location.href = result.redirectUrl || THANK_YOU_URL;
+      } catch (error) {
+        callbackStatus.textContent = error.message;
+        callbackStatus.className = "text-xs text-rose-600";
+      }
+    });
+
+    const quoteModal = document.getElementById("quoteModal");
+    const openQuoteModal = document.getElementById("openQuoteModal");
+    const closeQuoteModal = document.getElementById("closeQuoteModal");
+
+    function openModal() {
+      quoteModal.classList.remove("modal-hidden");
+      quoteModal.classList.add("flex");
+    }
+
+    function closeModal() {
+      quoteModal.classList.add("modal-hidden");
+      quoteModal.classList.remove("flex");
+    }
+
+    openQuoteModal.addEventListener("click", openModal);
+    closeQuoteModal.addEventListener("click", closeModal);
+    quoteModal.addEventListener("click", (e) => {
+      if (e.target === quoteModal) closeModal();
+    });
+
+    const quoteForm = document.getElementById("quoteForm");
+    const quoteStatus = document.getElementById("quoteStatus");
+    const quoteSubmit = document.getElementById("quoteSubmit");
+
+    quoteForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const name = document.getElementById("quoteName").value.trim();
+      const email = document.getElementById("quoteEmail").value.trim();
+      const phone = document.getElementById("quotePhone").value.trim();
+      const message = document.getElementById("quoteMessage").value.trim();
+      const services = [...document.querySelectorAll(".serviceOption:checked")].map((item) => item.value);
+
+      if (!name || !email || !phone || services.length === 0) {
+        quoteStatus.textContent = "Please fill all required fields and choose at least one service.";
+        quoteStatus.className = "text-xs text-rose-600";
+        return;
+      }
+
+      quoteSubmit.disabled = true;
+      quoteSubmit.textContent = "Submitting...";
+      quoteStatus.textContent = "";
+
+      try {
+        const result = await sendLead({
+          formType: "Custom Quote",
+          name,
+          email,
+          phone,
+          services,
+          message,
+          page: window.location.href
+        });
+
+        window.location.href = result.redirectUrl || THANK_YOU_URL;
+      } catch (error) {
+        quoteStatus.textContent = error.message;
+        quoteStatus.className = "text-xs text-rose-600";
+        quoteSubmit.disabled = false;
+        quoteSubmit.textContent = "Submit Request";
+      }
+    });
+
+    const reelsToggleBtn = document.getElementById("reelsToggleBtn");
+    const reelItems = [...document.querySelectorAll(".reel-item")];
+    let reelsExpanded = false;
+
+    function getVisibleReelCount() {
+      if (window.matchMedia("(min-width: 1024px)").matches) return 8;
+      if (window.matchMedia("(min-width: 640px)").matches) return 4;
+      return 2;
+    }
+
+    function updateReelVisibility() {
+      const visibleCount = getVisibleReelCount();
+      reelItems.forEach((item, index) => {
+        const shouldHide = !reelsExpanded && index >= visibleCount;
+        item.classList.toggle("reel-hidden", shouldHide);
+      });
+
+      if (reelItems.length <= visibleCount) {
+        reelsToggleBtn.classList.add("hidden");
+        return;
+      }
+
+      reelsToggleBtn.classList.remove("hidden");
+      reelsToggleBtn.innerHTML = reelsExpanded
+        ? 'Show less <ion-icon name="chevron-up-outline"></ion-icon>'
+        : 'View more <ion-icon name="chevron-down-outline"></ion-icon>';
+    }
+
+    if (reelsToggleBtn) {
+      reelsToggleBtn.addEventListener("click", () => {
+        reelsExpanded = !reelsExpanded;
+        updateReelVisibility();
+      });
+
+      window.addEventListener("resize", updateReelVisibility);
+      updateReelVisibility();
+    }
+  </script>
+</body>
+</html>
