@@ -248,10 +248,7 @@ const Portfolio = () => {
         </div>
 
         {/* Premium Portfolio Grid */}
-        <motion.div 
-          layout 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
               <motion.article
@@ -329,7 +326,7 @@ const Portfolio = () => {
               </motion.article>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
 
       </div>
     </section>
