@@ -412,7 +412,7 @@ export default function SmmLandingPage() {
             </div>
             <h1 className="mt-3 text-[28px] leading-tight font-medium sm:text-5xl">
               Build a Strong Brand Presence with <br className="sm:hidden" />
-              <span className="font-extrabold bg-gradient-to-r from-violet-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent">
+              <span className="font-extrabold bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
                 Social Media Management
               </span>
             </h1>
@@ -451,7 +451,7 @@ export default function SmmLandingPage() {
             <form onSubmit={handleFormSubmit} className="mt-3 space-y-2.5">
               <div>
                 <div className="relative group/input">
-                  <User className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within/input:text-violet-500 transition-colors w-4 h-4" />
+                  <User className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within/input:text-amber-500 transition-colors w-4 h-4" />
                   <input 
                     type="text" 
                     id="name" 
@@ -461,13 +461,13 @@ export default function SmmLandingPage() {
                     onChange={handleInputChange}
                     placeholder="Enter your name" 
                     disabled={status.loading}
-                    className="w-full rounded-lg border border-slate-300 pl-10 pr-4 py-2.5 text-sm outline-none transition bg-white/90 focus:border-violet-500 focus:ring-2 focus:ring-violet-100" 
+                    className="w-full rounded-lg border border-slate-300 pl-10 pr-4 py-2.5 text-sm outline-none transition bg-white/90 focus:border-amber-500 focus:ring-2 focus:ring-amber-100" 
                   />
                 </div>
               </div>
               <div>
                 <div className="relative group/input">
-                  <Phone className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within/input:text-violet-500 transition-colors w-4 h-4" />
+                  <Phone className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within/input:text-amber-500 transition-colors w-4 h-4" />
                   <input 
                     type="tel" 
                     id="phone" 
@@ -477,7 +477,7 @@ export default function SmmLandingPage() {
                     onChange={handleInputChange}
                     placeholder="Enter your phone" 
                     disabled={status.loading}
-                    className="w-full rounded-lg border border-slate-300 pl-10 pr-4 py-2.5 text-sm outline-none transition bg-white/90 focus:border-violet-500 focus:ring-2 focus:ring-violet-100" 
+                    className="w-full rounded-lg border border-slate-300 pl-10 pr-4 py-2.5 text-sm outline-none transition bg-white/90 focus:border-amber-500 focus:ring-2 focus:ring-amber-100" 
                   />
                 </div>
               </div>
