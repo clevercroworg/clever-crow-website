@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;700&display=swap");
+
 /* Scoped styling overrides for hospitality-marketing funnel */
 .hospitality-funnel {
   --color-brand-accent: #c1781f; /* Warm, rich metallic copper */
@@ -193,4 +195,12 @@
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Chrome, Safari, Opera */
+}
+
+/* Custom Barlow Condensed font override for hero main tagline only */
+.hospitality-funnel .hero-tagline,
+.hospitality-funnel .hero-tagline span {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.015em !important;
 }

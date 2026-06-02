@@ -246,14 +246,14 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col items-center"
         >
-          {/* Tagline using Poppins font, copper color accent with high-end drop shadow */}
-          <h1 className="font-heading font-black text-[8.2vw] xs:text-[8vw] sm:text-[42px] md:text-[54px] lg:text-[3.2rem] xl:text-[3.8rem] 2xl:text-[4.4rem] text-white tracking-tighter uppercase leading-[1.08] mb-6 max-w-5xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
+          {/* Tagline using Barlow Condensed font, copper color accent with high-end drop shadow */}
+          <h1 className="hero-tagline text-[8.2vw] xs:text-[8vw] sm:text-[42px] md:text-[54px] lg:text-[3.2rem] xl:text-[3.8rem] 2xl:text-[4.4rem] text-white tracking-tighter uppercase leading-[1.08] mb-6 max-w-5xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
             <span className="block whitespace-nowrap">Hospitality</span>
             <span className="block whitespace-nowrap">Digital Marketing</span>
-            <span className="text-brand-accent font-bold-important block mt-1.5 leading-[1.05] whitespace-nowrap">
+            <span className="text-brand-accent block mt-1.5 leading-[1.05] whitespace-nowrap">
               For Hotels, Resorts,
             </span>
-            <span className="text-brand-accent font-bold-important block leading-[1.05] whitespace-nowrap">
+            <span className="text-brand-accent block leading-[1.05] whitespace-nowrap">
               Homestays & Villas
             </span>
           </h1>
@@ -289,25 +289,13 @@ const HeroSection = () => {
           More visibility. More enquiries. Better growth.
         </motion.p>
 
-        {/* CTA Buttons - 2 Stacked on Mobile, Row on Desktop */}
+        {/* CTA Buttons - Center Request Call Back Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.35 }}
-          className="flex flex-col sm:flex-row gap-3.5 sm:gap-4.5 w-full sm:w-auto items-center justify-center max-w-md sm:max-w-none mx-auto"
+          className="flex items-center justify-center w-full sm:w-auto mx-auto"
         >
-          {/* Talk on WhatsApp — Outlined/Bordered */}
-          <a
-            href="https://wa.me/919986389444"
-            onClick={trackWhatsAppClick}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-3.5 border border-[#c1781f]/40 hover:border-[#c1781f] bg-[#0a0e0b]/50 hover:bg-[#0a0e0b]/70 text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4 sm:py-4.5 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-[#c1781f]/10 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
-          >
-            <FaWhatsapp className="w-5.5 h-5.5 text-[#25d366] shrink-0" />
-            <span>Talk on WhatsApp</span>
-          </a>
-
           {/* Request a Call Back — Copper Gradient Fill */}
           <button
             onClick={() => setIsModalOpen(true)}
