@@ -203,7 +203,7 @@ const Portfolio = () => {
     : projects.filter(p => p.category === activeFilter);
 
   return (
-    <section id="portfolio" className="py-24 px-6 bg-brand-dark relative overflow-hidden border-t border-brand-border/60">
+    <section id="portfolio" className="py-24 px-6 bg-white relative overflow-hidden border-t border-neutral-200/40">
       {/* Background soft radial glow */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[350px] h-[350px] bg-brand-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
 
@@ -211,7 +211,7 @@ const Portfolio = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto mb-16">
-          <h3 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-white uppercase tracking-[0.06em] leading-none mb-4">
+          <h3 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-[#0a0e0b] uppercase tracking-[0.06em] leading-none mb-4">
             OUR <span className="text-brand-accent font-bold-important">SUCCESS STORIES</span>
           </h3>
           <div className="w-24 h-[3px] bg-brand-accent mx-auto mt-6"></div>
@@ -220,9 +220,9 @@ const Portfolio = () => {
         {/* Filter Pills Bar */}
         <div className="relative mb-16 max-w-3xl mx-auto">
           {/* Left fade indicator (mobile only) */}
-          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-brand-dark to-transparent z-20 pointer-events-none md:hidden" />
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none md:hidden" />
           {/* Right fade indicator with subtle chevron hint (mobile only) */}
-          <div className="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-brand-dark via-brand-dark/80 to-transparent z-20 pointer-events-none md:hidden flex items-center justify-end pr-1">
+          <div className="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-white via-white/80 to-transparent z-20 pointer-events-none md:hidden flex items-center justify-end pr-1">
             <svg className="w-3.5 h-3.5 text-brand-accent/60 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
             </svg>
@@ -236,8 +236,8 @@ const Portfolio = () => {
                   onClick={() => setActiveFilter(cat)}
                   className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
                     isActive
-                      ? "bg-brand-accent text-brand-dark shadow-[0_4px_20px_rgba(193,120,31,0.35)]"
-                      : "bg-brand-card/50 text-neutral-400 hover:text-white border border-brand-border/30 hover:border-brand-accent/40"
+                      ? "bg-brand-accent text-white shadow-[0_4px_20px_rgba(193,120,31,0.35)]"
+                      : "bg-neutral-100 text-neutral-600 hover:text-[#0a0e0b] border border-neutral-200 hover:border-brand-accent/40"
                   }`}
                 >
                   {cat}
@@ -258,7 +258,7 @@ const Portfolio = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-brand-card border border-brand-border/40 hover:border-brand-accent/30 rounded-[1.5rem] overflow-hidden hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(193,120,31,0.06)] transition-all duration-500 flex flex-col h-full"
+                className="bg-white border border-neutral-200/80 hover:border-brand-accent/40 rounded-[1.5rem] overflow-hidden hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(193,120,31,0.08)] transition-all duration-500 flex flex-col h-full"
               >
                 {/* Card Property Photo Header */}
                 <div className="relative w-full h-[220px] overflow-hidden group">
@@ -268,7 +268,7 @@ const Portfolio = () => {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/40 to-transparent z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e0b]/95 via-[#0a0e0b]/40 to-transparent z-10" />
                   
                   {/* Location & Category Badges */}
                   <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-20 pointer-events-none">
@@ -293,26 +293,26 @@ const Portfolio = () => {
                 </div>
 
                 {/* Card Details Body */}
-                <div className="p-6 flex flex-col flex-grow justify-between">
+                <div className="p-6 flex flex-col flex-grow justify-between bg-white">
                   <div>
                     {/* Direct Response Headline */}
                     <h5 className="text-lg font-bold text-brand-accent mb-2 uppercase tracking-wide leading-snug font-heading">
                       {project.headline}
                     </h5>
-                    <p className="text-neutral-400 text-sm leading-relaxed mb-6 font-light">
+                    <p className="text-neutral-600 text-sm leading-relaxed mb-6 font-normal">
                       {project.description}
                     </p>
                   </div>
 
                   <div>
                     {/* Divider */}
-                    <div className="w-full h-[1px] bg-neutral-800/40 mb-5" />
+                    <div className="w-full h-[1px] bg-neutral-100 mb-5" />
 
                     {/* Performance Metrics */}
                     <div className="grid grid-cols-3 gap-2 text-center">
                       {project.metrics.map((metric, idx) => (
                         <div key={idx} className="flex flex-col">
-                          <span className="text-lg font-heading font-black text-white tracking-tight leading-none mb-1">
+                          <span className="text-lg font-heading font-black text-[#0a0e0b] tracking-tight leading-none mb-1">
                             {metric.value}
                           </span>
                           <span className="text-[0.62rem] font-bold tracking-widest text-neutral-500 uppercase leading-none">

@@ -21,11 +21,11 @@ export default function HospitalityLandingPage() {
       {/* 3. Section 2: Built for Hospitality Grid & Merged Performance Stats */}
       <IndustryCategories />
 
-      {/* 5. Section 3: Our Work Video Showcase (Replacing the process timeline) */}
-      <OurWork />
-
-      {/* 5b. Section 3b: Metrics Case-Study Snap Portfolio */}
+      {/* 5. Section 3: Metrics Case-Study Snap Portfolio */}
       <Portfolio />
+
+      {/* 5b. Section 3b: Our Work Video Showcase (Replacing the process timeline) */}
+      <OurWork />
 
       {/* 6. Section 4: Why Beyond Reach & Experience Stats (Minimalized layout) */}
       <WhyExperience />
