@@ -216,7 +216,7 @@ h2 {
   .hero-bg-seo h1,
   .hero-bg-smm h1 {
     font-weight: 500 !important; /* Elegant unbold (Medium) to fit in 2 lines */
-    font-size: 25px !important;   /* Set font size to exactly 25px as requested */
+    font-size: 23px !important;   /* Set font size to exactly 23px as requested */
     letter-spacing: -0.01em !important;
     line-height: 1.35 !important;
   }
