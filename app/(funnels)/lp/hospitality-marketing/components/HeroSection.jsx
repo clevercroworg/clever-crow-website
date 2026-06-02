@@ -247,7 +247,7 @@ const HeroSection = () => {
           className="flex flex-col items-center"
         >
           {/* Tagline using Barlow Condensed font, copper color accent with high-end drop shadow */}
-          <h1 className="hero-tagline text-[8.2vw] xs:text-[8vw] sm:text-[42px] md:text-[54px] lg:text-[3.2rem] xl:text-[3.8rem] 2xl:text-[4.4rem] text-white tracking-tighter uppercase leading-[1.08] mb-6 max-w-5xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
+          <h1 className="hero-tagline text-[9.5vw] xs:text-[9vw] sm:text-[48px] md:text-[62px] lg:text-[3.8rem] xl:text-[4.4rem] 2xl:text-[5.0rem] text-white tracking-tighter uppercase leading-[1.08] mb-6 max-w-5xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
             <span className="block whitespace-nowrap">Hospitality</span>
             <span className="block whitespace-nowrap">Digital Marketing</span>
             <span className="text-brand-accent block mt-1.5 leading-[1.05] whitespace-nowrap">
