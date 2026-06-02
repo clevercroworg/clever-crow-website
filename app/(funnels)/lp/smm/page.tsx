@@ -6,7 +6,7 @@ import Script from 'next/script';
 import { 
   Phone, Award, Users, Headphones, Sparkles, CheckCircle, 
   ShieldCheck, User, Send, ArrowRight, X, ChevronDown,
-  Video, BarChart3, Megaphone, Flame, Rocket, Leaf
+  Video, BarChart3, Megaphone, Flame, Rocket, Leaf, GraduationCap
 } from 'lucide-react';
 import { FaWhatsapp, FaGoogle, FaInstagram } from 'react-icons/fa';
 import './smm.css';
@@ -402,9 +402,6 @@ export default function SmmLandingPage() {
       {/* Hero Section */}
       <section className="hero-bg-smm pt-8 pb-16 text-white sm:py-20">
         <div className="hero-grid-pattern" aria-hidden="true" />
-        <span className="hero-orb hero-orb-cosmic-1"></span>
-        <span className="hero-orb hero-orb-cosmic-2"></span>
-        <span className="hero-orb hero-orb-cosmic-3"></span>
 
         <div className="relative z-10 mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
           <div className="lg:col-span-8">
@@ -414,38 +411,37 @@ export default function SmmLandingPage() {
               </span>
             </div>
             <h1 className="mt-3 text-[28px] leading-tight font-medium sm:text-5xl">
-              Build a Strong Brand Presence <br className="sm:hidden" />
-              with <br className="hidden sm:inline" />
+              Build a Strong Brand Presence with <br className="sm:hidden" />
               <span className="font-extrabold bg-gradient-to-r from-violet-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent">
                 Social Media Management
               </span>
             </h1>
             <p className="mt-4 max-w-2xl text-base text-slate-200 sm:text-lg leading-relaxed">From content strategy to publishing and reporting, we manage your social media end-to-end so you can focus on business growth.</p>
 
-            <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center shadow-lg backdrop-blur-sm">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 mb-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                  <Megaphone className="w-6 h-6" />
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="hero-badge-capsule">
+                <div className="hero-badge-icon-wrap">
+                  <Award className="w-5 h-5" />
                 </div>
-                <p className="text-xs md:text-sm font-bold text-white leading-snug">FB + IG + LinkedIn + X</p>
+                <span className="hero-badge-text">15+ Years of SEO Experience</span>
               </div>
-              <div className="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center shadow-lg backdrop-blur-sm">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 mb-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                  <Video className="w-6 h-6" />
+              <div className="hero-badge-capsule">
+                <div className="hero-badge-icon-wrap">
+                  <GraduationCap className="w-5 h-5" />
                 </div>
-                <p className="text-xs md:text-sm font-bold text-white leading-snug">Reels, Posts & Stories</p>
+                <span className="hero-badge-text">Technical + Content SEO Experts</span>
               </div>
-              <div className="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center shadow-lg backdrop-blur-sm">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 mb-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                  <BarChart3 className="w-6 h-6" />
+              <div className="hero-badge-capsule">
+                <div className="hero-badge-icon-wrap">
+                  <Users className="w-5 h-5" />
                 </div>
-                <p className="text-xs md:text-sm font-bold text-white leading-snug">Weekly Performance Reports</p>
+                <span className="hero-badge-text">550+ Businesses Served</span>
               </div>
-              <div className="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center shadow-lg backdrop-blur-sm">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 mb-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                  <Sparkles className="w-6 h-6" />
+              <div className="hero-badge-capsule">
+                <div className="hero-badge-icon-wrap">
+                  <Headphones className="w-5 h-5" />
                 </div>
-                <p className="text-xs md:text-sm font-bold text-white leading-snug">No Hidden Fees</p>
+                <span className="hero-badge-text">Transparent Monthly Reporting</span>
               </div>
             </div>
           </div>

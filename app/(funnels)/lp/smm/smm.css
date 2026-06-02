@@ -5,15 +5,15 @@
   position: relative;
   overflow: hidden;
   background: 
-    linear-gradient(to right, rgba(15, 11, 40, 0.96) 30%, rgba(30, 27, 75, 0.6) 100%),
-    url('/lp/smm/images/desktop_hero_bg.png') no-repeat center right / cover;
+    radial-gradient(circle at 45% 50%, rgba(16, 53, 127, 0.95) 0%, rgba(10, 19, 49, 0.98) 80%),
+    linear-gradient(135deg, #071330 0%, #0d2861 50%, #071330 100%);
 }
 
 @media (max-width: 1024px) {
   .hero-bg-smm {
     background: 
-      linear-gradient(to bottom, rgba(15, 11, 40, 0.9) 40%, rgba(30, 27, 75, 0.55) 100%),
-      url('/lp/smm/images/desktop_hero_bg.png') no-repeat center top / cover;
+      radial-gradient(circle at 50% 45%, rgba(16, 53, 127, 0.95) 0%, rgba(10, 19, 49, 0.98) 90%),
+      linear-gradient(180deg, #071330 0%, #0d2861 50%, #071330 100%);
   }
 }
 

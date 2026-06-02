@@ -28,29 +28,90 @@ h2 {
   position: relative;
   overflow: hidden;
   background: 
-    linear-gradient(to right, rgba(9, 13, 22, 0.95) 30%, rgba(9, 13, 22, 0.5) 100%),
-    url('/lp/digital-marketing/images/desktop_hero_bg.png') no-repeat center right / cover;
+    radial-gradient(circle at 45% 50%, rgba(16, 53, 127, 0.95) 0%, rgba(10, 19, 49, 0.98) 80%),
+    linear-gradient(135deg, #071330 0%, #0d2861 50%, #071330 100%);
 }
 
 @media (max-width: 1024px) {
   .hero-bg-dark {
     background: 
-      linear-gradient(to bottom, rgba(9, 13, 22, 0.82) 40%, rgba(9, 13, 22, 0.45) 100%),
-      url('/lp/digital-marketing/images/mobile_hero_bg.png') no-repeat center top / cover;
+      radial-gradient(circle at 50% 45%, rgba(16, 53, 127, 0.95) 0%, rgba(10, 19, 49, 0.98) 90%),
+      linear-gradient(180deg, #071330 0%, #0d2861 50%, #071330 100%);
   }
 }
 
 .hero-grid-pattern {
   position: absolute;
   inset: 0;
-  opacity: 0.35;
+  opacity: 0.85;
   pointer-events: none;
   background-image: 
-    radial-gradient(circle at left center, rgba(255, 255, 255, 0.03) 1.5px, transparent 2px),
-    radial-gradient(circle at right center, rgba(255, 255, 255, 0.03) 1.5px, transparent 2px),
-    radial-gradient(circle at center, rgba(255, 255, 255, 0.015) 0.8px, transparent 1.2px);
-  background-size: 24px 24px, 24px 24px, 16px 16px;
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.3) 75%, transparent 100%);
   z-index: 0;
+}
+
+/* Premium Horizontal Capsule Badges */
+.hero-badge-capsule {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+  padding: 14px 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.hero-badge-capsule:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 25px rgba(16, 53, 127, 0.35);
+}
+
+.hero-badge-icon-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.hero-badge-capsule:hover .hero-badge-icon-wrap {
+  background: #FFCE1B;
+  border-color: #FFCE1B;
+  color: #071330;
+  transform: scale(1.05);
+}
+
+.hero-badge-text {
+  font-family: "Poppins", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #ffffff;
+  line-height: 1.25;
+}
+
+@media (max-width: 640px) {
+  .hero-badge-capsule {
+    padding: 12px 16px;
+  }
+  .hero-badge-text {
+    font-size: 15.5px;
+  }
 }
 
 .logo-track {

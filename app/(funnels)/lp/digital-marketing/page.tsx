@@ -439,38 +439,37 @@ export default function DigitalMarketingLandingPage() {
               </span>
             </div>
             <h1 className="mt-3 text-[28px] leading-tight font-medium sm:text-5xl">
-              Get More Leads & Sales <br className="sm:hidden" />
-              with <br className="hidden sm:inline" />
+              Get More Leads & Sales with <br className="sm:hidden" />
               <span className="font-extrabold bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
                 Complete <br className="sm:hidden" /> Digital Marketing
               </span>
             </h1>
             <p className="mt-4 max-w-2xl text-base text-slate-200 sm:text-lg leading-relaxed">SEO, Google Ads, Meta Ads and conversion-focused strategy designed to generate real enquiries and measurable ROI.</p>
 
-            <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center shadow-lg backdrop-blur-sm">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-400/10 text-amber-400 mb-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                  <Award className="w-6 h-6" />
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="hero-badge-capsule">
+                <div className="hero-badge-icon-wrap">
+                  <Award className="w-5 h-5" />
                 </div>
-                <p className="text-xs md:text-sm font-bold text-white leading-snug">15+ Years of Experience</p>
+                <span className="hero-badge-text">15+ Years of SEO Experience</span>
               </div>
-              <div className="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center shadow-lg backdrop-blur-sm">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-400/10 text-amber-400 mb-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                  <GraduationCap className="w-6 h-6" />
+              <div className="hero-badge-capsule">
+                <div className="hero-badge-icon-wrap">
+                  <GraduationCap className="w-5 h-5" />
                 </div>
-                <p className="text-xs md:text-sm font-bold text-white leading-snug">Certified Professionals</p>
+                <span className="hero-badge-text">Technical + Content SEO Experts</span>
               </div>
-              <div className="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center shadow-lg backdrop-blur-sm">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-400/10 text-amber-400 mb-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                  <Users className="w-6 h-6" />
+              <div className="hero-badge-capsule">
+                <div className="hero-badge-icon-wrap">
+                  <Users className="w-5 h-5" />
                 </div>
-                <p className="text-xs md:text-sm font-bold text-white leading-snug">550+ Happy Clients</p>
+                <span className="hero-badge-text">550+ Businesses Served</span>
               </div>
-              <div className="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center shadow-lg backdrop-blur-sm">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-400/10 text-amber-400 mb-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                  <Headphones className="w-6 h-6" />
+              <div className="hero-badge-capsule">
+                <div className="hero-badge-icon-wrap">
+                  <Headphones className="w-5 h-5" />
                 </div>
-                <p className="text-xs md:text-sm font-bold text-white leading-snug">Best Customer Support</p>
+                <span className="hero-badge-text">Transparent Monthly Reporting</span>
               </div>
             </div>
           </div>
