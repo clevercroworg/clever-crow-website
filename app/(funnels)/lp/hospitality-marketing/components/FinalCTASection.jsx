@@ -85,7 +85,7 @@ const FinalCTASection = () => {
           </a>
           
           <a 
-            href="https://wa.me/919986389444"
+            href="https://wa.me/919986389444?text=Hi%20Clever%20Crow%2C%20I%27m%20interested%20in%20hospitality%20marketing%20services.%20(Ref:%20LP/Hospitality-Marketing)"
             onClick={trackWhatsAppClick}
             target="_blank"
             rel="noopener noreferrer"

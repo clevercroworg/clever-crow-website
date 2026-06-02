@@ -148,6 +148,7 @@ export default function DigitalMarketingLandingPage() {
   };
 
   const submitLead = async (name: string, phone: string, source: string) => {
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
     const response = await fetch('/api/leads', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -155,7 +156,7 @@ export default function DigitalMarketingLandingPage() {
         name,
         phone,
         email: `${name.toLowerCase().replace(/\s+/g, '')}@clevercrow-lead.in`,
-        message: `Callback request submitted. Source: ${source}`,
+        message: `New enquiry received. Source Page: ${source}. Referrer/Landed URL: ${currentUrl}`,
         source: source
       })
     });

@@ -83,11 +83,12 @@ const HeroSection = () => {
     setStatus({ loading: true, success: false, error: null });
 
     try {
+      const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
       const payload = {
         name: formData.contactName,
         phone: formData.phone,
         email: `${formData.contactName.toLowerCase().replace(/\s+/g, '')}@clevercrow-lead.in`,
-        message: `Property Growth Review Request\nProperty Type: ${formData.propertyType}`,
+        message: `New enquiry received. Source Page: Hospitality Marketing Landing Page. Referrer/Landed URL: ${currentUrl}\nProperty Type: ${formData.propertyType}`,
         source: "Hospitality Marketing Landing Page"
       };
 
@@ -226,7 +227,7 @@ const HeroSection = () => {
 
         {/* Right WhatsApp Us Capsule Button */}
         <a 
-          href="https://wa.me/919986389444" 
+          href="https://wa.me/919986389444?text=Hi%20Clever%20Crow%2C%20I%27m%20interested%20in%20hospitality%20marketing%20services.%20(Ref:%20LP/Hospitality-Marketing)" 
           onClick={trackWhatsAppClick}
           target="_blank"
           rel="noopener noreferrer"
