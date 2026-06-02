@@ -298,10 +298,10 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.35 }}
           className="flex items-center justify-center w-full sm:w-auto mx-auto"
         >
-          {/* Request a Call Back — Copper Gradient Fill */}
+          {/* Request a Call Back — Copper Outlined */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center justify-center gap-3.5 bg-gradient-to-r from-[#c1781f] via-[#d48a2a] to-[#c1781f] hover:from-[#9a6118] hover:via-[#c1781f] hover:to-[#9a6118] text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4 sm:py-4.5 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg shadow-[#c1781f]/30 hover:shadow-[#c1781f]/50 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
+            className="flex items-center justify-center gap-3.5 border border-[#c1781f]/40 hover:border-[#c1781f] bg-[#0a0e0b]/50 hover:bg-[#0a0e0b]/70 text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4 sm:py-4.5 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-[#c1781f]/10 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
           >
             <Phone className="w-4.5 h-4.5 stroke-[2.5] shrink-0" />
             <span>Request a Call Back</span>

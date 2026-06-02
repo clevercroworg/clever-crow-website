@@ -258,7 +258,7 @@ const Portfolio = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-white border border-neutral-200/80 hover:border-brand-accent/40 rounded-[1.5rem] overflow-hidden hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(193,120,31,0.08)] transition-all duration-500 flex flex-col h-full"
+                className="bg-brand-card border-2 border-[#c1781f]/35 hover:border-brand-accent/70 rounded-[1.5rem] overflow-hidden hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(193,120,31,0.12)] transition-all duration-500 flex flex-col h-full"
               >
                 {/* Card Property Photo Header */}
                 <div className="relative w-full h-[220px] overflow-hidden group">
@@ -293,26 +293,26 @@ const Portfolio = () => {
                 </div>
 
                 {/* Card Details Body */}
-                <div className="p-6 flex flex-col flex-grow justify-between bg-white">
+                <div className="p-6 flex flex-col flex-grow justify-between bg-brand-card">
                   <div>
                     {/* Direct Response Headline */}
                     <h5 className="text-lg font-bold text-brand-accent mb-2 uppercase tracking-wide leading-snug font-heading">
                       {project.headline}
                     </h5>
-                    <p className="text-neutral-600 text-sm leading-relaxed mb-6 font-normal">
+                    <p className="text-neutral-400 text-sm leading-relaxed mb-6 font-light">
                       {project.description}
                     </p>
                   </div>
 
                   <div>
                     {/* Divider */}
-                    <div className="w-full h-[1px] bg-neutral-100 mb-5" />
+                    <div className="w-full h-[1px] bg-neutral-800/40 mb-5" />
 
                     {/* Performance Metrics */}
                     <div className="grid grid-cols-3 gap-2 text-center">
                       {project.metrics.map((metric, idx) => (
                         <div key={idx} className="flex flex-col">
-                          <span className="text-lg font-heading font-black text-[#0a0e0b] tracking-tight leading-none mb-1">
+                          <span className="text-lg font-heading font-black text-white tracking-tight leading-none mb-1">
                             {metric.value}
                           </span>
                           <span className="text-[0.62rem] font-bold tracking-widest text-neutral-500 uppercase leading-none">
