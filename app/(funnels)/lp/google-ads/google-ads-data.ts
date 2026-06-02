@@ -1,6 +1,71 @@
-import { CaseStudy } from "../website/website-data";
+import { CaseStudy, FaqData } from "../website/website-data";
 
-export const googleAdsData: { caseStudies: CaseStudy[] } = {
+export const googleAdsData = {
+  hero: {
+    badges: ["Google Ads Experts", "Google Certified", "Performance Focused", "Lead Generation"],
+    title: "Google Ads Management",
+    accentTitle: "@ Just ₹15,000",
+    subtitle: "Get More Qualified Leads with Google Ads Management",
+    highlights: ["15+ Years of Experience", "Certified Professionals", "550+ Happy Clients", "Best Customer Support"],
+    ctaLabel: "View Pricing",
+  },
+  pricing: {
+    title: "Simple Pricing for Different Growth Stages",
+    subtitle: "Start small or choose ongoing management for stronger long-term performance.",
+    packages: [
+      {
+        label: "Basic",
+        name: "Basic",
+        price: "₹15,000",
+        description: "Best if: Best-in-budget marketing for instant leads.",
+        features: ["Campaign setup", "Keyword research", "Ad copy creation", "Conversion tracking setup", "7 days basic optimisation"],
+      },
+      {
+        label: "Growth",
+        name: "Growth",
+        price: "₹29,999",
+        description: "Best if: Aggressively dominate your local market.",
+        features: ["Everything in Basic", "Ongoing campaign optimisation", "Weekly testing and improvements", "Budget optimisation", "Reporting support"],
+        featured: true,
+      },
+    ],
+    quoteText: "Need a broader scope or custom plan?",
+    quoteHref: "tel:+919986389444",
+  },
+  faqs: [
+    {
+      question: "How much budget do I need for Google Ads?",
+      answer: "We recommend starting with at least ₹500–₹1,500 per day depending on your industry and competition. You can increase this as you see positive ROI."
+    },
+    {
+      question: "When will I start getting leads?",
+      answer: "Most campaigns start generating leads within 3–7 days after going live. Google’s algorithm usually takes about a week to fully optimise for your target audience."
+    },
+    {
+      question: "Is ₹15,000 the ad spend or your service fee?",
+      answer: "₹15,000 is our professional management fee for the Basic package. Your ad spend is paid directly to Google from your own account."
+    },
+    {
+      question: "Will I get guaranteed leads or sales?",
+      answer: "While we can't guarantee a specific number of sales, we focus on bringing high-intent traffic to your site and improving conversion rates through expert optimisation."
+    },
+    {
+      question: "Do I need a website or landing page?",
+      answer: "Yes, you need a functional landing page or website. If you don't have one, we can build a high-converting landing page for you at an additional cost."
+    },
+    {
+      question: "How do you track the performance of my ads?",
+      answer: "We set up comprehensive conversion tracking through Google Analytics and Google Ads, so you can see exactly where your leads and sales are coming from."
+    },
+    {
+      question: "What industries do you specialise in?",
+      answer: "We have experience across real estate, education, healthcare, e-commerce, and professional services, helping businesses scale their lead generation."
+    },
+    {
+      question: "Can I cancel the service anytime?",
+      answer: "Yes, our monthly packages are flexible. We recommend at least a 3-month commitment for the best data-driven results, but you are not locked into a long-term contract."
+    }
+  ] as FaqData[],
   caseStudies: [
     // GOOGLE ADS
     { 
@@ -319,5 +384,5 @@ export const googleAdsData: { caseStudies: CaseStudy[] } = {
       summary: "We restructured product taxonomy and optimized solution pages for industrial buyer queries. Consistent technical audits improved visibility for high-intent searches.", 
       image: "/landing-page/google-ads/case-studies/triveni.jpg" 
     }
-  ]
+  ] as CaseStudy[]
 };

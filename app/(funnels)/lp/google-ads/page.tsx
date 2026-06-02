@@ -25,9 +25,9 @@ export default function GoogleAdsLandingPage() {
       <div className="site-shell">
         <Header />
         <main id="top">
-          <HeroSection />
+          <HeroSection data={googleAdsData.hero} />
           <LogoMarquee />
-          <PricingSection />
+          <PricingSection data={googleAdsData.pricing} />
           <PerformanceExperts />
           <SuccessStories 
             data={googleAdsData.caseStudies} 
@@ -35,7 +35,7 @@ export default function GoogleAdsLandingPage() {
             subtitle="Proven performance across search, social, and organic channels."
             filterBy="platform"
           />
-          <FaqSection />
+          <FaqSection data={googleAdsData.faqs} />
           <ClientReviews />
         </main>
         <Footer />
