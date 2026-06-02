@@ -439,9 +439,10 @@ export default function DigitalMarketingLandingPage() {
               </span>
             </div>
             <h1 className="mt-3 text-[28px] leading-tight font-medium sm:text-5xl">
-              Get More Leads & Sales with <br className="sm:hidden" />
+              Get More Leads & Sales <br className="sm:hidden" />
+              with{" "}
               <span className="font-extrabold bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
-                Complete <br className="sm:hidden" /> Digital Marketing
+                Complete Digital Marketing
               </span>
             </h1>
             <p className="mt-4 max-w-2xl text-base text-slate-200 sm:text-lg leading-relaxed">SEO, Google Ads, Meta Ads and conversion-focused strategy designed to generate real enquiries and measurable ROI.</p>
