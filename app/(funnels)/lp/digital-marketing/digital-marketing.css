@@ -203,3 +203,26 @@ h2 {
 .whatsapp-mobile-pulse {
   animation: whatsappMobilePulse 2.2s infinite;
 }
+
+/* Responsive Heading weights for hero section to fit in 2 lines on mobile */
+.hero-bg-dark h1,
+.hero-bg-seo h1,
+.hero-bg-smm h1 {
+  font-weight: 800;
+}
+
+@media (max-width: 640px) {
+  .hero-bg-dark h1,
+  .hero-bg-seo h1,
+  .hero-bg-smm h1 {
+    font-weight: 500 !important; /* Elegant unbold (Medium) to fit in 2 lines */
+    font-size: 25px !important;   /* Set font size to exactly 25px as requested */
+    letter-spacing: -0.01em !important;
+    line-height: 1.35 !important;
+  }
+  .hero-bg-dark h1 span,
+  .hero-bg-seo h1 span,
+  .hero-bg-smm h1 span {
+    font-weight: 700 !important; /* Keep the highlighted main keywords bold and premium */
+  }
+}
