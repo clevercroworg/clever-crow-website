@@ -166,9 +166,9 @@ const ReviewFormSection = () => {
           {/* Left Column: Checks Grid */}
           <div className="lg:col-span-7 flex flex-col items-center">
             <div className="text-center mb-12">
-              <h2 className="font-heading text-[15px] md:text-[16px] tracking-[0.08em] text-brand-accent mb-3.5 font-bold uppercase">
+              <span className="font-heading text-[15px] md:text-[16px] tracking-[0.08em] text-brand-accent mb-3.5 font-bold uppercase block">
                 Before the Call
-              </h2>
+              </span>
               <h3 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a0e0b] uppercase leading-tight tracking-[0.015em]" style={{ wordSpacing: '0.06em' }}>
                 What We Review <br/>
                 For Your Property

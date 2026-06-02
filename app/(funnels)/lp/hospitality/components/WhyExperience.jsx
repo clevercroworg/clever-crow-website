@@ -34,9 +34,9 @@ const WhyExperience = () => {
           
           {/* Left Column: Why Choose Us */}
           <div className="lg:col-span-7">
-            <h2 className="font-heading text-xs tracking-widest text-brand-accent mb-2 font-semibold">
+            <span className="font-heading text-xs tracking-widest text-brand-accent mb-2 font-semibold block">
               Why Choose Us
-            </h2>
+            </span>
             <h3 className="font-heading text-4xl md:text-5xl font-bold text-white mb-6 uppercase leading-none">
               Results Driven. <br/>
               Hospitality Focused. <br/>
@@ -76,9 +76,9 @@ const WhyExperience = () => {
 
           {/* Right Column: Experience Stats */}
           <div id="our-experience" className="lg:col-span-5 bg-brand-dark/40 border border-brand-border p-8 md:p-10 rounded-2xl relative overflow-hidden">
-            <h2 className="font-heading text-xs tracking-widest text-brand-accent mb-2 font-semibold">
+            <span className="font-heading text-xs tracking-widest text-brand-accent mb-2 font-semibold block">
               Our Experience
-            </h2>
+            </span>
             <h3 className="font-heading text-3xl font-bold text-white uppercase mb-8">
               Experience Across Hospitality & Leisure
             </h3>

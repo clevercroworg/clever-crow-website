@@ -137,15 +137,22 @@
 /* Scoped headings override to preserve landing page design settings */
 .hospitality-funnel h1,
 .hospitality-funnel h2,
-.hospitality-funnel h3,
+.hospitality-funnel h3 {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  text-transform: uppercase !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.01em !important;
+  font-weight: 700 !important; /* Bold headings matching home page */
+}
+
 .hospitality-funnel h4,
 .hospitality-funnel h5,
 .hospitality-funnel h6 {
   font-family: var(--font-heading) !important;
   text-transform: uppercase !important;
-  line-height: 1.1 !important;
+  line-height: 1.15 !important;
   letter-spacing: 0.02em !important;
-  font-weight: 700 !important; /* Bold headings matching home page */
+  font-weight: 700 !important;
 }
 
 /* Specific heading overrides to preserve bold accents where absolutely required */

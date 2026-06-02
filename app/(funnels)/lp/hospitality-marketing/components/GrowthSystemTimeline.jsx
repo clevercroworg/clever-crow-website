@@ -41,9 +41,9 @@ const GrowthSystemTimeline = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto mb-20">
-          <h2 className="font-heading text-[15px] md:text-[16px] tracking-[0.08em] text-brand-accent mb-3.5 font-bold uppercase">
+          <span className="font-heading text-[15px] md:text-[16px] tracking-[0.08em] text-brand-accent mb-3.5 font-bold uppercase block">
             Our Proven System
-          </h2>
+          </span>
           <h3 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-[#0a0e0b] uppercase leading-tight tracking-[0.015em]" style={{ wordSpacing: '0.06em' }}>
             From Brand Presence to <span className="text-brand-accent">Booking Growth</span>
           </h3>

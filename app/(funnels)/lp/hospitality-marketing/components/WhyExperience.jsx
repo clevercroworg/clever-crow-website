@@ -38,9 +38,9 @@ const WhyExperience = () => {
           
           {/* Left Side: Minimalist Differentiators Grid (Col Span 7) */}
           <div className="lg:col-span-7 flex flex-col justify-center">
-            <h2 className="font-body text-xs md:text-sm tracking-[0.3em] text-brand-accent mb-3 font-bold uppercase">
+            <span className="font-body text-xs md:text-sm tracking-[0.3em] text-brand-accent mb-3 font-bold uppercase block">
               Why Choose Us
-            </h2>
+            </span>
             <h3 className="font-heading text-[28px] sm:text-[36px] md:text-[44px] lg:text-[48px] xl:text-[54px] font-bold text-white mb-6 uppercase leading-[1.1] tracking-[0.02em] font-bold-important">
               Results Driven. <br/>
               Hospitality Focused. <br/>

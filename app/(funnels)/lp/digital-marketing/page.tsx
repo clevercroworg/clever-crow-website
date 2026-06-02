@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import Script from 'next/script';
 import { 
   Phone, Award, Users, Headphones, Monitor, Search, Sparkles, 
   Megaphone, CheckCircle, ShieldCheck, User, Send, ArrowRight, X, 
@@ -175,6 +176,16 @@ export default function DigitalMarketingLandingPage() {
 
     try {
       await submitLead(formData.name, formData.phone, "Digital Marketing Landing Page");
+      // Fire Google conversion tracking
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'conversion', {
+          'send_to': 'AW-17335403082/YwV4CJ-q_e8YEPq9me49',
+        });
+        (window as any).gtag('event', 'GenerateLead', {
+          'event_category': 'Leads',
+          'event_label': 'Lead Form Submit'
+        });
+      }
       setStatus({ loading: false, success: true, error: null });
       setFormData({ name: '', phone: '' });
       router.push('/thank-you');
@@ -194,6 +205,16 @@ export default function DigitalMarketingLandingPage() {
 
     try {
       await submitLead(modalFormData.name, modalFormData.phone, "Digital Marketing Landing Page (Modal)");
+      // Fire Google conversion tracking
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'conversion', {
+          'send_to': 'AW-17335403082/YwV4CJ-q_e8YEPq9me49',
+        });
+        (window as any).gtag('event', 'GenerateLead', {
+          'event_category': 'Leads',
+          'event_label': 'Lead Form Submit'
+        });
+      }
       setModalStatus({ loading: false, success: true, error: null });
       setModalFormData({ name: '', phone: '' });
       setIsModalOpen(false);
@@ -354,6 +375,27 @@ export default function DigitalMarketingLandingPage() {
 
   return (
     <div className="bg-slate-50 pb-24 text-slate-800 hospitality-funnel">
+      {/* Google tag (gtag.js) */}
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=AW-17335403082"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'AW-17335403082');
+
+          // Phone conversion tracking configuration
+          gtag('config', 'AW-17335403082/uHSsCKf5i_QaEMqElcpA', {
+            'phone_conversion_number': '09986389444'
+          });
+        `}
+      </Script>
+
       {/* Navbar */}
       <nav className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
@@ -384,67 +426,50 @@ export default function DigitalMarketingLandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="hero-bg py-16 text-white sm:py-20">
-        <span className="hero-orb o1"></span>
-        <span className="hero-orb o2"></span>
-        <span className="hero-orb o3"></span>
-
-        {/* Mobile Scrolling Background */}
-        <div className="hero-mobile-scroll" aria-hidden="true">
-          <div className="mobile-flow-col c1">
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/webbg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/seobg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/googleadsbg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/metabg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/aibg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/smm.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/webbg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/seobg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/googleadsbg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/metabg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/aibg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/smm.jpg" alt="" /></div>
-          </div>
-          <div className="mobile-flow-col c2">
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/googleadsbg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/metabg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/aibg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/smm.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/webbg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/seobg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/googleadsbg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/metabg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/aibg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/smm.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/webbg.jpg" alt="" /></div>
-            <div className="mobile-flow-card"><img src="/lp/digital-marketing/images/seobg.jpg" alt="" /></div>
-          </div>
-        </div>
+      <section className="hero-bg-dark pt-8 pb-16 text-white sm:py-20">
+        <div className="hero-grid-pattern" aria-hidden="true" />
 
         <div className="relative z-10 mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
           <div className="lg:col-span-8">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em]">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-                </span>
-                Performance-led growth
-              </span>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[11px] font-bold text-slate-200 backdrop-blur-sm">
                 <span className="text-amber-400 text-xs">★★★★★</span> 4.9/5 Rating
               </span>
             </div>
-            <h1 className="mt-5 text-3xl leading-tight sm:text-5xl"><span className="font-medium">Get More Leads & Sales with</span> <br /><span className="font-extrabold bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">Complete Digital Marketing</span></h1>
-            {/* Improvement #1: Hero accent line */}
-            <div className="mt-3 h-1 w-20 rounded-full bg-gradient-to-r from-amber-400 to-amber-600" />
+            <h1 className="mt-3 text-[28px] leading-tight font-medium sm:text-5xl">
+              Get More Leads & Sales <br className="sm:hidden" />
+              with <br className="hidden sm:inline" />
+              <span className="font-extrabold bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
+                Complete <br className="sm:hidden" /> Digital Marketing
+              </span>
+            </h1>
             <p className="mt-4 max-w-2xl text-base text-slate-200 sm:text-lg leading-relaxed">SEO, Google Ads, Meta Ads and conversion-focused strategy designed to generate real enquiries and measurable ROI.</p>
 
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              <div className="group rounded-2xl border border-white/20 bg-white/10 p-4 hover:bg-white/15 hover:border-white/35 hover:-translate-y-0.5 transition-all duration-300"><p className="hero-point flex items-center"><Award className="mr-2.5 w-6 h-6 shrink-0 text-amber-400" />15+ Years of Experience</p></div>
-              <div className="group rounded-2xl border border-white/20 bg-white/10 p-4 hover:bg-white/15 hover:border-white/35 hover:-translate-y-0.5 transition-all duration-300"><p className="hero-point flex items-center"><GraduationCap className="mr-2.5 w-6 h-6 shrink-0 text-amber-400" />Certified Professionals</p></div>
-              <div className="group rounded-2xl border border-white/20 bg-white/10 p-4 hover:bg-white/15 hover:border-white/35 hover:-translate-y-0.5 transition-all duration-300"><p className="hero-point flex items-center"><Users className="mr-2.5 w-6 h-6 shrink-0 text-amber-400" />550+ Happy Clients</p></div>
-              <div className="group rounded-2xl border border-white/20 bg-white/10 p-4 hover:bg-white/15 hover:border-white/35 hover:-translate-y-0.5 transition-all duration-300"><p className="hero-point flex items-center"><Headphones className="mr-2.5 w-6 h-6 shrink-0 text-amber-400" />Best Customer Support</p></div>
+            <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center shadow-lg backdrop-blur-sm">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-400/10 text-amber-400 mb-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                  <Award className="w-6 h-6" />
+                </div>
+                <p className="text-xs md:text-sm font-bold text-white leading-snug">15+ Years of Experience</p>
+              </div>
+              <div className="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center shadow-lg backdrop-blur-sm">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-400/10 text-amber-400 mb-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                  <GraduationCap className="w-6 h-6" />
+                </div>
+                <p className="text-xs md:text-sm font-bold text-white leading-snug">Certified Professionals</p>
+              </div>
+              <div className="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center shadow-lg backdrop-blur-sm">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-400/10 text-amber-400 mb-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                  <Users className="w-6 h-6" />
+                </div>
+                <p className="text-xs md:text-sm font-bold text-white leading-snug">550+ Happy Clients</p>
+              </div>
+              <div className="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.08] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center shadow-lg backdrop-blur-sm">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-400/10 text-amber-400 mb-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                  <Headphones className="w-6 h-6" />
+                </div>
+                <p className="text-xs md:text-sm font-bold text-white leading-snug">Best Customer Support</p>
+              </div>
             </div>
           </div>
 
@@ -452,7 +477,6 @@ export default function DigitalMarketingLandingPage() {
             <h2 className="text-lg font-bold">Request a Call Back</h2>
             <form onSubmit={handleFormSubmit} className="mt-3 space-y-2.5">
               <div>
-                <label htmlFor="name" className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-600">Full Name</label>
                 <div className="relative group/input">
                   <User className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within/input:text-amber-500 transition-colors w-4 h-4" />
                   <input 
@@ -469,7 +493,6 @@ export default function DigitalMarketingLandingPage() {
                 </div>
               </div>
               <div>
-                <label htmlFor="phone" className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-600">Phone Number</label>
                 <div className="relative group/input">
                   <Phone className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within/input:text-amber-500 transition-colors w-4 h-4" />
                   <input 

@@ -37,6 +37,9 @@
   --color-brand-textSecondary: #9ca3af;
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Poppins', sans-serif;
+
+  /* Custom screen size for ultra-responsive styling on small devices */
+  --breakpoint-xs: 400px;
 }
 
 @media (prefers-color-scheme: dark) {
