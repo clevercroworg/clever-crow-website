@@ -62,6 +62,7 @@ function StatCard({ value, label, color, img }: { value: string; label: string; 
 
 export default function DigitalMarketingLandingPage() {
   const router = useRouter();
+  const whatsappUrl = "https://wa.me/919986389444?text=Hi%20Clever%20Crow%2C%20I%27m%20interested%20in%20digital%20marketing%20services.%20(Ref:%20LP/Digital-Marketing)";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAllReels, setShowAllReels] = useState(false);
   const [status, setStatus] = useState<{ loading: boolean; success: boolean; error: string | null }>({ loading: false, success: false, error: null });
@@ -412,7 +413,7 @@ export default function DigitalMarketingLandingPage() {
               <span className="hidden sm:inline">09986389444</span>
             </a>
             <a 
-              href="https://wa.me/919986389444" 
+              href={whatsappUrl} 
               onClick={trackWhatsAppClick}
               target="_blank" 
               rel="noopener noreferrer" 
@@ -673,7 +674,7 @@ export default function DigitalMarketingLandingPage() {
               09986389444
             </a>
             <a 
-              href="https://wa.me/919986389444" 
+              href={whatsappUrl} 
               onClick={trackWhatsAppClick}
               target="_blank" 
               rel="noopener noreferrer" 
@@ -788,7 +789,7 @@ export default function DigitalMarketingLandingPage() {
             09986389444
           </a>
           <a 
-            href="https://wa.me/919986389444" 
+            href={whatsappUrl} 
             onClick={trackWhatsAppClick}
             target="_blank" 
             rel="noopener noreferrer" 
@@ -817,7 +818,7 @@ export default function DigitalMarketingLandingPage() {
             Request a Call Back
           </button>
           <a 
-            href="https://wa.me/919986389444" 
+            href={whatsappUrl} 
             onClick={trackWhatsAppClick}
             target="_blank" 
             rel="noopener noreferrer" 
@@ -847,7 +848,7 @@ export default function DigitalMarketingLandingPage() {
             Get Free Callback
           </button>
           <a 
-            href="https://wa.me/919986389444" 
+            href={whatsappUrl} 
             onClick={trackWhatsAppClick}
             target="_blank" 
             rel="noopener noreferrer" 
