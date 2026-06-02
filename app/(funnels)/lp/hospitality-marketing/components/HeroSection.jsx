@@ -207,6 +207,8 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-[#0a0e0b]/80 sm:bg-[#0a0e0b]/25 z-[1]"></div>
         {/* Warm copper tint overlay on mobile for color harmony */}
         <div className="absolute inset-0 bg-[#c1781f]/8 sm:bg-transparent z-[1]"></div>
+        {/* Premium Vignette Edge Shadow Overlay */}
+        <div className="hero-vignette z-[2]"></div>
       </div>
       
       {/* Top Header Bar */}
