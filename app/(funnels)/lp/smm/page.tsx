@@ -411,7 +411,8 @@ export default function SmmLandingPage() {
               </span>
             </div>
             <h1 className="mt-3 text-[28px] leading-tight font-medium sm:text-5xl">
-              Build a Strong Brand Presence with <br className="sm:hidden" />
+              Build a Strong Brand Presence <br className="sm:hidden" />
+              with{" "}
               <span className="font-extrabold bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
                 Social Media Management
               </span>

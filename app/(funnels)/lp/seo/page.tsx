@@ -375,7 +375,8 @@ export default function SeoLandingPage() {
               </span>
             </div>
             <h1 className="mt-3 text-[28px] leading-tight font-medium sm:text-5xl">
-              Rank Higher on Google with <br className="sm:hidden" />
+              Rank Higher on Google <br className="sm:hidden" />
+              with{" "}
               <span className="font-extrabold bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
                 Result-Driven SEO Services
               </span>
