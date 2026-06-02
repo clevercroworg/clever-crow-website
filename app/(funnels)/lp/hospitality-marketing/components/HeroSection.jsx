@@ -249,13 +249,13 @@ const HeroSection = () => {
           className="flex flex-col items-center"
         >
           {/* Tagline using Barlow Condensed font, copper color accent with high-end drop shadow */}
-          <h1 className="hero-tagline text-[10.5vw] xs:text-[10vw] sm:text-[56px] md:text-[72px] lg:text-[3.8rem] xl:text-[4.4rem] 2xl:text-[5.0rem] text-white tracking-tighter uppercase leading-[1.08] mb-6 max-w-5xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
+          <h1 className="hero-tagline text-[10.5vw] xs:text-[10vw] sm:text-[56px] md:text-[72px] lg:text-[3.8rem] xl:text-[4.4rem] 2xl:text-[5.0rem] text-white tracking-tighter uppercase leading-[1.22] sm:leading-[1.08] mb-6 max-w-5xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]">
             <span className="block whitespace-nowrap">Hospitality</span>
             <span className="block whitespace-nowrap">Digital Marketing</span>
-            <span className="text-brand-accent block mt-1.5 leading-[1.05] whitespace-nowrap">
+            <span className="text-brand-accent block mt-1.5 leading-[1.18] sm:leading-[1.05] whitespace-nowrap">
               For Hotels, Resorts,
             </span>
-            <span className="text-brand-accent block leading-[1.05] whitespace-nowrap">
+            <span className="text-brand-accent block leading-[1.18] sm:leading-[1.05] whitespace-nowrap">
               Homestays & Villas
             </span>
           </h1>
