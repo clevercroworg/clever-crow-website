@@ -301,7 +301,7 @@ const HeroSection = () => {
           {/* Request a Call Back — Copper Outlined */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center justify-center gap-3.5 border border-[#c1781f]/40 hover:border-[#c1781f] bg-[#0a0e0b]/50 hover:bg-[#0a0e0b]/70 text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4 sm:py-4.5 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-[#c1781f]/10 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
+            className="flex items-center justify-center gap-3.5 border-2 border-[#c1781f]/40 hover:border-[#c1781f] bg-[#0a0e0b]/50 hover:bg-[#0a0e0b]/70 text-white font-heading text-[13px] xs:text-sm sm:text-base font-bold py-4 sm:py-4.5 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-md hover:shadow-[#c1781f]/10 tracking-wider uppercase w-full sm:w-auto shrink-0 cursor-pointer"
           >
             <Phone className="w-4.5 h-4.5 stroke-[2.5] shrink-0" />
             <span>Request a Call Back</span>
