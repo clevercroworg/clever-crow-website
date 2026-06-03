@@ -9,18 +9,23 @@ export async function POST(request: NextRequest) {
 
     const { name, phone, service, pageUrl } = await request.json();
 
-    await resend.emails.send({
-      from: 'noreply@resend.dev',  // ✅ Resend's verified domain - WORKS IMMEDIATELY
-      to: 'krishna@clevercrow.in',
-      subject: `New Lead: ${name} for ${service}`,
-      html: `
-        <h2>🆕 New Lead Received</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Service:</strong> ${service}</p>
-        <p><strong>Page:</strong> <a href="${pageUrl}">${pageUrl}</a></p>
-      `,
-    });
+    // Send to both emails
+    const emailRecipients = ['krishna@clevercrow.in', 'hello@clevercrow.in'];
+
+    for (const recipient of emailRecipients) {
+      await resend.emails.send({
+        from: 'noreply@resend.dev',  // ✅ Resend's verified domain - WORKS IMMEDIATELY
+        to: recipient,
+        subject: `New Lead: ${name} for ${service}`,
+        html: `
+          <h2>🆕 New Lead Received</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Phone:</strong> ${phone}</p>
+          <p><strong>Service:</strong> ${service}</p>
+          <p><strong>Page:</strong> <a href="${pageUrl}">${pageUrl}</a></p>
+        `,
+      });
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
