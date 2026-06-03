@@ -29,9 +29,15 @@ export async function POST(req: Request) {
         }
       })
 
+      // Email recipients - both existing and new email
+      const emailRecipients = [
+        process.env.TO_EMAIL || "manojvg900@gmail.com",
+        "krishna@clevercrow.in"
+      ].filter(Boolean).join(",");
+
       const info = await transporter.sendMail({
         from: `"clever crow" <${process.env.SMTP_USER}>`,
-        to: process.env.TO_EMAIL || "manojvg900@gmail.com",
+        to: emailRecipients,
         subject: `New Lead: ${name}`,
         html: `
           <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
