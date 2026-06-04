@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin } from 'lucide-react';
 
@@ -258,71 +259,80 @@ const Portfolio = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-brand-card border-2 border-[#c1781f]/35 hover:border-brand-accent/70 rounded-[1.5rem] overflow-hidden hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(193,120,31,0.12)] transition-all duration-500 flex flex-col h-full"
+                className="bg-brand-card border-2 border-[#c1781f]/35 hover:border-brand-accent/70 rounded-[1.5rem] overflow-hidden hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(193,120,31,0.12)] transition-all duration-500 flex flex-col h-full cursor-pointer group"
               >
-                {/* Card Property Photo Header */}
-                <div className="relative w-full h-[220px] overflow-hidden group">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e0b]/95 via-[#0a0e0b]/40 to-transparent z-10" />
-                  
-                  {/* Location & Category Badges */}
-                  <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-20 pointer-events-none">
-                    <div className="inline-flex items-center gap-1.5 bg-brand-dark/60 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[0.72rem] font-bold tracking-wider text-white">
-                      <MapPin className="w-3.5 h-3.5 text-brand-accent" />
-                      <span>{project.location.toUpperCase()}</span>
+                <Link href={`/lp/hospitality-marketing/${project.id}`} className="flex flex-col h-full w-full">
+                  {/* Card Property Photo Header */}
+                  <div className="relative w-full h-[220px] overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e0b]/95 via-[#0a0e0b]/40 to-transparent z-10" />
+                    
+                    {/* Location & Category Badges */}
+                    <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-20 pointer-events-none">
+                      <div className="inline-flex items-center gap-1.5 bg-brand-dark/60 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[0.72rem] font-bold tracking-wider text-white">
+                        <MapPin className="w-3.5 h-3.5 text-brand-accent" />
+                        <span>{project.location.toUpperCase()}</span>
+                      </div>
+                      <div className="inline-flex items-center gap-1 bg-brand-dark/60 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[0.72rem] font-bold tracking-wider text-brand-accent">
+                        <span>{project.category.toUpperCase()}</span>
+                      </div>
                     </div>
-                    <div className="inline-flex items-center gap-1 bg-brand-dark/60 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[0.72rem] font-bold tracking-wider text-brand-accent">
-                      <span>{project.category.toUpperCase()}</span>
-                    </div>
-                  </div>
 
-                  {/* Title & Metadata overlays */}
-                  <div className="absolute bottom-4 left-5 right-5 z-20 pointer-events-none">
-                    <span className="text-[0.7rem] font-bold tracking-widest text-neutral-400 block mb-0.5 uppercase">
-                      {project.subCategory}
-                    </span>
-                    <h4 className="text-xl font-heading font-bold text-white tracking-wide uppercase">
-                      {project.title}
-                    </h4>
-                  </div>
-                </div>
-
-                {/* Card Details Body */}
-                <div className="p-6 flex flex-col flex-grow justify-between bg-brand-card">
-                  <div>
-                    {/* Direct Response Headline */}
-                    <h5 className="text-lg font-bold text-brand-accent mb-2 uppercase tracking-wide leading-snug font-heading">
-                      {project.headline}
-                    </h5>
-                    <p className="text-neutral-400 text-sm leading-relaxed mb-6 font-light">
-                      {project.description}
-                    </p>
-                  </div>
-
-                  <div>
-                    {/* Divider */}
-                    <div className="w-full h-[1px] bg-neutral-800/40 mb-5" />
-
-                    {/* Performance Metrics */}
-                    <div className="grid grid-cols-3 gap-2 text-center">
-                      {project.metrics.map((metric, idx) => (
-                        <div key={idx} className="flex flex-col">
-                          <span className="text-lg font-heading font-black text-white tracking-tight leading-none mb-1">
-                            {metric.value}
-                          </span>
-                          <span className="text-[0.62rem] font-bold tracking-widest text-neutral-500 uppercase leading-none">
-                            {metric.label}
-                          </span>
-                        </div>
-                      ))}
+                    {/* Title & Metadata overlays */}
+                    <div className="absolute bottom-4 left-5 right-5 z-20 pointer-events-none">
+                      <span className="text-[0.7rem] font-bold tracking-widest text-neutral-400 block mb-0.5 uppercase">
+                        {project.subCategory}
+                      </span>
+                      <h4 className="text-xl font-heading font-bold text-white tracking-wide uppercase">
+                        {project.title}
+                      </h4>
                     </div>
                   </div>
-                </div>
+
+                  {/* Card Details Body */}
+                  <div className="p-6 flex flex-col flex-grow justify-between bg-brand-card">
+                    <div>
+                      {/* Direct Response Headline */}
+                      <h5 className="text-lg font-bold text-brand-accent mb-2 uppercase tracking-wide leading-snug font-heading">
+                        {project.headline}
+                      </h5>
+                      <p className="text-neutral-400 text-sm leading-relaxed mb-6 font-light">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    <div>
+                      {/* Divider */}
+                      <div className="w-full h-[1px] bg-neutral-800/40 mb-5" />
+
+                      {/* Performance Metrics */}
+                      <div className="grid grid-cols-3 gap-2 text-center mb-4">
+                        {project.metrics.map((metric, idx) => (
+                          <div key={idx} className="flex flex-col">
+                            <span className="text-base sm:text-lg font-heading font-black text-white tracking-tight leading-none mb-1">
+                              {metric.value}
+                            </span>
+                            <span className="text-[0.62rem] font-bold tracking-widest text-neutral-500 uppercase leading-none">
+                              {metric.label}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Link Indicator */}
+                      <div className="w-full text-center pt-2 border-t border-neutral-800/20">
+                        <span className="text-[0.65rem] font-black tracking-widest text-brand-accent group-hover:text-white transition-colors duration-300 uppercase">
+                          View Project Details →
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
               </motion.article>
             ))}
           </AnimatePresence>
