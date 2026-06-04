@@ -102,7 +102,7 @@ export default function ProjectDetailsPage({ params }) {
           <div className="lg:col-span-7 flex flex-col justify-center items-start text-left lg:pr-12 space-y-4">
             <div className="space-y-2">
               <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[2.6rem] xl:text-[3.2rem] text-white uppercase hero-heading leading-[1.1] tracking-wide">
-                Growth Story Of <br />
+                Growth Story Of <br className="lg:hidden" />{" "}
                 <span className="text-[#8ea800]">{project.title}</span>
               </h1>
               <p className="font-body text-sm sm:text-base text-white max-w-xl font-light leading-relaxed">
