@@ -101,7 +101,7 @@ const ReviewFormSection = () => {
       const payload = {
         name: formData.contactName,
         phone: formData.phone,
-        email: `${formData.contactName.toLowerCase().replace(/\s+/g, '')}@clevercrow-lead.in`,
+        email: "",
         message: `Property Growth Review Request\nProperty Type: ${formData.propertyType}`,
         source: "Hospitality Landing Page"
       };

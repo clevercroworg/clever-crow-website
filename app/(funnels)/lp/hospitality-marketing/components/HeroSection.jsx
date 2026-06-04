@@ -87,7 +87,7 @@ const HeroSection = () => {
       const payload = {
         name: formData.contactName,
         phone: formData.phone,
-        email: `${formData.contactName.toLowerCase().replace(/\s+/g, '')}@clevercrow-lead.in`,
+        email: "",
         message: `New enquiry received. Source Page: Hospitality Marketing Landing Page. Referrer/Landed URL: ${currentUrl}\nProperty Type: ${formData.propertyType}`,
         source: "Hospitality Marketing Landing Page"
       };

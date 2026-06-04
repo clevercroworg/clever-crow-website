@@ -155,7 +155,7 @@ export default function DigitalMarketingLandingPage() {
       body: JSON.stringify({
         name,
         phone,
-        email: `${name.toLowerCase().replace(/\s+/g, '')}@clevercrow-lead.in`,
+        email: "",
         message: `New enquiry received. Source Page: ${source}. Referrer/Landed URL: ${currentUrl}`,
         source: source
       })
