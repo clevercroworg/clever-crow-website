@@ -111,21 +111,21 @@ export default function ProjectDetailsPage({ params }) {
             </div>
 
             {/* Specifications and Tags Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-xl pt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl pt-1">
               
               {/* Specifications Card */}
               <div className="bg-[#131915]/80 backdrop-blur-md border border-[#2a332d] rounded-xl p-4 space-y-3">
                 <h4 className="text-xs font-black uppercase tracking-wider text-neutral-400">SPECIFICATIONS</h4>
                 <div className="space-y-2.5">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b border-neutral-800/40 pb-2 gap-1 sm:gap-4">
-                    <span className="text-neutral-500 text-[10px] sm:text-xs uppercase tracking-wider font-semibold">Capacity</span>
-                    <span className="font-bold text-white text-xs sm:text-[11px] lg:text-xs xl:text-sm sm:text-right sm:whitespace-nowrap">
+                    <span className="text-neutral-500 text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold">Capacity</span>
+                    <span className="font-bold text-white text-xs sm:text-[11px] lg:text-[11px] xl:text-xs sm:text-right sm:whitespace-nowrap">
                       {project.propertySpecs.capacity}
                     </span>
                   </div>
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-4">
-                    <span className="text-neutral-500 text-[10px] sm:text-xs uppercase tracking-wider font-semibold">Commission</span>
-                    <span className="font-bold text-[#8ea800] text-xs sm:text-[11px] lg:text-xs xl:text-sm sm:text-right sm:whitespace-nowrap">
+                    <span className="text-neutral-500 text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold">Commission</span>
+                    <span className="font-bold text-[#8ea800] text-xs sm:text-[11px] lg:text-[11px] xl:text-xs sm:text-right sm:whitespace-nowrap">
                       {project.propertySpecs.commission}
                     </span>
                   </div>
