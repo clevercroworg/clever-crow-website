@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     "See how Clever Crow Strategies helped brands grow with ROI-driven Google Ads, Meta Ads, and SEO campaigns. Real results, real growth.",
   keywords:
     "case studies, success stories, Google Ads results, Meta Ads ROI, SEO growth, performance marketing, digital marketing results",
+  robots: "noindex, nofollow",
 };
 
 export default function SuccessStoriesPage() {
