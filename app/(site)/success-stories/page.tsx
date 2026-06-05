@@ -1,5 +1,12 @@
 import { Metadata } from "next";
+import { Manrope } from "next/font/google";
 import SuccessStoriesClient from "./SuccessStoriesClient";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-manrope",
+});
 
 export const metadata: Metadata = {
   title: "Success Stories | Clever Crow Strategies",
@@ -10,5 +17,10 @@ export const metadata: Metadata = {
 };
 
 export default function SuccessStoriesPage() {
-  return <SuccessStoriesClient />;
+  return (
+    <div className={`${manrope.className} font-sans`}>
+      <SuccessStoriesClient />
+    </div>
+  );
 }
+

@@ -328,10 +328,15 @@ export default function SuccessStoriesClient() {
   const benchmarks = modalCase ? getBenchmarksForIndustry(modalCase.industry) : [];
 
   return (
-    <main className="success-stories-page">
+    <main
+      className="success-stories-page min-h-screen pt-32 lg:pt-40 pb-20 relative selection:bg-blue-500/30"
+      style={{
+        background: "radial-gradient(circle at 10% 10%, #eff6ff 0%, #f8fafc 35%, #ffffff 100%)",
+      }}
+    >
       {/* ─── HERO + FORM ─── */}
-      <section className="mx-auto mt-10 grid max-w-7xl grid-cols-1 gap-6 px-4 sm:px-6 lg:mt-14 lg:grid-cols-12 lg:gap-8 lg:px-8">
-        <div className="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-blue-700 p-7 text-white shadow-lg lg:col-span-8 lg:p-10">
+      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:px-8">
+        <div className="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-blue-800 p-7 text-white shadow-[0_12px_40px_rgba(2,6,23,0.08)] lg:col-span-8 lg:p-10">
           <p className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1 text-xs font-bold uppercase tracking-[0.2em] text-blue-100">
             <IconSparkles />
             Growth Marketing Partner
@@ -353,7 +358,7 @@ export default function SuccessStoriesClient() {
           </div>
         </div>
 
-        <aside className="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg lg:col-span-4">
+        <aside className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_12px_40px_rgba(2,6,23,0.08)] lg:col-span-4">
           <h2 className="text-xl font-bold">Request a Call Back</h2>
           <p className="mt-2 text-sm text-slate-600">Drop your details and our growth team will contact you shortly.</p>
 
@@ -364,7 +369,7 @@ export default function SuccessStoriesClient() {
               required
               value={formData.name}
               onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
-              className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
             />
             <input
               type="tel"
@@ -372,12 +377,12 @@ export default function SuccessStoriesClient() {
               required
               value={formData.phone}
               onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
-              className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
             />
             <button
               type="submit"
               disabled={formStatus === "sending"}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:opacity-60"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-700 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-800 disabled:opacity-60"
             >
               <IconSend />
               {formStatus === "sending" ? "Sending..." : formStatus === "sent" ? "Submitted ✓" : "Submit Request"}
@@ -400,12 +405,12 @@ export default function SuccessStoriesClient() {
 
       {/* ─── STATS ─── */}
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-lg">
+        <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-[0_12px_40px_rgba(2,6,23,0.08)]">
           <h2 className="text-3xl font-extrabold">Performance That Speaks</h2>
           <div className="mt-8 grid grid-cols-2 gap-5 md:grid-cols-4">
             {[
               { icon: <IconCash />, value: "₹1.2Cr+", label: "Ad Spend Managed" },
-              { icon: <IconTrending />, value: "4.7×", label: "Average ROI" },
+              { icon: <IconTrending />, value: "4.7\u00D7", label: "Average ROI" },
               { icon: <IconRocket />, value: "250+", label: "Campaigns" },
               { icon: <IconPeople />, value: "180+", label: "Happy Clients" },
             ].map((stat) => (
@@ -422,7 +427,7 @@ export default function SuccessStoriesClient() {
       {/* ─── CASE STUDIES ─── */}
       <section className="mx-auto mt-4 max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">Case Studies</p>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Case Studies</p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Success Stories by Platform</h2>
         </div>
 
@@ -440,8 +445,8 @@ export default function SuccessStoriesClient() {
               onClick={() => setActiveCategory(tab.key)}
               className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold shadow-sm transition ${
                 activeCategory === tab.key
-                  ? "border-blue-600 bg-blue-600 text-white"
-                  : "border-slate-200 bg-white text-slate-700 hover:border-blue-500 hover:text-blue-700"
+                  ? "border-blue-700 bg-blue-700 text-white"
+                  : "border-slate-200 bg-white text-slate-700 hover:border-blue-600 hover:text-blue-700"
               }`}
             >
               {tab.icon}
@@ -455,8 +460,7 @@ export default function SuccessStoriesClient() {
           {filteredCases.map((item) => (
             <article
               key={item.id}
-              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-              style={{ animation: "fadeUp 0.35s ease both" }}
+              className="case-card-animated group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(2,6,23,0.08)]"
             >
               <div className="relative overflow-hidden">
                 <Image
@@ -464,7 +468,7 @@ export default function SuccessStoriesClient() {
                   alt={item.name}
                   width={400}
                   height={170}
-                  className="h-[170px] w-full object-cover transition-transform duration-300 group-hover:scale-[1.06]"
+                  className="h-[170px] w-full object-cover transition-all duration-300 group-hover:scale-[1.06] group-hover:saturate-[1.08] group-hover:contrast-[1.05]"
                 />
                 <span className="absolute bottom-3.5 left-3.5 z-[2] inline-flex items-center gap-1 rounded-full border border-white/50 bg-slate-900/50 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
                   <IconPulse />
@@ -490,11 +494,11 @@ export default function SuccessStoriesClient() {
                   <span className="ml-1 rounded-md bg-emerald-100 px-2 py-1 text-xs text-emerald-700">{item.badge}</span>
                 </p>
                 <div className="mt-4 flex items-center justify-between">
-                  <span className="text-xs text-slate-500">{item.platform} · {item.period}</span>
+                  <span className="text-xs text-slate-500">{item.platform} \u00B7 {item.period}</span>
                   <button
                     type="button"
                     onClick={() => openModal(item)}
-                    className="inline-flex items-center gap-1 text-sm font-bold text-blue-700 hover:text-blue-600"
+                    className="inline-flex items-center gap-1 text-sm font-bold text-blue-800 hover:text-blue-700"
                   >
                     Know More
                     <IconArrow />
@@ -512,7 +516,7 @@ export default function SuccessStoriesClient() {
 
       {/* ─── BOTTOM CTA ─── */}
       <section className="mx-auto mb-16 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl bg-gradient-to-r from-blue-700 to-slate-900 px-8 py-12 text-center text-white shadow-lg">
+        <div className="rounded-3xl bg-gradient-to-r from-blue-800 to-slate-900 px-8 py-12 text-center text-white shadow-[0_12px_40px_rgba(2,6,23,0.08)]">
           <h2 className="text-3xl font-extrabold">Your Brand Could Be Our Next Success Story</h2>
           <a
             href="tel:+919986389444"
@@ -538,7 +542,7 @@ export default function SuccessStoriesClient() {
                 <div>
                   <h3 className="text-xl font-extrabold sm:text-2xl">{modalCase.name}</h3>
                   <p className="mt-1 text-sm text-slate-500">
-                    {modalCase.industry} · {modalCase.location} · {modalCase.platform}
+                    {modalCase.industry} \u00B7 {modalCase.location} \u00B7 {modalCase.platform}
                   </p>
                 </div>
                 <button type="button" onClick={closeModal} className="rounded-lg p-2 text-slate-600 transition hover:bg-slate-100">
@@ -574,13 +578,13 @@ export default function SuccessStoriesClient() {
               {/* Objective + Strategy */}
               <div className="mt-5 grid gap-5 lg:grid-cols-2">
                 <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">Campaign Objective</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Campaign Objective</p>
                   <p className="mt-2 text-sm leading-relaxed text-slate-700">
                     {playbook.objective} {modalCase.description}
                   </p>
                 </div>
                 <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">Execution Strategy</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Execution Strategy</p>
                   <ul className="mt-2 space-y-2 text-sm text-slate-700">
                     {playbook.strategy.map((point, i) => (
                       <li key={i} className="flex items-start gap-2">
@@ -594,7 +598,7 @@ export default function SuccessStoriesClient() {
 
               {/* Channel Stack */}
               <div className="mt-5 rounded-xl border border-slate-200 p-4">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">Channel Stack</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Channel Stack</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {playbook.channels.map((ch) => (
                     <span key={ch} className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700">
@@ -607,7 +611,7 @@ export default function SuccessStoriesClient() {
               {/* Benchmarks */}
               <div className="mt-5 rounded-xl border border-slate-200 p-4">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">Indicative Industry Benchmarks</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Indicative Industry Benchmarks</p>
                   <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-700">Reference Data</span>
                 </div>
                 <div className="mt-3 grid gap-3 sm:grid-cols-3">
@@ -626,10 +630,13 @@ export default function SuccessStoriesClient() {
       )}
 
       {/* ─── INLINE STYLES ─── */}
-      <style jsx>{`
-        @keyframes fadeUp {
+      <style>{`
+        @keyframes caseFadeUp {
           from { opacity: 0; transform: translateY(8px); }
           to   { opacity: 1; transform: translateY(0); }
+        }
+        .case-card-animated {
+          animation: caseFadeUp 0.35s ease both;
         }
       `}</style>
     </main>
