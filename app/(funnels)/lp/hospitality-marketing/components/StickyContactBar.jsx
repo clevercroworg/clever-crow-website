@@ -24,24 +24,30 @@ const StickyContactBar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const trackCallClick = () => {
+  const trackCallClick = (e) => {
     if (typeof window !== 'undefined') {
-      if (window.gtag) {
-        window.gtag('event', 'click', {
-          'event_category': 'Contact',
-          'event_label': 'Sticky Bar Call Click',
-          'phone_number': '09986389444'
-        });
-        window.gtag('event', 'Contact', {
-          'phone_number': '09986389444',
-          'method': 'Phone'
-        });
-      }
-      if (window.fbq) {
-        window.fbq('track', 'Contact', {
-          'content_name': 'Sticky Bar Call Click',
-          'phone_number': '09986389444'
-        });
+      if (window.gtag_report_conversion) {
+        if (e && e.preventDefault) e.preventDefault();
+        const href = e && e.currentTarget ? e.currentTarget.href : 'tel:09986389444';
+        window.gtag_report_conversion(href);
+      } else {
+        if (window.gtag) {
+          window.gtag('event', 'click', {
+            'event_category': 'Contact',
+            'event_label': 'Sticky Bar Call Click',
+            'phone_number': '09986389444'
+          });
+          window.gtag('event', 'Contact', {
+            'phone_number': '09986389444',
+            'method': 'Phone'
+          });
+        }
+        if (window.fbq) {
+          window.fbq('track', 'Contact', {
+            'content_name': 'Sticky Bar Call Click',
+            'phone_number': '09986389444'
+          });
+        }
       }
     }
   };

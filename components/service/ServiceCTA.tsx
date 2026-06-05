@@ -21,11 +21,16 @@ export default function ServiceCTA() {
           {/* PHONE */}
           <a
             href={`tel:${CONTACT.phone}`}
-            onClick={() => {
-              if (typeof window !== "undefined" && (window as any).gtag) {
-                (window as any).gtag("event", "conversion", {
-                  send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
-                });
+            onClick={(e) => {
+              if (typeof window !== "undefined") {
+                if ((window as any).gtag_report_conversion) {
+                  e.preventDefault();
+                  (window as any).gtag_report_conversion(e.currentTarget.getAttribute("href") || "");
+                } else if ((window as any).gtag) {
+                  (window as any).gtag("event", "conversion", {
+                    send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+                  });
+                }
               }
             }}
             className="

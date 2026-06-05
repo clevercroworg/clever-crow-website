@@ -30,20 +30,31 @@ export default function PPCHero({
     setError("");
 
     const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const phone = formData.get("phone") as string;
+    const pageUrl = typeof window !== "undefined" ? window.location.href : "";
 
     try {
-      const response = await fetch("/api/send-lead-email", {
+      const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: formData.get("name"),
-          phone: formData.get("phone"),
-          service: serviceName,
-          pageUrl: window.location.href,
+          name,
+          phone,
+          email: "",
+          message: `PPC Hero Callback. Service: ${serviceName}. Referrer/Landed URL: ${pageUrl}`,
+          source: `PPC Hero Form: ${serviceName}`,
         }),
       });
 
       if (!response.ok) throw new Error("Failed");
+
+      // Fire Google Ads conversion tracking
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
+        });
+      }
 
       window.location.href = "/thank-you";
     } catch {

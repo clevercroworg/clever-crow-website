@@ -7,6 +7,19 @@ function ThankYouContent() {
   const searchParams = useSearchParams();
   const source = searchParams.get("source");
 
+  const trackCallClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window !== "undefined") {
+      if ((window as any).gtag_report_conversion) {
+        e.preventDefault();
+        (window as any).gtag_report_conversion(e.currentTarget.href);
+      } else if ((window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+        });
+      }
+    }
+  };
+
   return (
     <section className="min-h-[70vh] flex items-center justify-center px-4 text-center">
       <div>
@@ -26,6 +39,7 @@ function ThankYouContent() {
 
         <a
           href="tel:+919986389444"
+          onClick={trackCallClick}
           className="inline-block bg-black text-white px-6 py-3 rounded font-semibold"
         >
           Call Us Now

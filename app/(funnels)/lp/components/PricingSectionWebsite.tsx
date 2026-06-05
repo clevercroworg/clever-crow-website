@@ -3,6 +3,19 @@
 import React from "react";
 
 export default function PricingSectionWebsite() {
+  const trackCallClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window !== "undefined") {
+      if ((window as any).gtag_report_conversion) {
+        e.preventDefault();
+        (window as any).gtag_report_conversion(e.currentTarget.href);
+      } else if ((window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+        });
+      }
+    }
+  };
+
   return (
     <section id="pricing" className="pricing-light-section py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -58,7 +71,7 @@ export default function PricingSectionWebsite() {
           </article>
         </div>
         <div className="package-quote-line">
-          <p>Need a broader scope or custom plan? <a href="tel:+919986389444">Call us for a custom quote</a>.</p>
+          <p>Need a broader scope or custom plan? <a href="tel:+919986389444" onClick={trackCallClick}>Call us for a custom quote</a>.</p>
         </div>
       </div>
     </section>

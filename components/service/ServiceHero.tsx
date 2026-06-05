@@ -39,18 +39,36 @@ export default function ServiceHero({
     setIsLoading(true);
     setError("");
     const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const phone = formData.get("phone") as string;
+    const pageUrl = typeof window !== "undefined" ? window.location.href : "";
+
     try {
-      const response = await fetch("/api/send-lead-email", {
+      const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: formData.get("name"),
-          phone: formData.get("phone"),
-          service: serviceName,
-          pageUrl: window.location.href,
+          name,
+          phone,
+          email: "",
+          message: `Enquiry for service: ${serviceName}. Referrer/Landed URL: ${pageUrl}`,
+          source: `Service Page: ${serviceName}`,
         }),
       });
+
       if (!response.ok) throw new Error("Failed to send");
+
+      // Fire Google Ads conversion tracking
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
+        });
+        (window as any).gtag("event", "GenerateLead", {
+          event_category: "Leads",
+          event_label: "Service Lead Form Submit",
+        });
+      }
+
       window.location.href = "/thank-you";
     } catch {
       setError("Failed to send request. Please try again.");

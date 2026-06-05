@@ -53,16 +53,16 @@ const defaultPricing: PricingMeta = {
 export default function PricingSection({ data }: PricingSectionProps) {
   const pricing = data ?? defaultPricing;
 
-  const trackCallClick = () => {
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "conversion", {
-        send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
-      });
-      (window as any).gtag("event", "click", {
-        event_category: "Contact",
-        event_label: "Pricing Custom Quote Call Click",
-        phone_number: "+919986389444",
-      });
+  const trackCallClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window !== "undefined") {
+      if ((window as any).gtag_report_conversion) {
+        e.preventDefault();
+        (window as any).gtag_report_conversion(e.currentTarget.href);
+      } else if ((window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+        });
+      }
     }
   };
 

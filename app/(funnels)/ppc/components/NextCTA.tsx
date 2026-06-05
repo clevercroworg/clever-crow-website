@@ -1,4 +1,21 @@
+"use client";
+
+import React from "react";
+
 export default function NextCTA() {
+  const trackCallClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window !== "undefined") {
+      if ((window as any).gtag_report_conversion) {
+        e.preventDefault();
+        (window as any).gtag_report_conversion(e.currentTarget.href);
+      } else if ((window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+        });
+      }
+    }
+  };
+
   return (
     <section className="relative py-20 sm:py-24 bg-[#fafafa] overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -64,6 +81,7 @@ export default function NextCTA() {
               {/* Phone */}
               <a
                 href="tel:09986389444"
+                onClick={trackCallClick}
                 className="
                   w-full sm:w-auto md:w-full
                   inline-flex items-center justify-center gap-3

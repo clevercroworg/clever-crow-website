@@ -12,22 +12,37 @@ export default function QuoteModal() {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const budget = formData.get("budget") as string;
+    const message = formData.get("message") as string;
 
     try {
-      await fetch("/api/ppc-lead", {
+      const response = await fetch("/api/leads", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          name: formData.get("name"),
-          email: formData.get("email"),
-          phone: formData.get("phone"),
-          budget: formData.get("budget"),
-          message: formData.get("message"),
-          source: "ppc-digital-marketing-quote"
+          name,
+          phone,
+          email,
+          message: `PPC Custom Quote Request. Budget: ${budget || "Not specified"}\nMessage: ${message || "Interested in services"}`,
+          source: "PPC Landing Page (Quote Modal)"
         })
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit");
+      }
+
+      // Fire Google Ads conversion tracking
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
+        });
+      }
 
       window.location.href = "/ppc/thank-you?source=custom-quote";
     } catch (err) {

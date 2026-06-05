@@ -11,20 +11,35 @@ export default function InlineForm() {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
+    const name = formData.get("name") as string;
+    const phone = formData.get("phone") as string;
+    const businessType = formData.get("businessType") as string;
 
     try {
-      await fetch("/api/ppc-lead", {
+      const response = await fetch("/api/leads", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          name: formData.get("name"),
-          phone: formData.get("phone"),
-          businessType: formData.get("businessType"),
-          source: "ppc-digital-marketing"
+          name,
+          phone,
+          email: "",
+          message: `PPC Enquiry Callback. Business Type: ${businessType || "Not specified"}`,
+          source: "PPC Landing Page"
         })
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit");
+      }
+
+      // Fire Google Ads conversion tracking
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
+        });
+      }
 
       window.location.href = "/ppc/thank-you?source=digital-marketing";
     } catch (err) {

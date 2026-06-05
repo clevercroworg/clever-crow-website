@@ -1,6 +1,22 @@
+"use client";
+
+import React from "react";
 import { IconPhone, IconBrandWhatsapp } from "@tabler/icons-react";
 
 export default function MobileStickyCTA() {
+  const trackCallClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window !== "undefined") {
+      if ((window as any).gtag_report_conversion) {
+        e.preventDefault();
+        (window as any).gtag_report_conversion(e.currentTarget.href);
+      } else if ((window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+        });
+      }
+    }
+  };
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
       <div className="flex border-t border-black/10 bg-white">
@@ -8,6 +24,7 @@ export default function MobileStickyCTA() {
         {/* Call */}
         <a
           href="tel:09986389444"
+          onClick={trackCallClick}
           className="flex w-1/2 items-center justify-center gap-2 py-4 text-sm font-medium text-black active:bg-black/5"
         >
           <IconPhone size={20} stroke={1.8} />
