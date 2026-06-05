@@ -220,12 +220,16 @@
         window.location = url;
       }
     };
-    gtag('event', 'conversion', {
-        'send_to': 'AW-17335403082/ul0ECKr5i_QaEMqElcpA',
-        'value': 200.0,
-        'currency': 'INR',
-        'event_callback': callback
-    });
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'conversion', {
+          'send_to': 'AW-17335403082/ul0ECKr5i_QaEMqElcpA',
+          'value': 200.0,
+          'currency': 'INR',
+          'event_callback': callback
+      });
+    } else {
+      callback();
+    }
     return false;
   }
   </script>
@@ -238,7 +242,7 @@
         <img src="images/logo-dark.svg" alt="Clevercrow" class="h-11 w-auto" />
       </a>
       <div class="flex items-center gap-2">
-        <a href="tel:09986389444" class="inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-4 py-2 text-sm font-bold text-slate-900 shadow-sm transition hover:bg-[#d99a00]">
+        <a href="tel:09986389444" onclick="return gtag_report_conversion('tel:09986389444');" class="inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-4 py-2 text-sm font-bold text-slate-900 shadow-sm transition hover:bg-[#d99a00]">
           <ion-icon name="call" class="text-base"></ion-icon>
           <span class="hidden sm:inline">09986389444</span>
         </a>
@@ -546,7 +550,7 @@
       <h2 class="text-3xl font-extrabold sm:text-4xl">Grow Your Business with Digital Marketing</h2>
       <p class="mt-3 text-slate-200">SEO, Social Media, Google Ads, and conversion-focused strategy.</p>
       <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a href="tel:09986389444" class="inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-6 py-3 font-bold text-slate-900 transition hover:bg-[#d99a00]"><ion-icon name="call"></ion-icon>09986389444</a>
+        <a href="tel:09986389444" onclick="return gtag_report_conversion('tel:09986389444');" class="inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-6 py-3 font-bold text-slate-900 transition hover:bg-[#d99a00]"><ion-icon name="call"></ion-icon>09986389444</a>
         <a href="https://wa.me/919986389444" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 font-bold text-white transition hover:bg-emerald-400"><ion-icon name="logo-whatsapp"></ion-icon>Chat with Us on WhatsApp</a>
       </div>
     </div>
@@ -635,7 +639,7 @@
   <footer class="bg-slate-900 py-10 text-center text-white">
     <h3 class="text-2xl font-extrabold">Start Building Your Digital Presence Today</h3>
     <div class="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
-      <a href="tel:09986389444" class="inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-6 py-3 font-bold text-slate-900 transition hover:bg-[#d99a00]"><ion-icon name="call"></ion-icon>09986389444</a>
+      <a href="tel:09986389444" onclick="return gtag_report_conversion('tel:09986389444');" class="inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-6 py-3 font-bold text-slate-900 transition hover:bg-[#d99a00]"><ion-icon name="call"></ion-icon>09986389444</a>
       <a href="https://wa.me/919986389444" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 font-bold text-white"><ion-icon name="logo-whatsapp"></ion-icon>Chat with Us on WhatsApp</a>
     </div>
     <p class="mt-6 text-sm text-slate-400">Clever Crow Strategies LLP. © All rights reserved.</p>
@@ -644,7 +648,7 @@
 
   <div class="fixed inset-x-0 bottom-4 z-50 px-4 sm:px-6 lg:px-8">
     <div class="mx-auto flex w-fit items-center justify-center gap-3 rounded-full border border-slate-200 bg-white/95 px-4 py-3 shadow-lg backdrop-blur">
-      <a href="tel:09986389444" class="inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-[#d99a00]" aria-label="Call now">
+      <a href="tel:09986389444" onclick="return gtag_report_conversion('tel:09986389444');" class="inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-[#d99a00]" aria-label="Call now">
         <ion-icon name="call" class="text-base"></ion-icon>
         09986389444
       </a>
