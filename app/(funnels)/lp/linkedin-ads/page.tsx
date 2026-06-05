@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Script from "next/script";
 import "../lp.css";
 
 // Components
@@ -114,27 +113,6 @@ export default function LinkedInAdsLandingPage() {
 
   return (
     <main className="landing-page-container">
-      {/* Google tag (gtag.js) */}
-      <Script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=AW-17335403082"
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'AW-17335403082');
-
-          // Phone conversion tracking configuration
-          gtag('config', 'AW-17335403082/uHSsCKf5i_QaEMqElcpA', {
-            'phone_conversion_number': '09986389444'
-          });
-        `}
-      </Script>
-
       <div className="site-shell">
         <Header />
         <main id="top">

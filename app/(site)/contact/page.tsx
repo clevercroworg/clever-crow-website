@@ -8,15 +8,10 @@ import { motion } from "framer-motion";
 
 export default function ContactPage() {
   const trackCallClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (typeof window !== "undefined") {
-      if ((window as any).gtag_report_conversion) {
-        e.preventDefault();
-        (window as any).gtag_report_conversion(e.currentTarget.href);
-      } else if ((window as any).gtag) {
-        (window as any).gtag("event", "conversion", {
-          send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
-        });
-      }
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "conversion", {
+        send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+      });
     }
   };
 

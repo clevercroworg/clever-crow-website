@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import Script from 'next/script';
 import { 
   Phone, Award, Users, Headphones, Sparkles, CheckCircle, 
   ShieldCheck, User, Send, ArrowRight, X, ChevronDown,
@@ -355,27 +354,6 @@ export default function SmmLandingPage() {
 
   return (
     <div className="bg-slate-50 pb-24 text-slate-800 hospitality-funnel">
-      {/* Google tag (gtag.js) */}
-      <Script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=AW-17335403082"
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'AW-17335403082');
-
-          // Phone conversion tracking configuration
-          gtag('config', 'AW-17335403082/uHSsCKf5i_QaEMqElcpA', {
-            'phone_conversion_number': '09986389444'
-          });
-        `}
-      </Script>
-
       {/* Navbar */}
       <nav className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
