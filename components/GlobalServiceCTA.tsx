@@ -31,6 +31,13 @@ export default function GlobalServiceCTA() {
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="tel:+919986389444"
+              onClick={() => {
+                if (typeof window !== "undefined" && (window as any).gtag) {
+                  (window as any).gtag("event", "conversion", {
+                    send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+                  });
+                }
+              }}
               className="inline-flex min-w-[220px] items-center justify-center rounded-xl bg-yellow-400 px-6 py-3 text-base font-medium text-black transition hover:bg-yellow-300"
             >
               Call Now

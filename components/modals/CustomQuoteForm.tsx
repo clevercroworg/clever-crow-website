@@ -39,6 +39,17 @@ export default function CustomQuoteForm({ onClose }: Props) {
 
       if (!res.ok) throw new Error("Failed")
 
+      // Fire Google Ads conversion tracking
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
+        });
+        (window as any).gtag("event", "GenerateLead", {
+          event_category: "Leads",
+          event_label: "Lead Form Submit",
+        });
+      }
+
       setSuccess(true)
       form.reset()
 

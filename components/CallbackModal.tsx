@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { XMarkIcon, PhoneIcon } from "@heroicons/react/24/outline";
 
 export default function CallbackModal({
@@ -9,7 +11,68 @@ export default function CallbackModal({
   open: boolean;
   onClose: () => void;
 }) {
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [statusMsg, setStatusMsg] = useState("");
+
   if (!open) return null;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !phone) {
+      setStatusMsg("Please enter both name and phone number.");
+      return;
+    }
+    setLoading(true);
+    setStatusMsg("");
+
+    try {
+      const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+      const currentTitle = typeof window !== "undefined" ? document.title : "";
+      const source = currentTitle || "Main Site Callback Modal";
+
+      const message = `Callback Request Details:
+- Referrer/Landed URL: ${currentUrl}`;
+
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          email: "",
+          message,
+          source,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong. Please try again.");
+      }
+
+      // Fire Google Ads conversion tracking
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
+        });
+        (window as any).gtag("event", "GenerateLead", {
+          event_category: "Leads",
+          event_label: "Lead Form Submit",
+        });
+      }
+
+      setName("");
+      setPhone("");
+      onClose();
+      router.push("/thank-you");
+    } catch (err: any) {
+      setStatusMsg(err.message || "An error occurred.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 backdrop-blur-sm">
@@ -45,7 +108,7 @@ export default function CallbackModal({
           </p>
 
           {/* FORM */}
-          <form className="mt-6 space-y-4">
+          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Your Name
@@ -54,6 +117,9 @@ export default function CallbackModal({
                 type="text"
                 required
                 placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                disabled={loading}
                 className="w-full rounded-md border border-gray-300 px-3 py-2.5
                   text-gray-900
                   focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -68,15 +134,25 @@ export default function CallbackModal({
                 type="tel"
                 required
                 placeholder="Enter your phone number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                disabled={loading}
                 className="w-full rounded-md border border-gray-300 px-3 py-2.5
                   text-gray-900
                   focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 
+            {statusMsg && (
+              <p className="text-xs font-semibold text-rose-600 mt-1">
+                {statusMsg}
+              </p>
+            )}
+
             {/* SUBMIT */}
             <button
               type="submit"
+              disabled={loading}
               className="
                 mt-2 w-full rounded-md px-4 py-3
                 font-semibold text-white
@@ -84,9 +160,10 @@ export default function CallbackModal({
                 hover:from-indigo-600 hover:to-violet-600
                 transition
                 shadow-md hover:shadow-lg
+                disabled:opacity-50
               "
             >
-              Request Call Back
+              {loading ? "Submitting..." : "Request Call Back"}
             </button>
           </form>
 

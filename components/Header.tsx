@@ -71,6 +71,29 @@ export default function Header() {
     dropdownTimerRef.current = setTimeout(() => setActiveDropdown(null), 150);
   };
 
+  const trackCallClick = () => {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "conversion", {
+        send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+      });
+      (window as any).gtag("event", "click", {
+        event_category: "Contact",
+        event_label: "Header Phone Call Click",
+        phone_number: "+919986389444",
+      });
+    }
+  };
+
+  const trackWhatsAppClick = () => {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "click", {
+        event_category: "Contact",
+        event_label: "Header WhatsApp Chat Click",
+        whatsapp_number: "919986389444",
+      });
+    }
+  };
+
   // Close menus on path change
   useEffect(() => {
     setMenuOpen(false);
@@ -159,6 +182,7 @@ export default function Header() {
         <div className="hidden lg:flex items-center gap-2 ml-2">
           <a
             href={`tel:${phoneNumber}`}
+            onClick={trackCallClick}
             className="flex items-center gap-2 rounded-full border border-black/5 bg-black/[0.03] px-4 py-2 text-[11px] font-black text-slate-700 hover:bg-black/[0.08] transition-all tracking-tight uppercase"
           >
             <div className="flex h-5 w-5 items-center justify-center rounded-full bg-yellow-500 text-slate-900 shadow-md shadow-yellow-500/20">
@@ -168,6 +192,7 @@ export default function Header() {
           </a>
           <a
             href={whatsappLink}
+            onClick={trackWhatsAppClick}
             target="_blank"
             className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/20 transition-all hover:scale-110 active:scale-95"
           >
@@ -262,12 +287,14 @@ export default function Header() {
             <div className="pt-6 mt-4 border-t border-slate-100 flex gap-4">
               <a
                 href={`tel:${phoneNumber}`}
+                onClick={trackCallClick}
                 className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-slate-50 py-4 text-[13px] font-bold text-slate-900 active:scale-95 transition-transform"
               >
                 <Phone size={16} /> Call
               </a>
               <a
                 href={whatsappLink}
+                onClick={trackWhatsAppClick}
                 target="_blank"
                 className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#25D366] py-4 text-[13px] font-black text-white shadow-lg active:scale-95 transition-transform"
               >

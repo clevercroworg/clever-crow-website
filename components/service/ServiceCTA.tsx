@@ -21,6 +21,13 @@ export default function ServiceCTA() {
           {/* PHONE */}
           <a
             href={`tel:${CONTACT.phone}`}
+            onClick={() => {
+              if (typeof window !== "undefined" && (window as any).gtag) {
+                (window as any).gtag("event", "conversion", {
+                  send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+                });
+              }
+            }}
             className="
               inline-flex items-center gap-2
               rounded-lg bg-yellow-400 px-6 py-3

@@ -32,6 +32,13 @@ export default function InlineContactCTA() {
             <motion.a
               whileHover={{ y: -2 }}
               href={`tel:${CONTACT.phone}`}
+              onClick={() => {
+                if (typeof window !== "undefined" && (window as any).gtag) {
+                  (window as any).gtag("event", "conversion", {
+                    send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+                  });
+                }
+              }}
               className="
                 inline-flex items-center gap-2
                 rounded-xl bg-yellow-400 px-8 py-4

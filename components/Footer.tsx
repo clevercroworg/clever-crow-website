@@ -17,6 +17,19 @@ export default function Footer() {
   const pathname = usePathname();
   const currentYear = new Date().getFullYear();
 
+  const trackCallClick = () => {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "conversion", {
+        send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+      });
+      (window as any).gtag("event", "click", {
+        event_category: "Contact",
+        event_label: "Footer Phone Call Click",
+        phone_number: "+919986389444",
+      });
+    }
+  };
+
   return (
     <footer className="relative w-full bg-[#020617] text-slate-400 overflow-hidden font-sans border-t border-white/5">
       {/* ───────────────── TOP NAV SECTION ───────────────── */}
@@ -63,6 +76,7 @@ export default function Footer() {
             {/* Phone Button */}
             <a
               href="tel:+919986389444"
+              onClick={trackCallClick}
               className="flex items-center gap-3 w-full bg-white/5 border border-white/10 hover:border-yellow-400/50 px-6 py-4 rounded-2xl text-white transition-all group shadow-lg"
             >
               <div className="bg-white/10 p-2 rounded-lg group-hover:scale-110 group-hover:bg-yellow-400/20 transition-transform">

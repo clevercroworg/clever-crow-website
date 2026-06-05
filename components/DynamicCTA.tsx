@@ -74,6 +74,13 @@ export default function DynamicCTA({
             {/* Call Button */}
             <a
               href="tel:+919986389444"
+              onClick={() => {
+                if (typeof window !== "undefined" && (window as any).gtag) {
+                  (window as any).gtag("event", "conversion", {
+                    send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+                  });
+                }
+              }}
               className="
                 group relative inline-flex items-center gap-3
                 rounded-2xl bg-black px-6 py-4 sm:px-10 sm:py-5
