@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function SuccessStoriesPage() {
   return (
-    <div className={`${manrope.className} font-sans`}>
+    <div className={manrope.className} style={manrope.style}>
       <SuccessStoriesClient />
     </div>
   );
