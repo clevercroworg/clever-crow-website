@@ -259,9 +259,9 @@ const Portfolio = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-brand-card border-2 border-[#c1781f]/35 hover:border-brand-accent/70 rounded-[1.5rem] overflow-hidden hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(193,120,31,0.12)] transition-all duration-500 flex flex-col h-full cursor-pointer group"
+                className="bg-brand-card border-2 border-[#c1781f]/35 hover:border-brand-accent/70 rounded-[1.5rem] overflow-hidden hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(193,120,31,0.12)] transition-all duration-500 flex flex-col h-full group"
               >
-                <Link href={`/lp/hospitality-marketing/${project.id}`} className="flex flex-col h-full w-full">
+                <div className="flex flex-col h-full w-full">
                   {/* Card Property Photo Header */}
                   <div className="relative w-full h-[220px] overflow-hidden">
                     <img
@@ -323,16 +323,9 @@ const Portfolio = () => {
                           </div>
                         ))}
                       </div>
-
-                      {/* Link Indicator */}
-                      <div className="w-full text-center pt-2 border-t border-neutral-800/20">
-                        <span className="text-[0.65rem] font-black tracking-widest text-brand-accent group-hover:text-white transition-colors duration-300 uppercase">
-                          View Project Details →
-                        </span>
-                      </div>
                     </div>
                   </div>
-                </Link>
+                </div>
               </motion.article>
             ))}
           </AnimatePresence>

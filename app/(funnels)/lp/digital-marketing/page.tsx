@@ -128,6 +128,9 @@ export default function DigitalMarketingLandingPage() {
   const trackCallClick = () => {
     if (typeof window !== 'undefined') {
       if ((window as any).gtag) {
+        (window as any).gtag('event', 'conversion', {
+          'send_to': 'AW-17335403082/ul0ECKr5i_QaEMqElcpA',
+        });
         (window as any).gtag('event', 'click', {
           'event_category': 'Contact',
           'event_label': 'Phone Call Click',

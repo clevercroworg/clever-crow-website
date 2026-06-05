@@ -121,7 +121,7 @@ const ReviewFormSection = () => {
         if (typeof window !== 'undefined') {
           if (window.gtag) {
             window.gtag('event', 'conversion', {
-              'send_to': 'AW-17335403082',
+              'send_to': 'AW-17335403082/YwV4CJ-q_e8YEPq9me49',
               'event_category': 'Lead',
               'event_label': 'Hospitality Form Submission'
             });

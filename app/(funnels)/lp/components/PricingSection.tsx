@@ -53,6 +53,19 @@ const defaultPricing: PricingMeta = {
 export default function PricingSection({ data }: PricingSectionProps) {
   const pricing = data ?? defaultPricing;
 
+  const trackCallClick = () => {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "conversion", {
+        send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+      });
+      (window as any).gtag("event", "click", {
+        event_category: "Contact",
+        event_label: "Pricing Custom Quote Call Click",
+        phone_number: "+919986389444",
+      });
+    }
+  };
+
   return (
     <section id="package" className="pricing-light-section py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -91,7 +104,7 @@ export default function PricingSection({ data }: PricingSectionProps) {
           ))}
         </div>
         <div className="package-quote-line">
-          <p>{pricing.quoteText} <a href={pricing.quoteHref ?? "tel:+919986389444"}>Call us for a custom quote</a>.</p>
+          <p>{pricing.quoteText} <a href={pricing.quoteHref ?? "tel:+919986389444"} onClick={trackCallClick}>Call us for a custom quote</a>.</p>
         </div>
       </div>
     </section>

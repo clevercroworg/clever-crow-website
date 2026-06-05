@@ -2,6 +2,9 @@
 
 import React from "react";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 type HeroMeta = {
   badges: string[];
   title: string;
@@ -26,6 +29,62 @@ const defaultHero: HeroMeta = {
 
 export default function HeroSection({ data }: HeroSectionProps) {
   const hero = data ?? defaultHero;
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [statusMsg, setStatusMsg] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !phone) {
+      setStatusMsg("Please enter both name and phone number.");
+      return;
+    }
+    setLoading(true);
+    setStatusMsg("");
+
+    try {
+      const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+      const currentTitle = typeof window !== "undefined" ? document.title : "";
+      const source = currentTitle || "Landing Page Hero Form";
+
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          email: "",
+          message: `New enquiry received from Hero Section. Source Page: ${source}. Referrer/Landed URL: ${currentUrl}`,
+          source: source,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong. Please try again.");
+      }
+
+      // Fire Google Ads conversion tracking
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
+        });
+        (window as any).gtag("event", "GenerateLead", {
+          event_category: "Leads",
+          event_label: "Lead Form Submit",
+        });
+      }
+
+      setName("");
+      setPhone("");
+      router.push("/thank-you");
+    } catch (err: any) {
+      setStatusMsg(err.message || "An error occurred.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="hero-section relative overflow-hidden pt-20 sm:pt-24">
@@ -67,10 +126,35 @@ export default function HeroSection({ data }: HeroSectionProps) {
             <div className="mb-3">
               <h3 className="text-base font-bold text-slate-900 sm:text-[1.35rem]">Request a Call Back</h3>
             </div>
-            <form className="space-y-2.5" onSubmit={(e) => { e.preventDefault(); alert("Thanks!"); }}>
-              <input type="text" name="hero_name" placeholder="Enter your name" className="hero-light-input" />
-              <input type="tel" name="hero_phone" placeholder="Enter your phone" className="hero-light-input" />
-              <button type="submit" className="mt-2 w-full rounded-2xl bg-[#f4c542] px-5 py-3.5 text-[15px] font-bold text-black transition hover:brightness-110 shadow-[0_8px_20px_rgba(244,197,66,0.25)]">Request a Call</button>
+            <form className="space-y-2.5" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="hero_name"
+                placeholder="Enter your name"
+                className="hero-light-input"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                disabled={loading}
+              />
+              <input
+                type="tel"
+                name="hero_phone"
+                placeholder="Enter your phone"
+                className="hero-light-input"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+                disabled={loading}
+              />
+              <button
+                type="submit"
+                disabled={loading}
+                className="mt-2 w-full rounded-2xl bg-[#f4c542] px-5 py-3.5 text-[15px] font-bold text-black transition hover:brightness-110 shadow-[0_8px_20px_rgba(244,197,66,0.25)] disabled:opacity-50"
+              >
+                {loading ? "Submitting..." : "Request a Call"}
+              </button>
+              {statusMsg && <p className="text-xs text-rose-600 mt-1.5">{statusMsg}</p>}
             </form>
           </div>
           <div className="hero-privacy-note">

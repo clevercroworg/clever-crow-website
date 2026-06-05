@@ -15,6 +15,9 @@ const HeroSection = () => {
   const trackCallClick = () => {
     if (typeof window !== 'undefined') {
       if (window.gtag) {
+        window.gtag('event', 'conversion', {
+          'send_to': 'AW-17335403082/ul0ECKr5i_QaEMqElcpA',
+        });
         window.gtag('event', 'click', {
           'event_category': 'Contact',
           'event_label': 'Phone Call Click',
