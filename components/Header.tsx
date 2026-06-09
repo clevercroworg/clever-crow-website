@@ -114,6 +114,20 @@ export default function Header() {
     setActiveDropdown(null);
   }, [pathname]);
 
+  // Auto-expand accordion for active route when mobile menu opens
+  useEffect(() => {
+    if (menuOpen) {
+      const activeGroup = navLinks.find(group =>
+        group.items.some(item => item.href === pathname)
+      );
+      if (activeGroup) {
+        setMobileAccordion(activeGroup.key);
+      } else {
+        setMobileAccordion(null);
+      }
+    }
+  }, [menuOpen, pathname]);
+
   return (
     <header className="fixed inset-x-0 top-4 z-[100] flex justify-center px-4 pointer-events-none">
       <div className="pointer-events-auto flex w-full max-w-[95%] items-center justify-between gap-2 rounded-full border border-white/40 bg-white/80 px-5 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-2xl transition-all hover:bg-white/90 ring-1 ring-white/20">
@@ -254,33 +268,35 @@ export default function Header() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-20 left-4 right-4 z-50 rounded-[2rem] border border-black/10 bg-white shadow-2xl xl:hidden max-h-[75vh] overflow-y-auto pointer-events-auto"
+            className="absolute top-20 left-4 right-4 z-50 rounded-[2rem] border border-black/10 bg-white shadow-2xl xl:hidden max-h-[75vh] overflow-y-auto pointer-events-auto flex flex-col justify-between"
           >
             <nav className="p-6 flex flex-col gap-2">
               {navLinks.map((group) => (
                 <div key={group.key} className="border-b border-slate-50 last:border-0 pb-1">
                   <button
                     onClick={() => setMobileAccordion(mobileAccordion === group.key ? null : group.key)}
-                    className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-[14px] font-bold transition-colors ${
+                    className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-[14px] transition-all duration-200 border ${
                       mobileAccordion === group.key || group.items.some(item => item.href === pathname)
-                        ? "text-yellow-600 bg-yellow-50"
-                        : "text-slate-900"
+                        ? "text-yellow-600 bg-yellow-50/80 border-yellow-100/50 font-bold"
+                        : "text-slate-700 hover:text-slate-900 hover:bg-slate-50/50 border-transparent font-semibold"
                     }`}
                   >
                     {group.label}
                     <ChevronDown
                       size={16}
                       className={`transition-transform duration-300 ${
-                        mobileAccordion === group.key || group.items.some(item => item.href === pathname) ? "rotate-180" : "text-slate-400"
+                        mobileAccordion === group.key ? "rotate-180 text-yellow-600" : "text-slate-400"
                       }`}
                     />
                   </button>
                   <AnimatePresence>
                     {mobileAccordion === group.key && (
                       <motion.div
+                        key={group.key}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
                         <div className="ml-3 border-l border-slate-100 pl-3 py-1 flex flex-col gap-1">
@@ -288,10 +304,10 @@ export default function Header() {
                             <Link
                               key={i}
                               href={item.href}
-                              className={`flex flex-col py-2 px-3 rounded-xl transition-all duration-150 ${
+                              className={`flex flex-col py-2 px-3 rounded-xl transition-all duration-150 border ${
                                 pathname === item.href
-                                  ? "bg-yellow-50 text-yellow-600 font-bold"
-                                  : "hover:bg-slate-50 text-slate-600 hover:text-slate-900"
+                                  ? "bg-yellow-50 text-yellow-600 font-bold border-yellow-100/30"
+                                  : "hover:bg-slate-50 text-slate-600 hover:text-slate-900 border-transparent"
                               }`}
                             >
                               <span className="text-[13px] font-bold tracking-tight">{item.label}</span>
@@ -310,27 +326,29 @@ export default function Header() {
               ))}
               <Link
                 href="/contact"
-                className={`block rounded-2xl px-4 py-3 text-[14px] font-bold transition-colors ${
-                  pathname === "/contact" ? "text-yellow-600 bg-yellow-50" : "text-slate-900"
+                className={`block rounded-xl px-4 py-3 text-[14px] transition-all duration-200 border ${
+                  pathname === "/contact"
+                    ? "text-yellow-600 bg-yellow-50/80 border-yellow-100/50 font-bold"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-50/50 border-transparent font-semibold"
                 }`}
               >
                 Contact Us
               </Link>
             </nav>
 
-            <div className="pt-6 mt-4 border-t border-slate-100 flex gap-4">
+            <div className="bg-slate-50/50 border-t border-slate-100/80 px-6 py-4 flex gap-3 rounded-b-[2rem]">
               <a
                 href={`tel:${phoneNumber}`}
                 onClick={trackCallClick}
-                className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-slate-50 py-4 text-[13px] font-bold text-slate-900 active:scale-95 transition-transform"
+                className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-white border border-slate-200 py-3.5 text-[13px] font-bold text-slate-700 active:scale-95 transition-all shadow-sm hover:bg-slate-50"
               >
-                <Phone size={16} /> Call
+                <Phone size={15} /> Call
               </a>
               <a
                 href={whatsappLink}
                 onClick={trackWhatsAppClick}
                 target="_blank"
-                className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#25D366] py-4 text-[13px] font-black text-white shadow-lg active:scale-95 transition-transform"
+                className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#25D366] py-3.5 text-[13px] font-black text-white shadow-md shadow-[#25D366]/20 active:scale-95 transition-all hover:bg-[#20ba59]"
               >
                 <FaWhatsapp size={18} /> WhatsApp
               </a>
