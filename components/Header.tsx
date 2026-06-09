@@ -16,38 +16,52 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const navLinks = [
   {
-    label: "App Development",
-    key: "apps",
+    label: "Development",
+    key: "development",
     items: [
-      { href: "/services/mobile-app-development", label: "Mobile App Development" },
-      { href: "/services/web-app-development", label: "Web Application Development" },
+      { href: "/services/mobile-app-development", label: "Mobile App Dev", desc: "iOS & Android apps built for scale" },
+      { href: "/services/web-app-development", label: "Web App Dev", desc: "Scalable SaaS & business applications" },
+      { href: "/services/business-websites", label: "Business Websites", desc: "Lead-generating brand & agency sites" },
+      { href: "/services/ecommerce", label: "E-commerce Stores", desc: "High-performance digital shops" },
+      { href: "/services/custom-website-design", label: "Custom UI/UX", desc: "Bespoke interface & design assets" },
+      { href: "/services/wordpress-website-design", label: "WordPress Sites", desc: "Flexible, managed WordPress solutions" },
+      { href: "/services/landing-pages", label: "Landing Pages", desc: "High-conversion product pages" },
     ],
   },
   {
-    label: "Website Development",
-    key: "web",
-    items: [
-      { href: "/services/business-websites", label: "Business Websites" },
-      { href: "/services/ecommerce", label: "E-commerce Websites" },
-    ],
-  },
-  {
-    label: "Digital Marketing",
+    label: "Marketing",
     key: "marketing",
     items: [
-      { href: "/services/google-ads", label: "Google Ads" },
-      { href: "/services/meta-ads", label: "Meta Ads" },
-      { href: "/services/linkedin-ads", label: "LinkedIn Advertising" },
-      { href: "/services/seo", label: "Search Engine Optimization" },
+      { href: "/services/google-ads", label: "Google Ads", desc: "Capture high-intent search traffic" },
+      { href: "/services/meta-ads", label: "Meta Ads", desc: "Facebook & Instagram campaigns" },
+      { href: "/services/linkedin-ads", label: "LinkedIn Ads", desc: "B2B client & lead acquisition" },
+      { href: "/services/seo", label: "SEO Services", desc: "Organic search ranking & authority" },
+      { href: "/services/ai-seo", label: "AI SEO", desc: "Next-gen algorithmic traffic growth" },
+      { href: "/services/social-media-marketing", label: "SMM Campaigns", desc: "Grow organic audience & presence" },
+      { href: "/services/social-media-management", label: "Social Management", desc: "End-to-end social operations" },
     ],
   },
   {
     label: "Branding",
     key: "branding",
     items: [
-      { href: "/services/strategy-planning", label: "Branding & Strategy" },
-      { href: "/services/content-writing", label: "Content Creation" },
-      { href: "/services/logo-design", label: "Logo Design" },
+      { href: "/services/strategy-planning", label: "Brand Strategy", desc: "Market positioning & growth roadmap" },
+      { href: "/services/logo-design", label: "Logo Design", desc: "Memorable corporate brand marks" },
+      { href: "/services/graphic-design", label: "Graphic Design", desc: "High-impact visual marketing assets" },
+      { href: "/services/content-writing", label: "Content Writing", desc: "Engaging, SEO-optimized copy" },
+      { href: "/services/content-marketing", label: "Content Marketing", desc: "Audience nurturing & funnel setup" },
+      { href: "/services/marketing-strategy", label: "Growth Strategy", desc: "Actionable scaling roadmaps" },
+    ],
+  },
+  {
+    label: "Creative",
+    key: "creative",
+    items: [
+      { href: "/services/script-writing", label: "Script Writing", desc: "Scripts for videos, ads & reels" },
+      { href: "/services/video-script-writing", label: "Video Scripts", desc: "Professional video storytelling" },
+      { href: "/services/social-media-copywriting", label: "Social Copy", desc: "High-engagement copywriting" },
+      { href: "/services/social-media-creatives", label: "Social Creatives", desc: "Scroll-stopping social visuals" },
+      { href: "/services/social-media-videos", label: "Social Videos", desc: "Short-form video & Reels production" },
     ],
   },
 ];
@@ -139,26 +153,41 @@ export default function Header() {
               <AnimatePresence>
                 {activeDropdown === group.key && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                    initial={{ opacity: 0, y: 12, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 8, scale: 0.99 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
                     className="absolute left-1/2 top-[calc(100%+12px)] -translate-x-1/2"
                     onMouseEnter={() => openDropdown(group.key)}
                   >
-                    <div className="w-[280px] rounded-[2rem] bg-white ring-1 ring-black/[0.05] shadow-[0_20px_48px_rgba(0,0,0,0.15)] overflow-hidden p-2">
+                    <div className="w-[600px] rounded-[2rem] bg-white ring-1 ring-black/[0.05] shadow-[0_25px_60px_rgba(0,0,0,0.15)] overflow-hidden p-4 grid grid-cols-2 gap-1.5 border border-slate-100/50">
                         {group.items.map((item, i) => (
                           <Link
                             key={i}
                             href={item.href}
-                            className={`group flex items-center justify-between rounded-2xl px-4 py-3 text-[13px] font-bold transition-all duration-150 ${
+                            className={`group flex flex-col justify-center rounded-2xl px-4 py-3 text-left transition-all duration-150 border border-transparent ${
                               pathname === item.href
-                                ? "bg-yellow-50 text-yellow-600"
-                                : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                                ? "bg-yellow-50/80 border-yellow-100/50"
+                                : "hover:bg-slate-50/80 hover:border-slate-100/50"
                             }`}
                           >
-                            {item.label}
-                            <ArrowRight size={14} className={`transition-all duration-200 ${pathname === item.href ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1 group-hover:opacity-60 group-hover:translate-x-0"}`} />
+                            <div className="flex items-center justify-between gap-1.5">
+                              <span className={`text-[12px] font-black tracking-tight transition-colors duration-150 ${
+                                pathname === item.href ? "text-yellow-600" : "text-slate-800 group-hover:text-yellow-600"
+                              }`}>
+                                {item.label}
+                              </span>
+                              <ArrowRight size={13} className={`text-yellow-500 transition-all duration-200 ${
+                                pathname === item.href 
+                                  ? "opacity-100 translate-x-0" 
+                                  : "opacity-0 -translate-x-1.5 group-hover:opacity-100 group-hover:translate-x-0"
+                              }`} />
+                            </div>
+                            {item.desc && (
+                              <span className="text-[10px] font-medium text-slate-400 mt-0.5 leading-snug line-clamp-1 group-hover:text-slate-500 transition-colors">
+                                {item.desc}
+                              </span>
+                            )}
                           </Link>
                         ))}
                     </div>
@@ -254,18 +283,23 @@ export default function Header() {
                         exit={{ height: 0, opacity: 0 }}
                         className="overflow-hidden"
                       >
-                        <div className="ml-4 border-l-2 border-slate-50 pl-4 py-2 flex flex-col gap-1">
+                        <div className="ml-3 border-l border-slate-100 pl-3 py-1 flex flex-col gap-1">
                           {group.items.map((item, i) => (
                             <Link
                               key={i}
                               href={item.href}
-                              className={`block py-2 text-[13px] font-medium transition-colors ${
+                              className={`flex flex-col py-2 px-3 rounded-xl transition-all duration-150 ${
                                 pathname === item.href
-                                  ? "text-yellow-600 font-bold"
-                                  : "text-slate-500 hover:text-slate-900"
+                                  ? "bg-yellow-50 text-yellow-600 font-bold"
+                                  : "hover:bg-slate-50 text-slate-600 hover:text-slate-900"
                               }`}
                             >
-                              {item.label}
+                              <span className="text-[13px] font-bold tracking-tight">{item.label}</span>
+                              {item.desc && (
+                                <span className="text-[10px] font-medium text-slate-400 mt-0.5 leading-none">
+                                  {item.desc}
+                                </span>
+                              )}
                             </Link>
                           ))}
                         </div>
