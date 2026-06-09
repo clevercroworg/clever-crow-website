@@ -29,63 +29,96 @@ export default function Footer() {
     <footer className="relative w-full bg-[#020617] text-slate-400 overflow-hidden font-sans border-t border-white/5">
       {/* ───────────────── TOP NAV SECTION ───────────────── */}
       <div className="mx-auto max-w-7xl px-6 pt-20 pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-10 xl:gap-4">
           
-          {/* Services Column */}
+          {/* Development Column */}
           <div>
-            <h3 className="text-white text-lg font-bold mb-8 tracking-tight">Services</h3>
-            <ul className="space-y-4 text-sm font-medium">
-              <li><Link href="/services/google-ads" className="hover:text-yellow-400 transition-colors">Google Ads Management</Link></li>
-              <li><Link href="/services/meta-ads" className="hover:text-yellow-400 transition-colors">Meta Ads Management</Link></li>
-              <li><Link href="/services/business-websites" className="hover:text-yellow-400 transition-colors">Website Development</Link></li>
-              <li><Link href="/services/mobile-app-development" className="hover:text-yellow-400 transition-colors">App Development</Link></li>
+            <h3 className="text-white text-md font-bold mb-6 tracking-tight">Development</h3>
+            <ul className="space-y-3 text-xs font-medium">
+              <li><Link href="/services/mobile-app-development" className="hover:text-yellow-400 transition-colors">Mobile App Dev</Link></li>
+              <li><Link href="/services/web-app-development" className="hover:text-yellow-400 transition-colors">Web App Dev</Link></li>
+              <li><Link href="/services/business-websites" className="hover:text-yellow-400 transition-colors">Business Websites</Link></li>
+              <li><Link href="/services/ecommerce" className="hover:text-yellow-400 transition-colors">E-commerce Stores</Link></li>
+              <li><Link href="/services/custom-website-design" className="hover:text-yellow-400 transition-colors">Custom UI/UX</Link></li>
+              <li><Link href="/services/wordpress-website-design" className="hover:text-yellow-400 transition-colors">WordPress Sites</Link></li>
+              <li><Link href="/services/landing-pages" className="hover:text-yellow-400 transition-colors">Landing Pages</Link></li>
+            </ul>
+          </div>
+
+          {/* Marketing Column */}
+          <div>
+            <h3 className="text-white text-md font-bold mb-6 tracking-tight">Marketing</h3>
+            <ul className="space-y-3 text-xs font-medium">
+              <li><Link href="/services/google-ads" className="hover:text-yellow-400 transition-colors">Google Ads</Link></li>
+              <li><Link href="/services/meta-ads" className="hover:text-yellow-400 transition-colors">Meta Ads</Link></li>
+              <li><Link href="/services/linkedin-ads" className="hover:text-yellow-400 transition-colors">LinkedIn Ads</Link></li>
+              <li><Link href="/services/seo" className="hover:text-yellow-400 transition-colors">SEO Services</Link></li>
+              <li><Link href="/services/ai-seo" className="hover:text-yellow-400 transition-colors">AI SEO</Link></li>
+              <li><Link href="/services/social-media-marketing" className="hover:text-yellow-400 transition-colors">SMM Campaigns</Link></li>
+              <li><Link href="/services/social-media-management" className="hover:text-yellow-400 transition-colors">Social Management</Link></li>
+            </ul>
+          </div>
+
+          {/* Branding Column */}
+          <div>
+            <h3 className="text-white text-md font-bold mb-6 tracking-tight">Branding</h3>
+            <ul className="space-y-3 text-xs font-medium">
+              <li><Link href="/services/strategy-planning" className="hover:text-yellow-400 transition-colors">Brand Strategy</Link></li>
+              <li><Link href="/services/logo-design" className="hover:text-yellow-400 transition-colors">Logo Design</Link></li>
+              <li><Link href="/services/graphic-design" className="hover:text-yellow-400 transition-colors">Graphic Design</Link></li>
+              <li><Link href="/services/content-writing" className="hover:text-yellow-400 transition-colors">Content Writing</Link></li>
+              <li><Link href="/services/content-marketing" className="hover:text-yellow-400 transition-colors">Content Marketing</Link></li>
+              <li><Link href="/services/marketing-strategy" className="hover:text-yellow-400 transition-colors">Growth Strategy</Link></li>
+            </ul>
+          </div>
+
+          {/* Creative Column */}
+          <div>
+            <h3 className="text-white text-md font-bold mb-6 tracking-tight">Creative</h3>
+            <ul className="space-y-3 text-xs font-medium">
+              <li><Link href="/services/script-writing" className="hover:text-yellow-400 transition-colors">Script Writing</Link></li>
+              <li><Link href="/services/video-script-writing" className="hover:text-yellow-400 transition-colors">Video Scripts</Link></li>
+              <li><Link href="/services/social-media-copywriting" className="hover:text-yellow-400 transition-colors">Social Copy</Link></li>
+              <li><Link href="/services/social-media-creatives" className="hover:text-yellow-400 transition-colors">Social Creatives</Link></li>
+              <li><Link href="/services/social-media-videos" className="hover:text-yellow-400 transition-colors">Social Videos</Link></li>
             </ul>
           </div>
 
           {/* Company Column */}
           <div>
-            <h3 className="text-white text-lg font-bold mb-8 tracking-tight">Company</h3>
-            <ul className="space-y-4 text-sm font-medium">
+            <h3 className="text-white text-md font-bold mb-6 tracking-tight">Company</h3>
+            <ul className="space-y-3 text-xs font-medium">
               <li><Link href="/" className="hover:text-yellow-400 transition-colors">About Us</Link></li>
-              <li><Link href="/#portfolio" className="hover:text-yellow-400 transition-colors">Our Work / Case Studies</Link></li>
-              <li><Link href="/contact" className="hover:text-yellow-400 transition-colors">Contact Us</Link></li>
+              <li><Link href="/#portfolio" className="hover:text-yellow-400 transition-colors">Our Work</Link></li>
+              <li><Link href="/success-stories" className="hover:text-yellow-400 transition-colors">Success Stories</Link></li>
               <li><Link href="/careers" className="hover:text-yellow-400 transition-colors">Careers</Link></li>
-            </ul>
-          </div>
-
-          {/* Explore Column */}
-          <div>
-            <h3 className="text-white text-lg font-bold mb-8 tracking-tight">Explore</h3>
-            <ul className="space-y-4 text-sm font-medium">
               <li><Link href="/internship" className="hover:text-yellow-400 transition-colors">Internships</Link></li>
-              <li><Link href="/services/seo" className="hover:text-yellow-400 transition-colors">SEO Services</Link></li>
-              <li><Link href="/services/social-media-marketing" className="hover:text-yellow-400 transition-colors">Social Media Marketing</Link></li>
-              <li><Link href="/services/content-writing" className="hover:text-yellow-400 transition-colors">Content Writing</Link></li>
+              <li><Link href="/contact" className="hover:text-yellow-400 transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 
           {/* Get in Touch Column */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-white text-lg font-bold mb-4 tracking-tight">Get in Touch</h3>
+          <div className="flex flex-col gap-3">
+            <h3 className="text-white text-md font-bold mb-2 tracking-tight">Get in Touch</h3>
             
             {/* Phone Button */}
             <a
               href="tel:+919986389444"
               onClick={trackCallClick}
-              className="flex items-center gap-3 w-full bg-white/5 border border-white/10 hover:border-yellow-400/50 px-6 py-4 rounded-2xl text-white transition-all group shadow-lg"
+              className="flex items-center gap-2.5 w-full bg-white/5 border border-white/10 hover:border-yellow-400/50 px-4 py-3 rounded-2xl text-white transition-all group shadow-lg"
             >
-              <div className="bg-white/10 p-2 rounded-lg group-hover:scale-110 group-hover:bg-yellow-400/20 transition-transform">
-                <Phone size={18} className="group-hover:text-yellow-400" />
+              <div className="bg-white/10 p-1.5 rounded-lg group-hover:scale-110 group-hover:bg-yellow-400/20 transition-transform shrink-0">
+                <Phone size={14} className="group-hover:text-yellow-400" />
               </div>
-              <span className="font-bold tracking-tight text-sm text-white">+91 99863 89444</span>
+              <span className="font-bold tracking-tight text-[12px] text-white whitespace-nowrap">+91 99863 89444</span>
             </a>
 
             {/* Request a Quote Button */}
             <Link
               href="/contact"
-              className="flex items-center justify-center gap-2 w-full bg-[#f4c542] hover:bg-[#eab308] px-6 py-4 rounded-2xl text-black font-bold text-sm transition-all shadow-lg active:scale-95"
+              className="flex items-center justify-center gap-2 w-full bg-[#f4c542] hover:bg-[#eab308] px-4 py-3 rounded-2xl text-black font-bold text-[12px] transition-all shadow-lg active:scale-95 whitespace-nowrap"
             >
-              <Mail size={18} />
+              <Mail size={14} />
               Request a Quote
             </Link>
 
@@ -94,9 +127,9 @@ export default function Footer() {
               href="https://wa.me/919986389444"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center justify-center gap-2 w-full bg-[#22c55e] hover:bg-[#16a34a] px-6 py-4 rounded-2xl text-white font-bold text-sm transition-all shadow-lg active:scale-95"
+              className="flex items-center justify-center gap-2 w-full bg-[#22c55e] hover:bg-[#16a34a] px-4 py-3 rounded-2xl text-white font-bold text-[12px] transition-all shadow-lg active:scale-95 whitespace-nowrap"
             >
-              <FaWhatsapp size={20} />
+              <FaWhatsapp size={16} />
               Chat With Us
             </a>
           </div>
