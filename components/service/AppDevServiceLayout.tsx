@@ -222,7 +222,7 @@ export default function AppDevServiceLayout({
     <div className="bg-white min-h-screen text-slate-800 antialiased font-body pt-24 pb-0 selection:bg-yellow-500/20">
       
       {/* ───────────────── 1. HERO SECTION ───────────────── */}
-      <section className="relative overflow-hidden pt-8 pb-20 bg-gradient-to-b from-slate-100/60 via-slate-50/50 to-slate-50/20">
+      <section className="relative overflow-hidden pt-6 pb-12 md:pb-16 bg-gradient-to-b from-slate-100/60 via-slate-50/50 to-slate-50/20">
         
         {/* Subtle dot grid and radial light flare */}
         <div className="absolute inset-0 pointer-events-none z-0">
@@ -374,10 +374,10 @@ export default function AppDevServiceLayout({
       </section>
 
       {/* ───────────────── 2. WHAT WE BUILD (SERVICES GRID) ───────────────── */}
-      <section id="what-we-build" className="py-12 md:py-24 max-w-7xl mx-auto px-6 lg:px-8 border-t border-slate-100/80">
+      <section id="what-we-build" className="py-10 md:py-16 max-w-7xl mx-auto px-6 lg:px-8 border-t border-slate-100/80">
         
         {/* Title */}
-        <div className="mb-16 text-center max-w-2xl mx-auto">
+        <div className="mb-10 text-center max-w-2xl mx-auto">
           <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3">
             WHAT WE BUILD
           </p>
@@ -427,11 +427,11 @@ export default function AppDevServiceLayout({
       </section>
 
       {/* ───────────────── 3. OUR PROCESS (TIMELINE PROCESS) ───────────────── */}
-      <section className="py-12 md:py-24 bg-slate-50/50 border-t border-b border-slate-100/60 overflow-hidden">
+      <section className="py-10 md:py-16 bg-slate-50/50 border-t border-b border-slate-100/60 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           
           {/* Header */}
-          <div className="mb-16 text-center max-w-2xl mx-auto">
+          <div className="mb-10 text-center max-w-2xl mx-auto">
             <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3">
               OUR PROCESS
             </p>
@@ -476,12 +476,12 @@ export default function AppDevServiceLayout({
       </section>
 
       {/* ───────────────── 4. WHY CHOOSE CLEVER CROW (PIXEL-PERFECT CARD) ───────────────── */}
-      <section className="py-12 md:py-20 bg-slate-50/30 border-b border-slate-100/60">
+      <section className="py-8 md:py-12 bg-slate-50/30 border-b border-slate-100/60">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           
           {/* Main White Border Card Container */}
-          <div className="bg-white border border-slate-200/80 rounded-[2.5rem] p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.01)]">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          <div className="bg-white border border-slate-200/80 rounded-[2rem] p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.01)]">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
               
               {/* 1. Phone Mockup (Left) */}
               <div className="lg:col-span-3 flex justify-center">
@@ -535,24 +535,24 @@ export default function AppDevServiceLayout({
 
               {/* 2. Middle Title Block (Middle-Left) */}
               <div className="lg:col-span-4 flex flex-col items-start text-left">
-                <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3 leading-none">
+                <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-2 leading-none">
                   WHY CHOOSE CLEVER CROW?
                 </p>
-                <h2 className="text-2xl md:text-3xl lg:text-[28px] font-black text-slate-900 tracking-tight leading-tight font-sans">
+                <h2 className="text-xl md:text-2xl lg:text-[26px] font-black text-slate-900 tracking-tight leading-tight font-sans">
                   We Build Apps That <br />Drive Real Results
                 </h2>
               </div>
 
               {/* 3. Vertical Divider Line (Desktop only) */}
               <div className="hidden lg:block lg:col-span-1 justify-self-center">
-                <div className="w-[1px] h-32 bg-slate-200" />
+                <div className="w-[1px] h-24 bg-slate-200/60" />
               </div>
 
               {/* Mobile Horizontal Divider */}
               <div className="w-full h-[1px] bg-slate-200/60 my-2 lg:hidden col-span-1" />
 
               {/* 4. 2-Column Checklist (Right) */}
-              <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5">
+              <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
                 {whyChooseDetailed.map((point, i) => {
                   const PointIcon = Check;
                   return (
@@ -580,19 +580,21 @@ export default function AppDevServiceLayout({
       </section>
 
       {/* ───────────────── 5. TECHNOLOGIES WE WORK WITH (PIXEL-PERFECT CARD) ───────────────── */}
-      <section className="py-10 bg-slate-50/10 border-b border-slate-100/60">
+      <section className="py-6 md:py-8 bg-slate-50/10 border-b border-slate-100/60">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           
-          <div className="bg-white border border-slate-200/80 rounded-[2rem] py-6 px-8 shadow-sm flex flex-col items-center gap-5">
+          <div className="bg-white border border-slate-200/80 rounded-[2rem] py-5 px-6 shadow-sm flex flex-col items-center gap-4">
             <p className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-slate-400 mb-1 leading-none">
               TECHNOLOGIES WE WORK WITH
             </p>
             
-            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 w-full">
+            <div className="flex flex-nowrap justify-start lg:justify-center items-center gap-3.5 md:gap-5 w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-2.5 lg:pb-0">
               {technologies.map((tech, i) => (
-                <div key={i} className="flex items-center gap-2 bg-slate-50/50 hover:bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200/40 shadow-sm shrink-0 transition-colors cursor-default">
-                  {tech.svg}
-                  <span className="text-[10px] font-black text-slate-700 uppercase tracking-wider">
+                <div key={i} className="flex items-center gap-2 bg-slate-50/50 hover:bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200/40 shadow-sm shrink-0 transition-colors cursor-default">
+                  <div className="flex items-center justify-center shrink-0 [&_svg]:!h-5 [&_svg]:!w-auto">
+                    {tech.svg}
+                  </div>
+                  <span className="text-[9px] font-black text-slate-700 uppercase tracking-wider">
                     {tech.name}
                   </span>
                 </div>
@@ -604,14 +606,14 @@ export default function AppDevServiceLayout({
       </section>
 
       {/* ───────────────── 6. TESTIMONIALS & FAQ (PIXEL-PERFECT TWO-COLUMN GRID) ───────────────── */}
-      <section id="faq-section" className="py-12 md:py-20 max-w-7xl mx-auto px-6 lg:px-8">
+      <section id="faq-section" className="py-8 md:py-12 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Left Column (Testimonial Card + Banner CTA Stack) */}
           <div className="lg:col-span-6 flex flex-col justify-between">
             
             {/* 1. Testimonial Card */}
-            <div className="bg-white border border-slate-200/80 rounded-[2.5rem] p-8 md:p-10 shadow-sm relative flex flex-col justify-between flex-grow min-h-[300px] mb-6">
+            <div className="bg-white border border-slate-200/80 rounded-[2rem] p-6 md:p-8 shadow-sm relative flex flex-col justify-between flex-grow min-h-[260px] mb-4">
               
               {/* Navigation Arrows Overlapping Card Edges */}
               <button 
@@ -629,14 +631,14 @@ export default function AppDevServiceLayout({
               </button>
 
               <div>
-                <p className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-4 leading-none">
+                <p className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3 leading-none">
                   BUILT FOR BUSINESSES. LOVED BY CLIENTS.
                 </p>
-                <h3 className="text-lg md:text-xl font-black text-slate-900 tracking-tight leading-tight font-sans">
+                <h3 className="text-base md:text-lg font-black text-slate-900 tracking-tight leading-tight font-sans">
                   Helping businesses automate, simplify and scale.
                 </h3>
 
-                <div className="mt-8 relative">
+                <div className="mt-6 relative">
                   <span className="text-4xl font-serif text-amber-500/20 absolute -top-4 -left-1 select-none">“</span>
                   <p className="text-xs font-bold text-slate-500 leading-relaxed pl-6 relative z-10">
                     {testimonials[activeTestimonial].quote}
@@ -645,7 +647,7 @@ export default function AppDevServiceLayout({
               </div>
 
               {/* Author & Star Rating Footer */}
-              <div className="mt-8 flex items-center justify-between border-t border-slate-100/80 pt-6">
+              <div className="mt-6 flex items-center justify-between border-t border-slate-100/80 pt-4">
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-full bg-amber-500/10 text-amber-600 flex items-center justify-center font-sans font-black text-xs shrink-0 shadow-sm border border-amber-500/5">
                     {testimonials[activeTestimonial].avatar}
