@@ -43,7 +43,11 @@ import {
   Building,
   Heart,
   Bed,
-  GraduationCap
+  GraduationCap,
+  Bot,
+  User,
+  Send,
+  Workflow
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -88,55 +92,55 @@ function getServiceConfig(title: string, iconKey: string) {
   if (t.includes("whatsapp")) {
     return {
       icon: FaWhatsapp,
-      bgColor: "bg-emerald-500/10",
-      textColor: "text-emerald-600",
+      bgColor: "bg-emerald-500/10 border border-emerald-500/20",
+      textColor: "text-[#25D366]",
       borderColor: "hover:border-emerald-500/35",
       arrowColor: "group-hover:text-emerald-500"
     };
   }
   if (t.includes("chatbot") || t.includes("bot") || k === "cpu") {
     return {
-      icon: Cpu,
-      bgColor: "bg-amber-500/10",
-      textColor: "text-amber-500",
+      icon: Bot,
+      bgColor: "bg-amber-500/10 border border-amber-500/20",
+      textColor: "text-[#F59E0B]",
       borderColor: "hover:border-amber-500/35",
       arrowColor: "group-hover:text-amber-500"
     };
   }
   if (t.includes("lead") || k === "target") {
     return {
-      icon: Target,
-      bgColor: "bg-orange-500/10",
-      textColor: "text-orange-600",
+      icon: User,
+      bgColor: "bg-orange-500/10 border border-orange-500/20",
+      textColor: "text-orange-500",
       borderColor: "hover:border-orange-500/35",
-      arrowColor: "group-hover:text-orange-600"
+      arrowColor: "group-hover:text-orange-500"
     };
   }
   if (t.includes("crm") || k === "database") {
     return {
       icon: Database,
-      bgColor: "bg-purple-500/10",
-      textColor: "text-purple-600",
+      bgColor: "bg-purple-500/10 border border-purple-500/20",
+      textColor: "text-purple-500",
       borderColor: "hover:border-purple-500/35",
-      arrowColor: "group-hover:text-purple-600"
+      arrowColor: "group-hover:text-purple-500"
     };
   }
   if (t.includes("sales") || t.includes("follow") || k === "rocket") {
     return {
-      icon: Rocket,
-      bgColor: "bg-amber-500/10",
-      textColor: "text-amber-600",
+      icon: Send,
+      bgColor: "bg-amber-500/10 border border-amber-500/20",
+      textColor: "text-amber-500",
       borderColor: "hover:border-amber-500/35",
-      arrowColor: "group-hover:text-amber-600"
+      arrowColor: "group-hover:text-amber-500"
     };
   }
   if (t.includes("workflow") || t.includes("process") || k === "wrench" || k === "network") {
     return {
-      icon: Network,
-      bgColor: "bg-blue-500/10",
-      textColor: "text-blue-600",
+      icon: Workflow,
+      bgColor: "bg-blue-500/10 border border-blue-500/20",
+      textColor: "text-blue-500",
       borderColor: "hover:border-blue-500/35",
-      arrowColor: "group-hover:text-blue-600"
+      arrowColor: "group-hover:text-blue-500"
     };
   }
 
@@ -144,7 +148,7 @@ function getServiceConfig(title: string, iconKey: string) {
   const FallbackIcon = iconMap[k] || Cpu;
   return {
     icon: FallbackIcon,
-    bgColor: "bg-amber-500/10",
+    bgColor: "bg-amber-500/10 border border-amber-500/20",
     textColor: "text-amber-500",
     borderColor: "hover:border-amber-500/35",
     arrowColor: "group-hover:text-amber-500"
@@ -766,39 +770,54 @@ export default function AiAutomationServiceLayout({
       {/* ───────────────── 6. BOTTOM BANNER STRIP ───────────────── */}
       <section className="py-6 md:py-8 max-w-7xl mx-auto px-6 lg:px-8">
         
-        <div className="bg-amber-500 rounded-[2rem] p-6 md:px-8 md:py-6 text-slate-950 shadow-md relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-amber-500 rounded-[2rem] p-5 md:px-8 md:py-5 text-slate-950 shadow-md relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
           
-          <div className="flex items-center gap-4">
-            {/* Mascot mini speech bubble icon */}
-            <div className="h-10 w-10 bg-slate-950 text-white rounded-full flex items-center justify-center shrink-0 shadow-sm border border-slate-950">
-              <MessageSquare size={16} className="stroke-[2.5]" />
-            </div>
-            <div>
+          {/* Left section: Icon and Text */}
+          <div className="flex items-center gap-4 flex-1">
+            {/* Custom Sparkle Speech Bubble SVG Icon */}
+            <svg className="w-11 h-11 text-white shrink-0 overflow-visible select-none pointer-events-none" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path 
+                d="M 8 10 C 8 7, 10 5, 13 5 L 35 5 C 38 5, 40 7, 40 10 L 40 26 C 40 29, 38 31, 35 31 L 20 31 L 11 39 L 11 31 C 9.5 31, 8 29.5, 8 26 Z" 
+                fill="white" 
+              />
+              <circle cx="21" cy="18" r="2.5" fill="#0f172a" />
+              <circle cx="27" cy="18" r="2.5" fill="#0f172a" />
+              <polygon 
+                points="39,2 41,7 46,9 41,11 39,16 37,11 32,9 37,7" 
+                fill="white" 
+              />
+            </svg>
+            
+            <div className="flex flex-col">
               <h4 className="text-sm md:text-base font-black leading-tight text-slate-950 font-sans">
                 Let AI handle the repetitive.
               </h4>
-              <p className="text-[11px] font-bold text-slate-950/80 leading-snug mt-0.5">
+              <p className="text-sm md:text-base font-black leading-tight text-slate-950 font-sans">
                 You focus on growth.
               </p>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto shrink-0 font-sans">
+          {/* Vertical dashed divider line (desktop only) */}
+          <div className="hidden md:block h-10 border-l border-dashed border-slate-950/20 mx-4" />
+
+          {/* Right section: Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3.5 w-full md:w-auto shrink-0 font-sans">
             <a
               href="#contact-form"
-              className="flex items-center justify-center gap-1.5 bg-slate-950 hover:bg-slate-900 text-white hover:scale-[1.01] active:scale-95 transition-all px-5 py-3 rounded-xl font-black text-[11px] shadow-sm cursor-pointer"
+              className="flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-900 text-white hover:scale-[1.01] active:scale-95 transition-all px-6 py-3.5 rounded-full font-black text-xs shadow-sm cursor-pointer"
             >
               <span>Book a Free Consultation</span>
-              <ArrowRight size={12} className="stroke-[3.5]" />
+              <ArrowRight size={13} className="stroke-[3]" />
             </a>
 
             <a
               href={`https://wa.me/919986389444?text=Hi%2C%20I'm%20interested%20in%20your%20${encodeURIComponent(serviceName)}%20service.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200/40 active:scale-98 transition-all px-5 py-3 rounded-xl text-slate-800 font-bold text-[11px] shadow-sm"
+              className="flex items-center justify-center gap-2.5 bg-white hover:bg-slate-50 hover:scale-[1.01] active:scale-95 transition-all px-6 py-3.5 rounded-full text-slate-800 font-bold text-xs shadow-sm"
             >
-              <FaWhatsapp size={15} className="text-[#25D366] shrink-0" />
+              <FaWhatsapp size={16} className="text-[#25D366] shrink-0" />
               <span>Chat on WhatsApp</span>
             </a>
           </div>
