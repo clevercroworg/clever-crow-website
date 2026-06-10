@@ -230,16 +230,6 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
-          {/* Work Link */}
-          <Link 
-            href="/success-stories" 
-            className={`rounded-full px-3.5 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase ${
-              pathname === "/success-stories" ? "text-yellow-600 bg-black/5" : "text-slate-600 hover:text-slate-900"
-            }`}
-          >
-            Work
-          </Link>
-
           {/* Industries Dropdown */}
           <div className="relative" onMouseEnter={() => openDropdown("industries")}>
             <button
@@ -453,17 +443,6 @@ export default function Header() {
                 </AnimatePresence>
               </div>
 
-              {/* Work Link */}
-              <Link
-                href="/success-stories"
-                className={`block rounded-xl px-4 py-3 text-[14px] transition-all duration-200 border ${
-                  pathname === "/success-stories"
-                    ? "text-yellow-600 bg-yellow-50/80 border-yellow-100/50 font-bold"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-50/50 border-transparent font-semibold"
-                }`}
-              >
-                Work
-              </Link>
 
               {/* Industries Accordion */}
               <div className="border-b border-slate-50 pb-1">

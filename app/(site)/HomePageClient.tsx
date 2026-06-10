@@ -211,7 +211,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                   Custom, responsive websites built for performance and business results.
                 </p>
               </div>
-              <Link href="/services/custom-website-design" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
+              <Link href="/website-development-company" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
                 Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -227,7 +227,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                   Custom iOS & Android apps that solve real problems and deliver real impact.
                 </p>
               </div>
-              <Link href="/services/mobile-app-development" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
+              <Link href="/app-development-company" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
                 Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -243,7 +243,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                   Intelligent automations that optimize workflows and scale productivity.
                 </p>
               </div>
-              <Link href="/services/web-app-development" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
+              <Link href="/ai-automation-agency" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
                 Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -259,7 +259,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                   Data-driven marketing that attracts, engages and converts at scale.
                 </p>
               </div>
-              <Link href="/services/google-ads" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
+              <Link href="/digital-marketing-agency" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
                 Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -442,8 +442,8 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                 Results we're proud of.
               </h2>
             </div>
-            <Link href="/success-stories" className="group flex items-center gap-1 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-amber-500 transition-colors shrink-0">
-              View all case studies 
+            <Link href="/contact" className="group flex items-center gap-1 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-amber-500 transition-colors shrink-0">
+              Get in touch 
               <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

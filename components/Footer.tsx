@@ -70,7 +70,7 @@ export default function Footer() {
                 <li><Link href="/app-development-company" className="hover:text-amber-500 transition-colors">App Development</Link></li>
                 <li><Link href="/ai-automation-agency" className="hover:text-amber-500 transition-colors">AI Automation</Link></li>
                 <li><Link href="/digital-marketing-agency" className="hover:text-amber-500 transition-colors">Digital Marketing</Link></li>
-                <li><Link href="/services/strategy-planning" className="hover:text-amber-500 transition-colors">Branding</Link></li>
+                <li><Link href="/digital-marketing-agency" className="hover:text-amber-500 transition-colors">Branding</Link></li>
               </ul>
             </div>
 
@@ -103,7 +103,7 @@ export default function Footer() {
               <h4 className="text-slate-900 text-[13px] font-extrabold uppercase tracking-widest mb-5">Resources</h4>
               <ul className="space-y-3.5 text-xs font-semibold text-slate-500">
                 <li><Link href="/careers" className="hover:text-amber-500 transition-colors">Guides</Link></li>
-                <li><Link href="/success-stories" className="hover:text-amber-500 transition-colors">Insights</Link></li>
+                <li><Link href="/contact" className="hover:text-amber-500 transition-colors">Insights</Link></li>
                 <li><Link href="/careers" className="hover:text-amber-500 transition-colors">Tools</Link></li>
                 <li><Link href="/contact" className="hover:text-amber-500 transition-colors">Support</Link></li>
               </ul>

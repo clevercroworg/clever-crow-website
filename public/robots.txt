@@ -2,3 +2,10 @@ User-agent: *
 Disallow: /ppc
 Disallow: /lp
 Disallow: /success-stories
+Disallow: /services/
+Disallow: /privacy-policy
+Disallow: /terms-and-conditions
+Disallow: /thank-you
+Disallow: /api/
+
+Sitemap: https://clevercrow.org/sitemap.xml

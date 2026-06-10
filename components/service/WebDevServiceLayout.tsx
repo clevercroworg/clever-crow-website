@@ -69,6 +69,189 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
   network: Network
 };
 
+// ─── High-Fidelity Custom SVG Icons for Business Goals & Services ───
+function CompanyProfileIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="3" width="20" height="18" rx="3" fill="#EEF2F6" stroke="#4F46E5" strokeWidth="1.5" />
+      <line x1="2" y1="8" x2="22" y2="8" stroke="#4F46E5" strokeWidth="1.5" />
+      <circle cx="5" cy="5.5" r="0.75" fill="#EF4444" />
+      <circle cx="7.5" cy="5.5" r="0.75" fill="#F59E0B" />
+      <circle cx="10" cy="5.5" r="0.75" fill="#10B981" />
+      <rect x="5" y="11" width="5" height="7" rx="0.5" fill="#4F46E5" />
+      <rect x="6.5" y="13" width="2" height="1.5" fill="#FFFFFF" opacity="0.8" />
+      <rect x="6.5" y="15.5" width="2" height="1.5" fill="#FFFFFF" opacity="0.8" />
+      <line x1="13" y1="12" x2="19" y2="12" stroke="#64748B" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="13" y1="15" x2="17" y2="15" stroke="#64748B" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M19 17l.5 1 .5-1-.5-1z" fill="#F59E0B" />
+    </svg>
+  );
+}
+
+function LeadGenerationIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="9" stroke="#EF4444" strokeWidth="1.5" fill="#FEF2F2" />
+      <circle cx="12" cy="12" r="6" stroke="#EF4444" strokeWidth="1.5" fill="none" strokeDasharray="2 2" />
+      <circle cx="12" cy="12" r="3" fill="#EF4444" />
+      <path d="M18.5 5.5L12.5 11.5" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" />
+      <polygon points="12.5,11.5 15,11 12.5,9" fill="#F59E0B" />
+      <path d="M5.5 5.5l.5.5.5-.5-.5-.5zM18.5 18.5l.5.5.5-.5-.5-.5z" fill="#FBBC05" />
+    </svg>
+  );
+}
+
+function EcommerceIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 8v11a2 2 0 002 2h8a2 2 0 002-2V8H6z" fill="#ECFDF5" stroke="#10B981" strokeWidth="1.5" />
+      <path d="M9 8V5a3 3 0 016 0v3" stroke="#10B981" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="12" cy="14" r="2.5" fill="#10B981" />
+      <path d="M12 12.5l.4 1 .9.1-.7.6.2.9-.8-.5-.8.5.2-.9-.7-.6.9-.1z" fill="#FFFFFF" />
+      <path d="M4 10l.5.75.5-.75-.5-.75z" fill="#F59E0B" />
+    </svg>
+  );
+}
+
+function SaasIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="4" width="18" height="6" rx="1.5" fill="#EEF2F6" stroke="#4F46E5" strokeWidth="1.5" />
+      <rect x="3" y="13" width="18" height="6" rx="1.5" fill="#EEF2F6" stroke="#4F46E5" strokeWidth="1.5" />
+      <circle cx="6" cy="7" r="1" fill="#10B981" />
+      <circle cx="6" cy="16" r="1" fill="#10B981" />
+      <line x1="9" y1="7" x2="17" y2="7" stroke="#4F46E5" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="9" y1="16" x2="15" y2="16" stroke="#4F46E5" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M18 10v3" stroke="#F59E0B" strokeWidth="1.5" strokeDasharray="2 2" />
+      <circle cx="18" cy="11.5" r="1.5" fill="#F59E0B" />
+    </svg>
+  );
+}
+
+function LandingPagesIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="3" width="20" height="18" rx="2" fill="#EFF6FF" stroke="#3B82F6" strokeWidth="1.5" />
+      <line x1="2" y1="8" x2="22" y2="8" stroke="#3B82F6" strokeWidth="1.5" />
+      <rect x="13" y="11" width="6" height="7" rx="1" fill="#3B82F6" />
+      <path d="M15 14.5l1 1 2-2" stroke="#FFFFFF" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+      <line x1="5" y1="11" x2="10" y2="11" stroke="#94A3B8" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="5" y1="14" x2="9" y2="14" stroke="#94A3B8" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="5" y1="17" x2="8" y2="17" stroke="#94A3B8" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function BookingIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="4" width="18" height="16" rx="2" fill="#FDF2F8" stroke="#EC4899" strokeWidth="1.5" />
+      <path d="M3 8h18" stroke="#EC4899" strokeWidth="1.5" />
+      <line x1="7" y1="2" x2="7" y2="5" stroke="#EC4899" strokeWidth="2" strokeLinecap="round" />
+      <line x1="17" y1="2" x2="17" y2="5" stroke="#EC4899" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="16" cy="14" r="4" fill="#FFFFFF" stroke="#F59E0B" strokeWidth="1.5" />
+      <path d="M16 12v2.5h1.5" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+      <rect x="6" y="11" width="3" height="3" rx="0.5" fill="#EC4899" opacity="0.6" />
+      <rect x="10" y="11" width="2" height="3" rx="0.5" fill="#EC4899" opacity="0.6" />
+    </svg>
+  );
+}
+
+function PortfolioIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="7" width="14" height="14" rx="2" fill="#FAF5FF" stroke="#8B5CF6" strokeWidth="1.5" />
+      <rect x="7" y="3" width="14" height="14" rx="2" fill="#ECFDF5" stroke="#10B981" strokeWidth="1.5" />
+      <circle cx="11" cy="7" r="2" fill="#10B981" opacity="0.5" />
+      <line x1="15" y1="6" x2="18" y2="6" stroke="#10B981" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="15" y1="8" x2="17" y2="8" stroke="#10B981" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M12 14l5-5 1 1-5 5z" fill="#F59E0B" />
+    </svg>
+  );
+}
+
+function ServiceBusinessIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="7" width="18" height="13" rx="2" fill="#F0F9FF" stroke="#0EA5E9" strokeWidth="1.5" />
+      <path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round" />
+      <rect x="11" y="12" width="2" height="3" rx="0.5" fill="#0EA5E9" />
+      <line x1="5" y1="10" x2="7" y2="10" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="17" y1="10" x2="19" y2="10" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M19 5l.5.75.5-.75-.5-.75z" fill="#F59E0B" />
+    </svg>
+  );
+}
+
+function LaptopBusinessIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="4" width="18" height="11" rx="1.5" fill="#EFF6FF" stroke="#3B82F6" strokeWidth="1.5" />
+      <path d="M1 16h22v2a2 2 0 01-2 2H3a2 2 0 01-2-2v-2Z" fill="#3B82F6" stroke="#3B82F6" strokeWidth="1" />
+      <rect x="10" y="17" width="4" height="1.5" rx="0.5" fill="#FFFFFF" opacity="0.8" />
+      <rect x="6" y="7" width="5" height="6" fill="#3B82F6" opacity="0.6" />
+      <line x1="13" y1="8" x2="18" y2="8" stroke="#94A3B8" strokeWidth="1.2" />
+      <line x1="13" y1="10" x2="17" y2="10" stroke="#94A3B8" strokeWidth="1.2" />
+    </svg>
+  );
+}
+
+function ReactNextIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="3" width="20" height="18" rx="2" fill="#ECFDF5" stroke="#10B981" strokeWidth="1.5" />
+      <path d="M8 10l-3 2 3 2" stroke="#10B981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M16 10l3 2-3 2" stroke="#10B981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <line x1="13" y1="9" x2="11" y2="15" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M19 6l.5.75.5-.75-.5-.75z" fill="#F59E0B" />
+    </svg>
+  );
+}
+
+function WebsiteRedesignIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="3" width="20" height="18" rx="2" fill="#FAF5FF" stroke="#8B5CF6" strokeWidth="1.5" />
+      <path d="M7 17L15 9" stroke="#8B5CF6" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M15 9l1.5-1.5L18 9l-1.5 1.5z" fill="#8B5CF6" />
+      <path d="M14 6l.3.45.3-.45-.3-.45zM19 10l.3.45.3-.45-.3-.45zM10 12l.3.45.3-.45-.3-.45z" fill="#F59E0B" />
+      <path d="M4 14q6-4 12 1" stroke="#8B5CF6" strokeWidth="1.2" strokeDasharray="2 2" />
+    </svg>
+  );
+}
+
+function WebsiteMaintenanceIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="3" width="20" height="18" rx="2" fill="#F8FAFC" stroke="#64748B" strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="3.5" stroke="#64748B" strokeWidth="1.5" fill="none" />
+      <path d="M13.5 10.5l4-4M17.5 6.5a1.5 1.5 0 010 2l-1 1M14.5 9.5a1.5 1.5 0 01-2 0" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="18" cy="6" r="3" fill="#10B981" />
+      <path d="M17 6l.75.75 1.5-1.5" stroke="#FFFFFF" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+const goalIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  home: CompanyProfileIcon,
+  target: LeadGenerationIcon,
+  shoppingcart: EcommerceIcon,
+  database: SaasIcon,
+  layout: LandingPagesIcon,
+  calendar: BookingIcon,
+  layers: PortfolioIcon,
+  briefcase: ServiceBusinessIcon
+};
+
+const serviceIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  laptop: LaptopBusinessIcon,
+  code2: ReactNextIcon,
+  shoppingcart: EcommerceIcon,
+  layout: LandingPagesIcon,
+  refreshcw: WebsiteRedesignIcon,
+  wrench: WebsiteMaintenanceIcon
+};
+
 // Default technologies list with custom SVG badges
 const defaultTechnologies = [
   {
@@ -105,8 +288,9 @@ const defaultTechnologies = [
   {
     name: "WooCommerce",
     svg: (
-      <svg className="w-11 h-7 text-[#96588A]" viewBox="0 9.5 8.25 5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fillRule="evenodd" d="M.754 9.58a.754.754 0 00-.754.758v2.525c0 .42.339.758.758.758h3.135l1.431.799-.326-.799h2.373a.757.757 0 00.758-.758v-2.525a.757.757 0 00-.758-.758H.754zm2.709.445h.03c.065.001.124.023.179.067a.26.26 0 01.103.19.29.29 0 01-.033.16c-.13.239-.236.64-.322 1.199-.083.541-.114.965-.094 1.267a.392.392 0 01-.039.219.213.213 0 01-.176.12c-.086.006-.177-.034-.263-.124-.31-.316-.555-.788-.735-1.416-.216.425-.375.744-.478.957-.196.376-.363.568-.502.578-.09.007-.166-.069-.233-.228-.17-.436-.352-1.277-.548-2.524a.297.297 0 01.054-.222c.047-.064.116-.095.21-.102.169-.013.265.065.288.238.103.695.217 1.284.336 1.766l.727-1.387c.066-.126.15-.192.25-.199.146-.01.237.083.273.28.083.441.188.817.315 1.136.086-.844.233-1.453.44-1.828a.255.255 0 01.218-.147zm1.293.36c.056 0 .116.006.18.02.232.05.411.177.53.386.107.18.161.395.161.654 0 .343-.087.654-.26.94-.2.332-.459.5-.781.5a.88.88 0 01-.18-.022.763.763 0 01-.531-.384 1.287 1.287 0 01-.158-.659c0-.342.085-.655.258-.937.202-.333.462-.498.78-.498zm2.084 0c.056 0 .116.006.18.02.236.05.411.177.53.386.107.18.16.395.16.654 0 .343-.086.654-.259.94-.2.332-.459.5-.781.5a.88.88 0 01-.18-.022.763.763 0 01-.531-.384 1.287 1.287 0 01-.16-.659c0-.342.087-.655.26-.937.202-.333.462-.498.78-.498z" />
+      <svg className="w-9 h-9" viewBox="0 0 503.81 299.89" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#96588A" d="M46.75,0H456.84a46.94,46.94,0,0,1,47,47V203.5a46.94,46.94,0,0,1-47,47H309.78L330,299.89l-88.78-49.43H47a46.94,46.94,0,0,1-47-47V47A46.77,46.77,0,0,1,46.76,0Z"/>
+        <path fill="#FFFFFF" d="M28.69,42.8c2.86-3.89,7.16-5.94,12.9-6.35Q57.25,35.24,59.41,51.2,68.94,115.4,80.09,160l44.85-85.4q6.15-11.67,15.36-12.29c9-.61,14.54,5.12,16.8,17.2,5.12,27.24,11.67,50.38,19.45,70q8-78,27-112.64c3.07-5.73,7.57-8.6,13.51-9A17.8,17.8,0,0,1,230,32a16,16,0,0,1,6.35,11.67,17.79,17.79,0,0,1-2,9.83c-8,14.75-14.55,39.53-19.87,73.93-5.12,33.39-7,59.4-5.73,78a24.29,24.29,0,0,1-2.46,13.52c-2.46,4.51-6.15,7-10.86,7.37-5.32.41-10.85-2.05-16.17-7.57Q150.64,189.54,134,131.48q-20,39.32-29.49,59c-12.09,23.14-22.33,35-30.93,35.64C68,226.51,63.3,221.8,59.2,212Q43.54,171.72,25.41,56.52A17.44,17.44,0,0,1,28.69,42.8ZM468.81,75C461.43,62.05,450.58,54.27,436,51.2A53.72,53.72,0,0,0,425,50c-19.66,0-35.63,10.24-48.13,30.72a108.52,108.52,0,0,0-16,57.75q0,23.66,9.83,40.55c7.37,12.91,18.23,20.69,32.77,23.76A53.64,53.64,0,0,0,414.54,204c19.86,0,35.83-10.24,48.12-30.72a109.73,109.73,0,0,0,16-58C478.84,99.33,475.36,86,468.81,75ZM443,131.69c-2.86,13.51-8,23.55-15.56,30.31-5.94,5.32-11.47,7.57-16.59,6.55-4.92-1-9-5.32-12.08-13.31a52,52,0,0,1-3.69-18.64,71.48,71.48,0,0,1,1.43-14.95,66.29,66.29,0,0,1,10.86-24.37c6.76-10,13.92-14.13,21.3-12.7,4.91,1,9,5.33,12.08,13.31a52,52,0,0,1,3.69,18.64A71.47,71.47,0,0,1,443,131.69ZM340.6,75c-7.37-12.91-18.43-20.69-32.76-23.76A53.79,53.79,0,0,0,296.78,50c-19.66,0-35.64,10.24-48.13,30.72a108.52,108.52,0,0,0-16,57.75q0,23.66,9.83,40.55c7.37,12.91,18.22,20.69,32.76,23.76A53.72,53.72,0,0,0,286.33,204c19.87,0,35.84-10.24,48.13-30.72a109.72,109.72,0,0,0,16-58C350.43,99.33,347.16,86,340.6,75Zm-26,56.73c-2.86,13.51-8,23.55-15.56,30.31-5.94,5.32-11.47,7.57-16.59,6.55-4.91-1-9-5.32-12.08-13.31a52,52,0,0,1-3.69-18.64,71.48,71.48,0,0,1,1.43-14.95A66.29,66.29,0,0,1,279,97.28c6.76-10,13.92-14.13,21.3-12.7,4.91,1,9,5.33,12.08,13.31A52,52,0,0,1,316,116.53a60.45,60.45,0,0,1-1.44,15.16Z"/>
       </svg>
     )
   },
@@ -378,7 +562,7 @@ export default function WebDevServiceLayout({
         {/* 6-Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {services.map((svc, i) => {
-            const IconComponent = iconMap[svc.icon.toLowerCase().replace(/[^a-z0-9]/g, "")] || Laptop;
+            const ServiceIconComponent = serviceIconMap[svc.icon.toLowerCase().replace(/[^a-z0-9]/g, "")] || LaptopBusinessIcon;
             return (
               <motion.div
                 key={i}
@@ -389,7 +573,7 @@ export default function WebDevServiceLayout({
                 <div className="flex flex-col items-center">
                   {/* Large Outline Icon (no box) */}
                   <div className="flex items-center justify-center shrink-0">
-                    <IconComponent className="w-12 h-12 text-amber-500 stroke-[1.5]" />
+                    <ServiceIconComponent className="w-12 h-12" />
                   </div>
                   {/* Text content */}
                   <h3 className="text-sm font-black text-slate-800 tracking-tight mt-6 leading-tight">
@@ -554,7 +738,7 @@ export default function WebDevServiceLayout({
           {/* Grid of 8 Goal items (no outer cards, small icon containers) */}
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">
             {defaultBusinessGoals.map((goal, idx) => {
-              const GoalIcon = iconMap[goal.icon.toLowerCase()] || Laptop;
+              const GoalIconComponent = goalIconMap[goal.icon.toLowerCase()] || CompanyProfileIcon;
               return (
                 <div
                   key={idx}
@@ -562,7 +746,7 @@ export default function WebDevServiceLayout({
                 >
                   {/* Small rounded icon box */}
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-200/60 shadow-sm shrink-0 group-hover:border-amber-500 transition-colors">
-                    <GoalIcon className="w-6 h-6 text-amber-500 stroke-[1.5]" />
+                    <GoalIconComponent className="w-7 h-7" />
                   </div>
                   <span className="text-[11px] md:text-xs font-black text-slate-700 leading-snug mt-1">
                     {goal.label}
