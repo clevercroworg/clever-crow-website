@@ -360,7 +360,7 @@ export default function WebDevServiceLayout({
       </section>
 
       {/* ───────────────── 2. WHAT WE BUILD (SERVICES GRID) ───────────────── */}
-      <section id="what-we-build" className="py-24 max-w-7xl mx-auto px-6 lg:px-8 border-t border-slate-100/80">
+      <section id="what-we-build" className="py-12 md:py-24 max-w-7xl mx-auto px-6 lg:px-8 border-t border-slate-100/80">
         
         {/* Title */}
         <div className="mb-16 text-center max-w-2xl mx-auto">
@@ -384,7 +384,7 @@ export default function WebDevServiceLayout({
                 key={i}
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.2 }}
-                className="group relative bg-white border border-slate-200/60 rounded-[2.2rem] p-6 shadow-sm hover:shadow-[0_20px_40px_rgba(0,0,0,0.02)] flex flex-col items-center text-center justify-between min-h-[330px] cursor-pointer"
+                className="group relative bg-white border border-slate-200/60 rounded-[2.2rem] px-6 py-8 md:py-6 shadow-sm hover:shadow-[0_20px_40px_rgba(0,0,0,0.02)] flex flex-col items-center text-center justify-between md:min-h-[330px] min-h-0 h-auto cursor-pointer"
               >
                 <div className="flex flex-col items-center">
                   {/* Large Outline Icon (no box) */}
@@ -413,7 +413,7 @@ export default function WebDevServiceLayout({
       </section>
 
       {/* ───────────────── 3. OUR APPROACH (TIMELINE PROCESS) ───────────────── */}
-      <section className="py-24 bg-slate-50/50 border-t border-b border-slate-100/60 overflow-hidden">
+      <section className="py-12 md:py-24 bg-slate-50/50 border-t border-b border-slate-100/60 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           
           {/* Header */}
@@ -462,12 +462,12 @@ export default function WebDevServiceLayout({
       </section>
 
       {/* ───────────────── 4. TWO-COLUMN FEATURES (TECHNOLOGIES & BENEFITS) ───────────────── */}
-      <section className="py-16 bg-slate-50/40 border-t border-b border-slate-100/80">
+      <section className="py-10 md:py-16 bg-slate-50/40 border-t border-b border-slate-100/80">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             
             {/* Left Column Card (Technologies) */}
-            <div className="lg:col-span-6 flex flex-col bg-white border border-slate-100 rounded-[2.5rem] p-8 md:px-10 md:py-8 shadow-sm justify-between">
+            <div className="lg:col-span-6 flex flex-col bg-white border border-slate-100 rounded-[2.5rem] p-6 md:p-8 md:px-10 md:py-8 shadow-sm justify-between">
               <div>
                 <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight font-sans">
                   Modern Technologies We Work With
@@ -497,7 +497,7 @@ export default function WebDevServiceLayout({
             </div>
 
             {/* Right Column Card (Why Choose Clever Crow) */}
-            <div className="lg:col-span-6 flex flex-col bg-white border border-slate-100 rounded-[2.5rem] p-8 md:px-10 md:py-8 shadow-sm relative overflow-hidden justify-between">
+            <div className="lg:col-span-6 flex flex-col bg-white border border-slate-100 rounded-[2.5rem] p-6 md:p-8 md:px-10 md:py-8 shadow-sm relative overflow-hidden justify-between">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center h-full">
                 
                 {/* Left part of this card: Checkpoints (60%) */}
@@ -538,7 +538,7 @@ export default function WebDevServiceLayout({
       </section>
 
       {/* ───────────────── 5. GOALS SECTION ───────────────── */}
-      <section className="py-24 bg-slate-50/50 border-t border-b border-slate-100/60">
+      <section className="py-12 md:py-24 bg-slate-50/50 border-t border-b border-slate-100/60">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           
           {/* Header */}
@@ -576,7 +576,7 @@ export default function WebDevServiceLayout({
       </section>
 
       {/* ───────────────── 6. FAQ & FINAL CTA (TWO-COLUMN GRID) ───────────────── */}
-      <section id="contact-form" className="py-16 max-w-7xl mx-auto px-6 lg:px-8">
+      <section id="contact-form" className="py-10 md:py-16 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Left Column (FAQs) - 6/12 width to reduce height */}
@@ -584,7 +584,7 @@ export default function WebDevServiceLayout({
             <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight font-sans mb-8">
               Frequently Asked Questions
             </h2>
-
+ 
             {/* Accordion list */}
             <div className="w-full flex flex-col">
               {faqs.map((faq, i) => (
@@ -610,7 +610,7 @@ export default function WebDevServiceLayout({
                         transition={{ duration: 0.2, ease: "easeInOut" }}
                       >
                         <div className="pb-3 pt-0.5 text-xs font-semibold text-slate-500 leading-relaxed">
-                          {faq.answer}
+                           {faq.answer}
                         </div>
                       </motion.div>
                     )}
@@ -619,9 +619,9 @@ export default function WebDevServiceLayout({
               ))}
             </div>
           </div>
-
+ 
           {/* Right Column (Cream CTA Card) - 6/12 width */}
-          <div className="lg:col-span-6 flex flex-col bg-[#FFFBF2] border border-amber-500/5 rounded-[2.5rem] shadow-sm relative overflow-hidden min-h-[380px]">
+          <div className="lg:col-span-6 flex flex-col bg-[#FFFBF2] border border-amber-500/5 rounded-[2.5rem] shadow-sm relative overflow-hidden md:min-h-[380px] min-h-0 h-auto">
             {/* Background radial highlight */}
             <div className="absolute top-[-50px] right-[-50px] w-48 h-48 rounded-full bg-amber-500/5 blur-[80px] pointer-events-none" />
             
@@ -636,7 +636,7 @@ export default function WebDevServiceLayout({
                     Let's build a website that reflects your brand, loads fast and helps your business grow.
                   </p>
                 </div>
-
+ 
                 <div className="flex flex-col gap-3 w-full max-w-[240px]">
                   <Link
                     href={`/contact?service=${encodeURIComponent(serviceName)}`}
@@ -645,7 +645,7 @@ export default function WebDevServiceLayout({
                     <span>Discuss Your Project</span>
                     <ArrowRight size={14} className="stroke-[3]" />
                   </Link>
-
+ 
                   <a
                     href={`https://wa.me/919986389444?text=Hi%2C%20I'm%20interested%20in%20your%20${encodeURIComponent(serviceName)}%20service.`}
                     target="_blank"
@@ -657,9 +657,9 @@ export default function WebDevServiceLayout({
                   </a>
                 </div>
               </div>
-
+ 
               {/* Right Side: Image container (50% width on desktop) */}
-              <div className="w-full md:w-[50%] relative min-h-[220px] md:min-h-0 self-stretch overflow-hidden">
+              <div className="w-full md:w-[50%] relative min-h-[160px] md:min-h-0 self-stretch overflow-hidden">
                 <img
                   src="/images/laptop-guy.png"
                   alt="Clever Crow consultant typing on laptop"
@@ -668,15 +668,15 @@ export default function WebDevServiceLayout({
               </div>
             </div>
           </div>
-
+ 
         </div>
       </section>
-
+ 
       {/* ───────────────── 7. STATS STRIP ───────────────── */}
-      <section className="bg-slate-50/50 border-t border-slate-100 py-16">
+      <section className="bg-slate-50/50 border-t border-slate-100 py-10 md:py-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           
-          <div className="bg-white border border-slate-200/80 rounded-[2.2rem] p-8 md:p-10 grid grid-cols-2 md:grid-cols-4 gap-8 items-center shadow-[0_4px_25px_rgba(0,0,0,0.01)]">
+          <div className="bg-white border border-slate-200/80 rounded-[2.2rem] p-6 md:p-10 grid grid-cols-2 md:grid-cols-4 gap-8 items-center shadow-[0_4px_25px_rgba(0,0,0,0.01)]">
             
             {/* Stat 1 */}
             <div className="flex flex-row items-center gap-4 py-2 justify-center md:justify-start">
