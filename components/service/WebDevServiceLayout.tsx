@@ -562,11 +562,11 @@ export default function WebDevServiceLayout({
               {faqs.map((faq, i) => (
                 <div
                   key={i}
-                  className="border-b border-slate-100 py-4.5 last:border-0"
+                  className="border-b border-slate-100 py-3.5 last:border-0"
                 >
                   <button
                     onClick={() => setActiveFaq(activeFaq === i ? null : i)}
-                    className="flex w-full items-center justify-between text-left font-black text-slate-800 text-[13px] hover:text-amber-500 transition-colors py-2"
+                    className="flex w-full items-center justify-between text-left font-semibold text-slate-800 text-[14px] hover:text-amber-500 transition-colors py-2"
                   >
                     <span>{faq.question}</span>
                     <span className="text-slate-400 shrink-0 text-lg font-bold ml-4 w-5 h-5 flex items-center justify-center transition-transform duration-200 select-none">
@@ -593,48 +593,54 @@ export default function WebDevServiceLayout({
           </div>
 
           {/* Right Column (Cream CTA Card) */}
-          <div className="lg:col-span-5 flex flex-col bg-[#FFFBF2] border border-amber-500/5 rounded-[2.5rem] p-8 md:p-10 shadow-sm relative overflow-hidden justify-center min-h-[380px] lg:min-h-0">
+          <div className="lg:col-span-5 flex flex-col bg-[#FFFBF2] border border-amber-500/5 rounded-[2.5rem] p-8 md:p-10 shadow-sm relative overflow-hidden justify-between">
             {/* Background radial highlight */}
             <div className="absolute top-[-50px] right-[-50px] w-48 h-48 rounded-full bg-amber-500/5 blur-[80px]" />
             
-            {/* Left aligned text & buttons (on desktop occupies 60% of card) */}
-            <div className="w-full md:w-[60%] flex flex-col justify-center gap-6 relative z-10">
-              <div>
-                <h3 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-tight">
-                  Ready to Build or Redesign Your Website?
-                </h3>
-                <p className="mt-4 text-xs font-semibold text-slate-500 leading-relaxed">
-                  Let's build a website that reflects your brand, loads fast and helps your business grow.
-                </p>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch h-full relative z-10">
+              
+              {/* Left Side: Text and Buttons (65%) */}
+              <div className="md:col-span-7 flex flex-col justify-center h-full gap-6">
+                <div>
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-tight">
+                    Ready to Build or Redesign Your Website?
+                  </h3>
+                  <p className="mt-4 text-xs font-semibold text-slate-500 leading-relaxed">
+                    Let's build a website that reflects your brand, loads fast and helps your business grow.
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-3 w-full max-w-[240px]">
+                  <Link
+                    href={`/contact?service=${encodeURIComponent(serviceName)}`}
+                    className="flex items-center justify-between bg-amber-500 hover:bg-amber-600 active:scale-98 transition-all px-5 py-3.5 rounded-xl text-slate-950 font-black text-[12px] uppercase tracking-wider shadow-sm"
+                  >
+                    <span>Discuss Your Project</span>
+                    <ArrowRight size={14} className="stroke-[3]" />
+                  </Link>
+
+                  <a
+                    href={`https://wa.me/919986389444?text=Hi%2C%20I'm%20interested%20in%20your%20${encodeURIComponent(serviceName)}%20service.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 active:scale-98 transition-all px-5 py-3.5 rounded-xl text-slate-800 font-black text-[12px] uppercase tracking-wider"
+                  >
+                    <FaWhatsapp size={16} className="text-[#25D366]" />
+                    <span>Chat on WhatsApp</span>
+                  </a>
+                </div>
               </div>
 
-              <div className="flex flex-col gap-3 w-full max-w-[240px]">
-                <Link
-                  href={`/contact?service=${encodeURIComponent(serviceName)}`}
-                  className="flex items-center justify-between bg-amber-500 hover:bg-amber-600 active:scale-98 transition-all px-5 py-3.5 rounded-xl text-slate-950 font-black text-[12px] uppercase tracking-wider shadow-sm"
-                >
-                  <span>Discuss Your Project</span>
-                  <ArrowRight size={14} className="stroke-[3]" />
-                </Link>
-
-                <a
-                  href={`https://wa.me/919986389444?text=Hi%2C%20I'm%20interested%20in%20your%20${encodeURIComponent(serviceName)}%20service.`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 active:scale-98 transition-all px-5 py-3.5 rounded-xl text-slate-800 font-black text-[12px] uppercase tracking-wider"
-                >
-                  <FaWhatsapp size={16} className="text-[#25D366]" />
-                  <span>Chat on WhatsApp</span>
-                </a>
+              {/* Right Side: Laptop Guy cutout positioned flush at the bottom right */}
+              <div className="md:col-span-5 relative min-h-[220px] md:min-h-0 md:h-full md:-mr-10 md:-mb-10 md:-mt-10 overflow-hidden">
+                <img
+                  src="/images/laptop-guy.png"
+                  alt="Clever Crow consultant typing on laptop"
+                  className="absolute bottom-0 right-0 h-full w-auto object-contain object-right-bottom select-none pointer-events-none"
+                />
               </div>
+
             </div>
-
-            {/* Laptop Guy cutout positioned flush at the bottom right */}
-            <img
-              src="/images/laptop-guy.png"
-              alt="Clever Crow consultant typing on laptop"
-              className="absolute bottom-0 right-0 h-[190px] md:h-[95%] lg:h-[100%] w-auto object-contain object-right-bottom z-0 pointer-events-none select-none"
-            />
           </div>
 
         </div>
