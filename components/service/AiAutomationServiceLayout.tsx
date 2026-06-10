@@ -559,31 +559,13 @@ export default function AiAutomationServiceLayout({
                 {/* Robot Illustration and Header */}
                 <div className="flex flex-col items-center text-center font-sans">
                   
-                  {/* High-fidelity CSS/SVG Robot Mascot */}
-                  <div className="w-28 h-28 relative my-3">
-                    <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      {/* Body */}
-                      <rect x="30" y="45" width="40" height="30" rx="15" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="2.5" />
-                      <rect x="38" y="52" width="24" height="16" rx="8" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1.5" />
-                      
-                      {/* Head */}
-                      <rect x="25" y="16" width="50" height="32" rx="16" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2.5" />
-                      
-                      {/* Face Screen */}
-                      <rect x="31" y="21" width="38" height="22" rx="11" fill="#1e293b" />
-                      
-                      {/* Glowing Eyes */}
-                      <circle cx="42" cy="32" r="4" fill="#f59e0b" className="animate-pulse" />
-                      <circle cx="58" cy="32" r="4" fill="#f59e0b" className="animate-pulse" />
-                      
-                      {/* Antennas */}
-                      <line x1="50" y1="16" x2="50" y2="8" stroke="#cbd5e1" strokeWidth="3" />
-                      <circle cx="50" cy="6" r="3" fill="#f59e0b" />
-                      
-                      {/* Arms */}
-                      <rect x="18" y="48" width="10" height="18" rx="5" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1.5" />
-                      <rect x="72" y="48" width="10" height="18" rx="5" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1.5" />
-                    </svg>
+                  {/* High-fidelity 3D Robot Mascot PNG */}
+                  <div className="w-36 h-36 relative my-2 flex items-center justify-center overflow-hidden">
+                    <img 
+                      src="/images/cute-robot-mascot.png" 
+                      alt="Clever Crow AI Robot Mascot" 
+                      className="w-full h-full object-contain select-none pointer-events-none"
+                    />
                   </div>
 
                   <h3 className="text-base md:text-lg font-black text-slate-900 tracking-tight leading-tight font-sans mt-2">
