@@ -47,7 +47,9 @@ import {
   Bot,
   User,
   Send,
-  Workflow
+  Workflow,
+  HeartPulse,
+  Luggage
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -82,7 +84,9 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
   building: Building,
   heart: Heart,
   bed: Bed,
-  graduationcap: GraduationCap
+  graduationcap: GraduationCap,
+  heartpulse: HeartPulse,
+  luggage: Luggage
 };
 
 function getServiceConfig(title: string, iconKey: string) {
@@ -236,9 +240,9 @@ export default function AiAutomationServiceLayout({
 
   // Where Automation Helps
   const industryHelps = [
-    { title: "Real Estate", desc: "Capture leads, schedule visits and close faster.", icon: "building" },
-    { title: "Healthcare", desc: "Manage appointments, reminders and patient queries.", icon: "heart" },
-    { title: "Hospitality", desc: "Handle bookings, inquiries and guest communication.", icon: "bed" },
+    { title: "Real Estate", desc: "Capture leads, schedule visits and close faster.", icon: "home" },
+    { title: "Healthcare", desc: "Manage appointments, reminders and patient queries.", icon: "heartpulse" },
+    { title: "Hospitality", desc: "Handle bookings, inquiries and guest communication.", icon: "luggage" },
     { title: "Education", desc: "Nurture enquiries and improve admissions.", icon: "graduationcap" },
     { title: "Service Businesses", desc: "Automate follow-ups and delight your customers.", icon: "users" }
   ];
@@ -496,12 +500,12 @@ export default function AiAutomationServiceLayout({
           {industryHelps.map((ind, i) => {
             const IndIcon = iconMap[ind.icon.toLowerCase()] || Building;
             return (
-              <div key={i} className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm flex flex-col gap-3 items-start hover:border-amber-500/20 transition-colors font-sans">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 shrink-0">
-                  <IndIcon size={18} className="stroke-[2]" />
-                </div>
-                <div>
-                  <span className="text-[11px] font-black text-slate-800 tracking-tight leading-none block mb-1">
+              <div key={i} className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm flex flex-row items-center gap-4 hover:border-amber-500/20 transition-colors font-sans">
+                {/* Large Outline Icon (no background container) */}
+                <IndIcon size={38} className="text-[#F59E0B] shrink-0 stroke-[1.5]" />
+                {/* Text content */}
+                <div className="flex flex-col justify-start">
+                  <span className="text-[11px] font-black text-slate-800 tracking-tight leading-none block mb-1.5">
                     {ind.title}
                   </span>
                   <span className="text-[10px] font-semibold text-slate-500 leading-normal block">
