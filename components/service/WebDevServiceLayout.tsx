@@ -188,56 +188,6 @@ export default function WebDevServiceLayout({
   pageUrl
 }: WebDevServiceLayoutProps) {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-  const [formData, setFormData] = useState({ name: "", phone: "" });
-  const [isLoading, setIsLoading] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError("");
-
-    try {
-      const response = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: "",
-          message: `Enquiry for service page: ${serviceName}. Referred URL: ${window.location.href}`,
-          source: `Service Page: ${serviceName}`
-        })
-      });
-
-      if (!response.ok) throw new Error("Failed to send");
-
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("event", "conversion", {
-          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49"
-        });
-        (window as any).gtag("event", "GenerateLead", {
-          event_category: "Leads",
-          event_label: "Service Lead Form Submit"
-        });
-      }
-
-      setSubmitSuccess(true);
-      setTimeout(() => {
-        window.location.href = "/thank-you";
-      }, 1500);
-    } catch {
-      setError("Failed to submit inquiry. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return (
     <div className="bg-white min-h-screen text-slate-800 antialiased font-body pt-24 pb-20 selection:bg-yellow-500/20">
@@ -488,58 +438,80 @@ export default function WebDevServiceLayout({
       </section>
 
       {/* ───────────────── 4. TWO-COLUMN FEATURES (TECHNOLOGIES & BENEFITS) ───────────────── */}
-      <section className="py-24 max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          
-          {/* Left Column (Technologies Grid) */}
-          <div className="lg:col-span-6 flex flex-col items-start">
-            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight font-sans">
-              Modern Technologies We Work With
-            </h2>
-            <p className="mt-2.5 text-slate-500 text-sm font-medium leading-relaxed max-w-md">
-              We leverage modern architectures and frameworks to ensure your site is fast, scalable, and secure.
-            </p>
-
-            {/* Badges Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full mt-10">
-              {defaultTechnologies.map((tech, i) => (
-                <div
-                  key={i}
-                  className="bg-white border border-slate-100 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm hover:border-slate-200 hover:shadow-md transition-all gap-3 cursor-default"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center shrink-0">
-                    {tech.svg}
-                  </div>
-                  <span className="text-[10px] font-extrabold text-slate-700 tracking-wider uppercase">
-                    {tech.name}
-                  </span>
+      <section className="py-24 bg-slate-50/40 border-t border-b border-slate-100/80">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            {/* Left Column Card (Technologies) */}
+            <div className="lg:col-span-6 flex flex-col bg-white border border-slate-100 rounded-[2.5rem] p-8 md:p-10 shadow-sm justify-between">
+              <div>
+                <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight font-sans">
+                  Modern Technologies We Work With
+                </h2>
+                <div className="grid grid-cols-4 gap-4 w-full mt-8">
+                  {defaultTechnologies.map((tech, i) => (
+                    <div
+                      key={i}
+                      className="bg-slate-50/50 border border-slate-100/60 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-slate-200 hover:shadow-sm transition-all gap-2 cursor-default"
+                    >
+                      <div className="flex h-10 w-10 items-center justify-center shrink-0">
+                        {tech.svg}
+                      </div>
+                      <span className="text-[10px] font-bold text-slate-700 tracking-tight leading-tight">
+                        {tech.name}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+              <div className="mt-8">
+                <Link href="/contact" className="inline-flex items-center gap-1.5 text-[11px] font-black text-amber-500 hover:text-amber-600 uppercase tracking-widest transition-colors">
+                  More Tools & Integrations
+                  <ArrowRight size={12} className="stroke-[2.5]" />
+                </Link>
+              </div>
             </div>
-          </div>
 
-          {/* Right Column (Why Choose Us benefits) */}
-          <div className="lg:col-span-6 flex flex-col items-start bg-slate-50/50 border border-slate-100 rounded-[2.5rem] p-8 md:p-10">
-            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight font-sans">
-              {whyChooseTitle}
-            </h2>
-
-            <div className="mt-8 flex flex-col gap-6 w-full">
-              {whyChoose.map((point, i) => (
-                <div key={i} className="flex gap-4 items-start">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-500 text-slate-900 shrink-0 shadow-sm shadow-amber-500/10">
-                    <Check size={12} className="stroke-[3]" />
-                  </div>
+            {/* Right Column Card (Why Choose Clever Crow) */}
+            <div className="lg:col-span-6 flex flex-col bg-white border border-slate-100 rounded-[2.5rem] p-8 md:p-10 shadow-sm relative overflow-hidden justify-between">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch h-full">
+                
+                {/* Left part of this card: Checkpoints (60%) */}
+                <div className="md:col-span-7 flex flex-col justify-between">
                   <div>
-                    <span className="text-[13px] font-black text-slate-800 leading-tight block">
-                      {point}
-                    </span>
+                    <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight font-sans">
+                      {whyChooseTitle}
+                    </h2>
+                    <div className="mt-6 flex flex-col gap-4">
+                      {whyChoose.map((point, i) => (
+                        <div key={i} className="flex gap-3 items-start">
+                          <div className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500 text-white shrink-0 shadow-sm shadow-amber-500/10">
+                            <Check size={11} className="stroke-[3]" />
+                          </div>
+                          <span className="text-[12px] font-bold text-slate-600 leading-tight">
+                            {point}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
 
+                {/* Right part of this card: Mockup Image (40%) */}
+                <div className="md:col-span-5 flex items-center justify-center md:h-full relative min-h-[160px] md:min-h-0">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <img
+                      src="/images/device-mockup.png"
+                      alt="Clever Crow website design mockups"
+                      className="max-h-[160px] md:max-h-none w-auto object-contain md:absolute md:right-[-20px] md:bottom-[-20px] md:w-[130%]"
+                    />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
@@ -579,10 +551,10 @@ export default function WebDevServiceLayout({
 
       {/* ───────────────── 6. FAQ & FINAL CTA (TWO-COLUMN GRID) ───────────────── */}
       <section id="contact-form" className="py-24 max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Left Column (FAQs) */}
-          <div className="lg:col-span-7 flex flex-col items-start">
+          <div className="lg:col-span-7 flex flex-col items-start bg-white border border-slate-100 rounded-[2.5rem] p-8 md:p-10 shadow-sm">
             <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-100 px-3 py-1 rounded-full border border-slate-200/50 mb-4">
               QUESTIONS
             </span>
@@ -591,23 +563,20 @@ export default function WebDevServiceLayout({
             </h2>
 
             {/* Accordion list */}
-            <div className="w-full flex flex-col gap-3">
+            <div className="w-full flex flex-col">
               {faqs.map((faq, i) => (
                 <div
                   key={i}
-                  className="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm"
+                  className="border-b border-slate-100 py-4.5 last:border-0"
                 >
                   <button
                     onClick={() => setActiveFaq(activeFaq === i ? null : i)}
-                    className="flex w-full items-center justify-between px-6 py-4.5 text-left font-black text-slate-800 text-[13px] hover:text-amber-500 transition-colors"
+                    className="flex w-full items-center justify-between text-left font-black text-slate-800 text-[13px] hover:text-amber-500 transition-colors py-2"
                   >
                     <span>{faq.question}</span>
-                    <ChevronDown
-                      size={16}
-                      className={`text-slate-400 shrink-0 transition-transform duration-200 ${
-                        activeFaq === i ? "rotate-180 text-amber-500" : ""
-                      }`}
-                    />
+                    <span className="text-slate-400 shrink-0 text-lg font-bold ml-4 w-5 h-5 flex items-center justify-center transition-transform duration-200 select-none">
+                      {activeFaq === i ? "−" : "+"}
+                    </span>
                   </button>
                   <AnimatePresence>
                     {activeFaq === i && (
@@ -617,7 +586,7 @@ export default function WebDevServiceLayout({
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.2, ease: "easeInOut" }}
                       >
-                        <div className="px-6 pb-5 pt-1 text-xs font-semibold text-slate-500 leading-relaxed border-t border-slate-50">
+                        <div className="pb-4 pt-1 text-xs font-semibold text-slate-500 leading-relaxed">
                           {faq.answer}
                         </div>
                       </motion.div>
@@ -628,78 +597,55 @@ export default function WebDevServiceLayout({
             </div>
           </div>
 
-          {/* Right Column (CTA Card with Lead Form) */}
-          <div className="lg:col-span-5 flex flex-col bg-slate-900 text-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl relative overflow-hidden">
-            {/* Subtle glow badge */}
-            <div className="absolute top-[-50px] right-[-50px] w-48 h-48 rounded-full bg-amber-500/10 blur-[80px]" />
+          {/* Right Column (Cream CTA Card) */}
+          <div className="lg:col-span-5 flex flex-col bg-[#FFFBF2] border border-amber-500/5 rounded-[2.5rem] p-8 md:p-10 shadow-sm relative overflow-hidden justify-between min-h-[380px] lg:min-h-0">
+            {/* Background radial highlight */}
+            <div className="absolute top-[-50px] right-[-50px] w-48 h-48 rounded-full bg-amber-500/5 blur-[80px]" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch h-full relative z-10">
+              
+              {/* Left Side: Text and Buttons (65%) */}
+              <div className="md:col-span-7 flex flex-col justify-between h-full gap-8">
+                <div>
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-tight">
+                    Ready to Build or Redesign Your Website?
+                  </h3>
+                  <p className="mt-4 text-xs font-semibold text-slate-500 leading-relaxed">
+                    Let's build a website that reflects your brand, loads fast and helps your business grow.
+                  </p>
+                </div>
 
-            <span className="text-[10px] font-black uppercase tracking-widest text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 w-fit">
-              GET IN TOUCH
-            </span>
-            <h3 className="text-xl md:text-2xl font-black tracking-tight mt-5 leading-tight">
-              Ready to Build or Redesign Your Website?
-            </h3>
-            <p className="mt-3 text-xs font-semibold text-slate-400 leading-relaxed">
-              Let's build a website that reflects your brand, loads fast, and converts traffic into customers. Reach out now.
-            </p>
+                <div className="flex flex-col gap-3 w-full">
+                  <Link
+                    href={`/contact?service=${encodeURIComponent(serviceName)}`}
+                    className="flex items-center justify-between bg-amber-500 hover:bg-amber-600 active:scale-98 transition-all px-5 py-3.5 rounded-xl text-slate-950 font-black text-[12px] uppercase tracking-wider shadow-sm"
+                  >
+                    <span>Discuss Your Project</span>
+                    <ArrowRight size={14} className="stroke-[3]" />
+                  </Link>
 
-            {/* Lead Form */}
-            {submitSuccess ? (
-              <div className="mt-8 rounded-2xl border border-green-500/20 bg-green-500/10 p-6 text-center text-sm font-bold text-green-400">
-                Inquiry Sent Successfully! Redirecting...
+                  <a
+                    href={`https://wa.me/919986389444?text=Hi%2C%20I'm%20interested%20in%20your%20${encodeURIComponent(serviceName)}%20service.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 active:scale-98 transition-all px-5 py-3.5 rounded-xl text-slate-800 font-black text-[12px] uppercase tracking-wider"
+                  >
+                    <FaWhatsapp size={16} className="text-[#25D366]" />
+                    <span>Chat on WhatsApp</span>
+                  </a>
+                </div>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="h-13 w-full rounded-2xl bg-white/5 border border-white/10 px-5 text-xs font-bold text-white placeholder:text-slate-500 focus:outline-none focus:border-amber-500 focus:bg-white/10 transition-all"
+
+              {/* Right Side: Laptop Guy cutout (35%) */}
+              <div className="md:col-span-5 flex items-end justify-center relative min-h-[220px] md:min-h-0">
+                <img
+                  src="/images/laptop-guy.png"
+                  alt="Clever Crow consultant typing on laptop"
+                  className="absolute bottom-[-40px] right-[-40px] w-[140%] max-w-[280px] md:max-w-none object-contain pointer-events-none select-none"
                 />
+              </div>
 
-                <input
-                  type="tel"
-                  name="phone"
-                  required
-                  placeholder="Phone Number"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="h-13 w-full rounded-2xl bg-white/5 border border-white/10 px-5 text-xs font-bold text-white placeholder:text-slate-500 focus:outline-none focus:border-amber-500 focus:bg-white/10 transition-all"
-                />
-
-                {error && (
-                  <span className="text-red-400 text-[11px] font-bold mt-1 block">
-                    {error}
-                  </span>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="h-14 w-full rounded-2xl bg-amber-500 text-slate-900 font-sans font-black uppercase tracking-wider text-xs shadow-lg shadow-amber-500/10 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all disabled:opacity-75 cursor-pointer mt-2"
-                >
-                  {isLoading ? "Submitting..." : "Discuss Your Project"}
-                </button>
-              </form>
-            )}
-
-            {/* WhatsApp CTA alternative */}
-            <div className="mt-6 flex items-center justify-center gap-2 border-t border-white/5 pt-6">
-              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Or Instant Chat</span>
-              <a
-                href={`https://wa.me/919986389444?text=Hi,%20I'm%20interested%2520in%2520your%2520${serviceName}%2520service.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 rounded-full bg-[#25D366] text-white py-1.5 px-4 text-[10px] font-extrabold uppercase tracking-wider hover:bg-[#20ba59] active:scale-95 transition-all"
-              >
-                <FaWhatsapp size={14} />
-                WhatsApp
-              </a>
             </div>
-
           </div>
 
         </div>
