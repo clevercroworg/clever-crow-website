@@ -24,7 +24,19 @@ import {
   Shield,
   Layers,
   HelpCircle,
-  CheckCircle2
+  CheckCircle2,
+  Target,
+  Rocket,
+  Headphones,
+  Home,
+  Calendar,
+  Briefcase,
+  Database,
+  Monitor,
+  Users,
+  Award,
+  Network,
+  Pencil
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -41,7 +53,20 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
   wrench: Wrench,
   search: Search,
   chevrondown: ChevronDown,
-  checkcircle2: CheckCircle2
+  checkcircle2: CheckCircle2,
+  target: Target,
+  shield: Shield,
+  pencil: Pencil,
+  rocket: Rocket,
+  headphones: Headphones,
+  home: Home,
+  calendar: Calendar,
+  briefcase: Briefcase,
+  database: Database,
+  monitor: Monitor,
+  users: Users,
+  award: Award,
+  network: Network
 };
 
 // Default technologies list with custom SVG badges
@@ -121,14 +146,14 @@ const defaultTechnologies = [
 
 // Default 8 business goals list
 const defaultBusinessGoals = [
-  { label: "Company Profile Websites", icon: Laptop },
-  { label: "Lead Generation Websites", icon: Search },
-  { label: "Ecommerce Stores", icon: ShoppingCart },
-  { label: "SaaS Product Websites", icon: Cpu },
-  { label: "Landing Pages for Ads", icon: Layout },
-  { label: "Booking & Enquiry Websites", icon: ChevronDown },
-  { label: "Portfolio Websites", icon: Layers },
-  { label: "Service Business Websites", icon: Megaphone }
+  { label: "Company Profile Websites", icon: "home" },
+  { label: "Lead Generation Websites", icon: "target" },
+  { label: "Ecommerce Stores", icon: "shoppingcart" },
+  { label: "SaaS Product Websites", icon: "database" },
+  { label: "Landing Pages for Ads", icon: "layout" },
+  { label: "Booking & Enquiry Websites", icon: "calendar" },
+  { label: "Portfolio Websites", icon: "layers" },
+  { label: "Service Business Websites", icon: "briefcase" }
 ];
 
 type WebDevServiceLayoutProps = {
@@ -339,9 +364,9 @@ export default function WebDevServiceLayout({
         
         {/* Title */}
         <div className="mb-16 text-center max-w-2xl mx-auto">
-          <span className="text-[10px] font-black uppercase tracking-widest text-amber-500 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/25">
+          <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3">
             WHAT WE BUILD
-          </span>
+          </p>
           <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mt-4 font-sans">
             {servicesTitle}
           </h2>
@@ -351,7 +376,7 @@ export default function WebDevServiceLayout({
         </div>
 
         {/* 6-Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {services.map((svc, i) => {
             const IconComponent = iconMap[svc.icon.toLowerCase().replace(/[^a-z0-9]/g, "")] || Laptop;
             return (
@@ -359,28 +384,26 @@ export default function WebDevServiceLayout({
                 key={i}
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.2 }}
-                className="group relative bg-white border border-slate-100 rounded-[2.2rem] p-8 shadow-sm hover:shadow-[0_25px_50px_rgba(0,0,0,0.025)] flex flex-col justify-between h-[255px] cursor-pointer"
+                className="group relative bg-white border border-slate-200/60 rounded-[2.2rem] p-6 shadow-sm hover:shadow-[0_20px_40px_rgba(0,0,0,0.02)] flex flex-col items-center text-center justify-between min-h-[330px] cursor-pointer"
               >
-                <div>
-                  {/* Circular Icon badge */}
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-600 shadow-sm border border-amber-500/10 shrink-0">
-                    <IconComponent size={18} className="stroke-[2.5]" />
+                <div className="flex flex-col items-center">
+                  {/* Large Outline Icon (no box) */}
+                  <div className="flex items-center justify-center shrink-0">
+                    <IconComponent className="w-12 h-12 text-amber-500 stroke-[1.5]" />
                   </div>
                   {/* Text content */}
-                  <h3 className="text-base font-black text-slate-900 tracking-tight mt-5">
+                  <h3 className="text-sm font-black text-slate-800 tracking-tight mt-6 leading-tight">
                     {svc.title}
                   </h3>
-                  <p className="text-xs font-semibold text-slate-400 mt-2.5 leading-relaxed line-clamp-3">
+                  <p className="text-[11px] font-semibold text-slate-500 mt-3.5 leading-relaxed">
                     {svc.description}
                   </p>
                 </div>
 
-                {/* Bottom Arrow */}
-                <div className="mt-4 flex items-center justify-between border-t border-slate-50 pt-4">
-                  <Link href={svc.href} className="text-[10px] font-black text-slate-500 uppercase tracking-widest group-hover:text-amber-500 transition-colors">
-                    Learn More
-                  </Link>
-                  <ArrowRight size={14} className="text-slate-400 group-hover:text-amber-500 group-hover:translate-x-1 transition-all" />
+                {/* Bottom link (centered, no border top divider) */}
+                <div className="mt-6 flex items-center justify-center gap-1 text-[10px] font-black text-amber-500 uppercase tracking-widest group-hover:text-amber-600 transition-colors">
+                  <span>Learn More</span>
+                  <ArrowRight size={10} className="stroke-[3] transition-transform group-hover:translate-x-0.5" />
                 </div>
               </motion.div>
             );
@@ -395,37 +418,38 @@ export default function WebDevServiceLayout({
           
           {/* Header */}
           <div className="mb-16 text-center max-w-2xl mx-auto">
-            <span className="text-[10px] font-black uppercase tracking-widest text-amber-500 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/25">
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3">
               OUR APPROACH
-            </span>
+            </p>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mt-4 font-sans">
               {processTitle}
             </h2>
           </div>
 
-          {/* 7-Step horizontal scroll timeline (scroll on md, stack on mobile) */}
+          {/* 7-Step horizontal timeline */}
           <div className="relative">
             {/* Background line connecting elements (desktop only) */}
-            <div className="absolute top-[37px] left-12 right-12 h-0.5 bg-slate-200/80 hidden lg:block z-0" />
+            <div className="absolute top-[38px] left-[8%] right-[8%] h-[2px] bg-slate-100 hidden lg:block z-0" />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-8 items-start relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-8 items-start relative z-10">
               {process.map((step, idx) => {
                 const ProcessIcon = iconMap[step.icon.toLowerCase().replace(/[^a-z0-9]/g, "")] || Search;
                 return (
-                  <div key={idx} className="flex flex-col items-center lg:items-start text-center lg:text-left group">
+                  <div key={idx} className="flex flex-col items-center text-center group">
                     {/* Step circle index badge */}
-                    <div className="relative flex h-[76px] w-[76px] items-center justify-center rounded-full bg-white border border-slate-200 shadow-sm group-hover:border-amber-500 group-hover:shadow-[0_0_15px_rgba(245,158,11,0.15)] transition-all shrink-0">
-                      <span className="absolute top-[-8px] text-[10px] font-black text-amber-500 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                    <div className="relative flex h-[76px] w-[76px] items-center justify-center rounded-full bg-white border border-slate-200 shadow-sm group-hover:border-amber-500 transition-all shrink-0">
+                      {/* Number badge on top edge */}
+                      <div className="absolute -top-2 left-1/2 -translate-x-1/2 flex h-5 w-5 items-center justify-center rounded-full bg-white border border-amber-500 text-[10px] font-black text-amber-500 shadow-sm">
                         {step.step}
-                      </span>
-                      <ProcessIcon size={20} className="text-slate-600 group-hover:text-amber-500 transition-colors stroke-[2.2]" />
+                      </div>
+                      <ProcessIcon className="w-8 h-8 text-amber-500 stroke-[1.5] transition-colors" />
                     </div>
 
                     {/* Title & Info */}
-                    <h4 className="text-[14px] font-black text-slate-800 tracking-tight mt-5">
+                    <h4 className="text-sm font-black text-slate-800 tracking-tight mt-5 text-center">
                       {step.title}
                     </h4>
-                    <p className="text-[11px] font-semibold text-slate-400 mt-2 leading-relaxed max-w-[150px] mx-auto lg:mx-0">
+                    <p className="text-[11px] font-semibold text-slate-500 mt-2 leading-relaxed text-center max-w-[150px] mx-auto">
                       {step.description}
                     </p>
                   </div>
@@ -519,29 +543,33 @@ export default function WebDevServiceLayout({
           
           {/* Header */}
           <div className="mb-16 text-center max-w-2xl mx-auto">
-            <span className="text-[10px] font-black uppercase tracking-widest text-amber-500 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/25">
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3">
               BUSINESS GOALS
-            </span>
+            </p>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mt-4 font-sans">
               Websites for Different Business Goals
             </h2>
           </div>
 
-          {/* Grid of 8 Goal items */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {defaultBusinessGoals.map((goal, idx) => (
-              <div
-                key={idx}
-                className="bg-white border border-slate-100 rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-all gap-4"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-600 shrink-0">
-                  <goal.icon size={22} className="stroke-[2.2]" />
+          {/* Grid of 8 Goal items (no outer cards, small icon containers) */}
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">
+            {defaultBusinessGoals.map((goal, idx) => {
+              const GoalIcon = iconMap[goal.icon.toLowerCase()] || Laptop;
+              return (
+                <div
+                  key={idx}
+                  className="flex flex-col items-center text-center gap-3 group"
+                >
+                  {/* Small rounded icon box */}
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-200/60 shadow-sm shrink-0 group-hover:border-amber-500 transition-colors">
+                    <GoalIcon className="w-6 h-6 text-amber-500 stroke-[1.5]" />
+                  </div>
+                  <span className="text-[11px] md:text-xs font-black text-slate-700 leading-snug mt-1">
+                    {goal.label}
+                  </span>
                 </div>
-                <span className="text-[12px] font-black text-slate-700 tracking-tight leading-snug">
-                  {goal.label}
-                </span>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
         </div>
@@ -645,27 +673,47 @@ export default function WebDevServiceLayout({
       </section>
 
       {/* ───────────────── 7. STATS STRIP ───────────────── */}
-      <section className="bg-slate-50/50 border-t border-slate-100 py-12">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+      <section className="bg-slate-50/50 border-t border-slate-100 py-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           
-          <div className="flex flex-col items-center text-center">
-            <span className="text-3xl font-black text-slate-900 tracking-tight leading-none">90+</span>
-            <span className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest mt-2 block">Websites Delivered</span>
-          </div>
+          <div className="bg-white border border-slate-200/80 rounded-[2.2rem] p-8 md:p-10 grid grid-cols-2 md:grid-cols-4 gap-8 items-center shadow-[0_4px_25px_rgba(0,0,0,0.01)]">
+            
+            {/* Stat 1 */}
+            <div className="flex flex-row items-center gap-4 py-2 justify-center md:justify-start">
+              <Monitor className="w-10 h-10 text-amber-500 stroke-[1.5] shrink-0" />
+              <div>
+                <span className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight block leading-none">90+</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-1 block">Websites Delivered</span>
+              </div>
+            </div>
 
-          <div className="flex flex-col items-center text-center">
-            <span className="text-3xl font-black text-slate-900 tracking-tight leading-none">50+</span>
-            <span className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest mt-2 block">Happy Clients</span>
-          </div>
+            {/* Stat 2 */}
+            <div className="flex flex-row items-center gap-4 py-2 justify-center md:justify-start">
+              <Users className="w-10 h-10 text-amber-500 stroke-[1.5] shrink-0" />
+              <div>
+                <span className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight block leading-none">50+</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-1 block">Happy Clients</span>
+              </div>
+            </div>
 
-          <div className="flex flex-col items-center text-center">
-            <span className="text-3xl font-black text-slate-900 tracking-tight leading-none">5+</span>
-            <span className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest mt-2 block">Years Experience</span>
-          </div>
+            {/* Stat 3 */}
+            <div className="flex flex-row items-center gap-4 py-2 justify-center md:justify-start">
+              <Award className="w-10 h-10 text-amber-500 stroke-[1.5] shrink-0" />
+              <div>
+                <span className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight block leading-none">5+</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-1 block">Years Experience</span>
+              </div>
+            </div>
 
-          <div className="flex flex-col items-center text-center">
-            <span className="text-3xl font-black text-slate-900 tracking-tight leading-none">10+</span>
-            <span className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest mt-2 block">Industries Served</span>
+            {/* Stat 4 */}
+            <div className="flex flex-row items-center gap-4 py-2 justify-center md:justify-start">
+              <Network className="w-10 h-10 text-amber-500 stroke-[1.5] shrink-0" />
+              <div>
+                <span className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight block leading-none">10+</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-1 block">Industries Served</span>
+              </div>
+            </div>
+
           </div>
 
         </div>
