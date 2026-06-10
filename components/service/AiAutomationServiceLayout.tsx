@@ -81,6 +81,76 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
   graduationcap: GraduationCap
 };
 
+function getServiceConfig(title: string, iconKey: string) {
+  const t = title.toLowerCase();
+  const k = iconKey.toLowerCase();
+  
+  if (t.includes("whatsapp")) {
+    return {
+      icon: FaWhatsapp,
+      bgColor: "bg-emerald-500/10",
+      textColor: "text-emerald-600",
+      borderColor: "hover:border-emerald-500/35",
+      arrowColor: "group-hover:text-emerald-500"
+    };
+  }
+  if (t.includes("chatbot") || t.includes("bot") || k === "cpu") {
+    return {
+      icon: Cpu,
+      bgColor: "bg-amber-500/10",
+      textColor: "text-amber-500",
+      borderColor: "hover:border-amber-500/35",
+      arrowColor: "group-hover:text-amber-500"
+    };
+  }
+  if (t.includes("lead") || k === "target") {
+    return {
+      icon: Target,
+      bgColor: "bg-orange-500/10",
+      textColor: "text-orange-600",
+      borderColor: "hover:border-orange-500/35",
+      arrowColor: "group-hover:text-orange-600"
+    };
+  }
+  if (t.includes("crm") || k === "database") {
+    return {
+      icon: Database,
+      bgColor: "bg-purple-500/10",
+      textColor: "text-purple-600",
+      borderColor: "hover:border-purple-500/35",
+      arrowColor: "group-hover:text-purple-600"
+    };
+  }
+  if (t.includes("sales") || t.includes("follow") || k === "rocket") {
+    return {
+      icon: Rocket,
+      bgColor: "bg-amber-500/10",
+      textColor: "text-amber-600",
+      borderColor: "hover:border-amber-500/35",
+      arrowColor: "group-hover:text-amber-600"
+    };
+  }
+  if (t.includes("workflow") || t.includes("process") || k === "wrench" || k === "network") {
+    return {
+      icon: Network,
+      bgColor: "bg-blue-500/10",
+      textColor: "text-blue-600",
+      borderColor: "hover:border-blue-500/35",
+      arrowColor: "group-hover:text-blue-600"
+    };
+  }
+
+  // Fallback default
+  const FallbackIcon = iconMap[k] || Cpu;
+  return {
+    icon: FallbackIcon,
+    bgColor: "bg-amber-500/10",
+    textColor: "text-amber-500",
+    borderColor: "hover:border-amber-500/35",
+    arrowColor: "group-hover:text-amber-500"
+  };
+}
+
 type ServiceItem = {
   icon: string;
   title: string;
@@ -329,26 +399,32 @@ export default function AiAutomationServiceLayout({
         {/* 3x2 Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {services.map((svc, i) => {
-            const IconComponent = iconMap[svc.icon.toLowerCase().replace(/[^a-z0-9]/g, "")] || Cpu;
+            const config = getServiceConfig(svc.title, svc.icon);
+            const IconComponent = config.icon;
             return (
-              <div
+              <Link
+                href={svc.href}
                 key={i}
-                className="bg-white border border-slate-200/80 rounded-2xl p-4 md:p-5 shadow-sm hover:border-amber-500/25 transition-colors flex gap-4 items-start font-sans"
+                className={`group bg-white border border-slate-200/80 rounded-2xl p-4 md:p-5 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.015)] transition-all duration-300 flex gap-4 items-start font-sans relative cursor-pointer min-h-[110px] ${config.borderColor}`}
               >
                 {/* Icon */}
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/5 text-amber-500 shrink-0 mt-0.5">
-                  <IconComponent size={20} className="stroke-[1.8]" />
+                <div className={`flex h-10 w-10 items-center justify-center rounded-full shrink-0 mt-0.5 ${config.bgColor} ${config.textColor}`}>
+                  <IconComponent size={20} className="w-5 h-5 shrink-0" />
                 </div>
                 {/* Text */}
-                <div className="flex flex-col justify-start">
-                  <h3 className="text-xs md:text-[13px] font-black text-slate-800 tracking-tight leading-snug">
+                <div className="flex flex-col justify-start pr-6">
+                  <h3 className="text-xs md:text-[13px] font-black text-slate-800 tracking-tight leading-snug group-hover:text-slate-900 transition-colors">
                     {svc.title}
                   </h3>
                   <p className="text-[10px] md:text-[11px] font-bold text-slate-500 mt-2 leading-relaxed">
                     {svc.description}
                   </p>
                 </div>
-              </div>
+                {/* Arrow CTA */}
+                <div className="absolute bottom-4 right-4 text-slate-300 transition-transform duration-300 group-hover:translate-x-1">
+                  <ArrowRight size={15} className={`stroke-[2.5] ${config.arrowColor}`} />
+                </div>
+              </Link>
             );
           })}
         </div>
@@ -589,9 +665,9 @@ export default function AiAutomationServiceLayout({
                           <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
                         </linearGradient>
                       </defs>
-                      <path d="M0 32 Q 20 10, 40 18 T 80 5 T 100 15" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M0 32 Q 20 10, 40 18 T 80 5 T 100 15 L 100 40 L 0 40 Z" fill="url(#responseGradient)" />
-                      <circle cx="100" cy="15" r="3" fill="currentColor" className="animate-pulse" />
+                      <path d="M0 32 Q 25 30, 50 15 T 100 8" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M0 32 Q 25 30, 50 15 T 100 8 L 100 40 L 0 40 Z" fill="url(#responseGradient)" />
+                      <circle cx="100" cy="8" r="3" fill="currentColor" className="animate-pulse" />
                     </svg>
                   </div>
                 </div>
