@@ -11,59 +11,81 @@ import {
   ChevronDown,
   ArrowRight,
   Phone,
+  Laptop,
+  Smartphone,
+  Cpu,
+  Megaphone,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
-const navLinks = [
+const servicesMegaMenu = [
   {
-    label: "Development",
-    key: "development",
+    category: "Website Development",
+    icon: Laptop,
+    color: "text-blue-500 bg-blue-50",
     items: [
-      { href: "/services/mobile-app-development", label: "Mobile App Dev", desc: "iOS & Android apps built for scale" },
-      { href: "/services/web-app-development", label: "Web App Dev", desc: "Scalable SaaS & business applications" },
-      { href: "/services/business-websites", label: "Business Websites", desc: "Lead-generating brand & agency sites" },
-      { href: "/services/ecommerce", label: "E-commerce Stores", desc: "High-performance digital shops" },
-      { href: "/services/custom-website-design", label: "Custom UI/UX", desc: "Bespoke interface & design assets" },
-      { href: "/services/wordpress-website-design", label: "WordPress Sites", desc: "Flexible, managed WordPress solutions" },
-      { href: "/services/landing-pages", label: "Landing Pages", desc: "High-conversion product pages" },
-    ],
+      { label: "Business Website Development", href: "/services/business-websites" },
+      { label: "React / Next.js Website Development", href: "/services/custom-website-design" },
+      { label: "Ecommerce Website Development", href: "/services/ecommerce" },
+      { label: "Landing Page Development", href: "/services/landing-pages" },
+      { label: "Website Redesign", href: "/services/custom-website-design" },
+      { label: "Website Maintenance", href: "/services/wordpress-website-design" },
+    ]
   },
   {
-    label: "Marketing",
-    key: "marketing",
+    category: "App Development",
+    icon: Smartphone,
+    color: "text-purple-500 bg-purple-50",
     items: [
-      { href: "/services/google-ads", label: "Google Ads", desc: "Capture high-intent search traffic" },
-      { href: "/services/meta-ads", label: "Meta Ads", desc: "Facebook & Instagram campaigns" },
-      { href: "/services/linkedin-ads", label: "LinkedIn Ads", desc: "B2B client & lead acquisition" },
-      { href: "/services/seo", label: "SEO Services", desc: "Organic search ranking & authority" },
-      { href: "/services/ai-seo", label: "AI SEO", desc: "Next-gen algorithmic traffic growth" },
-      { href: "/services/social-media-marketing", label: "SMM Campaigns", desc: "Grow organic audience & presence" },
-      { href: "/services/social-media-management", label: "Social Management", desc: "End-to-end social operations" },
-    ],
+      { label: "Mobile App Development", href: "/services/mobile-app-development" },
+      { label: "Web App Development", href: "/services/web-app-development" },
+      { label: "SaaS Product Development", href: "/services/web-app-development" },
+      { label: "CRM & Dashboard Development", href: "/services/web-app-development" },
+      { label: "Booking System Development", href: "/services/web-app-development" },
+      { label: "Admin Panel Development", href: "/services/web-app-development" },
+      { label: "Customer Portal Development", href: "/services/web-app-development" },
+    ]
   },
   {
-    label: "Branding",
-    key: "branding",
+    category: "AI Automation",
+    icon: Cpu,
+    color: "text-emerald-500 bg-emerald-50",
     items: [
-      { href: "/services/strategy-planning", label: "Brand Strategy", desc: "Market positioning & growth roadmap" },
-      { href: "/services/logo-design", label: "Logo Design", desc: "Memorable corporate brand marks" },
-      { href: "/services/graphic-design", label: "Graphic Design", desc: "High-impact visual marketing assets" },
-      { href: "/services/content-writing", label: "Content Writing", desc: "Engaging, SEO-optimized copy" },
-      { href: "/services/content-marketing", label: "Content Marketing", desc: "Audience nurturing & funnel setup" },
-      { href: "/services/marketing-strategy", label: "Growth Strategy", desc: "Actionable scaling roadmaps" },
-    ],
+      { label: "AI Chatbot Development", href: "/services/ai-seo" },
+      { label: "WhatsApp Automation", href: "/services/ai-seo" },
+      { label: "Lead Management Automation", href: "/services/ai-seo" },
+      { label: "CRM Automation", href: "/services/ai-seo" },
+      { label: "Sales Follow-Up Automation", href: "/services/ai-seo" },
+      { label: "Workflow Automation", href: "/services/ai-seo" },
+      { label: "AI Customer Support Automation", href: "/services/ai-seo" },
+    ]
   },
   {
-    label: "Creative",
-    key: "creative",
+    category: "Digital Marketing",
+    icon: Megaphone,
+    color: "text-amber-500 bg-amber-50",
     items: [
-      { href: "/services/script-writing", label: "Script Writing", desc: "Scripts for videos, ads & reels" },
-      { href: "/services/video-script-writing", label: "Video Scripts", desc: "Professional video storytelling" },
-      { href: "/services/social-media-copywriting", label: "Social Copy", desc: "High-engagement copywriting" },
-      { href: "/services/social-media-creatives", label: "Social Creatives", desc: "Scroll-stopping social visuals" },
-      { href: "/services/social-media-videos", label: "Social Videos", desc: "Short-form video & Reels production" },
-    ],
-  },
+      { label: "Google Ads Management", href: "/services/google-ads" },
+      { label: "Meta Ads Management", href: "/services/meta-ads" },
+      { label: "SEO Services", href: "/services/seo" },
+      { label: "Social Media Management", href: "/services/social-media-management" },
+      { label: "Lead Generation Campaigns", href: "/services/meta-ads" },
+      { label: "Performance Marketing", href: "/services/google-ads" },
+      { label: "Analytics & Tracking Setup", href: "/services/seo" },
+    ]
+  }
+];
+
+const industriesList = [
+  { label: "Healthcare", href: "/#industries" },
+  { label: "E-commerce", href: "/#industries" },
+  { label: "Education", href: "/#industries" },
+  { label: "Real Estate", href: "/#industries" },
+  { label: "Finance", href: "/#industries" },
+  { label: "Automotive", href: "/#industries" },
+  { label: "Hospitality", href: "/#industries" },
+  { label: "SaaS", href: "/#industries" },
+  { label: "Startups", href: "/#industries" },
 ];
 
 export default function Header() {
@@ -71,6 +93,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
+  const [mobileSubAccordion, setMobileSubAccordion] = useState<string | null>(null);
   const dropdownTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const phoneNumber = "9986389444";
@@ -114,20 +137,6 @@ export default function Header() {
     setActiveDropdown(null);
   }, [pathname]);
 
-  // Auto-expand accordion for active route when mobile menu opens
-  useEffect(() => {
-    if (menuOpen) {
-      const activeGroup = navLinks.find(group =>
-        group.items.some(item => item.href === pathname)
-      );
-      if (activeGroup) {
-        setMobileAccordion(activeGroup.key);
-      } else {
-        setMobileAccordion(null);
-      }
-    }
-  }, [menuOpen, pathname]);
-
   return (
     <header className="fixed inset-x-0 top-4 z-[100] flex justify-center px-4 pointer-events-none">
       <div className="pointer-events-auto flex w-full max-w-[95%] items-center justify-between gap-2 rounded-full border border-white/40 bg-white/80 px-5 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-2xl transition-all hover:bg-white/90 ring-1 ring-white/20">
@@ -146,75 +155,163 @@ export default function Header() {
 
         {/* DESKTOP NAV */}
         <nav className="hidden xl:flex items-center gap-0.5" onMouseLeave={closeDropdown}>
-          {navLinks.map((group) => (
-            <div key={group.key} className="relative" onMouseEnter={() => openDropdown(group.key)}>
-              <button
-                className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase ${
-                  activeDropdown === group.key || group.items.some(item => item.href === pathname)
-                    ? "text-yellow-600 bg-black/5"
-                    : "text-slate-600 hover:text-slate-900"
+          
+          {/* Services Dropdown */}
+          <div className="relative" onMouseEnter={() => openDropdown("services")}>
+            <button
+              className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase ${
+                activeDropdown === "services"
+                  ? "text-yellow-600 bg-black/5"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              Services
+              <ChevronDown
+                size={10}
+                className={`transition-transform duration-300 ${
+                  activeDropdown === "services" ? "rotate-180" : ""
                 }`}
-              >
-                {group.label}
-                <ChevronDown
-                  size={10}
-                  className={`transition-transform duration-300 ${
-                    activeDropdown === group.key || group.items.some(item => item.href === pathname) ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
+              />
+            </button>
 
-              <AnimatePresence>
-                {activeDropdown === group.key && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 12, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                    transition={{ duration: 0.18, ease: "easeOut" }}
-                    className="absolute left-1/2 top-[calc(100%+12px)] -translate-x-1/2"
-                    onMouseEnter={() => openDropdown(group.key)}
-                  >
-                    <div className="w-[600px] rounded-[2rem] bg-white ring-1 ring-black/[0.05] shadow-[0_25px_60px_rgba(0,0,0,0.15)] overflow-hidden p-4 grid grid-cols-2 gap-1.5 border border-slate-100/50">
-                        {group.items.map((item, i) => (
-                          <Link
-                            key={i}
-                            href={item.href}
-                            className={`group flex flex-col justify-center rounded-2xl px-4 py-3 text-left transition-all duration-150 border border-transparent ${
-                              pathname === item.href
-                                ? "bg-yellow-50/80 border-yellow-100/50"
-                                : "hover:bg-slate-50/80 hover:border-slate-100/50"
-                            }`}
-                          >
-                            <div className="flex items-center justify-between gap-1.5">
-                              <span className={`text-[12px] font-black tracking-tight transition-colors duration-150 ${
-                                pathname === item.href ? "text-yellow-600" : "text-slate-800 group-hover:text-yellow-600"
+            <AnimatePresence>
+              {activeDropdown === "services" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 12, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  className="absolute left-1/2 top-[calc(100%+12px)] -translate-x-1/2 z-50"
+                  onMouseEnter={() => openDropdown("services")}
+                >
+                  <div className="w-[1020px] rounded-[2.5rem] bg-white ring-1 ring-black/[0.05] shadow-[0_25px_60px_rgba(0,0,0,0.15)] overflow-hidden p-8 border border-slate-100/50 grid grid-cols-4 gap-8">
+                    {servicesMegaMenu.map((cat, i) => (
+                      <div key={i} className="flex flex-col">
+                        {/* Column Header */}
+                        <div className="flex items-center gap-2.5 mb-4 pb-2 border-b border-slate-100">
+                          <div className={`flex h-7 w-7 items-center justify-center rounded-lg ${cat.color} shrink-0`}>
+                            <cat.icon size={14} className="stroke-[2.5]" />
+                          </div>
+                          <span className="text-[11px] font-black tracking-widest text-slate-800 uppercase leading-none">
+                            {cat.category}
+                          </span>
+                        </div>
+                        
+                        {/* Items */}
+                        <div className="flex flex-col gap-0.5">
+                          {cat.items.map((item, j) => (
+                            <Link
+                              key={j}
+                              href={item.href}
+                              className={`group flex items-center justify-between rounded-xl px-3 py-2 text-left hover:bg-slate-50/80 transition-colors ${
+                                pathname === item.href ? "bg-yellow-50/50" : ""
+                              }`}
+                            >
+                              <span className={`text-[11.5px] font-bold leading-snug transition-colors ${
+                                pathname === item.href 
+                                  ? "text-yellow-600" 
+                                  : "text-slate-500 group-hover:text-yellow-600"
                               }`}>
                                 {item.label}
                               </span>
-                              <ArrowRight size={13} className={`text-yellow-500 transition-all duration-200 ${
-                                pathname === item.href 
-                                  ? "opacity-100 translate-x-0" 
-                                  : "opacity-0 -translate-x-1.5 group-hover:opacity-100 group-hover:translate-x-0"
+                              <ArrowRight size={10} className={`text-yellow-500 transition-all duration-150 ${
+                                pathname === item.href
+                                  ? "opacity-100 translate-x-0"
+                                  : "opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0"
                               }`} />
-                            </div>
-                            {item.desc && (
-                              <span className="text-[10px] font-medium text-slate-400 mt-0.5 leading-snug line-clamp-1 group-hover:text-slate-500 transition-colors">
-                                {item.desc}
-                              </span>
-                            )}
-                          </Link>
-                        ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
+          {/* Work Link */}
+          <Link 
+            href="/success-stories" 
+            className={`rounded-full px-3.5 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase ${
+              pathname === "/success-stories" ? "text-yellow-600 bg-black/5" : "text-slate-600 hover:text-slate-900"
+            }`}
+          >
+            Work
+          </Link>
+
+          {/* Industries Dropdown */}
+          <div className="relative" onMouseEnter={() => openDropdown("industries")}>
+            <button
+              className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase ${
+                activeDropdown === "industries"
+                  ? "text-yellow-600 bg-black/5"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              Industries
+              <ChevronDown
+                size={10}
+                className={`transition-transform duration-300 ${
+                  activeDropdown === "industries" ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            <AnimatePresence>
+              {activeDropdown === "industries" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 12, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  className="absolute left-1/2 top-[calc(100%+12px)] -translate-x-1/2 z-50"
+                  onMouseEnter={() => openDropdown("industries")}
+                >
+                  <div className="w-[220px] rounded-[2rem] bg-white ring-1 ring-black/[0.05] shadow-[0_25px_60px_rgba(0,0,0,0.15)] overflow-hidden p-3 border border-slate-100/50 flex flex-col gap-0.5">
+                    {industriesList.map((item, i) => (
+                      <Link
+                        key={i}
+                        href={item.href}
+                        className={`group flex items-center justify-between rounded-xl px-4 py-2 text-left hover:bg-slate-50/80 transition-colors ${
+                          pathname === item.href ? "bg-yellow-50/50" : ""
+                        }`}
+                      >
+                        <span className={`text-[11.5px] font-bold leading-tight transition-colors ${
+                          pathname === item.href
+                            ? "text-yellow-600"
+                            : "text-slate-500 group-hover:text-yellow-600"
+                        }`}>
+                          {item.label}
+                        </span>
+                        <ArrowRight size={10} className={`text-yellow-500 transition-all duration-150 ${
+                          pathname === item.href
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0"
+                        }`} />
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* About Us Link */}
+          <Link 
+            href="/" 
+            className={`rounded-full px-3.5 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase ${
+              pathname === "/" ? "text-yellow-600 bg-black/5" : "text-slate-600 hover:text-slate-900"
+            }`}
+          >
+            About Us
+          </Link>
+
+          {/* Contact Link */}
           <Link 
             href="/contact" 
-            className={`rounded-full px-3 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase ${
-                pathname === "/contact" ? "text-yellow-600 bg-black/5" : "text-slate-600 hover:text-slate-900"
+            className={`rounded-full px-3.5 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase ${
+              pathname === "/contact" ? "text-yellow-600 bg-black/5" : "text-slate-600 hover:text-slate-900"
             }`}
           >
             Contact
@@ -271,59 +368,163 @@ export default function Header() {
             className="absolute top-20 left-4 right-4 z-50 rounded-[2rem] border border-black/10 bg-white shadow-2xl xl:hidden max-h-[75vh] overflow-y-auto pointer-events-auto flex flex-col justify-between"
           >
             <nav className="p-6 flex flex-col gap-2">
-              {navLinks.map((group) => (
-                <div key={group.key} className="border-b border-slate-50 last:border-0 pb-1">
-                  <button
-                    onClick={() => setMobileAccordion(mobileAccordion === group.key ? null : group.key)}
-                    className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-[14px] transition-all duration-200 border ${
-                      mobileAccordion === group.key || group.items.some(item => item.href === pathname)
-                        ? "text-yellow-600 bg-yellow-50/80 border-yellow-100/50 font-bold"
-                        : "text-slate-700 hover:text-slate-900 hover:bg-slate-50/50 border-transparent font-semibold"
+              
+              {/* Services Accordion */}
+              <div className="border-b border-slate-50 pb-1">
+                <button
+                  onClick={() => setMobileAccordion(mobileAccordion === "services" ? null : "services")}
+                  className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-[14px] transition-all duration-200 border ${
+                    mobileAccordion === "services"
+                      ? "text-yellow-600 bg-yellow-50/80 border-yellow-100/50 font-bold"
+                      : "text-slate-700 hover:text-slate-900 hover:bg-slate-50/50 border-transparent font-semibold"
+                  }`}
+                >
+                  Services
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform duration-300 ${
+                      mobileAccordion === "services" ? "rotate-180 text-yellow-600" : "text-slate-400"
                     }`}
-                  >
-                    {group.label}
-                    <ChevronDown
-                      size={16}
-                      className={`transition-transform duration-300 ${
-                        mobileAccordion === group.key ? "rotate-180 text-yellow-600" : "text-slate-400"
-                      }`}
-                    />
-                  </button>
-                  <AnimatePresence>
-                    {mobileAccordion === group.key && (
-                      <motion.div
-                        key={group.key}
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="ml-3 border-l border-slate-100 pl-3 py-1 flex flex-col gap-1">
-                          {group.items.map((item, i) => (
-                            <Link
-                              key={i}
-                              href={item.href}
-                              className={`flex flex-col py-2 px-3 rounded-xl transition-all duration-150 border ${
-                                pathname === item.href
-                                  ? "bg-yellow-50 text-yellow-600 font-bold border-yellow-100/30"
-                                  : "hover:bg-slate-50 text-slate-600 hover:text-slate-900 border-transparent"
+                  />
+                </button>
+                <AnimatePresence>
+                  {mobileAccordion === "services" && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="ml-3 border-l border-slate-100 pl-3 py-2 flex flex-col gap-1.5">
+                        {servicesMegaMenu.map((cat, i) => (
+                          <div key={i} className="mb-1">
+                            <button
+                              onClick={() => setMobileSubAccordion(mobileSubAccordion === cat.category ? null : cat.category)}
+                              className={`flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-[13px] transition-all duration-150 border ${
+                                mobileSubAccordion === cat.category
+                                  ? "text-yellow-600 font-bold bg-slate-50/50 border-slate-100/30"
+                                  : "text-slate-600 font-semibold border-transparent"
                               }`}
                             >
-                              <span className="text-[13px] font-bold tracking-tight">{item.label}</span>
-                              {item.desc && (
-                                <span className="text-[10px] font-medium text-slate-400 mt-0.5 leading-none">
-                                  {item.desc}
-                                </span>
+                              <div className="flex items-center gap-2">
+                                <cat.icon size={13} className="text-yellow-600" />
+                                <span>{cat.category}</span>
+                              </div>
+                              <ChevronDown
+                                size={14}
+                                className={`transition-transform duration-300 ${
+                                  mobileSubAccordion === cat.category ? "rotate-180 text-yellow-600" : "text-slate-400"
+                                }`}
+                              />
+                            </button>
+                            <AnimatePresence>
+                              {mobileSubAccordion === cat.category && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.2, ease: "easeInOut" }}
+                                  className="overflow-hidden"
+                                >
+                                  <div className="ml-4 border-l border-slate-100 pl-3 py-1 flex flex-col gap-1">
+                                    {cat.items.map((item, j) => (
+                                      <Link
+                                        key={j}
+                                        href={item.href}
+                                        className={`flex items-center justify-between py-2 px-3 rounded-xl transition-all duration-150 border ${
+                                          pathname === item.href
+                                            ? "bg-yellow-50 text-yellow-600 font-bold border-yellow-100/30"
+                                            : "hover:bg-slate-50 text-slate-500 hover:text-slate-900 border-transparent"
+                                        }`}
+                                      >
+                                        <span className="text-[12px] font-bold leading-tight">{item.label}</span>
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </motion.div>
                               )}
-                            </Link>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
+                            </AnimatePresence>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Work Link */}
+              <Link
+                href="/success-stories"
+                className={`block rounded-xl px-4 py-3 text-[14px] transition-all duration-200 border ${
+                  pathname === "/success-stories"
+                    ? "text-yellow-600 bg-yellow-50/80 border-yellow-100/50 font-bold"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-50/50 border-transparent font-semibold"
+                }`}
+              >
+                Work
+              </Link>
+
+              {/* Industries Accordion */}
+              <div className="border-b border-slate-50 pb-1">
+                <button
+                  onClick={() => setMobileAccordion(mobileAccordion === "industries" ? null : "industries")}
+                  className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-[14px] transition-all duration-200 border ${
+                    mobileAccordion === "industries"
+                      ? "text-yellow-600 bg-yellow-50/80 border-yellow-100/50 font-bold"
+                      : "text-slate-700 hover:text-slate-900 hover:bg-slate-50/50 border-transparent font-semibold"
+                  }`}
+                >
+                  Industries
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform duration-300 ${
+                      mobileAccordion === "industries" ? "rotate-180 text-yellow-600" : "text-slate-400"
+                    }`}
+                  />
+                </button>
+                <AnimatePresence>
+                  {mobileAccordion === "industries" && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="ml-3 border-l border-slate-100 pl-3 py-1 flex flex-col gap-1">
+                        {industriesList.map((item, i) => (
+                          <Link
+                            key={i}
+                            href={item.href}
+                            className={`flex items-center justify-between py-2 px-3 rounded-xl transition-all duration-150 border ${
+                              pathname === item.href
+                                ? "bg-yellow-50 text-yellow-600 font-bold border-yellow-100/30"
+                                : "hover:bg-slate-50 text-slate-500 hover:text-slate-900 border-transparent"
+                            }`}
+                          >
+                            <span className="text-[12px] font-bold leading-tight">{item.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* About Us Link */}
+              <Link
+                href="/"
+                className={`block rounded-xl px-4 py-3 text-[14px] transition-all duration-200 border ${
+                  pathname === "/"
+                    ? "text-yellow-600 bg-yellow-50/80 border-yellow-100/50 font-bold"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-50/50 border-transparent font-semibold"
+                }`}
+              >
+                About Us
+              </Link>
+
+              {/* Contact Link */}
               <Link
                 href="/contact"
                 className={`block rounded-xl px-4 py-3 text-[14px] transition-all duration-200 border ${
@@ -332,7 +533,7 @@ export default function Header() {
                     : "text-slate-700 hover:text-slate-900 hover:bg-slate-50/50 border-transparent font-semibold"
                 }`}
               >
-                Contact Us
+                Contact
               </Link>
             </nav>
 
