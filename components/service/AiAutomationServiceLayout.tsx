@@ -442,7 +442,7 @@ export default function AiAutomationServiceLayout({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             
             {/* Column 1: Why Choose (4/12 width) */}
-            <div className="lg:col-span-4 flex flex-col justify-start gap-6">
+            <div className="lg:col-span-4 flex flex-col justify-between">
               
               <div>
                 <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3 leading-none font-sans">
@@ -466,8 +466,8 @@ export default function AiAutomationServiceLayout({
                 </div>
               </div>
 
-              {/* Mini Dashboard Card Component */}
-              <div className="bg-slate-50/60 border border-slate-200/80 rounded-2xl p-4 shadow-sm flex flex-col gap-3 font-sans mt-4">
+              {/* Mini Dashboard Card Component - Leads Captured */}
+              <div className="bg-slate-50/60 border border-slate-200/80 rounded-2xl p-4 shadow-sm flex flex-col gap-3 font-sans mt-6">
                 
                 {/* Live Pulse Header */}
                 <div className="flex items-center justify-between pb-2 border-b border-slate-200/40">
@@ -487,7 +487,7 @@ export default function AiAutomationServiceLayout({
                 <div className="flex justify-between items-center py-0.5">
                   <div>
                     <span className="text-[9px] font-bold text-slate-400 block tracking-wider uppercase">Leads Captured</span>
-                    <span className="text-xl font-black text-slate-900 mt-0.5 block leading-none">2,548</span>
+                    <span className="text-xl font-black text-slate-900 mt-0.5 block leading-none font-sans">2,548</span>
                     <span className="text-[9px] font-extrabold text-green-500 block mt-1">+32.6% this month</span>
                   </div>
                   {/* SVG graph line with linear gradient fill */}
@@ -506,118 +506,143 @@ export default function AiAutomationServiceLayout({
                   </div>
                 </div>
 
-                {/* Avg Response Time Segment */}
-                <div className="flex justify-between items-center py-0.5 border-t border-slate-200/40 pt-2.5">
-                  <div>
-                    <span className="text-[9px] font-bold text-slate-400 block tracking-wider uppercase">Response Time</span>
-                    <span className="text-xl font-black text-slate-900 mt-0.5 block leading-none">&lt; 20s avg</span>
-                    <span className="text-[9px] font-extrabold text-amber-500 block mt-1">Instant resolution</span>
-                  </div>
-                  {/* SVG bar chart */}
-                  <div className="flex items-end gap-1 h-8 shrink-0 pr-1">
-                    <div className="w-2 h-4 bg-slate-200 rounded-xs" />
-                    <div className="w-2 h-6 bg-slate-200 rounded-xs" />
-                    <div className="w-2 h-8 bg-slate-300 rounded-xs" />
-                    <div className="w-2 h-5 bg-amber-500 rounded-xs animate-pulse" />
-                  </div>
-                </div>
-
               </div>
 
             </div>
 
             {/* Column 2: FAQs Accordion (5/12 width) */}
-            <div className="lg:col-span-5 flex flex-col justify-start">
-              <p className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-slate-400 mb-3 leading-none font-sans">
-                FREQUENTLY ASKED QUESTIONS
-              </p>
-              <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-tight font-sans mb-6">
-                Got Questions?
-              </h2>
+            <div className="lg:col-span-5 flex flex-col justify-between">
+              
+              <div>
+                <p className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-slate-400 mb-3 leading-none font-sans">
+                  FREQUENTLY ASKED QUESTIONS
+                </p>
+                <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-tight font-sans mb-6">
+                  Got Questions?
+                </h2>
 
-              <div className="flex flex-col gap-3 font-sans">
-                {faqs.map((faq, i) => (
-                  <div 
-                    key={i} 
-                    className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-[0_2px_15px_rgba(0,0,0,0.01)] transition-colors hover:border-amber-500/30"
-                  >
-                    <button
-                      onClick={() => setActiveFaq(activeFaq === i ? null : i)}
-                      className="flex w-full items-center justify-between text-left font-bold text-slate-800 text-[12px] md:text-[13px] hover:text-amber-500 transition-colors"
+                <div className="flex flex-col gap-3 font-sans">
+                  {faqs.map((faq, i) => (
+                    <div 
+                      key={i} 
+                      className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-[0_2px_15px_rgba(0,0,0,0.01)] transition-colors hover:border-amber-500/30"
                     >
-                      <span>{faq.question}</span>
-                      <span className="text-slate-400 shrink-0 text-sm font-bold ml-4 select-none">
-                        {activeFaq === i ? "−" : "+"}
-                      </span>
-                    </button>
-                    <AnimatePresence>
-                      {activeFaq === i && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.18, ease: "easeInOut" }}
-                          className="overflow-hidden"
-                        >
-                          <div className="pb-1 pt-3 text-[11px] font-semibold text-slate-500 leading-relaxed border-t border-slate-100/50 mt-3">
-                            {faq.answer}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                      <button
+                        onClick={() => setActiveFaq(activeFaq === i ? null : i)}
+                        className="flex w-full items-center justify-between text-left font-bold text-slate-800 text-[12px] md:text-[13px] hover:text-amber-500 transition-colors"
+                      >
+                        <span>{faq.question}</span>
+                        <span className="text-slate-400 shrink-0 text-sm font-bold ml-4 select-none">
+                          {activeFaq === i ? "−" : "+"}
+                        </span>
+                      </button>
+                      <AnimatePresence>
+                        {activeFaq === i && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.18, ease: "easeInOut" }}
+                            className="overflow-hidden"
+                          >
+                            <div className="pb-1 pt-3 text-[11px] font-semibold text-slate-500 leading-relaxed border-t border-slate-100/50 mt-3">
+                              {faq.answer}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Response Time Metrics Card */}
+              <div className="bg-slate-50/60 border border-slate-200/80 rounded-2xl p-4 shadow-sm flex flex-col gap-3 font-sans mt-6">
+                
+                {/* Live Speed Header */}
+                <div className="flex items-center justify-between pb-2 border-b border-slate-200/40">
+                  <div className="flex items-center gap-1.5">
+                    <span className="flex h-1.5 w-1.5 relative">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
+                    </span>
+                    <span className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Response Efficiency</span>
                   </div>
-                ))}
+                  <span className="text-[8px] font-extrabold text-green-600 bg-green-500/10 px-1.5 py-0.5 rounded-sm uppercase tracking-wide">
+                    Active
+                  </span>
+                </div>
+
+                {/* Avg Response Time Segment */}
+                <div className="flex justify-between items-center py-0.5">
+                  <div>
+                    <span className="text-[9px] font-bold text-slate-400 block tracking-wider uppercase">Response Time</span>
+                    <span className="text-xl font-black text-slate-900 mt-0.5 block leading-none font-sans">&lt; 20s avg</span>
+                    <span className="text-[9px] font-extrabold text-amber-500 block mt-1">Instant resolution</span>
+                  </div>
+                  {/* SVG graph line with linear gradient fill - matching Leads Captured */}
+                  <div className="w-24 h-10 shrink-0 relative flex items-center">
+                    <svg className="w-full h-full text-amber-500 overflow-visible" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="responseGradient" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="currentColor" stopOpacity="0.25" />
+                          <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M0 32 Q 20 10, 40 18 T 80 5 T 100 15" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M0 32 Q 20 10, 40 18 T 80 5 T 100 15 L 100 40 L 0 40 Z" fill="url(#responseGradient)" />
+                      <circle cx="100" cy="15" r="3" fill="currentColor" className="animate-pulse" />
+                    </svg>
+                  </div>
+                </div>
+
               </div>
 
             </div>
 
             {/* Column 3: Ready to Automate + Mascot (3/12 width) */}
-            <div className="lg:col-span-3 flex flex-col justify-start">
+            <div className="lg:col-span-3 flex flex-col justify-between">
               
-              <div className="bg-[#FFFBF2] border border-amber-500/15 rounded-[2rem] p-5 shadow-[0_2px_15px_rgba(245,158,11,0.02)] flex flex-col items-center text-center h-full">
+              <div className="bg-[#FFFBF2] border border-amber-500/15 rounded-[2rem] p-5 shadow-[0_2px_15px_rgba(245,158,11,0.02)] flex flex-col items-center text-center justify-center py-6 flex-grow">
                 
-                {/* Mascot & Text Group */}
-                <div className="flex-grow flex flex-col items-center justify-center py-2">
+                {/* Category Badge */}
+                <span className="inline-flex items-center gap-1 bg-amber-500/10 text-amber-700 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full mb-3">
+                  AI Consultant
+                </span>
+
+                {/* Circular Avatar Frame */}
+                <div className="relative w-32 h-32 flex items-center justify-center mb-4">
+                  <div className="absolute inset-0 rounded-full bg-amber-500/5 blur-md" />
+                  <div className="absolute inset-2 rounded-full bg-white border border-slate-100 shadow-inner" />
+                  <img 
+                    src="/images/cute-robot-mascot.png" 
+                    alt="Clever Crow AI Robot Mascot" 
+                    className="w-24 h-24 object-contain relative z-10 scale-105 hover:scale-110 transition-transform duration-300 select-none pointer-events-none"
+                  />
+                </div>
+
+                {/* Text Block */}
+                <div className="flex flex-col items-center">
+                  <h3 className="text-base font-black text-slate-900 tracking-tight leading-tight font-sans">
+                    Ready to Automate <br />Your Business?
+                  </h3>
                   
-                  {/* Category Badge */}
-                  <span className="inline-flex items-center gap-1 bg-amber-500/10 text-amber-700 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full mb-3">
-                    AI Consultant
-                  </span>
-
-                  {/* Circular Avatar Frame */}
-                  <div className="relative w-32 h-32 flex items-center justify-center mb-4">
-                    <div className="absolute inset-0 rounded-full bg-amber-500/5 blur-md" />
-                    <div className="absolute inset-2 rounded-full bg-white border border-slate-100 shadow-inner" />
-                    <img 
-                      src="/images/cute-robot-mascot.png" 
-                      alt="Clever Crow AI Robot Mascot" 
-                      className="w-24 h-24 object-contain relative z-10 scale-105 hover:scale-110 transition-transform duration-300 select-none pointer-events-none"
-                    />
-                  </div>
-
-                  {/* Text Block */}
-                  <div className="flex flex-col items-center">
-                    <h3 className="text-base font-black text-slate-900 tracking-tight leading-tight font-sans">
-                      Ready to Automate <br />Your Business?
-                    </h3>
-                    
-                    <p className="mt-2 text-[10px] font-bold text-slate-500 leading-normal max-w-[190px]">
-                      Book a free consultation and see how AI can save time and reduce costs.
-                    </p>
-                  </div>
+                  <p className="mt-2 text-[10px] font-bold text-slate-500 leading-normal max-w-[190px]">
+                    Book a free consultation and see how AI can save time and reduce costs.
+                  </p>
                 </div>
 
-                {/* Button container forced to the bottom */}
-                <div className="w-full mt-auto pt-3 font-sans">
-                  <a
-                    href="#contact-form"
-                    className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-5 py-3.5 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/10 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer w-full"
-                  >
-                    Book Consultation
-                    <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
-                  </a>
-                </div>
+              </div>
 
+              {/* Button container forced to the bottom */}
+              <div className="w-full mt-4 font-sans">
+                <a
+                  href="#contact-form"
+                  className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-5 py-3.5 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/10 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer w-full text-center"
+                >
+                  Book Consultation
+                  <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+                </a>
               </div>
 
             </div>
