@@ -215,7 +215,7 @@ export default function WebDevServiceLayout({
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   return (
-    <div className="bg-white min-h-screen text-slate-800 antialiased font-body pt-24 pb-20 selection:bg-yellow-500/20">
+    <div className="bg-white min-h-screen text-slate-800 antialiased font-body pt-24 pb-0 selection:bg-yellow-500/20">
       
       {/* ───────────────── 1. HERO SECTION ───────────────── */}
       <section className="relative overflow-hidden pt-8 pb-20 bg-gradient-to-b from-slate-100/60 via-slate-50/50 to-slate-50/20">
