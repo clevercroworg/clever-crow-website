@@ -551,8 +551,8 @@ export default function WebDevServiceLayout({
       <section id="contact-form" className="py-16 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* Left Column (FAQs) - 5/12 width */}
-          <div className="lg:col-span-5 flex flex-col items-start bg-white border border-slate-100 rounded-[2.5rem] p-8 md:p-10 shadow-sm">
+          {/* Left Column (FAQs) - 6/12 width to reduce height */}
+          <div className="lg:col-span-6 flex flex-col items-start bg-white border border-slate-100 rounded-[2.5rem] p-6 md:p-8 shadow-sm">
             <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight font-sans mb-8">
               Frequently Asked Questions
             </h2>
@@ -562,7 +562,7 @@ export default function WebDevServiceLayout({
               {faqs.map((faq, i) => (
                 <div
                   key={i}
-                  className="border-b border-slate-100 py-3.5 last:border-0"
+                  className="border-b border-slate-100 py-2 last:border-0"
                 >
                   <button
                     onClick={() => setActiveFaq(activeFaq === i ? null : i)}
@@ -581,7 +581,7 @@ export default function WebDevServiceLayout({
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.2, ease: "easeInOut" }}
                       >
-                        <div className="pb-4 pt-1 text-xs font-semibold text-slate-500 leading-relaxed">
+                        <div className="pb-3 pt-0.5 text-xs font-semibold text-slate-500 leading-relaxed">
                           {faq.answer}
                         </div>
                       </motion.div>
@@ -592,14 +592,14 @@ export default function WebDevServiceLayout({
             </div>
           </div>
 
-          {/* Right Column (Cream CTA Card) - 7/12 width */}
-          <div className="lg:col-span-7 flex flex-col bg-[#FFFBF2] border border-amber-500/5 rounded-[2.5rem] shadow-sm relative overflow-hidden min-h-[380px]">
+          {/* Right Column (Cream CTA Card) - 6/12 width */}
+          <div className="lg:col-span-6 flex flex-col bg-[#FFFBF2] border border-amber-500/5 rounded-[2.5rem] shadow-sm relative overflow-hidden min-h-[380px]">
             {/* Background radial highlight */}
             <div className="absolute top-[-50px] right-[-50px] w-48 h-48 rounded-full bg-amber-500/5 blur-[80px] pointer-events-none" />
             
             <div className="flex flex-col md:flex-row items-stretch h-full w-full relative z-10 flex-grow">
-              {/* Left Side: Text and Buttons (55% width on desktop) */}
-              <div className="w-full md:w-[55%] flex flex-col justify-center gap-6 p-8 md:p-10 md:pr-0">
+              {/* Left Side: Text and Buttons (50% width on desktop) */}
+              <div className="w-full md:w-[50%] flex flex-col justify-center gap-6 p-6 md:py-8 md:pl-8 md:pr-0">
                 <div>
                   <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight leading-tight md:max-w-[280px]">
                     Ready to Build or<br className="hidden md:inline" />Redesign Your Website?
@@ -630,12 +630,12 @@ export default function WebDevServiceLayout({
                 </div>
               </div>
 
-              {/* Right Side: Image container (45% width on desktop) */}
-              <div className="w-full md:w-[45%] relative min-h-[220px] md:min-h-0 self-stretch overflow-hidden">
+              {/* Right Side: Image container (50% width on desktop) */}
+              <div className="w-full md:w-[50%] relative min-h-[220px] md:min-h-0 self-stretch overflow-hidden">
                 <img
                   src="/images/laptop-guy.png"
                   alt="Clever Crow consultant typing on laptop"
-                  className="absolute bottom-0 right-0 h-full w-auto object-contain object-right-bottom select-none pointer-events-none"
+                  className="absolute bottom-0 right-0 h-[105%] md:h-[110%] w-auto object-contain object-right-bottom select-none pointer-events-none"
                 />
               </div>
             </div>
