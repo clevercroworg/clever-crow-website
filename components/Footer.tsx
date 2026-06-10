@@ -66,10 +66,10 @@ export default function Footer() {
             <div>
               <h4 className="text-slate-900 text-[13px] font-extrabold uppercase tracking-widest mb-5">Services</h4>
               <ul className="space-y-3.5 text-xs font-semibold text-slate-500">
-                <li><Link href="/services/custom-website-design" className="hover:text-amber-500 transition-colors">Web Development</Link></li>
-                <li><Link href="/services/mobile-app-development" className="hover:text-amber-500 transition-colors">App Development</Link></li>
-                <li><Link href="/services/web-app-development" className="hover:text-amber-500 transition-colors">AI Automation</Link></li>
-                <li><Link href="/services/google-ads" className="hover:text-amber-500 transition-colors">Digital Marketing</Link></li>
+                <li><Link href="/website-development-company" className="hover:text-amber-500 transition-colors">Web Development</Link></li>
+                <li><Link href="/app-development-company" className="hover:text-amber-500 transition-colors">App Development</Link></li>
+                <li><Link href="/ai-automation-agency" className="hover:text-amber-500 transition-colors">AI Automation</Link></li>
+                <li><Link href="/digital-marketing-agency" className="hover:text-amber-500 transition-colors">Digital Marketing</Link></li>
                 <li><Link href="/services/strategy-planning" className="hover:text-amber-500 transition-colors">Branding</Link></li>
               </ul>
             </div>
@@ -78,11 +78,11 @@ export default function Footer() {
             <div>
               <h4 className="text-slate-900 text-[13px] font-extrabold uppercase tracking-widest mb-5">Solutions</h4>
               <ul className="space-y-3.5 text-xs font-semibold text-slate-500">
-                <li><Link href="/services/business-websites" className="hover:text-amber-500 transition-colors">Business Website</Link></li>
-                <li><Link href="/services/ecommerce" className="hover:text-amber-500 transition-colors">CMS & Booking</Link></li>
-                <li><Link href="/services/web-app-development" className="hover:text-amber-500 transition-colors">AI Automation</Link></li>
-                <li><Link href="/services/marketing-strategy" className="hover:text-amber-500 transition-colors">Marketing System</Link></li>
-                <li><Link href="/services/web-app-development" className="hover:text-amber-500 transition-colors">SaaS Development</Link></li>
+                <li><Link href="/business-website-development" className="hover:text-amber-500 transition-colors">Business Website</Link></li>
+                <li><Link href="/ecommerce-website-development" className="hover:text-amber-500 transition-colors">CMS & Booking</Link></li>
+                <li><Link href="/ai-chatbot-development" className="hover:text-amber-500 transition-colors">AI Automation</Link></li>
+                <li><Link href="/digital-marketing-agency" className="hover:text-amber-500 transition-colors">Marketing System</Link></li>
+                <li><Link href="/saas-product-development" className="hover:text-amber-500 transition-colors">SaaS Development</Link></li>
               </ul>
             </div>
 

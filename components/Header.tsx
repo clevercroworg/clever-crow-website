@@ -24,12 +24,12 @@ const servicesMegaMenu = [
     icon: Laptop,
     color: "text-blue-500 bg-blue-50",
     items: [
-      { label: "Business Website Development", href: "/services/business-websites" },
-      { label: "React / Next.js Website Development", href: "/services/custom-website-design" },
-      { label: "Ecommerce Website Development", href: "/services/ecommerce" },
-      { label: "Landing Page Development", href: "/services/landing-pages" },
-      { label: "Website Redesign", href: "/services/custom-website-design" },
-      { label: "Website Maintenance", href: "/services/wordpress-website-design" },
+      { label: "Business Website Development", href: "/business-website-development" },
+      { label: "React / Next.js Website Development", href: "/react-nextjs-website-development" },
+      { label: "Ecommerce Website Development", href: "/ecommerce-website-development" },
+      { label: "Landing Page Development", href: "/landing-page-development" },
+      { label: "Website Redesign", href: "/website-redesign-services" },
+      { label: "Website Maintenance", href: "/website-maintenance-services" },
     ]
   },
   {
@@ -37,13 +37,13 @@ const servicesMegaMenu = [
     icon: Smartphone,
     color: "text-purple-500 bg-purple-50",
     items: [
-      { label: "Mobile App Development", href: "/services/mobile-app-development" },
-      { label: "Web App Development", href: "/services/web-app-development" },
-      { label: "SaaS Product Development", href: "/services/web-app-development" },
-      { label: "CRM & Dashboard Development", href: "/services/web-app-development" },
-      { label: "Booking System Development", href: "/services/web-app-development" },
-      { label: "Admin Panel Development", href: "/services/web-app-development" },
-      { label: "Customer Portal Development", href: "/services/web-app-development" },
+      { label: "Mobile App Development", href: "/mobile-app-development" },
+      { label: "Web App Development", href: "/web-app-development" },
+      { label: "SaaS Product Development", href: "/saas-product-development" },
+      { label: "CRM & Dashboard Development", href: "/crm-dashboard-development" },
+      { label: "Booking System Development", href: "/booking-system-development" },
+      { label: "Admin Panel Development", href: "/admin-panel-development" },
+      { label: "Customer Portal Development", href: "/customer-portal-development" },
     ]
   },
   {
@@ -51,13 +51,13 @@ const servicesMegaMenu = [
     icon: Cpu,
     color: "text-emerald-500 bg-emerald-50",
     items: [
-      { label: "AI Chatbot Development", href: "/services/ai-seo" },
-      { label: "WhatsApp Automation", href: "/services/ai-seo" },
-      { label: "Lead Management Automation", href: "/services/ai-seo" },
-      { label: "CRM Automation", href: "/services/ai-seo" },
-      { label: "Sales Follow-Up Automation", href: "/services/ai-seo" },
-      { label: "Workflow Automation", href: "/services/ai-seo" },
-      { label: "AI Customer Support Automation", href: "/services/ai-seo" },
+      { label: "AI Chatbot Development", href: "/ai-chatbot-development" },
+      { label: "WhatsApp Automation", href: "/whatsapp-automation-services" },
+      { label: "Lead Management Automation", href: "/lead-management-automation" },
+      { label: "CRM Automation", href: "/crm-automation-services" },
+      { label: "Sales Follow-Up Automation", href: "/sales-follow-up-automation" },
+      { label: "Workflow Automation", href: "/workflow-automation-services" },
+      { label: "AI Customer Support Automation", href: "/ai-customer-support-automation" },
     ]
   },
   {
@@ -65,25 +65,25 @@ const servicesMegaMenu = [
     icon: Megaphone,
     color: "text-amber-500 bg-amber-50",
     items: [
-      { label: "Google Ads Management", href: "/services/google-ads" },
-      { label: "Meta Ads Management", href: "/services/meta-ads" },
-      { label: "SEO Services", href: "/services/seo" },
-      { label: "Social Media Management", href: "/services/social-media-management" },
-      { label: "Lead Generation Campaigns", href: "/services/meta-ads" },
-      { label: "Performance Marketing", href: "/services/google-ads" },
-      { label: "Analytics & Tracking Setup", href: "/services/seo" },
+      { label: "Google Ads Management", href: "/google-ads-management-services" },
+      { label: "Meta Ads Management", href: "/meta-ads-management-services" },
+      { label: "SEO Services", href: "/seo-services" },
+      { label: "Social Media Management", href: "/social-media-management-services" },
+      { label: "Lead Generation Campaigns", href: "/lead-generation-campaigns" },
+      { label: "Performance Marketing", href: "/performance-marketing-agency" },
+      { label: "Analytics & Tracking Setup", href: "/analytics-tracking-setup" },
     ]
   }
 ];
 
 const industriesList = [
-  { label: "Healthcare", href: "/#industries" },
-  { label: "E-commerce", href: "/#industries" },
-  { label: "Education", href: "/#industries" },
-  { label: "Real Estate", href: "/#industries" },
+  { label: "Healthcare", href: "/industries/healthcare-digital-marketing" },
+  { label: "E-commerce", href: "/industries/ecommerce-growth-marketing" },
+  { label: "Education", href: "/industries/education-marketing" },
+  { label: "Real Estate", href: "/industries/real-estate-digital-marketing" },
   { label: "Finance", href: "/#industries" },
   { label: "Automotive", href: "/#industries" },
-  { label: "Hospitality", href: "/#industries" },
+  { label: "Hospitality", href: "/industries/hotels-resorts-marketing" },
   { label: "SaaS", href: "/#industries" },
   { label: "Startups", href: "/#industries" },
 ];
