@@ -602,7 +602,7 @@ export default function WebDevServiceLayout({
               <div className="w-full md:w-[50%] flex flex-col justify-center gap-6 p-6 md:py-8 md:pl-8 md:pr-0">
                 <div>
                   <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight leading-tight md:max-w-[280px]">
-                    Ready to Build or<br className="hidden md:inline" />Redesign Your Website?
+                    Ready to Build or <br className="hidden md:inline" />Redesign Your Website?
                   </h3>
                   <p className="mt-3.5 text-[13px] font-semibold text-slate-500 leading-relaxed max-w-[280px]">
                     Let's build a website that reflects your brand, loads fast and helps your business grow.
@@ -635,7 +635,7 @@ export default function WebDevServiceLayout({
                 <img
                   src="/images/laptop-guy.png"
                   alt="Clever Crow consultant typing on laptop"
-                  className="absolute bottom-0 right-0 h-[105%] md:h-[110%] w-auto object-contain object-right-bottom select-none pointer-events-none"
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-0 h-[105%] md:h-[110%] w-auto object-contain object-bottom md:object-right-bottom select-none pointer-events-none"
                 />
               </div>
             </div>
