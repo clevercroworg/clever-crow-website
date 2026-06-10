@@ -136,7 +136,7 @@ function getServiceConfig(title: string, iconKey: string) {
   }
   if (t.includes("workflow") || t.includes("process") || k === "wrench" || k === "network") {
     return {
-      icon: Workflow,
+      icon: Network,
       bgColor: "bg-blue-500/10 border border-blue-500/20",
       textColor: "text-blue-500",
       borderColor: "hover:border-blue-500/35",
