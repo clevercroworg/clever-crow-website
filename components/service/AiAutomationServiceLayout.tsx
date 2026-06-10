@@ -554,31 +554,29 @@ export default function AiAutomationServiceLayout({
             {/* Column 3: Ready to Automate + Mascot (4/12 width) */}
             <div className="lg:col-span-4 flex flex-col justify-start">
               
-              <div className="bg-white border border-slate-200/80 rounded-[2rem] p-6 shadow-sm flex flex-col justify-between flex-grow min-h-[300px] h-full">
+              <div className="bg-white border border-slate-200/80 rounded-[2rem] p-6 shadow-sm flex flex-col justify-between items-center text-center flex-grow min-h-[380px] h-full">
                 
-                {/* Robot Illustration and Header */}
-                <div className="flex flex-col items-center text-center font-sans">
-                  
-                  {/* High-fidelity 3D Robot Mascot PNG */}
-                  <div className="w-36 h-36 relative my-2 flex items-center justify-center overflow-hidden">
-                    <img 
-                      src="/images/cute-robot-mascot.png" 
-                      alt="Clever Crow AI Robot Mascot" 
-                      className="w-full h-full object-contain select-none pointer-events-none"
-                    />
-                  </div>
+                {/* High-fidelity 3D Robot Mascot PNG */}
+                <div className="w-52 h-52 relative flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="/images/cute-robot-mascot.png" 
+                    alt="Clever Crow AI Robot Mascot" 
+                    className="w-full h-full object-contain select-none pointer-events-none"
+                  />
+                </div>
 
-                  <h3 className="text-base md:text-lg font-black text-slate-900 tracking-tight leading-tight font-sans mt-2">
+                {/* Text Block */}
+                <div className="flex flex-col items-center mt-2">
+                  <h3 className="text-base md:text-lg font-black text-slate-900 tracking-tight leading-tight font-sans">
                     Ready to Automate <br />Your Business?
                   </h3>
                   
                   <p className="mt-4 text-[11px] font-bold text-slate-500 leading-relaxed max-w-[240px]">
                     Book a free consultation and see how AI automation can save time, reduce costs and increase conversions.
                   </p>
-
                 </div>
 
-                <div className="mt-6 font-sans">
+                <div className="w-full mt-6 font-sans">
                   <a
                     href="#contact-form"
                     className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-5 py-3.5 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/10 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer w-full"
