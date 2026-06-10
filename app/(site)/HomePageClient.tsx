@@ -38,7 +38,9 @@ import {
   Users,
   Award,
   ArrowRight,
-  MapPin
+  MapPin,
+  Star,
+  Quote
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -611,7 +613,105 @@ export default function HomePageClient({ services }: HomePageClientProps) {
 
         </section>
 
-        {/* ================= 7. CTA BANNER ================= */}
+        {/* ================= 7. TESTIMONIALS ================= */}
+        <section className="space-y-8">
+          <div className="text-center">
+            <span className="text-[9px] font-extrabold text-amber-500 uppercase tracking-[0.3em]">Client Testimonials</span>
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mt-2">
+              Trusted by brands that<br className="hidden md:inline" /> demand results.
+            </h2>
+            <p className="text-sm text-slate-400 font-medium mt-3 max-w-md mx-auto">
+              Don't just take our word for it. Hear from the businesses we've helped grow.
+            </p>
+          </div>
+
+          {/* 2-Row Scrolling Testimonials */}
+          <div className="relative isolate">
+            {/* Edge fades */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 sm:w-40 bg-gradient-to-r from-[#FAFAF7] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 sm:w-40 bg-gradient-to-l from-[#FAFAF7] to-transparent" />
+
+            <div className="flex flex-col gap-4 overflow-hidden">
+              {/* Row 1 - scrolls left */}
+              <div className="flex overflow-hidden">
+                <motion.div
+                  animate={{ x: ["0%", "-50%"] }}
+                  transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+                  className="flex w-max gap-5 px-2"
+                >
+                  {[...[
+                    { name: "Anand Shetty", source: "Google", text: "We partnered with CleverCrow to improve our digital presence and lead generation. Their understanding of SEO, Google Ads, and automation is extremely practical. Within a few months, we saw consistent inbound leads.", rating: 5 },
+                    { name: "Rohit Kulkarni", source: "Trustpilot", text: "CleverCrow helped us restructure our paid ads and website funnels. What stood out was their data-driven approach and clear communication. The transition was seamless and results were immediate.", rating: 5 },
+                    { name: "Pooja Rao", source: "Google", text: "The CleverCrow team understood our business goals clearly and implemented solutions that genuinely saved us time and increased our ROI. Highly recommended for any growing brand.", rating: 5 },
+                    { name: "Suresh Nayak", source: "Google", text: "CleverCrow stands out for their honesty and execution. Everything was delivered on time and with clear outcomes. They transformed our digital strategy completely.", rating: 5 },
+                  ], ...[
+                    { name: "Anand Shetty", source: "Google", text: "We partnered with CleverCrow to improve our digital presence and lead generation. Their understanding of SEO, Google Ads, and automation is extremely practical. Within a few months, we saw consistent inbound leads.", rating: 5 },
+                    { name: "Rohit Kulkarni", source: "Trustpilot", text: "CleverCrow helped us restructure our paid ads and website funnels. What stood out was their data-driven approach and clear communication. The transition was seamless and results were immediate.", rating: 5 },
+                    { name: "Pooja Rao", source: "Google", text: "The CleverCrow team understood our business goals clearly and implemented solutions that genuinely saved us time and increased our ROI. Highly recommended for any growing brand.", rating: 5 },
+                    { name: "Suresh Nayak", source: "Google", text: "CleverCrow stands out for their honesty and execution. Everything was delivered on time and with clear outcomes. They transformed our digital strategy completely.", rating: 5 },
+                  ]].map((t, i) => (
+                    <div key={i} className="relative flex flex-col justify-between w-[85vw] sm:w-[420px] rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:border-amber-300/40 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 shrink-0">
+                      <Quote className="absolute top-4 right-4 h-6 w-6 text-slate-100" fill="currentColor" />
+                      <div>
+                        <div className="mb-3 flex items-center gap-0.5 text-amber-400">
+                          {[...Array(t.rating)].map((_, j) => <Star key={j} className="h-3.5 w-3.5" fill="currentColor" />)}
+                        </div>
+                        <p className="text-sm font-medium leading-relaxed text-slate-600 mb-6">&ldquo;{t.text}&rdquo;</p>
+                      </div>
+                      <div className="flex items-center gap-3 border-t border-slate-50 pt-4 mt-auto">
+                        <div className="h-10 w-10 rounded-full bg-slate-50 flex items-center justify-center text-sm font-black text-slate-400">{t.name.charAt(0)}</div>
+                        <div>
+                          <span className="text-sm font-black text-slate-900 block">{t.name}</span>
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">{t.source}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Row 2 - scrolls right */}
+              <div className="flex overflow-hidden">
+                <motion.div
+                  animate={{ x: ["-50%", "0%"] }}
+                  transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+                  className="flex w-max gap-5 px-2"
+                >
+                  {[...[
+                    { name: "Neha Deshpande", source: "Trustpilot", text: "Their strategic inputs and AI-driven optimizations made a noticeable difference in lead quality. We've seen a 40% jump in conversion rates since starting with them.", rating: 5 },
+                    { name: "Vivek Hegde", source: "Google", text: "From audit to execution, everything was planned well. The automation systems reduced a lot of manual work and allowed us to focus on our core business operations.", rating: 5 },
+                    { name: "Karan Johar", source: "Trustpilot", text: "Remarkable growth in just 3 months. Their tech-first approach to marketing is exactly what we needed. The ROI speaks for itself.", rating: 5 },
+                    { name: "Megha Singh", source: "Google", text: "The best agency we've worked with. No fluff, just pure performance and data-backed strategies that deliver real measurable results.", rating: 5 },
+                  ], ...[
+                    { name: "Neha Deshpande", source: "Trustpilot", text: "Their strategic inputs and AI-driven optimizations made a noticeable difference in lead quality. We've seen a 40% jump in conversion rates since starting with them.", rating: 5 },
+                    { name: "Vivek Hegde", source: "Google", text: "From audit to execution, everything was planned well. The automation systems reduced a lot of manual work and allowed us to focus on our core business operations.", rating: 5 },
+                    { name: "Karan Johar", source: "Trustpilot", text: "Remarkable growth in just 3 months. Their tech-first approach to marketing is exactly what we needed. The ROI speaks for itself.", rating: 5 },
+                    { name: "Megha Singh", source: "Google", text: "The best agency we've worked with. No fluff, just pure performance and data-backed strategies that deliver real measurable results.", rating: 5 },
+                  ]].map((t, i) => (
+                    <div key={i} className="relative flex flex-col justify-between w-[85vw] sm:w-[420px] rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:border-amber-300/40 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 shrink-0">
+                      <Quote className="absolute top-4 right-4 h-6 w-6 text-slate-100" fill="currentColor" />
+                      <div>
+                        <div className="mb-3 flex items-center gap-0.5 text-amber-400">
+                          {[...Array(t.rating)].map((_, j) => <Star key={j} className="h-3.5 w-3.5" fill="currentColor" />)}
+                        </div>
+                        <p className="text-sm font-medium leading-relaxed text-slate-600 mb-6">&ldquo;{t.text}&rdquo;</p>
+                      </div>
+                      <div className="flex items-center gap-3 border-t border-slate-50 pt-4 mt-auto">
+                        <div className="h-10 w-10 rounded-full bg-slate-50 flex items-center justify-center text-sm font-black text-slate-400">{t.name.charAt(0)}</div>
+                        <div>
+                          <span className="text-sm font-black text-slate-900 block">{t.name}</span>
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">{t.source}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ================= 8. CTA BANNER ================= */}
         <section>
           <div className="relative overflow-hidden bg-[#FFFDF9] border border-amber-500/10 rounded-[2.5rem] p-10 md:p-14 shadow-[0_15px_45px_rgba(0,0,0,0.01)] flex flex-col lg:flex-row items-center justify-between gap-8">
             
