@@ -442,7 +442,7 @@ export default function AiAutomationServiceLayout({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             
             {/* Column 1: Why Choose (4/12 width) */}
-            <div className="lg:col-span-4 flex flex-col justify-between">
+            <div className="lg:col-span-4 flex flex-col justify-start gap-6">
               
               <div>
                 <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3 leading-none font-sans">
@@ -467,38 +467,58 @@ export default function AiAutomationServiceLayout({
               </div>
 
               {/* Mini Dashboard Card Component */}
-              <div className="mt-8 bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm flex flex-col gap-4 font-sans">
+              <div className="bg-slate-50/60 border border-slate-200/80 rounded-2xl p-4 shadow-sm flex flex-col gap-3 font-sans mt-4">
                 
-                {/* Leads Captured Segment */}
-                <div className="flex justify-between items-start">
-                  <div>
-                    <span className="text-[10px] font-black text-slate-400 block tracking-tight uppercase">Leads Captured</span>
-                    <span className="text-xl font-black text-slate-950 mt-1 block">2,548</span>
-                    <span className="text-[9px] font-bold text-green-500 block mt-0.5">+ 32.6% this month</span>
+                {/* Live Pulse Header */}
+                <div className="flex items-center justify-between pb-2 border-b border-slate-200/40">
+                  <div className="flex items-center gap-1.5">
+                    <span className="flex h-1.5 w-1.5 relative">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
+                    </span>
+                    <span className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Live Performance</span>
                   </div>
-                  {/* SVG graph line */}
-                  <div className="w-24 h-10 shrink-0">
-                    <svg className="w-full h-full text-green-500" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M0 35 Q 20 20, 40 25 T 80 10 T 100 5" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                      <path d="M0 35 Q 20 20, 40 25 T 80 10 T 100 5 L 100 40 L 0 40 Z" fill="currentColor" fillOpacity="0.06" />
+                  <span className="text-[8px] font-extrabold text-amber-600 bg-amber-500/10 px-1.5 py-0.5 rounded-sm uppercase tracking-wide">
+                    Pulse
+                  </span>
+                </div>
+
+                {/* Leads Captured Segment */}
+                <div className="flex justify-between items-center py-0.5">
+                  <div>
+                    <span className="text-[9px] font-bold text-slate-400 block tracking-wider uppercase">Leads Captured</span>
+                    <span className="text-xl font-black text-slate-900 mt-0.5 block leading-none">2,548</span>
+                    <span className="text-[9px] font-extrabold text-green-500 block mt-1">+32.6% this month</span>
+                  </div>
+                  {/* SVG graph line with linear gradient fill */}
+                  <div className="w-24 h-10 shrink-0 relative flex items-center">
+                    <svg className="w-full h-full text-green-500 overflow-visible" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="leadsGradient" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="currentColor" stopOpacity="0.25" />
+                          <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M0 35 Q 20 20, 40 25 T 80 10 T 100 5" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M0 35 Q 20 20, 40 25 T 80 10 T 100 5 L 100 40 L 0 40 Z" fill="url(#leadsGradient)" />
+                      <circle cx="100" cy="5" r="3" fill="currentColor" className="animate-pulse" />
                     </svg>
                   </div>
                 </div>
 
-                <div className="h-[1px] bg-slate-100" />
-
                 {/* Avg Response Time Segment */}
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center py-0.5 border-t border-slate-200/40 pt-2.5">
                   <div>
-                    <span className="text-[10px] font-black text-slate-400 block tracking-tight uppercase">Response Time</span>
-                    <span className="text-base font-black text-slate-950 mt-0.5 block">-20s average</span>
+                    <span className="text-[9px] font-bold text-slate-400 block tracking-wider uppercase">Response Time</span>
+                    <span className="text-xl font-black text-slate-900 mt-0.5 block leading-none">&lt; 20s avg</span>
+                    <span className="text-[9px] font-extrabold text-amber-500 block mt-1">Instant resolution</span>
                   </div>
                   {/* SVG bar chart */}
-                  <div className="flex items-end gap-1 h-8">
-                    <div className="w-2.5 h-4 bg-slate-200 rounded-xs" />
-                    <div className="w-2.5 h-6 bg-slate-200 rounded-xs" />
-                    <div className="w-2.5 h-8 bg-slate-300 rounded-xs" />
-                    <div className="w-2.5 h-3 bg-amber-500 rounded-xs" />
+                  <div className="flex items-end gap-1 h-8 shrink-0 pr-1">
+                    <div className="w-2 h-4 bg-slate-200 rounded-xs" />
+                    <div className="w-2 h-6 bg-slate-200 rounded-xs" />
+                    <div className="w-2 h-8 bg-slate-300 rounded-xs" />
+                    <div className="w-2 h-5 bg-amber-500 rounded-xs animate-pulse" />
                   </div>
                 </div>
 
@@ -554,29 +574,33 @@ export default function AiAutomationServiceLayout({
             {/* Column 3: Ready to Automate + Mascot (4/12 width) */}
             <div className="lg:col-span-4 flex flex-col justify-start">
               
-              <div className="bg-white border border-slate-200/80 rounded-[2rem] p-6 shadow-sm flex flex-col justify-between items-center text-center flex-grow min-h-[380px] h-full">
+              <div className="bg-white border border-slate-200/80 rounded-[2rem] p-6 shadow-sm flex flex-col items-center text-center h-full">
                 
-                {/* High-fidelity 3D Robot Mascot PNG */}
-                <div className="w-52 h-52 relative flex items-center justify-center overflow-hidden">
-                  <img 
-                    src="/images/cute-robot-mascot.png" 
-                    alt="Clever Crow AI Robot Mascot" 
-                    className="w-full h-full object-contain select-none pointer-events-none"
-                  />
+                {/* Mascot & Text Group */}
+                <div className="flex-grow flex flex-col items-center justify-center py-4">
+                  {/* High-fidelity 3D Robot Mascot PNG */}
+                  <div className="w-40 h-40 relative flex items-center justify-center overflow-hidden mb-4">
+                    <img 
+                      src="/images/cute-robot-mascot.png" 
+                      alt="Clever Crow AI Robot Mascot" 
+                      className="w-full h-full object-contain select-none pointer-events-none"
+                    />
+                  </div>
+
+                  {/* Text Block */}
+                  <div className="flex flex-col items-center">
+                    <h3 className="text-base md:text-lg font-black text-slate-900 tracking-tight leading-tight font-sans">
+                      Ready to Automate <br />Your Business?
+                    </h3>
+                    
+                    <p className="mt-3 text-[11px] font-bold text-slate-500 leading-relaxed max-w-[240px]">
+                      Book a free consultation and see how AI automation can save time, reduce costs and increase conversions.
+                    </p>
+                  </div>
                 </div>
 
-                {/* Text Block */}
-                <div className="flex flex-col items-center mt-2">
-                  <h3 className="text-base md:text-lg font-black text-slate-900 tracking-tight leading-tight font-sans">
-                    Ready to Automate <br />Your Business?
-                  </h3>
-                  
-                  <p className="mt-4 text-[11px] font-bold text-slate-500 leading-relaxed max-w-[240px]">
-                    Book a free consultation and see how AI automation can save time, reduce costs and increase conversions.
-                  </p>
-                </div>
-
-                <div className="w-full mt-6 font-sans">
+                {/* Button container forced to the bottom */}
+                <div className="w-full mt-auto pt-4 font-sans">
                   <a
                     href="#contact-form"
                     className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-5 py-3.5 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/10 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer w-full"
