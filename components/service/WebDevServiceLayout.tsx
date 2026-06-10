@@ -4,14 +4,16 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  CheckCircle2,
+  X,
+  Menu,
+  ChevronDown,
   ArrowRight,
+  Phone,
   Laptop,
   Smartphone,
   Cpu,
   Megaphone,
   Check,
-  ChevronDown,
   Layout,
   ShoppingCart,
   Code2,
@@ -21,9 +23,26 @@ import {
   MessageSquare,
   Shield,
   Layers,
-  HelpCircle
+  HelpCircle,
+  CheckCircle2
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+
+// Map string identifiers to Lucide Icon components to avoid non-serializable objects error
+const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  laptop: Laptop,
+  smartphone: Smartphone,
+  cpu: Cpu,
+  megaphone: Megaphone,
+  layout: Layout,
+  shoppingcart: ShoppingCart,
+  code2: Code2,
+  refreshcw: RefreshCw,
+  wrench: Wrench,
+  search: Search,
+  chevrondown: ChevronDown,
+  checkcircle2: CheckCircle2
+};
 
 // Default technologies list with custom SVG badges
 const defaultTechnologies = [
@@ -121,7 +140,7 @@ type WebDevServiceLayoutProps = {
   servicesTitle?: string;
   servicesSubtitle?: string;
   services: {
-    icon: any;
+    icon: string;
     title: string;
     description: string;
     href: string;
@@ -131,7 +150,7 @@ type WebDevServiceLayoutProps = {
     step: string;
     title: string;
     description: string;
-    icon: any;
+    icon: string;
   }[];
   whyChooseTitle?: string;
   whyChoose: string[];
@@ -154,13 +173,13 @@ export default function WebDevServiceLayout({
   services,
   processTitle = "Our Website Development Process",
   process = [
-    { step: "01", title: "Discovery", description: "We understand your business, goals and target audience.", icon: Search },
-    { step: "02", title: "Planning", description: "We plan the sitemap, structure and content layout.", icon: ChevronDown },
-    { step: "03", title: "Design", description: "We create clean and modern UI/UX that represents your brand.", icon: Layout },
-    { step: "04", title: "Development", description: "We build fast, responsive and SEO-friendly websites.", icon: Code2 },
-    { step: "05", title: "Testing", description: "We test for speed, responsiveness and functionality.", icon: CheckCircle2 },
-    { step: "06", title: "Launch", description: "We deploy your website and make it live for your audience.", icon: Cpu },
-    { step: "07", title: "Support", description: "We provide ongoing support and maintenance.", icon: Wrench }
+    { step: "01", title: "Discovery", description: "We understand your business, goals and target audience.", icon: "search" },
+    { step: "02", title: "Planning", description: "We plan the sitemap, structure and content layout.", icon: "chevrondown" },
+    { step: "03", title: "Design", description: "We create clean and modern UI/UX that represents your brand.", icon: "layout" },
+    { step: "04", title: "Development", description: "We build fast, responsive and SEO-friendly websites.", icon: "code2" },
+    { step: "05", title: "Testing", description: "We test for speed, responsiveness and functionality.", icon: "checkcircle2" },
+    { step: "06", title: "Launch", description: "We deploy your website and make it live for your audience.", icon: "cpu" },
+    { step: "07", title: "Support", description: "We provide ongoing support and maintenance.", icon: "wrench" }
   ],
   whyChooseTitle = "Why Choose Clever Crow for Website Development?",
   whyChoose,
@@ -383,36 +402,39 @@ export default function WebDevServiceLayout({
 
         {/* 6-Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((svc, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.2 }}
-              className="group relative bg-white border border-slate-100 rounded-[2.2rem] p-8 shadow-sm hover:shadow-[0_25px_50px_rgba(0,0,0,0.025)] flex flex-col justify-between h-[255px] cursor-pointer"
-            >
-              <div>
-                {/* Circular Icon badge */}
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-600 shadow-sm border border-amber-500/10 shrink-0">
-                  <svc.icon size={18} className="stroke-[2.5]" />
+          {services.map((svc, i) => {
+            const IconComponent = iconMap[svc.icon.toLowerCase().replace(/[^a-z0-9]/g, "")] || Laptop;
+            return (
+              <motion.div
+                key={i}
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.2 }}
+                className="group relative bg-white border border-slate-100 rounded-[2.2rem] p-8 shadow-sm hover:shadow-[0_25px_50px_rgba(0,0,0,0.025)] flex flex-col justify-between h-[255px] cursor-pointer"
+              >
+                <div>
+                  {/* Circular Icon badge */}
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-600 shadow-sm border border-amber-500/10 shrink-0">
+                    <IconComponent size={18} className="stroke-[2.5]" />
+                  </div>
+                  {/* Text content */}
+                  <h3 className="text-base font-black text-slate-900 tracking-tight mt-5">
+                    {svc.title}
+                  </h3>
+                  <p className="text-xs font-semibold text-slate-400 mt-2.5 leading-relaxed line-clamp-3">
+                    {svc.description}
+                  </p>
                 </div>
-                {/* Text content */}
-                <h3 className="text-base font-black text-slate-900 tracking-tight mt-5">
-                  {svc.title}
-                </h3>
-                <p className="text-xs font-semibold text-slate-400 mt-2.5 leading-relaxed line-clamp-3">
-                  {svc.description}
-                </p>
-              </div>
 
-              {/* Bottom Arrow */}
-              <div className="mt-4 flex items-center justify-between border-t border-slate-50 pt-4">
-                <Link href={svc.href} className="text-[10px] font-black text-slate-500 uppercase tracking-widest group-hover:text-amber-500 transition-colors">
-                  Learn More
-                </Link>
-                <ArrowRight size={14} className="text-slate-400 group-hover:text-amber-500 group-hover:translate-x-1 transition-all" />
-              </div>
-            </motion.div>
-          ))}
+                {/* Bottom Arrow */}
+                <div className="mt-4 flex items-center justify-between border-t border-slate-50 pt-4">
+                  <Link href={svc.href} className="text-[10px] font-black text-slate-500 uppercase tracking-widest group-hover:text-amber-500 transition-colors">
+                    Learn More
+                  </Link>
+                  <ArrowRight size={14} className="text-slate-400 group-hover:text-amber-500 group-hover:translate-x-1 transition-all" />
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
       </section>
@@ -437,25 +459,28 @@ export default function WebDevServiceLayout({
             <div className="absolute top-[37px] left-12 right-12 h-0.5 bg-slate-200/80 hidden lg:block z-0" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-8 items-start relative z-10">
-              {process.map((step, idx) => (
-                <div key={idx} className="flex flex-col items-center lg:items-start text-center lg:text-left group">
-                  {/* Step circle index badge */}
-                  <div className="relative flex h-[76px] w-[76px] items-center justify-center rounded-full bg-white border border-slate-200 shadow-sm group-hover:border-amber-500 group-hover:shadow-[0_0_15px_rgba(245,158,11,0.15)] transition-all shrink-0">
-                    <span className="absolute top-[-8px] text-[10px] font-black text-amber-500 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
-                      {step.step}
-                    </span>
-                    <step.icon size={20} className="text-slate-600 group-hover:text-amber-500 transition-colors stroke-[2.2]" />
-                  </div>
+              {process.map((step, idx) => {
+                const ProcessIcon = iconMap[step.icon.toLowerCase().replace(/[^a-z0-9]/g, "")] || Search;
+                return (
+                  <div key={idx} className="flex flex-col items-center lg:items-start text-center lg:text-left group">
+                    {/* Step circle index badge */}
+                    <div className="relative flex h-[76px] w-[76px] items-center justify-center rounded-full bg-white border border-slate-200 shadow-sm group-hover:border-amber-500 group-hover:shadow-[0_0_15px_rgba(245,158,11,0.15)] transition-all shrink-0">
+                      <span className="absolute top-[-8px] text-[10px] font-black text-amber-500 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                        {step.step}
+                      </span>
+                      <ProcessIcon size={20} className="text-slate-600 group-hover:text-amber-500 transition-colors stroke-[2.2]" />
+                    </div>
 
-                  {/* Title & Info */}
-                  <h4 className="text-[14px] font-black text-slate-800 tracking-tight mt-5">
-                    {step.title}
-                  </h4>
-                  <p className="text-[11px] font-semibold text-slate-400 mt-2 leading-relaxed max-w-[150px] mx-auto lg:mx-0">
-                    {step.description}
-                  </p>
-                </div>
-              ))}
+                    {/* Title & Info */}
+                    <h4 className="text-[14px] font-black text-slate-800 tracking-tight mt-5">
+                      {step.title}
+                    </h4>
+                    <p className="text-[11px] font-semibold text-slate-400 mt-2 leading-relaxed max-w-[150px] mx-auto lg:mx-0">
+                      {step.description}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
 

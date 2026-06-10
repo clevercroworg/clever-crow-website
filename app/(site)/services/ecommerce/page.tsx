@@ -1,5 +1,4 @@
 import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
-import { Laptop, Code2, ShoppingCart, Layout, RefreshCw, Wrench } from "lucide-react";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -25,37 +24,37 @@ const ecommerceFaqs = [
 
 const ecommerceServices = [
   {
-    icon: ShoppingCart,
+    icon: "shoppingcart",
     title: "Custom Storefront Development",
     description: "Bespoke digital storefronts built with seamless checkouts and rich product catalogs.",
     href: "/services/ecommerce"
   },
   {
-    icon: Laptop,
+    icon: "laptop",
     title: "Shopify Store Setup & Design",
     description: "Highly optimized Shopify store design, theme customizations, and app integrations.",
     href: "/services/ecommerce"
   },
   {
-    icon: Code2,
+    icon: "code2",
     title: "WooCommerce Solutions",
     description: "Flexible and scalable e-commerce systems integrated into WordPress platforms.",
     href: "/services/ecommerce"
   },
   {
-    icon: Layout,
+    icon: "layout",
     title: "Payment & Shipping Integrations",
     description: "Connecting Stripe, Razorpay, and logistics APIs for smooth payment and tracking operations.",
     href: "/services/ecommerce"
   },
   {
-    icon: RefreshCw,
+    icon: "refreshcw",
     title: "Inventory & Order Dashboards",
     description: "Admin panel configurations to easily manage products, stocks, and customer orders.",
     href: "/services/ecommerce"
   },
   {
-    icon: Wrench,
+    icon: "wrench",
     title: "E-commerce Speed Tuning",
     description: "Compressing images, lazy-loading catalogs, and optimizing code for better conversion rates.",
     href: "/services/ecommerce"

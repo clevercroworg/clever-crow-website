@@ -1,5 +1,4 @@
 import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
-import { Laptop, Code2, ShoppingCart, Layout, RefreshCw, Wrench } from "lucide-react";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -29,37 +28,37 @@ const wordpressFaqs = [
 
 const wordpressServices = [
   {
-    icon: Laptop,
+    icon: "laptop",
     title: "Custom WordPress Design",
     description: "Fully custom visual designs engineered as clean, bespoke, and fast WordPress themes.",
     href: "/services/wordpress-website-design"
   },
   {
-    icon: ShoppingCart,
+    icon: "shoppingcart",
     title: "WooCommerce Setup & Growth",
     description: "Scalable ecommerce solutions with customized product structures and catalog layouts.",
     href: "/services/ecommerce"
   },
   {
-    icon: Code2,
+    icon: "code2",
     title: "Page Builder Customizations",
     description: "Building clean blocks in Elementor, Gutenberg, or Divi for easy non-technical team editing.",
     href: "/services/wordpress-website-design"
   },
   {
-    icon: RefreshCw,
+    icon: "refreshcw",
     title: "Weekly Backups & Security",
     description: "Setting up firewalls, malware scanning, database optimization, and automatic cloud backups.",
     href: "/services/wordpress-website-design"
   },
   {
-    icon: Wrench,
+    icon: "wrench",
     title: "Core & Plugin Maintenance",
     description: "Safe updates of themes, core WordPress files, and plugin extensions to prevent code conflicts.",
     href: "/services/wordpress-website-design"
   },
   {
-    icon: Layout,
+    icon: "layout",
     title: "WordPress Speed Tuning",
     description: "Database cleanups, caching rule setups, and asset delivery optimizations for instant load times.",
     href: "/services/wordpress-website-design"

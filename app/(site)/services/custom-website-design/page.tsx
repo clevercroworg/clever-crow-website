@@ -1,5 +1,4 @@
 import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
-import { Laptop, Code2, ShoppingCart, Layout, RefreshCw, Wrench } from "lucide-react";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -29,37 +28,37 @@ const customWebsiteFaqs = [
 
 const customServices = [
   {
-    icon: Code2,
+    icon: "code2",
     title: "Custom UI/UX React Sites",
     description: "Tailored component styling for a highly branded and responsive experience.",
     href: "/services/custom-website-design"
   },
   {
-    icon: Laptop,
+    icon: "laptop",
     title: "Headless CMS & Next.js",
     description: "Blazing fast static site generation paired with user-friendly dashboard backends.",
     href: "/services/custom-website-design"
   },
   {
-    icon: Layout,
+    icon: "layout",
     title: "SaaS Product Frontend",
     description: "Sleek user interfaces and smooth state management built for complex web apps.",
     href: "/services/custom-website-design"
   },
   {
-    icon: ShoppingCart,
+    icon: "shoppingcart",
     title: "Headless Commerce Stores",
     description: "High-performance ecommerce builds leveraging APIs for fast transaction flows.",
     href: "/services/ecommerce"
   },
   {
-    icon: RefreshCw,
+    icon: "refreshcw",
     title: "Legacy Code Redesign",
     description: "Porting legacy codebases to React and Next.js for cutting edge performance.",
     href: "/services/custom-website-design"
   },
   {
-    icon: Wrench,
+    icon: "wrench",
     title: "Dedicated Performance Audit",
     description: "Fine-tuning hydration, bundling, image sizes, and CDN delivery to pass Core Web Vitals.",
     href: "/services/custom-website-design"

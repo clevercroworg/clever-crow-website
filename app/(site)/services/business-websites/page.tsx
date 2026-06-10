@@ -1,5 +1,4 @@
 import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
-import { Laptop, Code2, ShoppingCart, Layout, RefreshCw, Wrench } from "lucide-react";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -25,37 +24,37 @@ const businessWebsiteFaqs = [
 
 const businessServices = [
   {
-    icon: Laptop,
+    icon: "laptop",
     title: "Business Website Development",
     description: "Professional corporate and brand websites that establish instant trust and authority online.",
     href: "/services/business-websites"
   },
   {
-    icon: Code2,
+    icon: "code2",
     title: "React / Next.js Development",
     description: "Bespoke high-performance web applications built using cutting-edge React and Next.js frameworks.",
     href: "/services/custom-website-design"
   },
   {
-    icon: ShoppingCart,
+    icon: "shoppingcart",
     title: "Ecommerce Website Development",
-    description: "Scalable digital shops designed with smooth product management and secure payment flows.",
+    description: "Scalable digital shops designed with AWS database features, smooth product management, and secure payment flows.",
     href: "/services/ecommerce"
   },
   {
-    icon: Layout,
+    icon: "layout",
     title: "Landing Page Development",
     description: "Conversion-optimized landing pages designed for PPC, Google Ads, and Meta Ads campaign traffic.",
     href: "/services/landing-pages"
   },
   {
-    icon: RefreshCw,
+    icon: "refreshcw",
     title: "Website Redesign",
     description: "Modern updates for legacy websites to improve load speed, visual appeal, and sales conversions.",
     href: "/services/custom-website-design"
   },
   {
-    icon: Wrench,
+    icon: "wrench",
     title: "Website Maintenance",
     description: "Ongoing updates, hosting management, technical support, and backup configurations.",
     href: "/services/wordpress-website-design"

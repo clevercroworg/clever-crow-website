@@ -1,5 +1,4 @@
 import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
-import { Laptop, Code2, ShoppingCart, Layout, RefreshCw, Wrench, Search, Smartphone } from "lucide-react";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -29,37 +28,37 @@ const landingPageFaqs = [
 
 const landingServices = [
   {
-    icon: Layout,
+    icon: "layout",
     title: "Lead Gen Landing Pages",
     description: "Focused layouts with custom query-capturing forms and Google/Meta conversion tracking.",
     href: "/services/landing-pages"
   },
   {
-    icon: Laptop,
+    icon: "laptop",
     title: "Product Launch Pages",
     description: "High-impact visual narratives designed to launch and showcase new products.",
     href: "/services/landing-pages"
   },
   {
-    icon: Search,
+    icon: "search",
     title: "Google & PPC Ads Pages",
     description: "Optimized quality-score layouts with direct message match for paid search ads.",
     href: "/services/landing-pages"
   },
   {
-    icon: Smartphone,
+    icon: "smartphone",
     title: "Meta & Social Traffic Pages",
     description: "Sleek, responsive scroll-stopping interfaces built for social media users.",
     href: "/services/landing-pages"
   },
   {
-    icon: Code2,
+    icon: "code2",
     title: "Headless Promo Microsites",
     description: "Dedicated campaign microsites built with static site speed and security.",
     href: "/services/landing-pages"
   },
   {
-    icon: RefreshCw,
+    icon: "refreshcw",
     title: "CRO Redesign & Audit",
     description: "Improving copy hierarchy, button placements, and load times of existing campaign pages.",
     href: "/services/landing-pages"
