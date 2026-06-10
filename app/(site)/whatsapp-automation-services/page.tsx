@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import AiAutomationServiceLayout from "@/components/service/AiAutomationServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -28,7 +28,7 @@ export const metadata = {
 export default function WhatsappAutomationServicesPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <AiAutomationServiceLayout
         eyebrow="WhatsApp Automation"
         heroTitle="WhatsApp Automation Services for Business Leads"
         heroSubtitle="Automate WhatsApp replies, lead qualification, follow-ups, reminders and customer communication with practical business workflows."

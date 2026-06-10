@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import AiAutomationServiceLayout from "@/components/service/AiAutomationServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -28,7 +28,7 @@ export const metadata = {
 export default function CrmAutomationServicesPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <AiAutomationServiceLayout
         eyebrow="CRM Automation"
         heroTitle="CRM Automation Services for Growing Businesses"
         heroSubtitle="Automate CRM updates, lead stages, reminders, task assignments and reporting so your sales team never misses a follow-up."

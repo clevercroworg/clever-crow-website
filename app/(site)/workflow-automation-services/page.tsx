@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import AiAutomationServiceLayout from "@/components/service/AiAutomationServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -28,7 +28,7 @@ export const metadata = {
 export default function WorkflowAutomationServicesPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <AiAutomationServiceLayout
         eyebrow="Workflow Automation"
         heroTitle="Workflow Automation Services for Business Operations"
         heroSubtitle="Reduce repetitive work by automating approvals, lead routing, notifications, reports and daily business processes."

@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import AiAutomationServiceLayout from "@/components/service/AiAutomationServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -28,7 +28,7 @@ export const metadata = {
 export default function AiCustomerSupportAutomationPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <AiAutomationServiceLayout
         eyebrow="AI Customer Support"
         heroTitle="AI Customer Support Automation for Faster Response"
         heroSubtitle="Use AI automation to handle common customer questions, support requests, status updates and escalation workflows faster."

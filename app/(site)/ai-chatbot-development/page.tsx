@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import AiAutomationServiceLayout from "@/components/service/AiAutomationServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -28,7 +28,7 @@ export const metadata = {
 export default function AiChatbotDevelopmentPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <AiAutomationServiceLayout
         eyebrow="AI Chatbot Development"
         heroTitle="AI Chatbot Development for Business Support and Leads"
         heroSubtitle="Build AI chatbots for websites, WhatsApp and support workflows to answer queries, capture leads and reduce manual follow-up."

@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import AiAutomationServiceLayout from "@/components/service/AiAutomationServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -71,7 +71,7 @@ export const metadata = {
 export default function AIAutomationAgencyPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <AiAutomationServiceLayout
         eyebrow="AI Automation Agency"
         heroTitle="AI Automation Agency for Sales, Support and Operations"
         heroSubtitle="Automate lead follow-ups, WhatsApp conversations, CRM workflows, customer support and sales processes with practical AI automation solutions."
