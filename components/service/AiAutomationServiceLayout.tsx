@@ -314,52 +314,41 @@ export default function AiAutomationServiceLayout({
       </section>
 
       {/* ───────────────── 2. OUR SERVICES GRID ───────────────── */}
-      <section id="automation-services" className="py-10 md:py-16 max-w-7xl mx-auto px-6 lg:px-8 border-t border-slate-100/80">
+      <section id="automation-services" className="py-8 md:py-10 max-w-7xl mx-auto px-6 lg:px-8 border-t border-slate-100/80">
         
         {/* Title */}
-        <div className="mb-10 text-center max-w-2xl mx-auto">
-          <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3 font-sans">
+        <div className="mb-6 text-center max-w-2xl mx-auto">
+          <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-2 font-sans">
             AUTOMATION SERVICES
           </p>
-          <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mt-4 font-sans">
+          <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mt-3 font-sans">
             Our Automation Services
           </h2>
         </div>
 
         {/* 3x2 Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {services.map((svc, i) => {
             const IconComponent = iconMap[svc.icon.toLowerCase().replace(/[^a-z0-9]/g, "")] || Cpu;
             return (
-              <motion.div
+              <div
                 key={i}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.2 }}
-                className="group relative bg-white border border-slate-200/80 rounded-[2rem] p-5 shadow-sm hover:shadow-[0_20px_40px_rgba(0,0,0,0.015)] flex flex-col justify-between min-h-[190px] h-auto cursor-pointer font-sans"
+                className="bg-white border border-slate-200/80 rounded-2xl p-4 md:p-5 shadow-sm hover:border-amber-500/25 transition-colors flex gap-4 items-start font-sans"
               >
-                <div className="flex gap-4 items-start font-sans">
-                  {/* Icon */}
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-500/5 text-amber-500 group-hover:bg-amber-500 group-hover:text-white transition-all shrink-0">
-                    <IconComponent size={22} className="stroke-[1.5]" />
-                  </div>
-                  {/* Text */}
-                  <div>
-                    <h3 className="text-xs font-black text-slate-800 tracking-tight leading-snug">
-                      {svc.title}
-                    </h3>
-                    <p className="text-[10px] font-semibold text-slate-500 mt-2 leading-relaxed">
-                      {svc.description}
-                    </p>
-                  </div>
+                {/* Icon */}
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/5 text-amber-500 shrink-0 mt-0.5">
+                  <IconComponent size={20} className="stroke-[1.8]" />
                 </div>
-
-                {/* Bottom link arrow */}
-                <div className="mt-4 flex items-center justify-end">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50 border border-slate-200 group-hover:border-amber-500 group-hover:bg-amber-500/5 text-slate-400 group-hover:text-amber-500 transition-colors">
-                    <ArrowRight size={12} className="stroke-[2.5]" />
-                  </div>
+                {/* Text */}
+                <div className="flex flex-col justify-start">
+                  <h3 className="text-xs md:text-[13px] font-black text-slate-800 tracking-tight leading-snug">
+                    {svc.title}
+                  </h3>
+                  <p className="text-[10px] md:text-[11px] font-bold text-slate-500 mt-2 leading-relaxed">
+                    {svc.description}
+                  </p>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
