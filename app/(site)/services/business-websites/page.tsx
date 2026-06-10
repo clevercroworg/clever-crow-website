@@ -1,37 +1,66 @@
-import ServiceHero from "@/components/service/ServiceHero";
-import DynamicCTA from "@/components/DynamicCTA";
-import FaqSection from "@/components/service/FaqSection";
-import BusinessWebsiteSections from "@/components/service/BusinessWebsiteSections";
+import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import { Laptop, Code2, ShoppingCart, Layout, RefreshCw, Wrench } from "lucide-react";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
 
-/* ---------------- FAQ DATA ---------------- */
-
 const businessWebsiteFaqs = [
   {
     question: "How many pages will my website have?",
-    answer:
-      "It depends on your requirement. Most business websites range from 5 to 15 pages.",
+    answer: "It depends on your requirement. Most business websites range from 5 to 15 pages.",
   },
   {
     question: "Will my website be mobile-friendly?",
-    answer:
-      "Yes. All our websites are fully responsive and optimized for mobile devices.",
+    answer: "Yes. All our websites are fully responsive and optimized for mobile devices.",
   },
   {
     question: "Can you redesign my existing website?",
-    answer:
-      "Yes. We can redesign and improve your current website.",
+    answer: "Yes. We can redesign and improve your current website to boost load speed and conversions.",
   },
   {
     question: "Do you provide hosting?",
-    answer:
-      "We can guide you or help set up hosting based on your needs.",
+    answer: "We can guide you or help set up hosting based on your needs, including domain linking and SSL setups.",
   },
 ];
 
-/* ---------------- METADATA ---------------- */
+const businessServices = [
+  {
+    icon: Laptop,
+    title: "Business Website Development",
+    description: "Professional corporate and brand websites that establish instant trust and authority online.",
+    href: "/services/business-websites"
+  },
+  {
+    icon: Code2,
+    title: "React / Next.js Development",
+    description: "Bespoke high-performance web applications built using cutting-edge React and Next.js frameworks.",
+    href: "/services/custom-website-design"
+  },
+  {
+    icon: ShoppingCart,
+    title: "Ecommerce Website Development",
+    description: "Scalable digital shops designed with smooth product management and secure payment flows.",
+    href: "/services/ecommerce"
+  },
+  {
+    icon: Layout,
+    title: "Landing Page Development",
+    description: "Conversion-optimized landing pages designed for PPC, Google Ads, and Meta Ads campaign traffic.",
+    href: "/services/landing-pages"
+  },
+  {
+    icon: RefreshCw,
+    title: "Website Redesign",
+    description: "Modern updates for legacy websites to improve load speed, visual appeal, and sales conversions.",
+    href: "/services/custom-website-design"
+  },
+  {
+    icon: Wrench,
+    title: "Website Maintenance",
+    description: "Ongoing updates, hosting management, technical support, and backup configurations.",
+    href: "/services/wordpress-website-design"
+  }
+];
 
 export const metadata = {
   title: "Business Website Development - Lead Generation Sites | Clever Crow",
@@ -40,39 +69,27 @@ export const metadata = {
   keywords: "business website development, small business website design, corporate website services, lead generation website, professional business websites, company website development",
 };
 
-/* ---------------- PAGE ---------------- */
-
 export default function BusinessWebsiteDevelopmentPage() {
   return (
     <main>
-      {/* ═══════════ HERO ═══════════ */}
-      <ServiceHero
+      <WebDevServiceLayout
         eyebrow="Business Website Development"
-        title="Professional Business Websites That Convert Visitors into Customers"
-        subtitle="We design and develop modern, fast, and mobile-friendly websites that help your business attract leads, build trust, and grow online."
+        heroTitle="High-Performance Websites That Build Trust & Drive Growth"
+        heroSubtitle="We design and develop professional business websites that are fast, secure, SEO-friendly, and built to convert visitors into customers."
         serviceName="Business Website Development"
-        highlights={[
-          "Mobile Responsive Design",
-          "SEO-Ready Structure",
-          "Fast Loading Speed",
-          "Conversion-Focused Layout",
+        services={businessServices}
+        whyChoose={[
+          "Conversion-focused layouts engineered to turn website visitors into active leads.",
+          "Clean, SEO-optimized structure and code that ranks higher on organic search results.",
+          "Blazing-fast loading speeds under 1.5s for maximum user retention and better search signals.",
+          "Responsive, mobile-first design that renders flawlessly on every smartphone and tablet.",
+          "Integrated tracking analytics, contact forms, CRM sync, and marketing tools.",
+          "Reliable post-launch maintenance, secure backups, and direct tech support."
         ]}
-      />
-
-      {/* ═══════════ ANIMATED SECTIONS (Problem+Solution, Services, Website Types, Why Choose, Process, Tech, Pricing, Final CTA) ═══════════ */}
-      <BusinessWebsiteSections />
-
-      {/* ═══════════ MID CTA ═══════════ */}
-      <DynamicCTA />
-
-      {/* ═══════════ FAQ ═══════════ */}
-      <FaqSection
-        title="Frequently Asked Questions"
-        description="Common questions about our business website development services."
         faqs={businessWebsiteFaqs}
+        pageUrl="https://clevercrow.in/services/business-websites"
       />
 
-      {/* ═══════════ SCHEMA ═══════════ */}
       <WebPageSchema
         title="Business Website Development Services | Clever Crow"
         description="We design and develop modern, fast, and mobile-friendly websites that help your business attract leads, build trust, and grow online."

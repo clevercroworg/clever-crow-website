@@ -1,45 +1,70 @@
-import ServiceHero from "@/components/service/ServiceHero";
-import HowItHelps from "@/components/service/HowItHelps";
-import WhatYouGet from "@/components/service/WhatYouGet";
-import DynamicCTA from "@/components/DynamicCTA";
-import FaqSection from "@/components/service/FaqSection";
-import ServiceCTA from "@/components/service/ServiceCTA";
+import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import { Laptop, Code2, ShoppingCart, Layout, RefreshCw, Wrench } from "lucide-react";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
-import CustomQuoteForm from "@/components/modals/CustomQuoteForm";
-
-/* ---------------- FAQ DATA ---------------- */
 
 const customWebsiteFaqs = [
   {
     question: "What is custom website design?",
-    answer:
-      "Custom website design means designing and developing a website from scratch, tailored specifically to your brand, goals, and business requirements—without relying on generic templates.",
+    answer: "Custom website design means designing and developing a website from scratch, tailored specifically to your brand, goals, and business requirements—without relying on generic templates.",
   },
   {
     question: "Is custom website design better than templates?",
-    answer:
-      "Yes. Custom websites offer better performance, scalability, branding, and conversion optimisation compared to pre-built templates.",
+    answer: "Yes. Custom websites offer better performance, scalability, branding, and conversion optimisation compared to pre-built templates.",
   },
   {
     question: "Will my website be mobile-friendly?",
-    answer:
-      "Absolutely. All our custom websites are built mobile-first and optimised for all devices and screen sizes.",
+    answer: "Absolutely. All our custom websites are built mobile-first and optimised for all devices and screen sizes.",
   },
   {
     question: "Do you build websites using WordPress or custom code?",
-    answer:
-      "We build both. Depending on the project, we use WordPress, headless CMS, or custom front-end frameworks for maximum flexibility.",
+    answer: "We build both. Depending on the project, we use WordPress, headless CMS, or custom front-end frameworks like React and Next.js for maximum speed.",
   },
   {
     question: "Do you provide ongoing support?",
-    answer:
-      "Yes. We offer ongoing maintenance, updates, performance optimisation, and technical support after launch.",
+    answer: "Yes. We offer ongoing maintenance, updates, performance optimisation, and technical support after launch.",
   },
 ];
 
-/* ---------------- METADATA ---------------- */
+const customServices = [
+  {
+    icon: Code2,
+    title: "Custom UI/UX React Sites",
+    description: "Tailored component styling for a highly branded and responsive experience.",
+    href: "/services/custom-website-design"
+  },
+  {
+    icon: Laptop,
+    title: "Headless CMS & Next.js",
+    description: "Blazing fast static site generation paired with user-friendly dashboard backends.",
+    href: "/services/custom-website-design"
+  },
+  {
+    icon: Layout,
+    title: "SaaS Product Frontend",
+    description: "Sleek user interfaces and smooth state management built for complex web apps.",
+    href: "/services/custom-website-design"
+  },
+  {
+    icon: ShoppingCart,
+    title: "Headless Commerce Stores",
+    description: "High-performance ecommerce builds leveraging APIs for fast transaction flows.",
+    href: "/services/ecommerce"
+  },
+  {
+    icon: RefreshCw,
+    title: "Legacy Code Redesign",
+    description: "Porting legacy codebases to React and Next.js for cutting edge performance.",
+    href: "/services/custom-website-design"
+  },
+  {
+    icon: Wrench,
+    title: "Dedicated Performance Audit",
+    description: "Fine-tuning hydration, bundling, image sizes, and CDN delivery to pass Core Web Vitals.",
+    href: "/services/custom-website-design"
+  }
+];
 
 export const metadata = {
   title: "Website Development Services - Business & E-commerce | Clever Crow",
@@ -48,131 +73,38 @@ export const metadata = {
   keywords: "website development company, custom website development, business website design, responsive website development, high performance websites, corporate website development",
 };
 
-/* ---------------- PAGE ---------------- */
-
 export default function CustomWebsiteDesignPage() {
   return (
     <main>
-      {/* ================= HERO ================= */}
-      <ServiceHero
-        eyebrow="Custom Web Design"
-        title="Custom Websites Designed for Performance & Growth"
-        subtitle="We design and build custom websites that reflect your brand, engage users, and support long-term business growth."
+      <WebDevServiceLayout
+        eyebrow="React & Next.js Development"
+        heroTitle="Custom Websites Built for Speed, Scalability, and Sales"
+        heroSubtitle="We build bespoke web applications and high-performance React and Next.js sites tailored from scratch—no templates, no limits."
         serviceName="Custom Website Design"
-        highlights={[
-          "Fully custom UI/UX design",
-          "Mobile-first & responsive",
-          "High-performance builds",
-          "SEO-friendly architecture",
-          "Conversion-focused layouts",
+        services={customServices}
+        whyChoose={[
+          "Custom-crafted codebase that avoids the heavy bloat of default page builders.",
+          "Zero-configuration static site builds that load in milliseconds, ensuring maximum SEO advantages.",
+          "Modern component-based design allowing simple UI updates and painless long-term scaling.",
+          "Highly secure architecture using decoupled frontend setups and secure API calls.",
+          "Integrated tracking analytics, server-side rendering, and performance optimization.",
+          "Reliable developer support, clear documentation, and direct code management."
         ]}
-        tools={[
-          { src: "/logos/html.svg", alt: "HTML" },
-          { src: "/logos/css.svg", alt: "CSS" },
-          { src: "/logos/javascript.svg", alt: "JavaScript" },
-        ]}
-      />
-
-      {/* ================= HOW IT HELPS ================= */}
-      <HowItHelps
-        badge="Custom Build"
-        title="Custom Websites Built Around Your Business"
-        description="Our custom website design services focus on performance, usability, and scalability—giving your business a strong digital foundation."
-        imageSrc="/images/custom-website-design.jpg"
-        imageAlt="Custom website design and development illustration"
-        pills={[
-          "Unique Brand Identity",
-          "Better UX",
-          "Faster Load Times",
-          "SEO Optimised",
-          "Scalable Architecture",
-        ]}
-      />
-
-      {/* ================= MID CTA ================= */}
-      <DynamicCTA />
-
-      {/* ================= WHAT YOU GET ================= */}
-      <WhatYouGet
-        title="What’s Included in Our Custom Website Design Services"
-        subtitle="Everything required to build a high-performing custom website."
-        items={[
-          "Custom UI/UX design",
-          "Responsive front-end development",
-          "Performance optimisation",
-          "SEO-friendly structure",
-          "Accessibility best practices",
-          "Content integration",
-          "Security & best practices",
-          "Launch & post-launch support",
-        ]}
-      />
-
-      {/* ================= WHO THIS IS FOR ================= */}
-      <section className="py-20">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-3xl font-semibold">
-            Who Is Custom Website Design For?
-          </h2>
-          <p className="mt-4 text-gray-600 max-w-3xl">
-            Custom website design is ideal for businesses that need flexibility,
-            scalability, and a strong brand presence online.
-          </p>
-
-          <ul className="mt-6 grid sm:grid-cols-2 gap-4 text-gray-700">
-            <li>✔ Growing businesses & startups</li>
-            <li>✔ Brands needing unique design</li>
-            <li>✔ Companies with complex requirements</li>
-            <li>✔ SaaS & service-based businesses</li>
-            <li>✔ Businesses redesigning legacy websites</li>
-          </ul>
-        </div>
-      </section>
-
-      {/* ================= PROCESS ================= */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-3xl font-semibold">
-            Our Custom Website Design Process
-          </h2>
-
-          <ol className="mt-8 space-y-4 text-gray-700">
-            <li><strong>1. Discovery</strong> – Business goals & requirements</li>
-            <li><strong>2. UX Planning</strong> – Information architecture</li>
-            <li><strong>3. Visual Design</strong> – Custom UI & branding</li>
-            <li><strong>4. Development</strong> – Front-end & CMS build</li>
-            <li><strong>5. Optimisation</strong> – Speed, SEO & accessibility</li>
-            <li><strong>6. Launch</strong> – Testing & go-live</li>
-          </ol>
-        </div>
-      </section>
-
-      {/* ================= FAQ ================= */}
-      <FaqSection
-        title="Custom Website Design – FAQs"
-        description="Common questions about custom website design and development."
         faqs={customWebsiteFaqs}
+        pageUrl="https://clevercrow.in/services/custom-website-design"
       />
 
-      
-
-      {/* ================= SCHEMA ================= */}
       <WebPageSchema
         title="Custom Website Design Services in India"
         description="Custom website design services focused on performance, scalability, and conversions."
         url="https://clevercrow.in/services/custom-website-design"
       />
-
       <ServiceSchema
         serviceName="Custom Website Design Services"
         serviceDescription="Professional custom website design services for businesses and brands."
         pageUrl="https://clevercrow.in/services/custom-website-design"
       />
-
       <FaqSchema faqs={customWebsiteFaqs} />
-
-      {/* ================= FINAL CTA ================= */}
-      <ServiceCTA />
     </main>
   );
 }
