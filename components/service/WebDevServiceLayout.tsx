@@ -438,12 +438,12 @@ export default function WebDevServiceLayout({
       </section>
 
       {/* ───────────────── 4. TWO-COLUMN FEATURES (TECHNOLOGIES & BENEFITS) ───────────────── */}
-      <section className="py-24 bg-slate-50/40 border-t border-b border-slate-100/80">
+      <section className="py-16 bg-slate-50/40 border-t border-b border-slate-100/80">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             
             {/* Left Column Card (Technologies) */}
-            <div className="lg:col-span-6 flex flex-col bg-white border border-slate-100 rounded-[2.5rem] p-8 md:p-10 shadow-sm justify-between">
+            <div className="lg:col-span-6 flex flex-col bg-white border border-slate-100 rounded-[2.5rem] p-8 md:px-10 md:py-8 shadow-sm justify-between">
               <div>
                 <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight font-sans">
                   Modern Technologies We Work With
@@ -452,12 +452,12 @@ export default function WebDevServiceLayout({
                   {defaultTechnologies.map((tech, i) => (
                     <div
                       key={i}
-                      className="bg-slate-50/50 border border-slate-100/60 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-slate-200 hover:shadow-sm transition-all gap-2 cursor-default"
+                      className="bg-slate-50/50 border border-slate-100/60 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-slate-200 hover:shadow-sm transition-all gap-3 cursor-default"
                     >
-                      <div className="flex h-10 w-10 items-center justify-center shrink-0">
+                      <div className="flex h-11 w-11 items-center justify-center shrink-0">
                         {tech.svg}
                       </div>
-                      <span className="text-[10px] font-bold text-slate-700 tracking-tight leading-tight">
+                      <span className="text-[11px] font-black text-slate-700 tracking-tight leading-tight">
                         {tech.name}
                       </span>
                     </div>
@@ -473,8 +473,8 @@ export default function WebDevServiceLayout({
             </div>
 
             {/* Right Column Card (Why Choose Clever Crow) */}
-            <div className="lg:col-span-6 flex flex-col bg-white border border-slate-100 rounded-[2.5rem] p-8 md:p-10 shadow-sm relative overflow-hidden justify-between">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch h-full">
+            <div className="lg:col-span-6 flex flex-col bg-white border border-slate-100 rounded-[2.5rem] p-8 md:px-10 md:py-8 shadow-sm relative overflow-hidden justify-between">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center h-full">
                 
                 {/* Left part of this card: Checkpoints (60%) */}
                 <div className="md:col-span-7 flex flex-col justify-between">
@@ -498,14 +498,12 @@ export default function WebDevServiceLayout({
                 </div>
 
                 {/* Right part of this card: Mockup Image (40%) */}
-                <div className="md:col-span-5 flex items-center justify-center md:h-full relative min-h-[160px] md:min-h-0">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <img
-                      src="/images/device-mockup.png"
-                      alt="Clever Crow website design mockups"
-                      className="max-h-[160px] md:max-h-none w-auto object-contain md:absolute md:right-[-20px] md:bottom-[-20px] md:w-[130%]"
-                    />
-                  </div>
+                <div className="md:col-span-5 flex items-center justify-center md:h-full relative min-h-[200px] md:min-h-0 overflow-visible">
+                  <img
+                    src="/images/device-mockup.png"
+                    alt="Clever Crow website design mockups"
+                    className="w-[125%] md:w-[155%] max-w-[280px] md:max-w-none object-contain mix-blend-multiply md:absolute md:right-[-35px] md:bottom-[-20px] select-none pointer-events-none"
+                  />
                 </div>
 
               </div>
@@ -550,11 +548,11 @@ export default function WebDevServiceLayout({
       </section>
 
       {/* ───────────────── 6. FAQ & FINAL CTA (TWO-COLUMN GRID) ───────────────── */}
-      <section id="contact-form" className="py-24 max-w-7xl mx-auto px-6 lg:px-8">
+      <section id="contact-form" className="py-16 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Left Column (FAQs) */}
-          <div className="lg:col-span-7 flex flex-col items-start bg-white border border-slate-100 rounded-[2.5rem] p-8 md:p-10 shadow-sm">
+          <div className="lg:col-span-7 flex flex-col items-start bg-white border border-slate-100 rounded-[2.5rem] p-6 md:p-8 shadow-sm">
             <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-100 px-3 py-1 rounded-full border border-slate-200/50 mb-4">
               QUESTIONS
             </span>
@@ -598,14 +596,14 @@ export default function WebDevServiceLayout({
           </div>
 
           {/* Right Column (Cream CTA Card) */}
-          <div className="lg:col-span-5 flex flex-col bg-[#FFFBF2] border border-amber-500/5 rounded-[2.5rem] p-8 md:p-10 shadow-sm relative overflow-hidden justify-between min-h-[380px] lg:min-h-0">
+          <div className="lg:col-span-5 flex flex-col bg-[#FFFBF2] border border-amber-500/5 rounded-[2.5rem] p-6 md:p-8 md:py-10 md:px-10 shadow-sm relative overflow-hidden justify-between">
             {/* Background radial highlight */}
             <div className="absolute top-[-50px] right-[-50px] w-48 h-48 rounded-full bg-amber-500/5 blur-[80px]" />
             
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch h-full relative z-10">
               
               {/* Left Side: Text and Buttons (65%) */}
-              <div className="md:col-span-7 flex flex-col justify-between h-full gap-8">
+              <div className="md:col-span-7 flex flex-col justify-center h-full gap-6">
                 <div>
                   <h3 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-tight">
                     Ready to Build or Redesign Your Website?
@@ -637,11 +635,11 @@ export default function WebDevServiceLayout({
               </div>
 
               {/* Right Side: Laptop Guy cutout (35%) */}
-              <div className="md:col-span-5 flex items-end justify-center relative min-h-[220px] md:min-h-0">
+              <div className="md:col-span-5 flex items-end justify-center relative min-h-[220px] md:min-h-0 md:h-full overflow-visible">
                 <img
                   src="/images/laptop-guy.png"
                   alt="Clever Crow consultant typing on laptop"
-                  className="absolute bottom-[-40px] right-[-40px] w-[140%] max-w-[280px] md:max-w-none object-contain pointer-events-none select-none"
+                  className="absolute bottom-[-40px] right-[-30px] h-[110%] w-auto max-w-none object-contain object-right-bottom mix-blend-multiply pointer-events-none select-none"
                 />
               </div>
 
