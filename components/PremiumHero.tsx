@@ -554,7 +554,7 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
                 </div>
 
                 {/* BOTTOM ROW: The Staggered Feature Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                <div className="hidden md:grid md:grid-cols-3 gap-6 w-full">
                   
                   {/* Feature 1: Web & App Dev */}
                   <motion.div
