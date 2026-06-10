@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import DigitalMarketingServiceLayout from "@/components/service/DigitalMarketingServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -28,7 +28,7 @@ export const metadata = {
 export default function SeoServicesPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <DigitalMarketingServiceLayout
         eyebrow="SEO Services"
         heroTitle="SEO Services for Long-Term Organic Growth"
         heroSubtitle="Improve organic visibility with keyword research, on-page SEO, technical SEO, content planning, local SEO and performance tracking."

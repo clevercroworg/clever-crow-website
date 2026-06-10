@@ -4,152 +4,174 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  X,
-  Menu,
-  ChevronDown,
   ArrowRight,
-  Phone,
-  Laptop,
+  Check,
+  CheckCircle2,
+  Search,
+  Megaphone,
+  Target,
+  Pencil,
+  Rocket,
+  Monitor,
+  TrendingUp,
+  BarChart3,
+  LineChart,
+  MousePointerClick,
+  Eye,
+  Users,
+  Heart,
+  Building,
+  Home,
+  GraduationCap,
+  ShoppingCart,
+  Layers,
+  Database,
+  Code2,
+  Layout,
   Smartphone,
   Cpu,
-  Megaphone,
-  Check,
-  Layout,
-  ShoppingCart,
-  Code2,
-  RefreshCw,
-  Wrench,
-  Search,
-  MessageSquare,
-  Shield,
-  Layers,
-  HelpCircle,
-  CheckCircle2,
-  Target,
-  Rocket,
   Headphones,
-  Home,
   Calendar,
-  Database,
-  Monitor,
-  Users,
+  Briefcase,
   Award,
   Network,
-  Pencil,
-  ChevronLeft,
-  Clock,
-  TrendingUp,
-  MessageCircle,
-  Building,
-  Heart,
-  Bed,
-  GraduationCap,
-  Bot,
-  User,
-  Send,
-  Workflow,
-  HeartPulse,
-  Luggage
+  Wrench,
+  Shield,
+  RefreshCw
 } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaGoogle, FaFacebookF, FaInstagram } from "react-icons/fa";
 
+// ─── Icon Map ───
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  laptop: Laptop,
-  smartphone: Smartphone,
-  cpu: Cpu,
-  megaphone: Megaphone,
-  layout: Layout,
-  shoppingcart: ShoppingCart,
-  code2: Code2,
-  refreshcw: RefreshCw,
-  wrench: Wrench,
   search: Search,
-  chevrondown: ChevronDown,
-  checkcircle2: CheckCircle2,
+  megaphone: Megaphone,
   target: Target,
-  shield: Shield,
   pencil: Pencil,
   rocket: Rocket,
-  headphones: Headphones,
-  home: Home,
-  calendar: Calendar,
-  database: Database,
   monitor: Monitor,
+  trendingup: TrendingUp,
+  barchart3: BarChart3,
+  linechart: LineChart,
+  mousepointerclick: MousePointerClick,
+  eye: Eye,
   users: Users,
+  home: Home,
+  graduationcap: GraduationCap,
+  shoppingcart: ShoppingCart,
+  layers: Layers,
+  database: Database,
+  code2: Code2,
+  layout: Layout,
+  smartphone: Smartphone,
+  cpu: Cpu,
+  headphones: Headphones,
+  calendar: Calendar,
+  briefcase: Briefcase,
   award: Award,
   network: Network,
-  clock: Clock,
-  trendingup: TrendingUp,
-  messagecircle: MessageCircle,
-  building: Building,
-  heart: Heart,
-  bed: Bed,
-  graduationcap: GraduationCap,
-  heartpulse: HeartPulse,
-  luggage: Luggage
+  wrench: Wrench,
+  shield: Shield,
+  refreshcw: RefreshCw,
+  checkcircle2: CheckCircle2
 };
 
-function getServiceConfig(title: string, iconKey: string) {
+// ─── Service Config Helper (color-coded branded icons) ───
+function getMarketingServiceConfig(title: string, iconKey: string) {
   const t = title.toLowerCase();
-  const k = iconKey.toLowerCase();
-  
-  if (t.includes("whatsapp")) {
+
+  if (t.includes("google")) {
     return {
-      icon: FaWhatsapp,
+      icon: Search,
+      bgColor: "bg-blue-500/10 border border-blue-500/20",
+      textColor: "text-blue-600",
+      borderColor: "hover:border-blue-500/35",
+      arrowColor: "group-hover:text-blue-600"
+    };
+  }
+  if (t.includes("meta") || t.includes("facebook") || t.includes("instagram")) {
+    return {
+      icon: Megaphone,
+      bgColor: "bg-indigo-500/10 border border-indigo-500/20",
+      textColor: "text-indigo-600",
+      borderColor: "hover:border-indigo-500/35",
+      arrowColor: "group-hover:text-indigo-600"
+    };
+  }
+  if (t.includes("seo") || t.includes("organic")) {
+    return {
+      icon: Target,
       bgColor: "bg-emerald-500/10 border border-emerald-500/20",
-      textColor: "text-[#25D366]",
+      textColor: "text-emerald-600",
       borderColor: "hover:border-emerald-500/35",
-      arrowColor: "group-hover:text-emerald-500"
+      arrowColor: "group-hover:text-emerald-600"
     };
   }
-  if (t.includes("chatbot") || t.includes("bot") || k === "cpu") {
+  if (t.includes("social") || t.includes("content") || t.includes("community") || t.includes("reels") || t.includes("hashtag")) {
     return {
-      icon: Bot,
-      bgColor: "bg-amber-500/10 border border-amber-500/20",
-      textColor: "text-[#F59E0B]",
-      borderColor: "hover:border-amber-500/35",
-      arrowColor: "group-hover:text-amber-500"
+      icon: Pencil,
+      bgColor: "bg-pink-500/10 border border-pink-500/20",
+      textColor: "text-pink-600",
+      borderColor: "hover:border-pink-500/35",
+      arrowColor: "group-hover:text-pink-600"
     };
   }
-  if (t.includes("lead") || k === "target") {
+  if (t.includes("lead") || t.includes("landing") || t.includes("funnel") || t.includes("whatsapp")) {
     return {
-      icon: User,
+      icon: Rocket,
       bgColor: "bg-orange-500/10 border border-orange-500/20",
-      textColor: "text-orange-500",
+      textColor: "text-orange-600",
       borderColor: "hover:border-orange-500/35",
-      arrowColor: "group-hover:text-orange-500"
+      arrowColor: "group-hover:text-orange-600"
     };
   }
-  if (t.includes("crm") || k === "database") {
+  if (t.includes("performance") || t.includes("retarget") || t.includes("conversion") || t.includes("creative") || t.includes("a/b")) {
+    return {
+      icon: TrendingUp,
+      bgColor: "bg-teal-500/10 border border-teal-500/20",
+      textColor: "text-teal-600",
+      borderColor: "hover:border-teal-500/35",
+      arrowColor: "group-hover:text-teal-600"
+    };
+  }
+  if (t.includes("analytics") || t.includes("tracking") || t.includes("ga4") || t.includes("gtm") || t.includes("pixel") || t.includes("dashboard") || t.includes("data layer") || t.includes("attribution")) {
+    return {
+      icon: BarChart3,
+      bgColor: "bg-violet-500/10 border border-violet-500/20",
+      textColor: "text-violet-600",
+      borderColor: "hover:border-violet-500/35",
+      arrowColor: "group-hover:text-violet-600"
+    };
+  }
+  if (t.includes("crm") || t.includes("follow")) {
     return {
       icon: Database,
       bgColor: "bg-purple-500/10 border border-purple-500/20",
-      textColor: "text-purple-500",
+      textColor: "text-purple-600",
       borderColor: "hover:border-purple-500/35",
-      arrowColor: "group-hover:text-purple-500"
+      arrowColor: "group-hover:text-purple-600"
     };
   }
-  if (t.includes("sales") || t.includes("follow") || k === "rocket") {
+  if (t.includes("paid search") || t.includes("search campaign")) {
     return {
-      icon: Send,
-      bgColor: "bg-amber-500/10 border border-amber-500/20",
-      textColor: "text-amber-500",
-      borderColor: "hover:border-amber-500/35",
-      arrowColor: "group-hover:text-amber-500"
-    };
-  }
-  if (t.includes("workflow") || t.includes("process") || k === "wrench" || k === "network") {
-    return {
-      icon: Network,
+      icon: Search,
       bgColor: "bg-blue-500/10 border border-blue-500/20",
-      textColor: "text-blue-500",
+      textColor: "text-blue-600",
       borderColor: "hover:border-blue-500/35",
-      arrowColor: "group-hover:text-blue-500"
+      arrowColor: "group-hover:text-blue-600"
+    };
+  }
+  if (t.includes("paid social")) {
+    return {
+      icon: Megaphone,
+      bgColor: "bg-indigo-500/10 border border-indigo-500/20",
+      textColor: "text-indigo-600",
+      borderColor: "hover:border-indigo-500/35",
+      arrowColor: "group-hover:text-indigo-600"
     };
   }
 
-  // Fallback default
-  const FallbackIcon = iconMap[k] || Cpu;
+  // Fallback
+  const FallbackIcon = iconMap[iconKey.toLowerCase().replace(/[^a-z0-9]/g, "")] || Monitor;
   return {
     icon: FallbackIcon,
     bgColor: "bg-amber-500/10 border border-amber-500/20",
@@ -159,6 +181,7 @@ function getServiceConfig(title: string, iconKey: string) {
   };
 }
 
+// ─── Types ───
 type ServiceItem = {
   icon: string;
   title: string;
@@ -171,7 +194,7 @@ type FAQItem = {
   answer: string;
 };
 
-type AiAutomationServiceLayoutProps = {
+type DigitalMarketingServiceLayoutProps = {
   eyebrow: string;
   heroTitle: string;
   heroSubtitle: string;
@@ -182,7 +205,7 @@ type AiAutomationServiceLayoutProps = {
   pageUrl: string;
 };
 
-export default function AiAutomationServiceLayout({
+export default function DigitalMarketingServiceLayout({
   eyebrow,
   heroTitle,
   heroSubtitle,
@@ -191,61 +214,69 @@ export default function AiAutomationServiceLayout({
   whyChoose,
   faqs,
   pageUrl
-}: AiAutomationServiceLayoutProps) {
+}: DigitalMarketingServiceLayoutProps) {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
-  // Hero bullets
+  // Hero Bullets
   const heroBullets = [
-    { title: "Faster Response", desc: "Instant replies and automated follow-ups.", icon: "cpu" },
-    { title: "Less Manual Work", desc: "Automate repetitive tasks and save hours daily.", icon: "clock" },
-    { title: "Better Lead Tracking", desc: "Capture, score and track every lead in one place.", icon: "target" },
-    { title: "Scalable Workflows", desc: "Automation that grows with your business.", icon: "trendingup" }
+    { title: "Higher ROI", desc: "Optimize every rupee for maximum lead generation.", icon: "trendingup" },
+    { title: "Quality Leads", desc: "Attract customers who are ready to buy.", icon: "target" },
+    { title: "Data-Driven", desc: "Every decision backed by real analytics data.", icon: "barchart3" },
+    { title: "Full-Funnel Strategy", desc: "From awareness to conversion and beyond.", icon: "layers" }
   ];
 
-  // Hero Right-Side Flowchart steps
-  const flowchartSteps = [
+  // Marketing Funnel Steps (Hero Right Side)
+  const funnelSteps = [
     {
-      title: "Lead Enquiry",
-      desc: "New leads come in via website, ads or forms.",
-      colorClass: "bg-green-500/10 text-green-600 border-green-500/20",
-      icon: <Users size={16} className="stroke-[2.5]" />
+      title: "Awareness",
+      desc: "Reach your audience via Google, Meta & social channels.",
+      colorClass: "bg-blue-500/10 text-blue-600 border-blue-500/20",
+      icon: <Eye size={16} className="stroke-[2.5]" />
     },
     {
-      title: "Instant WhatsApp Reply",
-      desc: "AI instantly replies, engages and qualifies the lead.",
+      title: "Interest & Engagement",
+      desc: "Engage with compelling content, ads and creatives.",
+      colorClass: "bg-indigo-500/10 text-indigo-600 border-indigo-500/20",
+      icon: <MousePointerClick size={16} className="stroke-[2.5]" />
+    },
+    {
+      title: "Lead Capture",
+      desc: "Convert visitors into leads with landing pages and forms.",
       colorClass: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
-      icon: <MessageCircle size={16} className="stroke-[2.5]" />
+      icon: <Target size={16} className="stroke-[2.5]" />
     },
     {
-      title: "CRM Update",
-      desc: "Lead details are captured and updated in CRM.",
-      colorClass: "bg-purple-500/10 text-purple-600 border-purple-500/20",
-      icon: <Database size={16} className="stroke-[2.5]" />
-    },
-    {
-      title: "Follow-Up",
-      desc: "Auto follow-ups nurture leads until they convert.",
+      title: "Conversion & Growth",
+      desc: "Nurture leads, track results and scale what works.",
       colorClass: "bg-amber-500/10 text-amber-600 border-amber-500/20",
-      icon: <Check size={16} className="stroke-[3]" />
+      icon: <TrendingUp size={16} className="stroke-[2.5]" />
     }
   ];
 
   // How It Works Steps
   const howItWorksSteps = [
-    { step: "01", title: "Enquiry Received", desc: "Leads come in from website, ads, WhatsApp or forms.", icon: "messagecircle" },
-    { step: "02", title: "AI Qualification", desc: "AI asks key questions and qualifies the lead.", icon: "cpu" },
-    { step: "03", title: "CRM Capture", desc: "Lead data is saved in CRM and assigned to the team.", icon: "database" },
-    { step: "04", title: "Follow-Up & Reporting", desc: "Automated follow-ups and performance tracking.", icon: "checkcircle2" }
+    { step: "01", title: "Strategy & Research", desc: "Analyse your business, market and competitors to build a data-led plan.", icon: "search" },
+    { step: "02", title: "Campaign Setup", desc: "Create ads, landing pages, tracking and audience targeting.", icon: "layout" },
+    { step: "03", title: "Launch & Optimize", desc: "Go live, A/B test creatives and optimize for best results.", icon: "rocket" },
+    { step: "04", title: "Report & Scale", desc: "Transparent reporting, insights and scaling what works.", icon: "barchart3" }
   ];
 
-  // Where Automation Helps
+  // Industries We Help
   const industryHelps = [
-    { title: "Real Estate", desc: "Capture leads, schedule visits and close faster.", icon: "home" },
-    { title: "Healthcare", desc: "Manage appointments, reminders and patient queries.", icon: "heartpulse" },
-    { title: "Hospitality", desc: "Handle bookings, inquiries and guest communication.", icon: "luggage" },
-    { title: "Education", desc: "Nurture enquiries and improve admissions.", icon: "graduationcap" },
-    { title: "Service Businesses", desc: "Automate follow-ups and delight your customers.", icon: "users" }
+    { title: "Real Estate", desc: "Generate enquiries for projects, plots and villas.", icon: "home" },
+    { title: "Healthcare", desc: "Drive patient appointments and health leads.", icon: "heart" },
+    { title: "Education", desc: "Boost admissions and course enrollments.", icon: "graduationcap" },
+    { title: "eCommerce", desc: "Increase orders, ROAS and repeat customers.", icon: "shoppingcart" },
+    { title: "Service Businesses", desc: "Fill your pipeline with quality service leads.", icon: "briefcase" }
   ];
+
+  const industryIconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+    home: Home,
+    heart: Heart,
+    graduationcap: GraduationCap,
+    shoppingcart: ShoppingCart,
+    briefcase: Briefcase
+  };
 
   return (
     <div className="bg-white min-h-screen text-slate-800 antialiased font-body pt-24 pb-0 selection:bg-amber-500/20">
@@ -262,8 +293,8 @@ export default function AiAutomationServiceLayout({
               backgroundSize: "24px 24px"
             }}
           />
-          <div className="absolute top-12 left-12 w-[300px] h-[300px] rounded-full bg-amber-200/10 blur-[80px]" />
-          <div className="absolute bottom-12 right-12 w-[350px] h-[350px] rounded-full bg-blue-100/20 blur-[90px]" />
+          <div className="absolute top-12 left-12 w-[300px] h-[300px] rounded-full bg-blue-200/10 blur-[80px]" />
+          <div className="absolute bottom-12 right-12 w-[350px] h-[350px] rounded-full bg-amber-100/15 blur-[90px]" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
@@ -288,16 +319,7 @@ export default function AiAutomationServiceLayout({
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-[50px] font-black leading-[1.12] tracking-tight text-slate-900 font-sans">
-                {heroTitle.includes("Replies") || heroTitle.includes("Replies,") ? (
-                  <span>
-                    AI Automation for <br />
-                    <span className="text-amber-500">Faster Replies</span>, Better <br className="hidden sm:inline" />
-                    Follow-Ups & <br className="hidden sm:inline" />
-                    Smarter Workflows
-                  </span>
-                ) : (
-                  heroTitle
-                )}
+                {heroTitle}
               </h1>
 
               <p className="mt-6 text-sm md:text-base text-slate-600 leading-relaxed font-semibold max-w-xl">
@@ -309,35 +331,35 @@ export default function AiAutomationServiceLayout({
                   href="#contact-form"
                   className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-6 py-4 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/15 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer"
                 >
-                  Book a Free Consultation
+                  Get a Growth Plan
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </a>
 
                 <a
-                  href="#automation-services"
+                  href="#marketing-services"
                   className="group flex items-center justify-center gap-2 rounded-2xl border-2 border-slate-200 bg-white px-6 py-4 text-xs font-black uppercase tracking-wider text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:scale-[1.01] active:scale-95 transition-all"
                 >
-                  Explore Automation Services
+                  Explore Services
                 </a>
               </div>
 
             </div>
 
-            {/* Right Column: Visual 4-Step Flowchart */}
+            {/* Right Column: Marketing Funnel Visual */}
             <div className="lg:col-span-6 w-full flex flex-col justify-center">
               <div className="relative bg-white border border-slate-200/80 rounded-[2rem] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.01)] max-w-lg mx-auto w-full font-sans">
                 
                 <p className="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 mb-6 leading-none text-center">
-                  CUSTOMER ACQUISITION FLOW
+                  MARKETING GROWTH FUNNEL
                 </p>
 
                 <div className="flex flex-col gap-4 relative">
                   
-                  {flowchartSteps.map((step, idx) => (
+                  {funnelSteps.map((step, idx) => (
                     <div key={idx} className="relative flex items-stretch gap-4">
                       
                       {/* Connecting Line (Vertical) */}
-                      {idx < flowchartSteps.length - 1 && (
+                      {idx < funnelSteps.length - 1 && (
                         <div className="absolute left-6 top-10 bottom-[-16px] w-[2px] border-l-2 border-dashed border-slate-200" />
                       )}
 
@@ -360,6 +382,14 @@ export default function AiAutomationServiceLayout({
 
                 </div>
 
+                {/* Platform Logos Row */}
+                <div className="mt-6 pt-4 border-t border-slate-100/60 flex items-center justify-center gap-5">
+                  <FaGoogle className="w-4 h-4 text-slate-300 hover:text-[#4285F4] transition-colors" />
+                  <FaFacebookF className="w-4 h-4 text-slate-300 hover:text-[#1877F2] transition-colors" />
+                  <FaInstagram className="w-4 h-4 text-slate-300 hover:text-[#E4405F] transition-colors" />
+                  <FaWhatsapp className="w-4 h-4 text-slate-300 hover:text-[#25D366] transition-colors" />
+                </div>
+
               </div>
             </div>
 
@@ -368,7 +398,7 @@ export default function AiAutomationServiceLayout({
           {/* Hero Bottom Bullets */}
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
             {heroBullets.map((bullet, idx) => {
-              const BulletIcon = iconMap[bullet.icon] || Clock;
+              const BulletIcon = iconMap[bullet.icon] || TrendingUp;
               return (
                 <div key={idx} className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm flex gap-3.5 items-start">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 shrink-0">
@@ -391,23 +421,23 @@ export default function AiAutomationServiceLayout({
 
       </section>
 
-      {/* ───────────────── 2. OUR SERVICES GRID ───────────────── */}
-      <section id="automation-services" className="py-8 md:py-10 max-w-7xl mx-auto px-6 lg:px-8 border-t border-slate-100/80">
+      {/* ───────────────── 2. OUR MARKETING SERVICES GRID ───────────────── */}
+      <section id="marketing-services" className="py-8 md:py-10 max-w-7xl mx-auto px-6 lg:px-8 border-t border-slate-100/80">
         
         {/* Title */}
         <div className="mb-6 text-center max-w-2xl mx-auto">
           <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-2 font-sans">
-            AUTOMATION SERVICES
+            OUR SERVICES
           </p>
           <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mt-3 font-sans">
-            Our Automation Services
+            Digital Marketing Services
           </h2>
         </div>
 
-        {/* 3x2 Grid */}
+        {/* 3×2 Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {services.map((svc, i) => {
-            const config = getServiceConfig(svc.title, svc.icon);
+            const config = getMarketingServiceConfig(svc.title, svc.icon);
             const IconComponent = config.icon;
             return (
               <Link
@@ -445,20 +475,20 @@ export default function AiAutomationServiceLayout({
           
           <div className="mb-10 text-center max-w-2xl mx-auto">
             <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3 font-sans">
-              HOW IT WORKS
+              OUR PROCESS
             </p>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mt-4 font-sans">
               How It Works
             </h2>
           </div>
 
-          {/* Dotted horizontal line timeline */}
+          {/* 4-Step horizontal timeline */}
           <div className="relative">
             <div className="absolute top-[38px] left-[7%] right-[7%] h-[2px] bg-slate-200/60 hidden lg:block z-0" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start relative z-10">
               {howItWorksSteps.map((step, idx) => {
-                const StepIcon = iconMap[step.icon.toLowerCase()] || Cpu;
+                const StepIcon = iconMap[step.icon.toLowerCase()] || Search;
                 return (
                   <div key={idx} className="flex flex-col items-center text-center group">
                     <div className="relative flex h-[76px] w-[76px] items-center justify-center rounded-full bg-white border border-slate-200 shadow-sm group-hover:border-amber-500 transition-all shrink-0">
@@ -483,22 +513,22 @@ export default function AiAutomationServiceLayout({
         </div>
       </section>
 
-      {/* ───────────────── 4. WHERE AUTOMATION HELPS ───────────────── */}
+      {/* ───────────────── 4. INDUSTRIES WE HELP ───────────────── */}
       <section className="py-10 md:py-16 max-w-7xl mx-auto px-6 lg:px-8">
         
         <div className="mb-10 text-center max-w-2xl mx-auto">
           <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3 font-sans">
-            WHERE AUTOMATION HELPS
+            INDUSTRIES WE HELP
           </p>
           <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mt-4 font-sans">
-            Where Automation Helps
+            Marketing That Works for Your Industry
           </h2>
         </div>
 
-        {/* 5 columns of horizontal industry helper cards */}
+        {/* 5 columns of industry helper cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           {industryHelps.map((ind, i) => {
-            const IndIcon = iconMap[ind.icon.toLowerCase()] || Building;
+            const IndIcon = industryIconMap[ind.icon] || Building;
             return (
               <div key={i} className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm flex flex-row items-center gap-4 hover:border-amber-500/20 transition-colors font-sans">
                 {/* Large Outline Icon (no background container) */}
@@ -520,7 +550,7 @@ export default function AiAutomationServiceLayout({
       </section>
 
       {/* ───────────────── 5. WHY CHOOSE, FAQ, CTA BLOCK ───────────────── */}
-      <section id="faq-section" className="py-8 md:py-12 bg-slate-50/30 border-t border-b border-slate-100/60">
+      <section id="contact-form" className="py-8 md:py-12 bg-slate-50/30 border-t border-b border-slate-100/60">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
@@ -533,7 +563,7 @@ export default function AiAutomationServiceLayout({
                   WHY CHOOSE CLEVER CROW
                 </p>
                 <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-tight font-sans mb-6">
-                  Automation That <br />Drives Growth
+                  Marketing That <br />Drives Results
                 </h2>
 
                 <div className="flex flex-col gap-4 font-sans">
@@ -550,7 +580,7 @@ export default function AiAutomationServiceLayout({
                 </div>
               </div>
 
-              {/* Mini Dashboard Card Component - Leads Captured */}
+              {/* Mini Dashboard Card — Leads Generated */}
               <div className="bg-slate-50/60 border border-slate-200/80 rounded-2xl p-4 shadow-sm flex flex-col gap-3 font-sans mt-6">
                 
                 {/* Live Pulse Header */}
@@ -560,31 +590,31 @@ export default function AiAutomationServiceLayout({
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
                     </span>
-                    <span className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Live Performance</span>
+                    <span className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Leads Generated</span>
                   </div>
-                  <span className="text-[8px] font-extrabold text-amber-600 bg-amber-500/10 px-1.5 py-0.5 rounded-sm uppercase tracking-wide">
-                    Pulse
+                  <span className="text-[8px] font-extrabold text-emerald-600 bg-emerald-500/10 px-1.5 py-0.5 rounded-sm uppercase tracking-wide">
+                    Live
                   </span>
                 </div>
 
-                {/* Leads Captured Segment */}
+                {/* Leads Generated Segment */}
                 <div className="flex justify-between items-center py-0.5">
                   <div>
-                    <span className="text-[9px] font-bold text-slate-400 block tracking-wider uppercase">Leads Captured</span>
-                    <span className="text-xl font-black text-slate-900 mt-0.5 block leading-none font-sans">2,548</span>
-                    <span className="text-[9px] font-extrabold text-green-500 block mt-1">+32.6% this month</span>
+                    <span className="text-[9px] font-bold text-slate-400 block tracking-wider uppercase">Total Leads</span>
+                    <span className="text-xl font-black text-slate-900 mt-0.5 block leading-none font-sans">4,820</span>
+                    <span className="text-[9px] font-extrabold text-green-500 block mt-1">+41.3% this month</span>
                   </div>
-                  {/* SVG graph line with linear gradient fill */}
+                  {/* SVG graph line */}
                   <div className="w-24 h-10 shrink-0 relative flex items-center">
                     <svg className="w-full h-full text-green-500 overflow-visible" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <defs>
-                        <linearGradient id="leadsGradient" x1="0" y1="0" x2="0" y2="1">
+                        <linearGradient id="dmLeadsGradient" x1="0" y1="0" x2="0" y2="1">
                           <stop offset="0%" stopColor="currentColor" stopOpacity="0.25" />
                           <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
                         </linearGradient>
                       </defs>
-                      <path d="M0 35 Q 20 20, 40 25 T 80 10 T 100 5" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M0 35 Q 20 20, 40 25 T 80 10 T 100 5 L 100 40 L 0 40 Z" fill="url(#leadsGradient)" />
+                      <path d="M0 35 Q 20 22, 40 28 T 80 12 T 100 5" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M0 35 Q 20 22, 40 28 T 80 12 T 100 5 L 100 40 L 0 40 Z" fill="url(#dmLeadsGradient)" />
                       <circle cx="100" cy="5" r="3" fill="currentColor" className="animate-pulse" />
                     </svg>
                   </div>
@@ -640,7 +670,7 @@ export default function AiAutomationServiceLayout({
                 </div>
               </div>
 
-              {/* Response Time Metrics Card */}
+              {/* Campaign ROAS Metrics Card */}
               <div className="bg-slate-50/60 border border-slate-200/80 rounded-2xl p-4 shadow-sm flex flex-col gap-3 font-sans mt-6">
                 
                 {/* Live Speed Header */}
@@ -650,31 +680,31 @@ export default function AiAutomationServiceLayout({
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
                     </span>
-                    <span className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Response Efficiency</span>
+                    <span className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Campaign ROAS</span>
                   </div>
-                  <span className="text-[8px] font-extrabold text-green-600 bg-green-500/10 px-1.5 py-0.5 rounded-sm uppercase tracking-wide">
+                  <span className="text-[8px] font-extrabold text-amber-600 bg-amber-500/10 px-1.5 py-0.5 rounded-sm uppercase tracking-wide">
                     Active
                   </span>
                 </div>
 
-                {/* Avg Response Time Segment */}
+                {/* ROAS Segment */}
                 <div className="flex justify-between items-center py-0.5">
                   <div>
-                    <span className="text-[9px] font-bold text-slate-400 block tracking-wider uppercase">Response Time</span>
-                    <span className="text-xl font-black text-slate-900 mt-0.5 block leading-none font-sans">&lt; 20s avg</span>
-                    <span className="text-[9px] font-extrabold text-amber-500 block mt-1">Instant resolution</span>
+                    <span className="text-[9px] font-bold text-slate-400 block tracking-wider uppercase">Return on Ad Spend</span>
+                    <span className="text-xl font-black text-slate-900 mt-0.5 block leading-none font-sans">5.2x avg</span>
+                    <span className="text-[9px] font-extrabold text-amber-500 block mt-1">Above industry avg</span>
                   </div>
-                  {/* SVG graph line with linear gradient fill - matching Leads Captured */}
+                  {/* SVG graph line */}
                   <div className="w-24 h-10 shrink-0 relative flex items-center">
                     <svg className="w-full h-full text-amber-500 overflow-visible" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <defs>
-                        <linearGradient id="responseGradient" x1="0" y1="0" x2="0" y2="1">
+                        <linearGradient id="dmRoasGradient" x1="0" y1="0" x2="0" y2="1">
                           <stop offset="0%" stopColor="currentColor" stopOpacity="0.25" />
                           <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
                         </linearGradient>
                       </defs>
                       <path d="M0 32 Q 25 30, 50 15 T 100 8" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M0 32 Q 25 30, 50 15 T 100 8 L 100 40 L 0 40 Z" fill="url(#responseGradient)" />
+                      <path d="M0 32 Q 25 30, 50 15 T 100 8 L 100 40 L 0 40 Z" fill="url(#dmRoasGradient)" />
                       <circle cx="100" cy="8" r="3" fill="currentColor" className="animate-pulse" />
                     </svg>
                   </div>
@@ -684,19 +714,19 @@ export default function AiAutomationServiceLayout({
 
             </div>
 
-            {/* Column 3: Ready to Automate + Mascot (3/12 width) */}
+            {/* Column 3: CTA + Metrics (3/12 width) */}
             <div className="lg:col-span-3 flex flex-col justify-between">
               
-              {/* Mascot Cream Card - Compact with Button inside */}
+              {/* Cream CTA Card */}
               <div className="bg-[#FFFBF2] border border-amber-500/15 rounded-[2rem] p-5 md:p-6 shadow-[0_2px_15px_rgba(245,158,11,0.02)] flex flex-col items-center text-center justify-between py-6 flex-grow">
                 
                 {/* Mascot & Text Group */}
                 <div className="flex flex-col items-center justify-center flex-grow py-2">
-                  {/* High-fidelity 3D Robot Mascot PNG */}
+                  {/* Marketing Growth Visual */}
                   <div className="w-48 h-48 relative flex items-center justify-center mb-4">
                     <img 
                       src="/images/cute-robot-mascot.png" 
-                      alt="Clever Crow AI Robot Mascot" 
+                      alt="Clever Crow Digital Marketing Mascot" 
                       className="w-full h-full object-contain relative z-10 scale-110 hover:scale-115 transition-transform duration-300 select-none pointer-events-none"
                     />
                   </div>
@@ -704,7 +734,7 @@ export default function AiAutomationServiceLayout({
                   {/* Text Block */}
                   <div className="flex flex-col items-center">
                     <h3 className="text-base md:text-lg font-black text-slate-900 tracking-tight leading-tight font-sans">
-                      Ready to Automate <br />Your Business?
+                      Ready to Grow <br />Your Business?
                     </h3>
                   </div>
                 </div>
@@ -715,14 +745,14 @@ export default function AiAutomationServiceLayout({
                     href="#contact-form"
                     className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-5 py-3 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/10 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer w-full text-center"
                   >
-                    Book Consultation
+                    Get Started
                     <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
                   </a>
                 </div>
 
               </div>
 
-              {/* Bottom Metrics Card 3: AI Resolution */}
+              {/* Bottom Metrics Card: Conversion Rate */}
               <div className="bg-slate-50/60 border border-slate-200/80 rounded-2xl p-4 shadow-sm flex flex-col gap-3 font-sans mt-6">
                 
                 {/* Live Success Header */}
@@ -732,31 +762,31 @@ export default function AiAutomationServiceLayout({
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500"></span>
                     </span>
-                    <span className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Automation Rate</span>
+                    <span className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Conversion Rate</span>
                   </div>
                   <span className="text-[8px] font-extrabold text-blue-600 bg-blue-500/10 px-1.5 py-0.5 rounded-sm uppercase tracking-wide">
-                    Success
+                    Tracking
                   </span>
                 </div>
 
-                {/* AI Resolution Segment */}
+                {/* Conversion Rate Segment */}
                 <div className="flex justify-between items-center py-0.5">
                   <div>
-                    <span className="text-[9px] font-bold text-slate-400 block tracking-wider uppercase">AI Resolution</span>
-                    <span className="text-xl font-black text-slate-900 mt-0.5 block leading-none font-sans">88% rate</span>
-                    <span className="text-[9px] font-extrabold text-blue-500 block mt-1">Automated support</span>
+                    <span className="text-[9px] font-bold text-slate-400 block tracking-wider uppercase">Avg Conversion</span>
+                    <span className="text-xl font-black text-slate-900 mt-0.5 block leading-none font-sans">12.4%</span>
+                    <span className="text-[9px] font-extrabold text-blue-500 block mt-1">3x industry avg</span>
                   </div>
-                  {/* SVG graph line with linear gradient fill - matching Leads/Response */}
+                  {/* SVG graph line */}
                   <div className="w-24 h-10 shrink-0 relative flex items-center">
                     <svg className="w-full h-full text-blue-500 overflow-visible" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <defs>
-                        <linearGradient id="resolutionGradient" x1="0" y1="0" x2="0" y2="1">
+                        <linearGradient id="dmConvGradient" x1="0" y1="0" x2="0" y2="1">
                           <stop offset="0%" stopColor="currentColor" stopOpacity="0.25" />
                           <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
                         </linearGradient>
                       </defs>
                       <path d="M0 35 Q 25 15, 50 22 T 85 8 T 100 2" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M0 35 Q 25 15, 50 22 T 85 8 T 100 2 L 100 40 L 0 40 Z" fill="url(#resolutionGradient)" />
+                      <path d="M0 35 Q 25 15, 50 22 T 85 8 T 100 2 L 100 40 L 0 40 Z" fill="url(#dmConvGradient)" />
                       <circle cx="100" cy="2" r="3" fill="currentColor" className="animate-pulse" />
                     </svg>
                   </div>
@@ -778,26 +808,21 @@ export default function AiAutomationServiceLayout({
           
           {/* Left section: Icon and Text */}
           <div className="flex items-center gap-4 flex-1">
-            {/* Custom Sparkle Speech Bubble SVG Icon */}
+            {/* Chart Growth SVG Icon */}
             <svg className="w-11 h-11 text-white shrink-0 overflow-visible select-none pointer-events-none" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path 
-                d="M 8 10 C 8 7, 10 5, 13 5 L 35 5 C 38 5, 40 7, 40 10 L 40 26 C 40 29, 38 31, 35 31 L 20 31 L 11 39 L 11 31 C 9.5 31, 8 29.5, 8 26 Z" 
-                fill="white" 
-              />
-              <circle cx="21" cy="18" r="2.5" fill="#0f172a" />
-              <circle cx="27" cy="18" r="2.5" fill="#0f172a" />
-              <polygon 
-                points="39,2 41,7 46,9 41,11 39,16 37,11 32,9 37,7" 
-                fill="white" 
-              />
+              <rect x="4" y="4" width="40" height="40" rx="10" fill="white" fillOpacity="0.15" />
+              <rect x="10" y="26" width="6" height="14" rx="2" fill="white" />
+              <rect x="21" y="18" width="6" height="22" rx="2" fill="white" />
+              <rect x="32" y="10" width="6" height="30" rx="2" fill="white" />
+              <polygon points="39,6 41,11 46,13 41,15 39,20 37,15 32,13 37,11" fill="white" />
             </svg>
             
             <div className="flex flex-col">
               <h4 className="text-sm md:text-base font-black leading-tight text-slate-950 font-sans">
-                Let AI handle the repetitive.
+                Let data drive your growth.
               </h4>
               <p className="text-sm md:text-base font-black leading-tight text-slate-950 font-sans">
-                You focus on growth.
+                We handle the campaigns.
               </p>
             </div>
           </div>

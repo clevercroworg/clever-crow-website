@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import DigitalMarketingServiceLayout from "@/components/service/DigitalMarketingServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -28,7 +28,7 @@ export const metadata = {
 export default function SocialMediaManagementServicesPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <DigitalMarketingServiceLayout
         eyebrow="Social Media Management"
         heroTitle="Social Media Management for Growing Brands"
         heroSubtitle="Build a consistent social media presence with content planning, post design, reels, captions, publishing and monthly reporting."

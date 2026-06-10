@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import DigitalMarketingServiceLayout from "@/components/service/DigitalMarketingServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -28,7 +28,7 @@ export const metadata = {
 export default function AnalyticsTrackingSetupPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <DigitalMarketingServiceLayout
         eyebrow="Analytics & Tracking"
         heroTitle="Analytics and Tracking Setup for Better Marketing Decisions"
         heroSubtitle="Set up GA4, Google Tag Manager, Meta Pixel, conversion events and lead tracking to measure every campaign properly."

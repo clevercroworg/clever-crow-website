@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import DigitalMarketingServiceLayout from "@/components/service/DigitalMarketingServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -71,7 +71,7 @@ export const metadata = {
 export default function DigitalMarketingAgencyPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <DigitalMarketingServiceLayout
         eyebrow="Digital Marketing Agency"
         heroTitle="Digital Marketing Agency Focused on Leads and Growth"
         heroSubtitle="Grow enquiries and sales with Google Ads, Meta Ads, SEO, social media management, lead generation campaigns and performance marketing."

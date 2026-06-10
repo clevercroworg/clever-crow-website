@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import DigitalMarketingServiceLayout from "@/components/service/DigitalMarketingServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -28,7 +28,7 @@ export const metadata = {
 export default function LeadGenerationCampaignsPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <DigitalMarketingServiceLayout
         eyebrow="Lead Generation"
         heroTitle="Lead Generation Campaigns for Business Growth"
         heroSubtitle="Plan and run lead generation campaigns across Google, Meta, landing pages and WhatsApp with tracking and follow-up systems."
