@@ -139,7 +139,7 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
                 className="group flex items-center justify-center gap-2.5 rounded-2xl bg-amber-500 px-6 py-4.5 text-xs font-black uppercase tracking-widest text-slate-900 shadow-md shadow-amber-500/20 hover:bg-amber-600 hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer"
               >
                 <Calendar className="w-4.5 h-4.5 shrink-0" />
-                BOOK A STRATEGY CALL
+                SCHEDULE A CALL
                 <ArrowRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" />
               </button>
 
