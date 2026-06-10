@@ -35,7 +35,8 @@ import {
   Users,
   Award,
   Network,
-  Pencil
+  Pencil,
+  ChevronLeft
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -165,7 +166,7 @@ const testimonials = [
     author: "Rohit Shetty",
     role: "Resort Owner",
     rating: 5,
-    avatar: "/images/testimonial_avatar.png" // Fallback to initial name avatar if not existing
+    avatar: "RS"
   }
 ];
 
@@ -209,12 +210,12 @@ export default function AppDevServiceLayout({
   ];
 
   const whyChooseDetailed = [
-    { title: "Business-first approach", desc: "We focus on solving real business problems with digital tools.", icon: "briefcase" },
+    { title: "Business-first approach", desc: "We focus on solving real business problems.", icon: "briefcase" },
     { title: "Scalable & future-ready", desc: "Built with modern technology that grows with your business.", icon: "database" },
     { title: "Secure & reliable", desc: "Best practices for security, data protection and performance.", icon: "shield" },
-    { title: "User experience-driven", desc: "Intuitive interfaces that enhance user satisfaction and retention.", icon: "layout" },
-    { title: "End-to-end support", desc: "From planning and UI design to post-launch support and updates.", icon: "rocket" },
-    { title: "Transparent communication", desc: "Clear updates, staging links, and collaboration at every step.", icon: "users" }
+    { title: "User experience-driven", desc: "Intuitive interfaces that enhance user satisfaction.", icon: "layout" },
+    { title: "End-to-end support", desc: "From planning to post-launch support, we're with you.", icon: "rocket" },
+    { title: "Transparent communication", desc: "Clear updates and collaboration at every step.", icon: "users" }
   ];
 
   return (
@@ -474,172 +475,239 @@ export default function AppDevServiceLayout({
         </div>
       </section>
 
-      {/* ───────────────── 4. WHY CHOOSE CLEVER CROW (TWO-COLUMN BENEFITS) ───────────────── */}
-      <section className="py-12 md:py-24 max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      {/* ───────────────── 4. WHY CHOOSE CLEVER CROW (PIXEL-PERFECT CARD) ───────────────── */}
+      <section className="py-12 md:py-20 bg-slate-50/30 border-b border-slate-100/60">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           
-          {/* Left Column (Pure CSS iPhone Mockup with Dashboard) */}
-          <div className="lg:col-span-5 relative w-full flex justify-center items-center">
-            
-            {/* Custom Phone Frame */}
-            <div className="relative mx-auto w-[250px] aspect-[9/18.5] bg-slate-900 border-[8px] border-slate-950 rounded-[2.5rem] shadow-2xl overflow-hidden">
+          {/* Main White Border Card Container */}
+          <div className="bg-white border border-slate-200/80 rounded-[2.5rem] p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.01)]">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
               
-              {/* Dynamic Island */}
-              <div className="absolute top-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-slate-950 rounded-full z-20" />
-              
-              {/* Screen Content */}
-              <div className="w-full h-full bg-[#050505] flex flex-col justify-between p-4 text-white font-sans relative">
-                
-                {/* Status Bar */}
-                <div className="flex justify-between items-center text-[9px] font-bold opacity-80 pt-1">
-                  <span>9:41</span>
-                  <div className="flex items-center gap-1">
-                    <span className="w-2.5 h-1.5 bg-white rounded-xs" />
-                  </div>
-                </div>
-
-                {/* Sample App UI Dashboard */}
-                <div className="flex-1 flex flex-col justify-start mt-6 gap-3">
-                  <div className="text-[10px] font-bold tracking-wider opacity-60">ACTIVE USERS</div>
-                  <div className="text-xl font-black text-amber-500">45,78,000</div>
+              {/* 1. Phone Mockup (Left) */}
+              <div className="lg:col-span-3 flex justify-center">
+                <div className="relative w-[190px] aspect-[9/18.5] bg-slate-900 border-[7px] border-slate-950 rounded-[2.2rem] shadow-2xl overflow-hidden shrink-0">
+                  {/* Dynamic Island */}
+                  <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-12 h-3 bg-slate-950 rounded-full z-20" />
                   
-                  {/* Mini Bar Chart */}
-                  <div className="h-24 flex items-end gap-1.5 pt-2">
-                    <div className="w-full bg-amber-500/20 h-10 rounded-sm" />
-                    <div className="w-full bg-amber-500/40 h-16 rounded-sm" />
-                    <div className="w-full bg-amber-500 h-24 rounded-sm" />
-                    <div className="w-full bg-amber-500/60 h-14 rounded-sm" />
-                    <div className="w-full bg-amber-500/80 h-20 rounded-sm" />
-                  </div>
+                  {/* Screen Content */}
+                  <div className="w-full h-full bg-[#18182b] flex flex-col justify-between p-3 text-white font-sans relative">
+                    {/* Status Bar */}
+                    <div className="flex justify-between items-center text-[8px] font-bold opacity-80 pt-0.5">
+                      <span>9:41</span>
+                      <div className="flex items-center gap-1">
+                        <span className="w-2 h-1 bg-white rounded-xs" />
+                      </div>
+                    </div>
 
-                  {/* Mini cards */}
-                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-2.5 mt-2 flex flex-col gap-1">
-                    <div className="text-[9px] font-bold text-slate-400">DAILY REVENUE</div>
-                    <div className="text-[13px] font-black text-white">$12,450.00</div>
+                    {/* Sample App UI Dashboard */}
+                    <div className="flex-1 flex flex-col justify-start mt-4 gap-2">
+                      <div className="text-[8px] font-black tracking-wider opacity-60">MONTHLY REVENUE</div>
+                      <div className="text-base font-black text-white">₹ 45,78,000</div>
+                      
+                      {/* Mini Bar/Line Chart */}
+                      <div className="h-20 flex items-end gap-1 pt-2 relative">
+                        {/* Custom visual wave lines */}
+                        <div className="absolute inset-x-0 bottom-4 h-[1px] bg-white/10" />
+                        <div className="w-full bg-amber-500/25 h-8 rounded-xs" />
+                        <div className="w-full bg-amber-500/40 h-12 rounded-xs" />
+                        <div className="w-full bg-amber-500 h-18 rounded-xs" />
+                        <div className="w-full bg-amber-500/50 h-10 rounded-xs" />
+                        <div className="w-full bg-amber-500/70 h-14 rounded-xs" />
+                        <div className="w-full bg-amber-500/90 h-16 rounded-xs" />
+                      </div>
+
+                      {/* Mini cards list */}
+                      <div className="flex flex-col gap-1.5 mt-2 bg-slate-950/40 border border-slate-800/40 rounded-lg p-2">
+                        <div className="flex justify-between items-center text-[7px] text-slate-400 font-bold">
+                          <span>Top Products</span>
+                          <span>Sales</span>
+                        </div>
+                        <div className="w-full h-[1px] bg-slate-800/40" />
+                        <div className="flex justify-between items-center text-[7px] text-white font-black">
+                          <span>Product X</span>
+                          <span className="text-amber-500">12,450</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                
               </div>
-            </div>
 
-          </div>
+              {/* 2. Middle Title Block (Middle-Left) */}
+              <div className="lg:col-span-4 flex flex-col items-start text-left">
+                <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3 leading-none">
+                  WHY CHOOSE CLEVER CROW?
+                </p>
+                <h2 className="text-2xl md:text-3xl lg:text-[28px] font-black text-slate-900 tracking-tight leading-tight font-sans">
+                  We Build Apps That <br />Drive Real Results
+                </h2>
+              </div>
 
-          {/* Right Column (Checkpoints List) */}
-          <div className="lg:col-span-7 flex flex-col items-start">
-            <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-3">
-              WHY CHOOSE CLEVER CROW?
-            </p>
-            <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight font-sans mb-8">
-              We Build Apps That Drive Real Results
-            </h2>
+              {/* 3. Vertical Divider Line (Desktop only) */}
+              <div className="hidden lg:block lg:col-span-1 justify-self-center">
+                <div className="w-[1px] h-32 bg-slate-200" />
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-              {whyChooseDetailed.map((point, i) => {
-                const PointIcon = iconMap[point.icon] || CheckCircle2;
-                return (
-                  <div key={i} className="flex gap-4 items-start">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-500/10 text-amber-500 shrink-0 shadow-sm">
-                      <PointIcon size={16} className="stroke-[2.5]" />
+              {/* Mobile Horizontal Divider */}
+              <div className="w-full h-[1px] bg-slate-200/60 my-2 lg:hidden col-span-1" />
+
+              {/* 4. 2-Column Checklist (Right) */}
+              <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5">
+                {whyChooseDetailed.map((point, i) => {
+                  const PointIcon = Check;
+                  return (
+                    <div key={i} className="flex gap-3 items-start">
+                      <div className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500 text-slate-950 shrink-0 shadow-sm shadow-amber-500/15">
+                        <PointIcon size={11} className="stroke-[3.5]" />
+                      </div>
+                      <div>
+                        <h4 className="text-[12px] font-black text-slate-800 tracking-tight leading-none mb-1">
+                          {point.title}
+                        </h4>
+                        <p className="text-[10px] font-bold text-slate-400 leading-normal">
+                          {point.desc}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="text-xs font-black text-slate-900 tracking-tight leading-none mb-1.5">
-                        {point.title}
-                      </h4>
-                      <p className="text-[11px] font-bold text-slate-500 leading-relaxed">
-                        {point.desc}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* ───────────────── 5. TECHNOLOGIES WE WORK WITH ───────────────── */}
-      <section className="py-12 bg-slate-50/50 border-t border-b border-slate-100/60">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <p className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-slate-400 mb-6">
-            TECHNOLOGIES WE WORK WITH
-          </p>
+      {/* ───────────────── 5. TECHNOLOGIES WE WORK WITH (PIXEL-PERFECT CARD) ───────────────── */}
+      <section className="py-10 bg-slate-50/10 border-b border-slate-100/60">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            {technologies.map((tech, i) => (
-              <div key={i} className="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl border border-slate-200/50 shadow-sm shrink-0">
-                {tech.svg}
-                <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider">
-                  {tech.name}
-                </span>
-              </div>
-            ))}
+          <div className="bg-white border border-slate-200/80 rounded-[2rem] py-6 px-8 shadow-sm flex flex-col items-center gap-5">
+            <p className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-slate-400 mb-1 leading-none">
+              TECHNOLOGIES WE WORK WITH
+            </p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 w-full">
+              {technologies.map((tech, i) => (
+                <div key={i} className="flex items-center gap-2 bg-slate-50/50 hover:bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200/40 shadow-sm shrink-0 transition-colors cursor-default">
+                  {tech.svg}
+                  <span className="text-[10px] font-black text-slate-700 uppercase tracking-wider">
+                    {tech.name}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
+
         </div>
       </section>
 
-      {/* ───────────────── 6. TESTIMONIALS & FAQ (TWO-COLUMN GRID) ───────────────── */}
-      <section id="faq-section" className="py-12 md:py-24 max-w-7xl mx-auto px-6 lg:px-8">
+      {/* ───────────────── 6. TESTIMONIALS & FAQ (PIXEL-PERFECT TWO-COLUMN GRID) ───────────────── */}
+      <section id="faq-section" className="py-12 md:py-20 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* Left Column (Testimonial Card) */}
-          <div className="lg:col-span-6 flex flex-col bg-white border border-slate-200/60 rounded-[2.5rem] p-8 md:p-10 shadow-sm justify-between min-h-[380px] h-auto relative overflow-hidden">
-            <div className="absolute top-[-50px] right-[-50px] w-48 h-48 rounded-full bg-amber-500/5 blur-[80px] pointer-events-none" />
+          {/* Left Column (Testimonial Card + Banner CTA Stack) */}
+          <div className="lg:col-span-6 flex flex-col justify-between">
             
-            <div>
-              <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-4">
-                BUILT FOR BUSINESSES. LOVED BY CLIENTS.
-              </p>
-              <h3 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-tight">
-                Helping businesses automate, simplify and scale.
-              </h3>
+            {/* 1. Testimonial Card */}
+            <div className="bg-white border border-slate-200/80 rounded-[2.5rem] p-8 md:p-10 shadow-sm relative flex flex-col justify-between flex-grow min-h-[300px] mb-6">
+              
+              {/* Navigation Arrows Overlapping Card Edges */}
+              <button 
+                onClick={() => {}}
+                className="absolute -left-4 top-[50%] -translate-y-1/2 h-9 w-9 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-md hover:border-amber-500 hover:text-amber-500 active:scale-90 transition-all z-20 cursor-pointer text-slate-500"
+              >
+                <ChevronLeft size={16} className="stroke-[2.5]" />
+              </button>
 
-              <div className="mt-8 relative">
-                <span className="text-5xl font-serif text-amber-500/20 absolute -top-4 -left-2 select-none">“</span>
-                <p className="text-xs font-bold text-slate-600 leading-relaxed pl-6 relative z-10">
-                  {testimonials[activeTestimonial].quote}
+              <button 
+                onClick={() => {}}
+                className="absolute -right-4 top-[50%] -translate-y-1/2 h-9 w-9 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-md hover:border-amber-500 hover:text-amber-500 active:scale-90 transition-all z-20 cursor-pointer text-slate-500"
+              >
+                <ArrowRight size={16} className="stroke-[2.5]" />
+              </button>
+
+              <div>
+                <p className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-4 leading-none">
+                  BUILT FOR BUSINESSES. LOVED BY CLIENTS.
+                </p>
+                <h3 className="text-lg md:text-xl font-black text-slate-900 tracking-tight leading-tight font-sans">
+                  Helping businesses automate, simplify and scale.
+                </h3>
+
+                <div className="mt-8 relative">
+                  <span className="text-4xl font-serif text-amber-500/20 absolute -top-4 -left-1 select-none">“</span>
+                  <p className="text-xs font-bold text-slate-500 leading-relaxed pl-6 relative z-10">
+                    {testimonials[activeTestimonial].quote}
+                  </p>
+                </div>
+              </div>
+
+              {/* Author & Star Rating Footer */}
+              <div className="mt-8 flex items-center justify-between border-t border-slate-100/80 pt-6">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-amber-500/10 text-amber-600 flex items-center justify-center font-sans font-black text-xs shrink-0 shadow-sm border border-amber-500/5">
+                    {testimonials[activeTestimonial].avatar}
+                  </div>
+                  <div>
+                    <span className="text-xs font-black text-slate-900 block leading-tight">
+                      {testimonials[activeTestimonial].author}
+                    </span>
+                    <span className="text-[9px] font-bold text-slate-400 block mt-1 leading-none">
+                      {testimonials[activeTestimonial].role}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex gap-0.5 text-amber-500 text-xs select-none">
+                  {"★".repeat(testimonials[activeTestimonial].rating)}
+                </div>
+              </div>
+
+            </div>
+
+            {/* 2. Have an App Idea? Solid Amber Card */}
+            <div className="bg-amber-500 rounded-[2rem] p-6 md:p-8 text-slate-950 shadow-md relative overflow-hidden flex items-center justify-between gap-6">
+              <div>
+                <h4 className="text-base md:text-[17px] font-black leading-tight text-slate-950 font-sans">
+                  Have an App Idea?
+                </h4>
+                <p className="text-[11px] font-bold text-slate-950/80 leading-snug mt-1">
+                  Let's build something amazing together.
                 </p>
               </div>
+
+              <Link
+                href={`/contact?service=${encodeURIComponent(serviceName)}`}
+                className="flex items-center justify-center gap-1.5 bg-slate-950 hover:bg-slate-900 text-white hover:scale-[1.01] active:scale-95 transition-all px-5 py-3 rounded-xl font-black text-[11px] shrink-0 shadow-sm cursor-pointer"
+              >
+                <span>Get Started</span>
+                <ArrowRight size={12} className="stroke-[3.5]" />
+              </Link>
             </div>
 
-            {/* Author Profile */}
-            <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-6">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-amber-500/10 text-amber-600 flex items-center justify-center font-sans font-black text-xs">
-                  RS
-                </div>
-                <div>
-                  <span className="text-xs font-black text-slate-900 block leading-tight">
-                    {testimonials[activeTestimonial].author}
-                  </span>
-                  <span className="text-[10px] font-bold text-slate-400 block mt-0.5">
-                    {testimonials[activeTestimonial].role}
-                  </span>
-                </div>
-              </div>
-
-              {/* Star Rating */}
-              <div className="flex gap-0.5 text-amber-500 text-xs">
-                {"★".repeat(testimonials[activeTestimonial].rating)}
-              </div>
-            </div>
           </div>
 
-          {/* Right Column (FAQs) */}
-          <div className="lg:col-span-6 flex flex-col bg-white border border-slate-200/60 rounded-[2.5rem] p-8 md:p-10 shadow-sm justify-start">
-            <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-4">
+          {/* Right Column (FAQ Card Rows) */}
+          <div className="lg:col-span-6 flex flex-col justify-start">
+            <p className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-4 leading-none">
               FREQUENTLY ASKED QUESTIONS
             </p>
-            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight font-sans mb-8">
+            <h2 className="text-2xl md:text-[26px] font-black text-slate-900 tracking-tight font-sans mb-8">
               Got Questions? We've Got Answers.
             </h2>
 
-            <div className="w-full flex flex-col gap-1">
+            {/* Stack of individual White Rounded Cards */}
+            <div className="flex flex-col gap-4">
               {faqs.map((faq, i) => (
-                <div key={i} className="border-b border-slate-100 py-2 last:border-0">
+                <div 
+                  key={i} 
+                  className="bg-white border border-slate-200/80 rounded-2xl p-4 md:p-5 shadow-[0_2px_15px_rgba(0,0,0,0.01)] transition-colors hover:border-amber-500/40"
+                >
                   <button
                     onClick={() => setActiveFaq(activeFaq === i ? null : i)}
-                    className="flex w-full items-center justify-between text-left font-semibold text-slate-800 text-[14px] hover:text-amber-500 transition-colors py-2"
+                    className="flex w-full items-center justify-between text-left font-bold text-slate-800 text-[13px] md:text-[14px] hover:text-amber-500 transition-colors"
                   >
                     <span>{faq.question}</span>
                     <span className="text-slate-400 shrink-0 text-lg font-bold ml-4 w-5 h-5 flex items-center justify-center transition-transform duration-200 select-none">
@@ -653,8 +721,9 @@ export default function AppDevServiceLayout({
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.2, ease: "easeInOut" }}
+                        className="overflow-hidden"
                       >
-                        <div className="pb-3 pt-0.5 text-xs font-semibold text-slate-500 leading-relaxed">
+                        <div className="pb-1 pt-4 text-xs font-semibold text-slate-500 leading-relaxed border-t border-slate-100/50 mt-3.5">
                           {faq.answer}
                         </div>
                       </motion.div>
@@ -665,42 +734,6 @@ export default function AppDevServiceLayout({
             </div>
           </div>
 
-        </div>
-      </section>
-
-      {/* ───────────────── 7. BOTTOM CTA BANNER ───────────────── */}
-      <section id="contact-form" className="py-10 md:py-16 max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="bg-[#FFFBF2] border border-amber-500/5 rounded-[2.5rem] p-8 md:p-12 shadow-sm relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="absolute top-[-50px] right-[-50px] w-48 h-48 rounded-full bg-amber-500/5 blur-[80px] pointer-events-none" />
-          
-          <div className="flex-1">
-            <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight leading-tight">
-              Have an App Idea? <br />Let's build something amazing together.
-            </h3>
-            <p className="mt-3.5 text-xs font-semibold text-slate-500 leading-relaxed max-w-md">
-              Share your project requirements with us and get a free concept consultation and project estimate.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 shrink-0 w-full sm:w-auto">
-            <Link
-              href={`/contact?service=${encodeURIComponent(serviceName)}`}
-              className="flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 active:scale-98 transition-all px-6 py-4 rounded-xl text-slate-950 font-bold text-xs shadow-sm"
-            >
-              <span>Get Started</span>
-              <ArrowRight size={14} className="stroke-[3]" />
-            </Link>
-
-            <a
-              href={`https://wa.me/919986389444?text=Hi%2C%20I'm%20interested%20in%20your%20${encodeURIComponent(serviceName)}%20service.`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 active:scale-98 transition-all px-6 py-4 rounded-xl text-slate-800 font-bold text-xs shadow-sm"
-            >
-              <FaWhatsapp size={16} className="text-[#25D366] shrink-0" />
-              <span>Chat on WhatsApp</span>
-            </a>
-          </div>
         </div>
       </section>
 
