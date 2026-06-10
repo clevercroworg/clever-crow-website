@@ -448,7 +448,7 @@ export default function WebDevServiceLayout({
                 <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight font-sans">
                   Modern Technologies We Work With
                 </h2>
-                <div className="grid grid-cols-4 gap-4 w-full mt-8">
+                <div className="grid grid-cols-4 gap-4 w-full mt-6">
                   {defaultTechnologies.map((tech, i) => (
                     <div
                       key={i}
@@ -482,7 +482,7 @@ export default function WebDevServiceLayout({
                     <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight font-sans">
                       {whyChooseTitle}
                     </h2>
-                    <div className="mt-6 flex flex-col gap-4">
+                    <div className="mt-6 flex flex-col gap-4 md:pr-6">
                       {whyChoose.map((point, i) => (
                         <div key={i} className="flex gap-3 items-start">
                           <div className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500 text-white shrink-0 shadow-sm shadow-amber-500/10">
@@ -502,7 +502,7 @@ export default function WebDevServiceLayout({
                   <img
                     src="/images/device-mockup.png"
                     alt="Clever Crow website design mockups"
-                    className="w-[125%] md:w-[155%] max-w-[280px] md:max-w-none object-contain mix-blend-multiply md:absolute md:right-[-35px] md:bottom-[-20px] select-none pointer-events-none"
+                    className="w-[110%] md:w-[120%] max-w-[260px] md:max-w-none object-contain mix-blend-multiply md:absolute md:right-[-15px] md:bottom-[-20px] select-none pointer-events-none"
                   />
                 </div>
 
