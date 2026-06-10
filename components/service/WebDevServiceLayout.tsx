@@ -193,7 +193,7 @@ export default function WebDevServiceLayout({
     <div className="bg-white min-h-screen text-slate-800 antialiased font-body pt-24 pb-20 selection:bg-yellow-500/20">
       
       {/* ───────────────── 1. HERO SECTION ───────────────── */}
-      <section className="relative overflow-hidden pt-8 pb-20 bg-gradient-to-b from-slate-50/70 to-white">
+      <section className="relative overflow-hidden pt-8 pb-20 bg-gradient-to-b from-slate-100/60 via-slate-50/50 to-slate-50/20">
         
         {/* Subtle dot grid and radial light flare */}
         <div className="absolute inset-0 pointer-events-none z-0">
