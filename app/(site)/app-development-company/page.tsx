@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import AppDevServiceLayout from "@/components/service/AppDevServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -58,6 +58,12 @@ const pillarServices = [
     title: "Admin Panel Development",
     description: "Manage users, content, bookings, orders, leads and reports with a secure custom admin panel.",
     href: "/admin-panel-development"
+  },
+  {
+    icon: "users",
+    title: "Customer Portal Development",
+    description: "Build secure, user-friendly customer portals to improve client engagement and support operations.",
+    href: "/customer-portal-development"
   }
 ];
 
@@ -71,10 +77,10 @@ export const metadata = {
 export default function AppDevelopmentCompanyPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <AppDevServiceLayout
         eyebrow="App Development Company"
-        heroTitle="App Development Company for Scalable Digital Products"
-        heroSubtitle="Clever Crow builds mobile apps, web apps, SaaS products, CRM dashboards, booking systems, admin panels and customer portals for growing businesses."
+        heroTitle="Custom Apps. Smarter Business. Stronger Growth."
+        heroSubtitle="We build powerful mobile and web applications, dashboards and business systems that simplify operations and accelerate growth."
         serviceName="App Development"
         services={pillarServices}
         whyChoose={[

@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import AppDevServiceLayout from "@/components/service/AppDevServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -28,7 +28,7 @@ export const metadata = {
 export default function AdminPanelDevelopmentPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <AppDevServiceLayout
         eyebrow="Admin Panel Development"
         heroTitle="Admin Panel Development for Custom Platforms"
         heroSubtitle="Manage users, content, bookings, orders, leads and reports with a secure custom admin panel built for your business workflow."

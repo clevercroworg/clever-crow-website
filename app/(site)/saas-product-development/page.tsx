@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import AppDevServiceLayout from "@/components/service/AppDevServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -28,7 +28,7 @@ export const metadata = {
 export default function SaasProductDevelopmentPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <AppDevServiceLayout
         eyebrow="SaaS Product Development"
         heroTitle="SaaS Product Development Company"
         heroSubtitle="Turn your SaaS idea into a scalable product with planning, UI design, development, dashboards, subscriptions and launch support."

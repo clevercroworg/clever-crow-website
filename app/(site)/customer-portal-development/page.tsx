@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import AppDevServiceLayout from "@/components/service/AppDevServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -28,7 +28,7 @@ export const metadata = {
 export default function CustomerPortalDevelopmentPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <AppDevServiceLayout
         eyebrow="Customer Portal Development"
         heroTitle="Customer Portal Development for Better Customer Experience"
         heroSubtitle="Give customers a secure portal to view requests, bookings, documents, payments, support updates and account information."

@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import AppDevServiceLayout from "@/components/service/AppDevServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -28,7 +28,7 @@ export const metadata = {
 export default function BookingSystemDevelopmentPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <AppDevServiceLayout
         eyebrow="Booking System Development"
         heroTitle="Booking System Development for Service Businesses"
         heroSubtitle="Create custom booking systems for hotels, resorts, clinics, events and service businesses with enquiry and payment tracking."

@@ -1,4 +1,4 @@
-import WebDevServiceLayout from "@/components/service/WebDevServiceLayout";
+import AppDevServiceLayout from "@/components/service/AppDevServiceLayout";
 import WebPageSchema from "@/components/seo/WebPageSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -71,7 +71,7 @@ export const metadata = {
 export default function MobileAppDevelopmentPage() {
   return (
     <main>
-      <WebDevServiceLayout
+      <AppDevServiceLayout
         eyebrow="Mobile App Development"
         heroTitle="Mobile App Development Company for Business Apps"
         heroSubtitle="Design and develop mobile apps for business operations, customer engagement, booking, sales, support and digital products."
