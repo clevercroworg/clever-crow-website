@@ -497,7 +497,7 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
                   </motion.div>
 
                   {/* 2. Metric Cards Column (1/3 width stack) */}
-                  <div className="lg:col-span-1 flex flex-col gap-6 justify-between h-[300px]">
+                  <div className="hidden lg:flex lg:col-span-1 flex-col gap-6 justify-between h-[300px]">
                     
                     {/* Leads Generated Metric Card */}
                     <motion.div
