@@ -526,8 +526,8 @@ export default function AiAutomationServiceLayout({
 
             </div>
 
-            {/* Column 2: FAQs Accordion (4/12 width) */}
-            <div className="lg:col-span-4 flex flex-col justify-start">
+            {/* Column 2: FAQs Accordion (5/12 width) */}
+            <div className="lg:col-span-5 flex flex-col justify-start">
               <p className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-slate-400 mb-3 leading-none font-sans">
                 FREQUENTLY ASKED QUESTIONS
               </p>
@@ -571,41 +571,49 @@ export default function AiAutomationServiceLayout({
 
             </div>
 
-            {/* Column 3: Ready to Automate + Mascot (4/12 width) */}
-            <div className="lg:col-span-4 flex flex-col justify-start">
+            {/* Column 3: Ready to Automate + Mascot (3/12 width) */}
+            <div className="lg:col-span-3 flex flex-col justify-start">
               
-              <div className="bg-white border border-slate-200/80 rounded-[2rem] p-6 shadow-sm flex flex-col items-center text-center h-full">
+              <div className="bg-[#FFFBF2] border border-amber-500/15 rounded-[2rem] p-5 shadow-[0_2px_15px_rgba(245,158,11,0.02)] flex flex-col items-center text-center h-full">
                 
                 {/* Mascot & Text Group */}
-                <div className="flex-grow flex flex-col items-center justify-center py-4">
-                  {/* High-fidelity 3D Robot Mascot PNG */}
-                  <div className="w-40 h-40 relative flex items-center justify-center overflow-hidden mb-4">
+                <div className="flex-grow flex flex-col items-center justify-center py-2">
+                  
+                  {/* Category Badge */}
+                  <span className="inline-flex items-center gap-1 bg-amber-500/10 text-amber-700 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full mb-3">
+                    AI Consultant
+                  </span>
+
+                  {/* Circular Avatar Frame */}
+                  <div className="relative w-32 h-32 flex items-center justify-center mb-4">
+                    <div className="absolute inset-0 rounded-full bg-amber-500/5 blur-md" />
+                    <div className="absolute inset-2 rounded-full bg-white border border-slate-100 shadow-inner" />
                     <img 
                       src="/images/cute-robot-mascot.png" 
                       alt="Clever Crow AI Robot Mascot" 
-                      className="w-full h-full object-contain select-none pointer-events-none"
+                      className="w-24 h-24 object-contain relative z-10 scale-105 hover:scale-110 transition-transform duration-300 select-none pointer-events-none"
                     />
                   </div>
 
                   {/* Text Block */}
                   <div className="flex flex-col items-center">
-                    <h3 className="text-base md:text-lg font-black text-slate-900 tracking-tight leading-tight font-sans">
+                    <h3 className="text-base font-black text-slate-900 tracking-tight leading-tight font-sans">
                       Ready to Automate <br />Your Business?
                     </h3>
                     
-                    <p className="mt-3 text-[11px] font-bold text-slate-500 leading-relaxed max-w-[240px]">
-                      Book a free consultation and see how AI automation can save time, reduce costs and increase conversions.
+                    <p className="mt-2 text-[10px] font-bold text-slate-500 leading-normal max-w-[190px]">
+                      Book a free consultation and see how AI can save time and reduce costs.
                     </p>
                   </div>
                 </div>
 
                 {/* Button container forced to the bottom */}
-                <div className="w-full mt-auto pt-4 font-sans">
+                <div className="w-full mt-auto pt-3 font-sans">
                   <a
                     href="#contact-form"
                     className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-5 py-3.5 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/10 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer w-full"
                   >
-                    Book a Free Consultation
+                    Book Consultation
                     <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
                   </a>
                 </div>
