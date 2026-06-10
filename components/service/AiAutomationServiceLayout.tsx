@@ -603,46 +603,81 @@ export default function AiAutomationServiceLayout({
             {/* Column 3: Ready to Automate + Mascot (3/12 width) */}
             <div className="lg:col-span-3 flex flex-col justify-between">
               
-              <div className="bg-[#FFFBF2] border border-amber-500/15 rounded-[2rem] p-5 shadow-[0_2px_15px_rgba(245,158,11,0.02)] flex flex-col items-center text-center justify-center py-6 flex-grow">
+              {/* Mascot Cream Card - Compact with Button inside */}
+              <div className="bg-[#FFFBF2] border border-amber-500/15 rounded-[2rem] p-5 md:p-6 shadow-[0_2px_15px_rgba(245,158,11,0.02)] flex flex-col items-center text-center justify-between py-6 flex-grow">
                 
-                {/* Category Badge */}
-                <span className="inline-flex items-center gap-1 bg-amber-500/10 text-amber-700 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full mb-3">
-                  AI Consultant
-                </span>
+                {/* Mascot & Text Group */}
+                <div className="flex flex-col items-center justify-center flex-grow py-2">
+                  {/* High-fidelity 3D Robot Mascot PNG */}
+                  <div className="w-48 h-48 relative flex items-center justify-center mb-4">
+                    <img 
+                      src="/images/cute-robot-mascot.png" 
+                      alt="Clever Crow AI Robot Mascot" 
+                      className="w-full h-full object-contain relative z-10 scale-110 hover:scale-115 transition-transform duration-300 select-none pointer-events-none"
+                    />
+                  </div>
 
-                {/* Circular Avatar Frame */}
-                <div className="relative w-32 h-32 flex items-center justify-center mb-4">
-                  <div className="absolute inset-0 rounded-full bg-amber-500/5 blur-md" />
-                  <div className="absolute inset-2 rounded-full bg-white border border-slate-100 shadow-inner" />
-                  <img 
-                    src="/images/cute-robot-mascot.png" 
-                    alt="Clever Crow AI Robot Mascot" 
-                    className="w-24 h-24 object-contain relative z-10 scale-105 hover:scale-110 transition-transform duration-300 select-none pointer-events-none"
-                  />
+                  {/* Text Block */}
+                  <div className="flex flex-col items-center">
+                    <h3 className="text-base md:text-lg font-black text-slate-900 tracking-tight leading-tight font-sans">
+                      Ready to Automate <br />Your Business?
+                    </h3>
+                  </div>
                 </div>
 
-                {/* Text Block */}
-                <div className="flex flex-col items-center">
-                  <h3 className="text-base font-black text-slate-900 tracking-tight leading-tight font-sans">
-                    Ready to Automate <br />Your Business?
-                  </h3>
-                  
-                  <p className="mt-2 text-[10px] font-bold text-slate-500 leading-normal max-w-[190px]">
-                    Book a free consultation and see how AI can save time and reduce costs.
-                  </p>
+                {/* Button inside the cream card */}
+                <div className="w-full mt-4 font-sans">
+                  <a
+                    href="#contact-form"
+                    className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-5 py-3 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/10 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer w-full text-center"
+                  >
+                    Book Consultation
+                    <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+                  </a>
                 </div>
 
               </div>
 
-              {/* Button container forced to the bottom */}
-              <div className="w-full mt-4 font-sans">
-                <a
-                  href="#contact-form"
-                  className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-5 py-3.5 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/10 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer w-full text-center"
-                >
-                  Book Consultation
-                  <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
-                </a>
+              {/* Bottom Metrics Card 3: AI Resolution */}
+              <div className="bg-slate-50/60 border border-slate-200/80 rounded-2xl p-4 shadow-sm flex flex-col gap-3 font-sans mt-6">
+                
+                {/* Live Success Header */}
+                <div className="flex items-center justify-between pb-2 border-b border-slate-200/40">
+                  <div className="flex items-center gap-1.5">
+                    <span className="flex h-1.5 w-1.5 relative">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500"></span>
+                    </span>
+                    <span className="text-[9px] font-bold tracking-wider text-slate-400 uppercase">Automation Rate</span>
+                  </div>
+                  <span className="text-[8px] font-extrabold text-blue-600 bg-blue-500/10 px-1.5 py-0.5 rounded-sm uppercase tracking-wide">
+                    Success
+                  </span>
+                </div>
+
+                {/* AI Resolution Segment */}
+                <div className="flex justify-between items-center py-0.5">
+                  <div>
+                    <span className="text-[9px] font-bold text-slate-400 block tracking-wider uppercase">AI Resolution</span>
+                    <span className="text-xl font-black text-slate-900 mt-0.5 block leading-none font-sans">88% rate</span>
+                    <span className="text-[9px] font-extrabold text-blue-500 block mt-1">Automated support</span>
+                  </div>
+                  {/* SVG graph line with linear gradient fill - matching Leads/Response */}
+                  <div className="w-24 h-10 shrink-0 relative flex items-center">
+                    <svg className="w-full h-full text-blue-500 overflow-visible" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="resolutionGradient" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="currentColor" stopOpacity="0.25" />
+                          <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M0 35 Q 25 15, 50 22 T 85 8 T 100 2" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M0 35 Q 25 15, 50 22 T 85 8 T 100 2 L 100 40 L 0 40 Z" fill="url(#resolutionGradient)" />
+                      <circle cx="100" cy="2" r="3" fill="currentColor" className="animate-pulse" />
+                    </svg>
+                  </div>
+                </div>
+
               </div>
 
             </div>
