@@ -563,12 +563,12 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
                     transition={{ delay: 0.3, duration: 0.6 }}
                     whileHover={{ y: -5 }}
                     onClick={() => setActiveTab("analytics")}
-                    className="group relative bg-white border border-slate-100 rounded-[1.8rem] p-5 shadow-sm hover:shadow-[0_20px_45px_rgba(0,0,0,0.03)] transition-all cursor-pointer flex flex-col justify-between h-[135px]"
+                    className="group relative bg-white border border-slate-100 rounded-[1.8rem] p-6 shadow-sm hover:shadow-[0_20px_45px_rgba(0,0,0,0.03)] transition-all cursor-pointer flex flex-col justify-between h-[155px]"
                   >
                     <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 text-blue-500 shadow-sm shadow-blue-500/5">
                       <Code className="w-4.5 h-4.5" />
                     </div>
-                    <div className="mt-3 flex-1">
+                    <div className="mt-2 flex-1">
                       <h4 className="text-[13px] font-black text-slate-800 tracking-tight">Web & App Development</h4>
                       <p className="text-[10px] font-medium text-slate-400 mt-1 leading-snug">Fast, secure and scalable digital experiences.</p>
                     </div>
@@ -584,12 +584,12 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
                     transition={{ delay: 0.4, duration: 0.6 }}
                     whileHover={{ y: -5 }}
                     onClick={() => setActiveTab("settings")}
-                    className="group relative bg-white border border-slate-100 rounded-[1.8rem] p-5 shadow-sm hover:shadow-[0_20px_45px_rgba(0,0,0,0.03)] transition-all cursor-pointer flex flex-col justify-between h-[135px]"
+                    className="group relative bg-white border border-slate-100 rounded-[1.8rem] p-6 shadow-sm hover:shadow-[0_20px_45px_rgba(0,0,0,0.03)] transition-all cursor-pointer flex flex-col justify-between h-[155px]"
                   >
                     <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-purple-50 text-purple-500 shadow-sm shadow-purple-500/5">
                       <Cpu className="w-4.5 h-4.5" />
                     </div>
-                    <div className="mt-3 flex-1">
+                    <div className="mt-2 flex-1">
                       <h4 className="text-[13px] font-black text-slate-800 tracking-tight">AI Automation</h4>
                       <p className="text-[10px] font-medium text-slate-400 mt-1 leading-snug">Automate workflows and boost productivity.</p>
                     </div>
@@ -605,12 +605,12 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
                     transition={{ delay: 0.5, duration: 0.6 }}
                     whileHover={{ y: -5 }}
                     onClick={() => setActiveTab("activity")}
-                    className="group relative bg-white border border-slate-100 rounded-[1.8rem] p-5 shadow-sm hover:shadow-[0_20px_45px_rgba(0,0,0,0.03)] transition-all cursor-pointer flex flex-col justify-between h-[135px]"
+                    className="group relative bg-white border border-slate-100 rounded-[1.8rem] p-6 shadow-sm hover:shadow-[0_20px_45px_rgba(0,0,0,0.03)] transition-all cursor-pointer flex flex-col justify-between h-[155px]"
                   >
                     <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 text-blue-500 shadow-sm shadow-blue-500/5">
                       <Megaphone className="w-4.5 h-4.5" />
                     </div>
-                    <div className="mt-3 flex-1">
+                    <div className="mt-2 flex-1">
                       <h4 className="text-[13px] font-black text-slate-800 tracking-tight">Digital Marketing</h4>
                       <p className="text-[10px] font-medium text-slate-400 mt-1 leading-snug">Reach the right audience and grow sales.</p>
                     </div>
