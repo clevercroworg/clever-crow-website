@@ -552,10 +552,7 @@ export default function WebDevServiceLayout({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Left Column (FAQs) */}
-          <div className="lg:col-span-7 flex flex-col items-start bg-white border border-slate-100 rounded-[2.5rem] p-6 md:p-8 shadow-sm">
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-100 px-3 py-1 rounded-full border border-slate-200/50 mb-4">
-              QUESTIONS
-            </span>
+          <div className="lg:col-span-7 flex flex-col items-start bg-white border border-slate-100 rounded-[2.5rem] p-8 md:p-10 shadow-sm">
             <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight font-sans mb-8">
               Frequently Asked Questions
             </h2>
@@ -596,54 +593,48 @@ export default function WebDevServiceLayout({
           </div>
 
           {/* Right Column (Cream CTA Card) */}
-          <div className="lg:col-span-5 flex flex-col bg-[#FFFBF2] border border-amber-500/5 rounded-[2.5rem] p-6 md:p-8 md:py-10 md:px-10 shadow-sm relative overflow-hidden justify-between">
+          <div className="lg:col-span-5 flex flex-col bg-[#FFFBF2] border border-amber-500/5 rounded-[2.5rem] p-8 md:p-10 shadow-sm relative overflow-hidden justify-center min-h-[380px] lg:min-h-0">
             {/* Background radial highlight */}
             <div className="absolute top-[-50px] right-[-50px] w-48 h-48 rounded-full bg-amber-500/5 blur-[80px]" />
             
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch h-full relative z-10">
-              
-              {/* Left Side: Text and Buttons (65%) */}
-              <div className="md:col-span-7 flex flex-col justify-center h-full gap-6">
-                <div>
-                  <h3 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-tight">
-                    Ready to Build or Redesign Your Website?
-                  </h3>
-                  <p className="mt-4 text-xs font-semibold text-slate-500 leading-relaxed">
-                    Let's build a website that reflects your brand, loads fast and helps your business grow.
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-3 w-full">
-                  <Link
-                    href={`/contact?service=${encodeURIComponent(serviceName)}`}
-                    className="flex items-center justify-between bg-amber-500 hover:bg-amber-600 active:scale-98 transition-all px-5 py-3.5 rounded-xl text-slate-950 font-black text-[12px] uppercase tracking-wider shadow-sm"
-                  >
-                    <span>Discuss Your Project</span>
-                    <ArrowRight size={14} className="stroke-[3]" />
-                  </Link>
-
-                  <a
-                    href={`https://wa.me/919986389444?text=Hi%2C%20I'm%20interested%20in%20your%20${encodeURIComponent(serviceName)}%20service.`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 active:scale-98 transition-all px-5 py-3.5 rounded-xl text-slate-800 font-black text-[12px] uppercase tracking-wider"
-                  >
-                    <FaWhatsapp size={16} className="text-[#25D366]" />
-                    <span>Chat on WhatsApp</span>
-                  </a>
-                </div>
+            {/* Left aligned text & buttons (on desktop occupies 60% of card) */}
+            <div className="w-full md:w-[60%] flex flex-col justify-center gap-6 relative z-10">
+              <div>
+                <h3 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-tight">
+                  Ready to Build or Redesign Your Website?
+                </h3>
+                <p className="mt-4 text-xs font-semibold text-slate-500 leading-relaxed">
+                  Let's build a website that reflects your brand, loads fast and helps your business grow.
+                </p>
               </div>
 
-              {/* Right Side: Laptop Guy cutout (35%) */}
-              <div className="md:col-span-5 flex items-end justify-center relative min-h-[220px] md:min-h-0 md:h-full overflow-visible">
-                <img
-                  src="/images/laptop-guy.png"
-                  alt="Clever Crow consultant typing on laptop"
-                  className="absolute bottom-[-40px] right-[-30px] h-[110%] w-auto max-w-none object-contain object-right-bottom mix-blend-multiply pointer-events-none select-none"
-                />
-              </div>
+              <div className="flex flex-col gap-3 w-full max-w-[240px]">
+                <Link
+                  href={`/contact?service=${encodeURIComponent(serviceName)}`}
+                  className="flex items-center justify-between bg-amber-500 hover:bg-amber-600 active:scale-98 transition-all px-5 py-3.5 rounded-xl text-slate-950 font-black text-[12px] uppercase tracking-wider shadow-sm"
+                >
+                  <span>Discuss Your Project</span>
+                  <ArrowRight size={14} className="stroke-[3]" />
+                </Link>
 
+                <a
+                  href={`https://wa.me/919986389444?text=Hi%2C%20I'm%20interested%20in%20your%20${encodeURIComponent(serviceName)}%20service.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 active:scale-98 transition-all px-5 py-3.5 rounded-xl text-slate-800 font-black text-[12px] uppercase tracking-wider"
+                >
+                  <FaWhatsapp size={16} className="text-[#25D366]" />
+                  <span>Chat on WhatsApp</span>
+                </a>
+              </div>
             </div>
+
+            {/* Laptop Guy cutout positioned flush at the bottom right */}
+            <img
+              src="/images/laptop-guy.png"
+              alt="Clever Crow consultant typing on laptop"
+              className="absolute bottom-0 right-0 h-[190px] md:h-[95%] lg:h-[100%] w-auto object-contain object-right-bottom z-0 pointer-events-none select-none"
+            />
           </div>
 
         </div>
