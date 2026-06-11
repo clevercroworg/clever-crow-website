@@ -134,7 +134,7 @@ export default function Header() {
         {/* LOGO */}
         <Link href="/" className="flex items-center shrink-0 transition-transform hover:scale-105 active:scale-95">
           <Image
-            src="/CSS.png"
+            src="/CSS.svg"
             alt="Clever Crow"
             width={100}
             height={28}
