@@ -522,7 +522,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
         </section>
 
         {/* ================= 6. INDUSTRIES & STATS SECTION ================= */}
-        <section className="space-y-12">
+        <section id="industries" className="space-y-12">
           
           {/* Industry Grid */}
           <div>

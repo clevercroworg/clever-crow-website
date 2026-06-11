@@ -76,17 +76,7 @@ const servicesMegaMenu = [
   }
 ];
 
-const industriesList = [
-  { label: "Healthcare", href: "/industries/healthcare-digital-marketing" },
-  { label: "E-commerce", href: "/industries/ecommerce-growth-marketing" },
-  { label: "Education", href: "/industries/education-marketing" },
-  { label: "Real Estate", href: "/industries/real-estate-digital-marketing" },
-  { label: "Finance", href: "/#industries" },
-  { label: "Automotive", href: "/#industries" },
-  { label: "Hospitality", href: "/industries/hotels-resorts-marketing" },
-  { label: "SaaS", href: "/#industries" },
-  { label: "Startups", href: "/#industries" },
-];
+
 
 export default function Header() {
   const pathname = usePathname();
@@ -144,7 +134,7 @@ export default function Header() {
         {/* LOGO */}
         <Link href="/" className="flex items-center shrink-0 transition-transform hover:scale-105 active:scale-95">
           <Image
-            src="/logo-dark.svg"
+            src="/CSS.png"
             alt="Clever Crow"
             width={100}
             height={28}
@@ -230,62 +220,13 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
-          {/* Industries Dropdown */}
-          <div className="relative" onMouseEnter={() => openDropdown("industries")}>
-            <button
-              className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase ${
-                activeDropdown === "industries"
-                  ? "text-yellow-600 bg-black/5"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              Industries
-              <ChevronDown
-                size={10}
-                className={`transition-transform duration-300 ${
-                  activeDropdown === "industries" ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-
-            <AnimatePresence>
-              {activeDropdown === "industries" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 12, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                  transition={{ duration: 0.18, ease: "easeOut" }}
-                  className="absolute left-1/2 top-[calc(100%+12px)] -translate-x-1/2 z-50"
-                  onMouseEnter={() => openDropdown("industries")}
-                >
-                  <div className="w-[220px] rounded-[2rem] bg-white ring-1 ring-black/[0.05] shadow-[0_25px_60px_rgba(0,0,0,0.15)] overflow-hidden p-3 border border-slate-100/50 flex flex-col gap-0.5">
-                    {industriesList.map((item, i) => (
-                      <Link
-                        key={i}
-                        href={item.href}
-                        className={`group flex items-center justify-between rounded-xl px-4 py-2 text-left hover:bg-slate-50/80 transition-colors ${
-                          pathname === item.href ? "bg-yellow-50/50" : ""
-                        }`}
-                      >
-                        <span className={`text-[11.5px] font-bold leading-tight transition-colors ${
-                          pathname === item.href
-                            ? "text-yellow-600"
-                            : "text-slate-500 group-hover:text-yellow-600"
-                        }`}>
-                          {item.label}
-                        </span>
-                        <ArrowRight size={10} className={`text-yellow-500 transition-all duration-150 ${
-                          pathname === item.href
-                            ? "opacity-100 translate-x-0"
-                            : "opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0"
-                        }`} />
-                      </Link>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          {/* Industries Link */}
+          <Link 
+            href="/#industries" 
+            className="rounded-full px-3.5 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase text-slate-600 hover:text-slate-900"
+          >
+            Industries
+          </Link>
 
           {/* About Us Link */}
           <Link 
@@ -443,53 +384,13 @@ export default function Header() {
                 </AnimatePresence>
               </div>
 
-
-              {/* Industries Accordion */}
-              <div className="border-b border-slate-50 pb-1">
-                <button
-                  onClick={() => setMobileAccordion(mobileAccordion === "industries" ? null : "industries")}
-                  className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-[14px] transition-all duration-200 border ${
-                    mobileAccordion === "industries"
-                      ? "text-yellow-600 bg-yellow-50/80 border-yellow-100/50 font-bold"
-                      : "text-slate-700 hover:text-slate-900 hover:bg-slate-50/50 border-transparent font-semibold"
-                  }`}
-                >
-                  Industries
-                  <ChevronDown
-                    size={16}
-                    className={`transition-transform duration-300 ${
-                      mobileAccordion === "industries" ? "rotate-180 text-yellow-600" : "text-slate-400"
-                    }`}
-                  />
-                </button>
-                <AnimatePresence>
-                  {mobileAccordion === "industries" && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <div className="ml-3 border-l border-slate-100 pl-3 py-1 flex flex-col gap-1">
-                        {industriesList.map((item, i) => (
-                          <Link
-                            key={i}
-                            href={item.href}
-                            className={`flex items-center justify-between py-2 px-3 rounded-xl transition-all duration-150 border ${
-                              pathname === item.href
-                                ? "bg-yellow-50 text-yellow-600 font-bold border-yellow-100/30"
-                                : "hover:bg-slate-50 text-slate-500 hover:text-slate-900 border-transparent"
-                            }`}
-                          >
-                            <span className="text-[12px] font-bold leading-tight">{item.label}</span>
-                          </Link>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+              {/* Industries Link */}
+              <Link
+                href="/#industries"
+                className="block rounded-xl px-4 py-3 text-[14px] transition-all duration-200 border text-slate-700 hover:text-slate-900 hover:bg-slate-50/50 border-transparent font-semibold"
+              >
+                Industries
+              </Link>
 
               {/* About Us Link */}
               <Link
