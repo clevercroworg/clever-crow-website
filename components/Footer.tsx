@@ -6,7 +6,6 @@ import {
   Linkedin,
   Instagram,
   Facebook,
-  Twitter,
   Phone,
   MapPin,
   Mail
@@ -41,7 +40,6 @@ export default function Footer() {
               {[
                 { Icon: Linkedin, href: "https://www.linkedin.com/company/clever-crow-strategies/", label: "LinkedIn" },
                 { Icon: Instagram, href: "https://www.instagram.com/clevercrow.strategies", label: "Instagram" },
-                { Icon: Twitter, href: "https://x.com", label: "Twitter" },
                 { Icon: Facebook, href: "https://www.facebook.com/people/Clever-Crow-Strategies/61579261586907/", label: "Facebook" }
               ].map(({ Icon, href, label }, i) => (
                 <a

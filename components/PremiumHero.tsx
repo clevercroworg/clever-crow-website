@@ -87,30 +87,14 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-16 xl:gap-20 items-center">
           
           {/* ───────────────── LEFT COLUMN (TEXT CONTENT) ───────────────── */}
-          <div className="lg:col-span-6 xl:col-span-5 flex flex-col items-start text-left">
+          <div className="lg:col-span-6 xl:col-span-5 flex flex-col items-start text-left lg:-mt-10">
             
-            {/* Pill kicker badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex flex-wrap md:flex-nowrap items-center gap-1.5 md:gap-2 px-3 py-1.5 rounded-full border border-slate-200/80 bg-white/70 backdrop-blur-md shadow-sm"
-            >
-              <span className="text-[8.5px] md:text-[9.5px] font-extrabold tracking-wider uppercase text-slate-500">Web Development</span>
-              <span className="h-1 w-1 rounded-full bg-amber-500 shrink-0" />
-              <span className="text-[8.5px] md:text-[9.5px] font-extrabold tracking-wider uppercase text-slate-500">App Development</span>
-              <span className="h-1 w-1 rounded-full bg-amber-500 shrink-0" />
-              <span className="text-[8.5px] md:text-[9.5px] font-extrabold tracking-wider uppercase text-slate-500">AI Automation</span>
-              <span className="h-1 w-1 rounded-full bg-amber-500 shrink-0" />
-              <span className="text-[8.5px] md:text-[9.5px] font-extrabold tracking-wider uppercase text-slate-500">Digital Marketing</span>
-            </motion.div>
-
             {/* Main Title Heading */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-6 md:mt-8 text-[40px] md:text-[56px] lg:text-[66px] font-black leading-[1.1] tracking-tight text-slate-900 font-sans"
+              className="text-[40px] md:text-[56px] lg:text-[66px] font-black leading-[1.1] tracking-tight text-slate-900 font-sans"
             >
               <span className="block sm:whitespace-nowrap">Websites. Apps.</span>
               <span className="block">Automation.</span>
