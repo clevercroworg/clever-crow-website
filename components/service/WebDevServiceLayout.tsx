@@ -2,7 +2,15 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { League_Gothic } from "next/font/google";
 import { motion, AnimatePresence } from "framer-motion";
+
+const leagueGothic = League_Gothic({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-league-gothic",
+});
 import {
   X,
   Menu,
@@ -346,6 +354,7 @@ type WebDevServiceLayoutProps = {
   heroSubtitle: string;
   highlights?: string[];
   mockupImage?: string;
+  heroBgImage?: string;
   servicesTitle?: string;
   servicesSubtitle?: string;
   services: {
@@ -377,6 +386,7 @@ export default function WebDevServiceLayout({
   heroSubtitle,
   highlights = ["SEO Ready", "Mobile Friendly", "Lightning Fast", "Easy to Manage"],
   mockupImage = "/services/web_design.png",
+  heroBgImage,
   servicesTitle = "Website Development Services",
   servicesSubtitle = "We build high-performing digital solutions tailored to your business needs.",
   services,
@@ -399,53 +409,63 @@ export default function WebDevServiceLayout({
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   return (
-    <div className="bg-white min-h-screen text-slate-800 antialiased font-body pt-24 pb-0 selection:bg-yellow-500/20">
+    <div className={`${leagueGothic.variable} bg-white min-h-screen text-slate-800 antialiased font-body pt-24 pb-0 selection:bg-yellow-500/20`}>
       
       {/* ───────────────── 1. HERO SECTION ───────────────── */}
-      <section className="relative overflow-hidden pt-8 pb-20 bg-gradient-to-b from-slate-100/60 via-slate-50/50 to-slate-50/20">
+      <section className="relative overflow-hidden pt-12 pb-24 bg-[#0B0F19] text-white">
         
-        {/* Subtle dot grid and radial light flare */}
-        <div className="absolute inset-0 pointer-events-none z-0">
+        {/* Ambient background image and dark overlay */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image
+            src={heroBgImage || "/images/webbg.png"}
+            alt="Service Background"
+            fill
+            priority
+            className="object-cover object-center opacity-30"
+          />
+          {/* Dark high-contrast overlay gradients */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B0F19] via-[#0B0F19]/95 to-[#0B0F19]/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-[#0B0F19]/30" />
+          
+          {/* Subtle dot grid */}
           <div 
-            className="absolute inset-0 opacity-[0.35]"
+            className="absolute inset-0 opacity-[0.15]"
             style={{
-              backgroundImage: `radial-gradient(rgba(0, 0, 0, 0.05) 1.2px, transparent 1.2px)`,
+              backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.15) 1.2px, transparent 1.2px)`,
               backgroundSize: "24px 24px"
             }}
           />
-          <div className="absolute top-12 left-12 w-[350px] h-[350px] rounded-full bg-amber-200/10 blur-[90px]" />
-          <div className="absolute bottom-12 right-12 w-[400px] h-[400px] rounded-full bg-blue-100/20 blur-[100px]" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           
           {/* Breadcrumbs */}
           <div className="flex items-center gap-2 text-[11px] font-bold text-slate-400 mb-6 uppercase tracking-wider">
-            <Link href="/" className="hover:text-slate-600 transition-colors">Home</Link>
+            <Link href="/" className="hover:text-slate-300 transition-colors">Home</Link>
             <span>/</span>
-            <span className="hover:text-slate-600 transition-colors cursor-default">Services</span>
+            <span className="hover:text-slate-300 transition-colors cursor-default">Services</span>
             <span>/</span>
             <span className="text-amber-500 font-extrabold">{eyebrow}</span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="max-w-3xl">
             
             {/* Left Column (Text & CTAs) */}
-            <div className="lg:col-span-7 flex flex-col items-start text-left">
+            <div className="flex flex-col items-start text-left">
               
               {/* Eyebrow kicker */}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-500/25 bg-amber-500/5 text-amber-600 mb-6 font-sans font-black text-[9px] uppercase tracking-widest shadow-sm">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-500/35 bg-amber-500/10 text-amber-400 mb-6 font-sans font-black text-[9px] uppercase tracking-widest shadow-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
                 {eyebrow}
               </div>
 
               {/* Title */}
-              <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-black leading-[1.12] tracking-tight text-slate-900 font-sans">
+              <h1 className="text-5xl sm:text-6xl lg:text-[76px] font-[family-name:var(--font-league-gothic)] font-normal uppercase tracking-wider leading-[1.05] text-white">
                 {heroTitle}
               </h1>
 
               {/* Subtitle */}
-              <p className="mt-6 text-base md:text-lg text-slate-600 leading-relaxed font-medium max-w-xl">
+              <p className="mt-6 text-base md:text-lg text-slate-300 leading-relaxed font-medium max-w-2xl">
                 {heroSubtitle}
               </p>
 
@@ -461,7 +481,7 @@ export default function WebDevServiceLayout({
 
                 <a
                   href="#what-we-build"
-                  className="group flex items-center justify-center gap-2 rounded-2xl border-2 border-slate-200 bg-white px-6 py-4 text-xs font-black uppercase tracking-wider text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:scale-[1.01] active:scale-95 transition-all"
+                  className="group flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-xs font-black uppercase tracking-wider text-white hover:border-white/20 hover:bg-white/10 hover:scale-[1.01] active:scale-95 transition-all"
                 >
                   Explore Services
                 </a>
@@ -470,69 +490,11 @@ export default function WebDevServiceLayout({
               {/* Highlights below buttons */}
               <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
                 {highlights.map((hl, i) => (
-                  <div key={i} className="flex items-center gap-2 text-[11px] font-black text-slate-500 uppercase tracking-wider">
+                  <div key={i} className="flex items-center gap-2 text-[11px] font-black text-slate-400 uppercase tracking-wider">
                     <CheckCircle2 size={14} className="text-amber-500 shrink-0" />
                     <span>{hl}</span>
                   </div>
                 ))}
-              </div>
-
-            </div>
-
-            {/* Right Column (Pure CSS Laptop & Phone Mockups) */}
-            <div className="lg:col-span-5 relative w-full flex justify-center items-center">
-              
-              {/* Device frame wrapper */}
-              <div className="relative w-full max-w-[480px] md:max-w-[540px] aspect-[16/11]">
-                
-                {/* Laptop Mockup Bezel */}
-                <div className="relative mx-auto bg-slate-900 border-slate-950 border-[8px] rounded-t-2xl shadow-2xl overflow-hidden aspect-[16/10] w-[90%]">
-                  {/* Laptop Web Page Screen */}
-                  <div className="w-full h-full relative overflow-hidden bg-slate-50 flex flex-col">
-                    {/* Fake Browser Topbar */}
-                    <div className="flex items-center gap-1 px-3 py-1 bg-slate-200 border-b border-slate-300/50 shrink-0">
-                      <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
-                      <span className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-                      <div className="h-3.5 bg-white border border-slate-300/40 rounded px-4 ml-4 flex-1 max-w-[140px] text-[8px] text-slate-400 font-semibold flex items-center leading-none">
-                        clevercrow.in
-                      </div>
-                    </div>
-                    {/* Simulated Web View Background Image */}
-                    <div className="flex-1 w-full h-full relative">
-                      <img 
-                        src={mockupImage} 
-                        alt="Website Layout Mockup"
-                        className="w-full h-full object-cover object-top"
-                      />
-                      {/* Premium overlay shadow */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Laptop Base */}
-                <div className="relative mx-auto bg-slate-800 rounded-b-xl h-[12px] w-[96%] shadow-lg">
-                  {/* Trackpad Cutout */}
-                  <div className="absolute left-1/2 top-0 -translate-x-1/2 w-16 h-1 bg-slate-900/60 rounded-b-md" />
-                </div>
-
-                {/* iPhone Overlapping on bottom right */}
-                <div className="absolute bottom-[-10px] right-[4px] w-[105px] md:w-[125px] aspect-[9/18.5] bg-slate-900 border-[5px] border-slate-950 rounded-[1.8rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden hidden sm:block">
-                  <div className="w-full h-full relative bg-white flex flex-col">
-                    {/* Dynamic Island Notching */}
-                    <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-10 h-2 bg-slate-950 rounded-full z-20" />
-                    {/* Mobile screen background */}
-                    <div className="flex-1 w-full h-full relative">
-                      <img 
-                        src={mockupImage} 
-                        alt="Mobile Website Layout Mockup"
-                        className="w-full h-full object-cover object-top"
-                      />
-                    </div>
-                  </div>
-                </div>
-
               </div>
 
             </div>

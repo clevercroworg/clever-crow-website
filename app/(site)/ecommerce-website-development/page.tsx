@@ -75,6 +75,7 @@ export default function EcommerceWebsiteDevelopmentPage() {
         eyebrow="Ecommerce Website Development"
         heroTitle="Ecommerce Website Development for Growing Brands"
         heroSubtitle="Launch an ecommerce website with clean product pages, smooth checkout, tracking setup and performance-focused design."
+        heroBgImage="/images/ecommerce_hero.png"
         serviceName="Ecommerce Website Development"
         services={services}
         whyChoose={[
