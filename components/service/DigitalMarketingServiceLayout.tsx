@@ -41,7 +41,8 @@ import {
   Globe,
   LayoutGrid,
   ChevronDown,
-  MessageSquare
+  MessageSquare,
+  Phone
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -393,8 +394,32 @@ export default function DigitalMarketingServiceLayout({
               </span>
 
               {/* Title — "Drives Growth" in amber */}
-              <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-black leading-[1.1] tracking-tight text-slate-900 font-sans">
-                {heroTitle.includes("Drives Growth") ? (
+              <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-black leading-[1.12] tracking-tight text-slate-900 font-sans">
+                {heroTitle.includes("Better Marketing Decisions") ? (
+                  <>
+                    {heroTitle.split("Better Marketing Decisions")[0]}
+                    <span className="text-amber-500">Better Marketing Decisions</span>
+                    {heroTitle.split("Better Marketing Decisions")[1]}
+                  </>
+                ) : heroTitle.includes("Quality Leads") ? (
+                  <>
+                    {heroTitle.split("Quality Leads")[0]}
+                    <span className="text-amber-500">Quality Leads</span>
+                    {heroTitle.split("Quality Leads")[1]}
+                  </>
+                ) : heroTitle.includes("Lead Generation") ? (
+                  <>
+                    {heroTitle.split("Lead Generation")[0]}
+                    <span className="text-amber-500">Lead Generation</span>
+                    {heroTitle.split("Lead Generation")[1]}
+                  </>
+                ) : heroTitle.includes("Growing") ? (
+                  <>
+                    {heroTitle.split("Growing")[0]}
+                    <span className="text-amber-500">Growing</span>
+                    {heroTitle.split("Growing")[1]}
+                  </>
+                ) : heroTitle.includes("Drives Growth") ? (
                   <>
                     {heroTitle.split("Drives Growth")[0]}
                     <span className="text-amber-500">Drives Growth</span>
@@ -419,19 +444,21 @@ export default function DigitalMarketingServiceLayout({
               {/* CTA Buttons */}
               <div className="mt-8 flex flex-row gap-4 w-full sm:w-auto">
                 <a
-                  href="#contact-form"
+                  href={`https://wa.me/919986389444?text=Hi%2C%20I'm%20interested%20in%20your%20${encodeURIComponent(serviceName)}%20services.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex items-center justify-center gap-2 rounded-xl bg-amber-500 px-6 py-3.5 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/15 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer"
                 >
-                  Get a Growth Plan
-                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                  Chat with Us
+                  <FaWhatsapp size={14} className="text-slate-900" />
                 </a>
 
                 <a
-                  href="#marketing-services"
+                  href="tel:+919986389444"
                   className="group flex items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-5 py-3.5 text-xs font-black uppercase tracking-wider text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:scale-[1.01] active:scale-95 transition-all"
                 >
-                  Explore Services
-                  <LayoutGrid size={14} className="stroke-[2.5]" />
+                  +91 99863 89444
+                  <Phone size={14} className="text-slate-700 stroke-[2.5]" />
                 </a>
               </div>
 
