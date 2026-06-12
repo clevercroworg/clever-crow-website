@@ -62,6 +62,7 @@
     font-family: "Barlow Condensed", sans-serif !important;
     font-size: clamp(2.25rem, 4vw, 3.75rem); /* 36px → 60px */
     line-height: 1.05 !important;
+    font-weight: 400 !important;
     text-transform: uppercase;
     letter-spacing: 0.02em;
   }
@@ -70,6 +71,7 @@
     font-family: "Barlow Condensed", sans-serif !important;
     font-size: clamp(1.75rem, 3vw, 2.5rem); /* 28px → 40px */
     line-height: 1.1 !important;
+    font-weight: 400 !important;
     text-transform: uppercase;
     letter-spacing: 0.02em;
   }
