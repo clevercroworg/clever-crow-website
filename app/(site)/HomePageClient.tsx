@@ -422,15 +422,34 @@ export default function HomePageClient({ services }: HomePageClientProps) {
 
       {/* ================= 4. READY TO DEPLOY SYSTEMS (DARK BACKGROUND SECTION 2) ================= */}
       <section className="w-full bg-[#0A0D16] text-white py-16 md:py-20 mt-6 relative overflow-hidden">
-        {/* Subtle grid pattern overlay */}
+        {/* Subtle CSS Checks (Checkerboard) Pattern Overlay */}
         <div 
-          className="absolute inset-0 opacity-[0.08] pointer-events-none mix-blend-overlay z-0"
-          style={{ backgroundImage: "url(/hero-grid.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
+          className="absolute inset-0 opacity-[0.06] pointer-events-none z-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%), 
+              linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%), 
+              linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.2) 75%), 
+              linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.2) 75%)
+            `,
+            backgroundSize: "60px 60px",
+            backgroundPosition: "0 0, 0 30px, 30px -30px, -30px 0px",
+            maskImage: "radial-gradient(ellipse at center, black, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(ellipse at center, black, transparent 80%)"
+          }}
         />
-        {/* Glowing background overlay */}
+        {/* Fine graph-check lines */}
         <div 
-          className="absolute inset-0 opacity-[0.25] pointer-events-none mix-blend-screen z-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/images/cta-bg-premium.png)" }}
+          className="absolute inset-0 opacity-[0.04] pointer-events-none z-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: "30px 30px",
+            maskImage: "radial-gradient(ellipse at center, black, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(ellipse at center, black, transparent 80%)"
+          }}
         />
         {/* Premium radial glows */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
