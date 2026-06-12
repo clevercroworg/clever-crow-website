@@ -7,7 +7,9 @@ import {
   Instagram,
   Facebook,
   Twitter,
-  Phone
+  Phone,
+  MapPin,
+  Mail
 } from "lucide-react";
 
 export default function Footer() {
@@ -114,10 +116,24 @@ export default function Footer() {
             <h4 className="text-slate-900 text-[13px] font-extrabold uppercase tracking-widest mb-2">Get in Touch</h4>
             
             <div className="space-y-4 text-xs font-semibold text-slate-500">
+              {/* Address */}
+              <div className="flex items-start gap-2.5">
+                <MapPin size={14} className="text-slate-400 shrink-0 mt-0.5" />
+                <span className="leading-relaxed">
+                  2nd Floor, Business Bay Centre,<br />
+                  Udupi–Manipal Highway, Kunjibettu,<br />
+                  Udupi, Karnataka 576102, India
+                </span>
+              </div>
               {/* Phone */}
               <a href="tel:+919986389444" className="flex items-center gap-2.5 hover:text-amber-500 transition-colors">
                 <Phone size={14} className="text-slate-400 shrink-0" />
                 <span>99863 89444</span>
+              </a>
+              {/* Email */}
+              <a href="mailto:hello@clevercrow.in" className="flex items-center gap-2.5 hover:text-amber-500 transition-colors">
+                <Mail size={14} className="text-slate-400 shrink-0" />
+                <span>hello@clevercrow.in</span>
               </a>
             </div>
           </div>

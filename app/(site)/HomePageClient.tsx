@@ -463,67 +463,52 @@ export default function HomePageClient({ services }: HomePageClientProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 relative z-10">
             
             {/* System 1 */}
-            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
+            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white">
                   <FileText className="h-6 w-6" />
                 </div>
-                <h4 className="text-[14px] font-black text-white leading-tight mt-5">Business Website Launch System</h4>
-                <p className="text-[11px] font-semibold text-slate-400 mt-2 leading-relaxed">
-                  Everything you need for a fast, high-converting website launch.
-                </p>
+                <h4 className="text-[16px] font-black text-white leading-tight mt-5">Business Website Launch System</h4>
               </div>
             </div>
 
             {/* System 2 */}
-            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
+            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white">
                   <Database className="h-6 w-6" />
                 </div>
-                <h4 className="text-[14px] font-black text-white leading-tight mt-5">Custom CMS & Booking System</h4>
-                <p className="text-[11px] font-semibold text-slate-400 mt-2 leading-relaxed">
-                  Capture leads, automate bookings and run your business on autopilot.
-                </p>
+                <h4 className="text-[16px] font-black text-white leading-tight mt-5">Custom CMS & Booking System</h4>
               </div>
             </div>
 
             {/* System 3 */}
-            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
+            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white">
                   <Bot className="h-6 w-6" />
                 </div>
-                <h4 className="text-[14px] font-black text-white leading-tight mt-5">AI Automation Accelerator</h4>
-                <p className="text-[11px] font-semibold text-slate-400 mt-2 leading-relaxed">
-                  Automate your workflows and scale hours every week.
-                </p>
+                <h4 className="text-[16px] font-black text-white leading-tight mt-5">AI Automation Accelerator</h4>
               </div>
             </div>
 
             {/* System 4 */}
-            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
+            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white">
                   <Target className="h-6 w-6" />
                 </div>
-                <h4 className="text-[14px] font-black text-white leading-tight mt-5">Performance Marketing System</h4>
-                <p className="text-[11px] font-semibold text-slate-400 mt-2 leading-relaxed">
-                  Full-funnel campaigns that generate quality leads and sales.
-                </p>
+                <h4 className="text-[16px] font-black text-white leading-tight mt-5">Performance Marketing System</h4>
               </div>
             </div>
 
             {/* System 5 */}
-            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
+            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white">
                   <Layers className="h-6 w-6" />
                 </div>
-                <h4 className="text-[14px] font-black text-white leading-tight mt-5">SaaS / Product Development</h4>
-                <p className="text-[11px] font-semibold text-slate-400 mt-2 leading-relaxed">
-                  Build scalable digital products with modern technology.
-                </p>
+                <h4 className="text-[16px] font-black text-white leading-tight mt-5">SaaS / Product Development</h4>
               </div>
             </div>
 
