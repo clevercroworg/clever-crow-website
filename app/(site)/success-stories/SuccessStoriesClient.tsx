@@ -258,6 +258,7 @@ function IconMeta() {
 export default function SuccessStoriesClient() {
   const [activeCategory, setActiveCategory] = useState<"all" | Category>("all");
   const [modalCase, setModalCase] = useState<CaseStudy | null>(null);
+  const [isCallbackOpen, setIsCallbackOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "" });
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
@@ -276,11 +277,23 @@ export default function SuccessStoriesClient() {
   /* close on Escape */
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") closeModal();
+      if (e.key === "Escape") {
+        closeModal();
+        setIsCallbackOpen(false);
+      }
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [closeModal]);
+
+  /* body scroll lock for callback modal */
+  useEffect(() => {
+    if (isCallbackOpen) {
+      document.body.style.overflow = "hidden";
+    } else if (!modalCase) {
+      document.body.style.overflow = "";
+    }
+  }, [isCallbackOpen, modalCase]);
 
   /* Handle phone click tracking */
   const handlePhoneClick = (e: React.MouseEvent) => {
@@ -334,73 +347,50 @@ export default function SuccessStoriesClient() {
         background: "radial-gradient(circle at 10% 10%, #eff6ff 0%, #f8fafc 35%, #ffffff 100%)",
       }}
     >
-      {/* ─── HERO + FORM ─── */}
-      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:px-8">
-        <div className="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-blue-800 p-7 text-white shadow-[0_12px_40px_rgba(2,6,23,0.08)] lg:col-span-8 lg:p-10">
-          <p className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1 text-xs font-bold uppercase tracking-[0.2em] text-blue-100">
-            <IconSparkles />
-            Growth Marketing Partner
-          </p>
-          <h1 className="mt-5 text-3xl font-extrabold leading-tight sm:text-4xl">
-            Digital Strategy Meets Performance Marketing
-          </h1>
-          <p className="mt-4 max-w-3xl text-base text-slate-100 sm:text-lg">
-            We partner with established businesses and growing brands to scale leads, revenue, and visibility through measurable digital performance.
-          </p>
+      {/* ─── HERO REDESIGN ─── */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-blue-800 p-6 sm:p-8 md:p-10 text-white shadow-[0_12px_40px_rgba(2,6,23,0.08)]">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+            <div className="max-w-3xl">
+              <p className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1 text-xs font-bold uppercase tracking-[0.2em] text-blue-100">
+                <IconSparkles />
+                Growth Marketing Partner
+              </p>
+              <h1 className="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl">
+                Digital Strategy Meets Performance Marketing
+              </h1>
+              <p className="mt-4 text-base text-slate-200 sm:text-lg">
+                We partner with established businesses and growing brands to scale leads, revenue, and visibility through measurable digital performance.
+              </p>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+              <button
+                onClick={() => setIsCallbackOpen(true)}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-500 hover:bg-amber-600 px-6 py-3.5 text-sm font-bold text-slate-900 shadow-lg shadow-amber-500/10 transition-all active:scale-[0.98] cursor-pointer"
+              >
+                <IconPhone />
+                Request a Call Back
+              </button>
+              <a
+                href="#cases"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 px-6 py-3.5 text-sm font-semibold text-white transition-all cursor-pointer"
+              >
+                View Case Studies
+                <IconArrow />
+              </a>
+            </div>
+          </div>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          <div className="mt-8 border-t border-white/10 pt-6 grid gap-4 grid-cols-2 md:grid-cols-4">
             {["15+ Years of Experience", "Certified Professionals", "550+ Happy Clients", "Fast Response Support"].map((item) => (
-              <p key={item} className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-3 text-sm font-semibold">
+              <p key={item} className="inline-flex items-center gap-2 text-sm font-semibold text-slate-200">
                 <IconCheck />
                 {item}
               </p>
             ))}
           </div>
         </div>
-
-        <aside className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_12px_40px_rgba(2,6,23,0.08)] lg:col-span-4">
-          <h2 className="text-xl font-bold">Request a Call Back</h2>
-          <p className="mt-2 text-sm text-slate-600">Drop your details and our growth team will contact you shortly.</p>
-
-          <form onSubmit={handleFormSubmit} className="mt-6 space-y-4">
-            <input
-              type="text"
-              placeholder="Enter your name"
-              required
-              value={formData.name}
-              onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
-            />
-            <input
-              type="tel"
-              placeholder="Enter your phone"
-              required
-              value={formData.phone}
-              onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-600"
-            />
-            <button
-              type="submit"
-              disabled={formStatus === "sending"}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-700 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-800 disabled:opacity-60"
-            >
-              <IconSend />
-              {formStatus === "sending" ? "Sending..." : formStatus === "sent" ? "Submitted ✓" : "Submit Request"}
-            </button>
-          </form>
-
-          {formStatus === "sent" && (
-            <p className="mt-3 text-sm font-medium text-emerald-600">Thank you! We&apos;ll call you shortly.</p>
-          )}
-          {formStatus === "error" && (
-            <p className="mt-3 text-sm font-medium text-red-600">Something went wrong. Please try again.</p>
-          )}
-
-          <p className="mt-4 inline-flex items-center gap-2 text-xs font-medium text-slate-500">
-            <IconShield />
-            We respect your privacy.
-          </p>
-        </aside>
       </section>
 
       {/* ─── STATS ─── */}
@@ -425,7 +415,7 @@ export default function SuccessStoriesClient() {
       </section>
 
       {/* ─── CASE STUDIES ─── */}
-      <section className="mx-auto mt-4 max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
+      <section id="cases" className="mx-auto mt-4 max-w-7xl px-4 pb-10 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">Case Studies</p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Success Stories by Platform</h2>
@@ -625,6 +615,74 @@ export default function SuccessStoriesClient() {
                 <p className="mt-3 text-xs text-slate-500">Benchmarks are directional planning ranges for similar industries and markets, not guaranteed outcomes.</p>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ─── REQUEST A CALL BACK MODAL ─── */}
+      {isCallbackOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 px-4 py-6"
+          onClick={(e) => { if (e.target === e.currentTarget) setIsCallbackOpen(false); }}
+        >
+          <div className="relative w-full max-w-md overflow-hidden rounded-3xl bg-white p-6 sm:p-8 shadow-2xl border border-slate-200">
+            {/* Close Button */}
+            <button
+              onClick={() => setIsCallbackOpen(false)}
+              className="absolute right-4 top-4 rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition-colors"
+            >
+              <IconClose />
+            </button>
+
+            <h2 className="text-2xl font-black text-slate-900 tracking-tight">Request a Call Back</h2>
+            <p className="mt-2 text-sm text-slate-600">Drop your details and our growth team will contact you shortly.</p>
+
+            <form onSubmit={handleFormSubmit} className="mt-6 space-y-4">
+              <div className="space-y-1">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 block ml-1">Your Name *</label>
+                <input
+                  type="text"
+                  placeholder="John Doe"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
+                  className="w-full rounded-2xl border border-slate-200/80 bg-slate-50/30 px-5 py-3.5 text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none transition focus:ring-2 focus:ring-blue-600/10"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 block ml-1">Phone Number *</label>
+                <input
+                  type="tel"
+                  placeholder="+91 99863 89444"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
+                  className="w-full rounded-2xl border border-slate-200/80 bg-slate-50/30 px-5 py-3.5 text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none transition focus:ring-2 focus:ring-blue-600/10"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={formStatus === "sending"}
+                className="group relative flex w-full items-center justify-center gap-2.5 rounded-2xl bg-blue-700 hover:bg-blue-800 px-6 py-4 font-black uppercase tracking-widest text-white transition-all active:scale-[0.99] disabled:opacity-70 disabled:pointer-events-none cursor-pointer mt-6"
+              >
+                <IconSend />
+                {formStatus === "sending" ? "Sending..." : formStatus === "sent" ? "Submitted ✓" : "Submit Request"}
+              </button>
+            </form>
+
+            {formStatus === "sent" && (
+              <p className="mt-3 text-sm font-semibold text-emerald-600">Thank you! We&apos;ll call you shortly.</p>
+            )}
+            {formStatus === "error" && (
+              <p className="mt-3 text-sm font-semibold text-red-600">Something went wrong. Please try again.</p>
+            )}
+
+            <p className="mt-6 inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 justify-center w-full">
+              <IconShield />
+              We respect your privacy
+            </p>
           </div>
         </div>
       )}
