@@ -421,11 +421,11 @@ export default function WebDevServiceLayout({
             alt="Service Background"
             fill
             priority
-            className="object-cover object-center opacity-[0.05]"
+            className="object-cover object-center opacity-[0.25]"
           />
           {/* Dark high-contrast overlay gradients */}
-          <div className="absolute inset-0 bg-[#0B0F19]/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-[#0B0F19]/25" />
+          <div className="absolute inset-0 bg-[#0B0F19]/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-[#0B0F19]/35" />
           
           {/* Subtle dot grid */}
           <div 
