@@ -445,7 +445,7 @@ export default function DigitalMarketingServiceLayout({
                   className="group flex items-center justify-center gap-2 rounded-xl bg-amber-500 px-6 py-3.5 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/15 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer"
                 >
                   Chat with Us
-                  <FaWhatsapp size={14} className="text-slate-900" />
+                  <FaWhatsapp size={20} className="text-slate-900" />
                 </a>
 
                 <a
@@ -453,7 +453,7 @@ export default function DigitalMarketingServiceLayout({
                   className="group flex items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-5 py-3.5 text-xs font-black uppercase tracking-wider text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:scale-[1.01] active:scale-95 transition-all"
                 >
                   +91 99863 89444
-                  <Phone size={14} className="text-slate-700 stroke-[2.5]" />
+                  <Phone size={18} className="text-slate-700 stroke-[2.5]" />
                 </a>
               </div>
 

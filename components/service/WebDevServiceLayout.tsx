@@ -462,7 +462,7 @@ export default function WebDevServiceLayout({
                   href="tel:9986389444"
                   className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-6 py-4 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/20 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer"
                 >
-                  <Phone size={14} className="shrink-0" fill="currentColor" />
+                  <Phone size={18} className="shrink-0" fill="currentColor" />
                   +91 9986389444
                 </a>
 
@@ -472,7 +472,7 @@ export default function WebDevServiceLayout({
                   rel="noopener noreferrer"
                   className="group flex items-center justify-center gap-2.5 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-xs font-black uppercase tracking-wider text-white hover:border-white/20 hover:bg-white/10 hover:scale-[1.01] active:scale-95 transition-all"
                 >
-                  <FaWhatsapp size={15} className="text-[#25D366] shrink-0" />
+                  <FaWhatsapp size={20} className="text-[#25D366] shrink-0" />
                   Chat with us
                 </a>
               </div>
@@ -480,7 +480,7 @@ export default function WebDevServiceLayout({
               {/* Highlights below buttons */}
               <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6 w-full justify-items-center">
                 {highlights.map((hl, i) => (
-                  <div key={i} className="flex items-center gap-2 text-[11px] font-black text-slate-400 uppercase tracking-wider">
+                  <div key={i} className="flex items-center gap-2 text-[14px] font-black text-slate-400 uppercase tracking-wider">
                     <CheckCircle2 size={14} className="text-amber-500 shrink-0" />
                     <span>{hl}</span>
                   </div>
