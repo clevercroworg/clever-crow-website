@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&family=Caveat:wght@500;700&family=Oswald:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&family=Caveat:wght@500;700&family=Oswald:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=League+Gothic&display=swap");
 @import "tailwindcss";
 
 @font-face {
@@ -37,6 +37,7 @@
   --color-brand-textSecondary: #9ca3af;
   --font-heading: 'Inter', sans-serif;
   --font-body: 'Open Sans', sans-serif;
+  --font-league: 'League Gothic', sans-serif;
 
   /* Custom screen size for ultra-responsive styling on small devices */
   --breakpoint-xs: 400px;
@@ -58,17 +59,21 @@
   }
 
   h1 {
-    font-family: "Inter", sans-serif;
+    font-family: "League Gothic", sans-serif !important;
     font-size: clamp(2.25rem, 4vw, 3.75rem); /* 36px → 60px */
-    line-height: 1.15;
-    font-weight: 700; /* bold */
+    line-height: 1.05 !important;
+    font-weight: 400 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
 
   h2 {
-    font-family: "Inter", sans-serif;
+    font-family: "League Gothic", sans-serif !important;
     font-size: clamp(1.75rem, 3vw, 2.5rem); /* 28px → 40px */
-    line-height: 1.25;
-    font-weight: 600; /* semi-bold */
+    line-height: 1.1 !important;
+    font-weight: 400 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
 
   h3 {
