@@ -516,9 +516,9 @@ export default function WebDevServiceLayout({
           <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mt-4 font-sans">
             {servicesTitle}
           </h2>
-          <p className="mt-3 text-slate-500 text-sm font-medium">
+          <h2 className="mt-3 text-slate-500 text-sm font-medium">
             {servicesSubtitle}
-          </p>
+          </h2>
         </div>
 
         {/* 6-Card Grid */}
