@@ -95,14 +95,15 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Resources */}
+            {/* Industries */}
             <div>
-              <h4 className="text-slate-900 text-[13px] font-extrabold uppercase tracking-widest mb-5">Resources</h4>
+              <h4 className="text-slate-900 text-[13px] font-extrabold uppercase tracking-widest mb-5">Industries</h4>
               <ul className="space-y-3.5 text-xs font-semibold text-slate-500">
-                <li><Link href="/careers" className="hover:text-amber-500 transition-colors">Guides</Link></li>
-                <li><Link href="/contact" className="hover:text-amber-500 transition-colors">Insights</Link></li>
-                <li><Link href="/careers" className="hover:text-amber-500 transition-colors">Tools</Link></li>
-                <li><Link href="/contact" className="hover:text-amber-500 transition-colors">Support</Link></li>
+                <li><Link href="/industries/ecommerce-growth-marketing" className="hover:text-amber-500 transition-colors">E-commerce</Link></li>
+                <li><Link href="/industries/healthcare-digital-marketing" className="hover:text-amber-500 transition-colors">Healthcare</Link></li>
+                <li><Link href="/industries/education-marketing" className="hover:text-amber-500 transition-colors">Education</Link></li>
+                <li><Link href="/industries/real-estate-digital-marketing" className="hover:text-amber-500 transition-colors">Real Estate</Link></li>
+                <li><Link href="/industries/hotels-resorts-marketing" className="hover:text-amber-500 transition-colors">Hospitality</Link></li>
               </ul>
             </div>
             

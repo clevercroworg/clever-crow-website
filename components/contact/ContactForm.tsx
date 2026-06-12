@@ -1,8 +1,7 @@
 "use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Loader2, Sparkles } from "lucide-react";
+import { ArrowRight, Loader2, Sparkles, ChevronDown } from "lucide-react";
 
 export default function ContactForm() {
   const router = useRouter();
@@ -20,8 +19,12 @@ export default function ContactForm() {
 
     const payload = {
       name: formData.get("name"),
+      email: formData.get("email"),
       phone: formData.get("phone"),
+      company: formData.get("company"),
       service: formData.get("service"),
+      budget: formData.get("budget"),
+      timeline: formData.get("timeline"),
       message: formData.get("message"),
       source: "Contact Page Form",
     };
@@ -60,103 +63,189 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="relative rounded-[3rem] border border-white/10 bg-white/5 p-8 sm:p-12 shadow-2xl backdrop-blur-2xl overflow-hidden group">
-      {/* Background Orbs */}
-      <div className="absolute -top-24 -right-24 h-64 w-64 bg-yellow-400/10 blur-[80px] rounded-full pointer-events-none transition-opacity group-hover:opacity-20" />
-      <div className="absolute -bottom-24 -left-24 h-64 w-64 bg-indigo-500/10 blur-[80px] rounded-full pointer-events-none transition-opacity group-hover:opacity-20" />
+    <div className="relative rounded-[3rem] border border-slate-200/60 bg-white/95 p-8 sm:p-10 md:p-12 shadow-[0_25px_60px_rgba(15,23,42,0.06)] backdrop-blur-2xl overflow-hidden group">
+      {/* Background Glows */}
+      <div className="absolute -top-24 -right-24 h-64 w-64 bg-amber-400/5 blur-[80px] rounded-full pointer-events-none transition-opacity group-hover:opacity-20" />
+      <div className="absolute -bottom-24 -left-24 h-64 w-64 bg-blue-500/5 blur-[80px] rounded-full pointer-events-none transition-opacity group-hover:opacity-20" />
 
       <div className="relative z-10">
-        <div className="mb-10">
-          <div className="inline-flex items-center gap-2 rounded-full bg-yellow-500/10 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-yellow-500 border border-yellow-500/20 mb-6">
-            <Sparkles size={12} />
+        <div className="mb-8">
+          <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-amber-600 border border-amber-500/20 mb-4">
+            <Sparkles size={11} />
             Growth Audit
           </div>
-          <h3 className="text-3xl font-black text-white tracking-tight">
-            Send us a <span className="text-yellow-500 italic">message</span>
+          <h3 className="text-3xl font-black text-slate-900 tracking-tight">
+            Send us a <span className="text-amber-500 italic">message</span>
           </h3>
-          <p className="mt-3 text-slate-400 font-medium leading-relaxed">
-            Tell us about your next project, and our growth engineers will get back to you within 24 hours.
+          <p className="mt-2 text-slate-500 text-sm font-semibold leading-relaxed">
+            Tell us about your goals, and our growth engineers will get back to you within 24 hours.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid gap-6 sm:grid-cols-2">
-            <div className="space-y-2">
-              <label htmlFor="name" className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 ml-2">
-                Full Name
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="grid gap-5 sm:grid-cols-2">
+            {/* Full Name */}
+            <div className="space-y-1.5">
+              <label htmlFor="name" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-2 block">
+                Full Name *
               </label>
               <input
                 id="name"
                 name="name"
                 required
                 placeholder="John Doe"
-                className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-white placeholder:text-slate-600 focus:border-yellow-500 focus:bg-white/10 focus:outline-none transition-all ring-1 ring-white/5"
+                className="w-full rounded-2xl border border-slate-200/80 bg-slate-50/30 px-5 py-3.5 text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:border-amber-500 focus:bg-white focus:outline-none transition-all focus:ring-2 focus:ring-amber-500/10"
               />
             </div>
             
-            <div className="space-y-2">
-              <label htmlFor="phone" className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 ml-2">
-                Phone Number
+            {/* Email Address */}
+            <div className="space-y-1.5">
+              <label htmlFor="email" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-2 block">
+                Email Address *
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                placeholder="john@example.com"
+                className="w-full rounded-2xl border border-slate-200/80 bg-slate-50/30 px-5 py-3.5 text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:border-amber-500 focus:bg-white focus:outline-none transition-all focus:ring-2 focus:ring-amber-500/10"
+              />
+            </div>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2">
+            {/* Phone Number */}
+            <div className="space-y-1.5">
+              <label htmlFor="phone" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-2 block">
+                Phone Number *
               </label>
               <input
                 id="phone"
                 name="phone"
                 type="tel"
                 required
-                placeholder="+91 XXX XXX XXXX"
-                className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-white placeholder:text-slate-600 focus:border-yellow-500 focus:bg-white/10 focus:outline-none transition-all ring-1 ring-white/5"
+                placeholder="+91 99863 89444"
+                className="w-full rounded-2xl border border-slate-200/80 bg-slate-50/30 px-5 py-3.5 text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:border-amber-500 focus:bg-white focus:outline-none transition-all focus:ring-2 focus:ring-amber-500/10"
+              />
+            </div>
+
+            {/* Company / Website */}
+            <div className="space-y-1.5">
+              <label htmlFor="company" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-2 block">
+                Company / Website
+              </label>
+              <input
+                id="company"
+                name="company"
+                placeholder="example.com"
+                className="w-full rounded-2xl border border-slate-200/80 bg-slate-50/30 px-5 py-3.5 text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:border-amber-500 focus:bg-white focus:outline-none transition-all focus:ring-2 focus:ring-amber-500/10"
               />
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label htmlFor="service" className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 ml-2">
-              What are you looking for?
-            </label>
-            <div className="relative">
-              <select
-                id="service"
-                name="service"
-                required
-                defaultValue=""
-                className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-white appearance-none focus:border-yellow-500 focus:bg-white/10 focus:outline-none transition-all ring-1 ring-white/5"
-              >
-                <option value="" disabled className="bg-[#020617]">Select a service...</option>
-                <option value="Digital Marketing" className="bg-[#020617]">Digital Marketing (Comprehensive)</option>
-                <option value="Google & Meta Ads" className="bg-[#020617]">Google & Meta Ads (PPC)</option>
-                <option value="SEO" className="bg-[#020617]">Search Engine Optimisation (SEO)</option>
-                <option value="Social Media" className="bg-[#020617]">Social Media Management</option>
-                <option value="Website Development" className="bg-[#020617]">Website Design & Development</option>
-                <option value="AI Lead Automation" className="bg-[#020617]">AI Lead Automation</option>
-                <option value="Not Sure" className="bg-[#020617]">Not Sure / Need Guidance</option>
-              </select>
-              <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {/* Service Selection */}
+            <div className="space-y-1.5">
+              <label htmlFor="service" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-2 block">
+                Required Service *
+              </label>
+              <div className="relative">
+                <select
+                  id="service"
+                  name="service"
+                  required
+                  defaultValue=""
+                  className="w-full rounded-2xl border border-slate-200/80 bg-slate-50/30 px-5 py-3.5 text-sm font-semibold text-slate-800 appearance-none focus:border-amber-500 focus:bg-white focus:outline-none transition-all focus:ring-2 focus:ring-amber-500/10"
+                >
+                  <option value="" disabled>Select service...</option>
+                  <option value="Website Development">Website Design & Dev</option>
+                  <option value="Mobile App Development">Mobile App Development</option>
+                  <option value="Google & Meta Ads">Google & Meta Ads (PPC)</option>
+                  <option value="SEO Services">SEO Services</option>
+                  <option value="Social Media Management">Social Media Management</option>
+                  <option value="AI Lead Automation">AI Lead Automation</option>
+                  <option value="Not Sure / Consultation">Not Sure / Consultation</option>
+                </select>
+                <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                  <ChevronDown size={14} className="stroke-[2.5]" />
+                </div>
+              </div>
+            </div>
+
+            {/* Budget Selection */}
+            <div className="space-y-1.5">
+              <label htmlFor="budget" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-2 block">
+                Monthly Budget *
+              </label>
+              <div className="relative">
+                <select
+                  id="budget"
+                  name="budget"
+                  required
+                  defaultValue=""
+                  className="w-full rounded-2xl border border-slate-200/80 bg-slate-50/30 px-5 py-3.5 text-sm font-semibold text-slate-800 appearance-none focus:border-amber-500 focus:bg-white focus:outline-none transition-all focus:ring-2 focus:ring-amber-500/10"
+                >
+                  <option value="" disabled>Select budget...</option>
+                  <option value="Under ₹50,000 / $600">Under ₹50,000 / $600</option>
+                  <option value="₹50,000 - ₹1,50,000 / $600 - $1,800">₹50,000 - ₹1,50,000</option>
+                  <option value="₹1,50,000 - ₹5,00,000 / $1,800 - $6,000">₹1,50,000 - ₹5,00,000</option>
+                  <option value="₹5,00,000+ / $6,000+">₹5,00,000+ / $6,000+</option>
+                </select>
+                <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                  <ChevronDown size={14} className="stroke-[2.5]" />
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label htmlFor="message" className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 ml-2">
-              Project Details
+          {/* Timeline Dropdown */}
+          <div className="space-y-1.5">
+            <label htmlFor="timeline" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-2 block">
+              Project Timeline *
+            </label>
+            <div className="relative">
+              <select
+                id="timeline"
+                name="timeline"
+                required
+                defaultValue=""
+                className="w-full rounded-2xl border border-slate-200/80 bg-slate-50/30 px-5 py-3.5 text-sm font-semibold text-slate-800 appearance-none focus:border-amber-500 focus:bg-white focus:outline-none transition-all focus:ring-2 focus:ring-amber-500/10"
+              >
+                <option value="" disabled>Select timeline...</option>
+                <option value="Immediate (Within 2 weeks)">Immediate (Within 2 weeks)</option>
+                <option value="Within 1 Month">Within 1 Month</option>
+                <option value="1 to 3 Months">1 to 3 Months</option>
+                <option value="Just researching / exploring">Just researching / exploring</option>
+              </select>
+              <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                <ChevronDown size={14} className="stroke-[2.5]" />
+              </div>
+            </div>
+          </div>
+
+          {/* Message / Project Details */}
+          <div className="space-y-1.5">
+            <label htmlFor="message" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-2 block">
+              Additional Details / Message
             </label>
             <textarea
               id="message"
               name="message"
-              rows={4}
-              placeholder="Tell us about your goals, current challenges, and timeline..."
-              className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-white placeholder:text-slate-600 focus:border-yellow-500 focus:bg-white/10 focus:outline-none transition-all resize-none ring-1 ring-white/5"
+              rows={3}
+              placeholder="Tell us about your current challenges, custom requirements, etc..."
+              className="w-full rounded-2xl border border-slate-200/80 bg-slate-50/30 px-5 py-3.5 text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:border-amber-500 focus:bg-white focus:outline-none transition-all resize-none focus:ring-2 focus:ring-amber-500/10"
             />
           </div>
 
           {error && (
-            <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm font-bold text-red-400">
+            <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-xs font-bold text-red-500">
               {error}
             </div>
           )}
 
           {success && (
-            <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm font-bold text-emerald-400">
+            <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-xs font-bold text-emerald-600">
               Message sent successfully! Redirecting...
             </div>
           )}
@@ -164,20 +253,20 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={loading || success}
-            className="group relative flex w-full items-center justify-center gap-3 rounded-2xl bg-yellow-500 px-8 py-5 font-black uppercase tracking-widest text-slate-900 shadow-xl shadow-yellow-500/20 transition-all hover:scale-[1.02] hover:bg-yellow-400 active:scale-[0.98] disabled:opacity-70 disabled:pointer-events-none overflow-hidden"
+            className="group relative flex w-full items-center justify-center gap-2.5 rounded-2xl bg-amber-500 px-6 py-4 font-black uppercase tracking-widest text-slate-900 shadow-lg shadow-amber-500/10 transition-all hover:scale-[1.01] hover:bg-amber-600 active:scale-[0.99] disabled:opacity-70 disabled:pointer-events-none overflow-hidden cursor-pointer"
           >
             {loading ? (
               <Loader2 className="h-5 w-5 animate-spin" />
             ) : (
               <>
-                <span className="relative z-10 text-[14px]">Get Growth Audit</span>
-                <ArrowRight size={18} className="relative z-10 transition-transform group-hover:translate-x-1" />
+                <span className="relative z-10 text-[12px]">Get Growth Audit</span>
+                <ArrowRight size={16} className="relative z-10 transition-transform group-hover:translate-x-1" />
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
               </>
             )}
           </button>
           
-          <p className="text-center text-[10px] font-black uppercase tracking-[0.2em] text-slate-600">
+          <p className="text-center text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
             Secure • Confidential • 24H Response
           </p>
         </form>

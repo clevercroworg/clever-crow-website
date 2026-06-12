@@ -220,12 +220,14 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
-          {/* Industries Link */}
+          {/* Work Link */}
           <Link 
-            href="/#industries" 
-            className="rounded-full px-3.5 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase text-slate-600 hover:text-slate-900"
+            href="/success-stories" 
+            className={`rounded-full px-3.5 py-1.5 text-[10px] font-black transition-all tracking-[0.15em] uppercase ${
+              pathname === "/success-stories" ? "text-yellow-600 bg-black/5" : "text-slate-600 hover:text-slate-900"
+            }`}
           >
-            Industries
+            Work
           </Link>
 
           {/* About Us Link */}
@@ -384,12 +386,16 @@ export default function Header() {
                 </AnimatePresence>
               </div>
 
-              {/* Industries Link */}
+              {/* Work Link */}
               <Link
-                href="/#industries"
-                className="block rounded-xl px-4 py-3 text-[14px] transition-all duration-200 border text-slate-700 hover:text-slate-900 hover:bg-slate-50/50 border-transparent font-semibold"
+                href="/success-stories"
+                className={`block rounded-xl px-4 py-3 text-[14px] transition-all duration-200 border ${
+                  pathname === "/success-stories"
+                    ? "text-yellow-600 bg-yellow-50/80 border-yellow-100/50 font-bold"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-50/50 border-transparent font-semibold"
+                }`}
               >
-                Industries
+                Work
               </Link>
 
               {/* About Us Link */}
