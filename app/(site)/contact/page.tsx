@@ -51,7 +51,7 @@ export default function ContactPage() {
   return (
     <main className="bg-[#FAF9F6] selection:bg-yellow-500/30 min-h-screen font-sans">
       {/* ================= HERO & INFO SPLIT ================= */}
-      <section className="relative pt-24 lg:pt-28 pb-20 overflow-hidden">
+      <section className="relative pt-24 lg:pt-28 pb-8 lg:pb-10 overflow-hidden">
         
         {/* ───────────────── BACKGROUND DOTS & RADIAL GLOW ───────────────── */}
         <div className="absolute inset-0 z-0 pointer-events-none">
@@ -69,7 +69,7 @@ export default function ContactPage() {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 z-10">
-          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-16 lg:gap-20 items-start">
+          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-start">
             
             {/* LEFT: TEXT & INFO */}
             <motion.div
@@ -78,29 +78,19 @@ export default function ContactPage() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="w-full"
             >
-              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/80 border border-slate-200/60 mb-6 shadow-sm backdrop-blur-md">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
-                  Engineering Scaling Systems
-                </span>
-              </div>
-              
-              <h1 className="text-4xl sm:text-5xl lg:text-[58px] font-black text-slate-900 tracking-tight mb-6 leading-[1.1]">
+              <h1 className="text-4xl sm:text-5xl lg:text-[58px] font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
                 Let's Build Your <br />
                 <span className="text-amber-500 italic pb-2 inline-block">
                   Growth Engine
                 </span>
               </h1>
               
-              <p className="text-base sm:text-lg text-slate-600 max-w-xl font-medium leading-relaxed mb-10">
+              <p className="text-base sm:text-lg text-slate-600 max-w-xl font-medium leading-relaxed mb-6">
                 Stop guessing with your marketing. Reach out to our team of growth engineers and engineer a predictable revenue system for your business.
               </p>
 
               {/* Direct Connect Cards */}
-              <div className="grid sm:grid-cols-3 gap-4 mb-10">
+              <div className="grid sm:grid-cols-3 gap-4 mb-6">
                 {contactMethods.map((method, idx) => (
                   <a
                     key={idx}
@@ -150,7 +140,7 @@ export default function ContactPage() {
       </section>
 
       {/* ================= HQ & MAP SECTION ================= */}
-      <section className="relative px-6 pb-28">
+      <section className="relative px-6 pb-20 pt-2 lg:pt-0">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-10 items-stretch">
             

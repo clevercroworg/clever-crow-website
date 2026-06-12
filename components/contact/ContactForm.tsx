@@ -63,26 +63,19 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="relative rounded-[3rem] border border-slate-200/60 bg-white/95 p-8 sm:p-10 md:p-12 shadow-[0_25px_60px_rgba(15,23,42,0.06)] backdrop-blur-2xl overflow-hidden group">
+    <div className="relative rounded-[2.5rem] border border-slate-200/60 bg-white/95 p-6 sm:p-8 shadow-[0_20px_50px_rgba(15,23,42,0.05)] backdrop-blur-2xl overflow-hidden group">
       {/* Background Glows */}
       <div className="absolute -top-24 -right-24 h-64 w-64 bg-amber-400/5 blur-[80px] rounded-full pointer-events-none transition-opacity group-hover:opacity-20" />
       <div className="absolute -bottom-24 -left-24 h-64 w-64 bg-blue-500/5 blur-[80px] rounded-full pointer-events-none transition-opacity group-hover:opacity-20" />
 
       <div className="relative z-10">
-        <div className="mb-8">
-          <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-amber-600 border border-amber-500/20 mb-4">
-            <Sparkles size={11} />
-            Growth Audit
-          </div>
-          <h3 className="text-3xl font-black text-slate-900 tracking-tight">
+        <div className="mb-6">
+          <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
             Send us a <span className="text-amber-500 italic">message</span>
           </h3>
-          <p className="mt-2 text-slate-500 text-sm font-semibold leading-relaxed">
-            Tell us about your goals, and our growth engineers will get back to you within 24 hours.
-          </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid gap-5 sm:grid-cols-2">
             {/* Full Name */}
             <div className="space-y-1.5">
