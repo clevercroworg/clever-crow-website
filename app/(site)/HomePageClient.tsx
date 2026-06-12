@@ -353,7 +353,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
         <section>
           <div className="mb-8">
             <h2 className="text-2xl md:text-3xl font-black text-slate-900 leading-tight tracking-tight">
-              A proven process. Predictable results.
+              A proven process.<br className="block sm:hidden" /> Predictable results.
             </h2>
           </div>
 
@@ -394,8 +394,8 @@ export default function HomePageClient({ services }: HomePageClientProps) {
 
           </div>
 
-          {/* Mobile/Tablet fallback: stacked layout */}
-          <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {/* Mobile/Tablet fallback: step-by-step vertical timeline with arrows */}
+          <div className="lg:hidden flex flex-col max-w-lg mx-auto mt-4">
             {[
               { num: "01", label: "Attract", Icon: Magnet, desc: "Bring in right audience with clarity." },
               { num: "02", label: "Engage", Icon: MessageSquare, desc: "Build trust and nurture real conversations." },
@@ -403,12 +403,24 @@ export default function HomePageClient({ services }: HomePageClientProps) {
               { num: "04", label: "Automate", Icon: Workflow, desc: "Streamline operations and drive efficiency." },
               { num: "05", label: "Scale", Icon: Activity, desc: "Optimize, retain and scale with measurable ROI." }
             ].map((step, idx) => (
-              <div key={idx} className="flex items-start gap-4">
-                <div className="flex flex-col items-center gap-1 shrink-0">
-                  <span className="text-sm font-black text-amber-500">{step.num}</span>
-                  <step.Icon className="h-8 w-8 text-slate-600" strokeWidth={1.5} />
+              <div key={idx} className="relative flex items-start gap-5 pb-10 last:pb-0">
+                {/* Arrow connector line */}
+                {idx < 4 && (
+                  <div className="absolute left-[22px] top-12 bottom-0 w-[2px] bg-slate-200 flex flex-col justify-end items-center">
+                    {/* Downward pointing arrow tip */}
+                    <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] border-t-slate-300 translate-y-[8px]" />
+                  </div>
+                )}
+                {/* Circle Container for Icon */}
+                <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white border border-slate-200 shadow-sm text-slate-600">
+                  <step.Icon className="h-5.5 w-5.5" strokeWidth={1.5} />
+                  {/* Step floating numeric badge */}
+                  <span className="absolute -top-1.5 -right-1.5 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-amber-500 text-[9px] font-black text-white leading-none">
+                    {step.num}
+                  </span>
                 </div>
-                <div>
+                {/* Text details */}
+                <div className="pt-0.5">
                   <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest">{step.label}</h4>
                   <p className="text-xs sm:text-[13px] font-semibold text-slate-500 mt-1 leading-relaxed">{step.desc}</p>
                 </div>
