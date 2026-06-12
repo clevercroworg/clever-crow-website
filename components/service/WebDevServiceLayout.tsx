@@ -3,14 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { League_Gothic } from "next/font/google";
 import { motion, AnimatePresence } from "framer-motion";
-
-const leagueGothic = League_Gothic({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-league-gothic",
-});
 import {
   X,
   Menu,
@@ -409,7 +402,7 @@ export default function WebDevServiceLayout({
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   return (
-    <div className={`${leagueGothic.variable} bg-white min-h-screen text-slate-800 antialiased font-body pt-0 pb-0 selection:bg-yellow-500/20`}>
+    <div className="bg-white min-h-screen text-slate-800 antialiased font-body pt-0 pb-0 selection:bg-yellow-500/20">
       
       {/* ───────────────── 1. HERO SECTION ───────────────── */}
       <section className="relative overflow-hidden pt-28 md:pt-36 pb-24 bg-[#0B0F19] text-white">
@@ -454,7 +447,7 @@ export default function WebDevServiceLayout({
             <div className="flex flex-col items-center text-center">
               
               {/* Title */}
-              <h1 className="text-5xl sm:text-6xl lg:text-[76px] font-[family-name:var(--font-league-gothic)] font-normal uppercase tracking-wider leading-[1.05] text-white">
+              <h1 className="text-5xl sm:text-6xl lg:text-[76px] font-normal uppercase tracking-wider leading-[1.05] text-white">
                 {heroTitle}
               </h1>
 
