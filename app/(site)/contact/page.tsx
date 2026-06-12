@@ -135,11 +135,12 @@ export default function ContactPage() {
                   <div className="absolute top-0 right-0 w-64 h-64 bg-amber-200/10 blur-[80px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
                   
                   <div className="relative z-10">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-500/10 mb-5 border border-amber-500/20">
-                      <Building2 className="h-5 w-5 text-amber-600" />
+                    <div className="flex items-center gap-3 mb-5">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 border border-amber-500/20 shrink-0">
+                        <Building2 className="h-4.5 w-4.5 text-amber-600" />
+                      </div>
+                      <h2 className="text-lg font-black text-slate-900 tracking-tight">Global Headquarters</h2>
                     </div>
-                    
-                    <h2 className="text-xl font-black text-slate-900 tracking-tight mb-5">Global Headquarters</h2>
                     
                     <div className="space-y-4">
                       <div className="flex gap-4">
@@ -175,20 +176,6 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
-
-                {/* Quick Support Card */}
-                <a 
-                  href="mailto:hello@clevercrow.in"
-                  className="rounded-[2rem] bg-white border border-slate-200/60 p-6 text-slate-800 flex items-center justify-between group cursor-pointer hover:bg-slate-50/50 transition-colors shadow-sm"
-                >
-                  <div>
-                    <h4 className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">Need Urgent Help?</h4>
-                    <p className="text-lg font-black text-slate-800 group-hover:text-amber-600 transition-colors">hello@clevercrow.in</p>
-                  </div>
-                  <div className="h-10 w-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 group-hover:bg-amber-500 group-hover:text-zinc-950 transition-all">
-                    <ArrowRight className="h-4.5 w-4.5" />
-                  </div>
-                </a>
               </div>
             </motion.div>
 
