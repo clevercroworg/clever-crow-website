@@ -282,7 +282,7 @@ export default function AiAutomationServiceLayout({
             {/* Left Column: Text & Buttons */}
             <div className="lg:col-span-6 flex flex-col items-start text-left">
               
-              <h1 className="text-4xl sm:text-5xl lg:text-[50px] font-black leading-[1.12] tracking-tight text-slate-900 font-sans">
+              <h1 className="service-h1 text-4xl sm:text-5xl lg:text-[50px] leading-[1.12] text-slate-900">
                 {heroTitle.includes("Replies") || heroTitle.includes("Replies,") ? (
                   <span>
                     AI Automation for <br />

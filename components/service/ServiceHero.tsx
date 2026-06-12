@@ -115,7 +115,7 @@ export default function ServiceHero({
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             
-            <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-black text-white leading-[1.05] tracking-tight">
+            <h1 className="service-h1 text-4xl sm:text-5xl lg:text-[52px] text-white leading-[1.05]">
               {title}
             </h1>
 

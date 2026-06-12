@@ -374,7 +374,7 @@ export default function AppDevServiceLayout({
             <div className="lg:col-span-7 flex flex-col items-start text-left">
               
               {/* Title */}
-              <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-black leading-[1.12] tracking-tight text-slate-900 font-sans">
+              <h1 className="service-h1 text-4xl sm:text-5xl lg:text-[54px] leading-[1.12] text-slate-900">
                 {heroTitle}
               </h1>
 

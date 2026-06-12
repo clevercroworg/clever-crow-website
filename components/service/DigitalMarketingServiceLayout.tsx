@@ -389,7 +389,7 @@ export default function DigitalMarketingServiceLayout({
             <div className="lg:col-span-5 flex flex-col items-start text-left pt-4">
               
               {/* Title — "Drives Growth" in amber */}
-              <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-black leading-[1.12] tracking-tight text-slate-900 font-sans">
+              <h1 className="service-h1 text-4xl sm:text-5xl lg:text-[54px] leading-[1.12] text-slate-900">
                 {heroTitle.includes("Better Marketing Decisions") ? (
                   <>
                     {heroTitle.split("Better Marketing Decisions")[0]}

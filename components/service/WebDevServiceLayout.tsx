@@ -447,7 +447,7 @@ export default function WebDevServiceLayout({
             <div className="flex flex-col items-center text-center">
               
               {/* Title */}
-              <h1 className="text-5xl sm:text-6xl lg:text-[76px] font-normal uppercase tracking-wider leading-[1.05] text-white">
+              <h1 className="service-h1 text-5xl sm:text-6xl lg:text-[76px] leading-[1.05] text-white">
                 {heroTitle}
               </h1>
 
