@@ -197,7 +197,7 @@ export default function Header() {
                                 pathname === item.href ? "bg-yellow-50/50" : ""
                               }`}
                             >
-                              <span className={`text-[11.5px] font-bold leading-snug transition-colors ${
+                              <span className={`text-[11.5px] font-medium leading-snug transition-colors ${
                                 pathname === item.href 
                                   ? "text-yellow-600" 
                                   : "text-slate-500 group-hover:text-yellow-600"
@@ -371,7 +371,7 @@ export default function Header() {
                                             : "hover:bg-slate-50 text-slate-500 hover:text-slate-900 border-transparent"
                                         }`}
                                       >
-                                        <span className="text-[12px] font-bold leading-tight">{item.label}</span>
+                                        <span className="text-[12px] font-medium leading-tight">{item.label}</span>
                                       </Link>
                                     ))}
                                   </div>
