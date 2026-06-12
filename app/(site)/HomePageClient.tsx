@@ -429,8 +429,8 @@ export default function HomePageClient({ services }: HomePageClientProps) {
         />
         {/* Glowing background overlay */}
         <div 
-          className="absolute inset-0 opacity-[0.15] pointer-events-none mix-blend-screen z-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/images/hero-premium-bg-v2.png)" }}
+          className="absolute inset-0 opacity-[0.25] pointer-events-none mix-blend-screen z-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(/images/cta-bg-premium.png)" }}
         />
         {/* Premium radial glows */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
@@ -453,7 +453,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 relative z-10">
             
             {/* System 1 */}
-            <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-white/[0.08] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
+            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white">
                   <FileText className="h-6 w-6" />
@@ -466,7 +466,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             </div>
 
             {/* System 2 */}
-            <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-white/[0.08] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
+            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white">
                   <Database className="h-6 w-6" />
@@ -479,7 +479,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             </div>
 
             {/* System 3 */}
-            <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-white/[0.08] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
+            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white">
                   <Bot className="h-6 w-6" />
@@ -492,7 +492,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             </div>
 
             {/* System 4 */}
-            <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-white/[0.08] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
+            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white">
                   <Target className="h-6 w-6" />
@@ -505,7 +505,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             </div>
 
             {/* System 5 */}
-            <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-white/[0.08] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
+            <div className="bg-[#111625] border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-[#151c2f] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white">
                   <Layers className="h-6 w-6" />
@@ -806,23 +806,25 @@ export default function HomePageClient({ services }: HomePageClientProps) {
 
         {/* ================= 8. CTA BANNER ================= */}
         <section>
-          <div className="relative overflow-hidden bg-[#FFFDF9] border border-amber-500/10 rounded-[2.5rem] p-10 md:p-14 shadow-[0_15px_45px_rgba(0,0,0,0.01)] flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="relative overflow-hidden bg-[#0B0F19] border border-white/10 rounded-[2.5rem] p-10 md:p-14 shadow-[0_15px_45px_rgba(0,0,0,0.01)] flex flex-col lg:flex-row items-center justify-between gap-8">
             
-            {/* Background Image Overlay */}
-            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[2.5rem]" style={{ opacity: 0.4 }}>
+            {/* Background Image Overlay with Dark Mask */}
+            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[2.5rem]">
               <Image
                 src="/images/cta-bg-office.png"
                 alt="CTA Background"
                 fill
-                className="object-cover select-none"
+                className="object-cover select-none opacity-40"
                 quality={90}
               />
+              {/* Subtle dark overlay */}
+              <div className="absolute inset-0 bg-[#0B0F19]/80 z-10" />
             </div>
 
             {/* Text details */}
             <div className="relative z-10 flex flex-col items-start gap-1">
               <span className="text-[9px] font-extrabold text-amber-500 uppercase tracking-[0.25em]">Ready to Grow?</span>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight max-w-[500px] mt-2">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight max-w-[500px] mt-2">
                 Let's build the right digital system for your business.
               </h2>
             </div>
