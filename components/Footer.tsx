@@ -7,10 +7,7 @@ import {
   Instagram,
   Facebook,
   Twitter,
-  Phone,
-  Mail,
-  MapPin,
-  ArrowRight
+  Phone
 } from "lucide-react";
 
 export default function Footer() {
@@ -121,18 +118,6 @@ export default function Footer() {
                 <Phone size={14} className="text-slate-400 shrink-0" />
                 <span>99863 89444</span>
               </a>
-
-              {/* Email */}
-              <a href="mailto:hello@clevercrow.in" className="flex items-center gap-2.5 hover:text-amber-500 transition-colors">
-                <Mail size={14} className="text-slate-400 shrink-0" />
-                <span>hello@clevercrow.in</span>
-              </a>
-
-              {/* Address */}
-              <div className="flex items-start gap-2.5">
-                <MapPin size={14} className="text-slate-400 shrink-0 mt-0.5" />
-                <span>Coimbatore, India</span>
-              </div>
             </div>
           </div>
 
