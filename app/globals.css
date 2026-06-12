@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@200;300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&family=Caveat:wght@500;700&family=Oswald:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@200;300;400;500;600;700;900&family=Open+Sans:wght@300;400;500;600;700&family=Caveat:wght@500;700&family=Oswald:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 
 @font-face {
@@ -62,9 +62,9 @@
     font-family: "Inter", sans-serif !important;
     font-size: clamp(2.25rem, 4vw, 3.75rem); /* 36px → 60px */
     line-height: 1.15 !important;
-    font-weight: 200 !important;
+    font-weight: 900 !important;
     text-transform: none !important;
-    letter-spacing: normal !important;
+    letter-spacing: -0.02em !important;
   }
 
   h2 {
