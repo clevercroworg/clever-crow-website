@@ -282,11 +282,6 @@ export default function AiAutomationServiceLayout({
             {/* Left Column: Text & Buttons */}
             <div className="lg:col-span-6 flex flex-col items-start text-left">
               
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-500/25 bg-amber-500/5 text-amber-600 mb-5 font-sans font-black text-[9px] uppercase tracking-widest shadow-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
-                {eyebrow}
-              </div>
-
               <h1 className="text-4xl sm:text-5xl lg:text-[50px] font-black leading-[1.12] tracking-tight text-slate-900 font-sans">
                 {heroTitle.includes("Replies") || heroTitle.includes("Replies,") ? (
                   <span>

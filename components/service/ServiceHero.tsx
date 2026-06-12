@@ -114,15 +114,7 @@ export default function ServiceHero({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            {eyebrow && (
-              <div className="inline-flex items-center gap-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 px-4 py-2 mb-8 backdrop-blur-md">
-                <div className="h-1.5 w-1.5 rounded-full bg-yellow-500 animate-pulse shadow-[0_0_8px_rgba(234,179,8,0.5)]" />
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-yellow-500">
-                  {eyebrow}
-                </span>
-              </div>
-            )}
-
+            
             <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-black text-white leading-[1.05] tracking-tight">
               {title}
             </h1>

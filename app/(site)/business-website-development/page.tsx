@@ -73,7 +73,7 @@ export default function BusinessWebsiteDevelopmentPage() {
     <main>
       <WebDevServiceLayout
         eyebrow="Business Website Development"
-        heroTitle="Business Website Development for Service Brands"
+        heroTitle="Business Website Development"
         heroSubtitle="Get a professional business website designed to build trust, explain your services clearly and convert visitors into enquiries."
         serviceName="Business Website Development"
         services={services}

@@ -388,11 +388,6 @@ export default function DigitalMarketingServiceLayout({
             {/* ── Left Column: Text & CTAs ── */}
             <div className="lg:col-span-5 flex flex-col items-start text-left pt-4">
               
-              {/* Eyebrow */}
-              <span className="text-[11px] font-black uppercase tracking-[0.2em] text-amber-500 mb-4 font-sans">
-                {eyebrow}
-              </span>
-
               {/* Title — "Drives Growth" in amber */}
               <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-black leading-[1.12] tracking-tight text-slate-900 font-sans">
                 {heroTitle.includes("Better Marketing Decisions") ? (

@@ -453,12 +453,6 @@ export default function WebDevServiceLayout({
             {/* Left Column (Text & CTAs) */}
             <div className="flex flex-col items-center text-center">
               
-              {/* Eyebrow kicker */}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-500/35 bg-amber-500/10 text-amber-400 mb-6 font-sans font-black text-[9px] uppercase tracking-widest shadow-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
-                {eyebrow}
-              </div>
-
               {/* Title */}
               <h1 className="text-5xl sm:text-6xl lg:text-[76px] font-[family-name:var(--font-league-gothic)] font-normal uppercase tracking-wider leading-[1.05] text-white">
                 {heroTitle}
@@ -472,18 +466,21 @@ export default function WebDevServiceLayout({
               {/* CTA Buttons */}
               <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
                 <a
-                  href="#contact-form"
+                  href="tel:9986389444"
                   className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-6 py-4 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/20 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer"
                 >
-                  Get Website Quote
-                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                  <Phone size={14} className="shrink-0" fill="currentColor" />
+                  +91 9986389444
                 </a>
 
                 <a
-                  href="#what-we-build"
-                  className="group flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-xs font-black uppercase tracking-wider text-white hover:border-white/20 hover:bg-white/10 hover:scale-[1.01] active:scale-95 transition-all"
+                  href={`https://wa.me/919986389444?text=Hi%2C%20I'm%20interested%20in%20your%20${encodeURIComponent(serviceName)}%20services.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-center gap-2.5 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-xs font-black uppercase tracking-wider text-white hover:border-white/20 hover:bg-white/10 hover:scale-[1.01] active:scale-95 transition-all"
                 >
-                  Explore Services
+                  <FaWhatsapp size={15} className="text-[#25D366] shrink-0" />
+                  Chat with us
                 </a>
               </div>
 

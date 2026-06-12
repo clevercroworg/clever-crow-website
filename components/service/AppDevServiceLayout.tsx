@@ -373,12 +373,6 @@ export default function AppDevServiceLayout({
             {/* Left Column (Text, CTAs & Horizontal Bullets) */}
             <div className="lg:col-span-7 flex flex-col items-start text-left">
               
-              {/* Eyebrow kicker */}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-500/25 bg-amber-500/5 text-amber-600 mb-6 font-sans font-black text-[9px] uppercase tracking-widest shadow-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
-                {eyebrow}
-              </div>
-
               {/* Title */}
               <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-black leading-[1.12] tracking-tight text-slate-900 font-sans">
                 {heroTitle}
