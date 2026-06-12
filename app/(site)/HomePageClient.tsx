@@ -424,7 +424,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
       <section className="w-full bg-[#0A0D16] text-white py-16 md:py-20 mt-6 relative overflow-hidden">
         {/* Subtle CSS Checks (Checkerboard) Pattern Overlay */}
         <div 
-          className="absolute inset-0 opacity-[0.06] pointer-events-none z-0"
+          className="absolute inset-0 opacity-[0.35] pointer-events-none z-0"
           style={{
             backgroundImage: `
               linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%), 
@@ -432,23 +432,23 @@ export default function HomePageClient({ services }: HomePageClientProps) {
               linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.2) 75%), 
               linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.2) 75%)
             `,
-            backgroundSize: "60px 60px",
-            backgroundPosition: "0 0, 0 30px, 30px -30px, -30px 0px",
-            maskImage: "radial-gradient(ellipse at center, black, transparent 80%)",
-            WebkitMaskImage: "radial-gradient(ellipse at center, black, transparent 80%)"
+            backgroundSize: "48px 48px",
+            backgroundPosition: "0 0, 0 24px, 24px -24px, -24px 0px",
+            maskImage: "radial-gradient(ellipse at center, black 30%, transparent 95%)",
+            WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 95%)"
           }}
         />
         {/* Fine graph-check lines */}
         <div 
-          className="absolute inset-0 opacity-[0.04] pointer-events-none z-0"
+          className="absolute inset-0 opacity-[0.2] pointer-events-none z-0"
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
+              linear-gradient(to right, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 1px, transparent 1px)
             `,
-            backgroundSize: "30px 30px",
-            maskImage: "radial-gradient(ellipse at center, black, transparent 80%)",
-            WebkitMaskImage: "radial-gradient(ellipse at center, black, transparent 80%)"
+            backgroundSize: "24px 24px",
+            maskImage: "radial-gradient(ellipse at center, black 30%, transparent 95%)",
+            WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 95%)"
           }}
         />
         {/* Premium radial glows */}
@@ -833,11 +833,11 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                 src="/images/cta-bg-office.png"
                 alt="CTA Background"
                 fill
-                className="object-cover select-none opacity-40"
+                className="object-cover select-none opacity-80"
                 quality={90}
               />
               {/* Subtle dark overlay */}
-              <div className="absolute inset-0 bg-[#0B0F19]/80 z-10" />
+              <div className="absolute inset-0 bg-[#0B0F19]/50 z-10" />
             </div>
 
             {/* Text details */}
@@ -854,7 +854,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                 onClick={() => setIsModalOpen(true)}
                 className="group flex items-center justify-center gap-2.5 rounded-2xl bg-amber-500 hover:bg-amber-600 px-7 py-4.5 text-xs font-black uppercase tracking-widest text-slate-900 shadow-md shadow-amber-500/10 active:scale-95 transition-all duration-200 cursor-pointer"
               >
-                Request a Strategy Call
+                Request a Call Back
                 <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
               </button>
 
