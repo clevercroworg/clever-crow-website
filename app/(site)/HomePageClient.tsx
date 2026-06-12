@@ -211,7 +211,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
               {/* Image Header */}
               <div className="relative w-full h-[180px] overflow-hidden">
                 <Image 
-                  src="/images/webbg.jpg" 
+                  src="/images/webbg.png" 
                   alt="Website Development" 
                   fill 
                   className="object-cover transition-transform duration-500 group-hover:scale-105" 
@@ -245,7 +245,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
               {/* Image Header */}
               <div className="relative w-full h-[180px] overflow-hidden">
                 <Image 
-                  src="/images/webdev.jpg" 
+                  src="/images/webdev.png" 
                   alt="App Development" 
                   fill 
                   className="object-cover transition-transform duration-500 group-hover:scale-105" 
@@ -279,7 +279,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
               {/* Image Header */}
               <div className="relative w-full h-[180px] overflow-hidden">
                 <Image 
-                  src="/images/aibg.jpg" 
+                  src="/images/aibg.png" 
                   alt="AI Automation" 
                   fill 
                   className="object-cover transition-transform duration-500 group-hover:scale-105" 
@@ -313,7 +313,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
               {/* Image Header */}
               <div className="relative w-full h-[180px] overflow-hidden">
                 <Image 
-                  src="/images/seobg.jpg" 
+                  src="/images/seobg.png" 
                   alt="Digital Marketing" 
                   fill 
                   className="object-cover transition-transform duration-500 group-hover:scale-105" 
