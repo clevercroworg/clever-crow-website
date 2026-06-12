@@ -124,8 +124,8 @@ export default function HomePageClient({ services }: HomePageClientProps) {
           <div className="bg-[#FFFDF9] border border-amber-500/10 rounded-[2.5rem] p-8 md:p-10 shadow-[0_15px_40px_rgba(0,0,0,0.015)] flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
             
             {/* Left Message (Puzzle icon removed, H2 heading styled for 2 lines) */}
-            <div className="w-full lg:w-[55%]">
-              <h2 className="text-2xl sm:text-[28px] font-extrabold text-slate-900 leading-snug tracking-tight">
+            <div className="w-full lg:w-[62%]">
+              <h2 className="text-xl sm:text-[24px] lg:text-[26px] font-extrabold text-slate-900 leading-snug tracking-tight">
                 Most businesses don't have a strategy problem.<br className="hidden lg:inline" /> They have a <span className="text-amber-500">disconnection problem.</span>
               </h2>
             </div>
@@ -134,7 +134,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             <div className="hidden lg:block h-16 w-[1px] bg-slate-200/80" />
 
             {/* Right 4 Columns Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full lg:w-[45%]">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full lg:w-[38%]">
               
               {/* Disconnected Tools */}
               <div className="flex flex-col items-start">
@@ -207,7 +207,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative z-10">
             
             {/* Website Development */}
-            <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#111625] transition-all duration-300 hover:border-amber-500/30 flex flex-col h-full min-h-[380px] shadow-lg">
+            <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#111625] transition-all duration-300 hover:border-amber-500/30 flex flex-col h-full min-h-[320px] shadow-lg">
               {/* Image Header */}
               <div className="relative w-full h-[180px] overflow-hidden">
                 <Image 
@@ -241,7 +241,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             </div>
 
             {/* App Development */}
-            <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#111625] transition-all duration-300 hover:border-amber-500/30 flex flex-col h-full min-h-[380px] shadow-lg">
+            <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#111625] transition-all duration-300 hover:border-amber-500/30 flex flex-col h-full min-h-[320px] shadow-lg">
               {/* Image Header */}
               <div className="relative w-full h-[180px] overflow-hidden">
                 <Image 
@@ -275,7 +275,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             </div>
 
             {/* AI Automation */}
-            <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#111625] transition-all duration-300 hover:border-amber-500/30 flex flex-col h-full min-h-[380px] shadow-lg">
+            <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#111625] transition-all duration-300 hover:border-amber-500/30 flex flex-col h-full min-h-[320px] shadow-lg">
               {/* Image Header */}
               <div className="relative w-full h-[180px] overflow-hidden">
                 <Image 
@@ -309,7 +309,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             </div>
 
             {/* Digital Marketing */}
-            <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#111625] transition-all duration-300 hover:border-amber-500/30 flex flex-col h-full min-h-[380px] shadow-lg">
+            <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#111625] transition-all duration-300 hover:border-amber-500/30 flex flex-col h-full min-h-[320px] shadow-lg">
               {/* Image Header */}
               <div className="relative w-full h-[180px] overflow-hidden">
                 <Image 
