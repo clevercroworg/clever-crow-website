@@ -409,10 +409,10 @@ export default function WebDevServiceLayout({
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   return (
-    <div className={`${leagueGothic.variable} bg-white min-h-screen text-slate-800 antialiased font-body pt-24 pb-0 selection:bg-yellow-500/20`}>
+    <div className={`${leagueGothic.variable} bg-white min-h-screen text-slate-800 antialiased font-body pt-0 pb-0 selection:bg-yellow-500/20`}>
       
       {/* ───────────────── 1. HERO SECTION ───────────────── */}
-      <section className="relative overflow-hidden pt-12 pb-24 bg-[#0B0F19] text-white">
+      <section className="relative overflow-hidden pt-28 md:pt-36 pb-24 bg-[#0B0F19] text-white">
         
         {/* Ambient background image and dark overlay */}
         <div className="absolute inset-0 z-0 pointer-events-none">

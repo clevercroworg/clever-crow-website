@@ -365,10 +365,10 @@ export default function DigitalMarketingServiceLayout({
   };
 
   return (
-    <div className="bg-white min-h-screen text-slate-800 antialiased font-body pt-24 pb-0 selection:bg-amber-500/20">
+    <div className="bg-white min-h-screen text-slate-800 antialiased font-body pt-0 pb-0 selection:bg-amber-500/20">
       
       {/* ═══════════════════ 1. HERO SECTION ═══════════════════ */}
-      <section className="relative overflow-hidden pt-6 pb-8 md:pb-10 bg-gradient-to-b from-slate-50/80 via-white to-white">
+      <section className="relative overflow-hidden pt-28 md:pt-32 pb-8 md:pb-10 bg-gradient-to-b from-slate-50/80 via-white to-white">
         
         {/* Subtle bg pattern */}
         <div className="absolute inset-0 pointer-events-none z-0">
