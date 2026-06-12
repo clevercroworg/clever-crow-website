@@ -142,7 +142,6 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                   <Unlink className="h-6 w-6" />
                 </div>
                 <h4 className="text-xs font-black text-slate-800 uppercase tracking-wider">Disconnected Tools</h4>
-                <p className="text-[11px] font-semibold text-slate-500 mt-2 leading-relaxed">Too many tools. No single source.</p>
               </div>
 
               {/* Manual Workflows */}
@@ -151,7 +150,6 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                   <Clock className="h-6 w-6" />
                 </div>
                 <h4 className="text-xs font-black text-slate-800 uppercase tracking-wider">Manual Workflows</h4>
-                <p className="text-[11px] font-semibold text-slate-500 mt-2 leading-relaxed">Wasting time. Missing data.</p>
               </div>
 
               {/* No Clear Strategy */}
@@ -160,7 +158,6 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                   <Compass className="h-6 w-6" />
                 </div>
                 <h4 className="text-xs font-black text-slate-800 uppercase tracking-wider">No Clear Strategy</h4>
-                <p className="text-[11px] font-semibold text-slate-500 mt-2 leading-relaxed">Hard to measure. Harder to scale.</p>
               </div>
 
               {/* Limited Growth */}
@@ -169,7 +166,6 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                   <TrendingDown className="h-6 w-6" />
                 </div>
                 <h4 className="text-xs font-black text-slate-800 uppercase tracking-wider">Limited Growth</h4>
-                <p className="text-[11px] font-semibold text-slate-500 mt-2 leading-relaxed">Leads dry up. Growth stalls.</p>
               </div>
 
             </div>
