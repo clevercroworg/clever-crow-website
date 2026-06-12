@@ -117,29 +117,24 @@ export default function HomePageClient({ services }: HomePageClientProps) {
       <TechStack />
 
       {/* Container wrapper for consistent maximum width */}
-      <div className="mx-auto max-w-[1360px] px-6 lg:px-8 space-y-16 md:space-y-24 pb-20">
+      <div className="mx-auto max-w-[1360px] px-6 lg:px-8 space-y-12 md:space-y-16 pb-16">
         
         {/* ================= 1. DISCONNECTION BANNER ================= */}
-        <section className="relative mt-12">
+        <section className="relative mt-6">
           <div className="bg-[#FFFDF9] border border-amber-500/10 rounded-[2.5rem] p-8 md:p-10 shadow-[0_15px_40px_rgba(0,0,0,0.015)] flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
             
-            {/* Left Badge & Message */}
-            <div className="flex items-center gap-5 w-full lg:w-1/2">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500 text-white shrink-0 shadow-md shadow-amber-500/20">
-                <Puzzle className="h-7 w-7" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl sm:text-2xl font-black text-slate-900 leading-snug tracking-tight">
-                  Most businesses don't have a strategy problem. They have a <span className="text-amber-500">disconnection problem.</span>
-                </h3>
-              </div>
+            {/* Left Message (Puzzle icon removed, H2 heading styled for 2 lines) */}
+            <div className="w-full lg:w-[52%]">
+              <h2 className="text-2xl sm:text-[28px] font-black text-slate-900 leading-snug tracking-tight">
+                Most businesses don't have a strategy problem. They have a <span className="text-amber-500">disconnection problem.</span>
+              </h2>
             </div>
 
             {/* Vertical Divider for Desktop */}
             <div className="hidden lg:block h-16 w-[1px] bg-slate-200/80" />
 
             {/* Right 4 Columns Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full lg:w-1/2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full lg:w-[48%]">
               
               {/* Disconnected Tools */}
               <div className="flex flex-col items-start">
@@ -185,8 +180,19 @@ export default function HomePageClient({ services }: HomePageClientProps) {
       </div>
 
       {/* ================= 2. END-TO-END SOLUTIONS (DARK BACKGROUND SECTION 1) ================= */}
-      <section id="services" className="w-full bg-[#0B0F19] text-white py-16 md:py-20 mt-6">
-        <div className="mx-auto max-w-[1360px] px-6 lg:px-8">
+      <section id="services" className="w-full bg-[#0B0F19] text-white py-16 md:py-20 mt-6 relative overflow-hidden">
+        {/* Subtle grid pattern overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.08] pointer-events-none mix-blend-overlay z-0"
+          style={{ backgroundImage: "url(/hero-grid.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
+        />
+        {/* Premium radial glows */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-amber-500/10 blur-[100px]" />
+          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-blue-500/10 blur-[120px]" />
+        </div>
+
+        <div className="mx-auto max-w-[1360px] px-6 lg:px-8 relative z-10">
           
           <div className="mb-12">
             <p className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.3em] text-amber-500 mb-3">
@@ -198,11 +204,18 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative z-10">
             
             {/* Website Development */}
-            <div className="group bg-white/5 border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between min-h-[260px]">
-              <div>
+            <div 
+              className="group relative border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden"
+              style={{
+                backgroundImage: "linear-gradient(180deg, rgba(11, 15, 25, 0.85) 0%, rgba(11, 15, 25, 0.95) 100%), url(/images/webbg.jpg)",
+                backgroundSize: "cover",
+                backgroundPosition: "center"
+              }}
+            >
+              <div className="relative z-10">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
                   <Globe className="h-7 w-7" />
                 </div>
@@ -211,14 +224,21 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                   Custom, responsive websites built for performance and business results.
                 </p>
               </div>
-              <Link href="/website-development-company" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
+              <Link href="/website-development-company" className="relative z-10 inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
                 Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
             {/* App Development */}
-            <div className="group bg-white/5 border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between min-h-[260px]">
-              <div>
+            <div 
+              className="group relative border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden"
+              style={{
+                backgroundImage: "linear-gradient(180deg, rgba(11, 15, 25, 0.85) 0%, rgba(11, 15, 25, 0.95) 100%), url(/images/webdev.jpg)",
+                backgroundSize: "cover",
+                backgroundPosition: "center"
+              }}
+            >
+              <div className="relative z-10">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
                   <Smartphone className="h-7 w-7" />
                 </div>
@@ -227,14 +247,21 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                   Custom iOS & Android apps that solve real problems and deliver real impact.
                 </p>
               </div>
-              <Link href="/app-development-company" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
+              <Link href="/app-development-company" className="relative z-10 inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
                 Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
             {/* AI Automation */}
-            <div className="group bg-white/5 border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between min-h-[260px]">
-              <div>
+            <div 
+              className="group relative border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden"
+              style={{
+                backgroundImage: "linear-gradient(180deg, rgba(11, 15, 25, 0.85) 0%, rgba(11, 15, 25, 0.95) 100%), url(/images/aibg.jpg)",
+                backgroundSize: "cover",
+                backgroundPosition: "center"
+              }}
+            >
+              <div className="relative z-10">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
                   <Cpu className="h-7 w-7" />
                 </div>
@@ -243,14 +270,21 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                   Intelligent automations that optimize workflows and scale productivity.
                 </p>
               </div>
-              <Link href="/ai-automation-agency" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
+              <Link href="/ai-automation-agency" className="relative z-10 inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
                 Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
             {/* Digital Marketing */}
-            <div className="group bg-white/5 border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between min-h-[260px]">
-              <div>
+            <div 
+              className="group relative border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden"
+              style={{
+                backgroundImage: "linear-gradient(180deg, rgba(11, 15, 25, 0.85) 0%, rgba(11, 15, 25, 0.95) 100%), url(/images/seobg.jpg)",
+                backgroundSize: "cover",
+                backgroundPosition: "center"
+              }}
+            >
+              <div className="relative z-10">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
                   <Megaphone className="h-7 w-7" />
                 </div>
@@ -259,7 +293,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                   Data-driven marketing that attracts, engages and converts at scale.
                 </p>
               </div>
-              <Link href="/digital-marketing-agency" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
+              <Link href="/digital-marketing-agency" className="relative z-10 inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
                 Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -275,8 +309,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
         <section>
           <div className="mb-8">
             <h2 className="text-2xl md:text-3xl font-black text-slate-900 leading-tight tracking-tight">
-              A proven process.<br className="hidden md:inline" />
-              Predictable results.
+              A proven process. Predictable results.
             </h2>
           </div>
 
@@ -301,7 +334,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                   </div>
                   {/* Title + Description */}
                   <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest">{step.label}</h4>
-                  <p className="text-[11px] font-semibold text-slate-400 mt-2 leading-relaxed max-w-[180px]">
+                  <p className="text-xs sm:text-[13px] font-semibold text-slate-500 mt-2 leading-relaxed max-w-[180px]">
                     {step.desc}
                   </p>
                 </div>
@@ -333,7 +366,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
                 </div>
                 <div>
                   <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest">{step.label}</h4>
-                  <p className="text-[11px] font-semibold text-slate-400 mt-1 leading-relaxed">{step.desc}</p>
+                  <p className="text-xs sm:text-[13px] font-semibold text-slate-500 mt-1 leading-relaxed">{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -344,10 +377,21 @@ export default function HomePageClient({ services }: HomePageClientProps) {
       </div>
 
       {/* ================= 4. READY TO DEPLOY SYSTEMS (DARK BACKGROUND SECTION 2) ================= */}
-      <section className="w-full bg-[#0A0D16] text-white py-16 md:py-20 mt-6">
-        <div className="mx-auto max-w-[1360px] px-6 lg:px-8">
+      <section className="w-full bg-[#0A0D16] text-white py-16 md:py-20 mt-6 relative overflow-hidden">
+        {/* Subtle grid pattern overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.08] pointer-events-none mix-blend-overlay z-0"
+          style={{ backgroundImage: "url(/hero-grid.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
+        />
+        {/* Premium radial glows */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          <div className="absolute top-1/4 right-1/4 w-[350px] h-[350px] rounded-full bg-purple-500/10 blur-[100px]" />
+          <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] rounded-full bg-amber-500/10 blur-[120px]" />
+        </div>
+
+        <div className="mx-auto max-w-[1360px] px-6 lg:px-8 relative z-10">
           
-          <div className="mb-12">
+          <div className="mb-12 relative z-10">
             <p className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.3em] text-amber-500 mb-3">
               Standard Architectures
             </p>
@@ -357,7 +401,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 relative z-10">
             
             {/* System 1 */}
             <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6 shadow-lg hover:bg-white/[0.08] hover:border-white/20 transition-all flex flex-col justify-between min-h-[190px]">

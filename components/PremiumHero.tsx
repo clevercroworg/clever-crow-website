@@ -67,7 +67,7 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
   ];
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-slate-100/60 via-slate-50/50 to-[#FAF9F6] pt-24 pb-20 lg:pt-28 lg:pb-28 overflow-hidden font-sans">
+    <section className="relative bg-gradient-to-b from-slate-100/60 via-slate-50/50 to-[#FAF9F6] pt-24 pb-12 lg:pt-28 lg:pb-16 overflow-hidden font-sans">
       {/* ───────────────── BACKGROUND DOTS & RADIAL GLOW ───────────────── */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Subtle grid pattern */}

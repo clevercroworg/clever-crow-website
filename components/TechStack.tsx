@@ -32,8 +32,8 @@ export default function TechStack() {
   const duplicatedStack = [...techStack, ...techStack];
 
   return (
-    <section className="relative bg-white py-4 sm:py-8 overflow-hidden border-b border-gray-100">
-      <div className="mx-auto max-w-7xl px-6 mb-5 sm:mb-8 text-center">
+    <section className="relative bg-white py-2 sm:py-4 overflow-hidden border-b border-gray-100">
+      <div className="mx-auto max-w-7xl px-6 mb-2 sm:mb-3 text-center">
         <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">
           Integrated Technology Stack
         </span>
