@@ -421,15 +421,15 @@ export default function WebDevServiceLayout({
             alt="Service Background"
             fill
             priority
-            className="object-cover object-center opacity-30"
+            className="object-cover object-center opacity-[0.05]"
           />
           {/* Dark high-contrast overlay gradients */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B0F19] via-[#0B0F19]/95 to-[#0B0F19]/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-[#0B0F19]/30" />
+          <div className="absolute inset-0 bg-[#0B0F19]/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-[#0B0F19]/25" />
           
           {/* Subtle dot grid */}
           <div 
-            className="absolute inset-0 opacity-[0.15]"
+            className="absolute inset-0 opacity-[0.12]"
             style={{
               backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.15) 1.2px, transparent 1.2px)`,
               backgroundSize: "24px 24px"
@@ -437,10 +437,10 @@ export default function WebDevServiceLayout({
           />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center flex flex-col items-center">
           
           {/* Breadcrumbs */}
-          <div className="flex items-center gap-2 text-[11px] font-bold text-slate-400 mb-6 uppercase tracking-wider">
+          <div className="flex items-center justify-center gap-2 text-[11px] font-bold text-slate-400 mb-6 uppercase tracking-wider">
             <Link href="/" className="hover:text-slate-300 transition-colors">Home</Link>
             <span>/</span>
             <span className="hover:text-slate-300 transition-colors cursor-default">Services</span>
@@ -448,10 +448,10 @@ export default function WebDevServiceLayout({
             <span className="text-amber-500 font-extrabold">{eyebrow}</span>
           </div>
 
-          <div className="max-w-3xl">
+          <div className="max-w-3xl mx-auto flex flex-col items-center">
             
             {/* Left Column (Text & CTAs) */}
-            <div className="flex flex-col items-start text-left">
+            <div className="flex flex-col items-center text-center">
               
               {/* Eyebrow kicker */}
               <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-500/35 bg-amber-500/10 text-amber-400 mb-6 font-sans font-black text-[9px] uppercase tracking-widest shadow-sm">
@@ -465,12 +465,12 @@ export default function WebDevServiceLayout({
               </h1>
 
               {/* Subtitle */}
-              <p className="mt-6 text-base md:text-lg text-slate-300 leading-relaxed font-medium max-w-2xl">
+              <p className="mt-6 text-base md:text-lg text-slate-300 leading-relaxed font-medium max-w-2xl mx-auto">
                 {heroSubtitle}
               </p>
 
               {/* CTA Buttons */}
-              <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
                 <a
                   href="#contact-form"
                   className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-6 py-4 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/20 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer"
@@ -488,7 +488,7 @@ export default function WebDevServiceLayout({
               </div>
 
               {/* Highlights below buttons */}
-              <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+              <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6 w-full justify-items-center">
                 {highlights.map((hl, i) => (
                   <div key={i} className="flex items-center gap-2 text-[11px] font-black text-slate-400 uppercase tracking-wider">
                     <CheckCircle2 size={14} className="text-amber-500 shrink-0" />
