@@ -51,7 +51,7 @@ export default function ContactPage() {
   return (
     <main className="bg-[#FAF9F6] selection:bg-yellow-500/30 min-h-screen font-sans">
       {/* ================= HERO & INFO SPLIT ================= */}
-      <section className="relative pt-36 lg:pt-44 pb-20 overflow-hidden">
+      <section className="relative pt-24 lg:pt-28 pb-20 overflow-hidden">
         
         {/* ───────────────── BACKGROUND DOTS & RADIAL GLOW ───────────────── */}
         <div className="absolute inset-0 z-0 pointer-events-none">
@@ -76,7 +76,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:sticky lg:top-32"
+              className="w-full"
             >
               <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/80 border border-slate-200/60 mb-6 shadow-sm backdrop-blur-md">
                 <span className="relative flex h-2 w-2">
