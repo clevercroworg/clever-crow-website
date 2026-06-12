@@ -434,33 +434,12 @@ export default function HomePageClient({ services }: HomePageClientProps) {
 
       {/* ================= 4. READY TO DEPLOY SYSTEMS (DARK BACKGROUND SECTION 2) ================= */}
       <section className="w-full bg-[#0A0D16] text-white py-16 md:py-20 mt-6 relative overflow-hidden">
-        {/* Subtle CSS Checks (Checkerboard) Pattern Overlay */}
+        {/* Clean dot grid pattern */}
         <div 
-          className="absolute inset-0 opacity-[0.35] pointer-events-none z-0"
+          className="absolute inset-0 pointer-events-none z-0"
           style={{
-            backgroundImage: `
-              linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%), 
-              linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%), 
-              linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.2) 75%), 
-              linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.2) 75%)
-            `,
-            backgroundSize: "48px 48px",
-            backgroundPosition: "0 0, 0 24px, 24px -24px, -24px 0px",
-            maskImage: "radial-gradient(ellipse at center, black 30%, transparent 95%)",
-            WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 95%)"
-          }}
-        />
-        {/* Fine graph-check lines */}
-        <div 
-          className="absolute inset-0 opacity-[0.2] pointer-events-none z-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 1px, transparent 1px)
-            `,
-            backgroundSize: "24px 24px",
-            maskImage: "radial-gradient(ellipse at center, black 30%, transparent 95%)",
-            WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 95%)"
+            backgroundImage: `radial-gradient(circle, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px)`,
+            backgroundSize: "32px 32px"
           }}
         />
         {/* Premium radial glows */}
