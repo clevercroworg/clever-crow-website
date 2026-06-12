@@ -388,19 +388,6 @@ export default function AiAutomationServiceLayout({
 
         </div>
 
-        {/* Aurora glow bottom edge */}
-        <div className="absolute bottom-0 left-0 right-0 h-[100px] md:h-[120px] z-20 overflow-hidden pointer-events-none">
-          <div className="absolute bottom-[-15px] left-[-10%] w-[45%] h-[100px] rounded-full blur-[40px] opacity-90"
-            style={{ background: "radial-gradient(ellipse, #4285F4, transparent 70%)" }} />
-          <div className="absolute bottom-[-10px] left-[15%] w-[40%] h-[90px] rounded-full blur-[35px] opacity-85"
-            style={{ background: "radial-gradient(ellipse, #9B72CB, transparent 70%)" }} />
-          <div className="absolute bottom-[-15px] left-[35%] w-[35%] h-[90px] rounded-full blur-[35px] opacity-85"
-            style={{ background: "radial-gradient(ellipse, #D96570, transparent 70%)" }} />
-          <div className="absolute bottom-[-10px] left-[55%] w-[35%] h-[90px] rounded-full blur-[35px] opacity-90"
-            style={{ background: "radial-gradient(ellipse, #FFC857, transparent 70%)" }} />
-          <div className="absolute bottom-[-15px] right-[-5%] w-[40%] h-[100px] rounded-full blur-[40px] opacity-85"
-            style={{ background: "radial-gradient(ellipse, #5BB974, transparent 70%)" }} />
-        </div>
 
       </section>
 
