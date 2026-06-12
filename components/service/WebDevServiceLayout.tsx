@@ -406,7 +406,7 @@ export default function WebDevServiceLayout({
         <>
           {match[1]}
           <br />
-          <span className="font-caveat-brush text-amber-500 text-[1.15em] normal-case">
+          <span className="font-caveat-brush text-amber-500 text-[0.65em] normal-case">
             for {match[3]}
           </span>
         </>
