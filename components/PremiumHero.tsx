@@ -94,7 +94,7 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[40px] md:text-[56px] lg:text-[66px] font-black leading-[1.1] tracking-tight text-slate-900 font-sans"
+              className="text-[40px] md:text-[56px] lg:text-[66px] font-extralight leading-[1.1] tracking-tight text-slate-900 font-sans"
             >
               <span className="block sm:whitespace-nowrap">Websites. Apps.</span>
               <span className="block">Automation.</span>
