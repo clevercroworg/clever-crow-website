@@ -330,6 +330,49 @@ export default function DigitalMarketingServiceLayout({
 }: DigitalMarketingServiceLayoutProps) {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
+  const renderHeroTitle = (title: string) => {
+    const match = title.match(/(.*)\s+(for|For)\s+(.*)/);
+    if (match) {
+      return (
+        <>
+          {match[1]}
+          <br />
+          <span className="font-caveat-brush text-amber-500 text-[1.15em] normal-case">
+            for {match[3]}
+          </span>
+        </>
+      );
+    }
+    if (title.includes("Better Marketing Decisions")) {
+      return (
+        <>
+          {title.split("Better Marketing Decisions")[0]}
+          <span className="text-amber-500">Better Marketing Decisions</span>
+          {title.split("Better Marketing Decisions")[1]}
+        </>
+      );
+    }
+    if (title.includes("Quality Leads")) {
+      return (
+        <>
+          {title.split("Quality Leads")[0]}
+          <span className="text-amber-500">Quality Leads</span>
+          {title.split("Quality Leads")[1]}
+        </>
+      );
+    }
+    if (title.includes("Lead Generation")) {
+      return (
+        <>
+          {title.split("Lead Generation")[0]}
+          <span className="text-amber-500">Lead Generation</span>
+          {title.split("Lead Generation")[1]}
+        </>
+      );
+    }
+    return title;
+  };
+
   // Hero Bottom Bullets (matching design image)
   const heroBullets = [
     { title: "Performance Focused", desc: "Every campaign is built for measurable ROI.", icon: "target" },
@@ -390,45 +433,7 @@ export default function DigitalMarketingServiceLayout({
               
               {/* Title — "Drives Growth" in amber */}
               <h1 className="service-h1 text-4xl sm:text-5xl lg:text-[54px] leading-[1.12] text-slate-900">
-                {heroTitle.includes("Better Marketing Decisions") ? (
-                  <>
-                    {heroTitle.split("Better Marketing Decisions")[0]}
-                    <span className="text-amber-500">Better Marketing Decisions</span>
-                    {heroTitle.split("Better Marketing Decisions")[1]}
-                  </>
-                ) : heroTitle.includes("Quality Leads") ? (
-                  <>
-                    {heroTitle.split("Quality Leads")[0]}
-                    <span className="text-amber-500">Quality Leads</span>
-                    {heroTitle.split("Quality Leads")[1]}
-                  </>
-                ) : heroTitle.includes("Lead Generation") ? (
-                  <>
-                    {heroTitle.split("Lead Generation")[0]}
-                    <span className="text-amber-500">Lead Generation</span>
-                    {heroTitle.split("Lead Generation")[1]}
-                  </>
-                ) : heroTitle.includes("Growing") ? (
-                  <>
-                    {heroTitle.split("Growing")[0]}
-                    <span className="text-amber-500">Growing</span>
-                    {heroTitle.split("Growing")[1]}
-                  </>
-                ) : heroTitle.includes("Drives Growth") ? (
-                  <>
-                    {heroTitle.split("Drives Growth")[0]}
-                    <span className="text-amber-500">Drives Growth</span>
-                    {heroTitle.split("Drives Growth")[1]}
-                  </>
-                ) : heroTitle.includes("Growth") ? (
-                  <>
-                    {heroTitle.split("Growth")[0]}
-                    <span className="text-amber-500">Growth</span>
-                    {heroTitle.split("Growth")[1]}
-                  </>
-                ) : (
-                  heroTitle
-                )}
+                {renderHeroTitle(heroTitle)}
               </h1>
 
               {/* Subtitle */}

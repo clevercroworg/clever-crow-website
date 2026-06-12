@@ -399,6 +399,22 @@ export default function WebDevServiceLayout({
   serviceName,
   pageUrl
 }: WebDevServiceLayoutProps) {
+  const renderHeroTitle = (title: string) => {
+    const match = title.match(/(.*)\s+(for|For)\s+(.*)/);
+    if (match) {
+      return (
+        <>
+          {match[1]}
+          <br />
+          <span className="font-caveat-brush text-amber-500 text-[1.15em] normal-case">
+            for {match[3]}
+          </span>
+        </>
+      );
+    }
+    return title;
+  };
+
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   return (
@@ -448,7 +464,7 @@ export default function WebDevServiceLayout({
               
               {/* Title */}
               <h1 className="service-h1 text-5xl sm:text-6xl lg:text-[76px] leading-[1.05] text-white">
-                {heroTitle}
+                {renderHeroTitle(heroTitle)}
               </h1>
 
               {/* Subtitle */}

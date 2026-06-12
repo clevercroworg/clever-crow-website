@@ -75,6 +75,10 @@ p { font-weight: 400;  }
   text-transform: none !important;
 }
 
+.font-caveat-brush {
+  font-family: 'Caveat Brush', cursive !important;
+}
+
 
 @keyframes fadeUp {
   from {

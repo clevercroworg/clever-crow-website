@@ -322,6 +322,22 @@ export default function AppDevServiceLayout({
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
+  const renderHeroTitle = (title: string) => {
+    const match = title.match(/(.*)\s+(for|For)\s+(.*)/);
+    if (match) {
+      return (
+        <>
+          {match[1]}
+          <br />
+          <span className="font-caveat-brush text-amber-500 text-[1.15em] normal-case">
+            for {match[3]}
+          </span>
+        </>
+      );
+    }
+    return title;
+  };
+
   const heroBullets = [
     { label: "Business-Focused Solutions", icon: "briefcase" },
     { label: "Scalable & Secure Architecture", icon: "shield" },
@@ -375,7 +391,7 @@ export default function AppDevServiceLayout({
               
               {/* Title */}
               <h1 className="service-h1 text-4xl sm:text-5xl lg:text-[54px] leading-[1.12] text-slate-900">
-                {heroTitle}
+                {renderHeroTitle(heroTitle)}
               </h1>
 
               {/* Subtitle */}

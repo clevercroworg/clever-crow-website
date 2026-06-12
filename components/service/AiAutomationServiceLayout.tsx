@@ -194,6 +194,32 @@ export default function AiAutomationServiceLayout({
 }: AiAutomationServiceLayoutProps) {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
+  const renderHeroTitle = (title: string) => {
+    const match = title.match(/(.*)\s+(for|For)\s+(.*)/);
+    if (match) {
+      return (
+        <>
+          {match[1]}
+          <br />
+          <span className="font-caveat-brush text-amber-500 text-[1.15em] normal-case">
+            for {match[3]}
+          </span>
+        </>
+      );
+    }
+    if (title.includes("Replies") || title.includes("Replies,")) {
+      return (
+        <span>
+          AI Automation for <br />
+          <span className="text-amber-500">Faster Replies</span>, Better <br className="hidden sm:inline" />
+          Follow-Ups & <br className="hidden sm:inline" />
+          Smarter Workflows
+        </span>
+      );
+    }
+    return title;
+  };
+
   // Hero bullets
   const heroBullets = [
     { title: "Faster Response", desc: "Instant replies and automated follow-ups.", icon: "cpu" },
@@ -283,16 +309,7 @@ export default function AiAutomationServiceLayout({
             <div className="lg:col-span-6 flex flex-col items-start text-left">
               
               <h1 className="service-h1 text-4xl sm:text-5xl lg:text-[50px] leading-[1.12] text-slate-900">
-                {heroTitle.includes("Replies") || heroTitle.includes("Replies,") ? (
-                  <span>
-                    AI Automation for <br />
-                    <span className="text-amber-500">Faster Replies</span>, Better <br className="hidden sm:inline" />
-                    Follow-Ups & <br className="hidden sm:inline" />
-                    Smarter Workflows
-                  </span>
-                ) : (
-                  heroTitle
-                )}
+                {renderHeroTitle(heroTitle)}
               </h1>
 
               <p className="mt-6 text-sm md:text-base text-slate-600 leading-relaxed font-semibold max-w-xl">

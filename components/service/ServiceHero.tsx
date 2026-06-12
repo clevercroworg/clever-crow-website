@@ -31,6 +31,22 @@ export default function ServiceHero({
   highlights = [],
   tools = [],
 }: ServiceHeroProps) {
+  const renderHeroTitle = (text: string) => {
+    const match = text.match(/(.*)\s+(for|For)\s+(.*)/);
+    if (match) {
+      return (
+        <>
+          {match[1]}
+          <br />
+          <span className="font-caveat-brush text-amber-500 text-[1.15em] normal-case">
+            for {match[3]}
+          </span>
+        </>
+      );
+    }
+    return text;
+  };
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -116,7 +132,7 @@ export default function ServiceHero({
           >
             
             <h1 className="service-h1 text-4xl sm:text-5xl lg:text-[52px] text-white leading-[1.05]">
-              {title}
+              {renderHeroTitle(title)}
             </h1>
 
             <p className="mt-8 max-w-xl text-lg sm:text-xl text-slate-400 font-medium leading-relaxed opacity-90">

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@200;300;400;500;600;700;900&family=Open+Sans:wght@300;400;500;600;700&family=Caveat:wght@500;700&family=Oswald:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@200;300;400;500;600;700;900&family=Open+Sans:wght@300;400;500;600;700&family=Caveat:wght@500;700&family=Oswald:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Caveat+Brush&display=swap");
 @import "tailwindcss";
 
 @font-face {
@@ -95,6 +95,10 @@
     font-weight: 200 !important;
     letter-spacing: normal !important;
     text-transform: none !important;
+  }
+
+  .font-caveat-brush {
+    font-family: 'Caveat Brush', cursive !important;
   }
 }
 
