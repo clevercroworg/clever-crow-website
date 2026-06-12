@@ -69,6 +69,25 @@ export default function ContactPage() {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 z-10">
+          {/* Header Text (Mobile Only) */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:hidden mb-8"
+          >
+            <h1 className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
+              Let's Build Your <br />
+              <span className="text-amber-500 italic pb-2 inline-block">
+                Growth Engine
+              </span>
+            </h1>
+            
+            <p className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
+              Stop guessing with your marketing. Reach out to our team of growth engineers and engineer a predictable revenue system for your business.
+            </p>
+          </motion.div>
+
           <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-start">
             
             {/* LEFT: TEXT & INFO */}
@@ -76,10 +95,10 @@ export default function ContactPage() {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full flex flex-col gap-8"
+              className="w-full flex flex-col gap-8 order-2 lg:order-1"
             >
-              {/* Header Text */}
-              <div>
+              {/* Header Text (Desktop Only) */}
+              <div className="hidden lg:block">
                 <h1 className="text-4xl sm:text-5xl lg:text-[58px] font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
                   Let's Build Your <br />
                   <span className="text-amber-500 italic pb-2 inline-block">
@@ -184,7 +203,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="relative"
+              className="relative order-1 lg:order-2"
             >
               <ContactForm />
             </motion.div>
