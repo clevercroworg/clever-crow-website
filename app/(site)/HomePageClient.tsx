@@ -124,9 +124,9 @@ export default function HomePageClient({ services }: HomePageClientProps) {
           <div className="bg-[#FFFDF9] border border-amber-500/10 rounded-[2.5rem] p-8 md:p-10 shadow-[0_15px_40px_rgba(0,0,0,0.015)] flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
             
             {/* Left Message (Puzzle icon removed, H2 heading styled for 2 lines) */}
-            <div className="w-full lg:w-[52%]">
-              <h2 className="text-2xl sm:text-[28px] font-black text-slate-900 leading-snug tracking-tight">
-                Most businesses don't have a strategy problem. They have a <span className="text-amber-500">disconnection problem.</span>
+            <div className="w-full lg:w-[55%]">
+              <h2 className="text-2xl sm:text-[28px] font-extrabold text-slate-900 leading-snug tracking-tight">
+                Most businesses don't have a strategy problem.<br className="hidden lg:inline" /> They have a <span className="text-amber-500">disconnection problem.</span>
               </h2>
             </div>
 
@@ -134,7 +134,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             <div className="hidden lg:block h-16 w-[1px] bg-slate-200/80" />
 
             {/* Right 4 Columns Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full lg:w-[48%]">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full lg:w-[45%]">
               
               {/* Disconnected Tools */}
               <div className="flex flex-col items-start">
