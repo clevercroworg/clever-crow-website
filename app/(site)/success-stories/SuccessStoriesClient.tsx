@@ -342,7 +342,7 @@ export default function SuccessStoriesClient() {
 
   return (
     <main
-      className="success-stories-page min-h-screen pt-32 lg:pt-40 pb-20 relative selection:bg-blue-500/30 text-slate-900"
+      className="success-stories-page min-h-screen pt-24 lg:pt-28 pb-20 relative selection:bg-blue-500/30 text-slate-900"
       style={{
         background: "radial-gradient(circle at 10% 10%, #eff6ff 0%, #f8fafc 35%, #ffffff 100%)",
       }}
@@ -382,32 +382,16 @@ export default function SuccessStoriesClient() {
             </div>
           </div>
 
-          <div className="mt-8 border-t border-white/10 pt-6 grid gap-4 grid-cols-2 md:grid-cols-4">
-            {["15+ Years of Experience", "Certified Professionals", "550+ Happy Clients", "Fast Response Support"].map((item) => (
-              <p key={item} className="inline-flex items-center gap-2 text-sm font-semibold text-slate-200">
-                <IconCheck />
-                {item}
-              </p>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── STATS ─── */}
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-[0_12px_40px_rgba(2,6,23,0.08)]">
-          <h2 className="text-3xl font-extrabold">Performance That Speaks</h2>
-          <div className="mt-8 grid grid-cols-2 gap-5 md:grid-cols-4">
+          <div className="mt-8 border-t border-white/10 pt-6 grid gap-6 grid-cols-2 md:grid-cols-4">
             {[
-              { icon: <IconCash />, value: "₹1.2Cr+", label: "Ad Spend Managed" },
-              { icon: <IconTrending />, value: "4.7\u00D7", label: "Average ROI" },
-              { icon: <IconRocket />, value: "250+", label: "Campaigns" },
-              { icon: <IconPeople />, value: "180+", label: "Happy Clients" },
-            ].map((stat) => (
-              <div key={stat.label} className="rounded-2xl bg-slate-50 p-5">
-                {stat.icon}
-                <p className="mt-2 text-2xl font-extrabold">{stat.value}</p>
-                <p className="text-sm text-slate-600">{stat.label}</p>
+              { value: "₹1.2Cr+", label: "Ad Spend Managed" },
+              { value: "4.7×", label: "Average ROI" },
+              { value: "250+", label: "Campaigns" },
+              { value: "180+", label: "Happy Clients" },
+            ].map((stat, idx) => (
+              <div key={idx} className="flex flex-col gap-1">
+                <span className="text-2xl sm:text-3xl font-black text-amber-500">{stat.value}</span>
+                <span className="text-xs sm:text-sm font-medium text-slate-300">{stat.label}</span>
               </div>
             ))}
           </div>
