@@ -186,11 +186,6 @@ export default function HomePageClient({ services }: HomePageClientProps) {
           className="absolute inset-0 opacity-[0.08] pointer-events-none mix-blend-overlay z-0"
           style={{ backgroundImage: "url(/hero-grid.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
         />
-        {/* Glowing background overlay */}
-        <div 
-          className="absolute inset-0 opacity-[0.15] pointer-events-none mix-blend-screen z-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/images/hero-premium-bg-v2.png)" }}
-        />
         {/* Premium radial glows */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
           <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-amber-500/10 blur-[100px]" />
@@ -212,83 +207,139 @@ export default function HomePageClient({ services }: HomePageClientProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative z-10">
             
             {/* Website Development */}
-            <div className="group relative bg-[#111625] border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden">
-              <div 
-                className="absolute inset-0 bg-cover bg-center opacity-[0.04] group-hover:opacity-[0.18] group-hover:scale-105 transition-all duration-500 pointer-events-none z-0"
-                style={{ backgroundImage: "url(/images/webbg.jpg)" }}
-              />
-              <div className="relative z-10">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
-                  <Globe className="h-7 w-7" />
-                </div>
-                <h3 className="text-lg font-black text-white mt-6">Website Development</h3>
-                <p className="text-xs sm:text-sm font-semibold text-slate-300 mt-3 leading-relaxed">
-                  Custom, responsive websites built for performance and business results.
-                </p>
+            <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#111625] transition-all duration-300 hover:border-amber-500/30 flex flex-col h-full min-h-[380px] shadow-lg">
+              {/* Image Header */}
+              <div className="relative w-full h-[180px] overflow-hidden">
+                <Image 
+                  src="/images/webbg.jpg" 
+                  alt="Website Development" 
+                  fill 
+                  className="object-cover transition-transform duration-500 group-hover:scale-105" 
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111625] via-[#111625]/20 to-transparent" />
               </div>
-              <Link href="/website-development-company" className="relative z-10 inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
-                Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
-              </Link>
+              {/* Bottom Overlapping content container */}
+              <div className="relative z-10 px-6 pb-6 pt-5 bg-gradient-to-b from-[#111625]/90 to-[#111625] backdrop-blur-md rounded-t-[1.8rem] -mt-8 flex-1 flex flex-col justify-between border-t border-white/10">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400 shrink-0">
+                      <Globe className="h-5.5 w-5.5" />
+                    </div>
+                    <h3 className="text-base font-black text-white leading-tight">Website Development</h3>
+                  </div>
+                  <p className="text-xs font-semibold text-slate-300 mt-3.5 leading-relaxed">
+                    Custom, responsive websites built for performance and business results.
+                  </p>
+                </div>
+                <div className="mt-5">
+                  <Link href="/website-development-company" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest group-hover:text-amber-300 transition-colors">
+                    Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </div>
             </div>
 
             {/* App Development */}
-            <div className="group relative bg-[#111625] border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden">
-              <div 
-                className="absolute inset-0 bg-cover bg-center opacity-[0.04] group-hover:opacity-[0.18] group-hover:scale-105 transition-all duration-500 pointer-events-none z-0"
-                style={{ backgroundImage: "url(/images/webdev.jpg)" }}
-              />
-              <div className="relative z-10">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
-                  <Smartphone className="h-7 w-7" />
-                </div>
-                <h3 className="text-lg font-black text-white mt-6">App Development</h3>
-                <p className="text-xs sm:text-sm font-semibold text-slate-300 mt-3 leading-relaxed">
-                  Custom iOS & Android apps that solve real problems and deliver real impact.
-                </p>
+            <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#111625] transition-all duration-300 hover:border-amber-500/30 flex flex-col h-full min-h-[380px] shadow-lg">
+              {/* Image Header */}
+              <div className="relative w-full h-[180px] overflow-hidden">
+                <Image 
+                  src="/images/webdev.jpg" 
+                  alt="App Development" 
+                  fill 
+                  className="object-cover transition-transform duration-500 group-hover:scale-105" 
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111625] via-[#111625]/20 to-transparent" />
               </div>
-              <Link href="/app-development-company" className="relative z-10 inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
-                Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
-              </Link>
+              {/* Bottom Overlapping content container */}
+              <div className="relative z-10 px-6 pb-6 pt-5 bg-gradient-to-b from-[#111625]/90 to-[#111625] backdrop-blur-md rounded-t-[1.8rem] -mt-8 flex-1 flex flex-col justify-between border-t border-white/10">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400 shrink-0">
+                      <Smartphone className="h-5.5 w-5.5" />
+                    </div>
+                    <h3 className="text-base font-black text-white leading-tight">App Development</h3>
+                  </div>
+                  <p className="text-xs font-semibold text-slate-300 mt-3.5 leading-relaxed">
+                    Custom iOS & Android apps that solve real problems and deliver real impact.
+                  </p>
+                </div>
+                <div className="mt-5">
+                  <Link href="/app-development-company" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest group-hover:text-amber-300 transition-colors">
+                    Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </div>
             </div>
 
             {/* AI Automation */}
-            <div className="group relative bg-[#111625] border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden">
-              <div 
-                className="absolute inset-0 bg-cover bg-center opacity-[0.04] group-hover:opacity-[0.18] group-hover:scale-105 transition-all duration-500 pointer-events-none z-0"
-                style={{ backgroundImage: "url(/images/aibg.jpg)" }}
-              />
-              <div className="relative z-10">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
-                  <Cpu className="h-7 w-7" />
-                </div>
-                <h3 className="text-lg font-black text-white mt-6">AI Automation</h3>
-                <p className="text-xs sm:text-sm font-semibold text-slate-300 mt-3 leading-relaxed">
-                  Intelligent automations that optimize workflows and scale productivity.
-                </p>
+            <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#111625] transition-all duration-300 hover:border-amber-500/30 flex flex-col h-full min-h-[380px] shadow-lg">
+              {/* Image Header */}
+              <div className="relative w-full h-[180px] overflow-hidden">
+                <Image 
+                  src="/images/aibg.jpg" 
+                  alt="AI Automation" 
+                  fill 
+                  className="object-cover transition-transform duration-500 group-hover:scale-105" 
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111625] via-[#111625]/20 to-transparent" />
               </div>
-              <Link href="/ai-automation-agency" className="relative z-10 inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
-                Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
-              </Link>
+              {/* Bottom Overlapping content container */}
+              <div className="relative z-10 px-6 pb-6 pt-5 bg-gradient-to-b from-[#111625]/90 to-[#111625] backdrop-blur-md rounded-t-[1.8rem] -mt-8 flex-1 flex flex-col justify-between border-t border-white/10">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400 shrink-0">
+                      <Cpu className="h-5.5 w-5.5" />
+                    </div>
+                    <h3 className="text-base font-black text-white leading-tight">AI Automation</h3>
+                  </div>
+                  <p className="text-xs font-semibold text-slate-300 mt-3.5 leading-relaxed">
+                    Intelligent automations that optimize workflows and scale productivity.
+                  </p>
+                </div>
+                <div className="mt-5">
+                  <Link href="/ai-automation-agency" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest group-hover:text-amber-300 transition-colors">
+                    Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </div>
             </div>
 
             {/* Digital Marketing */}
-            <div className="group relative bg-[#111625] border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden">
-              <div 
-                className="absolute inset-0 bg-cover bg-center opacity-[0.04] group-hover:opacity-[0.18] group-hover:scale-105 transition-all duration-500 pointer-events-none z-0"
-                style={{ backgroundImage: "url(/images/seobg.jpg)" }}
-              />
-              <div className="relative z-10">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
-                  <Megaphone className="h-7 w-7" />
-                </div>
-                <h3 className="text-lg font-black text-white mt-6">Digital Marketing</h3>
-                <p className="text-xs sm:text-sm font-semibold text-slate-300 mt-3 leading-relaxed">
-                  Data-driven marketing that attracts, engages and converts at scale.
-                </p>
+            <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#111625] transition-all duration-300 hover:border-amber-500/30 flex flex-col h-full min-h-[380px] shadow-lg">
+              {/* Image Header */}
+              <div className="relative w-full h-[180px] overflow-hidden">
+                <Image 
+                  src="/images/seobg.jpg" 
+                  alt="Digital Marketing" 
+                  fill 
+                  className="object-cover transition-transform duration-500 group-hover:scale-105" 
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111625] via-[#111625]/20 to-transparent" />
               </div>
-              <Link href="/digital-marketing-agency" className="relative z-10 inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest mt-8 group-hover:text-amber-300 transition-colors">
-                Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
-              </Link>
+              {/* Bottom Overlapping content container */}
+              <div className="relative z-10 px-6 pb-6 pt-5 bg-gradient-to-b from-[#111625]/90 to-[#111625] backdrop-blur-md rounded-t-[1.8rem] -mt-8 flex-1 flex flex-col justify-between border-t border-white/10">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400 shrink-0">
+                      <Megaphone className="h-5.5 w-5.5" />
+                    </div>
+                    <h3 className="text-base font-black text-white leading-tight">Digital Marketing</h3>
+                  </div>
+                  <p className="text-xs font-semibold text-slate-300 mt-3.5 leading-relaxed">
+                    Data-driven marketing that attracts, engages and converts at scale.
+                  </p>
+                </div>
+                <div className="mt-5">
+                  <Link href="/digital-marketing-agency" className="inline-flex items-center gap-1.5 text-xs font-black text-amber-400 uppercase tracking-widest group-hover:text-amber-300 transition-colors">
+                    Learn More <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </div>
             </div>
 
           </div>
