@@ -120,7 +120,7 @@ export default function HomePageClient({ services }: HomePageClientProps) {
       <div className="mx-auto max-w-[1360px] px-6 lg:px-8 space-y-12 md:space-y-16 pb-16">
         
         {/* ================= 1. DISCONNECTION BANNER ================= */}
-        <section className="relative mt-6">
+        <section className="relative mt-2 md:mt-4">
           <div className="bg-[#FFFDF9] border border-amber-500/10 rounded-[2.5rem] p-8 md:p-10 shadow-[0_15px_40px_rgba(0,0,0,0.015)] flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
             
             {/* Left Message (Puzzle icon removed, H2 heading styled for 2 lines) */}
@@ -186,6 +186,11 @@ export default function HomePageClient({ services }: HomePageClientProps) {
           className="absolute inset-0 opacity-[0.08] pointer-events-none mix-blend-overlay z-0"
           style={{ backgroundImage: "url(/hero-grid.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
         />
+        {/* Glowing background overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.15] pointer-events-none mix-blend-screen z-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(/images/hero-premium-bg-v2.png)" }}
+        />
         {/* Premium radial glows */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
           <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-amber-500/10 blur-[100px]" />
@@ -207,14 +212,11 @@ export default function HomePageClient({ services }: HomePageClientProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative z-10">
             
             {/* Website Development */}
-            <div 
-              className="group relative border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden"
-              style={{
-                backgroundImage: "linear-gradient(180deg, rgba(11, 15, 25, 0.85) 0%, rgba(11, 15, 25, 0.95) 100%), url(/images/webbg.jpg)",
-                backgroundSize: "cover",
-                backgroundPosition: "center"
-              }}
-            >
+            <div className="group relative bg-[#111625] border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden">
+              <div 
+                className="absolute inset-0 bg-cover bg-center opacity-[0.04] group-hover:opacity-[0.18] group-hover:scale-105 transition-all duration-500 pointer-events-none z-0"
+                style={{ backgroundImage: "url(/images/webbg.jpg)" }}
+              />
               <div className="relative z-10">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
                   <Globe className="h-7 w-7" />
@@ -230,14 +232,11 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             </div>
 
             {/* App Development */}
-            <div 
-              className="group relative border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden"
-              style={{
-                backgroundImage: "linear-gradient(180deg, rgba(11, 15, 25, 0.85) 0%, rgba(11, 15, 25, 0.95) 100%), url(/images/webdev.jpg)",
-                backgroundSize: "cover",
-                backgroundPosition: "center"
-              }}
-            >
+            <div className="group relative bg-[#111625] border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden">
+              <div 
+                className="absolute inset-0 bg-cover bg-center opacity-[0.04] group-hover:opacity-[0.18] group-hover:scale-105 transition-all duration-500 pointer-events-none z-0"
+                style={{ backgroundImage: "url(/images/webdev.jpg)" }}
+              />
               <div className="relative z-10">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
                   <Smartphone className="h-7 w-7" />
@@ -253,14 +252,11 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             </div>
 
             {/* AI Automation */}
-            <div 
-              className="group relative border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden"
-              style={{
-                backgroundImage: "linear-gradient(180deg, rgba(11, 15, 25, 0.85) 0%, rgba(11, 15, 25, 0.95) 100%), url(/images/aibg.jpg)",
-                backgroundSize: "cover",
-                backgroundPosition: "center"
-              }}
-            >
+            <div className="group relative bg-[#111625] border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden">
+              <div 
+                className="absolute inset-0 bg-cover bg-center opacity-[0.04] group-hover:opacity-[0.18] group-hover:scale-105 transition-all duration-500 pointer-events-none z-0"
+                style={{ backgroundImage: "url(/images/aibg.jpg)" }}
+              />
               <div className="relative z-10">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
                   <Cpu className="h-7 w-7" />
@@ -276,14 +272,11 @@ export default function HomePageClient({ services }: HomePageClientProps) {
             </div>
 
             {/* Digital Marketing */}
-            <div 
-              className="group relative border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden"
-              style={{
-                backgroundImage: "linear-gradient(180deg, rgba(11, 15, 25, 0.85) 0%, rgba(11, 15, 25, 0.95) 100%), url(/images/seobg.jpg)",
-                backgroundSize: "cover",
-                backgroundPosition: "center"
-              }}
-            >
+            <div className="group relative bg-[#111625] border border-white/10 rounded-[2.2rem] p-8 sm:p-10 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[260px] overflow-hidden">
+              <div 
+                className="absolute inset-0 bg-cover bg-center opacity-[0.04] group-hover:opacity-[0.18] group-hover:scale-105 transition-all duration-500 pointer-events-none z-0"
+                style={{ backgroundImage: "url(/images/seobg.jpg)" }}
+              />
               <div className="relative z-10">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
                   <Megaphone className="h-7 w-7" />
@@ -382,6 +375,11 @@ export default function HomePageClient({ services }: HomePageClientProps) {
         <div 
           className="absolute inset-0 opacity-[0.08] pointer-events-none mix-blend-overlay z-0"
           style={{ backgroundImage: "url(/hero-grid.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
+        />
+        {/* Glowing background overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.15] pointer-events-none mix-blend-screen z-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(/images/hero-premium-bg-v2.png)" }}
         />
         {/* Premium radial glows */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">

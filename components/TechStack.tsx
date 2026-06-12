@@ -32,7 +32,7 @@ export default function TechStack() {
   const duplicatedStack = [...techStack, ...techStack];
 
   return (
-    <section className="relative bg-white py-2 sm:py-4 overflow-hidden border-b border-gray-100">
+    <section className="relative bg-transparent pt-0 pb-2 sm:pb-4 -mt-8 lg:-mt-12 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 mb-2 sm:mb-3 text-center">
         <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">
           Integrated Technology Stack
@@ -41,8 +41,8 @@ export default function TechStack() {
 
       <div className="relative flex overflow-hidden">
         {/* Gradients for smooth fade edge */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#FAF9F6] to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#FAF9F6] to-transparent z-10" />
 
         <motion.div
           className="flex items-center whitespace-nowrap gap-6 sm:gap-14 py-2 sm:py-4"
