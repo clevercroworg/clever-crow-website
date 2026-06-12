@@ -30,7 +30,7 @@ export default function SalesFollowUpAutomationPage() {
     <main>
       <AiAutomationServiceLayout
         eyebrow="Sales Follow-Up Automation"
-        heroTitle="Sales Follow-Up Automation for Better Conversions"
+        heroTitle="Sales Follow-Up Automation"
         heroSubtitle="Set up automated follow-up sequences across WhatsApp, email and CRM to improve response speed and lead conversion."
         serviceName="Sales Follow-Up Automation"
         services={services}

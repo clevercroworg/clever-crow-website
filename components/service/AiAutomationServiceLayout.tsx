@@ -195,28 +195,6 @@ export default function AiAutomationServiceLayout({
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   const renderHeroTitle = (title: string) => {
-    const match = title.match(/(.*)\s+(for|For)\s+(.*)/);
-    if (match) {
-      return (
-        <>
-          {match[1]}
-          <br />
-          <span className="font-caveat-brush text-amber-500 text-[1.15em] normal-case">
-            for {match[3]}
-          </span>
-        </>
-      );
-    }
-    if (title.includes("Replies") || title.includes("Replies,")) {
-      return (
-        <span>
-          AI Automation for <br />
-          <span className="text-amber-500">Faster Replies</span>, Better <br className="hidden sm:inline" />
-          Follow-Ups & <br className="hidden sm:inline" />
-          Smarter Workflows
-        </span>
-      );
-    }
     return title;
   };
 
@@ -277,28 +255,37 @@ export default function AiAutomationServiceLayout({
     <div className="bg-white min-h-screen text-slate-800 antialiased font-body pt-0 pb-0 selection:bg-amber-500/20">
       
       {/* ───────────────── 1. HERO SECTION ───────────────── */}
-      <section className="relative overflow-hidden pt-28 md:pt-32 pb-12 md:pb-16 bg-gradient-to-b from-slate-100/60 via-slate-50/50 to-slate-50/20">
+      <section className="relative overflow-hidden pt-28 md:pt-32 pb-12 md:pb-16 text-white">
         
-        {/* Dot grid bg */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <div 
-            className="absolute inset-0 opacity-[0.3]"
-            style={{
-              backgroundImage: `radial-gradient(rgba(0, 0, 0, 0.04) 1.2px, transparent 1.2px)`,
-              backgroundSize: "24px 24px"
-            }}
-          />
-          <div className="absolute top-12 left-12 w-[300px] h-[300px] rounded-full bg-amber-200/10 blur-[80px]" />
-          <div className="absolute bottom-12 right-12 w-[350px] h-[350px] rounded-full bg-blue-100/20 blur-[90px]" />
+        {/* Dark base background */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            background: "linear-gradient(135deg, #06051a 0%, #0e0b2a 30%, #120e30 60%, #080620 100%)"
+          }}
+        />
+
+        {/* Aurora blobs floating randomly in hero */}
+        <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+          <div className="absolute w-[500px] h-[500px] rounded-full blur-[80px] opacity-[0.35]"
+            style={{ background: "#7c3aed", top: "-5%", left: "0%", animation: "aurora-float-a 14s ease-in-out infinite" }} />
+          <div className="absolute w-[450px] h-[450px] rounded-full blur-[70px] opacity-[0.30]"
+            style={{ background: "#06b6d4", top: "20%", right: "-5%", animation: "aurora-float-b 17s ease-in-out infinite" }} />
+          <div className="absolute w-[550px] h-[550px] rounded-full blur-[90px] opacity-[0.25]"
+            style={{ background: "#ec4899", bottom: "0%", left: "20%", animation: "aurora-float-c 20s ease-in-out infinite" }} />
+          <div className="absolute w-[400px] h-[400px] rounded-full blur-[70px] opacity-[0.20]"
+            style={{ background: "#818cf8", top: "40%", left: "55%", animation: "aurora-float-a 12s ease-in-out infinite reverse" }} />
+          <div className="absolute w-[350px] h-[350px] rounded-full blur-[60px] opacity-[0.18]"
+            style={{ background: "#f59e0b", top: "60%", left: "10%", animation: "aurora-float-b 15s ease-in-out infinite reverse" }} />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           
           {/* Breadcrumbs */}
           <div className="flex items-center gap-2 text-[11px] font-bold text-slate-400 mb-6 uppercase tracking-wider">
-            <Link href="/" className="hover:text-slate-600 transition-colors font-sans">Home</Link>
+            <Link href="/" className="hover:text-slate-300 transition-colors font-sans">Home</Link>
             <span>/</span>
-            <span className="hover:text-slate-600 transition-colors cursor-default font-sans">Services</span>
+            <span className="hover:text-slate-300 transition-colors cursor-default font-sans">Services</span>
             <span>/</span>
             <span className="text-amber-500 font-extrabold font-sans">{eyebrow}</span>
           </div>
@@ -308,18 +295,18 @@ export default function AiAutomationServiceLayout({
             {/* Left Column: Text & Buttons */}
             <div className="lg:col-span-6 flex flex-col items-start text-left">
               
-              <h1 className="service-h1 text-4xl sm:text-5xl lg:text-[50px] leading-[1.12] text-slate-900">
+              <h1 className="service-h1 text-4xl sm:text-5xl lg:text-[50px] leading-[1.12] text-white">
                 {renderHeroTitle(heroTitle)}
               </h1>
 
-              <p className="mt-6 text-sm md:text-base text-slate-600 leading-relaxed font-semibold max-w-xl">
+              <p className="mt-6 text-sm md:text-base text-slate-300 leading-relaxed font-semibold max-w-xl">
                 {heroSubtitle}
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                 <a
                   href="#contact-form"
-                  className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-6 py-4 text-xs font-black uppercase tracking-wider text-slate-900 shadow-md shadow-amber-500/15 hover:bg-amber-600 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer"
+                  className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-6 py-4 text-xs font-black uppercase tracking-wider text-slate-900 shadow-lg shadow-amber-500/20 hover:bg-amber-400 hover:shadow-amber-500/30 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer"
                 >
                   Book a Free Consultation
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
@@ -327,7 +314,7 @@ export default function AiAutomationServiceLayout({
 
                 <a
                   href="#automation-services"
-                  className="group flex items-center justify-center gap-2 rounded-2xl border-2 border-slate-200 bg-white px-6 py-4 text-xs font-black uppercase tracking-wider text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:scale-[1.01] active:scale-95 transition-all"
+                  className="group flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm px-6 py-4 text-xs font-black uppercase tracking-wider text-white hover:border-white/20 hover:bg-white/10 hover:scale-[1.01] active:scale-95 transition-all"
                 >
                   Explore Automation Services
                 </a>
@@ -337,7 +324,7 @@ export default function AiAutomationServiceLayout({
 
             {/* Right Column: Visual 4-Step Flowchart */}
             <div className="lg:col-span-6 w-full flex flex-col justify-center">
-              <div className="relative bg-white border border-slate-200/80 rounded-[2rem] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.01)] max-w-lg mx-auto w-full font-sans">
+              <div className="relative bg-white/[0.04] backdrop-blur-md border border-white/[0.08] rounded-[2rem] p-6 shadow-[0_8px_40px_rgba(0,0,0,0.3)] max-w-lg mx-auto w-full font-sans">
                 
                 <p className="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 mb-6 leading-none text-center">
                   CUSTOMER ACQUISITION FLOW
@@ -350,7 +337,7 @@ export default function AiAutomationServiceLayout({
                       
                       {/* Connecting Line (Vertical) */}
                       {idx < flowchartSteps.length - 1 && (
-                        <div className="absolute left-6 top-10 bottom-[-16px] w-[2px] border-l-2 border-dashed border-slate-200" />
+                        <div className="absolute left-6 top-10 bottom-[-16px] w-[2px] border-l-2 border-dashed border-white/10" />
                       )}
 
                       {/* Step Icon Container */}
@@ -359,11 +346,11 @@ export default function AiAutomationServiceLayout({
                       </div>
 
                       {/* Step content */}
-                      <div className="flex flex-col justify-center bg-slate-50/40 border border-slate-200/40 rounded-2xl px-4 py-3 flex-grow shadow-xs">
-                        <span className="text-[11px] font-black text-slate-800 tracking-tight leading-none">
+                      <div className="flex flex-col justify-center bg-white/[0.03] border border-white/[0.06] rounded-2xl px-4 py-3 flex-grow">
+                        <span className="text-[11px] font-black text-white/90 tracking-tight leading-none">
                           {step.title}
                         </span>
-                        <span className="text-[10px] font-semibold text-slate-500 leading-normal mt-1 block">
+                        <span className="text-[10px] font-semibold text-slate-400 leading-normal mt-1 block">
                           {step.desc}
                         </span>
                       </div>
@@ -382,15 +369,15 @@ export default function AiAutomationServiceLayout({
             {heroBullets.map((bullet, idx) => {
               const BulletIcon = iconMap[bullet.icon] || Clock;
               return (
-                <div key={idx} className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm flex gap-3.5 items-start">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 shrink-0">
+                <div key={idx} className="bg-[#1a1d2e] border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start hover:border-white/20 transition-colors">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/15 text-amber-400 shrink-0">
                     <BulletIcon size={18} className="stroke-[2]" />
                   </div>
                   <div>
-                    <h3 className="text-xs font-black text-slate-800 tracking-tight leading-none mb-1.5">
+                    <h3 className="text-xs font-black text-white tracking-tight leading-none mb-1.5">
                       {bullet.title}
                     </h3>
-                    <p className="text-[10px] font-semibold text-slate-500 leading-normal">
+                    <p className="text-[10px] font-semibold text-slate-300 leading-normal">
                       {bullet.desc}
                     </p>
                   </div>
@@ -399,6 +386,20 @@ export default function AiAutomationServiceLayout({
             })}
           </div>
 
+        </div>
+
+        {/* Aurora glow bottom edge */}
+        <div className="absolute bottom-0 left-0 right-0 h-[100px] md:h-[120px] z-20 overflow-hidden pointer-events-none">
+          <div className="absolute bottom-[-15px] left-[-10%] w-[45%] h-[100px] rounded-full blur-[40px] opacity-90"
+            style={{ background: "radial-gradient(ellipse, #4285F4, transparent 70%)" }} />
+          <div className="absolute bottom-[-10px] left-[15%] w-[40%] h-[90px] rounded-full blur-[35px] opacity-85"
+            style={{ background: "radial-gradient(ellipse, #9B72CB, transparent 70%)" }} />
+          <div className="absolute bottom-[-15px] left-[35%] w-[35%] h-[90px] rounded-full blur-[35px] opacity-85"
+            style={{ background: "radial-gradient(ellipse, #D96570, transparent 70%)" }} />
+          <div className="absolute bottom-[-10px] left-[55%] w-[35%] h-[90px] rounded-full blur-[35px] opacity-90"
+            style={{ background: "radial-gradient(ellipse, #FFC857, transparent 70%)" }} />
+          <div className="absolute bottom-[-15px] right-[-5%] w-[40%] h-[100px] rounded-full blur-[40px] opacity-85"
+            style={{ background: "radial-gradient(ellipse, #5BB974, transparent 70%)" }} />
         </div>
 
       </section>

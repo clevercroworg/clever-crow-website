@@ -30,7 +30,7 @@ export default function WhatsappAutomationServicesPage() {
     <main>
       <AiAutomationServiceLayout
         eyebrow="WhatsApp Automation"
-        heroTitle="WhatsApp Automation Services for Business Leads"
+        heroTitle="WhatsApp Automation Services"
         heroSubtitle="Automate WhatsApp replies, lead qualification, follow-ups, reminders and customer communication with practical business workflows."
         serviceName="WhatsApp Automation"
         services={services}

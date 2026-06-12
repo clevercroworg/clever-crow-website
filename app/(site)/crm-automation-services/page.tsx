@@ -30,7 +30,7 @@ export default function CrmAutomationServicesPage() {
     <main>
       <AiAutomationServiceLayout
         eyebrow="CRM Automation"
-        heroTitle="CRM Automation Services for Growing Businesses"
+        heroTitle="CRM Automation Services"
         heroSubtitle="Automate CRM updates, lead stages, reminders, task assignments and reporting so your sales team never misses a follow-up."
         serviceName="CRM Automation"
         services={services}

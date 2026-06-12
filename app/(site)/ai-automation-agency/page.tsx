@@ -73,7 +73,7 @@ export default function AIAutomationAgencyPage() {
     <main>
       <AiAutomationServiceLayout
         eyebrow="AI Automation Agency"
-        heroTitle="AI Automation Agency for Sales, Support and Operations"
+        heroTitle="AI Automation Agency"
         heroSubtitle="Automate lead follow-ups, WhatsApp conversations, CRM workflows, customer support and sales processes with practical AI automation solutions."
         serviceName="AI Automation"
         services={pillarServices}

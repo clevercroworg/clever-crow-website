@@ -30,7 +30,7 @@ export default function AiChatbotDevelopmentPage() {
     <main>
       <AiAutomationServiceLayout
         eyebrow="AI Chatbot Development"
-        heroTitle="AI Chatbot Development for Business Support and Leads"
+        heroTitle="AI Chatbot Development"
         heroSubtitle="Build AI chatbots for websites, WhatsApp and support workflows to answer queries, capture leads and reduce manual follow-up."
         serviceName="AI Chatbot Development"
         services={services}

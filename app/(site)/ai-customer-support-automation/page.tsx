@@ -30,7 +30,7 @@ export default function AiCustomerSupportAutomationPage() {
     <main>
       <AiAutomationServiceLayout
         eyebrow="AI Customer Support"
-        heroTitle="AI Customer Support Automation for Faster Response"
+        heroTitle="AI Customer Support Automation"
         heroSubtitle="Use AI automation to handle common customer questions, support requests, status updates and escalation workflows faster."
         serviceName="AI Customer Support Automation"
         services={services}

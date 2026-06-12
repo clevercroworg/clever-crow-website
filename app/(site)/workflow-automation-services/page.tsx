@@ -30,7 +30,7 @@ export default function WorkflowAutomationServicesPage() {
     <main>
       <AiAutomationServiceLayout
         eyebrow="Workflow Automation"
-        heroTitle="Workflow Automation Services for Business Operations"
+        heroTitle="Workflow Automation Services"
         heroSubtitle="Reduce repetitive work by automating approvals, lead routing, notifications, reports and daily business processes."
         serviceName="Workflow Automation"
         services={services}

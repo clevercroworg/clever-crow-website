@@ -30,7 +30,7 @@ export default function LeadManagementAutomationPage() {
     <main>
       <AiAutomationServiceLayout
         eyebrow="Lead Management Automation"
-        heroTitle="Lead Management Automation for Sales Teams"
+        heroTitle="Lead Management Automation"
         heroSubtitle="Capture, assign, track and follow up with leads automatically using CRM workflows, WhatsApp alerts and sales pipeline automation."
         serviceName="Lead Management Automation"
         services={services}
