@@ -268,6 +268,17 @@ const defaultColorClasses = [
   "bg-amber-500/10 text-amber-400 border-amber-500/20"
 ];
 
+const getStepTheme = (colorClass: string) => {
+  const c = colorClass.toLowerCase();
+  if (c.includes("green")) return { color: "#22c55e", shadow: "hover:shadow-[0_0_15px_rgba(34,197,94,0.15)]", border: "hover:border-green-500/40" };
+  if (c.includes("emerald")) return { color: "#10b981", shadow: "hover:shadow-[0_0_15px_rgba(16,185,129,0.15)]", border: "hover:border-emerald-500/40" };
+  if (c.includes("purple")) return { color: "#a855f7", shadow: "hover:shadow-[0_0_15px_rgba(168,85,247,0.15)]", border: "hover:border-purple-500/40" };
+  if (c.includes("amber")) return { color: "#f59e0b", shadow: "hover:shadow-[0_0_15px_rgba(245,158,11,0.15)]", border: "hover:border-amber-500/40" };
+  if (c.includes("blue")) return { color: "#3b82f6", shadow: "hover:shadow-[0_0_15px_rgba(59,130,246,0.15)]", border: "hover:border-blue-500/40" };
+  if (c.includes("orange")) return { color: "#f97316", shadow: "hover:shadow-[0_0_15px_rgba(249,115,22,0.15)]", border: "hover:border-orange-500/40" };
+  return { color: "#f59e0b", shadow: "hover:shadow-[0_0_15px_rgba(245,158,11,0.15)]", border: "hover:border-amber-500/40" };
+};
+
 export default function AiAutomationServiceLayout({
   eyebrow,
   heroTitle,
@@ -419,14 +430,35 @@ export default function AiAutomationServiceLayout({
 
             {/* Right Column: Visual 4-Step Flowchart */}
             <div className="lg:col-span-6 w-full flex flex-col justify-center">
-              <div className="relative bg-white/[0.04] backdrop-blur-md border border-white/[0.08] rounded-[2rem] p-6 shadow-[0_8px_40px_rgba(0,0,0,0.3)] max-w-lg mx-auto w-full font-sans">
+              <div className="relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-[2.2rem] p-7 shadow-[0_12px_50px_rgba(0,0,0,0.4)] max-w-lg mx-auto w-full font-sans overflow-hidden">
                 
+                {/* Cybernetic Grid Overlay */}
+                <div 
+                  className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
+                  style={{
+                    backgroundImage: `
+                      linear-gradient(to right, white 1px, transparent 1px),
+                      linear-gradient(to bottom, white 1px, transparent 1px)
+                    `,
+                    backgroundSize: "24px 24px"
+                  }}
+                />
+
+                {/* Glowing AI Hub Background Halos */}
+                <div className="absolute -top-20 -left-20 w-44 h-44 rounded-full blur-[40px] opacity-[0.12] bg-[#f59e0b] pointer-events-none" />
+                <div className="absolute -bottom-20 -right-20 w-44 h-44 rounded-full blur-[40px] opacity-[0.12] bg-[#7c3aed] pointer-events-none" />
+
                 {/* Flowchart Header Icon & Title */}
-                <div className="flex flex-col items-center mb-6">
-                  <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${headerColors.bgColor} ${headerColors.textColor} border ${headerColors.borderColor} mb-3 shadow-md`}>
-                    <FlowchartHeaderIcon size={24} className="stroke-[1.5]" />
+                <div className="flex flex-col items-center mb-7 relative z-10">
+                  <div className="relative group/header mb-3">
+                    {/* Rotating tech ring outline */}
+                    <div className="absolute inset-[-4px] rounded-[20px] border border-dashed border-amber-500/30 animate-[spin_20s_linear_infinite]" />
+                    
+                    <div className={`relative flex h-12 w-12 items-center justify-center rounded-2xl ${headerColors.bgColor} ${headerColors.textColor} border ${headerColors.borderColor} shadow-lg shadow-black/20`}>
+                      <FlowchartHeaderIcon size={24} className="stroke-[1.5]" />
+                    </div>
                   </div>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-300 leading-none text-center">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 leading-none text-center font-mono">
                     {activeFlowchart.title}
                   </p>
                 </div>
@@ -436,25 +468,56 @@ export default function AiAutomationServiceLayout({
                   {activeFlowchart.steps.map((step, idx) => {
                     const colorClass = step.colorClass || defaultColorClasses[idx % defaultColorClasses.length];
                     const StepIcon = iconMap[step.icon.toLowerCase()] || Cpu;
+                    const theme = getStepTheme(colorClass);
                     return (
-                      <div key={idx} className="relative flex items-stretch gap-4">
+                      <div key={idx} className="relative flex items-stretch gap-4 group">
                         
-                        {/* Connecting Line (Vertical) */}
+                        {/* Connecting Line (Vertical with animated pulse) */}
                         {idx < activeFlowchart.steps.length - 1 && (
-                          <div className="absolute left-6 top-10 bottom-[-16px] w-[2px] border-l-2 border-dashed border-white/10" />
+                          <div className="absolute left-[23px] top-12 bottom-[-16px] w-[2px] bg-white/5">
+                            <motion.div
+                              className="absolute w-[6px] h-12 rounded-full left-[-2px] blur-[1px]"
+                              style={{
+                                background: `linear-gradient(to bottom, transparent, ${theme.color}, transparent)`,
+                                height: "40px"
+                              }}
+                              animate={{ y: ["0%", "320%"] }}
+                              transition={{
+                                duration: 2.2 + idx * 0.4,
+                                ease: "linear",
+                                repeat: Infinity
+                              }}
+                            />
+                          </div>
                         )}
 
-                        {/* Step Icon Container */}
-                        <div className={`flex h-12 w-12 items-center justify-center rounded-2xl shrink-0 border shadow-sm z-10 ${colorClass}`}>
-                          <StepIcon size={16} className="stroke-[2.5]" />
+                        {/* Step Icon Container (with circular tech pulse) */}
+                        <div className={`relative flex h-12 w-12 items-center justify-center rounded-2xl shrink-0 border shadow-sm z-10 transition-all duration-300 group-hover:scale-105 ${colorClass}`}>
+                          <StepIcon size={16} className="stroke-[2.5] z-10" />
+                          <span 
+                            className="absolute inset-0 rounded-2xl opacity-[0.08] animate-ping"
+                            style={{ backgroundColor: theme.color, animationDuration: "3s" }} 
+                          />
                         </div>
 
-                        {/* Step content */}
-                        <div className="flex flex-col justify-center bg-white/[0.03] border border-white/[0.06] rounded-2xl px-4 py-3 flex-grow">
+                        {/* Step content (futuristic glass card) */}
+                        <div className={`flex flex-col justify-center bg-white/[0.02] border border-white/[0.05] rounded-2xl px-4 py-3.5 flex-grow transition-all duration-300 hover:bg-white/[0.05] hover:border-white/10 ${theme.shadow} ${theme.border} relative overflow-hidden`}>
+                          
+                          {/* Left highlight strip on hover */}
+                          <div 
+                            className="absolute left-0 top-0 bottom-0 w-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            style={{ background: `linear-gradient(to bottom, ${theme.color}, transparent)` }}
+                          />
+
+                          {/* Node Tech Index */}
+                          <span className="absolute right-4 top-2 text-[8px] font-bold text-slate-500/80 tracking-widest font-mono select-none">
+                            NODE_0{idx + 1}
+                          </span>
+
                           <span className="text-[11px] font-black text-white/90 tracking-tight leading-none">
                             {step.title}
                           </span>
-                          <span className="text-[10px] font-semibold text-slate-400 leading-normal mt-1 block">
+                          <span className="text-[10px] font-semibold text-slate-400 leading-normal mt-1.5 block">
                             {step.desc}
                           </span>
                         </div>
