@@ -68,7 +68,7 @@ const leadGenDashboard = {
     slices: [
       { name: "Meta Lead Ads", percentage: 42, colorClass: "bg-blue-500", strokeColor: "#3B82F6" },
       { name: "Google Search Leads", percentage: 38, colorClass: "bg-amber-500", strokeColor: "#F59E0B" },
-      { name: "LinkedIn Lead Forms", percentage: 15, colorClass: "bg-blue-700", strokeColor: "#0A66C2" },
+      { name: "LinkedIn Lead Forms", percentage: 15, colorClass: "bg-emerald-500", strokeColor: "#10B981" },
       { name: "Landing Page Forms", percentage: 5, colorClass: "bg-violet-500", strokeColor: "#8B5CF6" }
     ],
     primarySource: "Meta Lead Ads"

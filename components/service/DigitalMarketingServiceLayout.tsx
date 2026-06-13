@@ -604,11 +604,25 @@ export default function DigitalMarketingServiceLayout({
                   
                   <div>
                     {/* Header */}
-                    <div className="flex items-center gap-3 mb-5">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 shadow-sm shadow-amber-500/10">
-                        <BarChart3 size={18} className="text-white stroke-[2.5]" />
+                    <div className="flex items-center justify-between mb-5 flex-wrap gap-2">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 shadow-sm shadow-amber-500/10">
+                          <BarChart3 size={18} className="text-white stroke-[2.5]" />
+                        </div>
+                        <span className="text-base font-black text-slate-800 tracking-tight">Performance Overview</span>
                       </div>
-                      <span className="text-base font-black text-slate-800 tracking-tight">Performance Overview</span>
+                      
+                      {/* Legend */}
+                      <div className="flex items-center gap-3 whitespace-nowrap">
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                          <span className="text-[9px] font-bold text-slate-400 whitespace-nowrap">{activeDashboard.lineChart.leadsLabel || "Leads"}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+                          <span className="text-[9px] font-bold text-slate-400 whitespace-nowrap">{activeDashboard.lineChart.conversionsLabel || "Conversions"}</span>
+                        </div>
+                      </div>
                     </div>
 
                     {/* 4 Stats Row */}
@@ -637,17 +651,6 @@ export default function DigitalMarketingServiceLayout({
 
                     {/* Line Chart Area */}
                     <div className="relative h-[130px] w-full">
-                      {/* Legend */}
-                      <div className="absolute top-0 right-0 flex items-center gap-3 whitespace-nowrap">
-                        <div className="flex items-center gap-1.5">
-                          <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                          <span className="text-[9px] font-bold text-slate-400 whitespace-nowrap">{activeDashboard.lineChart.leadsLabel || "Leads"}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
-                          <span className="text-[9px] font-bold text-slate-400 whitespace-nowrap">{activeDashboard.lineChart.conversionsLabel || "Conversions"}</span>
-                        </div>
-                      </div>
                       {/* SVG Chart */}
                       <svg className="w-full h-full" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
                         {/* Grid lines */}

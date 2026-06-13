@@ -68,8 +68,8 @@ const performanceDashboard = {
     slices: [
       { name: "Google Ads", percentage: 38, colorClass: "bg-blue-500", strokeColor: "#3B82F6" },
       { name: "Meta Ads", percentage: 32, colorClass: "bg-amber-500", strokeColor: "#F59E0B" },
-      { name: "LinkedIn Ads", percentage: 18, colorClass: "bg-blue-700", strokeColor: "#0A66C2" },
-      { name: "YouTube Ads", percentage: 12, colorClass: "bg-rose-600", strokeColor: "#DC2626" }
+      { name: "LinkedIn Ads", percentage: 18, colorClass: "bg-emerald-500", strokeColor: "#10B981" },
+      { name: "YouTube Ads", percentage: 12, colorClass: "bg-rose-500", strokeColor: "#F43F5E" }
     ],
     primarySource: "Google & Meta Ads"
   },

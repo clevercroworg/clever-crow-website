@@ -68,7 +68,7 @@ const analyticsDashboard = {
     slices: [
       { name: "GA4 Events", percentage: 45, colorClass: "bg-amber-500", strokeColor: "#F59E0B" },
       { name: "GTM Tags", percentage: 30, colorClass: "bg-blue-500", strokeColor: "#3B82F6" },
-      { name: "Facebook Pixel", percentage: 20, colorClass: "bg-blue-700", strokeColor: "#1D4ED8" },
+      { name: "Facebook Pixel", percentage: 20, colorClass: "bg-emerald-500", strokeColor: "#10B981" },
       { name: "LinkedIn Insight", percentage: 5, colorClass: "bg-violet-500", strokeColor: "#8B5CF6" }
     ],
     primarySource: "Google Tag Manager"

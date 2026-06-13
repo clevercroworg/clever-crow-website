@@ -67,9 +67,9 @@ const smmDashboard = {
   channelMix: {
     slices: [
       { name: "Instagram Organic", percentage: 48, colorClass: "bg-pink-500", strokeColor: "#E1306C" },
-      { name: "LinkedIn Organic", percentage: 22, colorClass: "bg-blue-700", strokeColor: "#0077B5" },
-      { name: "Facebook Page", percentage: 18, colorClass: "bg-blue-500", strokeColor: "#1877F2" },
-      { name: "YouTube Shorts", percentage: 12, colorClass: "bg-rose-600", strokeColor: "#DC2626" }
+      { name: "LinkedIn Organic", percentage: 22, colorClass: "bg-blue-500", strokeColor: "#3B82F6" },
+      { name: "Facebook Page", percentage: 18, colorClass: "bg-amber-500", strokeColor: "#F59E0B" },
+      { name: "YouTube Shorts", percentage: 12, colorClass: "bg-emerald-500", strokeColor: "#10B981" }
     ],
     primarySource: "Instagram Feed"
   },
