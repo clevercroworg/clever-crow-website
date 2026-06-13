@@ -430,11 +430,11 @@ export default function AiAutomationServiceLayout({
 
             {/* Right Column: Visual 4-Step Flowchart */}
             <div className="lg:col-span-6 w-full flex flex-col justify-center">
-              <div className="relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-[2.2rem] p-7 shadow-[0_12px_50px_rgba(0,0,0,0.4)] max-w-lg mx-auto w-full font-sans overflow-hidden">
+              <div className="relative bg-[#0c0a24]/60 backdrop-blur-xl border border-white/10 rounded-[2.2rem] p-7 shadow-[0_15px_40px_rgba(0,0,0,0.5)] max-w-lg mx-auto w-full font-sans overflow-hidden">
                 
                 {/* Cybernetic Grid Overlay */}
                 <div 
-                  className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
+                  className="absolute inset-0 opacity-[0.015] pointer-events-none mix-blend-overlay"
                   style={{
                     backgroundImage: `
                       linear-gradient(to right, white 1px, transparent 1px),
@@ -445,14 +445,14 @@ export default function AiAutomationServiceLayout({
                 />
 
                 {/* Glowing AI Hub Background Halos */}
-                <div className="absolute -top-20 -left-20 w-44 h-44 rounded-full blur-[40px] opacity-[0.12] bg-[#f59e0b] pointer-events-none" />
-                <div className="absolute -bottom-20 -right-20 w-44 h-44 rounded-full blur-[40px] opacity-[0.12] bg-[#7c3aed] pointer-events-none" />
+                <div className="absolute -top-24 -left-24 w-48 h-48 rounded-full blur-[60px] opacity-[0.08] bg-amber-500 pointer-events-none" />
+                <div className="absolute -bottom-24 -right-24 w-48 h-48 rounded-full blur-[60px] opacity-[0.08] bg-purple-500 pointer-events-none" />
 
                 {/* Flowchart Header Icon & Title */}
                 <div className="flex flex-col items-center mb-7 relative z-10">
                   <div className="relative group/header mb-3">
-                    {/* Rotating tech ring outline */}
-                    <div className="absolute inset-[-4px] rounded-[20px] border border-dashed border-amber-500/30 animate-[spin_20s_linear_infinite]" />
+                    {/* Pulsing scanner ring */}
+                    <div className="absolute inset-[-4px] rounded-[20px] border border-amber-500/20 animate-pulse" />
                     
                     <div className={`relative flex h-12 w-12 items-center justify-center rounded-2xl ${headerColors.bgColor} ${headerColors.textColor} border ${headerColors.borderColor} shadow-lg shadow-black/20`}>
                       <FlowchartHeaderIcon size={24} className="stroke-[1.5]" />
@@ -474,16 +474,15 @@ export default function AiAutomationServiceLayout({
                         
                         {/* Connecting Line (Vertical with animated pulse) */}
                         {idx < activeFlowchart.steps.length - 1 && (
-                          <div className="absolute left-[23px] top-12 bottom-[-16px] w-[2px] bg-white/5">
+                          <div className="absolute left-[23px] top-12 bottom-[-16px] w-[2px] bg-white/10 overflow-hidden rounded-full">
                             <motion.div
-                              className="absolute w-[6px] h-12 rounded-full left-[-2px] blur-[1px]"
+                              className="absolute w-full h-10 rounded-full left-0"
                               style={{
                                 background: `linear-gradient(to bottom, transparent, ${theme.color}, transparent)`,
-                                height: "40px"
                               }}
-                              animate={{ y: ["0%", "320%"] }}
+                              animate={{ top: ["-40px", "100%"] }}
                               transition={{
-                                duration: 2.2 + idx * 0.4,
+                                duration: 2,
                                 ease: "linear",
                                 repeat: Infinity
                               }}
@@ -501,7 +500,7 @@ export default function AiAutomationServiceLayout({
                         </div>
 
                         {/* Step content (futuristic glass card) */}
-                        <div className={`flex flex-col justify-center bg-white/[0.02] border border-white/[0.05] rounded-2xl px-4 py-3.5 flex-grow transition-all duration-300 hover:bg-white/[0.05] hover:border-white/10 ${theme.shadow} ${theme.border} relative overflow-hidden`}>
+                        <div className={`flex flex-col justify-center bg-white/[0.03] border border-white/[0.06] rounded-2xl px-5 py-3.5 flex-grow transition-all duration-300 hover:bg-white/[0.06] hover:border-white/12 ${theme.shadow} ${theme.border} relative overflow-hidden`}>
                           
                           {/* Left highlight strip on hover */}
                           <div 
@@ -509,17 +508,18 @@ export default function AiAutomationServiceLayout({
                             style={{ background: `linear-gradient(to bottom, ${theme.color}, transparent)` }}
                           />
 
-                          {/* Node Tech Index */}
-                          <span className="absolute right-4 top-2 text-[8px] font-bold text-slate-500/80 tracking-widest font-mono select-none">
-                            NODE_0{idx + 1}
-                          </span>
+                          <div className="flex items-center justify-between gap-4 mb-1">
+                            <span className="text-[13px] sm:text-[14px] font-bold text-white tracking-tight">
+                              {step.title}
+                            </span>
+                            <span className="text-[9px] font-bold text-slate-500 tracking-wider font-mono select-none">
+                              NODE_0{idx + 1}
+                            </span>
+                          </div>
 
-                          <span className="text-[11px] font-black text-white/90 tracking-tight leading-none">
-                            {step.title}
-                          </span>
-                          <span className="text-[10px] font-semibold text-slate-400 leading-normal mt-1.5 block">
+                          <p className="text-[11px] sm:text-[12px] font-medium text-slate-300 leading-relaxed">
                             {step.desc}
-                          </span>
+                          </p>
                         </div>
                       </div>
                     );
