@@ -411,18 +411,21 @@ export default function AiAutomationServiceLayout({
 
               <div className="mt-6 lg:mt-5 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                 <a
-                  href="#contact-form"
+                  href={`https://wa.me/919986389444?text=Hi%2C%20I'm%20interested%20in%20your%20${encodeURIComponent(serviceName)}%20services.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-6 py-4 text-xs font-black uppercase tracking-wider text-slate-900 shadow-lg shadow-amber-500/20 hover:bg-amber-400 hover:shadow-amber-500/30 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer"
                 >
-                  Book a Free Consultation
-                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                  <FaWhatsapp size={18} className="shrink-0" />
+                  Chat with Us
                 </a>
 
                 <a
-                  href="#automation-services"
+                  href="#contact-form"
                   className="group flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm px-6 py-4 text-xs font-black uppercase tracking-wider text-white hover:border-white/20 hover:bg-white/10 hover:scale-[1.01] active:scale-95 transition-all"
                 >
-                  Explore Automation Services
+                  <Phone size={14} className="text-white group-hover:text-amber-500 transition-colors shrink-0" />
+                  Request a Callback
                 </a>
               </div>
 
