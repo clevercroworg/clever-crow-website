@@ -638,14 +638,14 @@ export default function DigitalMarketingServiceLayout({
                     {/* Line Chart Area */}
                     <div className="relative h-[130px] w-full">
                       {/* Legend */}
-                      <div className="absolute top-0 right-0 flex items-center gap-3">
+                      <div className="absolute top-0 right-0 flex items-center gap-3 whitespace-nowrap">
                         <div className="flex items-center gap-1.5">
                           <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                          <span className="text-[9px] font-bold text-slate-400">{activeDashboard.lineChart.leadsLabel || "Leads"}</span>
+                          <span className="text-[9px] font-bold text-slate-400 whitespace-nowrap">{activeDashboard.lineChart.leadsLabel || "Leads"}</span>
                         </div>
                         <div className="flex items-center gap-1.5">
                           <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
-                          <span className="text-[9px] font-bold text-slate-400">{activeDashboard.lineChart.conversionsLabel || "Conversions"}</span>
+                          <span className="text-[9px] font-bold text-slate-400 whitespace-nowrap">{activeDashboard.lineChart.conversionsLabel || "Conversions"}</span>
                         </div>
                       </div>
                       {/* SVG Chart */}
@@ -660,9 +660,10 @@ export default function DigitalMarketingServiceLayout({
                         <path d={activeDashboard.lineChart.conversionsPath} stroke="#3B82F6" strokeWidth="2" fill="none" strokeLinecap="round" strokeDasharray="6 4" />
                         {/* X-axis labels */}
                         {activeDashboard.lineChart.dates.map((date, idx) => {
-                          const xCoords = [0, 90, 185, 280, 370];
+                          const xCoords = [12, 100, 195, 290, 388];
+                          const anchors = ["start", "middle", "middle", "middle", "end"] as const;
                           return (
-                            <text key={idx} x={xCoords[idx] || 0} y="123" fill="#94a3b8" fontSize="9" fontWeight="600">
+                            <text key={idx} x={xCoords[idx]} y="123" fill="#94a3b8" fontSize="9" fontWeight="600" textAnchor={anchors[idx]}>
                               {date}
                             </text>
                           );
@@ -741,7 +742,7 @@ export default function DigitalMarketingServiceLayout({
                         </div>
                         <div className="flex flex-col gap-1.5 text-[9px] font-bold text-slate-600">
                           {activeDashboard.channelMix.slices.map((slice, i) => (
-                            <div key={i} className="flex items-center gap-1.5">
+                            <div key={i} className="flex items-center gap-1.5 whitespace-nowrap">
                               <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${slice.colorClass}`} />
                               {slice.name} {slice.percentage}%
                             </div>
