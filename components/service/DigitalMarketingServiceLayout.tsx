@@ -200,6 +200,22 @@ function YouTubeBrandIcon({ className }: { className?: string }) {
   );
 }
 
+function InstagramBrandIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#E1306C" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051C.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+    </svg>
+  );
+}
+
+const brandIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  google: GoogleBrandIcon,
+  facebook: FacebookBrandIcon,
+  linkedin: LinkedInBrandIcon,
+  youtube: YouTubeBrandIcon,
+  instagram: InstagramBrandIcon
+};
+
 // ─── Service config for color themes ───
 function getMarketingServiceConfig(title: string, iconKey: string) {
   const t = title.toLowerCase();
@@ -295,6 +311,53 @@ function getMarketingServiceConfig(title: string, iconKey: string) {
 }
 
 // ─── Types ───
+export type DashboardStat = {
+  label: string;
+  value: string;
+  valueLong?: string;
+  change: string;
+  isIncrease: boolean;
+};
+
+export type DonutSlice = {
+  name: string;
+  percentage: number;
+  colorClass: string;
+  strokeColor: string;
+};
+
+export type LineChartData = {
+  leadsLabel?: string;
+  conversionsLabel?: string;
+  leadsPath: string;
+  conversionsPath: string;
+  dates: string[];
+};
+
+export type DashboardData = {
+  leadsGenerated: DashboardStat;
+  conversions: DashboardStat;
+  revenue: DashboardStat;
+  costPerLead: DashboardStat;
+  lineChart: LineChartData;
+  activePlatforms: string[];
+  trafficGrowth: {
+    value: string;
+    change: string;
+    isIncrease: boolean;
+  };
+  channelMix: {
+    slices: DonutSlice[];
+    primarySource: string;
+  };
+  whyChooseMetrics?: {
+    leadsMiniPath?: string;
+    conversionsMiniPath?: string;
+    cplMiniPath?: string;
+    revenueBars?: number[];
+  };
+};
+
 type ServiceItem = {
   icon: string;
   title: string;
@@ -316,6 +379,7 @@ type DigitalMarketingServiceLayoutProps = {
   whyChoose: string[];
   faqs: FAQItem[];
   pageUrl: string;
+  dashboard?: DashboardData;
 };
 
 export default function DigitalMarketingServiceLayout({
@@ -326,9 +390,75 @@ export default function DigitalMarketingServiceLayout({
   services,
   whyChoose,
   faqs,
-  pageUrl
+  pageUrl,
+  dashboard
 }: DigitalMarketingServiceLayoutProps) {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+
+  const DEFAULT_DASHBOARD: DashboardData = {
+    leadsGenerated: {
+      label: "Leads Generated",
+      value: "2,548",
+      change: "↑ 28.6%",
+      isIncrease: true
+    },
+    conversions: {
+      label: "Conversions",
+      value: "4.32K",
+      change: "↑ 31.2%",
+      isIncrease: true
+    },
+    revenue: {
+      label: "Revenue Generated",
+      value: "₹23.5L",
+      valueLong: "₹23,51,600",
+      change: "↑ 34.8%",
+      isIncrease: true
+    },
+    costPerLead: {
+      label: "Cost per Lead",
+      value: "₹135",
+      change: "↓ 18.7%",
+      isIncrease: false
+    },
+    lineChart: {
+      leadsLabel: "Leads",
+      conversionsLabel: "Conversions",
+      leadsPath: "M0 90 Q 50 85, 80 70 T 160 50 T 240 65 T 320 35 T 400 20",
+      conversionsPath: "M0 105 Q 50 100, 80 90 T 160 70 T 240 80 T 320 50 T 400 30",
+      dates: ["Apr 7", "Apr 14", "Apr 21", "Apr 28", "May 5"]
+    },
+    activePlatforms: ["google", "facebook", "linkedin", "youtube"],
+    trafficGrowth: {
+      value: "+64.2%",
+      change: "↑ 12.4% vs last week",
+      isIncrease: true
+    },
+    channelMix: {
+      slices: [
+        { name: "Google Ads", percentage: 40, colorClass: "bg-blue-500", strokeColor: "#3B82F6" },
+        { name: "Meta Ads", percentage: 28, colorClass: "bg-amber-500", strokeColor: "#F59E0B" },
+        { name: "Organic Search", percentage: 18, colorClass: "bg-emerald-500", strokeColor: "#10B981" },
+        { name: "Social Media", percentage: 7, colorClass: "bg-violet-500", strokeColor: "#8B5CF6" }
+      ],
+      primarySource: "Google Search"
+    },
+    whyChooseMetrics: {
+      leadsMiniPath: "M0 25 Q15 20,30 22 T60 12 T100 5",
+      conversionsMiniPath: "M0 28 Q20 22,40 18 T80 8 T100 3",
+      cplMiniPath: "M0 8 Q20 10,40 15 T80 22 T100 25",
+      revenueBars: [28, 35, 22, 40, 32, 48, 38, 55, 45, 60, 52, 65]
+    }
+  };
+
+  const activeDashboard = dashboard || DEFAULT_DASHBOARD;
+
+  const isCplDecreaseGood = activeDashboard.costPerLead.label.toLowerCase().includes("cost") || 
+                             activeDashboard.costPerLead.label.toLowerCase().includes("cpl") || 
+                             activeDashboard.costPerLead.label.toLowerCase().includes("position") ||
+                             activeDashboard.costPerLead.label.toLowerCase().includes("rank") ||
+                             activeDashboard.costPerLead.label.toLowerCase().includes("error");
+  const isCplPositive = isCplDecreaseGood ? !activeDashboard.costPerLead.isIncrease : activeDashboard.costPerLead.isIncrease;
 
   const renderHeroTitle = (title: string) => {
     const match = title.match(/(.*)\s+(for|For)\s+(.*)/);
@@ -484,24 +614,24 @@ export default function DigitalMarketingServiceLayout({
                     {/* 4 Stats Row */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
                       <div className="bg-slate-50/70 rounded-xl p-3">
-                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider block">Leads Generated</span>
-                        <span className="text-xl sm:text-2xl font-black text-slate-900 block leading-none mt-1.5">2,548</span>
-                        <span className="text-[9px] font-bold text-green-500 mt-1 block">↑ 28.6%</span>
+                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider block">{activeDashboard.leadsGenerated.label}</span>
+                        <span className="text-xl sm:text-2xl font-black text-slate-900 block leading-none mt-1.5">{activeDashboard.leadsGenerated.value}</span>
+                        <span className={`text-[9px] font-bold mt-1 block ${activeDashboard.leadsGenerated.isIncrease ? "text-green-500" : "text-rose-500"}`}>{activeDashboard.leadsGenerated.change}</span>
                       </div>
                       <div className="bg-slate-50/70 rounded-xl p-3">
-                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider block">Conversions</span>
-                        <span className="text-xl sm:text-2xl font-black text-slate-900 block leading-none mt-1.5">4.32K</span>
-                        <span className="text-[9px] font-bold text-green-500 mt-1 block">↑ 31.2%</span>
+                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider block">{activeDashboard.conversions.label}</span>
+                        <span className="text-xl sm:text-2xl font-black text-slate-900 block leading-none mt-1.5">{activeDashboard.conversions.value}</span>
+                        <span className={`text-[9px] font-bold mt-1 block ${activeDashboard.conversions.isIncrease ? "text-green-500" : "text-rose-500"}`}>{activeDashboard.conversions.change}</span>
                       </div>
                       <div className="bg-slate-50/70 rounded-xl p-3">
-                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider block">Revenue Generated</span>
-                        <span className="text-xl sm:text-2xl font-black text-slate-900 block leading-none mt-1.5">₹23.5L</span>
-                        <span className="text-[9px] font-bold text-green-500 mt-1 block">↑ 34.8%</span>
+                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider block">{activeDashboard.revenue.label}</span>
+                        <span className="text-xl sm:text-2xl font-black text-slate-900 block leading-none mt-1.5">{activeDashboard.revenue.value}</span>
+                        <span className={`text-[9px] font-bold mt-1 block ${activeDashboard.revenue.isIncrease ? "text-green-500" : "text-rose-500"}`}>{activeDashboard.revenue.change}</span>
                       </div>
                       <div className="bg-slate-50/70 rounded-xl p-3">
-                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider block">Cost per Lead</span>
-                        <span className="text-xl sm:text-2xl font-black text-slate-900 block leading-none mt-1.5">₹135</span>
-                        <span className="text-[9px] font-bold text-green-500 mt-1 block">↓ 18.7%</span>
+                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider block">{activeDashboard.costPerLead.label}</span>
+                        <span className="text-xl sm:text-2xl font-black text-slate-900 block leading-none mt-1.5">{activeDashboard.costPerLead.value}</span>
+                        <span className={`text-[9px] font-bold mt-1 block ${isCplPositive ? "text-green-500" : "text-rose-500"}`}>{activeDashboard.costPerLead.change}</span>
                       </div>
                     </div>
 
@@ -511,11 +641,11 @@ export default function DigitalMarketingServiceLayout({
                       <div className="absolute top-0 right-0 flex items-center gap-3">
                         <div className="flex items-center gap-1.5">
                           <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                          <span className="text-[9px] font-bold text-slate-400">Leads</span>
+                          <span className="text-[9px] font-bold text-slate-400">{activeDashboard.lineChart.leadsLabel || "Leads"}</span>
                         </div>
                         <div className="flex items-center gap-1.5">
                           <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
-                          <span className="text-[9px] font-bold text-slate-400">Conversions</span>
+                          <span className="text-[9px] font-bold text-slate-400">{activeDashboard.lineChart.conversionsLabel || "Conversions"}</span>
                         </div>
                       </div>
                       {/* SVG Chart */}
@@ -525,15 +655,18 @@ export default function DigitalMarketingServiceLayout({
                         <line x1="0" y1="60" x2="400" y2="60" stroke="#f1f5f9" strokeWidth="1" />
                         <line x1="0" y1="100" x2="400" y2="100" stroke="#f1f5f9" strokeWidth="1" />
                         {/* Leads line (amber) */}
-                        <path d="M0 90 Q 50 85, 80 70 T 160 50 T 240 65 T 320 35 T 400 20" stroke="#F59E0B" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                        <path d={activeDashboard.lineChart.leadsPath} stroke="#F59E0B" strokeWidth="2.5" fill="none" strokeLinecap="round" />
                         {/* Conversions line (blue) */}
-                        <path d="M0 105 Q 50 100, 80 90 T 160 70 T 240 80 T 320 50 T 400 30" stroke="#3B82F6" strokeWidth="2" fill="none" strokeLinecap="round" strokeDasharray="6 4" />
+                        <path d={activeDashboard.lineChart.conversionsPath} stroke="#3B82F6" strokeWidth="2" fill="none" strokeLinecap="round" strokeDasharray="6 4" />
                         {/* X-axis labels */}
-                        <text x="0" y="123" fill="#94a3b8" fontSize="9" fontWeight="600">Apr 7</text>
-                        <text x="90" y="123" fill="#94a3b8" fontSize="9" fontWeight="600">Apr 14</text>
-                        <text x="185" y="123" fill="#94a3b8" fontSize="9" fontWeight="600">Apr 21</text>
-                        <text x="280" y="123" fill="#94a3b8" fontSize="9" fontWeight="600">Apr 28</text>
-                        <text x="370" y="123" fill="#94a3b8" fontSize="9" fontWeight="600">May 5</text>
+                        {activeDashboard.lineChart.dates.map((date, idx) => {
+                          const xCoords = [0, 90, 185, 280, 370];
+                          return (
+                            <text key={idx} x={xCoords[idx] || 0} y="123" fill="#94a3b8" fontSize="9" fontWeight="600">
+                              {date}
+                            </text>
+                          );
+                        })}
                       </svg>
                     </div>
                   </div>
@@ -542,10 +675,15 @@ export default function DigitalMarketingServiceLayout({
                   <div className="mt-4 pt-4 border-t border-slate-100/60 flex items-center gap-3">
                     <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Active Platforms</span>
                     <div className="flex items-center gap-2 ml-auto">
-                      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50 border border-slate-100/80 shadow-[0_1px_3px_rgba(0,0,0,0.02)] hover:scale-105 hover:bg-slate-100 transition-all"><GoogleBrandIcon className="w-3.5 h-3.5" /></div>
-                      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50 border border-slate-100/80 shadow-[0_1px_3px_rgba(0,0,0,0.02)] hover:scale-105 hover:bg-slate-100 transition-all"><FacebookBrandIcon className="w-3.5 h-3.5" /></div>
-                      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50 border border-slate-100/80 shadow-[0_1px_3px_rgba(0,0,0,0.02)] hover:scale-105 hover:bg-slate-100 transition-all"><LinkedInBrandIcon className="w-3.5 h-3.5" /></div>
-                      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50 border border-slate-100/80 shadow-[0_1px_3px_rgba(0,0,0,0.02)] hover:scale-105 hover:bg-slate-100 transition-all"><YouTubeBrandIcon className="w-3.5 h-3.5" /></div>
+                      {activeDashboard.activePlatforms.map((plat) => {
+                        const IconComponent = brandIconMap[plat.toLowerCase()];
+                        if (!IconComponent) return null;
+                        return (
+                          <div key={plat} className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-50 border border-slate-100/80 shadow-[0_1px_3px_rgba(0,0,0,0.02)] hover:scale-105 hover:bg-slate-100 transition-all">
+                            <IconComponent className="w-3.5 h-3.5" />
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
@@ -557,10 +695,11 @@ export default function DigitalMarketingServiceLayout({
                   <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-[0_4px_25px_rgba(0,0,0,0.04)] font-sans flex flex-col justify-between h-[135px] shrink-0">
                     <div>
                       <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider block">Traffic Growth</span>
-                      <span className="text-3xl font-black text-emerald-600 block leading-none mt-2">+64.2%</span>
+                      <span className={`text-3xl font-black block leading-none mt-2 ${activeDashboard.trafficGrowth.isIncrease ? "text-emerald-600" : "text-rose-600"}`}>{activeDashboard.trafficGrowth.value}</span>
                     </div>
                     <span className="text-[9px] font-bold text-slate-400/85 block mt-2">
-                      <span className="text-emerald-500">↑ 12.4%</span> vs last week
+                      <span className={activeDashboard.trafficGrowth.isIncrease ? "text-emerald-500" : "text-rose-500"}>{activeDashboard.trafficGrowth.change.split(" vs ")[0]}</span>
+                      {" vs " + activeDashboard.trafficGrowth.change.split(" vs ")[1]}
                     </span>
                   </div>
 
@@ -574,23 +713,45 @@ export default function DigitalMarketingServiceLayout({
                         <div className="w-20 h-20 shrink-0 relative">
                           <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
                             <circle cx="18" cy="18" r="14" fill="none" stroke="#f1f5f9" strokeWidth="5" />
-                            <circle cx="18" cy="18" r="14" fill="none" stroke="#3B82F6" strokeWidth="5" strokeDasharray="35 65" strokeDashoffset="0" strokeLinecap="round" />
-                            <circle cx="18" cy="18" r="14" fill="none" stroke="#F59E0B" strokeWidth="5" strokeDasharray="25 75" strokeDashoffset="-35" strokeLinecap="round" />
-                            <circle cx="18" cy="18" r="14" fill="none" stroke="#10B981" strokeWidth="5" strokeDasharray="20 80" strokeDashoffset="-60" strokeLinecap="round" />
-                            <circle cx="18" cy="18" r="14" fill="none" stroke="#8B5CF6" strokeWidth="5" strokeDasharray="15 85" strokeDashoffset="-80" strokeLinecap="round" />
+                            {(() => {
+                              let accumulatedPercent = 0;
+                              return activeDashboard.channelMix.slices.map((slice, i) => {
+                                const dashoffset = -accumulatedPercent;
+                                accumulatedPercent += slice.percentage;
+                                const isHex = slice.strokeColor.startsWith("#");
+                                return (
+                                  <circle
+                                    key={i}
+                                    cx="18"
+                                    cy="18"
+                                    r="14"
+                                    fill="none"
+                                    stroke={isHex ? slice.strokeColor : "currentColor"}
+                                    className={!isHex ? slice.strokeColor : undefined}
+                                    strokeWidth="5"
+                                    pathLength={100}
+                                    strokeDasharray={`${slice.percentage} ${100 - slice.percentage}`}
+                                    strokeDashoffset={dashoffset}
+                                    strokeLinecap="round"
+                                  />
+                                );
+                              });
+                            })()}
                           </svg>
                         </div>
                         <div className="flex flex-col gap-1.5 text-[9px] font-bold text-slate-600">
-                          <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-blue-500 shrink-0" />Google Ads 40%</div>
-                          <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-amber-500 shrink-0" />Meta Ads 28%</div>
-                          <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />Organic Search 18%</div>
-                          <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-violet-500 shrink-0" />Social Media 7%</div>
+                          {activeDashboard.channelMix.slices.map((slice, i) => (
+                            <div key={i} className="flex items-center gap-1.5">
+                              <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${slice.colorClass}`} />
+                              {slice.name} {slice.percentage}%
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
 
                     <div className="mt-4 pt-3 border-t border-slate-100/60 text-[9px] font-bold text-slate-400">
-                      Primary Source: <span className="text-blue-500">Google Search</span>
+                      Primary Source: <span className="text-blue-500">{activeDashboard.channelMix.primarySource}</span>
                     </div>
                   </div>
 
@@ -754,42 +915,48 @@ export default function DigitalMarketingServiceLayout({
               
               {/* Leads Generated Card */}
               <div className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm font-sans">
-                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Leads Generated</span>
-                <span className="text-2xl font-black text-slate-900 block leading-none mt-1.5">2.54K</span>
-                <span className="text-[9px] font-bold text-green-500 block mt-1">↑ 28.6% <span className="text-slate-400">vs last 30 days</span></span>
+                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">{activeDashboard.leadsGenerated.label}</span>
+                <span className="text-2xl font-black text-slate-900 block leading-none mt-1.5">{activeDashboard.leadsGenerated.value}</span>
+                <span className={`text-[9px] font-bold block mt-1 ${activeDashboard.leadsGenerated.isIncrease ? "text-green-500" : "text-rose-500"}`}>
+                  {activeDashboard.leadsGenerated.change} <span className="text-slate-400">vs last 30 days</span>
+                </span>
                 <div className="w-full h-8 mt-2">
                   <svg className="w-full h-full text-green-500" viewBox="0 0 100 30" fill="none">
                     <defs><linearGradient id="lg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="currentColor" stopOpacity="0.2"/><stop offset="100%" stopColor="currentColor" stopOpacity="0"/></linearGradient></defs>
-                    <path d="M0 25 Q15 20,30 22 T60 12 T100 5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                    <path d="M0 25 Q15 20,30 22 T60 12 T100 5 L100 30 L0 30Z" fill="url(#lg1)"/>
+                    <path d={activeDashboard.whyChooseMetrics?.leadsMiniPath || "M0 25 Q15 20,30 22 T60 12 T100 5"} stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                    <path d={`${activeDashboard.whyChooseMetrics?.leadsMiniPath || "M0 25 Q15 20,30 22 T60 12 T100 5"} L100 30 L0 30Z`} fill="url(#lg1)"/>
                   </svg>
                 </div>
               </div>
 
               {/* Conversions Card */}
               <div className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm font-sans">
-                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Conversions</span>
-                <span className="text-2xl font-black text-slate-900 block leading-none mt-1.5">4.32K</span>
-                <span className="text-[9px] font-bold text-green-500 block mt-1">↑ 31.2% <span className="text-slate-400">vs last 30 days</span></span>
+                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">{activeDashboard.conversions.label}</span>
+                <span className="text-2xl font-black text-slate-900 block leading-none mt-1.5">{activeDashboard.conversions.value}</span>
+                <span className={`text-[9px] font-bold block mt-1 ${activeDashboard.conversions.isIncrease ? "text-green-500" : "text-rose-500"}`}>
+                  {activeDashboard.conversions.change} <span className="text-slate-400">vs last 30 days</span>
+                </span>
                 <div className="w-full h-8 mt-2">
                   <svg className="w-full h-full text-blue-500" viewBox="0 0 100 30" fill="none">
                     <defs><linearGradient id="lg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="currentColor" stopOpacity="0.2"/><stop offset="100%" stopColor="currentColor" stopOpacity="0"/></linearGradient></defs>
-                    <path d="M0 28 Q20 22,40 18 T80 8 T100 3" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                    <path d="M0 28 Q20 22,40 18 T80 8 T100 3 L100 30 L0 30Z" fill="url(#lg2)"/>
+                    <path d={activeDashboard.whyChooseMetrics?.conversionsMiniPath || "M0 28 Q20 22,40 18 T80 8 T100 3"} stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                    <path d={`${activeDashboard.whyChooseMetrics?.conversionsMiniPath || "M0 28 Q20 22,40 18 T80 8 T100 3"} L100 30 L0 30Z`} fill="url(#lg2)"/>
                   </svg>
                 </div>
               </div>
 
               {/* Cost per Lead Card */}
               <div className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm font-sans">
-                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Cost per Lead</span>
-                <span className="text-2xl font-black text-slate-900 block leading-none mt-1.5">₹135</span>
-                <span className="text-[9px] font-bold text-green-500 block mt-1">↓ 18.7% <span className="text-slate-400">vs last 30 days</span></span>
+                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">{activeDashboard.costPerLead.label}</span>
+                <span className="text-2xl font-black text-slate-900 block leading-none mt-1.5">{activeDashboard.costPerLead.value}</span>
+                <span className={`text-[9px] font-bold block mt-1 ${isCplPositive ? "text-green-500" : "text-rose-500"}`}>
+                  {activeDashboard.costPerLead.change} <span className="text-slate-400">vs last 30 days</span>
+                </span>
                 <div className="w-full h-8 mt-2">
                   <svg className="w-full h-full text-amber-500" viewBox="0 0 100 30" fill="none">
                     <defs><linearGradient id="lg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="currentColor" stopOpacity="0.2"/><stop offset="100%" stopColor="currentColor" stopOpacity="0"/></linearGradient></defs>
-                    <path d="M0 8 Q20 10,40 15 T80 22 T100 25" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                    <path d="M0 8 Q20 10,40 15 T80 22 T100 25 L100 30 L0 30Z" fill="url(#lg3)"/>
+                    <path d={activeDashboard.whyChooseMetrics?.cplMiniPath || "M0 8 Q20 10,40 15 T80 22 T100 25"} stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                    <path d={`${activeDashboard.whyChooseMetrics?.cplMiniPath || "M0 8 Q20 10,40 15 T80 22 T100 25"} L100 30 L0 30Z`} fill="url(#lg3)"/>
                   </svg>
                 </div>
               </div>
@@ -800,13 +967,15 @@ export default function DigitalMarketingServiceLayout({
             <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm font-sans mt-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Revenue Generated</span>
-                  <span className="text-2xl font-black text-slate-900 block leading-none mt-1.5">₹23,51,600</span>
-                  <span className="text-[9px] font-bold text-green-500 block mt-1">↑ 34.8% vs last 30 days</span>
+                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">{activeDashboard.revenue.label}</span>
+                  <span className="text-2xl font-black text-slate-900 block leading-none mt-1.5">{activeDashboard.revenue.valueLong || activeDashboard.revenue.value}</span>
+                  <span className={`text-[9px] font-bold block mt-1 ${activeDashboard.revenue.isIncrease ? "text-green-500" : "text-rose-500"}`}>
+                    {activeDashboard.revenue.change} vs last 30 days
+                  </span>
                 </div>
                 {/* Bar chart visual */}
                 <div className="flex items-end gap-1.5 h-16">
-                  {[28, 35, 22, 40, 32, 48, 38, 55, 45, 60, 52, 65].map((h, i) => (
+                  {(activeDashboard.whyChooseMetrics?.revenueBars || [28, 35, 22, 40, 32, 48, 38, 55, 45, 60, 52, 65]).map((h, i) => (
                     <div
                       key={i}
                       className="w-3 rounded-t-sm bg-amber-500"

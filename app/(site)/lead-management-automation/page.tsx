@@ -25,6 +25,37 @@ export const metadata = {
   keywords: "lead management automation, lead capture automation, automated lead follow-up, sales pipeline automation, CRM lead management",
 };
 
+const leadFlowchart = {
+  title: "LEAD CAPTURE & PIPELINE FLOW",
+  icon: "target",
+  steps: [
+    {
+      title: "Multi-Source Capture",
+      desc: "Leads captured from Facebook Ads, web forms, & WhatsApp.",
+      icon: "users",
+      colorClass: "bg-blue-500/10 text-blue-400 border-blue-500/20"
+    },
+    {
+      title: "Instant Lead Scoring",
+      desc: "AI scores and categorizes leads by purchase intent.",
+      icon: "target",
+      colorClass: "bg-orange-500/10 text-orange-400 border-orange-500/20"
+    },
+    {
+      title: "Auto Team Assignment",
+      desc: "Smart rules assign leads to sales reps instantly.",
+      icon: "network",
+      colorClass: "bg-purple-500/10 text-purple-400 border-purple-500/20"
+    },
+    {
+      title: "Instant WhatsApp Alert",
+      desc: "Assigned rep receives WhatsApp alert with lead info.",
+      icon: "smartphone",
+      colorClass: "bg-green-500/10 text-green-400 border-green-500/20"
+    }
+  ]
+};
+
 export default function LeadManagementAutomationPage() {
   return (
     <main>
@@ -43,6 +74,7 @@ export default function LeadManagementAutomationPage() {
         ]}
         faqs={faqs}
         pageUrl="https://clevercrow.in/lead-management-automation"
+        flowchart={leadFlowchart}
       />
       <WebPageSchema title="Lead Management Automation Services | Clever Crow" description="Capture, assign, track and follow up with leads automatically using CRM workflows, WhatsApp alerts and sales pipeline automation." url="https://clevercrow.in/lead-management-automation" />
       <ServiceSchema serviceName="Lead Management Automation" serviceDescription="Lead management automation services for capturing, assigning, tracking, and following up with leads automatically." pageUrl="https://clevercrow.in/lead-management-automation" />

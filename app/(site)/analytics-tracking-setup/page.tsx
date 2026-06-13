@@ -25,6 +25,62 @@ export const metadata = {
   keywords: "analytics tracking setup, GA4 setup, Google Tag Manager, Meta Pixel setup, conversion tracking, marketing analytics",
 };
 
+const analyticsDashboard = {
+  leadsGenerated: {
+    label: "Events Tracked",
+    value: "184K",
+    change: "↑ 100%",
+    isIncrease: true
+  },
+  conversions: {
+    label: "Conversions Mapped",
+    value: "12.8K",
+    change: "↑ 100%",
+    isIncrease: true
+  },
+  revenue: {
+    label: "Data Accuracy",
+    value: "99.9%",
+    valueLong: "99.9% Accurate",
+    change: "↑ 100%",
+    isIncrease: true
+  },
+  costPerLead: {
+    label: "Tracking Errors",
+    value: "0",
+    change: "↓ 100% reduction",
+    isIncrease: false
+  },
+  lineChart: {
+    leadsLabel: "Custom Events",
+    conversionsLabel: "Conversions",
+    leadsPath: "M0 120 Q 50 100, 80 80 T 160 40 T 240 50 T 320 20 T 400 5",
+    conversionsPath: "M0 125 Q 50 115, 80 95 T 160 60 T 240 70 T 320 35 T 400 15",
+    dates: ["Apr 7", "Apr 14", "Apr 21", "Apr 28", "May 5"]
+  },
+  activePlatforms: ["google"],
+  trafficGrowth: {
+    value: "+100%",
+    change: "↑ 100% vs last week",
+    isIncrease: true
+  },
+  channelMix: {
+    slices: [
+      { name: "GA4 Events", percentage: 45, colorClass: "bg-amber-500", strokeColor: "#F59E0B" },
+      { name: "GTM Tags", percentage: 30, colorClass: "bg-blue-500", strokeColor: "#3B82F6" },
+      { name: "Facebook Pixel", percentage: 20, colorClass: "bg-blue-700", strokeColor: "#1D4ED8" },
+      { name: "LinkedIn Insight", percentage: 5, colorClass: "bg-violet-500", strokeColor: "#8B5CF6" }
+    ],
+    primarySource: "Google Tag Manager"
+  },
+  whyChooseMetrics: {
+    leadsMiniPath: "M0 25 Q20 18,40 22 T80 12 T100 2",
+    conversionsMiniPath: "M0 28 Q20 20,40 18 T80 8 T100 2",
+    cplMiniPath: "M0 20 Q20 15,40 10 T80 5 T100 2",
+    revenueBars: [45, 48, 50, 52, 55, 60, 62, 65, 70, 75, 80, 85]
+  }
+};
+
 export default function AnalyticsTrackingSetupPage() {
   return (
     <main>
@@ -43,6 +99,7 @@ export default function AnalyticsTrackingSetupPage() {
         ]}
         faqs={faqs}
         pageUrl="https://clevercrow.in/analytics-tracking-setup"
+        dashboard={analyticsDashboard}
       />
       <WebPageSchema title="Analytics & Tracking Setup Services | Clever Crow" description="Set up GA4, Google Tag Manager, Meta Pixel, conversion events and lead tracking to measure every campaign properly." url="https://clevercrow.in/analytics-tracking-setup" />
       <ServiceSchema serviceName="Analytics & Tracking Setup" serviceDescription="Professional analytics and tracking setup including GA4, GTM, Meta Pixel, and conversion event configuration." pageUrl="https://clevercrow.in/analytics-tracking-setup" />

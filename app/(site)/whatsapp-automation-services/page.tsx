@@ -25,6 +25,37 @@ export const metadata = {
   keywords: "WhatsApp automation services, WhatsApp chatbot, WhatsApp Business automation, WhatsApp lead management, WhatsApp marketing",
 };
 
+const whatsappFlowchart = {
+  title: "WHATSAPP CHAT AUTOMATION FLOW",
+  icon: "whatsapp",
+  steps: [
+    {
+      title: "Customer Messages",
+      desc: "Lead messages your business WhatsApp number.",
+      icon: "messagecircle",
+      colorClass: "bg-green-500/10 text-green-400 border-green-500/20"
+    },
+    {
+      title: "Instant AI Qualification",
+      desc: "AI qualifies lead and gathers requirement details.",
+      icon: "cpu",
+      colorClass: "bg-amber-500/10 text-amber-400 border-amber-500/20"
+    },
+    {
+      title: "Auto Calendar Booking",
+      desc: "AI sends calendar links for booking an appointment.",
+      icon: "calendar",
+      colorClass: "bg-blue-500/10 text-blue-400 border-blue-500/20"
+    },
+    {
+      title: "CRM Log & Notify",
+      desc: "Details are synced to CRM and team gets notified.",
+      icon: "database",
+      colorClass: "bg-purple-500/10 text-purple-400 border-purple-500/20"
+    }
+  ]
+};
+
 export default function WhatsappAutomationServicesPage() {
   return (
     <main>
@@ -43,6 +74,7 @@ export default function WhatsappAutomationServicesPage() {
         ]}
         faqs={faqs}
         pageUrl="https://clevercrow.in/whatsapp-automation-services"
+        flowchart={whatsappFlowchart}
       />
       <WebPageSchema title="WhatsApp Automation Services | Clever Crow" description="Automate WhatsApp replies, lead qualification, follow-ups, reminders and customer communication with practical business workflows." url="https://clevercrow.in/whatsapp-automation-services" />
       <ServiceSchema serviceName="WhatsApp Automation Services" serviceDescription="WhatsApp Business automation for lead qualification, customer communication, and follow-up workflows." pageUrl="https://clevercrow.in/whatsapp-automation-services" />

@@ -25,6 +25,37 @@ export const metadata = {
   keywords: "workflow automation services, business process automation, automated workflows, process optimization, task automation",
 };
 
+const workflowFlowchart = {
+  title: "OPERATIONAL WORKFLOW FLOW",
+  icon: "workflow",
+  steps: [
+    {
+      title: "Process Triggered",
+      desc: "Employee submits request or system event occurs.",
+      icon: "laptop",
+      colorClass: "bg-blue-500/10 text-blue-400 border-blue-500/20"
+    },
+    {
+      title: "Smart Approval Routing",
+      desc: "Approval request routed to manager via Slack/WhatsApp.",
+      icon: "network",
+      colorClass: "bg-purple-500/10 text-purple-400 border-purple-500/20"
+    },
+    {
+      title: "Automatic Notification",
+      desc: "Team is notified of approval and task status.",
+      icon: "shield",
+      colorClass: "bg-amber-500/10 text-amber-400 border-amber-500/20"
+    },
+    {
+      title: "Automated Completion",
+      desc: "System executes action and updates reports.",
+      icon: "checkcircle2",
+      colorClass: "bg-green-500/10 text-green-400 border-green-500/20"
+    }
+  ]
+};
+
 export default function WorkflowAutomationServicesPage() {
   return (
     <main>
@@ -43,6 +74,7 @@ export default function WorkflowAutomationServicesPage() {
         ]}
         faqs={faqs}
         pageUrl="https://clevercrow.in/workflow-automation-services"
+        flowchart={workflowFlowchart}
       />
       <WebPageSchema title="Workflow Automation Services | Clever Crow" description="Reduce repetitive work by automating approvals, lead routing, notifications, reports and daily business processes." url="https://clevercrow.in/workflow-automation-services" />
       <ServiceSchema serviceName="Workflow Automation Services" serviceDescription="Business workflow automation for approvals, lead routing, notifications, and daily operational processes." pageUrl="https://clevercrow.in/workflow-automation-services" />

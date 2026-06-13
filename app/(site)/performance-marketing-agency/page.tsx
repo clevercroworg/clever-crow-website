@@ -25,6 +25,62 @@ export const metadata = {
   keywords: "performance marketing agency, performance advertising, data-driven marketing, paid media optimization, ROI-focused marketing",
 };
 
+const performanceDashboard = {
+  leadsGenerated: {
+    label: "Leads Generated",
+    value: "4,850",
+    change: "↑ 44.6%",
+    isIncrease: true
+  },
+  conversions: {
+    label: "Sales / Signups",
+    value: "7.2K",
+    change: "↑ 49.8%",
+    isIncrease: true
+  },
+  revenue: {
+    label: "Client Revenue",
+    value: "₹48.2L",
+    valueLong: "₹48,24,500",
+    change: "↑ 52.4%",
+    isIncrease: true
+  },
+  costPerLead: {
+    label: "Blended CPL",
+    value: "₹160",
+    change: "↓ 24.1%",
+    isIncrease: false
+  },
+  lineChart: {
+    leadsLabel: "Paid Leads",
+    conversionsLabel: "Paid Sales",
+    leadsPath: "M0 100 Q 50 85, 80 65 T 160 40 T 240 55 T 320 20 T 400 5",
+    conversionsPath: "M0 115 Q 50 105, 80 90 T 160 70 T 240 80 T 320 45 T 400 20",
+    dates: ["Apr 7", "Apr 14", "Apr 21", "Apr 28", "May 5"]
+  },
+  activePlatforms: ["google", "facebook", "linkedin", "youtube", "instagram"],
+  trafficGrowth: {
+    value: "+92.4%",
+    change: "↑ 22.8% vs last week",
+    isIncrease: true
+  },
+  channelMix: {
+    slices: [
+      { name: "Google Ads", percentage: 38, colorClass: "bg-blue-500", strokeColor: "#3B82F6" },
+      { name: "Meta Ads", percentage: 32, colorClass: "bg-amber-500", strokeColor: "#F59E0B" },
+      { name: "LinkedIn Ads", percentage: 18, colorClass: "bg-blue-700", strokeColor: "#0A66C2" },
+      { name: "YouTube Ads", percentage: 12, colorClass: "bg-rose-600", strokeColor: "#DC2626" }
+    ],
+    primarySource: "Google & Meta Ads"
+  },
+  whyChooseMetrics: {
+    leadsMiniPath: "M0 25 Q20 18,40 22 T80 12 T100 2",
+    conversionsMiniPath: "M0 28 Q20 20,40 18 T80 8 T100 2",
+    cplMiniPath: "M0 10 Q20 12,40 16 T80 22 T100 26",
+    revenueBars: [30, 38, 32, 45, 40, 55, 48, 62, 55, 72, 65, 80]
+  }
+};
+
 export default function PerformanceMarketingAgencyPage() {
   return (
     <main>
@@ -43,6 +99,7 @@ export default function PerformanceMarketingAgencyPage() {
         ]}
         faqs={faqs}
         pageUrl="https://clevercrow.in/performance-marketing-agency"
+        dashboard={performanceDashboard}
       />
       <WebPageSchema title="Performance Marketing Agency | Clever Crow" description="Scale paid campaigns with data-led strategy, creative testing, conversion tracking and continuous optimization for better ROI." url="https://clevercrow.in/performance-marketing-agency" />
       <ServiceSchema serviceName="Performance Marketing" serviceDescription="Performance marketing agency providing data-driven paid advertising with creative testing and ROI optimization." pageUrl="https://clevercrow.in/performance-marketing-agency" />

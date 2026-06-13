@@ -68,6 +68,37 @@ export const metadata = {
   keywords: "AI automation agency India, AI chatbot development, WhatsApp automation, lead management automation, CRM automation, workflow automation",
 };
 
+const agencyFlowchart = {
+  title: "END-TO-END BUSINESS AUTOMATION",
+  icon: "workflow",
+  steps: [
+    {
+      title: "Omnichannel Capture",
+      desc: "Capture leads from website, ads, forms, and WhatsApp.",
+      icon: "users",
+      colorClass: "bg-blue-500/10 text-blue-400 border-blue-500/20"
+    },
+    {
+      title: "AI Conversational Agent",
+      desc: "Bot instantly answers queries and qualifies prospects.",
+      icon: "bot",
+      colorClass: "bg-amber-500/10 text-amber-400 border-amber-500/20"
+    },
+    {
+      title: "Smart Data Routing",
+      desc: "Updates CRM and schedules meetings dynamically.",
+      icon: "database",
+      colorClass: "bg-purple-500/10 text-purple-400 border-purple-500/20"
+    },
+    {
+      title: "Continuous Follow-Up",
+      desc: "Nurtures leads automatically until conversion.",
+      icon: "rocket",
+      colorClass: "bg-green-500/10 text-green-400 border-green-500/20"
+    }
+  ]
+};
+
 export default function AIAutomationAgencyPage() {
   return (
     <main>
@@ -86,6 +117,7 @@ export default function AIAutomationAgencyPage() {
         ]}
         faqs={pillarFaqs}
         pageUrl="https://clevercrow.in/ai-automation-agency"
+        flowchart={agencyFlowchart}
       />
 
       <WebPageSchema

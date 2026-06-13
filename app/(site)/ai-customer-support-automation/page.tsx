@@ -25,6 +25,37 @@ export const metadata = {
   keywords: "AI customer support automation, automated customer support, AI support chatbot, customer service automation, support ticket automation",
 };
 
+const supportFlowchart = {
+  title: "SUPPORT TICKET RESOLUTION FLOW",
+  icon: "headphones",
+  steps: [
+    {
+      title: "Ticket Submitted",
+      desc: "Customer files a support request via website or email.",
+      icon: "headphones",
+      colorClass: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20"
+    },
+    {
+      title: "AI FAQ Auto-Reply",
+      desc: "AI resolves common FAQs instantly with zero delay.",
+      icon: "cpu",
+      colorClass: "bg-amber-500/10 text-amber-400 border-amber-500/20"
+    },
+    {
+      title: "Contextual Escalation",
+      desc: "Complex issues routed to support agents with context.",
+      icon: "users",
+      colorClass: "bg-purple-500/10 text-purple-400 border-purple-500/20"
+    },
+    {
+      title: "Feedback Loop",
+      desc: "Automatically collects customer satisfaction score.",
+      icon: "checkcircle2",
+      colorClass: "bg-green-500/10 text-green-400 border-green-500/20"
+    }
+  ]
+};
+
 export default function AiCustomerSupportAutomationPage() {
   return (
     <main>
@@ -43,6 +74,7 @@ export default function AiCustomerSupportAutomationPage() {
         ]}
         faqs={faqs}
         pageUrl="https://clevercrow.in/ai-customer-support-automation"
+        flowchart={supportFlowchart}
       />
       <WebPageSchema title="AI Customer Support Automation | Clever Crow" description="Use AI automation to handle common customer questions, support requests, status updates and escalation workflows faster." url="https://clevercrow.in/ai-customer-support-automation" />
       <ServiceSchema serviceName="AI Customer Support Automation" serviceDescription="AI-powered customer support automation for handling queries, support requests, and escalation workflows." pageUrl="https://clevercrow.in/ai-customer-support-automation" />

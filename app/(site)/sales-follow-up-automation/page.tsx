@@ -25,6 +25,37 @@ export const metadata = {
   keywords: "sales follow up automation, automated follow-up, lead follow-up automation, WhatsApp follow-up, email drip campaigns",
 };
 
+const salesFlowchart = {
+  title: "AUTOMATED FOLLOW-UP SEQUENCE",
+  icon: "rocket",
+  steps: [
+    {
+      title: "No-Response Trigger",
+      desc: "Triggers when a qualified lead doesn't respond.",
+      icon: "clock",
+      colorClass: "bg-red-500/10 text-red-400 border-red-500/20"
+    },
+    {
+      title: "WhatsApp Multi-Drip",
+      desc: "Sends friendly follow-up nudges over 3 days.",
+      icon: "messagecircle",
+      colorClass: "bg-green-500/10 text-green-400 border-green-500/20"
+    },
+    {
+      title: "Email Nurture Send",
+      desc: "Shares case studies or client reviews automatically.",
+      icon: "send",
+      colorClass: "bg-blue-500/10 text-blue-400 border-blue-500/20"
+    },
+    {
+      title: "Deal Won Update",
+      desc: "Lead converts and updates deals pipeline automatically.",
+      icon: "checkcircle2",
+      colorClass: "bg-amber-500/10 text-amber-400 border-amber-500/20"
+    }
+  ]
+};
+
 export default function SalesFollowUpAutomationPage() {
   return (
     <main>
@@ -43,6 +74,7 @@ export default function SalesFollowUpAutomationPage() {
         ]}
         faqs={faqs}
         pageUrl="https://clevercrow.in/sales-follow-up-automation"
+        flowchart={salesFlowchart}
       />
       <WebPageSchema title="Sales Follow-Up Automation Services | Clever Crow" description="Set up automated follow-up sequences across WhatsApp, email and CRM to improve response speed and lead conversion." url="https://clevercrow.in/sales-follow-up-automation" />
       <ServiceSchema serviceName="Sales Follow-Up Automation" serviceDescription="Automated sales follow-up sequences across WhatsApp, email, and CRM for improved lead conversion." pageUrl="https://clevercrow.in/sales-follow-up-automation" />

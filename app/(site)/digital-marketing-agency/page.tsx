@@ -68,6 +68,62 @@ export const metadata = {
   keywords: "digital marketing agency in India, Google Ads management, Meta Ads management, SEO services, social media management, lead generation, performance marketing",
 };
 
+const agencyDashboard = {
+  leadsGenerated: {
+    label: "Total Impressions",
+    value: "1.2M",
+    change: "↑ 62.4%",
+    isIncrease: true
+  },
+  conversions: {
+    label: "Leads Acquired",
+    value: "5,420",
+    change: "↑ 34.6%",
+    isIncrease: true
+  },
+  revenue: {
+    label: "Business Revenue",
+    value: "₹35.8L",
+    valueLong: "₹35,81,600",
+    change: "↑ 41.2%",
+    isIncrease: true
+  },
+  costPerLead: {
+    label: "Cost per Acquisition",
+    value: "₹145",
+    change: "↓ 18.2%",
+    isIncrease: false
+  },
+  lineChart: {
+    leadsLabel: "Total Clicks",
+    conversionsLabel: "Acquisitions",
+    leadsPath: "M0 90 Q 50 85, 80 70 T 160 50 T 240 65 T 320 35 T 400 20",
+    conversionsPath: "M0 105 Q 50 100, 80 90 T 160 70 T 240 80 T 320 50 T 400 30",
+    dates: ["Apr 7", "Apr 14", "Apr 21", "Apr 28", "May 5"]
+  },
+  activePlatforms: ["google", "facebook", "linkedin", "youtube", "instagram"],
+  trafficGrowth: {
+    value: "+64.2%",
+    change: "↑ 12.4% vs last week",
+    isIncrease: true
+  },
+  channelMix: {
+    slices: [
+      { name: "Google Ads", percentage: 40, colorClass: "bg-blue-500", strokeColor: "#3B82F6" },
+      { name: "Meta Ads", percentage: 28, colorClass: "bg-amber-500", strokeColor: "#F59E0B" },
+      { name: "Organic Search", percentage: 18, colorClass: "bg-emerald-500", strokeColor: "#10B981" },
+      { name: "Social Media", percentage: 14, colorClass: "bg-violet-500", strokeColor: "#8B5CF6" }
+    ],
+    primarySource: "Google Search"
+  },
+  whyChooseMetrics: {
+    leadsMiniPath: "M0 25 Q15 20,30 22 T60 12 T100 5",
+    conversionsMiniPath: "M0 28 Q20 22,40 18 T80 8 T100 3",
+    cplMiniPath: "M0 8 Q20 10,40 15 T80 22 T100 25",
+    revenueBars: [28, 35, 22, 40, 32, 48, 38, 55, 45, 60, 52, 65]
+  }
+};
+
 export default function DigitalMarketingAgencyPage() {
   return (
     <main>
@@ -86,6 +142,7 @@ export default function DigitalMarketingAgencyPage() {
         ]}
         faqs={pillarFaqs}
         pageUrl="https://clevercrow.in/digital-marketing-agency"
+        dashboard={agencyDashboard}
       />
 
       <WebPageSchema

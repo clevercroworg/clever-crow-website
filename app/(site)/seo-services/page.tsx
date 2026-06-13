@@ -25,6 +25,62 @@ export const metadata = {
   keywords: "SEO services in India, search engine optimization, on-page SEO, technical SEO, local SEO, keyword research",
 };
 
+const seoDashboard = {
+  leadsGenerated: {
+    label: "Organic Clicks",
+    value: "12.4K",
+    change: "↑ 42.1%",
+    isIncrease: true
+  },
+  conversions: {
+    label: "Organic Leads",
+    value: "1,150",
+    change: "↑ 35.8%",
+    isIncrease: true
+  },
+  revenue: {
+    label: "Est. Traffic Value",
+    value: "₹6.8L",
+    valueLong: "₹6,80,400",
+    change: "↑ 44.2%",
+    isIncrease: true
+  },
+  costPerLead: {
+    label: "Avg. Rank Position",
+    value: "14.2",
+    change: "↓ 28.1% improvement",
+    isIncrease: false
+  },
+  lineChart: {
+    leadsLabel: "Organic Sessions",
+    conversionsLabel: "Organic Leads",
+    leadsPath: "M0 120 Q 50 110, 80 90 T 160 50 T 240 70 T 320 40 T 400 10",
+    conversionsPath: "M0 125 Q 50 120, 80 110 T 160 85 T 240 95 T 320 65 T 400 30",
+    dates: ["Apr 7", "Apr 14", "Apr 21", "Apr 28", "May 5"]
+  },
+  activePlatforms: ["google"],
+  trafficGrowth: {
+    value: "+82.5%",
+    change: "↑ 14.8% vs last week",
+    isIncrease: true
+  },
+  channelMix: {
+    slices: [
+      { name: "Google Organic", percentage: 65, colorClass: "bg-orange-500", strokeColor: "#FF6600" },
+      { name: "Direct Search", percentage: 20, colorClass: "bg-blue-500", strokeColor: "#3B82F6" },
+      { name: "Referral Link", percentage: 10, colorClass: "bg-emerald-500", strokeColor: "#10B981" },
+      { name: "Social Organic", percentage: 5, colorClass: "bg-violet-500", strokeColor: "#8B5CF6" }
+    ],
+    primarySource: "Google Organic"
+  },
+  whyChooseMetrics: {
+    leadsMiniPath: "M0 25 Q20 18,40 22 T80 12 T100 2",
+    conversionsMiniPath: "M0 28 Q20 20,40 18 T80 8 T100 2",
+    cplMiniPath: "M0 12 Q20 10,40 8 T80 4 T100 2",
+    revenueBars: [40, 45, 38, 52, 48, 58, 50, 68, 62, 75, 70, 85]
+  }
+};
+
 export default function SeoServicesPage() {
   return (
     <main>
@@ -43,6 +99,7 @@ export default function SeoServicesPage() {
         ]}
         faqs={faqs}
         pageUrl="https://clevercrow.in/seo-services"
+        dashboard={seoDashboard}
       />
       <WebPageSchema title="SEO Services in India | Clever Crow" description="Improve organic visibility with keyword research, on-page SEO, technical SEO, content planning, local SEO and performance tracking." url="https://clevercrow.in/seo-services" />
       <ServiceSchema serviceName="SEO Services" serviceDescription="Professional SEO services including keyword research, on-page optimization, technical SEO, and local SEO." pageUrl="https://clevercrow.in/seo-services" />

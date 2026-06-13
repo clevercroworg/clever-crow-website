@@ -86,7 +86,14 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
   bed: Bed,
   graduationcap: GraduationCap,
   heartpulse: HeartPulse,
-  luggage: Luggage
+  luggage: Luggage,
+  bot: Bot,
+  user: User,
+  send: Send,
+  workflow: Workflow,
+  check: Check,
+  whatsapp: FaWhatsapp,
+  fawhatsapp: FaWhatsapp
 };
 
 function getServiceConfig(title: string, iconKey: string) {
@@ -159,6 +166,77 @@ function getServiceConfig(title: string, iconKey: string) {
   };
 }
 
+function getHeaderConfig(iconKey: string) {
+  const k = iconKey.toLowerCase();
+  if (k === "whatsapp" || k === "fawhatsapp") {
+    return {
+      bgColor: "bg-emerald-500/10",
+      textColor: "text-[#25D366]",
+      borderColor: "border-emerald-500/20"
+    };
+  }
+  if (k === "bot" || k === "cpu") {
+    return {
+      bgColor: "bg-amber-500/10",
+      textColor: "text-amber-400",
+      borderColor: "border-amber-500/20"
+    };
+  }
+  if (k === "database" || k === "crm") {
+    return {
+      bgColor: "bg-purple-500/10",
+      textColor: "text-purple-400",
+      borderColor: "border-purple-500/20"
+    };
+  }
+  if (k === "network" || k === "workflow") {
+    return {
+      bgColor: "bg-blue-500/10",
+      textColor: "text-blue-400",
+      borderColor: "border-blue-500/20"
+    };
+  }
+  if (k === "target") {
+    return {
+      bgColor: "bg-orange-500/10",
+      textColor: "text-orange-400",
+      borderColor: "border-orange-500/20"
+    };
+  }
+  if (k === "rocket" || k === "send") {
+    return {
+      bgColor: "bg-amber-500/10",
+      textColor: "text-amber-400",
+      borderColor: "border-amber-500/20"
+    };
+  }
+  if (k === "headphones") {
+    return {
+      bgColor: "bg-indigo-500/10",
+      textColor: "text-indigo-400",
+      borderColor: "border-indigo-500/20"
+    };
+  }
+  return {
+    bgColor: "bg-slate-500/10",
+    textColor: "text-slate-400",
+    borderColor: "border-slate-500/20"
+  };
+}
+
+type FlowchartStep = {
+  title: string;
+  desc: string;
+  colorClass?: string;
+  icon: string;
+};
+
+type FlowchartData = {
+  title: string;
+  icon: string;
+  steps: FlowchartStep[];
+};
+
 type ServiceItem = {
   icon: string;
   title: string;
@@ -180,7 +258,15 @@ type AiAutomationServiceLayoutProps = {
   whyChoose: string[];
   faqs: FAQItem[];
   pageUrl: string;
+  flowchart?: FlowchartData;
 };
+
+const defaultColorClasses = [
+  "bg-green-500/10 text-green-400 border-green-500/20",
+  "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+  "bg-purple-500/10 text-purple-400 border-purple-500/20",
+  "bg-amber-500/10 text-amber-400 border-amber-500/20"
+];
 
 export default function AiAutomationServiceLayout({
   eyebrow,
@@ -190,7 +276,8 @@ export default function AiAutomationServiceLayout({
   services,
   whyChoose,
   faqs,
-  pageUrl
+  pageUrl,
+  flowchart
 }: AiAutomationServiceLayoutProps) {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
@@ -206,33 +293,41 @@ export default function AiAutomationServiceLayout({
     { title: "Scalable Workflows", desc: "Automation that grows with your business.", icon: "trendingup" }
   ];
 
-  // Hero Right-Side Flowchart steps
-  const flowchartSteps = [
-    {
-      title: "Lead Enquiry",
-      desc: "New leads come in via website, ads or forms.",
-      colorClass: "bg-green-500/10 text-green-600 border-green-500/20",
-      icon: <Users size={16} className="stroke-[2.5]" />
-    },
-    {
-      title: "Instant WhatsApp Reply",
-      desc: "AI instantly replies, engages and qualifies the lead.",
-      colorClass: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
-      icon: <MessageCircle size={16} className="stroke-[2.5]" />
-    },
-    {
-      title: "CRM Update",
-      desc: "Lead details are captured and updated in CRM.",
-      colorClass: "bg-purple-500/10 text-purple-600 border-purple-500/20",
-      icon: <Database size={16} className="stroke-[2.5]" />
-    },
-    {
-      title: "Follow-Up",
-      desc: "Auto follow-ups nurture leads until they convert.",
-      colorClass: "bg-amber-500/10 text-amber-600 border-amber-500/20",
-      icon: <Check size={16} className="stroke-[3]" />
-    }
-  ];
+  // Fallback / default flowchart data
+  const defaultFlowchart: FlowchartData = {
+    title: "CUSTOMER ACQUISITION FLOW",
+    icon: "users",
+    steps: [
+      {
+        title: "Lead Enquiry",
+        desc: "New leads come in via website, ads or forms.",
+        colorClass: "bg-green-500/10 text-green-400 border-green-500/20",
+        icon: "users"
+      },
+      {
+        title: "Instant WhatsApp Reply",
+        desc: "AI instantly replies, engages and qualifies the lead.",
+        colorClass: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+        icon: "messagecircle"
+      },
+      {
+        title: "CRM Update",
+        desc: "Lead details are captured and updated in CRM.",
+        colorClass: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+        icon: "database"
+      },
+      {
+        title: "Follow-Up",
+        desc: "Auto follow-ups nurture leads until they convert.",
+        colorClass: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+        icon: "check"
+      }
+    ]
+  };
+
+  const activeFlowchart = flowchart || defaultFlowchart;
+  const FlowchartHeaderIcon = iconMap[activeFlowchart.icon.toLowerCase()] || Cpu;
+  const headerColors = getHeaderConfig(activeFlowchart.icon);
 
   // How It Works Steps
   const howItWorksSteps = [
@@ -326,36 +421,46 @@ export default function AiAutomationServiceLayout({
             <div className="lg:col-span-6 w-full flex flex-col justify-center">
               <div className="relative bg-white/[0.04] backdrop-blur-md border border-white/[0.08] rounded-[2rem] p-6 shadow-[0_8px_40px_rgba(0,0,0,0.3)] max-w-lg mx-auto w-full font-sans">
                 
-                <p className="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 mb-6 leading-none text-center">
-                  CUSTOMER ACQUISITION FLOW
-                </p>
+                {/* Flowchart Header Icon & Title */}
+                <div className="flex flex-col items-center mb-6">
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${headerColors.bgColor} ${headerColors.textColor} border ${headerColors.borderColor} mb-3 shadow-md`}>
+                    <FlowchartHeaderIcon size={24} className="stroke-[1.5]" />
+                  </div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-300 leading-none text-center">
+                    {activeFlowchart.title}
+                  </p>
+                </div>
 
                 <div className="flex flex-col gap-4 relative">
                   
-                  {flowchartSteps.map((step, idx) => (
-                    <div key={idx} className="relative flex items-stretch gap-4">
-                      
-                      {/* Connecting Line (Vertical) */}
-                      {idx < flowchartSteps.length - 1 && (
-                        <div className="absolute left-6 top-10 bottom-[-16px] w-[2px] border-l-2 border-dashed border-white/10" />
-                      )}
+                  {activeFlowchart.steps.map((step, idx) => {
+                    const colorClass = step.colorClass || defaultColorClasses[idx % defaultColorClasses.length];
+                    const StepIcon = iconMap[step.icon.toLowerCase()] || Cpu;
+                    return (
+                      <div key={idx} className="relative flex items-stretch gap-4">
+                        
+                        {/* Connecting Line (Vertical) */}
+                        {idx < activeFlowchart.steps.length - 1 && (
+                          <div className="absolute left-6 top-10 bottom-[-16px] w-[2px] border-l-2 border-dashed border-white/10" />
+                        )}
 
-                      {/* Step Icon Container */}
-                      <div className={`flex h-12 w-12 items-center justify-center rounded-2xl shrink-0 border shadow-sm z-10 ${step.colorClass}`}>
-                        {step.icon}
-                      </div>
+                        {/* Step Icon Container */}
+                        <div className={`flex h-12 w-12 items-center justify-center rounded-2xl shrink-0 border shadow-sm z-10 ${colorClass}`}>
+                          <StepIcon size={16} className="stroke-[2.5]" />
+                        </div>
 
-                      {/* Step content */}
-                      <div className="flex flex-col justify-center bg-white/[0.03] border border-white/[0.06] rounded-2xl px-4 py-3 flex-grow">
-                        <span className="text-[11px] font-black text-white/90 tracking-tight leading-none">
-                          {step.title}
-                        </span>
-                        <span className="text-[10px] font-semibold text-slate-400 leading-normal mt-1 block">
-                          {step.desc}
-                        </span>
+                        {/* Step content */}
+                        <div className="flex flex-col justify-center bg-white/[0.03] border border-white/[0.06] rounded-2xl px-4 py-3 flex-grow">
+                          <span className="text-[11px] font-black text-white/90 tracking-tight leading-none">
+                            {step.title}
+                          </span>
+                          <span className="text-[10px] font-semibold text-slate-400 leading-normal mt-1 block">
+                            {step.desc}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
 
                 </div>
 
@@ -364,22 +469,19 @@ export default function AiAutomationServiceLayout({
 
           </div>
 
-          {/* Hero Bottom Bullets */}
+          {/* Hero Bottom Bullets (Compact: Icon & Title only, centered vertically) */}
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
             {heroBullets.map((bullet, idx) => {
               const BulletIcon = iconMap[bullet.icon] || Clock;
               return (
-                <div key={idx} className="bg-[#1a1d2e] border border-white/10 rounded-2xl p-4 flex gap-3.5 items-start hover:border-white/20 transition-colors">
+                <div key={idx} className="bg-[#1a1d2e] border border-white/10 rounded-2xl p-4 flex gap-3.5 items-center hover:border-white/20 transition-colors">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/15 text-amber-400 shrink-0">
                     <BulletIcon size={18} className="stroke-[2]" />
                   </div>
                   <div>
-                    <h3 className="text-xs font-black text-white tracking-tight leading-none mb-1.5">
+                    <h3 className="text-xs font-black text-white tracking-tight leading-none">
                       {bullet.title}
                     </h3>
-                    <p className="text-[10px] font-semibold text-slate-300 leading-normal">
-                      {bullet.desc}
-                    </p>
                   </div>
                 </div>
               );

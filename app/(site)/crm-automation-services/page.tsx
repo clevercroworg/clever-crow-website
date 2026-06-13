@@ -25,6 +25,37 @@ export const metadata = {
   keywords: "CRM automation services, CRM workflow automation, sales CRM automation, automated CRM, CRM task automation",
 };
 
+const crmFlowchart = {
+  title: "CRM WORKFLOW AUTOMATION",
+  icon: "database",
+  steps: [
+    {
+      title: "New Lead Logged",
+      desc: "Lead gets automatically created in the CRM database.",
+      icon: "database",
+      colorClass: "bg-purple-500/10 text-purple-400 border-purple-500/20"
+    },
+    {
+      title: "Stage Auto-Promotion",
+      desc: "Pipeline stage updates automatically based on activity.",
+      icon: "trendingup",
+      colorClass: "bg-blue-500/10 text-blue-400 border-blue-500/20"
+    },
+    {
+      title: "Task Assignment",
+      desc: "Follow-up tasks and calendar events assigned to reps.",
+      icon: "calendar",
+      colorClass: "bg-amber-500/10 text-amber-400 border-amber-500/20"
+    },
+    {
+      title: "Auto Document Send",
+      desc: "Sends brochures or proposals automatically to the lead.",
+      icon: "send",
+      colorClass: "bg-green-500/10 text-green-400 border-green-500/20"
+    }
+  ]
+};
+
 export default function CrmAutomationServicesPage() {
   return (
     <main>
@@ -43,6 +74,7 @@ export default function CrmAutomationServicesPage() {
         ]}
         faqs={faqs}
         pageUrl="https://clevercrow.in/crm-automation-services"
+        flowchart={crmFlowchart}
       />
       <WebPageSchema title="CRM Automation Services | Clever Crow" description="Automate CRM updates, lead stages, reminders, task assignments and reporting so your sales team never misses a follow-up." url="https://clevercrow.in/crm-automation-services" />
       <ServiceSchema serviceName="CRM Automation Services" serviceDescription="CRM automation for sales teams including pipeline management, task assignment, and automated reporting." pageUrl="https://clevercrow.in/crm-automation-services" />

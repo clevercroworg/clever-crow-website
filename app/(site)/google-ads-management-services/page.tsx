@@ -25,6 +25,62 @@ export const metadata = {
   keywords: "Google Ads management services, Google Ads agency, PPC management, Google search ads, Google Ads optimization",
 };
 
+const googleAdsDashboard = {
+  leadsGenerated: {
+    label: "Leads Generated",
+    value: "1,840",
+    change: "↑ 24.5%",
+    isIncrease: true
+  },
+  conversions: {
+    label: "Form Fills / Calls",
+    value: "2.12K",
+    change: "↑ 28.2%",
+    isIncrease: true
+  },
+  revenue: {
+    label: "Ad Spend",
+    value: "₹4.4L",
+    valueLong: "₹4,41,800",
+    change: "↑ 15.6%",
+    isIncrease: true
+  },
+  costPerLead: {
+    label: "Cost per Conversion",
+    value: "₹208",
+    change: "↓ 12.4%",
+    isIncrease: false
+  },
+  lineChart: {
+    leadsLabel: "Clicks",
+    conversionsLabel: "Conversions",
+    leadsPath: "M0 100 Q 50 80, 80 60 T 160 30 T 240 50 T 320 25 T 400 10",
+    conversionsPath: "M0 115 Q 50 110, 80 95 T 160 65 T 240 85 T 320 45 T 400 25",
+    dates: ["Apr 7", "Apr 14", "Apr 21", "Apr 28", "May 5"]
+  },
+  activePlatforms: ["google", "youtube"],
+  trafficGrowth: {
+    value: "+48.6%",
+    change: "↑ 8.2% vs last week",
+    isIncrease: true
+  },
+  channelMix: {
+    slices: [
+      { name: "Search Ads", percentage: 60, colorClass: "bg-blue-500", strokeColor: "#3B82F6" },
+      { name: "Performance Max", percentage: 25, colorClass: "bg-amber-500", strokeColor: "#F59E0B" },
+      { name: "YouTube Ads", percentage: 10, colorClass: "bg-rose-500", strokeColor: "#F43F5E" },
+      { name: "Display Ads", percentage: 5, colorClass: "bg-violet-500", strokeColor: "#8B5CF6" }
+    ],
+    primarySource: "Google Search"
+  },
+  whyChooseMetrics: {
+    leadsMiniPath: "M0 25 Q20 18,40 22 T80 12 T100 2",
+    conversionsMiniPath: "M0 28 Q20 20,40 18 T80 8 T100 2",
+    cplMiniPath: "M0 6 Q20 8,40 12 T80 20 T100 24",
+    revenueBars: [22, 30, 25, 38, 30, 45, 35, 50, 40, 55, 48, 58]
+  }
+};
+
 export default function GoogleAdsManagementServicesPage() {
   return (
     <main>
@@ -43,6 +99,7 @@ export default function GoogleAdsManagementServicesPage() {
         ]}
         faqs={faqs}
         pageUrl="https://clevercrow.in/google-ads-management-services"
+        dashboard={googleAdsDashboard}
       />
       <WebPageSchema title="Google Ads Management Services | Clever Crow" description="Run Google Search, lead generation and conversion-focused ad campaigns with keyword planning, tracking and ongoing optimization." url="https://clevercrow.in/google-ads-management-services" />
       <ServiceSchema serviceName="Google Ads Management Services" serviceDescription="Professional Google Ads management with keyword planning, conversion tracking, and ongoing campaign optimization." pageUrl="https://clevercrow.in/google-ads-management-services" />

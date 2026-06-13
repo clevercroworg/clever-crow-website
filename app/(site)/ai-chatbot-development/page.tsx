@@ -25,6 +25,37 @@ export const metadata = {
   keywords: "AI chatbot development company, chatbot development, WhatsApp chatbot, AI customer support chatbot, lead capture chatbot",
 };
 
+const chatbotFlowchart = {
+  title: "AI CHATBOT ENGAGEMENT FLOW",
+  icon: "bot",
+  steps: [
+    {
+      title: "Visitor Greeting",
+      desc: "User visits website or sends a message to initiate chat.",
+      icon: "user",
+      colorClass: "bg-blue-500/10 text-blue-400 border-blue-500/20"
+    },
+    {
+      title: "AI Intent Matching",
+      desc: "AI instantly parses the query and matches intent.",
+      icon: "cpu",
+      colorClass: "bg-amber-500/10 text-amber-400 border-amber-500/20"
+    },
+    {
+      title: "Data Collection",
+      desc: "AI collects user name, email, and enquiry details.",
+      icon: "database",
+      colorClass: "bg-purple-500/10 text-purple-400 border-purple-500/20"
+    },
+    {
+      title: "Live Chat Handover",
+      desc: "If needed, AI hands over to a human agent seamlessly.",
+      icon: "checkcircle2",
+      colorClass: "bg-green-500/10 text-green-400 border-green-500/20"
+    }
+  ]
+};
+
 export default function AiChatbotDevelopmentPage() {
   return (
     <main>
@@ -43,6 +74,7 @@ export default function AiChatbotDevelopmentPage() {
         ]}
         faqs={faqs}
         pageUrl="https://clevercrow.in/ai-chatbot-development"
+        flowchart={chatbotFlowchart}
       />
       <WebPageSchema title="AI Chatbot Development Company | Clever Crow" description="Build AI chatbots for websites, WhatsApp and support workflows to answer queries, capture leads and reduce manual follow-up." url="https://clevercrow.in/ai-chatbot-development" />
       <ServiceSchema serviceName="AI Chatbot Development" serviceDescription="AI chatbot development for websites and WhatsApp to automate customer support and lead capture." pageUrl="https://clevercrow.in/ai-chatbot-development" />
