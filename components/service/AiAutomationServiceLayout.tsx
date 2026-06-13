@@ -537,12 +537,12 @@ export default function AiAutomationServiceLayout({
             {heroBullets.map((bullet, idx) => {
               const BulletIcon = iconMap[bullet.icon] || Clock;
               return (
-                <div key={idx} className="bg-[#1a1d2e] border border-white/10 rounded-2xl p-4 lg:p-3 xl:p-4 flex gap-3.5 lg:gap-3 items-center hover:border-white/20 transition-colors">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/15 text-amber-400 shrink-0">
-                    <BulletIcon size={18} className="stroke-[2]" />
+                <div key={idx} className="bg-[#1a1d2e] border border-white/10 rounded-2xl p-4 lg:p-3 xl:p-4 flex gap-4 lg:gap-3 items-center hover:border-white/20 transition-colors">
+                  <div className="flex h-10 w-10 sm:h-8 sm:w-8 lg:h-7 lg:w-7 xl:h-8 xl:w-8 items-center justify-center rounded-xl bg-amber-500/15 text-amber-400 shrink-0">
+                    <BulletIcon className="w-5 h-5 sm:w-4 sm:h-4 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4 stroke-[2]" />
                   </div>
                   <div>
-                    <h3 className="text-xs font-black text-white tracking-tight leading-none">
+                    <h3 className="text-lg sm:text-xs lg:text-[11px] xl:text-xs font-black text-white tracking-tight leading-tight">
                       {bullet.title}
                     </h3>
                   </div>
