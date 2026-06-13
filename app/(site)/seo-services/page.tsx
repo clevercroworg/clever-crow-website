@@ -48,7 +48,7 @@ const seoDashboard = {
   costPerLead: {
     label: "Avg. Rank Position",
     value: "14.2",
-    change: "↓ 28.1% improvement",
+    change: "↓ 28.1%",
     isIncrease: false
   },
   lineChart: {

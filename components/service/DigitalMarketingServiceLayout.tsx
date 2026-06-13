@@ -652,7 +652,7 @@ export default function DigitalMarketingServiceLayout({
                     {/* Line Chart Area */}
                     <div className="relative h-[130px] w-full">
                       {/* SVG Chart */}
-                      <svg className="w-full h-full" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg className="w-full h-full overflow-visible" viewBox="0 0 400 130" fill="none" xmlns="http://www.w3.org/2000/svg">
                         {/* Grid lines */}
                         <line x1="0" y1="20" x2="400" y2="20" stroke="#f1f5f9" strokeWidth="1" />
                         <line x1="0" y1="60" x2="400" y2="60" stroke="#f1f5f9" strokeWidth="1" />
@@ -713,7 +713,7 @@ export default function DigitalMarketingServiceLayout({
                       <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider block mb-3.5">Channel Mix</span>
                       
                       {/* Donut chart visual */}
-                      <div className="flex items-center gap-4">
+                      <div className="flex flex-col items-center gap-5 justify-center py-2">
                         <div className="w-20 h-20 shrink-0 relative">
                           <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
                             <circle cx="18" cy="18" r="14" fill="none" stroke="#f1f5f9" strokeWidth="5" />
@@ -743,9 +743,9 @@ export default function DigitalMarketingServiceLayout({
                             })()}
                           </svg>
                         </div>
-                        <div className="flex flex-col gap-1.5 text-[9px] font-bold text-slate-600">
+                        <div className="flex flex-col gap-2 text-[10px] font-bold text-slate-600 w-fit mx-auto">
                           {activeDashboard.channelMix.slices.map((slice, i) => (
-                            <div key={i} className="flex items-center gap-1.5 whitespace-nowrap">
+                            <div key={i} className="flex items-center gap-2 whitespace-nowrap">
                               <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${slice.colorClass}`} />
                               {slice.name} {slice.percentage}%
                             </div>

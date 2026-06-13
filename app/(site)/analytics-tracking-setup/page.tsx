@@ -48,7 +48,7 @@ const analyticsDashboard = {
   costPerLead: {
     label: "Tracking Errors",
     value: "0",
-    change: "↓ 100% reduction",
+    change: "↓ 100%",
     isIncrease: false
   },
   lineChart: {
