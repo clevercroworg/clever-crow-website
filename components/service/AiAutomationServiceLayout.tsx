@@ -361,7 +361,7 @@ export default function AiAutomationServiceLayout({
     <div className="bg-white min-h-screen text-slate-800 antialiased font-body pt-0 pb-0 selection:bg-amber-500/20">
       
       {/* ───────────────── 1. HERO SECTION ───────────────── */}
-      <section className="relative overflow-hidden pt-28 md:pt-32 pb-12 md:pb-16 text-white">
+      <section className="relative overflow-hidden pt-28 md:pt-32 lg:pt-24 pb-8 lg:pb-10 text-white">
         
         {/* Dark base background */}
         <div
@@ -388,7 +388,7 @@ export default function AiAutomationServiceLayout({
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           
           {/* Breadcrumbs */}
-          <div className="flex items-center gap-2 text-[11px] font-bold text-slate-400 mb-6 uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-[11px] font-bold text-slate-400 mb-4 lg:mb-3 uppercase tracking-wider">
             <Link href="/" className="hover:text-slate-300 transition-colors font-sans">Home</Link>
             <span>/</span>
             <span className="hover:text-slate-300 transition-colors cursor-default font-sans">Services</span>
@@ -405,11 +405,11 @@ export default function AiAutomationServiceLayout({
                 {renderHeroTitle(heroTitle)}
               </h1>
 
-              <p className="mt-6 text-sm md:text-base text-slate-300 leading-relaxed font-semibold max-w-xl">
+              <p className="mt-5 lg:mt-3 text-sm md:text-base text-slate-300 leading-relaxed font-semibold max-w-xl">
                 {heroSubtitle}
               </p>
 
-              <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <div className="mt-6 lg:mt-5 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                 <a
                   href="#contact-form"
                   className="group flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-6 py-4 text-xs font-black uppercase tracking-wider text-slate-900 shadow-lg shadow-amber-500/20 hover:bg-amber-400 hover:shadow-amber-500/30 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer"
@@ -430,7 +430,7 @@ export default function AiAutomationServiceLayout({
 
             {/* Right Column: Visual 4-Step Flowchart */}
             <div className="lg:col-span-6 w-full flex flex-col justify-center">
-              <div className="relative bg-[#0c0a24]/60 backdrop-blur-xl border border-white/10 rounded-[2.2rem] p-7 shadow-[0_15px_40px_rgba(0,0,0,0.5)] max-w-lg mx-auto w-full font-sans overflow-hidden">
+              <div className="relative bg-[#0c0a24]/60 backdrop-blur-xl border border-white/10 rounded-[2.2rem] p-5 lg:p-5 xl:p-6 shadow-[0_15px_40px_rgba(0,0,0,0.5)] max-w-lg mx-auto w-full font-sans overflow-hidden">
                 
                 {/* Cybernetic Grid Overlay */}
                 <div 
@@ -449,7 +449,7 @@ export default function AiAutomationServiceLayout({
                 <div className="absolute -bottom-24 -right-24 w-48 h-48 rounded-full blur-[60px] opacity-[0.08] bg-purple-500 pointer-events-none" />
 
                 {/* Flowchart Header Icon & Title */}
-                <div className="flex flex-col items-center mb-7 relative z-10">
+                <div className="flex flex-col items-center mb-5 lg:mb-4 relative z-10">
                   <div className="relative group/header mb-3">
                     {/* Pulsing scanner ring */}
                     <div className="absolute inset-[-4px] rounded-[20px] border border-amber-500/20 animate-pulse" />
@@ -463,7 +463,7 @@ export default function AiAutomationServiceLayout({
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-4 relative">
+                <div className="flex flex-col gap-4 lg:gap-3 relative">
                   
                   {activeFlowchart.steps.map((step, idx) => {
                     const colorClass = step.colorClass || defaultColorClasses[idx % defaultColorClasses.length];
@@ -500,7 +500,7 @@ export default function AiAutomationServiceLayout({
                         </div>
 
                         {/* Step content (futuristic glass card) */}
-                        <div className={`flex flex-col justify-center bg-white/[0.03] border border-white/[0.06] rounded-2xl px-5 py-3.5 flex-grow transition-all duration-300 hover:bg-white/[0.06] hover:border-white/12 ${theme.shadow} ${theme.border} relative overflow-hidden`}>
+                        <div className={`flex flex-col justify-center bg-white/[0.03] border border-white/[0.06] rounded-2xl px-5 py-3.5 lg:py-2.5 xl:py-3.5 flex-grow transition-all duration-300 hover:bg-white/[0.06] hover:border-white/12 ${theme.shadow} ${theme.border} relative overflow-hidden`}>
                           
                           {/* Left highlight strip on hover */}
                           <div 
@@ -533,11 +533,11 @@ export default function AiAutomationServiceLayout({
           </div>
 
           {/* Hero Bottom Bullets (Compact: Icon & Title only, centered vertically) */}
-          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+          <div className="mt-12 lg:mt-8 xl:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
             {heroBullets.map((bullet, idx) => {
               const BulletIcon = iconMap[bullet.icon] || Clock;
               return (
-                <div key={idx} className="bg-[#1a1d2e] border border-white/10 rounded-2xl p-4 flex gap-3.5 items-center hover:border-white/20 transition-colors">
+                <div key={idx} className="bg-[#1a1d2e] border border-white/10 rounded-2xl p-4 lg:p-3 xl:p-4 flex gap-3.5 lg:gap-3 items-center hover:border-white/20 transition-colors">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/15 text-amber-400 shrink-0">
                     <BulletIcon size={18} className="stroke-[2]" />
                   </div>
