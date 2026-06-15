@@ -20,7 +20,9 @@ export async function POST(req: Request) {
       education, 
       country, state, address,
       run_beginning,
-      consent
+      consent,
+      internship_title,
+      internship_id
     } = body;
 
     const dob = `${dob_day} ${dob_month} ${dob_year}`;
@@ -61,11 +63,15 @@ export async function POST(req: Request) {
     const mailOptions = {
       from: `"Clever Crow Internships" <${process.env.SMTP_USER}>`,
       to: process.env.TO_EMAIL || "manojvg900@gmail.com",
-      subject: `New Internship Application: ${name}`,
+      subject: `New Internship Application: ${name} (${internship_title || "General"})`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; border-radius: 12px; padding: 24px;">
           <h2 style="color: #eab308; border-bottom: 2px solid #fef9c3; padding-bottom: 12px;">🎓 New Internship Application</h2>
           
+          <div style="background-color: #fef9c3; color: #854d0e; padding: 12px 16px; border-radius: 8px; font-weight: bold; margin-bottom: 20px;">
+            Applied For: ${internship_title || "Not specified"} (ID: ${internship_id || "N/A"})
+          </div>
+
           <h3 style="color: #4b5563; margin-top: 24px;">Personal Information</h3>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>

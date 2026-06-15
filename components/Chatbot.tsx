@@ -19,9 +19,19 @@ type ChatMode = "chat" | "lead_gen";
 type LeadStep = "name" | "email" | "phone" | "message" | "done";
 
 // Custom Premium 3D-Styled Full-Body Robot Model (waving and bobbing)
-const AnimatedBot = ({ isSpeaking, className }: { isSpeaking: boolean, className?: string }) => (
+const AnimatedBot = ({ 
+  isSpeaking, 
+  className, 
+  animate = false,
+  expression = "happy"
+}: { 
+  isSpeaking: boolean, 
+  className?: string, 
+  animate?: boolean,
+  expression?: "happy" | "thinking" | "focused" | "excited"
+}) => (
   <svg 
-    viewBox="0 0 100 130" 
+    viewBox="18 10 64 64" 
     fill="none" 
     xmlns="http://www.w3.org/2000/svg" 
     className={`overflow-visible ${className || "w-10 h-10"}`}
@@ -78,29 +88,28 @@ const AnimatedBot = ({ isSpeaking, className }: { isSpeaking: boolean, className
     </defs>
 
     <style>{`
-      @keyframes botFloat {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-5px); }
-      }
-      @keyframes botWave {
-        0%, 100% { transform: rotate(0deg); }
-        50% { transform: rotate(-22deg); }
-      }
       @keyframes botBlink {
         0%, 96%, 100% { transform: scaleY(1); }
         98% { transform: scaleY(0.1); }
       }
-      @keyframes botBreathe {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.02); }
+      @keyframes botHeadTurn3D {
+        0%, 100% { transform: perspective(400px) rotateY(0deg); }
+        20%, 40% { transform: perspective(400px) rotateY(-22deg); }
+        60%, 80% { transform: perspective(400px) rotateY(22deg); }
       }
-      .bot-float-group {
-        animation: botFloat 4s ease-in-out infinite;
-        transform-origin: center;
+      @keyframes botFaceParallax {
+        0%, 100% { transform: translateX(0px); }
+        20%, 40% { transform: translateX(-4.5px); }
+        60%, 80% { transform: translateX(4.5px); }
       }
-      .bot-waving-arm {
-        animation: botWave 2.5s ease-in-out infinite;
-        transform-origin: 32px 64px;
+      .bot-head-group {
+        animation: botHeadTurn3D 6s ease-in-out infinite;
+        transform-origin: 50px 39px;
+        transform-style: preserve-3d;
+      }
+      .bot-face-group {
+        animation: botFaceParallax 6s ease-in-out infinite;
+        transform-origin: 50px 39px;
       }
       .bot-eye-l {
         animation: botBlink 4.5s ease-in-out infinite;
@@ -110,83 +119,14 @@ const AnimatedBot = ({ isSpeaking, className }: { isSpeaking: boolean, className
         animation: botBlink 4.5s ease-in-out infinite;
         transform-origin: 57px 39px;
       }
-      .bot-body-group {
-        animation: botBreathe 3s ease-in-out infinite;
-        transform-origin: 50px 76px;
-      }
     `}</style>
 
-    {/* Entire Floating Bot assembly */}
-    <g className="bot-float-group" filter="url(#botShadow)">
-      
-      {/* 1. Hips / Leg Connectors */}
-      <circle cx="42" cy="88" r="3.5" fill="url(#silverMetal)" />
-      <circle cx="58" cy="88" r="3.5" fill="url(#silverMetal)" />
-
-      {/* 2. Legs & Feet */}
-      {/* Left Leg */}
-      <path d="M 42 88 L 41 100" stroke="url(#whiteGloss)" strokeWidth="6" strokeLinecap="round" />
-      <circle cx="41" cy="100" r="2.5" fill="url(#silverMetal)" />
-      <path d="M 41 100 L 41 114" stroke="url(#whiteGloss)" strokeWidth="5.5" strokeLinecap="round" />
-      <ellipse cx="41" cy="116" rx="5" ry="2.5" fill="url(#whiteGloss)" />
-      
-      {/* Right Leg */}
-      <path d="M 58 88 L 59 100" stroke="url(#whiteGloss)" strokeWidth="6" strokeLinecap="round" />
-      <circle cx="59" cy="100" r="2.5" fill="url(#silverMetal)" />
-      <path d="M 59 100 L 59 114" stroke="url(#whiteGloss)" strokeWidth="5.5" strokeLinecap="round" />
-      <ellipse cx="59" cy="116" rx="5" ry="2.5" fill="url(#whiteGloss)" />
-
-      {/* 3. Torso (Breathes gently) */}
-      <g className="bot-body-group">
-        <rect x="34" y="58" width="32" height="30" rx="12" fill="url(#whiteGloss)" stroke="#e2e8f0" strokeWidth="0.5" />
-        
-        {/* Chest Plate Cover */}
-        <path d="M 38 64 L 62 64 C 62 64 61 80 50 82 C 39 80 38 64 38 64 Z" fill="url(#whiteGloss)" stroke="#e2e8f0" strokeWidth="0.75" />
-        
-        {/* Glowing Accent Lines */}
-        <path d="M 38 68 C 42 76 58 76 62 68" fill="none" stroke="#22d3ee" strokeWidth="1" opacity="0.8" filter="url(#neonGlow)" />
-        
-        {/* "AI" Glowing Chest Badge */}
-        <rect x="43" y="66" width="14" height="8" rx="4" fill="url(#blueAccent)" />
-        <text x="50" y="72" fontSize="5" fontWeight="900" fontFamily="sans-serif" fill="#ffffff" textAnchor="middle">AI</text>
-      </g>
-
-      {/* 4. Left Arm (Relaxed) */}
-      <g>
-        {/* Upper Arm */}
-        <path d="M 68 64 L 78 74" stroke="url(#whiteGloss)" strokeWidth="6" strokeLinecap="round" />
-        {/* Elbow Joint */}
-        <circle cx="78" cy="74" r="2.5" fill="url(#silverMetal)" />
-        {/* Forearm */}
-        <path d="M 78 74 L 84 88" stroke="url(#whiteGloss)" strokeWidth="5" strokeLinecap="round" />
-        {/* Hand */}
-        <circle cx="84" cy="88" r="4" fill="url(#whiteGloss)" />
-        {/* Fingers */}
-        <circle cx="82" cy="92" r="1.2" fill="url(#whiteGloss)" />
-        <circle cx="85" cy="93" r="1.2" fill="url(#whiteGloss)" />
-        <circle cx="87" cy="91" r="1.2" fill="url(#whiteGloss)" />
-      </g>
-
-      {/* 5. Right Arm (Waving animation) */}
-      <g className="bot-waving-arm">
-        {/* Upper Arm */}
-        <path d="M 32 64 L 20 54" stroke="url(#whiteGloss)" strokeWidth="6" strokeLinecap="round" />
-        {/* Elbow Joint */}
-        <circle cx="20" cy="54" r="2.5" fill="url(#silverMetal)" />
-        {/* Forearm */}
-        <path d="M 20 54 L 14 38" stroke="url(#whiteGloss)" strokeWidth="5" strokeLinecap="round" />
-        {/* Hand */}
-        <circle cx="14" cy="38" r="4" fill="url(#whiteGloss)" />
-        {/* Fingers */}
-        <circle cx="11" cy="34" r="1.2" fill="url(#whiteGloss)" />
-        <circle cx="14" cy="32" r="1.2" fill="url(#whiteGloss)" />
-        <circle cx="17" cy="34" r="1.2" fill="url(#whiteGloss)" />
-      </g>
-
-      {/* 6. Neck Joint */}
+    {/* Entire Head assembly */}
+    <g className={animate ? "bot-head-group" : ""} filter="url(#botShadow)">
+      {/* Neck Joint */}
       <rect x="46" y="52" width="8" height="6" rx="2" fill="url(#silverMetal)" />
 
-      {/* 7. Robot Head Capsule */}
+      {/* Robot Head Capsule */}
       <rect x="28" y="22" width="44" height="34" rx="17" fill="url(#whiteGloss)" stroke="#e2e8f0" strokeWidth="0.5" />
 
       {/* Antennas (Ears) */}
@@ -200,63 +140,157 @@ const AnimatedBot = ({ isSpeaking, className }: { isSpeaking: boolean, className
       <line x1="74" y1="39" x2="79" y2="27" stroke="url(#silverMetal)" strokeWidth="1.8" strokeLinecap="round" />
       <circle cx="79" cy="27" r="1.8" fill="#22d3ee" filter="url(#neonGlow)" />
 
-      {/* 8. Visor Screen */}
-      <rect x="34" y="27" width="32" height="20" rx="9" fill="url(#visorGlass)" />
+      {/* Face elements (Visor and Eyes/Mouth) */}
+      <g className={animate ? "bot-face-group" : ""}>
+        {/* Visor Screen */}
+        <rect x="34" y="27" width="32" height="20" rx="9" fill="url(#visorGlass)" />
 
-      {/* 9. Visor Glass Shiny Highlight */}
-      <rect x="35" y="28" width="30" height="9" rx="4.5" fill="url(#glassReflect)" pointerEvents="none" />
+        {/* Visor Glass Shiny Highlight */}
+        <rect x="35" y="28" width="30" height="9" rx="4.5" fill="url(#glassReflect)" pointerEvents="none" />
 
-      {/* 10. Glowing Smile-Eyes Inside Visor */}
-      {/* Left Eye (Smile shape) */}
-      <path 
-        d="M 40 37 Q 43 34 46 37" 
-        fill="none" 
-        stroke="#22d3ee" 
-        strokeWidth="2.2" 
-        strokeLinecap="round" 
-        className="bot-eye-l"
-        filter="url(#neonGlow)" 
-      />
-      
-      {/* Right Eye (Smile shape) */}
-      <path 
-        d="M 54 37 Q 57 34 60 37" 
-        fill="none" 
-        stroke="#22d3ee" 
-        strokeWidth="2.2" 
-        strokeLinecap="round" 
-        className="bot-eye-r"
-        filter="url(#neonGlow)" 
-      />
+        {/* Left Eye */}
+        {expression === "happy" && (
+          <path 
+            d="M 40 37 Q 43 34 46 37" 
+            fill="none" 
+            stroke="#22d3ee" 
+            strokeWidth="2.2" 
+            strokeLinecap="round" 
+            className="bot-eye-l"
+            filter="url(#neonGlow)" 
+          />
+        )}
+        {expression === "thinking" && (
+          <line 
+            x1="40" y1="36" x2="46" y2="36" 
+            stroke="#22d3ee" 
+            strokeWidth="2.2" 
+            strokeLinecap="round" 
+            className="bot-eye-l"
+            filter="url(#neonGlow)" 
+          />
+        )}
+        {expression === "focused" && (
+          <circle 
+            cx="42.5" cy="35.5" r="2.2" 
+            fill="#22d3ee" 
+            className="bot-eye-l"
+            filter="url(#neonGlow)" 
+          />
+        )}
+        {expression === "excited" && (
+          <path 
+            d="M 39.5 38.5 L 42.5 35 L 45.5 38.5" 
+            fill="none" 
+            stroke="#22d3ee" 
+            strokeWidth="2.2" 
+            strokeLinecap="round" 
+            className="bot-eye-l"
+            filter="url(#neonGlow)" 
+          />
+        )}
 
-      {/* 11. Smiling Mouth */}
-      {isSpeaking ? (
-        // Animated Mouth wave
-        <path 
-          d="M 45 42 Q 50 46 55 42" 
-          fill="none" 
-          stroke="#22d3ee" 
-          strokeWidth="1.8" 
-          strokeLinecap="round"
-          filter="url(#neonGlow)"
-        >
-          <animate attributeName="d" values="M 45 42 Q 50 46 55 42; M 45 44 Q 50 41 55 44; M 45 42 Q 50 46 55 42" dur="0.5s" repeatCount="indefinite" />
-        </path>
-      ) : (
-        // Standard Smile
-        <path 
-          d="M 46 42 Q 50 45 54 42" 
-          fill="none" 
-          stroke="#22d3ee" 
-          strokeWidth="1.8" 
-          strokeLinecap="round"
-          filter="url(#neonGlow)"
-        />
-      )}
+        {/* Right Eye */}
+        {expression === "happy" && (
+          <path 
+            d="M 54 37 Q 57 34 60 37" 
+            fill="none" 
+            stroke="#22d3ee" 
+            strokeWidth="2.2" 
+            strokeLinecap="round" 
+            className="bot-eye-r"
+            filter="url(#neonGlow)" 
+          />
+        )}
+        {expression === "thinking" && (
+          <line 
+            x1="54" y1="36" x2="60" y2="36" 
+            stroke="#22d3ee" 
+            strokeWidth="2.2" 
+            strokeLinecap="round" 
+            className="bot-eye-r"
+            filter="url(#neonGlow)" 
+          />
+        )}
+        {expression === "focused" && (
+          <circle 
+            cx="57.5" cy="35.5" r="2.2" 
+            fill="#22d3ee" 
+            className="bot-eye-r"
+            filter="url(#neonGlow)" 
+          />
+        )}
+        {expression === "excited" && (
+          <path 
+            d="M 54.5 38.5 L 57.5 35 L 60.5 38.5" 
+            fill="none" 
+            stroke="#22d3ee" 
+            strokeWidth="2.2" 
+            strokeLinecap="round" 
+            className="bot-eye-r"
+            filter="url(#neonGlow)" 
+          />
+        )}
 
+        {/* Mouth */}
+        {isSpeaking ? (
+          <path 
+            d="M 45 42 Q 50 46 55 42" 
+            fill="none" 
+            stroke="#22d3ee" 
+            strokeWidth="1.8" 
+            strokeLinecap="round"
+            filter="url(#neonGlow)"
+          >
+            <animate attributeName="d" values="M 45 42 Q 50 46 55 42; M 45 44 Q 50 41 55 44; M 45 42 Q 50 46 55 42" dur="0.5s" repeatCount="indefinite" />
+          </path>
+        ) : (
+          <>
+            {expression === "happy" && (
+              <path 
+                d="M 46 43 Q 50 46 54 43" 
+                fill="none" 
+                stroke="#22d3ee" 
+                strokeWidth="1.8" 
+                strokeLinecap="round"
+                filter="url(#neonGlow)"
+              />
+            )}
+            {expression === "thinking" && (
+              <line 
+                x1="46" y1="43" x2="54" y2="43" 
+                stroke="#22d3ee" 
+                strokeWidth="1.8" 
+                strokeLinecap="round"
+                filter="url(#neonGlow)"
+              />
+            )}
+            {expression === "focused" && (
+              <path 
+                d="M 47 43 Q 50 45.5 53 43" 
+                fill="none" 
+                stroke="#22d3ee" 
+                strokeWidth="1.8" 
+                strokeLinecap="round"
+                filter="url(#neonGlow)"
+              />
+            )}
+            {expression === "excited" && (
+              <path 
+                d="M 45 42 Q 50 48 55 42 Z" 
+                fill="#22d3ee" 
+                stroke="#22d3ee" 
+                strokeWidth="1" 
+                strokeLinejoin="round"
+                filter="url(#neonGlow)"
+              />
+            )}
+          </>
+        )}
+      </g>
     </g>
   </svg>
-);
+);;
 
 export default function Chatbot() {
   const pathname = usePathname();
@@ -265,6 +299,67 @@ export default function Chatbot() {
   const [currentStep, setCurrentStep] = useState<LeadStep>("name");
   const [isTyping, setIsTyping] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+
+  let currentExpression: "happy" | "thinking" | "focused" | "excited" = "happy";
+  if (isTyping) {
+    currentExpression = "thinking";
+  } else if (currentStep === "done") {
+    currentExpression = "excited";
+  } else if (mode === "lead_gen") {
+    currentExpression = "focused";
+  }
+
+  const [bubbleText, setBubbleText] = useState<string | null>(null);
+  const [isTriggerSpeaking, setIsTriggerSpeaking] = useState(false);
+  const [bubbleExpression, setBubbleExpression] = useState<"happy" | "thinking" | "focused" | "excited">("happy");
+
+  useEffect(() => {
+    if (isOpen) {
+      setBubbleText(null);
+      setIsTriggerSpeaking(false);
+      return;
+    }
+
+    const speakMessages = [
+      { text: "Hi! 👋", expression: "excited" as const },
+      { text: "Need any help?", expression: "focused" as const },
+      { text: "Ask me anything!", expression: "happy" as const },
+      { text: "Let's connect!", expression: "excited" as const },
+    ];
+
+    // Show initial bubble after 3 seconds
+    const initialTimeout = setTimeout(() => {
+      const msg = speakMessages[Math.floor(Math.random() * speakMessages.length)];
+      setBubbleText(msg.text);
+      setBubbleExpression(msg.expression);
+      setIsTriggerSpeaking(true);
+
+      // Stop speaking and hide bubble after 3 seconds
+      setTimeout(() => {
+        setBubbleText(null);
+        setIsTriggerSpeaking(false);
+      }, 3000);
+    }, 3000);
+
+    // Periodic loop: 3 seconds visible, 3 seconds hidden -> triggers every 6 seconds!
+    const interval = setInterval(() => {
+      const msg = speakMessages[Math.floor(Math.random() * speakMessages.length)];
+      setBubbleText(msg.text);
+      setBubbleExpression(msg.expression);
+      setIsTriggerSpeaking(true);
+
+      // Stop speaking and hide bubble after 3 seconds
+      setTimeout(() => {
+        setBubbleText(null);
+        setIsTriggerSpeaking(false);
+      }, 3000);
+    }, 6000);
+
+    return () => {
+      clearTimeout(initialTimeout);
+      clearInterval(interval);
+    };
+  }, [isOpen]);
 
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -517,7 +612,7 @@ export default function Chatbot() {
             <div className="relative p-4 flex justify-between items-center bg-slate-50/60 backdrop-blur-md border-b border-slate-200/60 z-10">
               <div className="flex items-center gap-3">
                 <div className="relative flex items-center justify-center">
-                  <AnimatedBot isSpeaking={isTyping} className="w-10 h-10" />
+                  <AnimatedBot isSpeaking={isTyping} className="w-10 h-10" expression={currentExpression} />
                   <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white shadow-[0_0_8px_rgba(16,185,129,0.4)]"></span>
                 </div>
                 <div>
@@ -612,23 +707,37 @@ export default function Chatbot() {
         )}
       </AnimatePresence>
 
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[10000] flex items-center justify-center transition-all duration-500 hover:scale-110 focus:outline-none ${
-          isOpen 
-            ? 'w-[56px] h-[56px] sm:w-[64px] sm:h-[64px] rounded-full border bg-white border-slate-200 shadow-lg' 
-            : 'w-[96px] h-[125px] sm:w-[104px] sm:h-[135px] md:w-[112px] md:h-[146px] bg-transparent border-none shadow-none'
-        }`}
-      >
-        {isOpen ? (
-          <X size={24} className="text-slate-600" />
-        ) : (
-          <div className="relative flex items-center justify-center w-full h-full p-0">
-            <AnimatedBot isSpeaking={false} className="w-full h-full" />
-            <span className="absolute top-[18%] left-[20%] -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.6)] z-20"></span>
-          </div>
-        )}
-      </button>
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[10000] flex items-center justify-end">
+        {/* Periodic Speak Message Bubble */}
+        <AnimatePresence>
+          {bubbleText && !isOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, x: 20, y: "-50%" }}
+              animate={{ opacity: 1, scale: 1, x: 0, y: "-50%" }}
+              exit={{ opacity: 0, scale: 0.8, x: 20, y: "-50%" }}
+              className="absolute right-[112px] sm:right-[132px] top-1/2 bg-white/95 backdrop-blur-md border border-slate-200/80 shadow-[0_8px_25px_rgba(15,23,42,0.08)] px-4 py-2.5 rounded-2xl rounded-br-none text-slate-800 text-xs sm:text-sm font-bold whitespace-nowrap z-[10001] pointer-events-none select-none"
+            >
+              {bubbleText}
+              {/* Tooltip Arrow pointing to the Chatbot trigger button */}
+              <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-white border-r border-b border-slate-200/80 rotate-[-45deg] z-[10002]" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className={`flex items-center justify-center transition-all duration-500 hover:scale-110 focus:outline-none w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] rounded-full border bg-white border-slate-200 shadow-lg relative`}
+        >
+          {isOpen ? (
+            <X size={40} className="text-slate-600" />
+          ) : (
+            <div className="relative flex items-center justify-center w-[84px] h-[84px] sm:w-[102px] sm:h-[102px] p-0">
+              <AnimatedBot isSpeaking={isTriggerSpeaking} className="w-full h-full" animate={true} expression={bubbleExpression} />
+              <span className="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.6)] z-20"></span>
+            </div>
+          )}
+        </button>
+      </div>
     </>
   );
 }

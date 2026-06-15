@@ -4,7 +4,10 @@ import nodemailer from "nodemailer"
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { name, phone, email, message, source, company, service, budget, timeline } = body
+    const { 
+      name, phone, email, message, source, company, service, budget, timeline,
+      utm_source, utm_medium, utm_campaign, utm_term, utm_content, referrer, landed_url
+    } = body
 
     if (!name || !phone) {
       return NextResponse.json(
@@ -50,11 +53,22 @@ export async function POST(req: Request) {
               <p style="margin: 8px 0;"><strong style="color: #0f172a;">Service Needed:</strong> ${service || "Not provided"}</p>
               <p style="margin: 8px 0;"><strong style="color: #0f172a;">Monthly Budget:</strong> ${budget || "Not provided"}</p>
               <p style="margin: 8px 0;"><strong style="color: #0f172a;">Expected Timeline:</strong> ${timeline || "Not provided"}</p>
+              
               <p style="margin: 15px 0 8px 0; padding-top: 10px; border-top: 1px solid #e2e8f0;"><strong style="color: #0f172a;">Message / Details:</strong></p>
               <blockquote style="margin: 0; padding: 10px 15px; background-color: #fff; border-left: 4px solid #f59e0b; border-radius: 4px; font-style: italic;">
                 ${message || "No additional message provided"}
               </blockquote>
-              <p style="margin: 15px 0 0 0; font-size: 11px; color: #94a3b8; text-transform: uppercase; tracking-wider: 0.1em;"><strong>Lead Source:</strong> ${source || "Contact Page Form"}</p>
+
+              <p style="margin: 15px 0 8px 0; padding-top: 10px; border-top: 1px solid #e2e8f0;"><strong style="color: #0f172a;">Marketing & Campaign Attribution:</strong></p>
+              <p style="margin: 4px 0;"><strong style="color: #0f172a;">UTM Source:</strong> ${utm_source || "Direct / Organic"}</p>
+              <p style="margin: 4px 0;"><strong style="color: #0f172a;">UTM Medium:</strong> ${utm_medium || "N/A"}</p>
+              <p style="margin: 4px 0;"><strong style="color: #0f172a;">UTM Campaign:</strong> ${utm_campaign || "N/A"}</p>
+              ${utm_term ? `<p style="margin: 4px 0;"><strong style="color: #0f172a;">UTM Keyword/Term:</strong> ${utm_term}</p>` : ''}
+              ${utm_content ? `<p style="margin: 4px 0;"><strong style="color: #0f172a;">UTM Content:</strong> ${utm_content}</p>` : ''}
+              <p style="margin: 4px 0;"><strong style="color: #0f172a;">External Referrer:</strong> ${referrer || "Direct / None"}</p>
+              <p style="margin: 4px 0;"><strong style="color: #0f172a;">Submission URL:</strong> ${landed_url || "Not provided"}</p>
+
+              <p style="margin: 15px 0 0 0; font-size: 11px; color: #94a3b8; text-transform: uppercase; tracking-wider: 0.1em;"><strong>Lead Source Tag:</strong> ${source || "Contact Page Form"}</p>
             </div>
           </div>
         `,
