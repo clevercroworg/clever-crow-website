@@ -726,10 +726,10 @@ export default function Chatbot() {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`flex items-center justify-center transition-all duration-500 hover:scale-110 focus:outline-none rounded-full border bg-white border-slate-200 shadow-lg relative ${
+          className={`flex items-center justify-center transition-all duration-500 hover:scale-110 focus:outline-none rounded-full relative ${
             isOpen 
-              ? "w-[56px] h-[56px] sm:w-[64px] sm:h-[64px]" 
-              : "w-[100px] h-[100px] sm:w-[120px] sm:h-[120px]"
+              ? "w-[56px] h-[56px] sm:w-[64px] sm:h-[64px] border bg-white border-slate-200 shadow-lg" 
+              : "w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] bg-transparent border-none shadow-none"
           }`}
         >
           {isOpen ? (
