@@ -726,10 +726,14 @@ export default function Chatbot() {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`flex items-center justify-center transition-all duration-500 hover:scale-110 focus:outline-none w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] rounded-full border bg-white border-slate-200 shadow-lg relative`}
+          className={`flex items-center justify-center transition-all duration-500 hover:scale-110 focus:outline-none rounded-full border bg-white border-slate-200 shadow-lg relative ${
+            isOpen 
+              ? "w-[56px] h-[56px] sm:w-[64px] sm:h-[64px]" 
+              : "w-[100px] h-[100px] sm:w-[120px] sm:h-[120px]"
+          }`}
         >
           {isOpen ? (
-            <X size={40} className="text-slate-600" />
+            <X size={24} className="text-slate-600" />
           ) : (
             <div className="relative flex items-center justify-center w-[84px] h-[84px] sm:w-[102px] sm:h-[102px] p-0">
               <AnimatedBot isSpeaking={isTriggerSpeaking} className="w-full h-full" animate={true} expression={bubbleExpression} />
