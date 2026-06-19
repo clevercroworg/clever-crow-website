@@ -17,6 +17,7 @@ export interface CaseStudy {
   summary: string;
   image: string;
   link?: string;
+  builtWith?: string;
 }
 
 const defaultCaseStudies: CaseStudy[] = [
@@ -186,8 +187,29 @@ export default function SuccessStories({ data, title, subtitle, filterBy, hideMe
                 {/* Content Box */}
                 <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{cs.location}</span>
-                    <p className="text-[10px] font-bold text-brand-main uppercase tracking-widest">{cs.category}</p>
+                    {isAppPortfolio ? (
+                      <div className="flex items-center gap-1.5">
+                        <span className="inline-flex items-center gap-1.5 rounded bg-slate-100 px-2 py-0.5 text-[9px] font-extrabold text-slate-600 border border-slate-200/40">
+                          <svg className="h-2.5 w-2.5 text-slate-500" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.1 16.67C20.08 16.74 19.67 18.11 18.71 19.5M15.97 4.17C16.63 3.37 17.07 2.28 16.95 1C15.85 1.04 14.51 1.73 13.73 2.64C13.07 3.41 12.49 4.52 12.64 5.78C13.87 5.87 15.12 5.17 15.97 4.17Z" />
+                          </svg>
+                          <svg className="h-2.5 w-2.5 text-slate-500" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.523 15.3l1.834 3.177c.291.503.118 1.15-.385 1.441-.504.291-1.151.118-1.44-.385L15.68 16.32c-1.09.48-2.298.76-3.68.76s-2.59-.28-3.68-.76l-1.852 3.213c-.29.503-.937.676-1.44.385-.503-.29-.676-.938-.385-1.44l1.834-3.178C4.195 13.737 2.5 10.976 2.5 7.72H21.5c0 3.256-1.695 6.017-3.977 7.58M7 10.25a.75.75 0 100-1.5.75.75 0 000 1.5m10 0a.75.75 0 100-1.5.75.75 0 000 1.5M12 2a.5.5 0 01.5.5v1.5a.5.5 0 01-1 0V2.5A.5.5 0 0112 2" />
+                          </svg>
+                          <span>iOS & Android</span>
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{cs.location}</span>
+                    )}
+
+                    {isAppPortfolio && cs.builtWith ? (
+                      <span className="text-[10px] font-extrabold text-brand-main bg-brand-main/10 border border-brand-main/20 rounded-full px-2.5 py-0.5 uppercase tracking-wider shadow-sm">
+                        {cs.builtWith}
+                      </span>
+                    ) : (
+                      <p className="text-[10px] font-bold text-brand-main uppercase tracking-widest">{cs.category}</p>
+                    )}
                   </div>
 
                   <div className="mb-4">

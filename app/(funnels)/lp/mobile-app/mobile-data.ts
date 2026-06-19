@@ -47,6 +47,7 @@ export type CaseStudy = {
   summary: string;
   image: string;
   link?: string;
+  builtWith?: string;
 };
 
 export type FaqData = {
@@ -161,6 +162,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Real estate networking platform for professional connections, bringing agents, builders, and buyers together.",
         image: "/images/apps/propin.png",
         link: "https://play.google.com/store/apps/details?id=com.frontfootlabs.propin",
+        builtWith: "Flutter",
       },
       {
         id: "redfin",
@@ -175,6 +177,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "High-performance property search app featuring real-time MLS data updates every 2 minutes and a smart AI assistant ('Ask Redfin') for listing queries.",
         image: "/images/apps/redfin.png",
         link: "https://play.google.com/store/apps/details?id=com.redfin.android",
+        builtWith: "React Native",
       },
       {
         id: "acn-realestate",
@@ -189,6 +192,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Dedicated workflow tool for real estate agents to manage property listings, buyer details, and client networks on the go.",
         image: "/images/apps/acn-realestate.png",
         link: "https://play.google.com/store/apps/details?id=com.acnonline.in",
+        builtWith: "Native Android & iOS",
       },
       {
         id: "trulia",
@@ -203,6 +207,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Comprehensive property search and neighborhood insight platform with location intelligence and live map tracking.",
         image: "/images/apps/trulia.png",
         link: "https://play.google.com/store/apps/details?id=com.trulia.android",
+        builtWith: "Native Android & iOS",
       },
 
       // E-commerce
@@ -219,6 +224,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Discovery platform for unique, hand-picked gadgets and products, offering custom checkout and global delivery tracking.",
         image: "/images/apps/mavigadget.png",
         link: "https://play.google.com/store/apps/details?id=co.tapcart.app.id_Klb0b0VCJq",
+        builtWith: "React Native",
       },
       {
         id: "alpaka",
@@ -233,6 +239,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "High-end mobile shopping experience for ultra-functional bags and travel gear, optimized for fast checkout and mobile cart retention.",
         image: "/images/apps/alpaka.png",
         link: "https://play.google.com/store/apps/details?id=co.tapcart.app.id_3pZUUpeL9G",
+        builtWith: "Flutter",
       },
       {
         id: "banggood",
@@ -247,6 +254,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Global online shopping application offering thousands of consumer goods with localized pricing and multi-lingual customer support.",
         image: "/images/apps/banggood.png",
         link: "https://play.google.com/store/apps/details?id=com.banggood.client",
+        builtWith: "Native Android & iOS",
       },
       {
         id: "krave-mart",
@@ -261,6 +269,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Rapid grocery delivery platform focused on speed, localized stock tracking, and near-instant checkout and delivery booking.",
         image: "/images/apps/krave-mart.png",
         link: "https://play.google.com/store/apps/details?id=com.krrave.customer",
+        builtWith: "React Native",
       },
 
       // Food Delivery
@@ -277,6 +286,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Real-time order tracking, merchant APIs, and fee-free delivery integration on eligible large orders.",
         image: "/images/apps/grubhub.png",
         link: "https://play.google.com/store/apps/details?id=com.grubhub.android",
+        builtWith: "Native Android & iOS",
       },
       {
         id: "just-eat",
@@ -291,6 +301,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Integrated 'Food Tracker' system with custom push notifications keeping users updated on food prep and rider location stages.",
         image: "/images/apps/just-eat.png",
         link: "https://play.google.com/store/apps/details?id=com.justeat.app.uk",
+        builtWith: "React Native",
       },
       {
         id: "cookr",
@@ -305,6 +316,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Platform for authentic home-cooked meals, featuring local home chef profiles and specific dietary filters (veg, vegan, keto).",
         image: "/images/apps/cookr.png",
         link: "https://play.google.com/store/apps/details?id=com.cookr.customer",
+        builtWith: "Flutter",
       },
       {
         id: "bolt-food",
@@ -319,6 +331,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Efficient restaurant and grocery delivery platform integrating client apps, restaurant dashboards, and delivery rider map interfaces.",
         image: "/images/apps/bolt-food.png",
         link: "https://play.google.com/store/apps/details?id=com.bolt.deliveryclient",
+        builtWith: "Native Android & iOS",
       },
 
       // Travel & Hospitality
@@ -335,6 +348,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Specialized last-minute booking application featuring the 'Daily Drop' module offering exclusive 15-minute booking discounts.",
         image: "/images/apps/hoteltonight.png",
         link: "https://play.google.com/store/apps/details?id=com.hoteltonight.android.prod",
+        builtWith: "Native Android & iOS",
       },
       {
         id: "ratehawk",
@@ -349,6 +363,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Enterprise B2B mobile portal for travel agencies and professionals, pulling listings and booking capabilities from over 2.5 million properties.",
         image: "/images/apps/ratehawk.png",
         link: "https://play.google.com/store/apps/details?id=com.ratehawk.android",
+        builtWith: "React Native",
       },
       {
         id: "zenhotels",
@@ -363,6 +378,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "All-in-one consumer booking application for hotels and hostels, featuring offline booking confirmations and 24/7 in-app support chat.",
         image: "/images/apps/zenhotels.png",
         link: "https://play.google.com/store/apps/details?id=com.zenhotels.android",
+        builtWith: "Native Android & iOS",
       },
       {
         id: "traveloka",
@@ -377,6 +393,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Lifestyle travel super-app enabling users to book flights, hotels, train tickets, and attractions in a single unified system.",
         image: "/images/apps/traveloka.png",
         link: "https://play.google.com/store/apps/details?id=com.traveloka.android",
+        builtWith: "Native Android & iOS",
       },
 
       // Educational Technology
@@ -393,6 +410,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "AI-powered learning helper generating custom flashcards, notes, and mock exams with spaced repetition algorithms for study retention.",
         image: "/images/apps/studysmarter.png",
         link: "https://play.google.com/store/apps/details?id=com.studysmarter",
+        builtWith: "Flutter",
       },
       {
         id: "upsc-prep",
@@ -407,6 +425,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Preparation tool for civil service exams, featuring offline 'smart-books', live MCQ tests, and personalized weak-topic analytics.",
         image: "/images/apps/upsc-prep.png",
         link: "https://play.google.com/store/apps/details?id=com.crackittoday.upsc",
+        builtWith: "React Native",
       },
       {
         id: "tophat",
@@ -421,6 +440,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Active learning platform enabling professors to run live lecture polls, accept digital assignments, and stream course readings.",
         image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=600&q=80",
         link: "https://play.google.com/store/apps/details?id=com.tophat.mobile",
+        builtWith: "React Native",
       },
       {
         id: "studydrive",
@@ -435,6 +455,7 @@ export function getMobileAppLandingData(): MobileAppLandingData {
         summary: "Collaborative portal for university students to share lecture notes, mock exams, and summaries, gamified with reward coins.",
         image: "/images/apps/studydrive.png",
         link: "https://play.google.com/store/apps/details?id=me.drashti.studydrive",
+        builtWith: "Native Android & iOS",
       }
     ],
   };
