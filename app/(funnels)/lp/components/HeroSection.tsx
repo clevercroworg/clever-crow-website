@@ -12,6 +12,7 @@ type HeroMeta = {
   subtitle: string;
   highlights: string[];
   ctaLabel?: string;
+  ctaHref?: string;
 };
 
 type HeroSectionProps = {
@@ -93,16 +94,18 @@ export default function HeroSection({ data }: HeroSectionProps) {
       <div className="hero-orb hero-orb-two"></div>
       <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-8 pt-5 sm:px-6 lg:grid-cols-[1.28fr_0.72fr] lg:items-start lg:px-8 lg:pb-12">
         <div className="relative z-10 max-w-3xl">
-          <div className="hero-badge-row">
-            {hero.badges.map((badge) => (
-              <div
-                key={badge}
-                className={`hero-top-badge ${badge === hero.badges[0] ? "hero-top-badge-primary" : ""}`}
-              >
-                {badge}
-              </div>
-            ))}
-          </div>
+          {hero.badges && hero.badges.length > 0 && (
+            <div className="hero-badge-row">
+              {hero.badges.map((badge) => (
+                <div
+                  key={badge}
+                  className={`hero-top-badge ${badge === hero.badges[0] ? "hero-top-badge-primary" : ""}`}
+                >
+                  {badge}
+                </div>
+              ))}
+            </div>
+          )}
           <h1 className="mt-6 text-[1.75rem] leading-[1.2] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[3rem] lg:leading-[1.08]">
             <span className="font-light text-white">{hero.title}</span>
             <span className="block font-extrabold offer-highlight">{hero.accentTitle}</span>
@@ -167,7 +170,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
         </div>
       </div>
       <div className="hero-scroll-cue">
-        <a href="#pricing" className="hero-scroll-link">
+        <a href={hero.ctaHref || "#pricing"} className="hero-scroll-link">
           <span>{hero.ctaLabel || "View Pricing"}</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M12 5v14"></path>

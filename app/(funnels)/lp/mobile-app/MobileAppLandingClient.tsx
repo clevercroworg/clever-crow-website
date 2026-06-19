@@ -7,9 +7,7 @@ import "../lp.css";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import LogoMarquee from "../components/LogoMarquee";
-import PerformanceExperts from "../components/PerformanceExperts";
 import SuccessStories from "../components/SuccessStories";
-import PricingSection from "../components/PricingSection";
 import FaqSection from "../components/FaqSection";
 import ClientReviews from "../components/ClientReviews";
 import Footer from "@/components/Footer";
@@ -52,15 +50,11 @@ export default function MobileAppLandingClient({ data }: MobileAppLandingClientP
         <main id="top">
           <HeroSection data={data.hero} />
           <LogoMarquee />
-          <div id="pricing">
-            <PricingSection data={data.pricing} />
-          </div>
-          <PerformanceExperts />
           <SuccessStories 
             data={data.caseStudies} 
             title="Our Mobile App Portfolio"
             subtitle="Explore our range of high-performance mobile applications developed across Real Estate, E-commerce, Food Delivery, Travel & Hospitality, and Educational Technology."
-            hideMetrics={true}
+            hideMetrics={false}
             isAppPortfolio={true}
           />
           <FaqSection data={data.faqs} />

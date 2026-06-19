@@ -5,6 +5,7 @@ export type HeroMeta = {
   subtitle: string;
   highlights: string[];
   ctaLabel?: string;
+  ctaHref?: string;
 };
 
 export type PackageInfo = {
@@ -64,12 +65,13 @@ export type MobileAppLandingData = {
 export function getMobileAppLandingData(): MobileAppLandingData {
   return {
     hero: {
-      badges: ["App Growth Packages", "High-Performance UX", "Play Store & App Store Launch", "Agile Execution"],
+      badges: [],
       title: "Your Custom App.",
       accentTitle: "Built to Scale.",
       subtitle: "High-performing iOS and Android apps designed for smooth user experience, robust backend scaling, and seamless store approval.",
       highlights: ["15+ Years Experience", "50+ Apps Delivered", "Cross-Platform Experts", "Full Post-Launch Support"],
-      ctaLabel: "View Prices",
+      ctaLabel: "View Portfolio",
+      ctaHref: "#portfolio",
     },
     pricing: {
       preTitle: "Transparent App Pricing",

@@ -190,10 +190,10 @@ export default function SuccessStories({ data, title, subtitle, filterBy, hideMe
                     <p className="text-[10px] font-bold text-brand-main uppercase tracking-widest">{cs.category}</p>
                   </div>
 
-                  <div className={hideMetrics ? "mb-4" : "mb-6"}>
+                  <div className="mb-4">
                     <h3 className="text-lg font-bold text-slate-900 group-hover:text-brand-main transition-colors mb-1">{cs.title}</h3>
-                    {hideMetrics && cs.summary && (
-                      <p className="mt-2 text-xs text-slate-500 line-clamp-2 leading-relaxed font-medium">
+                    {cs.summary && (
+                      <p className="mt-1.5 text-xs text-slate-500 line-clamp-3 leading-relaxed font-medium">
                         {cs.summary}
                       </p>
                     )}
@@ -201,23 +201,44 @@ export default function SuccessStories({ data, title, subtitle, filterBy, hideMe
 
                   {/* Metrics Grid */}
                   {!hideMetrics && (
-                    <div className="grid grid-cols-2 gap-3 mb-6">
-                      <div className="rounded-xl bg-slate-50 p-3 border border-slate-100 group-hover:bg-white group-hover:border-slate-200 transition-all">
-                        <p className="text-[9px] font-bold text-slate-400 uppercase mb-0.5">Impact</p>
-                        <p className="text-sm font-black text-slate-900">{cs.primaryMetric}</p>
+                    <div className="grid grid-cols-2 gap-3 mb-4">
+                      <div className="rounded-xl bg-slate-50 p-2.5 border border-slate-100 group-hover:bg-white group-hover:border-slate-200 transition-all">
+                        <p className="text-[8px] font-bold text-slate-400 uppercase mb-0.5">
+                          {isAppPortfolio ? "App Focus" : "Impact"}
+                        </p>
+                        <p className="text-xs font-black text-slate-900 leading-tight">{cs.primaryMetric}</p>
                       </div>
-                      <div className="rounded-xl bg-emerald-50 p-3 border border-emerald-100 group-hover:bg-emerald-100/20 transition-all">
-                        <p className="text-[9px] font-bold text-emerald-500 uppercase mb-0.5">Growth</p>
-                        <p className="text-sm font-black text-emerald-700">{cs.secondaryMetric}</p>
+                      <div className={`rounded-xl p-2.5 border transition-all ${
+                        isAppPortfolio 
+                          ? "bg-amber-50/60 border-amber-100/60 group-hover:bg-amber-100/10 text-amber-700" 
+                          : "bg-emerald-50 border-emerald-100 group-hover:bg-emerald-100/20 text-emerald-700"
+                      }`}>
+                        <p className={`text-[8px] font-bold uppercase mb-0.5 ${
+                          isAppPortfolio ? "text-amber-600" : "text-emerald-500"
+                        }`}>
+                          {isAppPortfolio ? "Key Highlight" : "Growth"}
+                        </p>
+                        <p className="text-xs font-black leading-tight">{cs.secondaryMetric}</p>
                       </div>
                     </div>
                   )}
 
+                  {/* Tags Badges */}
+                  {cs.tags && cs.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {cs.tags.slice(0, 3).map((tag) => (
+                        <span key={tag} className="text-[9px] font-bold text-slate-500 bg-slate-100 border border-slate-200/40 rounded px-2 py-0.5 uppercase tracking-wide">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
                   {/* Bottom Info */}
-                  <div className="mt-auto flex items-center justify-between pt-5 border-t border-slate-50">
+                  <div className="mt-auto flex items-center justify-between pt-4 border-t border-slate-100">
                     <p className="text-[10px] text-slate-400 font-medium">{cs.duration}</p>
                     <div className="flex items-center text-[10px] font-bold text-brand-main uppercase tracking-wider">
-                      {cs.link ? "View Project" : "Know More"}
+                      {cs.link ? (isAppPortfolio ? "View App" : "View Project") : "Know More"}
                       <svg className="ml-1.5 h-3 w-3 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
