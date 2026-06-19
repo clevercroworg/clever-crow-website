@@ -109,18 +109,17 @@ export default function SuccessStories({ data, title, subtitle, filterBy, hideMe
         )}
 
         {/* Grid Layout */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredCaseStudies.map((cs) => (
-              <motion.div
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                key={cs.id}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredCaseStudies.map((cs) => (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                type: "tween",
+                ease: "easeOut",
+                duration: 0.25
+              }}
+              key={`${activeCategory}-${cs.id}`}
                 onClick={() => {
                   if (cs.link) {
                     window.open(cs.link, "_blank", "noopener,noreferrer");
@@ -201,10 +200,9 @@ export default function SuccessStories({ data, title, subtitle, filterBy, hideMe
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* Enhanced Modal */}
@@ -219,11 +217,11 @@ export default function SuccessStories({ data, title, subtitle, filterBy, hideMe
               className="absolute inset-0 cursor-zoom-out"
             />
             <motion.div
-              layoutId={selectedId}
               className="relative w-full max-w-2xl bg-white rounded-[40px] shadow-2xl overflow-hidden"
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              initial={{ scale: 0.95, opacity: 0, y: 15 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              exit={{ scale: 0.95, opacity: 0, y: 15 }}
+              transition={{ type: "tween", ease: "easeOut", duration: 0.25 }}
             >
               <button
                 onClick={() => setSelectedId(null)}
