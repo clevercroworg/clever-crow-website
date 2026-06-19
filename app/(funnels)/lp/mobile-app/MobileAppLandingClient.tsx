@@ -61,6 +61,7 @@ export default function MobileAppLandingClient({ data }: MobileAppLandingClientP
             title="Our Mobile App Portfolio"
             subtitle="Explore our range of high-performance mobile applications developed across Real Estate, E-commerce, Food Delivery, Travel & Hospitality, and Educational Technology."
             hideMetrics={true}
+            isAppPortfolio={true}
           />
           <FaqSection data={data.faqs} />
           <ClientReviews />
