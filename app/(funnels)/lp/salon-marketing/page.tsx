@@ -361,132 +361,91 @@ export default function SalonLandingPage() {
       </header>
 
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden bg-gradient-to-b from-[#111] via-[#0d0d0d] to-[#111] text-white">
-        {/* Ambient Backdrops */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none salon-grid-pattern" />
-        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] rounded-full bg-[#c29438]/10 blur-[150px] pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full bg-amber-500/5 blur-[120px] pointer-events-none" />
+      <section className="relative pt-36 pb-24 lg:pt-48 lg:pb-36 overflow-hidden bg-[#0d0d0d] text-white flex items-center justify-center min-h-[85vh]">
+        {/* Background Image & Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/images/salon/salon_hero_bg.png" 
+            alt="Luxury Salon Interior Clever Crow Marketing" 
+            fill 
+            className="object-cover opacity-35"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-[#0d0d0d]" />
+          <div className="absolute inset-0 opacity-[0.02] pointer-events-none salon-grid-pattern" />
+        </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-10">
             
-            {/* Left Column: Copy & Actions */}
-            <div className="lg:col-span-7 flex flex-col items-start space-y-8">
-              
-              {/* Title & Subtitle */}
-              <div className="space-y-4">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-black font-serif-luxury tracking-tight leading-tight text-white">
-                  Want More <span className="text-gold-gradient block sm:inline">Salon Appointments?</span>
-                </h1>
-                <h2 className="text-lg sm:text-xl font-bold text-[#f7e7c4] max-w-2xl leading-relaxed">
-                  Digital Marketing for Salons, Beauty Studios, Unisex Salons & Men’s Grooming Brands
-                </h2>
+            {/* Title & Subtitle */}
+            <div className="space-y-4">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-serif-luxury tracking-tight leading-tight text-white">
+                Want More <span className="text-gold-gradient block sm:inline">Salon Appointments?</span>
+              </h1>
+              <h2 className="text-base sm:text-lg md:text-xl font-bold text-[#f7e7c4] max-w-3xl leading-relaxed mx-auto">
+                Digital Marketing for Salons, Beauty Studios, Unisex Salons & Men’s Grooming Brands
+              </h2>
+            </div>
+            
+            {/* 4 Trust & Service Badges (2x2 Layout on all screens) */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-2xl mx-auto">
+              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center">
+                <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
+                  <Award className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
+                </div>
+                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200">15+ Years Experience</span>
               </div>
-              
-              {/* 4 Trust & Service Badges */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-xl">
-                <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
-                    <Award className="h-4.5 w-4.5" />
-                  </div>
-                  <span className="text-xs sm:text-sm font-semibold text-slate-200">15+ Years Experience</span>
+              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center">
+                <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
+                  <Users className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
                 </div>
-                <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
-                    <Users className="h-4.5 w-4.5" />
-                  </div>
-                  <span className="text-xs sm:text-sm font-semibold text-slate-200">20+ Salons Served</span>
-                </div>
-                <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
-                    <MapPin className="h-4.5 w-4.5" />
-                  </div>
-                  <span className="text-xs sm:text-sm font-semibold text-slate-200">Local Enquiries</span>
-                </div>
-                <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
-                    <Calendar className="h-4.5 w-4.5" />
-                  </div>
-                  <span className="text-xs sm:text-sm font-semibold text-slate-200">Appointment Requests</span>
-                </div>
+                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200">20+ Salons Served</span>
               </div>
-
-              {/* Retainer pricing badge */}
-              <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl p-4 w-full sm:w-auto">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20">
-                  <Calendar className="h-5 w-5" />
+              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center">
+                <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
+                  <MapPin className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
                 </div>
-                <div>
-                  <span className="text-[10px] uppercase tracking-widest text-slate-400 block font-semibold">Starter Retainer Pricing</span>
-                  <span className="text-base sm:text-lg font-black text-white">
-                    Packages starting from <span className="text-[#c29438]">₹18,000</span>/month
-                  </span>
+                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200">Local Enquiries</span>
+              </div>
+              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center">
+                <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
+                  <Calendar className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
                 </div>
+                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200">Appointment Requests</span>
               </div>
-
-              {/* Dual CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-2">
-                <button 
-                  onClick={() => scrollToSection(formRef)}
-                  className="px-8 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider btn-salon-primary cursor-pointer flex items-center justify-center gap-2 group"
-                >
-                  <span>Get Free Salon Marketing Consultation</span>
-                  <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button 
-                  onClick={() => scrollToSection(packagesRef)}
-                  className="px-8 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider btn-salon-secondary cursor-pointer flex items-center justify-center"
-                >
-                  View Packages
-                </button>
-              </div>
-
-
             </div>
 
-            {/* Right Column: Layered Dashboard Mockup */}
-            <div className="lg:col-span-5 relative mt-8 lg:mt-0 flex justify-center">
-              {/* Backglow */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-[#c29438]/20 blur-[80px] pointer-events-none z-0" />
-
-              <div className="relative z-10 w-full max-w-[420px] aspect-[4/5] sm:aspect-[4/4] lg:aspect-[4/5] relative">
-                
-                {/* Main Salon Photo Showcase Card */}
-                <div className="absolute inset-0 rounded-[2.5rem] overflow-hidden border border-white/10 bg-[#161616] p-3 shadow-2xl z-10">
-                  <div className="relative h-full w-full rounded-[2rem] overflow-hidden bg-slate-900">
-                    <Image 
-                      src="/images/salon_hero_showcase.png" 
-                      alt="Luxury Salon Interior Clever Crow Marketing" 
-                      fill 
-                      className="object-cover opacity-80"
-                      sizes="(max-width: 1024px) 100vw, 420px"
-                      priority
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
-                  </div>
-                </div>
-
-                {/* Floating Card B: Ads Performance stats (Top Right) */}
-                <motion.div 
-                  initial={{ y: -20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.7, duration: 0.6 }}
-                  className="absolute -top-4 -right-4 z-20 bg-[#161616] text-white rounded-2xl p-4 shadow-2xl border border-[#c29438]/30 max-w-[190px] flex flex-col gap-2 select-none"
-                >
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Meta Ads ROI</span>
-                    <TrendingUp className="h-4 w-4 text-[#c29438]" />
-                  </div>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-2xl font-black text-white">8.4x</span>
-                    <span className="text-[10px] text-green-500 font-bold">+310%</span>
-                  </div>
-                  <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-[#c29438] h-full w-[85%] rounded-full" />
-                  </div>
-                </motion.div>
-
+            {/* Retainer pricing badge */}
+            <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl p-4 w-full sm:w-auto justify-center mx-auto">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20">
+                <Calendar className="h-5 w-5" />
               </div>
+              <div className="text-left">
+                <span className="text-[10px] uppercase tracking-widest text-slate-400 block font-semibold">Starter Retainer Pricing</span>
+                <span className="text-base sm:text-lg font-black text-white">
+                  Packages starting from <span className="text-[#c29438]">₹18,000</span>/month
+                </span>
+              </div>
+            </div>
+
+            {/* Dual CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center pt-2">
+              <a 
+                href="tel:+919986389444" 
+                onClick={trackCallClick}
+                className="px-8 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider btn-salon-primary cursor-pointer flex items-center justify-center gap-2 group shadow-lg"
+              >
+                <Phone className="h-4.5 w-4.5 shrink-0" />
+                <span>Call: +91 99863 89444</span>
+              </a>
+              <button 
+                onClick={() => scrollToSection(packagesRef)}
+                className="px-8 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider btn-salon-secondary cursor-pointer flex items-center justify-center gap-2"
+              >
+                <span>View Pricing Packages</span>
+              </button>
             </div>
 
           </div>
