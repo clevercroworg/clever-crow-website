@@ -427,25 +427,25 @@ export default function SalonLandingPage() {
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
                   <Award className="h-4.5 w-4.5" />
                 </div>
-                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200 block mt-1 sm:mt-0 max-w-[120px] sm:max-w-none">15+ Years Experience</span>
+                <span className="text-sm sm:text-base md:text-lg font-semibold text-slate-200 block mt-1 sm:mt-0 max-w-[140px] sm:max-w-none">15+ Years Experience</span>
               </div>
               <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 px-3 py-3 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start text-center sm:text-left">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
                   <Users className="h-4.5 w-4.5" />
                 </div>
-                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200 block mt-1 sm:mt-0 max-w-[120px] sm:max-w-none">20+ Salons Served</span>
+                <span className="text-sm sm:text-base md:text-lg font-semibold text-slate-200 block mt-1 sm:mt-0 max-w-[140px] sm:max-w-none">20+ Salons Served</span>
               </div>
               <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 px-3 py-3 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start text-center sm:text-left">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
                   <MapPin className="h-4.5 w-4.5" />
                 </div>
-                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200 block mt-1 sm:mt-0 max-w-[120px] sm:max-w-none">Local Enquiries</span>
+                <span className="text-sm sm:text-base md:text-lg font-semibold text-slate-200 block mt-1 sm:mt-0 max-w-[140px] sm:max-w-none">Local Enquiries</span>
               </div>
               <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 px-3 py-3 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start text-center sm:text-left">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
                   <Calendar className="h-4.5 w-4.5" />
                 </div>
-                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200 block mt-1 sm:mt-0 max-w-[120px] sm:max-w-none">Appointment Requests</span>
+                <span className="text-sm sm:text-base md:text-lg font-semibold text-slate-200 block mt-1 sm:mt-0 max-w-[140px] sm:max-w-none">Appointment Requests</span>
               </div>
             </div>
 
