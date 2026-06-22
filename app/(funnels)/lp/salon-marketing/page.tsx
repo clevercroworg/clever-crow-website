@@ -14,6 +14,16 @@ import {
   Compass, Users, MessageCircle, Globe
 } from "lucide-react";
 
+const cleanUrl = (urlStr: string): string => {
+  if (!urlStr) return "";
+  try {
+    const url = new URL(urlStr);
+    return `${url.origin}/`;
+  } catch (e) {
+    return urlStr;
+  }
+};
+
 export default function SalonLandingPage() {
   const router = useRouter();
 
@@ -545,7 +555,7 @@ export default function SalonLandingPage() {
                       <div className="flex gap-2">
                         {salon["Source URL"] && (
                           <a 
-                            href={salon["Source URL"]}
+                            href={cleanUrl(salon["Source URL"])}
                             target="_blank"
                             rel="noreferrer"
                             className="flex-1 py-2 px-3 rounded-xl text-[11px] font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200/80 transition-colors flex items-center justify-center gap-1"
