@@ -55,7 +55,7 @@ export default function SalonLandingPage() {
     }
   };
 
-  const [selectedCity, setSelectedCity] = useState("All");
+  const [selectedCity, setSelectedCity] = useState("Bangalore");
   const [selectedPackage, setSelectedPackage] = useState("");
   const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -585,16 +585,16 @@ export default function SalonLandingPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
             {solutionsWeHandle.map((solution, idx) => (
               <div 
                 key={idx} 
-                className="salon-glass-card rounded-3xl p-8 border border-white/5 hover:border-[#c29438]/20 transition-all duration-300 flex flex-col items-center justify-center text-center"
+                className="salon-glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-white/5 hover:border-[#c29438]/20 transition-all duration-300 flex flex-col items-center justify-center text-center aspect-square sm:aspect-auto"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#c29438]/10 text-[#c29438] mb-4 border border-[#c29438]/20 mx-auto">
-                  <solution.icon className="h-5.5 w-5.5" />
+                <div className="flex h-9 w-9 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl bg-[#c29438]/10 text-[#c29438] mb-3 sm:mb-4 border border-[#c29438]/20 mx-auto">
+                  <solution.icon className="h-4.5 w-4.5 sm:h-5.5 sm:w-5.5" />
                 </div>
-                <h3 className="text-base font-bold text-white leading-snug text-center">{solution.title}</h3>
+                <h3 className="text-xs sm:text-base font-bold text-white leading-snug text-center">{solution.title}</h3>
               </div>
             ))}
           </div>
