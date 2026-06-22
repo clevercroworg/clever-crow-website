@@ -24,6 +24,128 @@ const cleanUrl = (urlStr: string): string => {
   }
 };
 
+const salonAssets: Record<string, { cover: string; logo?: string }> = {
+  "Green Trends Salon Kondapur": {
+    cover: "/images/salon/projects/Green Trends Salon Kondapur/12108163-12108163-15d737b0.jpg",
+    logo: "/images/salon/projects/Green Trends Salon Kondapur/gtlogo_2025-10-16-06-41-52-801.jpg"
+  },
+  "Bubbles Hair & Beauty": {
+    cover: "/images/salon/projects/Bubbles Hair & Beauty/AHf0ZiORBNsU3F6I4X9ywmIxVUc.jpg",
+    logo: "/images/salon/projects/Bubbles Hair & Beauty/Logo.jpg"
+  },
+  "Juice Salon Hyderabad": {
+    cover: "/images/salon/projects/Juice Salon Hyderabad/649822667_18097939618777180_3614060310979274649_n.jpg",
+    logo: "/images/salon/projects/Juice Salon Hyderabad/416195627_348761514203920_3264338372189409976_n.jpg"
+  },
+  "Lakmé Salon Jubilee Hills": {
+    cover: "/images/salon/projects/Lakmé Salon Jubilee Hills/imgdownloader-d2e81a27 (1).jpg",
+    logo: "/images/salon/projects/Lakmé Salon Jubilee Hills/210882704_1082963205443260_1085961944717439397_n.jpg"
+  },
+  "Bodycraft Salon & Spa": {
+    cover: "/images/salon/projects/Bodycraft Salon & Spa/imgdownloader-ef642954.jpg",
+    logo: "/images/salon/projects/Bodycraft Salon & Spa/bodycraft-logo.jpg"
+  },
+  "BBlunt Salon Bangalore": {
+    cover: "/images/salon/projects/BBlunt Salon Bangalore/imgdownloader-9f35824e.jpg",
+    logo: "/images/salon/projects/BBlunt Salon Bangalore/573354549_18028271834743436_7209604810643271348_n.jpg"
+  },
+  "Bounce Salon and Spa": {
+    cover: "/images/salon/projects/Bounce Salon and Spa/imgdownloader-60e367ff.jpg",
+    logo: "/images/salon/projects/Bounce Salon and Spa/logo.jpg"
+  },
+  "Geetanjali Salon": {
+    cover: "/images/salon/projects/Geetanjali Salon/imgdownloader-c1a045c4.jpg",
+    logo: "/images/salon/projects/Geetanjali Salon/701227824_18586218994036260_1485607745862599866_n.jpg"
+  },
+  "Affinity Salon": {
+    cover: "/images/salon/projects/Affinity Salon/imgdownloader-86389d42.jpg",
+    logo: "/images/salon/projects/Affinity Salon/13734356_168980156865011_1004344739_a.jpg"
+  },
+  "Enrich Salon": {
+    cover: "/images/salon/projects/Enrich Salon/imgdownloader-9c9d711a.jpg",
+    logo: "/images/salon/projects/Enrich Salon/270222350_3066914783625176_2807857343531465218_n.jpg"
+  },
+  "Jean-Claude Biguine India": {
+    cover: "/images/salon/projects/Jean-Claude Biguine India/imgdownloader-53746d6f.jpg",
+    logo: "/images/salon/projects/Jean-Claude Biguine India/296217128_1996132850577453_2706143868079793970_n.jpg"
+  },
+  "BBlunt Salon Mumbai": {
+    cover: "/images/salon/projects/BBlunt Salon Mumbai/imgdownloader-97cd68a8.jpeg",
+    logo: "/images/salon/projects/BBlunt Salon Mumbai/586701328_18098312185803070_5687082432374983108_n.jpg"
+  },
+  "Kromakay Hair & Beauty Salon": {
+    cover: "/images/salon/projects/Kromakay Hair & Beauty Salon/imgdownloader-8b643254.jpg",
+    logo: "/images/salon/projects/Kromakay Hair & Beauty Salon/446199378_1227836928197940_7478880987324040907_n.jpg"
+  },
+  "Florian Hurel Hair Couture & Spa": {
+    cover: "/images/salon/projects/Florian Hurel Hair Couture & Spa/imgdownloader-66db9173.jpg",
+    logo: "/images/salon/projects/Florian Hurel Hair Couture & Spa/656874338_17989318577949903_2376044086625553449_n.jpg"
+  },
+  "Bina Punjani Hair Studio": {
+    cover: "/images/salon/projects/Bina Punjani Hair Studio/imgdownloader-b40b2acf.jpg",
+    logo: "/images/salon/projects/Bina Punjani Hair Studio/Logo Left.jpg"
+  },
+  "A&A / Aaqil’s Salon & Spa": {
+    cover: "/images/salon/projects/A&A - Aaqil’s Salon & Spa/imgdownloader-53a33b56.jpg"
+  },
+  "Lakmé Salon Porvorim": {
+    cover: "/images/salon/projects/Lakmé Salon Porvorim/imgdownloader-3c15de14.jpeg",
+    logo: "/images/salon/projects/Lakmé Salon Porvorim/391515593_3557589277822652_2548203576464698757_n.jpg"
+  }
+};
+
+const defaultCovers = [
+  "/images/salon/salon_bridal.png",
+  "/images/salon/salon_festival.png",
+  "/images/salon/salon_haircolour.png",
+  "/images/salon/salon_hairextensions.png",
+  "/images/salon/salon_hydrafacial.png",
+  "/images/salon/salon_keratin.png",
+  "/images/salon/salon_membership.png",
+  "/images/salon/salon_mengrooming.png",
+  "/images/salon/salon_nailart.png",
+  "/images/salon/salon_skintreatment.png"
+];
+
+const getSalonImages = (salonName: string, category: string, index: number) => {
+  const normalizedKey = salonName.normalize("NFC");
+  const mapped = Object.keys(salonAssets).find(k => k.normalize("NFC") === normalizedKey);
+  const assets = mapped ? salonAssets[mapped] : null;
+  
+  let cover = assets?.cover || "";
+  let logo = assets?.logo || "";
+  
+  if (!cover) {
+    const catLower = category.toLowerCase();
+    if (catLower.includes("bridal") || catLower.includes("wedding")) {
+      cover = "/images/salon/salon_bridal.png";
+    } else if (catLower.includes("men") || catLower.includes("grooming")) {
+      cover = "/images/salon/salon_mengrooming.png";
+    } else if (catLower.includes("colour") || catLower.includes("color")) {
+      cover = "/images/salon/salon_haircolour.png";
+    } else if (catLower.includes("extensions")) {
+      cover = "/images/salon/salon_hairextensions.png";
+    } else if (catLower.includes("skin") || catLower.includes("facial") || catLower.includes("treatment")) {
+      cover = "/images/salon/salon_skintreatment.png";
+    } else if (catLower.includes("nail")) {
+      cover = "/images/salon/salon_nailart.png";
+    } else {
+      cover = defaultCovers[index % defaultCovers.length];
+    }
+  }
+  
+  return { cover, logo };
+};
+
+const getInitials = (name: string): string => {
+  const clean = name.replace(/salon|spa|hair|beauty|india|unisex|&/gi, "").trim();
+  const words = clean.split(/\s+/).filter(Boolean);
+  if (words.length >= 2) {
+    return (words[0][0] + words[1][0]).toUpperCase();
+  }
+  return words[0] ? words[0][0].toUpperCase() : "S";
+};
+
 export default function SalonLandingPage() {
   const router = useRouter();
 
@@ -505,68 +627,107 @@ export default function SalonLandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {salonsData
               .filter(salon => selectedCity === "All" || salon.City === selectedCity)
-              .map((salon: any, idx: number) => (
-                <div 
-                  key={idx} 
-                  className="bg-white rounded-3xl p-6 border border-[#c29438]/10 hover:border-[#c29438]/30 shadow-sm transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
-                >
-                  <div className="space-y-4">
-                    {/* Header: Category & City */}
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-[#8c641c] bg-[#c29438]/5 px-2.5 py-1 rounded-full">
-                        {salon["Category / Angle"]}
-                      </span>
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
-                        <MapPin className="h-3 w-3 text-[#c29438]" /> {salon.City}
-                      </span>
+              .map((salon: any, idx: number) => {
+                const { cover, logo } = getSalonImages(salon["Salon Name"], salon["Category / Angle"], idx);
+                return (
+                  <div 
+                    key={idx} 
+                    className="relative overflow-hidden bg-white rounded-3xl border border-[#c29438]/10 hover:border-[#c29438]/30 shadow-sm transition-all duration-300 hover:-translate-y-1 flex flex-col group"
+                  >
+                    {/* Cover Image */}
+                    <div className="h-44 w-full relative overflow-hidden bg-slate-100 border-b border-[#c29438]/5">
+                      <Image 
+                        src={cover} 
+                        alt={salon["Salon Name"]} 
+                        fill 
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                      
+                      {/* Overlaid Badges */}
+                      <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
+                        <span className="text-[9px] font-black uppercase tracking-widest text-[#8c641c] bg-white/90 backdrop-blur-xs px-2.5 py-1 rounded-full shadow-xs">
+                          {salon["Category / Angle"]}
+                        </span>
+                        <span className="text-[9px] font-bold text-slate-700 bg-white/90 backdrop-blur-xs px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
+                          <MapPin className="h-3 w-3 text-[#c29438]" /> {salon.City}
+                        </span>
+                      </div>
                     </div>
 
-                    {/* Salon Title */}
-                    <div>
-                      <h3 className="text-lg font-black text-slate-900 leading-snug">{salon["Salon Name"]}</h3>
-                      <p className="text-xs text-slate-500 mt-1">{salon.Location}</p>
-                    </div>
-                  </div>
-
-                  {/* Actions */}
-                  <div className="mt-6 pt-4 border-t border-slate-100">
-                    <div className="flex flex-col gap-2">
-                      {salon["Instagram Account Link"] && (
-                        <a 
-                          href={salon["Instagram Account Link"]}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="w-full py-2 px-4 rounded-xl text-xs font-bold text-white bg-[#c29438] hover:bg-[#b0812d] transition-colors flex items-center justify-center gap-1.5 shadow-sm"
-                        >
-                          <Instagram className="h-3.5 w-3.5" /> Instagram Profile
-                        </a>
-                      )}
-                      <div className="flex gap-2">
-                        {salon["Source URL"] && (
-                          <a 
-                            href={cleanUrl(salon["Source URL"])}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="flex-1 py-2 px-3 rounded-xl text-[11px] font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200/80 transition-colors flex items-center justify-center gap-1"
-                          >
-                            <Globe className="h-3.5 w-3.5 text-[#c29438]" /> Website
-                          </a>
-                        )}
-                        {salon["GMB / Google Maps Link"] && (
-                          <a 
-                            href={salon["GMB / Google Maps Link"]}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="flex-1 py-2 px-3 rounded-xl text-[11px] font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200/80 transition-colors flex items-center justify-center gap-1"
-                          >
-                            <MapPin className="h-3.5 w-3.5 text-[#c29438]" /> Google Maps
-                          </a>
+                    {/* Logo/Icon Container */}
+                    <div className="relative px-6">
+                      <div className="absolute -top-7 left-6 h-14 w-14 rounded-2xl bg-white border border-[#c29438]/10 shadow-md p-1 flex items-center justify-center z-10 overflow-hidden">
+                        {logo ? (
+                          <div className="relative w-full h-full">
+                            <Image 
+                              src={logo} 
+                              alt={`${salon["Salon Name"]} Logo`} 
+                              fill 
+                              className="object-contain rounded-xl"
+                              sizes="56px"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-full h-full rounded-xl bg-gradient-to-br from-[#c29438]/10 to-[#8c641c]/20 flex items-center justify-center">
+                            <span className="text-sm font-black text-[#8c641c]">
+                              {getInitials(salon["Salon Name"])}
+                            </span>
+                          </div>
                         )}
                       </div>
                     </div>
+
+                    {/* Info Section */}
+                    <div className="pt-9 px-6 pb-6 flex-1 flex flex-col justify-between space-y-4">
+                      <div>
+                        <h3 className="text-base font-black text-slate-900 leading-snug group-hover:text-[#c29438] transition-colors duration-300">
+                          {salon["Salon Name"]}
+                        </h3>
+                        <p className="text-xs text-slate-500 mt-1">{salon.Location}</p>
+                      </div>
+
+                      {/* Actions */}
+                      <div className="pt-4 border-t border-slate-100">
+                        <div className="flex flex-col gap-2">
+                          {salon["Instagram Account Link"] && (
+                            <a 
+                              href={salon["Instagram Account Link"]}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="w-full py-2 px-4 rounded-xl text-xs font-bold text-white bg-[#c29438] hover:bg-[#b0812d] transition-colors flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+                            >
+                              <Instagram className="h-3.5 w-3.5" /> Instagram Profile
+                            </a>
+                          )}
+                          <div className="flex gap-2">
+                            {salon["Source URL"] && (
+                              <a 
+                                href={cleanUrl(salon["Source URL"])}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="flex-1 py-2 px-3 rounded-xl text-[11px] font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200/80 transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                              >
+                                <Globe className="h-3.5 w-3.5 text-[#c29438]" /> Website
+                              </a>
+                            )}
+                            {salon["GMB / Google Maps Link"] && (
+                              <a 
+                                href={salon["GMB / Google Maps Link"]}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="flex-1 py-2 px-3 rounded-xl text-[11px] font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200/80 transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                              >
+                                <MapPin className="h-3.5 w-3.5 text-[#c29438]" /> Google Maps
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
           </div>
         </div>
       </section>
