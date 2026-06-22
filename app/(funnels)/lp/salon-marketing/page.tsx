@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaWhatsapp } from "react-icons/fa";
 import { 
   Scissors, Sparkles, CheckCircle2, AlertCircle, Calendar, 
   MapPin, Award, ArrowRight, MessageSquare, Phone, 
@@ -14,6 +15,35 @@ import {
 
 export default function SalonLandingPage() {
   const router = useRouter();
+
+  const trackWhatsAppClick = () => {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "click", {
+        event_category: "Contact",
+        event_label: "WhatsApp Chat Click",
+        whatsapp_number: "09986389444"
+      });
+    }
+  };
+
+  const trackCallClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window !== "undefined") {
+      if ((window as any).gtag_report_conversion) {
+        e.preventDefault();
+        (window as any).gtag_report_conversion(e.currentTarget.href);
+      } else if ((window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
+        });
+        (window as any).gtag("event", "click", {
+          event_category: "Contact",
+          event_label: "Phone Call Click",
+          phone_number: "09986389444"
+        });
+      }
+    }
+  };
+
   const [selectedPackage, setSelectedPackage] = useState("");
   const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -95,6 +125,17 @@ export default function SalonLandingPage() {
       });
 
       if (response.ok) {
+        // Fire Google Ads & Analytics conversion tracking
+        if (typeof window !== "undefined" && (window as any).gtag) {
+          (window as any).gtag("event", "conversion", {
+            send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
+          });
+          (window as any).gtag("event", "GenerateLead", {
+            event_category: "Leads",
+            event_label: "Lead Form Submit"
+          });
+        }
+
         setSubmitStatus("success");
         // Reset form
         setFormState({
@@ -291,6 +332,7 @@ export default function SalonLandingPage() {
           <div className="flex items-center gap-3">
             <a 
               href="tel:+919986389444" 
+              onClick={trackCallClick}
               className="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white border border-[#c29438]/20 text-[#8c641c] hover:bg-[#FAF9F6] transition-colors shadow-sm"
               aria-label="Call Us"
             >
@@ -299,12 +341,13 @@ export default function SalonLandingPage() {
             
             <a 
               href="https://wa.me/919986389444?text=Hi%20Clever%20Crow%2C%20I%27m%20interested%20in%20salon%20marketing%20services.%20(Ref:%20LP/Salon-Marketing)" 
+              onClick={trackWhatsAppClick}
               target="_blank"
               rel="noreferrer"
               className="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors shadow-sm"
               aria-label="Chat on WhatsApp"
             >
-              <MessageCircle className="h-4.5 w-4.5" />
+              <FaWhatsapp className="h-5 w-5" />
             </a>
             
             <button 
@@ -1317,11 +1360,12 @@ export default function SalonLandingPage() {
             </button>
             <a 
               href="https://wa.me/919986389444?text=Hi%20Clever%20Crow%2C%20I%27m%20interested%20in%20salon%20marketing%20services.%20(Ref:%20LP/Salon-Marketing)"
+              onClick={trackWhatsAppClick}
               target="_blank"
               rel="noreferrer"
               className="px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider btn-salon-secondary cursor-pointer flex items-center justify-center gap-2 bg-[#22c55e]/10 border-[#22c55e]/40 text-[#22c55e] hover:bg-[#22c55e]/20"
             >
-              <MessageSquare className="h-4.5 w-4.5" /> WhatsApp Us Now
+              <FaWhatsapp className="h-5 w-5" /> WhatsApp Us Now
             </a>
           </div>
 
@@ -1348,6 +1392,18 @@ export default function SalonLandingPage() {
           </div>
         </div>
       </footer>
+
+      {/* Sticky WhatsApp Floating Icon (Bottom Right) */}
+      <a 
+        href="https://wa.me/919986389444?text=Hi%20Clever%20Crow%2C%20I%27m%20interested%20in%20salon%20marketing%20services.%20(Ref:%20LP/Salon-Marketing)" 
+        target="_blank"
+        rel="noreferrer"
+        onClick={trackWhatsAppClick}
+        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#22c55e] text-white shadow-xl hover:bg-[#1ebd50] transition-transform hover:scale-110 whatsapp-pulse cursor-pointer"
+        aria-label="Chat on WhatsApp"
+      >
+        <FaWhatsapp className="h-7 w-7 text-white" />
+      </a>
     </div>
   );
 }
