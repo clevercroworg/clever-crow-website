@@ -11,7 +11,7 @@ import {
   MapPin, Award, ArrowRight, MessageSquare, Phone, 
   Target, TrendingUp, Instagram, Share2, Eye, 
   HelpCircle, ChevronDown, Check, Loader2, Sparkle,
-  Compass, Users, MessageCircle
+  Compass, Users, MessageCircle, Globe
 } from "lucide-react";
 
 export default function SalonLandingPage() {
@@ -531,27 +531,39 @@ export default function SalonLandingPage() {
 
                   {/* Actions */}
                   <div className="mt-6 pt-4 border-t border-slate-100">
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-col gap-2">
                       {salon["Instagram Account Link"] && (
                         <a 
                           href={salon["Instagram Account Link"]}
                           target="_blank"
                           rel="noreferrer"
-                          className="flex-1 py-2 px-4 rounded-xl text-xs font-bold text-[#8c641c] bg-[#c29438]/5 hover:bg-[#c29438]/10 border border-[#c29438]/10 transition-colors flex items-center justify-center gap-1.5"
+                          className="w-full py-2 px-4 rounded-xl text-xs font-bold text-white bg-[#c29438] hover:bg-[#b0812d] transition-colors flex items-center justify-center gap-1.5 shadow-sm"
                         >
-                          <Instagram className="h-3.5 w-3.5" /> Instagram
+                          <Instagram className="h-3.5 w-3.5" /> Instagram Profile
                         </a>
                       )}
-                      {salon["GMB / Google Maps Link"] && (
-                        <a 
-                          href={salon["GMB / Google Maps Link"]}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="flex-1 py-2 px-4 rounded-xl text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-100 transition-colors flex items-center justify-center gap-1.5"
-                        >
-                          <MapPin className="h-3.5 w-3.5" /> Google Maps
-                        </a>
-                      )}
+                      <div className="flex gap-2">
+                        {salon["Source URL"] && (
+                          <a 
+                            href={salon["Source URL"]}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex-1 py-2 px-3 rounded-xl text-[11px] font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200/80 transition-colors flex items-center justify-center gap-1"
+                          >
+                            <Globe className="h-3.5 w-3.5 text-[#c29438]" /> Website
+                          </a>
+                        )}
+                        {salon["GMB / Google Maps Link"] && (
+                          <a 
+                            href={salon["GMB / Google Maps Link"]}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex-1 py-2 px-3 rounded-xl text-[11px] font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200/80 transition-colors flex items-center justify-center gap-1"
+                          >
+                            <MapPin className="h-3.5 w-3.5 text-[#c29438]" /> Google Maps
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
