@@ -361,35 +361,41 @@ export default function SalonLandingPage() {
       </header>
 
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-36 pb-24 lg:pt-48 lg:pb-36 overflow-hidden bg-[#0d0d0d] text-white flex items-center justify-center min-h-[85vh]">
-        {/* Background Image & Overlay */}
+      <section className="relative pt-36 pb-24 lg:pt-44 lg:pb-36 overflow-hidden bg-[#0d0d0d] text-white flex items-center justify-center min-h-[95vh]">
+        {/* Background Image & Lighter Overlay */}
         <div className="absolute inset-0 z-0">
           <Image 
             src="/images/salon/salon_hero_bg.png" 
             alt="Luxury Salon Interior Clever Crow Marketing" 
             fill 
-            className="object-cover opacity-35"
+            className="object-cover opacity-70"
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-[#0d0d0d]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/35 to-[#0d0d0d]" />
           <div className="absolute inset-0 opacity-[0.02] pointer-events-none salon-grid-pattern" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex justify-center">
+          {/* Centered Glassmorphic Content Card */}
+          <div className="w-full max-w-4xl bg-black/60 backdrop-blur-md border border-white/10 rounded-[2.5rem] sm:rounded-[3.5rem] p-6 sm:p-10 md:p-14 shadow-2xl flex flex-col items-center text-center space-y-8 md:space-y-10">
             
+            {/* Top Context Tag */}
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#c29438] bg-[#c29438]/10 border border-[#c29438]/20">
+              <Sparkles className="h-3.5 w-3.5 shrink-0" /> Salon Retainer Marketing
+            </span>
+
             {/* Title & Subtitle */}
             <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-serif-luxury tracking-tight leading-tight text-white">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-serif-luxury tracking-tight leading-tight text-white max-w-3xl">
                 Want More <span className="text-gold-gradient block sm:inline">Salon Appointments?</span>
               </h1>
-              <h2 className="text-base sm:text-lg md:text-xl font-bold text-[#f7e7c4] max-w-3xl leading-relaxed mx-auto">
-                Digital Marketing for Salons, Beauty Studios, Unisex Salons & Men’s Grooming Brands
-              </h2>
+              <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl leading-relaxed mx-auto">
+                Scale your salon, beauty studio, unisex brand, or men's grooming lounge with local social ads and booking automation.
+              </p>
             </div>
             
-            {/* 4 Trust & Service Badges (2x2 Layout on all screens) */}
+            {/* 4 Trust & Service Badges (2x2 Layout) */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-2xl mx-auto">
               <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center">
                 <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
