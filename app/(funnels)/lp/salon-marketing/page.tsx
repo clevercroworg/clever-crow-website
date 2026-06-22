@@ -734,11 +734,7 @@ export default function SalonLandingPage() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-slate-100 space-y-4">
-                <div className="bg-slate-50 rounded-xl p-3 text-center">
-                  <span className="text-[10px] font-black uppercase text-slate-400 block">Recommended Ad Budget</span>
-                  <span className="text-xs font-bold text-slate-700">₹10,000–₹15,000 / month</span>
-                </div>
+              <div className="mt-8 pt-6 border-t border-slate-100">
                 <button 
                   onClick={() => handlePackageSelect("Starter Growth Package (₹18,000)")}
                   className="w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider btn-salon-secondary-light cursor-pointer text-center"
@@ -779,11 +775,7 @@ export default function SalonLandingPage() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/5 space-y-4">
-                <div className="bg-white/5 rounded-xl p-3 text-center">
-                  <span className="text-[10px] font-black uppercase text-slate-400 block">Recommended Ad Budget</span>
-                  <span className="text-xs font-bold text-white">₹20,000–₹30,000 / month</span>
-                </div>
+              <div className="mt-8 pt-6 border-t border-white/5">
                 <button 
                   onClick={() => handlePackageSelect("Appointment Growth Package (₹30,000)")}
                   className="w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider btn-salon-primary cursor-pointer text-center"
@@ -820,11 +812,7 @@ export default function SalonLandingPage() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-slate-100 space-y-4">
-                <div className="bg-slate-50 rounded-xl p-3 text-center">
-                  <span className="text-[10px] font-black uppercase text-slate-400 block">Recommended Ad Budget</span>
-                  <span className="text-xs font-bold text-slate-700">₹30,000–₹60,000 / month</span>
-                </div>
+              <div className="mt-8 pt-6 border-t border-slate-100">
                 <button 
                   onClick={() => handlePackageSelect("Premium Salon Growth Package (₹45,000)")}
                   className="w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider btn-salon-secondary-light cursor-pointer text-center"
