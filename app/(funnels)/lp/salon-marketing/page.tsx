@@ -153,7 +153,7 @@ export default function SalonLandingPage() {
           message: ""
         });
         setTimeout(() => {
-          router.push("/thank-you");
+          router.push("/");
         }, 1200);
       } else {
         setSubmitStatus("error");
@@ -320,7 +320,7 @@ export default function SalonLandingPage() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          <a href="#" className="flex items-center">
+          <a href="/" className="flex items-center">
             <Image 
               src="/logo-dark.svg" 
               alt="Clever Crow Logo" 
