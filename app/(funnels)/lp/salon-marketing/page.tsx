@@ -416,8 +416,7 @@ export default function SalonLandingPage() {
               </h1>
               <h2 className="text-[15px] xs:text-base sm:text-xl md:text-2xl font-medium text-[#f7e7c4] max-w-3xl lg:max-w-none leading-relaxed mx-auto lg:mx-0">
                 <span className="block sm:inline whitespace-nowrap sm:whitespace-normal">Digital Marketing for Salons, Beauty Studios,</span>
-                <span className="hidden sm:inline"> </span>
-                <br className="sm:hidden" />
+                <br className="hidden sm:inline" />
                 <span className="block sm:inline whitespace-nowrap sm:whitespace-normal">Unisex Salons & Men’s Grooming Brands</span>
               </h2>
             </div>
