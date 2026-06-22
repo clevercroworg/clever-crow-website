@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Scissors, Sparkles, CheckCircle2, AlertCircle, Calendar, 
@@ -12,6 +13,7 @@ import {
 } from "lucide-react";
 
 export default function SalonLandingPage() {
+  const router = useRouter();
   const [selectedPackage, setSelectedPackage] = useState("");
   const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -107,6 +109,9 @@ export default function SalonLandingPage() {
           budget: "",
           message: ""
         });
+        setTimeout(() => {
+          router.push("/thank-you");
+        }, 1200);
       } else {
         setSubmitStatus("error");
       }

@@ -1,6 +1,19 @@
 import { NextResponse } from "next/server"
 import nodemailer from "nodemailer"
 
+const isValValid = (val: any) => {
+  if (!val) return false;
+  const s = String(val).trim();
+  return (
+    s !== "" &&
+    s.toLowerCase() !== "not provided" &&
+    s.toLowerCase() !== "none" &&
+    s.toLowerCase() !== "not selected" &&
+    s.toLowerCase() !== "null" &&
+    s.toLowerCase() !== "undefined"
+  );
+};
+
 export async function POST(req: Request) {
   try {
     const body = await req.json()
@@ -9,7 +22,7 @@ export async function POST(req: Request) {
       utm_source, utm_medium, utm_campaign, utm_term, utm_content, referrer, landed_url
     } = body
 
-    if (!name || !phone) {
+    if (!name || (!phone && !email)) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -47,12 +60,12 @@ export async function POST(req: Request) {
             <h2 style="color: #d97706; margin-top: 0; font-size: 20px; font-weight: 800; border-bottom: 2px solid #f59e0b; padding-bottom: 10px;">🆕 New Lead Received</h2>
             <div style="margin-top: 15px; font-size: 14px; line-height: 1.6;">
               <p style="margin: 8px 0;"><strong style="color: #0f172a;">Name:</strong> ${name}</p>
-              <p style="margin: 8px 0;"><strong style="color: #0f172a;">Email:</strong> ${email || "Not provided"}</p>
-              <p style="margin: 8px 0;"><strong style="color: #0f172a;">Phone:</strong> ${phone}</p>
-              <p style="margin: 8px 0;"><strong style="color: #0f172a;">Company / Website:</strong> ${company || "Not provided"}</p>
-              <p style="margin: 8px 0;"><strong style="color: #0f172a;">Service Needed:</strong> ${service || "Not provided"}</p>
-              <p style="margin: 8px 0;"><strong style="color: #0f172a;">Monthly Budget:</strong> ${budget || "Not provided"}</p>
-              <p style="margin: 8px 0;"><strong style="color: #0f172a;">Expected Timeline:</strong> ${timeline || "Not provided"}</p>
+              ${isValValid(email) ? `<p style="margin: 8px 0;"><strong style="color: #0f172a;">Email:</strong> ${email}</p>` : ''}
+              ${isValValid(phone) ? `<p style="margin: 8px 0;"><strong style="color: #0f172a;">Phone:</strong> ${phone}</p>` : ''}
+              ${isValValid(company) ? `<p style="margin: 8px 0;"><strong style="color: #0f172a;">Company / Website:</strong> ${company}</p>` : ''}
+              ${isValValid(service) ? `<p style="margin: 8px 0;"><strong style="color: #0f172a;">Service Needed:</strong> ${service}</p>` : ''}
+              ${isValValid(budget) ? `<p style="margin: 8px 0;"><strong style="color: #0f172a;">Monthly Budget:</strong> ${budget}</p>` : ''}
+              ${isValValid(timeline) ? `<p style="margin: 8px 0;"><strong style="color: #0f172a;">Expected Timeline:</strong> ${timeline}</p>` : ''}
               
               <p style="margin: 15px 0 8px 0; padding-top: 10px; border-top: 1px solid #e2e8f0;"><strong style="color: #0f172a;">Message / Details:</strong></p>
               <blockquote style="margin: 0; padding: 10px 15px; background-color: #fff; border-left: 4px solid #f59e0b; border-radius: 4px; font-style: italic;">
