@@ -91,6 +91,56 @@ const salonAssets: Record<string, { cover: string; logo?: string }> = {
   "Lakmé Salon Porvorim": {
     cover: "/images/salon/projects/Lakmé Salon Porvorim/imgdownloader-3c15de14.jpeg",
     logo: "/images/salon/projects/Lakmé Salon Porvorim/391515593_3557589277822652_2548203576464698757_n.jpg"
+  },
+  "Looks Privé": {
+    cover: "/images/salon/projects/Looks Privé/67285e522ad2554d28a31fce_1730698834116.jpg",
+    logo: "/images/salon/projects/Looks Privé/420001686_7051604931597938_7008736639394343815_n.jpg"
+  },
+  "Looks Salon Bengaluru": {
+    cover: "/images/salon/projects/Looks Salon Bengaluru/imgdownloader-47103283.jpg",
+    logo: "/images/salon/projects/Looks Salon Bengaluru/Big_Logo.jpg"
+  },
+  "Martina Wu Hair & Beauty": {
+    cover: "/images/salon/projects/Martina Wu Hair & Beauty/imgdownloader-8bbc9f12.jpg"
+  },
+  "Monsoon Salon Sector 50": {
+    cover: "/images/salon/projects/Monsoon Salon Sector 50/imgdownloader-21b2c6ec.jpg",
+    logo: "/images/salon/projects/Monsoon Salon Sector 50/471535665_1121930072802236_4794360968497913281_n.jpg"
+  },
+  "Naturals Salon Kondapur": {
+    cover: "/images/salon/projects/Naturals Salon Kondapur/626555699_18111025150734689_230712153322619737_n.jpg",
+    logo: "/images/salon/projects/Naturals Salon Kondapur/Natural_Salon_Logo_.jpg"
+  },
+  "Neomis Salon & Spa": {
+    cover: "/images/salon/projects/Neomis Salon & Spa/imgdownloader-dec3264b.jpg",
+    logo: "/images/salon/projects/Neomis Salon & Spa/18298331_1364436303637804_1480410729407315968_a.jpg"
+  },
+  "Noir The Salon (Noida)": {
+    cover: "/images/salon/projects/Noir The Salon/imgdownloader-bdd8a310.jpeg",
+    logo: "/images/salon/projects/Noir The Salon/36149073_191260344923839_8351700615881031680_n.jpg"
+  },
+  "Noir The Salon (New Delhi)": {
+    cover: "/images/salon/projects/Noir The Salon NEW Delhi/imgdownloader-1e4cec62.jpg",
+    logo: "/images/salon/projects/Noir The Salon NEW Delhi/36149073_191260344923839_8351700615881031680_n.jpg"
+  },
+  "Snip Salon & Spa": {
+    cover: "/images/salon/projects/Snip Salon & Spa/imgdownloader-ec597860.jpg",
+    logo: "/images/salon/projects/Snip Salon & Spa/7246604756cf09fcf7f5dc51970e8867.webp"
+  },
+  "TONI&GUY Delhi": {
+    cover: "/images/salon/projects/TONI&GUY Delhi/imgdownloader-2a762878.jpg",
+    logo: "/images/salon/projects/TONI&GUY Delhi/515342195_18378570970125319_6341967269046561169_n.jpg"
+  },
+  "TONI&GUY Noida Sector 18": {
+    cover: "/images/salon/projects/TONI&GUY Noida Sector 18/imgdownloader-83c15e11.jpg",
+    logo: "/images/salon/projects/TONI&GUY Noida Sector 18/515342195_18378570970125319_6341967269046561169_n.jpg"
+  },
+  "Truefitt & Hill Noida": {
+    cover: "/images/salon/projects/Truefitt & Hill Noida/imgdownloader-aa2cffa5.jpg"
+  },
+  "YLG Salon": {
+    cover: "/images/salon/projects/YLG Salon/imgdownloader-ad76586c.jpg",
+    logo: "/images/salon/projects/YLG Salon/logo.jpg"
   }
 };
 
@@ -107,8 +157,17 @@ const defaultCovers = [
   "/images/salon/salon_skintreatment.png"
 ];
 
-const getSalonImages = (salonName: string, category: string, index: number) => {
-  const normalizedKey = salonName.normalize("NFC");
+const getSalonImages = (salonName: string, category: string, index: number, city?: string) => {
+  let lookupName = salonName;
+  if (salonName === "Noir The Salon") {
+    if (city === "New Delhi") {
+      lookupName = "Noir The Salon (New Delhi)";
+    } else {
+      lookupName = "Noir The Salon (Noida)";
+    }
+  }
+
+  const normalizedKey = lookupName.normalize("NFC");
   const mapped = Object.keys(salonAssets).find(k => k.normalize("NFC") === normalizedKey);
   const assets = mapped ? salonAssets[mapped] : null;
   
@@ -628,7 +687,7 @@ export default function SalonLandingPage() {
             {salonsData
               .filter(salon => selectedCity === "All" || salon.City === selectedCity)
               .map((salon: any, idx: number) => {
-                const { cover, logo } = getSalonImages(salon["Salon Name"], salon["Category / Angle"], idx);
+                const { cover, logo } = getSalonImages(salon["Salon Name"], salon["Category / Angle"], idx, salon.City);
                 return (
                   <div 
                     key={idx} 
