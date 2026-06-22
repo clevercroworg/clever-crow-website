@@ -313,86 +313,131 @@ export default function SalonLandingPage() {
       </header>
 
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-gradient-to-b from-[#161616] via-[#0d0d0d] to-[#161616] text-white">
-        <div className="absolute inset-0 opacity-[0.04] pointer-events-none salon-grid-pattern" />
-        <div className="absolute top-1/4 left-10 w-[300px] h-[300px] rounded-full bg-[#c29438]/10 blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-10 right-10 w-[400px] h-[400px] rounded-full bg-[#c29438]/5 blur-[120px] pointer-events-none" />
+      <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden bg-gradient-to-b from-[#111] via-[#0d0d0d] to-[#111] text-white">
+        {/* Ambient Backdrops */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none salon-grid-pattern" />
+        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] rounded-full bg-[#c29438]/10 blur-[150px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full bg-amber-500/5 blur-[120px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
             
-            {/* Hero Left Content */}
-            <div className="lg:col-span-7 flex flex-col items-start space-y-6">
+            {/* Left Column: Copy & Actions */}
+            <div className="lg:col-span-7 flex flex-col items-start space-y-8">
               
-              {/* Trust Badges */}
-              <div className="flex flex-wrap gap-2 text-xs">
-                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#f7e7c4] font-semibold">
-                  <Award className="h-3.5 w-3.5 text-[#c29438]" /> 20+ Salons Served
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#f7e7c4] font-semibold">
-                  <Sparkles className="h-3.5 w-3.5 text-[#c29438]" /> 15+ Years Experience
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#f7e7c4] font-semibold">
-                  <MapPin className="h-3.5 w-3.5 text-[#c29438]" /> Pan India Services
-                </span>
+              {/* Title & Subtitle */}
+              <div className="space-y-4">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-black font-serif-luxury tracking-tight leading-tight text-white">
+                  Want More <span className="text-gold-gradient block sm:inline">Salon Appointments?</span>
+                </h1>
+                <h2 className="text-lg sm:text-xl font-bold text-[#f7e7c4] max-w-2xl leading-relaxed">
+                  Digital Marketing for Salons, Beauty Studios, Unisex Salons & Men’s Grooming Brands
+                </h2>
+              </div>
+              
+              {/* 4 Trust & Service Badges */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-xl">
+                <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
+                    <Award className="h-4.5 w-4.5" />
+                  </div>
+                  <span className="text-xs sm:text-sm font-semibold text-slate-200">15+ Years Experience</span>
+                </div>
+                <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
+                    <Users className="h-4.5 w-4.5" />
+                  </div>
+                  <span className="text-xs sm:text-sm font-semibold text-slate-200">20+ Salons Served</span>
+                </div>
+                <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
+                    <MapPin className="h-4.5 w-4.5" />
+                  </div>
+                  <span className="text-xs sm:text-sm font-semibold text-slate-200">Local Enquiries</span>
+                </div>
+                <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
+                    <Calendar className="h-4.5 w-4.5" />
+                  </div>
+                  <span className="text-xs sm:text-sm font-semibold text-slate-200">Appointment Requests</span>
+                </div>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold font-serif-luxury tracking-tight leading-tight text-white">
-                Want More <span className="text-gold-gradient">Salon Appointments?</span>
-              </h1>
-              
-              <h2 className="text-lg sm:text-xl font-medium text-slate-300 max-w-2xl leading-relaxed">
-                Digital Marketing for Salons, Beauty Studios, Unisex Salons & Men’s Grooming Brands
-              </h2>
-              
-              <p className="text-sm sm:text-base text-slate-400 max-w-xl leading-relaxed">
-                We help salons attract more local enquiries, improve online visibility, promote high-value services and generate more appointment requests through social media marketing, Meta Ads, WhatsApp lead campaigns and local digital marketing.
-              </p>
-
-              <div className="bg-[#c29438]/10 border border-[#c29438]/30 rounded-2xl p-4 w-full sm:w-auto">
-                <span className="text-xs uppercase tracking-widest text-[#f7e7c4] block font-semibold mb-1">Affordable RETENTION retained Retainer Plans</span>
-                <span className="text-xl sm:text-2xl font-black text-white">
-                  Packages starting from <span className="text-[#c29438]">₹18,000</span>/month
-                </span>
+              {/* Retainer pricing badge */}
+              <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl p-4 w-full sm:w-auto">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20">
+                  <Calendar className="h-5 w-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase tracking-widest text-slate-400 block font-semibold">Starter Retainer Pricing</span>
+                  <span className="text-base sm:text-lg font-black text-white">
+                    Packages starting from <span className="text-[#c29438]">₹18,000</span>/month
+                  </span>
+                </div>
               </div>
 
+              {/* Dual CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-2">
                 <button 
                   onClick={() => scrollToSection(formRef)}
-                  className="px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider btn-salon-primary cursor-pointer flex items-center justify-center gap-2"
+                  className="px-8 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider btn-salon-primary cursor-pointer flex items-center justify-center gap-2 group"
                 >
-                  Get Free Salon Consultation <ArrowRight className="h-4 w-4" />
+                  <span>Get Free Salon Marketing Consultation</span>
+                  <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                 </button>
                 <button 
                   onClick={() => scrollToSection(packagesRef)}
-                  className="px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider btn-salon-secondary cursor-pointer"
+                  className="px-8 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider btn-salon-secondary cursor-pointer flex items-center justify-center"
                 >
                   View Packages
                 </button>
               </div>
 
+
             </div>
 
-            {/* Hero Right Visual Column */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-[420px] lg:max-w-none rounded-[2.5rem] overflow-hidden border border-[#c29438]/20 bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] p-3 shadow-2xl animate-gold-breathe">
-                <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3] sm:aspect-square bg-slate-900">
-                  <Image 
-                    src="/images/salon_hero_showcase.png" 
-                    alt="Premium Salon Interior Clever Crow Marketing" 
-                    fill 
-                    className="object-cover opacity-90 hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 1024px) 100vw, 400px"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                </div>
+            {/* Right Column: Layered Dashboard Mockup */}
+            <div className="lg:col-span-5 relative mt-8 lg:mt-0 flex justify-center">
+              {/* Backglow */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-[#c29438]/20 blur-[80px] pointer-events-none z-0" />
+
+              <div className="relative z-10 w-full max-w-[420px] aspect-[4/5] sm:aspect-[4/4] lg:aspect-[4/5] relative">
                 
-                <div className="p-5 text-center">
-                  <span className="text-xs uppercase tracking-widest text-[#c29438] font-bold block mb-1">Appointment Growth System</span>
-                  <p className="text-sm font-medium text-slate-300">
-                    Transforming local visibility into fully booked salon schedules.
-                  </p>
+                {/* Main Salon Photo Showcase Card */}
+                <div className="absolute inset-0 rounded-[2.5rem] overflow-hidden border border-white/10 bg-[#161616] p-3 shadow-2xl z-10">
+                  <div className="relative h-full w-full rounded-[2rem] overflow-hidden bg-slate-900">
+                    <Image 
+                      src="/images/salon_hero_showcase.png" 
+                      alt="Luxury Salon Interior Clever Crow Marketing" 
+                      fill 
+                      className="object-cover opacity-80"
+                      sizes="(max-width: 1024px) 100vw, 420px"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
+                  </div>
                 </div>
+
+                {/* Floating Card B: Ads Performance stats (Top Right) */}
+                <motion.div 
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.7, duration: 0.6 }}
+                  className="absolute -top-4 -right-4 z-20 bg-[#161616] text-white rounded-2xl p-4 shadow-2xl border border-[#c29438]/30 max-w-[190px] flex flex-col gap-2 select-none"
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Meta Ads ROI</span>
+                    <TrendingUp className="h-4 w-4 text-[#c29438]" />
+                  </div>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-2xl font-black text-white">8.4x</span>
+                    <span className="text-[10px] text-green-500 font-bold">+310%</span>
+                  </div>
+                  <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                    <div className="bg-[#c29438] h-full w-[85%] rounded-full" />
+                  </div>
+                </motion.div>
+
               </div>
             </div>
 
