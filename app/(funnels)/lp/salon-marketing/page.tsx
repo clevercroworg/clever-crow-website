@@ -414,49 +414,36 @@ export default function SalonLandingPage() {
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-serif-luxury tracking-tight leading-tight text-white">
                 Want More <span className="text-gold-gradient block sm:inline">Salon Appointments?</span>
               </h1>
-              <h2 className="text-base sm:text-lg md:text-xl font-bold text-[#f7e7c4] max-w-3xl lg:max-w-none leading-relaxed mx-auto lg:mx-0">
-                Digital Marketing for Salons, Beauty Studios, Unisex Salons <br /> & Men’s Grooming Brands
+              <h2 className="text-lg sm:text-xl md:text-2xl font-medium text-[#f7e7c4] max-w-3xl lg:max-w-none leading-relaxed mx-auto lg:mx-0">
+                Digital Marketing for Salons, Beauty Studios, <br /> Unisex Salons & Men’s Grooming Brands
               </h2>
             </div>
             
-            {/* 4 Trust & Service Badges (2x2 Layout on all screens) */}
+            {/* 4 Trust & Service Badges (2x2 Grid, centered stacked layout on mobile) */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-xl lg:mx-0">
-              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start">
-                <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
-                  <Award className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
+              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 px-3 py-3 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start text-center sm:text-left">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
+                  <Award className="h-4.5 w-4.5" />
                 </div>
-                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200">15+ Years Experience</span>
+                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200 block mt-1 sm:mt-0 max-w-[120px] sm:max-w-none">15+ Years Experience</span>
               </div>
-              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start">
-                <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
-                  <Users className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
+              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 px-3 py-3 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start text-center sm:text-left">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
+                  <Users className="h-4.5 w-4.5" />
                 </div>
-                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200">20+ Salons Served</span>
+                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200 block mt-1 sm:mt-0 max-w-[120px] sm:max-w-none">20+ Salons Served</span>
               </div>
-              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start">
-                <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
-                  <MapPin className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
+              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 px-3 py-3 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start text-center sm:text-left">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
+                  <MapPin className="h-4.5 w-4.5" />
                 </div>
-                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200">Local Enquiries</span>
+                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200 block mt-1 sm:mt-0 max-w-[120px] sm:max-w-none">Local Enquiries</span>
               </div>
-              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start">
-                <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
-                  <Calendar className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
+              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 px-3 py-3 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start text-center sm:text-left">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
+                  <Calendar className="h-4.5 w-4.5" />
                 </div>
-                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200">Appointment Requests</span>
-              </div>
-            </div>
-
-            {/* Retainer pricing badge */}
-            <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl p-4 w-full sm:w-auto justify-center lg:justify-start mx-auto lg:mx-0">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20">
-                <Calendar className="h-5 w-5" />
-              </div>
-              <div className="text-left">
-                <span className="text-[10px] uppercase tracking-widest text-slate-400 block font-semibold">Starter Retainer Pricing</span>
-                <span className="text-base sm:text-lg font-black text-white">
-                  Packages starting from <span className="text-[#c29438]">₹18,000</span>/month
-                </span>
+                <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200 block mt-1 sm:mt-0 max-w-[120px] sm:max-w-none">Appointment Requests</span>
               </div>
             </div>
 
@@ -465,10 +452,10 @@ export default function SalonLandingPage() {
               <a 
                 href="tel:+919986389444" 
                 onClick={trackCallClick}
-                className="px-8 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider btn-salon-primary cursor-pointer flex items-center justify-center gap-2 group shadow-lg"
+                className="px-8 py-4 rounded-full text-base sm:text-lg font-extrabold uppercase tracking-wider btn-salon-primary cursor-pointer flex items-center justify-center gap-2 group shadow-lg"
               >
-                <Phone className="h-4.5 w-4.5 shrink-0" />
-                <span>Call: +91 99863 89444</span>
+                <Phone className="h-5 w-5 shrink-0" />
+                <span>+91 99863 89444</span>
               </a>
               <button 
                 onClick={() => scrollToSection(packagesRef)}
