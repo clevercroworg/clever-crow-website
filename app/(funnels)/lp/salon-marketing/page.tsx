@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
+import salonsData from "./salons_data.json";
 import { 
   Scissors, Sparkles, CheckCircle2, AlertCircle, Calendar, 
   MapPin, Award, ArrowRight, MessageSquare, Phone, 
@@ -44,6 +45,7 @@ export default function SalonLandingPage() {
     }
   };
 
+  const [selectedCity, setSelectedCity] = useState("All");
   const [selectedPackage, setSelectedPackage] = useState("");
   const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -361,61 +363,73 @@ export default function SalonLandingPage() {
       </header>
 
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-36 pb-24 lg:pt-44 lg:pb-36 overflow-hidden bg-[#0d0d0d] text-white flex items-center justify-center min-h-[95vh]">
-        {/* Background Image & Lighter Overlay */}
-        <div className="absolute inset-0 z-0">
+      <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-[#0d0d0d] text-white">
+        {/* Background Image & Overlays */}
+        {/* Mobile Background */}
+        <div className="absolute inset-0 z-0 lg:hidden">
           <Image 
-            src="/images/salon/salon_hero_bg.png" 
-            alt="Luxury Salon Interior Clever Crow Marketing" 
+            src="/images/salon/salon_hero_mobile.png" 
+            alt="Luxury Salon Interior Clever Crow Marketing Mobile" 
             fill 
-            className="object-cover opacity-70"
+            className="object-cover opacity-45"
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/35 to-[#0d0d0d]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-[#0d0d0d]" />
           <div className="absolute inset-0 opacity-[0.02] pointer-events-none salon-grid-pattern" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex justify-center">
-          {/* Centered Glassmorphic Content Card */}
-          <div className="w-full max-w-4xl bg-black/60 backdrop-blur-md border border-white/10 rounded-[2.5rem] sm:rounded-[3.5rem] p-6 sm:p-10 md:p-14 shadow-2xl flex flex-col items-center text-center space-y-8 md:space-y-10">
-            
-            {/* Top Context Tag */}
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#c29438] bg-[#c29438]/10 border border-[#c29438]/20">
-              <Sparkles className="h-3.5 w-3.5 shrink-0" /> Salon Retainer Marketing
-            </span>
+        {/* Desktop Background */}
+        <div className="absolute inset-0 z-0 hidden lg:block">
+          <Image 
+            src="/images/salon/salon_hero_desktop.png" 
+            alt="Luxury Salon Interior Clever Crow Marketing Desktop" 
+            fill 
+            className="object-cover opacity-75"
+            sizes="100vw"
+            priority
+          />
+          {/* Left-to-right gradient to keep text readable on the left but keep the image on the right fully clear */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent" />
+          {/* Subtle top-to-bottom gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0d0d0d]" />
+          <div className="absolute inset-0 opacity-[0.02] pointer-events-none salon-grid-pattern" />
+        </div>
 
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left max-w-4xl lg:max-w-3xl space-y-6">
+            
             {/* Title & Subtitle */}
-            <div className="space-y-4">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-serif-luxury tracking-tight leading-tight text-white max-w-3xl">
+            <div className="space-y-4 w-full">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-serif-luxury tracking-tight leading-tight text-white">
                 Want More <span className="text-gold-gradient block sm:inline">Salon Appointments?</span>
               </h1>
-              <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl leading-relaxed mx-auto">
-                Scale your salon, beauty studio, unisex brand, or men's grooming lounge with local social ads and booking automation.
-              </p>
+              <h2 className="text-base sm:text-lg md:text-xl font-bold text-[#f7e7c4] max-w-3xl lg:max-w-none leading-relaxed mx-auto lg:mx-0">
+                Digital Marketing for Salons, Beauty Studios, Unisex Salons <br /> & Men’s Grooming Brands
+              </h2>
             </div>
             
-            {/* 4 Trust & Service Badges (2x2 Layout) */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-2xl mx-auto">
-              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center">
+            {/* 4 Trust & Service Badges (2x2 Layout on all screens) */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-xl lg:mx-0">
+              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start">
                 <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
                   <Award className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
                 </div>
                 <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200">15+ Years Experience</span>
               </div>
-              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center">
+              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start">
                 <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
                   <Users className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
                 </div>
                 <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200">20+ Salons Served</span>
               </div>
-              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center">
+              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start">
                 <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
                   <MapPin className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
                 </div>
                 <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-200">Local Enquiries</span>
               </div>
-              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center">
+              <div className="flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#c29438]/30 transition-colors select-none group justify-center lg:justify-start">
                 <div className="flex h-7 w-7 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20 group-hover:scale-110 transition-transform">
                   <Calendar className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
                 </div>
@@ -424,7 +438,7 @@ export default function SalonLandingPage() {
             </div>
 
             {/* Retainer pricing badge */}
-            <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl p-4 w-full sm:w-auto justify-center mx-auto">
+            <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl p-4 w-full sm:w-auto justify-center lg:justify-start mx-auto lg:mx-0">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/10 text-[#c29438] border border-[#c29438]/20">
                 <Calendar className="h-5 w-5" />
               </div>
@@ -437,7 +451,7 @@ export default function SalonLandingPage() {
             </div>
 
             {/* Dual CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center pt-2">
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center lg:justify-start pt-2">
               <a 
                 href="tel:+919986389444" 
                 onClick={trackCallClick}
@@ -458,54 +472,90 @@ export default function SalonLandingPage() {
         </div>
       </section>
 
-      {/* --- SECTION 2: PROBLEM SECTION --- */}
+      {/* --- SECTION 2: PORTFOLIO SECTION --- */}
       <section className="py-20 bg-[#FAF9F6]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8c641c] mb-2 block">The Growth Gap</span>
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8c641c] mb-2 block">Our Reach</span>
             <h2 className="text-3xl md:text-4xl font-extrabold font-serif-luxury text-slate-900 leading-tight">
-              Is Your Salon Getting Enough Enquiries Online?
+              Featured Salon Portfolio & Brand Reach
             </h2>
             <p className="text-sm sm:text-base text-slate-600 mt-4 leading-relaxed">
-              Many salons post regularly on Instagram, boost posts, or run offers, but still fail to generate consistent bookings.
+              We help premium salons, chains, and luxury styling brands scale their local bookings and build elite digital presences. Filter by city to explore local markets.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { text: "Your Instagram page does not look professional.", desc: "Competitors steal high-value clients because of a disorganized feed, poor aesthetic layouts, or lack of brand identity." },
-              { text: "Your ads are not bringing quality enquiries.", desc: "You waste money boosting posts to random people who are uninterested, instead of running hyper-targeted campaigns." },
-              { text: "Your offers are not reaching nearby customers.", desc: "Your discount campaigns and seasonal packages aren't targeting locals living within a 3-5 km radius of your location." },
-              { text: "Your high-value services are not promoted properly.", desc: "Services like HydraFacials, Keratin, and Balayage get lost behind basic haircut updates, reducing average order value." },
-              { text: "Your salon depends only on walk-ins and referrals.", desc: "Zero predictable lead flow means empty chairs during weak weekdays, hurting monthly cash flow." },
-              { text: "You do not have a clear system to track leads & follow-ups.", desc: "Lead contacts are lost in spreadsheets or Instagram DMs with slow response times, resulting in missed bookings." }
-            ].map((problem, idx) => (
-              <div 
-                key={idx} 
-                className="bg-white rounded-3xl p-6 border border-[#c29438]/10 hover:border-[#c29438]/30 shadow-sm transition-all duration-300 hover:-translate-y-1"
+          {/* City Filter Tabs */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+            {["All", "Hyderabad", "Bangalore", "Noida", "New Delhi", "Mumbai", "Goa"].map((city) => (
+              <button
+                key={city}
+                onClick={() => setSelectedCity(city)}
+                className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                  selectedCity === city
+                    ? "bg-[#c29438] text-white shadow-md scale-105"
+                    : "bg-white border border-[#c29438]/10 text-slate-700 hover:bg-[#FAF9F6] hover:border-[#c29438]/30"
+                }`}
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-50 text-red-500 mb-5 border border-red-100">
-                  <AlertCircle className="h-5.5 w-5.5" />
-                </div>
-                <h4 className="text-base font-bold text-slate-900 leading-snug mb-2">{problem.text}</h4>
-                <p className="text-xs text-slate-500 leading-relaxed">{problem.desc}</p>
-              </div>
+                {city === "All" ? "All Cities" : city}
+              </button>
             ))}
           </div>
 
-          <div className="mt-12 bg-white rounded-3xl p-6 md:p-8 border border-amber-500/20 text-center max-w-4xl mx-auto shadow-sm">
-            <h3 className="text-lg md:text-xl font-bold text-slate-900">
-              Your salon needs more than random posts.
-            </h3>
-            <p className="text-sm text-[#8c641c] font-semibold mt-1">
-              It needs a structured appointment growth system.
-            </p>
-            <button 
-              onClick={() => scrollToSection(formRef)}
-              className="mt-5 inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider btn-salon-primary cursor-pointer"
-            >
-              Analyze My Salon Now <ArrowRight className="h-3.5 w-3.5" />
-            </button>
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {salonsData
+              .filter(salon => selectedCity === "All" || salon.City === selectedCity)
+              .map((salon: any, idx: number) => (
+                <div 
+                  key={idx} 
+                  className="bg-white rounded-3xl p-6 border border-[#c29438]/10 hover:border-[#c29438]/30 shadow-sm transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+                >
+                  <div className="space-y-4">
+                    {/* Header: Category & City */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-[#8c641c] bg-[#c29438]/5 px-2.5 py-1 rounded-full">
+                        {salon["Category / Angle"]}
+                      </span>
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                        <MapPin className="h-3 w-3 text-[#c29438]" /> {salon.City}
+                      </span>
+                    </div>
+
+                    {/* Salon Title */}
+                    <div>
+                      <h3 className="text-lg font-black text-slate-900 leading-snug">{salon["Salon Name"]}</h3>
+                      <p className="text-xs text-slate-500 mt-1">{salon.Location}</p>
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="mt-6 pt-4 border-t border-slate-100">
+                    <div className="flex items-center gap-3">
+                      {salon["Instagram Account Link"] && (
+                        <a 
+                          href={salon["Instagram Account Link"]}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex-1 py-2 px-4 rounded-xl text-xs font-bold text-[#8c641c] bg-[#c29438]/5 hover:bg-[#c29438]/10 border border-[#c29438]/10 transition-colors flex items-center justify-center gap-1.5"
+                        >
+                          <Instagram className="h-3.5 w-3.5" /> Instagram
+                        </a>
+                      )}
+                      {salon["GMB / Google Maps Link"] && (
+                        <a 
+                          href={salon["GMB / Google Maps Link"]}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex-1 py-2 px-4 rounded-xl text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-100 transition-colors flex items-center justify-center gap-1.5"
+                        >
+                          <MapPin className="h-3.5 w-3.5" /> Google Maps
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
       </section>
