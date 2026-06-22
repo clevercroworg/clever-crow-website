@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --salon-gold-light: #f7e7c4;
+  --salon-gold: #c29438;
+  --salon-gold-dark: #8c641c;
+  --salon-black: #0d0d0d;
+  --salon-charcoal: #161616;
+  --salon-cream: #FAF9F6;
+  --salon-card-border: rgba(194, 148, 56, 0.15);
+  --salon-glow: 0 10px 30px rgba(194, 148, 56, 0.08);
+}
+
+.font-serif-luxury {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+}
+
+.font-sans-modern {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Background patterns */
+.salon-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(194, 148, 56, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(194, 148, 56, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.salon-dark-gradient {
+  background: radial-gradient(circle at top right, rgba(194, 148, 56, 0.08), transparent 35%),
+              linear-gradient(180deg, #0d0d0d 0%, #151515 50%, #0a0a0a 100%);
+}
+
+.salon-cream-gradient {
+  background: radial-gradient(circle at 10% 20%, rgba(194, 148, 56, 0.04), transparent 30%),
+              linear-gradient(180deg, #FAF9F6 0%, #FFFFFF 100%);
+}
+
+/* Text gold gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #f7e7c4 0%, #d4af37 40%, #c29438 70%, #aa7c11 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gold-gradient-dark {
+  background: linear-gradient(135deg, #c29438 0%, #a47823 50%, #8c641c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Border gold gradient */
+.border-gold-glow {
+  border: 1px solid var(--salon-card-border);
+  box-shadow: var(--salon-glow);
+}
+
+.border-gold-glow:hover {
+  border-color: rgba(194, 148, 56, 0.35);
+  box-shadow: 0 12px 40px rgba(194, 148, 56, 0.15);
+}
+
+/* Buttons */
+.btn-salon-primary {
+  background: linear-gradient(135deg, #f3db9d 0%, #c29438 100%);
+  color: #0d0d0d;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(194, 148, 56, 0.25);
+}
+
+.btn-salon-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(194, 148, 56, 0.4);
+  filter: brightness(1.05);
+}
+
+.btn-salon-secondary {
+  border: 1px solid rgba(194, 148, 56, 0.4);
+  background: rgba(194, 148, 56, 0.05);
+  color: #c29438;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.btn-salon-secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(194, 148, 56, 0.12);
+  border-color: #c29438;
+  color: #f7e7c4;
+}
+
+.btn-salon-secondary-light {
+  border: 1px solid rgba(194, 148, 56, 0.3);
+  background: #ffffff;
+  color: #8c641c;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.btn-salon-secondary-light:hover {
+  transform: translateY(-2px);
+  background: rgba(194, 148, 56, 0.06);
+  border-color: #c29438;
+}
+
+/* Glassmorphism for Salon Cards */
+.salon-glass-card {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.salon-glass-card-gold {
+  background: rgba(22, 22, 22, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(194, 148, 56, 0.15);
+}
+
+.salon-glass-card-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(194, 148, 56, 0.08);
+}
+
+/* Form Styling */
+.salon-form-input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(194, 148, 56, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1a1a;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.salon-form-input:focus {
+  border-color: #c29438;
+  box-shadow: 0 0 0 3px rgba(194, 148, 56, 0.18);
+  background: #ffffff;
+}
+
+/* Chip Hover styling */
+.salon-chip {
+  transition: all 0.2s ease;
+}
+.salon-chip:hover {
+  background: rgba(194, 148, 56, 0.1);
+  border-color: #c29438;
+  color: #c29438;
+  transform: translateY(-1px);
+}
+
+/* Animations */
+@keyframes goldBreathe {
+  0% {
+    box-shadow: 0 0 10px rgba(194, 148, 56, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(194, 148, 56, 0.25);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(194, 148, 56, 0.1);
+  }
+}
+
+.animate-gold-breathe {
+  animation: goldBreathe 4s ease-in-out infinite;
+}
+
+/* Smooth Accordion custom classes */
+.accordion-transition {
+  transition: max-height 0.3s ease-out, opacity 0.2s ease-out, padding 0.3s ease-out;
+}
