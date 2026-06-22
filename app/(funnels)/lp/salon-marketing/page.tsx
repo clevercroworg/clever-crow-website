@@ -261,18 +261,18 @@ export default function SalonLandingPage() {
 
   // 12 Deliverables what we handle (Section 3)
   const solutionsWeHandle = [
-    { title: "Social media marketing", desc: "Build a premium online presence across Instagram and Facebook.", icon: Instagram },
-    { title: "Instagram content planning", desc: "Structured, aesthetic layout planning tailored for beauty audiences.", icon: Share2 },
-    { title: "Creative post design", desc: "Stunning visual graphics showcasing your treatments and client results.", icon: Sparkles },
-    { title: "Reels & short video editing", desc: "Polished, trending video formats that show before & after processes.", icon: Eye },
-    { title: "Meta Ads management", desc: "Expert setup, optimization, and scaling for social media ad platforms.", icon: Target },
-    { title: "WhatsApp lead campaigns", desc: "Direct client inquiries straight to your phone for instant bookings.", icon: MessageSquare },
-    { title: "Local audience targeting", desc: "Target high-intent customers residing within a 3-5 km radius of your salon.", icon: MapPin },
-    { title: "Monthly offer campaign planning", desc: "Strategic offers to drive walk-ins during off-peak weekdays.", icon: Calendar },
-    { title: "Retargeting campaigns", desc: "Stay top-of-mind for users who previously visited your page or ads.", icon: Target },
+    { title: "Social Media Marketing", desc: "Build a premium online presence across Instagram and Facebook.", icon: Instagram },
+    { title: "Instagram Content Planning", desc: "Structured, aesthetic layout planning tailored for beauty audiences.", icon: Share2 },
+    { title: "Creative Post Design", desc: "Stunning visual graphics showcasing your treatments and client results.", icon: Sparkles },
+    { title: "Reels & Short Video Editing", desc: "Polished, trending video formats that show before & after processes.", icon: Eye },
+    { title: "Meta Ads Management", desc: "Expert setup, optimization, and scaling for social media ad platforms.", icon: Target },
+    { title: "WhatsApp Lead Campaigns", desc: "Direct client inquiries straight to your phone for instant bookings.", icon: MessageSquare },
+    { title: "Local Audience Targeting", desc: "Target high-intent customers residing within a 3-5 km radius of your salon.", icon: MapPin },
+    { title: "Monthly Offer Campaign Planning", desc: "Strategic offers to drive walk-ins during off-peak weekdays.", icon: Calendar },
+    { title: "Retargeting Campaigns", desc: "Stay top-of-mind for users who previously visited your page or ads.", icon: Target },
     { title: "Local SEO & Google Business", desc: "Rank #1 on Google Maps for local salon searches near you.", icon: Compass },
-    { title: "Lead tracking support", desc: "Simple sheets and tools to track inquiries, walk-ins, and conversions.", icon: TrendingUp },
-    { title: "Monthly reporting", desc: "Transparent performance summaries highlighting spend, leads, and ROI.", icon: Award }
+    { title: "Lead Tracking Support", desc: "Simple sheets and tools to track inquiries, walk-ins, and conversions.", icon: TrendingUp },
+    { title: "Monthly Reporting", desc: "Transparent performance summaries highlighting spend, leads, and ROI.", icon: Award }
   ];
 
   // FAQs (Section 11)
@@ -578,15 +578,12 @@ export default function SalonLandingPage() {
             {solutionsWeHandle.map((solution, idx) => (
               <div 
                 key={idx} 
-                className="salon-glass-card rounded-3xl p-6 border border-white/5 hover:border-[#c29438]/20 transition-all duration-300 flex flex-col justify-between"
+                className="salon-glass-card rounded-3xl p-8 border border-white/5 hover:border-[#c29438]/20 transition-all duration-300 flex flex-col items-center justify-center text-center"
               >
-                <div>
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#c29438]/10 text-[#c29438] mb-5 border border-[#c29438]/20">
-                    <solution.icon className="h-5.5 w-5.5" />
-                  </div>
-                  <h3 className="text-base font-bold text-white leading-snug">{solution.title}</h3>
-                  <p className="text-xs text-slate-400 mt-2 leading-relaxed">{solution.desc}</p>
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#c29438]/10 text-[#c29438] mb-4 border border-[#c29438]/20 mx-auto">
+                  <solution.icon className="h-5.5 w-5.5" />
                 </div>
+                <h3 className="text-base font-bold text-white leading-snug text-center">{solution.title}</h3>
               </div>
             ))}
           </div>
@@ -594,38 +591,234 @@ export default function SalonLandingPage() {
         </div>
       </section>
 
-      {/* --- SECTION 4: WHO THIS IS FOR --- */}
-      <section className="py-20 bg-[#FAF9F6]">
+      {/* --- SECTION 6: PACKAGE OVERVIEW (PRICING) --- */}
+      <section id="packages" ref={packagesRef} className="py-20 bg-[#FAF9F6] scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8c641c] mb-2 block">Perfect Alignment</span>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8c641c] mb-2 block">Transparent retains Plans</span>
             <h2 className="text-3xl md:text-4xl font-extrabold font-serif-luxury text-slate-900 leading-tight">
-              Built for Salons That Want More Customers
+              Salon Marketing Packages
             </h2>
             <p className="text-sm sm:text-base text-slate-600 mt-4 leading-relaxed">
-              Whether you are a premium luxury salon, grooming studio, or niche clinic, our digital systems scale to fit your business.
+              Choose a monthly retainer based on your salon size, target location reach, and monthly booking growth objectives.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-            {salonTypes.map((type, idx) => (
-              <div 
-                key={idx} 
-                className="bg-white border border-[#c29438]/15 rounded-2xl p-4 flex items-center gap-3.5 hover:border-[#c29438]/40 hover:shadow-sm transition-all duration-200 salon-chip group"
-              >
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#c29438]/5 text-[#c29438] group-hover:bg-[#c29438]/10 transition-colors">
-                  <type.icon className="h-4.5 w-4.5" />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-6xl mx-auto">
+            
+            {/* Retainer 1: Starter */}
+            <div className="bg-white border border-[#c29438]/15 rounded-[2.5rem] p-8 shadow-sm flex flex-col justify-between transition-all hover:scale-[1.01] hover:shadow-md">
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-black uppercase tracking-wider text-[#8c641c] bg-[#c29438]/5 px-3 py-1 rounded-full">Starter Growth</span>
+                  <h3 className="text-2xl font-black text-slate-900 mt-4">Starter Salon Growth</h3>
+                  <p className="text-xs text-slate-500 mt-1">Best for small salons or single locations starting out.</p>
                 </div>
-                <span className="text-xs sm:text-sm font-bold text-slate-800">{type.label}</span>
+
+                <div className="py-4 border-y border-slate-100">
+                  <span className="text-4xl font-black text-slate-900">₹18,000</span>
+                  <span className="text-xs text-slate-400 font-bold block mt-1">/ month + GST</span>
+                </div>
+
+                <div>
+                  <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest mb-3">Key Deliverables:</h4>
+                  <ul className="space-y-2 text-xs text-slate-600">
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Instagram content planning</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 15–25 static posts / month</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 10+ edited reels / month</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Meta Ads management</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> WhatsApp lead campaigns</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Local audience targeting</li>
+                  </ul>
+                </div>
               </div>
-            ))}
+
+              <div className="mt-8 pt-6 border-t border-slate-100">
+                <button 
+                  onClick={() => handlePackageSelect("Starter Growth Package (₹18,000)")}
+                  className="w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider btn-salon-secondary-light cursor-pointer text-center"
+                >
+                  Enquire for Starter
+                </button>
+              </div>
+            </div>
+
+            {/* Retainer 2: Growth (FEATURED) */}
+            <div className="bg-[#161616] text-white border-2 border-[#c29438] rounded-[2.5rem] p-8 shadow-xl flex flex-col justify-between relative transform lg:-translate-y-4 transition-all hover:scale-[1.01]">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#c29438] text-black text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md">
+                Most Popular
+              </div>
+
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-black uppercase tracking-wider text-[#f7e7c4] bg-white/5 px-3 py-1 rounded-full">Appointment Growth</span>
+                  <h3 className="text-2xl font-black text-white mt-4">Salon Appointment Growth</h3>
+                  <p className="text-xs text-slate-400 mt-1">Ideal for salons looking to scale inquiries & bookings.</p>
+                </div>
+
+                <div className="py-4 border-y border-white/5">
+                  <span className="text-4xl font-black text-[#c29438]">₹30,000</span>
+                  <span className="text-xs text-[#f7e7c4] font-bold block mt-1">/ month + GST</span>
+                </div>
+
+                <div>
+                  <h4 className="text-xs font-black text-[#f7e7c4] uppercase tracking-widest mb-3">Key Deliverables:</h4>
+                  <ul className="space-y-2 text-xs text-slate-300">
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> 25–35 premium posts / month</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> 15+ edited reels / month</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> Lead & Appointment campaigns</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> Retargeting campaigns</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> Google Business Profile support</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> 1 Monthly strategy planning call</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-white/5">
+                <button 
+                  onClick={() => handlePackageSelect("Appointment Growth Package (₹30,000)")}
+                  className="w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider btn-salon-primary cursor-pointer text-center"
+                >
+                  Enquire for Growth
+                </button>
+              </div>
+            </div>
+
+            {/* Retainer 3: Premium */}
+            <div className="bg-white border border-[#c29438]/15 rounded-[2.5rem] p-8 shadow-sm flex flex-col justify-between transition-all hover:scale-[1.01] hover:shadow-md">
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-black uppercase tracking-wider text-[#8c641c] bg-[#c29438]/5 px-3 py-1 rounded-full">Premium Scale</span>
+                  <h3 className="text-2xl font-black text-slate-900 mt-4">Premium Salon Growth</h3>
+                  <p className="text-xs text-slate-500 mt-1">For multi-locations, luxury chains, or high-ticket focus.</p>
+                </div>
+
+                <div className="py-4 border-y border-slate-100">
+                  <span className="text-4xl font-black text-slate-900">₹45,000</span>
+                  <span className="text-xs text-slate-400 font-bold block mt-1">/ month + GST</span>
+                </div>
+
+                <div>
+                  <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest mb-3">Key Deliverables:</h4>
+                  <ul className="space-y-2 text-xs text-slate-600">
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 35+ premium posts / month</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 20+ edited reels / month</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Meta & Google Ads management</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> High-ticket service campaigns</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Lead tracking sheet support</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Weekly updates & reporting</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-slate-100">
+                <button 
+                  onClick={() => handlePackageSelect("Premium Salon Growth Package (₹45,000)")}
+                  className="w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider btn-salon-secondary-light cursor-pointer text-center"
+                >
+                  Enquire for Premium
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* --- SECTION 7: COMPARISON TABLE --- */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8c641c] mb-2 block">Side-by-side</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold font-serif-luxury text-slate-900 leading-tight">
+              Compare Packages
+            </h2>
+            <p className="text-sm sm:text-base text-slate-600 mt-4 leading-relaxed">
+              Analyze deliverables closely to pick the perfect retainer setup for your salon’s capacity.
+            </p>
           </div>
 
-          <div className="text-center mt-12">
-            <p className="text-xs text-slate-500 font-semibold max-w-xl mx-auto">
-              From single locations looking to fill open seats, to multi-location salon franchises scaling campaigns across cities — we handle it all.
-            </p>
+          <div className="overflow-x-auto max-w-4xl mx-auto border border-slate-200/80 rounded-[2rem] shadow-sm bg-white">
+            <table className="w-full text-left border-collapse min-w-[600px]">
+              <thead>
+                <tr className="bg-slate-50 border-b border-slate-200/80">
+                  <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-700">Deliverables</th>
+                  <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-700 text-center">Starter</th>
+                  <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-700 text-center bg-[#c29438]/5">Growth</th>
+                  <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-700 text-center">Premium</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
+                <tr>
+                  <td className="p-5 font-bold text-slate-800">Monthly Fee</td>
+                  <td className="p-5 text-center text-slate-600">₹18,000</td>
+                  <td className="p-5 text-center font-black text-[#8c641c] bg-[#c29438]/5">₹30,000</td>
+                  <td className="p-5 text-center text-slate-600">₹45,000</td>
+                </tr>
+                <tr>
+                  <td className="p-5 font-bold text-slate-800">Static Posts</td>
+                  <td className="p-5 text-center text-slate-600">15–25</td>
+                  <td className="p-5 text-center text-slate-600 bg-[#c29438]/5">25–35</td>
+                  <td className="p-5 text-center text-slate-600">35+</td>
+                </tr>
+                <tr>
+                  <td className="p-5 font-bold text-slate-800">Reels / Short Videos</td>
+                  <td className="p-5 text-center text-slate-600">10+</td>
+                  <td className="p-5 text-center text-slate-600 bg-[#c29438]/5">15+</td>
+                  <td className="p-5 text-center text-slate-600">20+</td>
+                </tr>
+                <tr>
+                  <td className="p-5 font-bold text-slate-800">Meta Ads Management</td>
+                  <td className="p-5 text-center text-slate-600"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                  <td className="p-5 text-center bg-[#c29438]/5"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                </tr>
+                <tr>
+                  <td className="p-5 font-bold text-slate-800">WhatsApp Lead Campaign</td>
+                  <td className="p-5 text-center text-slate-600"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                  <td className="p-5 text-center bg-[#c29438]/5"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                </tr>
+                <tr>
+                  <td className="p-5 font-bold text-slate-800">Retargeting Campaign</td>
+                  <td className="p-5 text-center text-slate-400">Not Included</td>
+                  <td className="p-5 text-center bg-[#c29438]/5"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                </tr>
+                <tr>
+                  <td className="p-5 font-bold text-slate-800">Google Business Profile Support</td>
+                  <td className="p-5 text-center text-slate-600">Basic</td>
+                  <td className="p-5 text-center bg-[#c29438]/5"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                </tr>
+                <tr>
+                  <td className="p-5 font-bold text-slate-800">Google Ads Management</td>
+                  <td className="p-5 text-center text-slate-400">Not Included</td>
+                  <td className="p-5 text-center bg-[#c29438]/5">Not Included</td>
+                  <td className="p-5 text-center text-slate-600">If Required</td>
+                </tr>
+                <tr>
+                  <td className="p-5 font-bold text-slate-800">Monthly Strategy Call</td>
+                  <td className="p-5 text-center text-slate-400">Not Included</td>
+                  <td className="p-5 text-center bg-[#c29438]/5"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                </tr>
+                <tr>
+                  <td className="p-5 font-bold text-slate-800">Weekly Updates</td>
+                  <td className="p-5 text-center text-slate-400">Not Included</td>
+                  <td className="p-5 text-center bg-[#c29438]/5">Not Included</td>
+                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                </tr>
+                <tr>
+                  <td className="p-5 font-bold text-slate-800">Lead Tracking Support</td>
+                  <td className="p-5 text-center text-slate-400">Not Included</td>
+                  <td className="p-5 text-center bg-[#c29438]/5 font-semibold text-slate-600">Basic</td>
+                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
         </div>
@@ -754,238 +947,7 @@ export default function SalonLandingPage() {
         </div>
       </section>
 
-      {/* --- SECTION 6: PACKAGE OVERVIEW (PRICING) --- */}
-      <section id="packages" ref={packagesRef} className="py-20 bg-[#FAF9F6] scroll-mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8c641c] mb-2 block">Transparent retains Plans</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold font-serif-luxury text-slate-900 leading-tight">
-              Salon Marketing Packages
-            </h2>
-            <p className="text-sm sm:text-base text-slate-600 mt-4 leading-relaxed">
-              Choose a monthly retainer based on your salon size, target location reach, and monthly booking growth objectives.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-6xl mx-auto">
-            
-            {/* Retainer 1: Starter */}
-            <div className="bg-white border border-[#c29438]/15 rounded-[2.5rem] p-8 shadow-sm flex flex-col justify-between transition-all hover:scale-[1.01] hover:shadow-md">
-              <div className="space-y-6">
-                <div>
-                  <span className="text-xs font-black uppercase tracking-wider text-[#8c641c] bg-[#c29438]/5 px-3 py-1 rounded-full">Starter Growth</span>
-                  <h3 className="text-2xl font-black text-slate-900 mt-4">Starter Salon Growth</h3>
-                  <p className="text-xs text-slate-500 mt-1">Best for small salons or single locations starting out.</p>
-                </div>
-
-                <div className="py-4 border-y border-slate-100">
-                  <span className="text-4xl font-black text-slate-900">₹18,000</span>
-                  <span className="text-xs text-slate-400 font-bold block mt-1">/ month + GST</span>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest mb-3">Key Deliverables:</h4>
-                  <ul className="space-y-2 text-xs text-slate-600">
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Instagram content planning</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 10–12 static posts / month</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 2–4 edited reels / month</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Meta Ads management</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> WhatsApp lead campaigns</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Local audience targeting</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-slate-100">
-                <button 
-                  onClick={() => handlePackageSelect("Starter Growth Package (₹18,000)")}
-                  className="w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider btn-salon-secondary-light cursor-pointer text-center"
-                >
-                  Enquire for Starter
-                </button>
-              </div>
-            </div>
-
-            {/* Retainer 2: Growth (FEATURED) */}
-            <div className="bg-[#161616] text-white border-2 border-[#c29438] rounded-[2.5rem] p-8 shadow-xl flex flex-col justify-between relative transform lg:-translate-y-4 transition-all hover:scale-[1.01]">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#c29438] text-black text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md">
-                Most Popular
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <span className="text-xs font-black uppercase tracking-wider text-[#f7e7c4] bg-white/5 px-3 py-1 rounded-full">Appointment Growth</span>
-                  <h3 className="text-2xl font-black text-white mt-4">Salon Appointment Growth</h3>
-                  <p className="text-xs text-slate-400 mt-1">Ideal for salons looking to scale inquiries & bookings.</p>
-                </div>
-
-                <div className="py-4 border-y border-white/5">
-                  <span className="text-4xl font-black text-[#c29438]">₹30,000</span>
-                  <span className="text-xs text-[#f7e7c4] font-bold block mt-1">/ month + GST</span>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-black text-[#f7e7c4] uppercase tracking-widest mb-3">Key Deliverables:</h4>
-                  <ul className="space-y-2 text-xs text-slate-300">
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> 15–20 premium posts / month</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> 4–6 edited reels / month</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> Lead & Appointment campaigns</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> Retargeting campaigns</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> Google Business Profile support</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> 1 Monthly strategy planning call</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-white/5">
-                <button 
-                  onClick={() => handlePackageSelect("Appointment Growth Package (₹30,000)")}
-                  className="w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider btn-salon-primary cursor-pointer text-center"
-                >
-                  Enquire for Growth
-                </button>
-              </div>
-            </div>
-
-            {/* Retainer 3: Premium */}
-            <div className="bg-white border border-[#c29438]/15 rounded-[2.5rem] p-8 shadow-sm flex flex-col justify-between transition-all hover:scale-[1.01] hover:shadow-md">
-              <div className="space-y-6">
-                <div>
-                  <span className="text-xs font-black uppercase tracking-wider text-[#8c641c] bg-[#c29438]/5 px-3 py-1 rounded-full">Premium Scale</span>
-                  <h3 className="text-2xl font-black text-slate-900 mt-4">Premium Salon Growth</h3>
-                  <p className="text-xs text-slate-500 mt-1">For multi-locations, luxury chains, or high-ticket focus.</p>
-                </div>
-
-                <div className="py-4 border-y border-slate-100">
-                  <span className="text-4xl font-black text-slate-900">₹45,000</span>
-                  <span className="text-xs text-slate-400 font-bold block mt-1">/ month + GST</span>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest mb-3">Key Deliverables:</h4>
-                  <ul className="space-y-2 text-xs text-slate-600">
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 20–25 premium posts / month</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 8–10 edited reels / month</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Meta & Google Ads management</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> High-ticket service campaigns</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Lead tracking sheet support</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Weekly updates & reporting</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-slate-100">
-                <button 
-                  onClick={() => handlePackageSelect("Premium Salon Growth Package (₹45,000)")}
-                  className="w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider btn-salon-secondary-light cursor-pointer text-center"
-                >
-                  Enquire for Premium
-                </button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* --- SECTION 7: COMPARISON TABLE --- */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8c641c] mb-2 block">Side-by-side</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold font-serif-luxury text-slate-900 leading-tight">
-              Compare Packages
-            </h2>
-            <p className="text-sm sm:text-base text-slate-600 mt-4 leading-relaxed">
-              Analyze deliverables closely to pick the perfect retainer setup for your salon’s capacity.
-            </p>
-          </div>
-
-          <div className="overflow-x-auto max-w-4xl mx-auto border border-slate-200/80 rounded-[2rem] shadow-sm bg-white">
-            <table className="w-full text-left border-collapse min-w-[600px]">
-              <thead>
-                <tr className="bg-slate-50 border-b border-slate-200/80">
-                  <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-700">Deliverables</th>
-                  <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-700 text-center">Starter</th>
-                  <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-700 text-center bg-[#c29438]/5">Growth</th>
-                  <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-700 text-center">Premium</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
-                <tr>
-                  <td className="p-5 font-bold text-slate-800">Monthly Fee</td>
-                  <td className="p-5 text-center text-slate-600">₹18,000</td>
-                  <td className="p-5 text-center font-black text-[#8c641c] bg-[#c29438]/5">₹30,000</td>
-                  <td className="p-5 text-center text-slate-600">₹45,000</td>
-                </tr>
-                <tr>
-                  <td className="p-5 font-bold text-slate-800">Static Posts</td>
-                  <td className="p-5 text-center text-slate-600">10–12</td>
-                  <td className="p-5 text-center text-slate-600 bg-[#c29438]/5">15–20</td>
-                  <td className="p-5 text-center text-slate-600">20–25</td>
-                </tr>
-                <tr>
-                  <td className="p-5 font-bold text-slate-800">Reels / Short Videos</td>
-                  <td className="p-5 text-center text-slate-600">2–4</td>
-                  <td className="p-5 text-center text-slate-600 bg-[#c29438]/5">4–6</td>
-                  <td className="p-5 text-center text-slate-600">8–10</td>
-                </tr>
-                <tr>
-                  <td className="p-5 font-bold text-slate-800">Meta Ads Management</td>
-                  <td className="p-5 text-center text-slate-600"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                  <td className="p-5 text-center bg-[#c29438]/5"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                </tr>
-                <tr>
-                  <td className="p-5 font-bold text-slate-800">WhatsApp Lead Campaign</td>
-                  <td className="p-5 text-center text-slate-600"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                  <td className="p-5 text-center bg-[#c29438]/5"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                </tr>
-                <tr>
-                  <td className="p-5 font-bold text-slate-800">Retargeting Campaign</td>
-                  <td className="p-5 text-center text-slate-400">Not Included</td>
-                  <td className="p-5 text-center bg-[#c29438]/5"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                </tr>
-                <tr>
-                  <td className="p-5 font-bold text-slate-800">Google Business Profile Support</td>
-                  <td className="p-5 text-center text-slate-600">Basic</td>
-                  <td className="p-5 text-center bg-[#c29438]/5"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                </tr>
-                <tr>
-                  <td className="p-5 font-bold text-slate-800">Google Ads Management</td>
-                  <td className="p-5 text-center text-slate-400">Not Included</td>
-                  <td className="p-5 text-center bg-[#c29438]/5">Not Included</td>
-                  <td className="p-5 text-center text-slate-600">If Required</td>
-                </tr>
-                <tr>
-                  <td className="p-5 font-bold text-slate-800">Monthly Strategy Call</td>
-                  <td className="p-5 text-center text-slate-400">Not Included</td>
-                  <td className="p-5 text-center bg-[#c29438]/5"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                </tr>
-                <tr>
-                  <td className="p-5 font-bold text-slate-800">Weekly Updates</td>
-                  <td className="p-5 text-center text-slate-400">Not Included</td>
-                  <td className="p-5 text-center bg-[#c29438]/5">Not Included</td>
-                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                </tr>
-                <tr>
-                  <td className="p-5 font-bold text-slate-800">Lead Tracking Support</td>
-                  <td className="p-5 text-center text-slate-400">Not Included</td>
-                  <td className="p-5 text-center bg-[#c29438]/5 font-semibold text-slate-600">Basic</td>
-                  <td className="p-5 text-center"><Check className="h-4.5 w-4.5 mx-auto text-green-600" /></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-      </section>
 
       {/* --- SECTION 8: WHY CHOOSE CLEVER CROW --- */}
       <section className="py-20 bg-gradient-to-b from-[#0d0d0d] to-[#161616] text-white">
