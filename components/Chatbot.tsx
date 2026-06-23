@@ -734,9 +734,41 @@ const matchInputToNavigation = (text: string) => {
     return { type: "general", key: "greeting" };
   }
 
-  if (t.includes("contact") || t.includes("phone") || t.includes("number") || t.includes("email") || t.includes("call")) {
+  // Contact inquiries
+  if (
+    t.includes("contact") || 
+    t.includes("phone") || 
+    t.includes("number") || 
+    t.includes("email") || 
+    t.includes("call") || 
+    t.includes("get in touch") || 
+    t.includes("reach you") || 
+    t.includes("talk to") || 
+    t.includes("speak to") || 
+    t.includes("support")
+  ) {
     return { type: "general", key: "contact" };
   }
+
+  // Services & capabilities inquiries
+  if (
+    t.includes("services") || 
+    t.includes("service") || 
+    t.includes("offer") || 
+    t.includes("provide") || 
+    t.includes("portfolio") || 
+    t.includes("do for me") || 
+    t.includes("help with") || 
+    t.includes("capability") || 
+    t.includes("capabilities") || 
+    t.includes("solution") || 
+    t.includes("solutions") || 
+    t.includes("skills") || 
+    t.includes("what do you do")
+  ) {
+    return { type: "general", key: "services" };
+  }
+
   if (t.includes("address") || t.includes("location") || t.includes("office") || t.includes("where")) {
     return { type: "general", key: "location" };
   }
@@ -922,23 +954,34 @@ export default function Chatbot() {
 
   const handleGeneralFAQ = (key: string, state: ChatbotState, messagesBefore: Message[]) => {
     let faqText = "";
+    let options = getOptionsForState(state);
+
     if (key === "location") {
-      faqText = "Our Global HQ is located at:\n\n**Business Bay, 2nd Floor, Udupi–Manipal Highway, Kunjibettu, KA, India.**\n\nWould you like to schedule a call or go back?";
+      faqText = "📍 **Visit Our Office!**\n\nWe would love to host you at our Global Headquarters:\n🏢 **Business Bay, 2nd Floor, Udupi–Manipal Highway, Kunjibettu, Udupi, Karnataka, India.**\n\nDrop by for a cup of coffee ☕ and let's talk about your next project! Would you like to schedule a call or go back?";
     } else if (key === "contact") {
-      faqText = "You can reach us at:\n\n📞 **+91 99863 89444**\n📧 **hello@clevercrow.in**\n\nWould you like me to collect your project details so our team can contact you?";
+      faqText = "📞 **Let's Connect!**\n\nHere are the best ways to reach our team immediately:\n\n☎️ **Phone:** [+91 99863 89444](tel:+919986389444)\n📧 **Email:** [hello@clevercrow.in](mailto:hello@clevercrow.in)\n💬 **WhatsApp:** [+91 99863 89444](https://wa.me/919986389444)\n\nAlternatively, I can guide you through our quick pre-qualification form right here to submit your project details directly to our developers! Would you like to get started?";
     } else if (key === "careers") {
-      faqText = "Clever Crow offers careers and internships in Web Development, Digital Marketing, and UI/UX Design.\n\nYou can apply directly on our site:\n• [Internships](file:///internship)\n• [Careers](file:///careers)";
+      faqText = "💼 **Join the Clever Crow Team!**\n\nWe are always on the lookout for talented creators, developers, and marketers. We offer internships and full-time careers in:\n\n💻 **Web & App Development**\n📈 **Digital Marketing**\n🎨 **UI/UX Design**\n\nApply directly on our portals:\n👉 [Internship Opportunities](file:///internship)\n👉 [Careers Portal](file:///careers)\n\nWe can't wait to see your application! 🚀";
     } else if (key === "about") {
-      faqText = "Clever Crow is a premier digital growth agency based in Udupi, India.\n\nWe build custom mobile & web apps, SaaS products, workflow automations, and manage high-performing digital marketing campaigns for brands globally.";
+      faqText = "🐦 **About Clever Crow**\n\nClever Crow is a premier digital growth agency dedicated to turning ambitious business goals into digital reality! Based in Udupi, India, we partner with clients globally to scale their digital footprint. 🌍\n\nHere is what we specialize in:\n🚀 **Custom Software Development** (Mobile & Web apps, SaaS products)\n🌐 **Stunning Web Experiences** (Corporate sites, E-commerce stores)\n🤖 **AI & Intelligent Automation** (Chatbots, WhatsApp integration, workflows)\n📈 **Performance Marketing** (Google Ads, Meta Ads, SEO, SMM)\n\nWe act as your extended technology and growth partner! What can we build or scale for you today?";
     } else if (key === "pricing") {
-      faqText = "Pricing at Clever Crow depends entirely on the scope, complexity, and specific requirements of your project.\n\nWe provide custom proposals and tailored estimations. Would you like to connect with us to get a custom quote?";
+      faqText = "💰 **Pricing & Project Proposals**\n\nAt Clever Crow, we believe in bespoke solutions rather than one-size-fits-all pricing. Because every project has unique features, complexity, and design demands, we provide customized proposals and itemized quotes.\n\nTo give you an accurate estimation, we follow a simple 3-step process:\n1️⃣ **Pre-qualify**: We check your project goals and budget range.\n2️⃣ **Consultation**: A brief 10-minute call to align on requirements.\n3️⃣ **Proposal**: A detailed, transparent proposal sent to your inbox!\n\nWould you like to get a quote right now by answering a couple of quick questions? It takes less than 60 seconds! ⚡";
+    } else if (key === "services") {
+      faqText = "🛠️ **Our Core Services**\n\nWe offer a full suite of digital engineering and marketing services to help your business fly high! 🐦 Here is an overview of our capabilities:\n\n🌐 **Website Development**: Next.js/React apps, E-commerce stores, custom WordPress, and landing pages.\n📱 **App Development**: Native/Cross-platform mobile apps, customer portals, custom dashboards, and SaaS products.\n🤖 **AI & Automation**: AI chatbots, WhatsApp Business API setups, and no-code workflow automations.\n📈 **Digital Marketing**: High-performance Google & Meta Ads, LinkedIn advertising, SEO, and Social Media Management.\n\nWhich of these categories would you like to explore? Click an option below or type your choice! 👇";
+      options = [
+        "🌐 Website Development",
+        "📱 App Development",
+        "🤖 AI & Automation",
+        "📈 Digital Marketing",
+        "🔙 Main Menu"
+      ];
     }
     
     setHistory(prev => [...prev, { state, messages: messagesBefore }]);
     addMessage({
       sender: "bot",
       text: faqText,
-      options: getOptionsForState(state)
+      options: options
     });
   };
 
