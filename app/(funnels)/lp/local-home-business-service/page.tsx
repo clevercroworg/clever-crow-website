@@ -269,7 +269,7 @@ export default function LocalServicesLandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <a href="/" className="flex items-center">
             <Image 
-              src="/logo-dark.svg" 
+              src="/CSS.svg" 
               alt="Clever Crow Logo" 
               width={140} 
               height={40} 
@@ -1017,7 +1017,7 @@ export default function LocalServicesLandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <div className="flex justify-center items-center">
             <Image 
-              src="/logo-dark.svg" 
+              src="/CSS.svg" 
               alt="Clever Crow Logo" 
               width={130} 
               height={36} 

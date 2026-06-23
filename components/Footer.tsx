@@ -23,7 +23,7 @@ export default function Footer() {
           <div className="lg:col-span-3 flex flex-col items-start gap-6">
             <Link href="/" className="shrink-0 transition-transform hover:scale-105 active:scale-95">
               <Image
-                src="/logo-dark.svg"
+                src="/CSS.svg"
                 alt="Clever Crow"
                 width={160}
                 height={45}
