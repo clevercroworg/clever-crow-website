@@ -73,7 +73,7 @@ export default function MobileAppDevelopmentPage() {
     <main>
       <AppDevServiceLayout
         eyebrow="Mobile App Development"
-        heroTitle="Mobile App Development Company for Business Apps"
+        heroTitle="Mobile App Development for Business Apps"
         heroSubtitle="Design and develop mobile apps for business operations, customer engagement, booking, sales, support and digital products."
         serviceName="Mobile App Development"
         services={services}

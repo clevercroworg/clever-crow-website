@@ -73,7 +73,7 @@ export default function WebAppDevelopmentPage() {
     <main>
       <AppDevServiceLayout
         eyebrow="Web App Development"
-        heroTitle="Web App Development Company for Custom Platforms"
+        heroTitle="Web App Development for Custom Platforms"
         heroSubtitle="Build custom web applications, dashboards, portals and internal tools that simplify operations and improve customer experience."
         serviceName="Web App Development"
         services={services}

@@ -30,7 +30,7 @@ export default function SaasProductDevelopmentPage() {
     <main>
       <AppDevServiceLayout
         eyebrow="SaaS Product Development"
-        heroTitle="SaaS Product Development Company"
+        heroTitle="SaaS Product Development"
         heroSubtitle="Turn your SaaS idea into a scalable product with planning, UI design, development, dashboards, subscriptions and launch support."
         serviceName="SaaS Product Development"
         services={services}
