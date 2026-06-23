@@ -310,15 +310,45 @@ export default function LocalServicesLandingPage() {
       </header>
 
       {/* --- HERO SECTION (Dark Section 1) --- */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-zinc-950 text-white">
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#eab308_1px,transparent_1px)] [background-size:20px_20px]" />
-        
-        {/* Soft yellow radial background glow */}
-        <div className="absolute -top-40 right-0 w-[400px] h-[400px] bg-yellow-500/10 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute -bottom-40 left-0 w-[400px] h-[400px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
+      <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-zinc-950 text-white">
+        {/* Background Image & Overlays */}
+        {/* Mobile Background */}
+        <div className="absolute inset-0 z-0 lg:hidden">
+          <Image 
+            src="/images/local_services_hero_mobile.png" 
+            alt="Local Home Services Clever Crow Marketing Mobile" 
+            fill 
+            className="object-cover opacity-40"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-zinc-950" />
+          <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(#eab308_1px,transparent_1px)] [background-size:20px_20px]" />
+        </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
+        {/* Desktop Background */}
+        <div className="absolute inset-0 z-0 hidden lg:block">
+          <Image 
+            src="/images/local_services_hero_desktop.png" 
+            alt="Local Home Services Clever Crow Marketing Desktop" 
+            fill 
+            className="object-cover opacity-55"
+            sizes="100vw"
+            priority
+          />
+          {/* Left-to-right gradient to keep text readable on the left but keep the image on the right fully clear */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-transparent" />
+          {/* Subtle top-to-bottom gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-zinc-950" />
+          <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(#eab308_1px,transparent_1px)] [background-size:20px_20px]" />
+        </div>
+
+        {/* Soft yellow radial background glow */}
+        <div className="absolute -top-40 right-0 w-[400px] h-[400px] bg-yellow-500/10 rounded-full blur-[100px] pointer-events-none z-0" />
+        <div className="absolute -bottom-40 left-0 w-[400px] h-[400px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none z-0" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left max-w-4xl lg:max-w-3xl space-y-6">
             
             {/* Tagline Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 select-none">
@@ -326,18 +356,18 @@ export default function LocalServicesLandingPage() {
               <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-300">Google & Meta Ads Strategy</span>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 w-full">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight text-white">
                 Get More Calls, Enquiries & Bookings for Your <span className="text-yellow-400">Local Service Business</span>
               </h1>
-              <p className="text-base sm:text-lg md:text-xl font-medium text-zinc-300 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl font-medium text-zinc-300 max-w-3xl mx-auto lg:mx-0 leading-relaxed">
                 We help cleaning, pest control, painting, repair, maintenance and other local service businesses generate quality leads through Meta Ads, Google Ads and WhatsApp follow-up.
               </p>
             </div>
 
             {/* Dual CTAs & Pricing info */}
-            <div className="space-y-3 pt-2">
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="space-y-3 pt-2 w-full">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
                 <button 
                   onClick={() => scrollToSection(formRef)}
                   className="w-full sm:w-auto px-8 py-4 rounded-full text-sm font-extrabold uppercase tracking-wider bg-yellow-400 hover:bg-yellow-500 text-zinc-950 border border-yellow-400 hover:border-yellow-500 transition-all shadow-lg hover:scale-[1.02] cursor-pointer flex items-center justify-center gap-2"
@@ -358,7 +388,7 @@ export default function LocalServicesLandingPage() {
             </div>
 
             {/* Hero Highlights */}
-            <div className="pt-8 border-t border-white/10">
+            <div className="pt-8 border-t border-white/10 w-full">
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 {[
                   "Meta Ads",
