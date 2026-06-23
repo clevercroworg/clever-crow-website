@@ -15,8 +15,38 @@ type Message = {
   isTyping?: boolean;
 };
 
-type ChatMode = "chat" | "lead_gen";
-type LeadStep = "name" | "email" | "phone" | "message" | "done";
+type ChatbotState = {
+  stage:
+    | "start"
+    | "category-select"
+    | "service-select"
+    | "service-details"
+    | "project-goal"
+    | "project-budget"
+    | "lead-name"
+    | "lead-email"
+    | "lead-phone"
+    | "completed";
+  selectedCategory: string | null;
+  selectedServiceKey: string | null;
+  projectGoal: string | null;
+  projectBudget: string | null;
+};
+
+type HistoryItem = {
+  state: ChatbotState;
+  messages: Message[];
+};
+
+type ChatbotService = {
+  title: string;
+  category: string;
+  description: string;
+  highlights: string[];
+  slug: string;
+  customGoalPrompt?: string;
+  customGoalOptions?: string[];
+};
 
 // Custom Premium 3D-Styled Full-Body Robot Model (waving and bobbing)
 const AnimatedBot = ({ 
@@ -292,20 +322,477 @@ const AnimatedBot = ({
   </svg>
 );;
 
+const CHATBOT_SERVICES: Record<string, ChatbotService> = {
+  // Website Development
+  "business-website": {
+    title: "Business Website Development",
+    category: "Website Development",
+    description: "High-performance, custom-built corporate and business websites optimized for lead generation, speed, and brand credibility.",
+    highlights: ["Custom Next.js & React Frontend", "Modern CMS (WordPress / Sanity)", "Fully Responsive Layouts", "Technical SEO Foundations"],
+    slug: "business-website-development",
+    customGoalPrompt: "What is the primary goal of your business website?",
+    customGoalOptions: ["Brand Presence", "Lead Generation", "Corporate Info", "Other"]
+  },
+  "ecommerce-website": {
+    title: "E-commerce Website Development",
+    category: "Website Development",
+    description: "Secure, lightning-fast online stores designed to showcase your products, streamline checkout, and drive sales.",
+    highlights: ["Shopify / WooCommerce / Custom Dev", "Payment Gateway Integrations", "Order & Inventory Syncing", "Conversion Rate Optimization"],
+    slug: "ecommerce-website-development",
+    customGoalPrompt: "Are you starting a new e-commerce store or migrating/upgrading an existing one?",
+    customGoalOptions: ["New Shopify Store", "Migrate/Upgrade Site", "Custom E-commerce", "Other"]
+  },
+  "wordpress-design": {
+    title: "WordPress Website Design",
+    category: "Website Development",
+    description: "Custom-designed WordPress websites that are easy to manage, fast, secure, and optimized for marketing.",
+    highlights: ["Custom Elementor / Gutenberg themes", "Speed & Performance Tuning", "Advanced Security Hardening", "No-code admin editing dashboard"],
+    slug: "services/wordpress-website-design",
+    customGoalPrompt: "What type of website are you planning to build on WordPress?",
+    customGoalOptions: ["Business Blog", "Corporate/Service Site", "WooCommerce Store", "Other"]
+  },
+  "custom-website-design": {
+    title: "Custom Website Design",
+    category: "Website Development",
+    description: "Bespoke UI/UX design and custom-coded frontends built specifically for unique brand aesthetics and speed.",
+    highlights: ["Tailored Figma UI/UX prototyping", "Ultra-fast loading times", "Zero cookie-cutter templates", "Unique interactive micro-animations"],
+    slug: "services/custom-website-design",
+    customGoalPrompt: "Do you have custom design files (Figma, Adobe XD) ready, or do we start from layout design?",
+    customGoalOptions: ["Need UI/UX Design", "Have Figma ready", "Not sure", "Other"]
+  },
+  "landing-page-dev": {
+    title: "Landing Page Development",
+    category: "Website Development",
+    description: "High-converting, performance-oriented landing pages built to turn campaign traffic into qualified leads.",
+    highlights: ["Designed for PPC and Social campaigns", "Speed-optimized for low bounce rates", "Focused single-action CTA design", "A/B testing ready setups"],
+    slug: "landing-page-development",
+    customGoalPrompt: "What campaign is this landing page for (e.g. Google Ads, Meta Ads, Email marketing)?",
+    customGoalOptions: ["Google Ads Campaign", "Meta Ads Campaign", "Product Launch", "Other"]
+  },
+  "react-nextjs": {
+    title: "React & Next.js Development",
+    category: "Website Development",
+    description: "State-of-the-art web development using React and Next.js for maximum performance, SEO indexability, and scalability.",
+    highlights: ["Static Site Generation (SSG) & SSR", "Optimized Core Web Vitals", "Scalable component-based code", "API route integrations"],
+    slug: "react-nextjs-website-development",
+    customGoalPrompt: "What is the scope of your React/Next.js project?",
+    customGoalOptions: ["Headless CMS Site", "Interactive Web Portal", "SaaS Frontend", "Other"]
+  },
+  "website-redesign": {
+    title: "Website Redesign Services",
+    category: "Website Development",
+    description: "Modernize your existing website with a fresh, contemporary UI, improved navigation, and better conversion paths.",
+    highlights: ["Complete UI/UX overhaul", "SEO rankings preservation", "Performance and speed upgrade", "Mobile layout optimization"],
+    slug: "website-redesign-services",
+    customGoalPrompt: "What is the primary reason you want to redesign your website?",
+    customGoalOptions: ["Modernize UI/UX", "Improve Page Speed", "Boost Conversions", "Other"]
+  },
+  "website-maintenance": {
+    title: "Website Maintenance Services",
+    category: "Website Development",
+    description: "Proactive care, security monitoring, daily backups, and regular content updates to keep your site running flawlessly.",
+    highlights: ["Regular plugin and core updates", "Daily cloud backups", "Malware scanning & cleanups", "On-demand development support hours"],
+    slug: "website-maintenance-services",
+    customGoalPrompt: "What kind of maintenance support do you need most?",
+    customGoalOptions: ["Regular Updates & Backups", "Technical Support/Fixes", "Monthly SEO Checks", "Other"]
+  },
+
+  // App Development
+  "mobile-app-dev": {
+    title: "Mobile App Development",
+    category: "App Development",
+    description: "Custom native and cross-platform mobile apps for iOS and Android, built to engage users and power business workflows.",
+    highlights: ["iOS & Android App Store publishing", "React Native & Flutter expertise", "Real-time sync and push notifications", "Offline support & local storage"],
+    slug: "mobile-app-development",
+    customGoalPrompt: "Do you need your app built for iOS, Android, or both platforms?",
+    customGoalOptions: ["iOS & Android (Flutter/RN)", "iOS Only (Swift)", "Android Only (Kotlin)", "Other"]
+  },
+  "web-app-dev": {
+    title: "Web App Development",
+    category: "App Development",
+    description: "Custom web-based applications, client portals, interactive dashboards, and business automation platforms.",
+    highlights: ["Complex database & API backends", "Secure user role authentication", "Interactive analytics charts", "Responsive web app frontends"],
+    slug: "web-app-development",
+    customGoalPrompt: "What type of custom web application are you building?",
+    customGoalOptions: ["Internal Dashboard", "Customer Login Portal", "Operational Tool", "Other"]
+  },
+  "saas-product-dev": {
+    title: "SaaS Product Development",
+    category: "App Development",
+    description: "Full-cycle SaaS product engineering from initial MVP launch to subscription system integration and scaling.",
+    highlights: ["Multi-tenant architecture", "Stripe / Razorpay subscriptions", "Interactive user onboarding", "Robust API documentation"],
+    slug: "saas-product-development",
+    customGoalPrompt: "What is the core functionality or industry category of your SaaS idea?",
+    customGoalOptions: ["B2B SaaS Portal", "D2C/Consumer SaaS", "MVP Prototype", "Other"]
+  },
+  "crm-dashboards": {
+    title: "CRM & Dashboard Development",
+    category: "App Development",
+    description: "Custom CRM portals and dashboards to track your leads, sales pipelines, client actions, and business operations.",
+    highlights: ["Custom sales pipeline boards", "Interactive reporting & metrics", "Lead routing automation", "Integrations with email & WhatsApp"],
+    slug: "crm-dashboard-development",
+    customGoalPrompt: "What CRM integrations or main tracking pipelines do you need on your dashboard?",
+    customGoalOptions: ["Lead Tracking Pipeline", "Sales & Invoicing", "Client Support Hub", "Other"]
+  },
+  "booking-systems": {
+    title: "Booking System Development",
+    category: "App Development",
+    description: "Tailored online booking and scheduling systems for hotels, resorts, clinics, events, and service businesses.",
+    highlights: ["Real-time availability calendars", "Online deposit payments", "Automated SMS / email reminders", "Staff calendar sync (Google / Outlook)"],
+    slug: "booking-system-development",
+    customGoalPrompt: "What type of booking scheduling do you need?",
+    customGoalOptions: ["Appointment Booking", "Hotel/Resort Booking", "Event Ticket Booking", "Other"]
+  },
+  "admin-panels": {
+    title: "Admin Panel Development",
+    category: "App Development",
+    description: "Secure, easy-to-use custom backend admin portals to manage your app data, content, orders, and user permissions.",
+    highlights: ["Role-based access control (RBAC)", "Bulk import/export tools", "System logs and user auditing", "Tailored database managers"],
+    slug: "admin-panel-development",
+    customGoalPrompt: "What major features are critical for your admin panel?",
+    customGoalOptions: ["User Management & RBAC", "Order & Product Control", "Content/CMS Admin", "Other"]
+  },
+  "customer-portals": {
+    title: "Customer Portal Development",
+    category: "App Development",
+    description: "Self-service online portals where your clients can log in, view project status, download invoices, and access support.",
+    highlights: ["Secure client login accounts", "Invoice payment integrations", "File sharing and messaging", "Ticket-based customer support"],
+    slug: "customer-portal-development",
+    customGoalPrompt: "What self-service features should the customer portal provide?",
+    customGoalOptions: ["Invoice & Payment Pay", "File Sharing / Reports", "Support Ticket Console", "Other"]
+  },
+
+  // AI & Automation
+  "ai-chatbot-dev": {
+    title: "AI Chatbot Development",
+    category: "AI & Automation",
+    description: "Intelligent AI assistant agents trained on your business data to handle customer inquiries, capture leads, and support workflows.",
+    highlights: ["Website & WhatsApp deployments", "Trained on your custom documents/FAQs", "CRM syncing & automatic handoffs", "Multi-language support"],
+    slug: "ai-chatbot-development",
+    customGoalPrompt: "Where do you want to deploy the AI chatbot?",
+    customGoalOptions: ["Website Chatbot", "WhatsApp Automation Bot", "Multi-Channel Bot", "Other"]
+  },
+  "whatsapp-automation": {
+    title: "WhatsApp Automation Services",
+    category: "AI & Automation",
+    description: "Official WhatsApp Business API setups to send notifications, automate replies, run broadcasts, and qualify incoming leads.",
+    highlights: ["Official API access green tick help", "Interactive button template messages", "Automated order/booking updates", "Shared team inbox routing"],
+    slug: "whatsapp-automation-services",
+    customGoalPrompt: "What is the main use case for WhatsApp automation?",
+    customGoalOptions: ["Send Alerts/Updates", "Lead Qualification Bot", "Broadcast Marketing", "Other"]
+  },
+  "ai-customer-support": {
+    title: "AI Customer Support Automation",
+    category: "AI & Automation",
+    description: "AI-driven customer service systems that resolve common queries instantly and create tickets for complex issues.",
+    highlights: ["24/7 instant FAQ answering", "Auto-resolves order status checks", "Seamless human support escalation", "Helpdesk ticketing tool sync"],
+    slug: "ai-customer-support-automation",
+    customGoalPrompt: "Which customer support systems or helpdesks do you want to integrate with the AI?",
+    customGoalOptions: ["Freshdesk/Zendesk Sync", "Custom Website Widget", "Slack/Email Ticketing", "Other"]
+  },
+  "workflow-automation": {
+    title: "Workflow Automation Services",
+    category: "AI & Automation",
+    description: "Integration of different business applications to eliminate manual data entry, errors, and repetitive workflows.",
+    highlights: ["Zapier / Make.com expert builds", "Automated invoice/agreement generation", "Lead distribution & alert slack/email", "No-code backend orchestration"],
+    slug: "workflow-automation-services",
+    customGoalPrompt: "Which business applications do you want to connect to automate your workflow?",
+    customGoalOptions: ["CRM to Email/WhatsApp", "Forms to Sheets & Slack", "ERP/Accounting Sync", "Other"]
+  },
+  "sales-followup": {
+    title: "Sales Follow-Up Automation",
+    category: "AI & Automation",
+    description: "Automated, multi-step email and WhatsApp follow-up campaigns to convert cold leads and inquiries into sales.",
+    highlights: ["Drip email & WhatsApp schedules", "Smart delay triggers", "Automatic stop upon user reply", "Sales pipeline stage transition triggers"],
+    slug: "sales-follow-up-automation",
+    customGoalPrompt: "What is the primary channel you want to automate follow-ups for?",
+    customGoalOptions: ["WhatsApp Follow-Ups", "Email Sequences", "Multi-Channel Drips", "Other"]
+  },
+  "lead-management": {
+    title: "Lead Management Automation",
+    category: "AI & Automation",
+    description: "Instantly capture, route, filter, and score new leads coming from your ads and landing pages.",
+    highlights: ["Instant SMS/Slack lead notifications", "Auto-assignment based on region/service", "Duplicate lead detection", "Lead scoring systems"],
+    slug: "lead-management-automation",
+    customGoalPrompt: "Where do your leads currently come from?",
+    customGoalOptions: ["Facebook/Instagram Ads", "Google Search Ads", "Website Webforms", "Other"]
+  },
+
+  // Digital Marketing
+  "google-ads": {
+    title: "Google Ads Management",
+    category: "Digital Marketing",
+    description: "Maximize your ROI with search ads, display networks, YouTube, and Performance Max campaigns targeting high-intent buyers.",
+    highlights: ["Intent-based keyword targeting", "Performance Max (PMax) setups", "Conversion rate tracking audit", "Ad copy copywriting & testing"],
+    slug: "google-ads-management-services",
+    customGoalPrompt: "What is the primary goal of your Google Ads campaigns?",
+    customGoalOptions: ["Inquiries & Calls", "E-commerce Sales", "App Downloads", "Other"]
+  },
+  "meta-ads": {
+    title: "Meta Ads Management",
+    category: "Digital Marketing",
+    description: "Targeted campaigns on Facebook and Instagram using high-converting creative ad formats, targeting, and custom funnels.",
+    highlights: ["Visual ad creative production", "Lookalike & Retargeting funnels", "Lead capture forms on Facebook/IG", "CAPI (Conversions API) setups"],
+    slug: "meta-ads-management-services",
+    customGoalPrompt: "What is the primary objective of your Meta (Facebook & Instagram) ads?",
+    customGoalOptions: ["Lead Generation", "Direct Purchase (D2C)", "Brand Visibility", "Other"]
+  },
+  "linkedin-ads": {
+    title: "LinkedIn Ads Management",
+    category: "Digital Marketing",
+    description: "High-precision B2B advertising targeting founders, executives, decision-makers, and specific companies.",
+    highlights: ["Targeting by job title/company size", "Sponsored content & message ads", "High-quality B2B lead generation", "Account-based marketing (ABM)"],
+    slug: "services/linkedin-ads",
+    customGoalPrompt: "What industry or job roles are you targeting with your LinkedIn Campaigns?",
+    customGoalOptions: ["B2B Decision Makers", "HR/Recruiters", "Tech/Founders", "Other"]
+  },
+  "seo-services": {
+    title: "SEO Services",
+    category: "Digital Marketing",
+    description: "Drive consistent organic search traffic and dominate Google rankings with on-page, off-page, and technical SEO.",
+    highlights: ["Detailed keyword gap research", "Technical site speed optimization", "High-quality backlink building", "Local SEO & Google Maps optimization"],
+    slug: "seo-services",
+    customGoalPrompt: "Are you looking to optimize an existing website or a brand new one?",
+    customGoalOptions: ["Optimize Existing Site", "SEO for New Site", "Local SEO (Google Maps)", "Other"]
+  },
+  "performance-marketing": {
+    title: "Performance Marketing",
+    category: "Digital Marketing",
+    description: "Scale your revenue through goal-focused, data-driven paid advertising across multiple networks with detailed analytics.",
+    highlights: ["Cross-channel budget scaling", "Advanced marketing analytics", "Cohort analysis & LTV tracking", "Weekly growth dashboard reviews"],
+    slug: "performance-marketing-agency",
+    customGoalPrompt: "What is your current average monthly marketing budget?",
+    customGoalOptions: ["Under $1,500/mo", "$1,500 - $5,000/mo", "$5,000+/mo", "Deciding"]
+  },
+  "lead-gen-campaigns": {
+    title: "Lead Generation Campaigns",
+    category: "Digital Marketing",
+    description: "Custom lead acquisition funnels designed to fill your sales team's pipeline with warm, pre-qualified business inquiries.",
+    highlights: ["Ad-to-landing-page optimized funnels", "Pre-qualification lead forms", "Automated email/SMS follow-ups", "Ad spend vs Lead Cost tracking"],
+    slug: "lead-generation-campaigns",
+    customGoalPrompt: "What is the average ticket size or value of a qualified lead for your business?",
+    customGoalOptions: ["High-ticket B2B", "Mid-range services", "Local consumer leads", "Other"]
+  },
+  "social-media-management": {
+    title: "Social Media Management",
+    category: "Digital Marketing",
+    description: "Grow your organic presence, engage your audience, and build brand loyalty across Instagram, LinkedIn, and YouTube.",
+    highlights: ["Weekly visual content calendars", "Copywriting & hashtag strategies", "Reels/Shorts video editing help", "Direct message & comment replying"],
+    slug: "social-media-management-services",
+    customGoalPrompt: "Which platforms do you want us to manage (e.g. Instagram, LinkedIn, YouTube, Facebook)?",
+    customGoalOptions: ["Instagram & Facebook", "LinkedIn & Twitter/X", "YouTube & Reels", "Other"]
+  }
+};
+
+const getOptionsForState = (state: ChatbotState): string[] => {
+  switch (state.stage) {
+    case "start":
+      return [
+        "🌐 Website Development",
+        "📱 App Development",
+        "🤖 AI & Automation",
+        "📈 Digital Marketing",
+        "💼 Quick Connect"
+      ];
+    case "category-select":
+      if (state.selectedCategory === "Website Development") {
+        return [
+          "Business Website",
+          "E-commerce Website",
+          "WordPress Design",
+          "Custom UI/UX Site",
+          "Landing Page Dev",
+          "React & Next.js",
+          "Website Redesign",
+          "Website Maintenance",
+          "👈 Back",
+          "🔙 Main Menu"
+        ];
+      }
+      if (state.selectedCategory === "App Development") {
+        return [
+          "Mobile App Dev",
+          "Web App Dev",
+          "SaaS Product Dev",
+          "CRM & Dashboards",
+          "Booking Systems",
+          "Admin Panels",
+          "Customer Portals",
+          "👈 Back",
+          "🔙 Main Menu"
+        ];
+      }
+      if (state.selectedCategory === "AI & Automation") {
+        return [
+          "AI Chatbots",
+          "WhatsApp Automation",
+          "AI Customer Support",
+          "Workflow Automation",
+          "Sales Follow-Up",
+          "Lead Management",
+          "👈 Back",
+          "🔙 Main Menu"
+        ];
+      }
+      if (state.selectedCategory === "Digital Marketing") {
+        return [
+          "Google Ads",
+          "Meta Ads (FB & IG)",
+          "LinkedIn Ads",
+          "SEO Services",
+          "Performance Marketing",
+          "Lead Gen Campaigns",
+          "Social Media Management",
+          "👈 Back",
+          "🔙 Main Menu"
+        ];
+      }
+      return ["🔙 Main Menu"];
+      
+    case "service-details":
+      return [
+        "📋 Get a Quote",
+        "👈 Back",
+        "🔙 Main Menu"
+      ];
+      
+    case "project-goal":
+      const svcKey = state.selectedServiceKey;
+      if (svcKey && CHATBOT_SERVICES[svcKey]?.customGoalOptions) {
+        return [...(CHATBOT_SERVICES[svcKey].customGoalOptions || []), "👈 Back", "🔙 Main Menu"];
+      }
+      const cat = state.selectedCategory || "";
+      let goalOptions = ["Other / Custom request"];
+      if (cat === "Website Development") {
+        goalOptions = ["Build a new site from scratch", "Redesign existing website", "Add new features", "Other / Custom request"];
+      } else if (cat === "App Development") {
+        goalOptions = ["Build a new MVP/product", "Develop custom web/mobile app", "Build internal tools/dashboard", "Other / Custom request"];
+      } else if (cat === "AI & Automation") {
+        goalOptions = ["Automate customer support", "Generate & qualify leads", "Connect tools & CRM workflows", "Other / Custom request"];
+      } else if (cat === "Digital Marketing") {
+        goalOptions = ["Increase leads & enquiries", "Drive e-commerce sales", "Boost brand awareness", "Other / Custom request"];
+      }
+      return [...goalOptions, "👈 Back", "🔙 Main Menu"];
+      
+    case "project-budget":
+      return [
+        "Under $1,500",
+        "$1,500 - $4,000",
+        "$4,000 - $10,000",
+        "$10,000+",
+        "Deciding / Discuss on call",
+        "👈 Back",
+        "🔙 Main Menu"
+      ];
+      
+    case "lead-name":
+    case "lead-email":
+    case "lead-phone":
+      return [
+        "👈 Back",
+        "🔙 Main Menu"
+      ];
+      
+    case "completed":
+      return [
+        "🔄 Start New Inquiry",
+        "🔙 Main Menu"
+      ];
+      
+    default:
+      return ["🔙 Main Menu"];
+  }
+};
+
+const matchInputToNavigation = (text: string) => {
+  const t = text.toLowerCase().trim();
+  
+  if (t === "back" || t === "go back" || t === "👈 back") return { type: "general", key: "back" };
+  if (t === "menu" || t === "main menu" || t === "home" || t === "🔙 main menu" || t === "🔄 start new inquiry") return { type: "general", key: "menu" };
+  
+  // Clean punctuation for easier matching of conversational phrases
+  const cleanText = t.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "").replace(/\s+/g, " ").trim();
+
+  // Greetings variations
+  const greetings = [
+    "hi", "hello", "hey", "good morning", "good afternoon", "good evening", 
+    "gday", "namaste", "hola", "sup", "yo", "greeting", "greetings",
+    "hey there", "hi there", "hello there", "nice to meet you"
+  ];
+  if (greetings.some(g => cleanText === g || cleanText.startsWith(g + " ") || cleanText.endsWith(" " + g))) {
+    return { type: "general", key: "greeting" };
+  }
+
+  // Common conversational queries/status checks
+  const conversationalQuestions = [
+    "how are you", "how is it going", "hows it going", "how are you doing",
+    "whats up", "what is up", "are you there", "anyone there", "is anyone here",
+    "can you help me", "who are you", "what is your name", "whats your name",
+    "what do you do"
+  ];
+  if (conversationalQuestions.some(q => cleanText.includes(q))) {
+    return { type: "general", key: "greeting" };
+  }
+
+  if (t.includes("contact") || t.includes("phone") || t.includes("number") || t.includes("email") || t.includes("call")) {
+    return { type: "general", key: "contact" };
+  }
+  if (t.includes("address") || t.includes("location") || t.includes("office") || t.includes("where")) {
+    return { type: "general", key: "location" };
+  }
+  if (t.includes("career") || t.includes("job") || t.includes("internship") || t.includes("work")) {
+    return { type: "general", key: "careers" };
+  }
+  if (t.includes("about") || t.includes("clever crow") || t.includes("who are you")) {
+    return { type: "general", key: "about" };
+  }
+  if (t.includes("pricing") || t.includes("cost") || t.includes("price") || t.includes("how much") || t.includes("charges")) {
+    return { type: "general", key: "pricing" };
+  }
+
+  // Match category
+  if (t.includes("website") || t.includes("web site") || t.includes("wordpress") || t.includes("blog")) {
+    return { type: "category", key: "Website Development" };
+  }
+  if (t.includes("app") || t.includes("mobile") || t.includes("saas") || t.includes("crm") || t.includes("portal") || t.includes("dashboard")) {
+    return { type: "category", key: "App Development" };
+  }
+  if (t.includes("ai") || t.includes("chatbot") || t.includes("automation") || t.includes("zapier") || t.includes("whatsapp")) {
+    return { type: "category", key: "AI & Automation" };
+  }
+  if (t.includes("marketing") || t.includes("ads") || t.includes("seo") || t.includes("google") || t.includes("facebook") || t.includes("meta") || t.includes("instagram") || t.includes("social")) {
+    return { type: "category", key: "Digital Marketing" };
+  }
+
+  // Match specific service title
+  for (const [key, svc] of Object.entries(CHATBOT_SERVICES)) {
+    if (t.includes(svc.title.toLowerCase()) || svc.highlights.some(h => t.includes(h.toLowerCase())) || svc.slug.replace("-", " ").includes(t)) {
+      return { type: "service", key };
+    }
+  }
+
+  return null;
+};
+
 export default function Chatbot() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [mode, setMode] = useState<ChatMode>("chat");
-  const [currentStep, setCurrentStep] = useState<LeadStep>("name");
+  const [chatState, setChatState] = useState<ChatbotState>({
+    stage: "start",
+    selectedCategory: null,
+    selectedServiceKey: null,
+    projectGoal: null,
+    projectBudget: null,
+  });
+  const [history, setHistory] = useState<HistoryItem[]>([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
   let currentExpression: "happy" | "thinking" | "focused" | "excited" = "happy";
   if (isTyping) {
     currentExpression = "thinking";
-  } else if (currentStep === "done") {
+  } else if (chatState.stage === "completed") {
     currentExpression = "excited";
-  } else if (mode === "lead_gen") {
+  } else if (chatState.stage.startsWith("lead-") || chatState.stage.startsWith("project-")) {
     currentExpression = "focused";
   }
 
@@ -341,7 +828,7 @@ export default function Chatbot() {
       }, 3000);
     }, 3000);
 
-    // Periodic loop: 3 seconds visible, 3 seconds hidden -> triggers every 6 seconds!
+    // Periodic loop
     const interval = setInterval(() => {
       const msg = speakMessages[Math.floor(Math.random() * speakMessages.length)];
       setBubbleText(msg.text);
@@ -365,8 +852,14 @@ export default function Chatbot() {
     {
       id: "1",
       sender: "bot",
-      text: "Hi! I'm the Clever Crow AI.\n\nAsk me about Web Development, Marketing, or Branding.",
-      options: ["Web Dev", "Marketing", "Branding", "Connect"],
+      text: "Hi! I'm the Clever Crow AI. 🐦\n\nI can help you explore our services, get custom quotes, or connect with our team.\n\nWhat can we build or grow for you today?",
+      options: [
+        "🌐 Website Development",
+        "📱 App Development",
+        "🤖 AI & Automation",
+        "📈 Digital Marketing",
+        "💼 Quick Connect"
+      ],
     },
   ]);
   
@@ -375,7 +868,6 @@ export default function Chatbot() {
     name: "",
     email: "",
     phone: "",
-    message: "",
   });
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -414,180 +906,600 @@ export default function Chatbot() {
 
   const handleSend = (text: string) => {
     if (!text.trim()) return;
+    
+    // Capture state and messages before user's text is appended
+    const prevState = { ...chatState };
+    const prevMessages = [...messages];
+    
     addMessage({ sender: "user", text });
     setInputValue("");
     setIsTyping(true);
-    setTimeout(() => processInput(text), 1500 + Math.random() * 1000); 
+    
+    setTimeout(() => {
+      processInput(text, prevState, prevMessages);
+    }, 1000 + Math.random() * 500); 
   };
 
-  const generateAIResponse = (text: string) => {
-    const lowerText = text.toLowerCase();
+  const handleGeneralFAQ = (key: string, state: ChatbotState, messagesBefore: Message[]) => {
+    let faqText = "";
+    if (key === "location") {
+      faqText = "Our Global HQ is located at:\n\n**Business Bay, 2nd Floor, Udupi–Manipal Highway, Kunjibettu, KA, India.**\n\nWould you like to schedule a call or go back?";
+    } else if (key === "contact") {
+      faqText = "You can reach us at:\n\n📞 **+91 99863 89444**\n📧 **hello@clevercrow.in**\n\nWould you like me to collect your project details so our team can contact you?";
+    } else if (key === "careers") {
+      faqText = "Clever Crow offers careers and internships in Web Development, Digital Marketing, and UI/UX Design.\n\nYou can apply directly on our site:\n• [Internships](file:///internship)\n• [Careers](file:///careers)";
+    } else if (key === "about") {
+      faqText = "Clever Crow is a premier digital growth agency based in Udupi, India.\n\nWe build custom mobile & web apps, SaaS products, workflow automations, and manage high-performing digital marketing campaigns for brands globally.";
+    } else if (key === "pricing") {
+      faqText = "Pricing at Clever Crow depends entirely on the scope, complexity, and specific requirements of your project.\n\nWe provide custom proposals and tailored estimations. Would you like to connect with us to get a custom quote?";
+    }
     
-    // Greetings
-    if (/^(hi|hello|hey)\b/.test(lowerText)) {
-      addMessage({
-        sender: "bot",
-        text: "Hello! How can I help you today?",
-        options: ["Web Dev", "Marketing", "Branding", "Connect"],
-      });
-      return;
-    }
-
-    // Contact & Address Info
-    if (lowerText.includes("address") || lowerText.includes("location") || lowerText.includes("office") || lowerText.includes("where")) {
-      addMessage({
-        sender: "bot",
-        text: "Our Global HQ is located at:\n\n**Business Bay, 2nd Floor, Udupi–Manipal Highway, Kunjibettu, KA, India.**\n\nWould you like to visit us or schedule a call?",
-        options: ["Schedule Call", "Main Menu"],
-      });
-      return;
-    }
-
-    if (lowerText.includes("contact") || lowerText.includes("phone") || lowerText.includes("email") || lowerText.includes("number")) {
-      addMessage({
-        sender: "bot",
-        text: "You can reach us at:\n\n📞 **+91 99863 89444**\n📧 **hello@clevercrow.in**\n\nOr I can collect your details and have our team call you?",
-        options: ["Connect Now", "Main Menu"],
-      });
-      return;
-    }
-
-    // Lead Gen Triggers
-    if (lowerText.includes("connect") || lowerText.includes("schedule") || lowerText === "yes, connect" || lowerText === "connect now" || lowerText === "schedule call") {
-      setMode("lead_gen");
-      setCurrentStep("name");
-      addMessage({ sender: "bot", text: "Great! Let's get some details. What's your name?" });
-      return;
-    }
-
-    // Reset / Main Menu
-    if (lowerText.includes("main menu") || lowerText.includes("other services") || lowerText.includes("start over")) {
-      addMessage({
-        sender: "bot",
-        text: "I'm here to help with Web, Marketing, and Branding. What would you like to explore?",
-        options: ["Web Dev", "Marketing", "Branding", "Connect"],
-      });
-      return;
-    }
-
-    // --- CHECK FOR SPECIFIC SERVICES FIRST ---
-    const matchedService = Object.values(services).find(s => 
-      lowerText.includes(s.title.toLowerCase()) || 
-      lowerText.includes(s.slug.replace("-", " ")) ||
-      (s.title.toLowerCase() === "logo design" && lowerText === "logo design")
-    );
-
-    if (matchedService) {
-      setSelectedServices(prev => Array.from(new Set([...prev, matchedService.title])));
-      addMessage({
-        sender: "bot",
-        text: `${matchedService.title}: ${matchedService.heroSubtitle}\n\nShall we connect?`,
-        options: ["Yes, connect", "Other services"],
-      });
-      return;
-    }
-
-    // --- BROAD CATEGORY CHECKS ---
-    if (lowerText.includes("web") || lowerText.includes("site")) {
-      setSelectedServices(prev => Array.from(new Set([...prev, "Web Development"])));
-      addMessage({
-        sender: "bot",
-        text: "We build Business and E-commerce websites. Which do you need?",
-        options: ["Business Website", "E-commerce Website", "Connect"],
-      });
-      return;
-    }
-
-    if (lowerText.includes("marketing") || lowerText.includes("ads") || lowerText.includes("seo")) {
-      setSelectedServices(prev => Array.from(new Set([...prev, "Digital Marketing"])));
-      addMessage({
-        sender: "bot",
-        text: "We offer Google Ads, Social Media Ads, and SEO. Interested in one?",
-        options: ["Google Ads", "Social Media Ads", "SEO", "Connect"],
-      });
-      return;
-    }
-
-    if (lowerText.includes("branding") || lowerText.includes("logo") || lowerText.includes("design") || lowerText.includes("strategy")) {
-      setSelectedServices(prev => Array.from(new Set([...prev, "Branding"])));
-      addMessage({
-        sender: "bot",
-        text: "Our Branding includes Logo Design, Graphic Design, and Strategy & Planning. Need a refresh?",
-        options: ["Logo Design", "Graphic Design", "Strategy & Planning", "Connect"],
-      });
-      return;
-    }
-
+    setHistory(prev => [...prev, { state, messages: messagesBefore }]);
     addMessage({
       sender: "bot",
-      text: "I'm here to help with Web, Marketing, and Branding. What can I do for you?",
-      options: ["Web Dev", "Marketing", "Branding", "Connect"],
+      text: faqText,
+      options: getOptionsForState(state)
     });
   };
 
-  const processLeadGen = async (val: string) => {
-    switch (currentStep) {
-      case "name":
-        if (!validateName(val)) { addMessage({ sender: "bot", text: "Please enter a valid name." }); return; }
-        setUserData((prev) => ({ ...prev, name: val }));
-        setCurrentStep("email");
-        addMessage({ sender: "bot", text: `Hi ${val}! What is your email address?` });
-        break;
-      case "email":
-        if (!validateEmail(val)) { addMessage({ sender: "bot", text: "Please enter a valid email." }); return; }
-        setUserData((prev) => ({ ...prev, email: val }));
-        setCurrentStep("phone");
-        addMessage({ sender: "bot", text: "Great! And your phone number?" });
-        break;
-      case "phone":
-        if (!validatePhone(val)) { addMessage({ sender: "bot", text: "Please enter a valid number." }); return; }
-        const finalData = { ...userData, phone: val, message: selectedServices.join(", ") || "General Interest" };
-        setUserData(finalData);
-        setIsTyping(true);
-        
-        const result = await submitLead({
-          name: finalData.name,
-          email: finalData.email,
-          phone: finalData.phone,
-          message: finalData.message,
-          source: "AI Chatbot"
-        });
+  const handleGreeting = (text: string, state: ChatbotState, messagesBefore: Message[]) => {
+    const t = text.toLowerCase().trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "").replace(/\s+/g, " ").trim();
+    
+    // Check if the user is asking "how are you" or "who are you" or if it is a general greeting
+    const isHowAreYou = ["how are you", "how is it going", "hows it going", "how are you doing", "whats up", "what is up"].some(p => t.includes(p));
+    const isWhoAreYou = ["who are you", "what is your name", "whats your name", "what do you do"].some(p => t.includes(p));
+    const isAvailability = ["are you there", "anyone there", "is anyone here"].some(p => t.includes(p));
+    const isHelp = ["can you help me"].some(p => t.includes(p));
 
-        setIsTyping(false);
-        if (result.success) {
-          setCurrentStep("done");
-          addMessage({ 
-            sender: "bot", 
-            text: "Thank you! Your inquiry has been sent to our team. We will connect you shortly.",
-            options: ["Start New Chat"]
-          });
-        } else {
-          addMessage({ sender: "bot", text: "Oops, something went wrong. Could you please try again or contact us via phone?" });
-        }
-        break;
-      case "done":
-        if (val.toLowerCase().includes("new chat") || val.toLowerCase().includes("start")) {
-          setMode("chat");
-          setCurrentStep("name");
-          setSelectedServices([]);
-          setMessages([{
-            id: "1",
-            sender: "bot",
-            text: "Hi! I'm the Clever Crow AI.\n\nAsk me about Web Development, Digital Marketing, or Branding.",
-            options: ["Web Dev", "Marketing", "Branding", "Connect"],
-          }]);
-        } else {
-          addMessage({ sender: "bot", text: "We have received your inquiry. Thank you!" });
-        }
-        break;
+    let prefix = "Hello! Hope you are having a wonderful day. I'm the Clever Crow AI, your digital growth assistant. 🐦\n\n";
+
+    if (isHowAreYou) {
+      prefix = "I'm doing great, thank you for asking! I'm here and ready to help you grow your business. 🚀\n\n";
+    } else if (isWhoAreYou) {
+      prefix = "I'm the Clever Crow AI! 🐦 We help businesses build custom mobile & web apps, set up AI/WhatsApp automation, design premium websites, and scale with digital marketing.\n\n";
+    } else if (isAvailability) {
+      prefix = "Yes, I'm here and ready to assist you! 🐦\n\n";
+    } else if (isHelp) {
+      prefix = "I would be glad to help you! Let's get right into it. 🐦\n\n";
     }
+
+    let greetingResponse = prefix + "What can we build or grow for you today?";
+
+    if (state.stage === "category-select") {
+      greetingResponse = `${prefix}We were just exploring services under **${state.selectedCategory}**. Let's find the right service for your business. Please select an option below:`;
+    } else if (state.stage === "service-details") {
+      const serviceName = state.selectedServiceKey ? CHATBOT_SERVICES[state.selectedServiceKey].title : "this service";
+      greetingResponse = `${prefix}We were looking at **${serviceName}**. Would you like to get a custom quote/proposal for this, or go back?`;
+    } else if (state.stage === "project-goal") {
+      const serviceName = state.selectedServiceKey ? CHATBOT_SERVICES[state.selectedServiceKey].title : "your project";
+      const service = state.selectedServiceKey ? CHATBOT_SERVICES[state.selectedServiceKey] : null;
+      const question = service?.customGoalPrompt 
+        ? service.customGoalPrompt 
+        : `What is the primary goal of your project or the main features you need?`;
+      greetingResponse = `${prefix}We are in the process of generating your custom quote for **${serviceName || "your project"}**. \n\n${question}`;
+    } else if (state.stage === "project-budget") {
+      greetingResponse = `${prefix}Let's finish setting up your quote. What is your estimated budget or timeline for this project?`;
+    } else if (state.stage === "lead-name") {
+      greetingResponse = `${prefix}Let's finish setting up your quote. To prepare your proposal and schedule a brief call, could you please tell me your name?`;
+    } else if (state.stage === "lead-email") {
+      greetingResponse = `${prefix}Almost done! What is the best email address to send the proposal to?`;
+    } else if (state.stage === "lead-phone") {
+      greetingResponse = `${prefix}Last step! What is your phone number (preferably WhatsApp) for quick updates?`;
+    }
+
+    setHistory(prev => [...prev, { state, messages: messagesBefore }]);
+    addMessage({
+      sender: "bot",
+      text: greetingResponse,
+      options: getOptionsForState(state)
+    });
   };
 
-  const processInput = (text: string) => {
+  const processInput = async (
+    text: string,
+    prevState: ChatbotState,
+    prevMessages: Message[]
+  ) => {
     setIsTyping(false);
     const val = text.trim();
-    if (mode === "chat") generateAIResponse(val);
-    else processLeadGen(val);
+    const valLower = val.toLowerCase();
+
+    // 1. Check for back/menu commands globally
+    if (valLower === "back" || valLower === "go back" || val === "👈 Back") {
+      if (history.length > 0) {
+        const lastItem = history[history.length - 1];
+        setHistory(prev => prev.slice(0, -1));
+        setChatState(lastItem.state);
+        setMessages(lastItem.messages);
+        return;
+      }
+    }
+    
+    if (valLower === "menu" || valLower === "main menu" || val === "🔙 Main Menu" || val === "🔄 Start New Inquiry") {
+      setHistory([]);
+      const startState: ChatbotState = {
+        stage: "start",
+        selectedCategory: null,
+        selectedServiceKey: null,
+        projectGoal: null,
+        projectBudget: null,
+      };
+      setChatState(startState);
+      setMessages([
+        {
+          id: "1",
+          sender: "bot",
+          text: "Hi! I'm the Clever Crow AI. 🐦\n\nI can help you explore our services, get custom quotes, or connect with our team.\n\nWhat can we build or grow for you today?",
+          options: getOptionsForState(startState)
+        }
+      ]);
+      return;
+    }
+
+    const pushToHistory = () => {
+      setHistory(prev => [...prev, { state: prevState, messages: prevMessages }]);
+    };
+
+    // 2. State-based processing
+    switch (prevState.stage) {
+      case "start": {
+        const matched = matchInputToNavigation(val);
+        if (matched) {
+          if (matched.type === "general" && matched.key === "greeting") {
+            handleGreeting(val, prevState, prevMessages);
+            return;
+          }
+          if (matched.type === "category") {
+            // Treat as clicking a category option
+            processInput(matched.key, prevState, prevMessages);
+            return;
+          }
+          if (matched.type === "service") {
+            pushToHistory();
+            const service = CHATBOT_SERVICES[matched.key];
+            const nextState: ChatbotState = {
+              ...prevState,
+              stage: "service-details",
+              selectedCategory: service.category,
+              selectedServiceKey: matched.key
+            };
+            setChatState(nextState);
+            addMessage({
+              sender: "bot",
+              text: `I noticed you're asking about **${service.title}**.\n\n${service.description}\n\n**Key features & outcomes:**\n${service.highlights.map(h => `• ${h}`).join("\n")}`,
+              options: getOptionsForState(nextState)
+            });
+            return;
+          }
+          if (matched.type === "general") {
+            handleGeneralFAQ(matched.key, prevState, prevMessages);
+            return;
+          }
+        }
+
+        if (val.includes("Website Development")) {
+          pushToHistory();
+          const nextState: ChatbotState = {
+            ...prevState,
+            stage: "category-select",
+            selectedCategory: "Website Development"
+          };
+          setChatState(nextState);
+          addMessage({
+            sender: "bot",
+            text: "🌐 **Website Development Services**\n\nClever Crow builds high-performance corporate sites, custom e-commerce stores, easy-to-manage WordPress pages, and bespoke React/Next.js platforms.\n\nWhich website service would you like to explore?",
+            options: getOptionsForState(nextState)
+          });
+          return;
+        }
+        if (val.includes("App Development")) {
+          pushToHistory();
+          const nextState: ChatbotState = {
+            ...prevState,
+            stage: "category-select",
+            selectedCategory: "App Development"
+          };
+          setChatState(nextState);
+          addMessage({
+            sender: "bot",
+            text: "📱 **App Development Services**\n\nWe design and develop custom mobile apps (iOS & Android), complex web applications, scalable SaaS products, custom CRM dashboards, and self-service portals.\n\nWhich app development service would you like to explore?",
+            options: getOptionsForState(nextState)
+          });
+          return;
+        }
+        if (val.includes("AI & Automation")) {
+          pushToHistory();
+          const nextState: ChatbotState = {
+            ...prevState,
+            stage: "category-select",
+            selectedCategory: "AI & Automation"
+          };
+          setChatState(nextState);
+          addMessage({
+            sender: "bot",
+            text: "🤖 **AI & Automation Services**\n\nSupercharge your efficiency. We build AI chatbots for websites/WhatsApp, automate customer support, setup workflow integrations (Zapier/Make), and implement automated follow-up sequences.\n\nWhich AI or automation service would you like to explore?",
+            options: getOptionsForState(nextState)
+          });
+          return;
+        }
+        if (val.includes("Digital Marketing")) {
+          pushToHistory();
+          const nextState: ChatbotState = {
+            ...prevState,
+            stage: "category-select",
+            selectedCategory: "Digital Marketing"
+          };
+          setChatState(nextState);
+          addMessage({
+            sender: "bot",
+            text: "📈 **Digital Marketing Services**\n\nGrow your brand and generate high-quality business leads. We manage high-performance Google Ads, Meta Ads (Facebook & Instagram), LinkedIn Ads, SEO, and organic social media.\n\nWhich marketing service would you like to explore?",
+            options: getOptionsForState(nextState)
+          });
+          return;
+        }
+        if (val.includes("Quick Connect") || valLower.includes("connect")) {
+          pushToHistory();
+          const nextState: ChatbotState = {
+            ...prevState,
+            stage: "project-goal"
+          };
+          setChatState(nextState);
+          addMessage({
+            sender: "bot",
+            text: "Great! Let's get some project details. What is the primary goal of your project or the main features you need?",
+            options: getOptionsForState(nextState)
+          });
+          return;
+        }
+
+        addMessage({
+          sender: "bot",
+          text: "I'm here to help you explore our services, get quotes, or connect with our team. Please choose an option below:",
+          options: getOptionsForState(prevState)
+        });
+        break;
+      }
+
+      case "category-select": {
+        const matched = matchInputToNavigation(val);
+        if (matched) {
+          if (matched.type === "general" && matched.key === "greeting") {
+            handleGreeting(val, prevState, prevMessages);
+            return;
+          }
+          if (matched.type === "service") {
+            pushToHistory();
+            const service = CHATBOT_SERVICES[matched.key];
+            const nextState: ChatbotState = {
+              ...prevState,
+              stage: "service-details",
+              selectedCategory: service.category,
+              selectedServiceKey: matched.key
+            };
+            setChatState(nextState);
+            addMessage({
+              sender: "bot",
+              text: `**${service.title}**\n${service.description}\n\n**Key features & outcomes:**\n${service.highlights.map(h => `• ${h}`).join("\n")}`,
+              options: getOptionsForState(nextState)
+            });
+            return;
+          }
+          if (matched.type === "category" && matched.key !== prevState.selectedCategory) {
+            processInput(matched.key, prevState, prevMessages);
+            return;
+          }
+          if (matched.type === "general") {
+            handleGeneralFAQ(matched.key, prevState, prevMessages);
+            return;
+          }
+        }
+
+        const foundServiceKey = Object.keys(CHATBOT_SERVICES).find(key => {
+          const svc = CHATBOT_SERVICES[key];
+          return svc.category === prevState.selectedCategory && val.toLowerCase().includes(svc.title.toLowerCase().substring(0, 15));
+        });
+
+        let serviceKey = foundServiceKey;
+        if (!serviceKey) {
+          const optionNameMap: Record<string, string> = {
+            "Business Website": "business-website",
+            "E-commerce Website": "ecommerce-website",
+            "WordPress Design": "wordpress-design",
+            "Custom UI/UX Site": "custom-website-design",
+            "Landing Page Dev": "landing-page-dev",
+            "React & Next.js": "react-nextjs",
+            "Website Redesign": "website-redesign",
+            "Website Maintenance": "website-maintenance",
+            
+            "Mobile App Dev": "mobile-app-dev",
+            "Web App Dev": "web-app-dev",
+            "SaaS Product Dev": "saas-product-dev",
+            "CRM & Dashboards": "crm-dashboards",
+            "Booking Systems": "booking-systems",
+            "Admin Panels": "admin-panels",
+            "Customer Portals": "customer-portals",
+            
+            "AI Chatbots": "ai-chatbot-dev",
+            "WhatsApp Automation": "whatsapp-automation",
+            "AI Customer Support": "ai-customer-support",
+            "Workflow Automation": "workflow-automation",
+            "Sales Follow-Up": "sales-followup",
+            "Lead Management": "lead-management",
+            
+            "Google Ads": "google-ads",
+            "Meta Ads (FB & IG)": "meta-ads",
+            "LinkedIn Ads": "linkedin-ads",
+            "SEO Services": "seo-services",
+            "Performance Marketing": "performance-marketing",
+            "Lead Gen Campaigns": "lead-gen-campaigns",
+            "Social Media Management": "social-media-management"
+          };
+          const mappedKey = optionNameMap[val];
+          if (mappedKey && CHATBOT_SERVICES[mappedKey]) {
+            serviceKey = mappedKey;
+          }
+        }
+
+        if (serviceKey) {
+          pushToHistory();
+          const service = CHATBOT_SERVICES[serviceKey];
+          const nextState: ChatbotState = {
+            ...prevState,
+            stage: "service-details",
+            selectedServiceKey: serviceKey
+          };
+          setChatState(nextState);
+          addMessage({
+            sender: "bot",
+            text: `**${service.title}**\n${service.description}\n\n**Key features & outcomes:**\n${service.highlights.map(h => `• ${h}`).join("\n")}`,
+            options: getOptionsForState(nextState)
+          });
+          return;
+        }
+
+        addMessage({
+          sender: "bot",
+          text: `Please select one of the services under ${prevState.selectedCategory} or use the buttons below.`,
+          options: getOptionsForState(prevState)
+        });
+        break;
+      }
+
+      case "service-details": {
+        const matched = matchInputToNavigation(val);
+        if (matched) {
+          if (matched.type === "general" && matched.key === "greeting") {
+            handleGreeting(val, prevState, prevMessages);
+            return;
+          }
+          if (matched.type === "general") {
+            handleGeneralFAQ(matched.key, prevState, prevMessages);
+            return;
+          }
+          if (matched.type === "service") {
+            pushToHistory();
+            const service = CHATBOT_SERVICES[matched.key];
+            const nextState: ChatbotState = {
+              ...prevState,
+              stage: "service-details",
+              selectedCategory: service.category,
+              selectedServiceKey: matched.key
+            };
+            setChatState(nextState);
+            addMessage({
+              sender: "bot",
+              text: `**${service.title}**\n${service.description}\n\n**Key features & outcomes:**\n${service.highlights.map(h => `• ${h}`).join("\n")}`,
+              options: getOptionsForState(nextState)
+            });
+            return;
+          }
+        }
+
+        if (valLower.includes("quote") || valLower.includes("get a quote") || valLower.includes("connect")) {
+          pushToHistory();
+          const nextState: ChatbotState = {
+            ...prevState,
+            stage: "project-goal"
+          };
+          setChatState(nextState);
+          
+          const service = prevState.selectedServiceKey ? CHATBOT_SERVICES[prevState.selectedServiceKey] : null;
+          const questionText = service?.customGoalPrompt 
+            ? service.customGoalPrompt 
+            : "Excellent! Let's pre-qualify your inquiry. What is the primary goal of your project or the main features you need?";
+            
+          addMessage({
+            sender: "bot",
+            text: questionText,
+            options: getOptionsForState(nextState)
+          });
+          return;
+        }
+
+        addMessage({
+          sender: "bot",
+          text: "Would you like to get a quote/proposal for this service, or go back?",
+          options: getOptionsForState(prevState)
+        });
+        break;
+      }
+
+      case "project-goal": {
+        const matched = matchInputToNavigation(val);
+        if (matched && matched.type === "general" && matched.key === "greeting") {
+          handleGreeting(val, prevState, prevMessages);
+          return;
+        }
+        pushToHistory();
+        const nextState: ChatbotState = {
+          ...prevState,
+          stage: "project-budget",
+          projectGoal: val
+        };
+        setChatState(nextState);
+        addMessage({
+          sender: "bot",
+          text: "Understood. What is your estimated budget or timeline for this project?",
+          options: getOptionsForState(nextState)
+        });
+        break;
+      }
+
+      case "project-budget": {
+        const matched = matchInputToNavigation(val);
+        if (matched && matched.type === "general" && matched.key === "greeting") {
+          handleGreeting(val, prevState, prevMessages);
+          return;
+        }
+        pushToHistory();
+        const nextState: ChatbotState = {
+          ...prevState,
+          stage: "lead-name",
+          projectBudget: val
+        };
+        setChatState(nextState);
+        addMessage({
+          sender: "bot",
+          text: "Perfect! To send you a custom proposal and schedule a brief call, could you please tell me your name?",
+          options: getOptionsForState(nextState)
+        });
+        break;
+      }
+
+      case "lead-name": {
+        const matched = matchInputToNavigation(val);
+        if (matched && matched.type === "general" && matched.key === "greeting") {
+          handleGreeting(val, prevState, prevMessages);
+          return;
+        }
+        if (!validateName(val)) {
+          addMessage({
+            sender: "bot",
+            text: "Please enter a valid name (at least 2 characters).",
+            options: getOptionsForState(prevState)
+          });
+          return;
+        }
+        pushToHistory();
+        setUserData(prev => ({ ...prev, name: val }));
+        const nextState: ChatbotState = {
+          ...prevState,
+          stage: "lead-email"
+        };
+        setChatState(nextState);
+        addMessage({
+          sender: "bot",
+          text: `Thanks, ${val}! What is the best email address to send the proposal to?`,
+          options: getOptionsForState(nextState)
+        });
+        break;
+      }
+
+      case "lead-email": {
+        const matched = matchInputToNavigation(val);
+        if (matched && matched.type === "general" && matched.key === "greeting") {
+          handleGreeting(val, prevState, prevMessages);
+          return;
+        }
+        if (!validateEmail(val)) {
+          addMessage({
+            sender: "bot",
+            text: "Please enter a valid email address.",
+            options: getOptionsForState(prevState)
+          });
+          return;
+        }
+        pushToHistory();
+        setUserData(prev => ({ ...prev, email: val }));
+        const nextState: ChatbotState = {
+          ...prevState,
+          stage: "lead-phone"
+        };
+        setChatState(nextState);
+        addMessage({
+          sender: "bot",
+          text: "Great! And what is your phone number (preferably WhatsApp for quick updates)?",
+          options: getOptionsForState(nextState)
+        });
+        break;
+      }
+
+      case "lead-phone": {
+        const matched = matchInputToNavigation(val);
+        if (matched && matched.type === "general" && matched.key === "greeting") {
+          handleGreeting(val, prevState, prevMessages);
+          return;
+        }
+        if (!validatePhone(val)) {
+          addMessage({
+            sender: "bot",
+            text: "Please enter a valid phone number (e.g. +91 99863 89444 or 10-digit number).",
+            options: getOptionsForState(prevState)
+          });
+          return;
+        }
+        
+        setIsTyping(true);
+        
+        const serviceName = prevState.selectedServiceKey 
+          ? CHATBOT_SERVICES[prevState.selectedServiceKey].title 
+          : "General Business Connect";
+
+        const finalMessageText = `Goal: ${prevState.projectGoal || "N/A"}\nBudget/Timeline: ${prevState.projectBudget || "N/A"}`;
+        
+        const payload = {
+          name: userData.name,
+          email: userData.email,
+          phone: val,
+          message: finalMessageText,
+          service: serviceName,
+          source: "AI Chatbot"
+        };
+
+        const result = await submitLead(payload);
+        
+        setIsTyping(false);
+
+        if (result.success) {
+          pushToHistory();
+          const nextState: ChatbotState = {
+            ...prevState,
+            stage: "completed"
+          };
+          setChatState(nextState);
+          addMessage({
+            sender: "bot",
+            text: `Thank you so much, ${userData.name}! Your inquiry has been submitted successfully to the Clever Crow team. 🚀\n\nWe will review your project details and get in touch within 24 hours.\n\nIs there anything else I can help you with?`,
+            options: getOptionsForState(nextState)
+          });
+        } else {
+          addMessage({
+            sender: "bot",
+            text: "Oops, something went wrong while submitting. Please try again or call us directly at +91 99863 89444.",
+            options: getOptionsForState(prevState)
+          });
+        }
+        break;
+      }
+
+      case "completed": {
+        setHistory([]);
+        const startState: ChatbotState = {
+          stage: "start",
+          selectedCategory: null,
+          selectedServiceKey: null,
+          projectGoal: null,
+          projectBudget: null,
+        };
+        setChatState(startState);
+        addMessage({
+          sender: "bot",
+          text: "Hi! I'm the Clever Crow AI. 🐦\n\nWhat can we build or grow for you today?",
+          options: getOptionsForState(startState)
+        });
+        break;
+      }
+    }
   };
 
   const handleOptionClick = (option: string) => handleSend(option);
