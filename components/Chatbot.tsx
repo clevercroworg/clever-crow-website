@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { X, Send } from "lucide-react";
 import { services } from "@/data/services";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,6 +13,10 @@ type Message = {
   text: string;
   options?: string[];
   isTyping?: boolean;
+  cta?: {
+    text: string;
+    url: string;
+  };
 };
 
 type ChatbotState = {
@@ -713,27 +717,6 @@ const matchInputToNavigation = (text: string) => {
   // Clean punctuation for easier matching of conversational phrases
   const cleanText = t.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "").replace(/\s+/g, " ").trim();
 
-  // Greetings variations
-  const greetings = [
-    "hi", "hello", "hey", "good morning", "good afternoon", "good evening", 
-    "gday", "namaste", "hola", "sup", "yo", "greeting", "greetings",
-    "hey there", "hi there", "hello there", "nice to meet you"
-  ];
-  if (greetings.some(g => cleanText === g || cleanText.startsWith(g + " ") || cleanText.endsWith(" " + g))) {
-    return { type: "general", key: "greeting" };
-  }
-
-  // Common conversational queries/status checks
-  const conversationalQuestions = [
-    "how are you", "how is it going", "hows it going", "how are you doing",
-    "whats up", "what is up", "are you there", "anyone there", "is anyone here",
-    "can you help me", "who are you", "what is your name", "whats your name",
-    "what do you do"
-  ];
-  if (conversationalQuestions.some(q => cleanText.includes(q))) {
-    return { type: "general", key: "greeting" };
-  }
-
   // Contact inquiries
   if (
     t.includes("contact") || 
@@ -775,11 +758,32 @@ const matchInputToNavigation = (text: string) => {
   if (t.includes("career") || t.includes("job") || t.includes("internship") || t.includes("work")) {
     return { type: "general", key: "careers" };
   }
-  if (t.includes("about") || t.includes("clever crow") || t.includes("who are you")) {
+  if (t.includes("about") || t.includes("clever crow")) {
     return { type: "general", key: "about" };
   }
   if (t.includes("pricing") || t.includes("cost") || t.includes("price") || t.includes("how much") || t.includes("charges")) {
     return { type: "general", key: "pricing" };
+  }
+
+  // Greetings variations
+  const greetings = [
+    "hi", "hello", "hey", "good morning", "good afternoon", "good evening", 
+    "gday", "namaste", "hola", "sup", "yo", "greeting", "greetings",
+    "hey there", "hi there", "hello there", "nice to meet you"
+  ];
+  if (greetings.some(g => cleanText === g || cleanText.startsWith(g + " ") || cleanText.endsWith(" " + g))) {
+    return { type: "general", key: "greeting" };
+  }
+
+  // Common conversational queries/status checks
+  const conversationalQuestions = [
+    "how are you", "how is it going", "hows it going", "how are you doing",
+    "whats up", "what is up", "are you there", "anyone there", "is anyone here",
+    "can you help me", "who are you", "what is your name", "whats your name",
+    "what do you do"
+  ];
+  if (conversationalQuestions.some(q => cleanText.includes(q))) {
+    return { type: "general", key: "greeting" };
   }
 
   // Match category
@@ -806,8 +810,83 @@ const matchInputToNavigation = (text: string) => {
   return null;
 };
 
+const parseMarkdown = (text: string, onLinkClick?: (url: string) => void) => {
+  const lines = text.split("\n");
+  
+  return lines.map((line, lineIdx) => {
+    const parts: React.ReactNode[] = [];
+    const regex = /(\*\*.*?\*\*|\[.*?\]\(.*?\))/g;
+    let match;
+    let lastIndex = 0;
+    
+    while ((match = regex.exec(line)) !== null) {
+      const matchIndex = match.index;
+      const matchText = match[0];
+      
+      if (matchIndex > lastIndex) {
+        parts.push(line.substring(lastIndex, matchIndex));
+      }
+      
+      if (matchText.startsWith("**") && matchText.endsWith("**")) {
+        const boldText = matchText.slice(2, -2);
+        parts.push(<strong key={matchIndex} className="font-extrabold text-slate-900">{boldText}</strong>);
+      } else if (matchText.startsWith("[") && matchText.includes("](")) {
+        const closeBracketIdx = matchText.indexOf("]");
+        const linkText = matchText.slice(1, closeBracketIdx);
+        const linkUrl = matchText.slice(closeBracketIdx + 2, -1);
+        
+        const isLocal = linkUrl.startsWith("/") || linkUrl.startsWith("file://");
+        const cleanUrl = linkUrl.startsWith("file://") ? linkUrl.replace("file://", "") : linkUrl;
+        
+        if (isLocal) {
+          parts.push(
+            <a
+              key={matchIndex}
+              href={cleanUrl}
+              onClick={(e) => {
+                e.preventDefault();
+                if (onLinkClick) {
+                  onLinkClick(cleanUrl);
+                }
+              }}
+              className="text-amber-600 hover:text-amber-500 font-extrabold underline transition-colors"
+            >
+              {linkText}
+            </a>
+          );
+        } else {
+          parts.push(
+            <a
+              key={matchIndex}
+              href={linkUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-amber-600 hover:text-amber-500 font-extrabold underline transition-colors"
+            >
+              {linkText}
+            </a>
+          );
+        }
+      }
+      
+      lastIndex = regex.lastIndex;
+    }
+    
+    if (lastIndex < line.length) {
+      parts.push(line.substring(lastIndex));
+    }
+    
+    return (
+      <div key={lineIdx} className="min-h-[1.25rem]">
+        {parts.length > 0 ? parts : " "}
+      </div>
+    );
+  });
+};
+
 export default function Chatbot() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [chatState, setChatState] = useState<ChatbotState>({
     stage: "start",
@@ -884,7 +963,7 @@ export default function Chatbot() {
     {
       id: "1",
       sender: "bot",
-      text: "Hi! I'm the Clever Crow AI. 🐦\n\nI can help you explore our services, get custom quotes, or connect with our team.\n\nWhat can we build or grow for you today?",
+      text: "Hi! Welcome to Clever Crow. 😊 I can help you explore our services, get a quick project estimate, or put you in touch with our team.\n\nWhat can we build or grow for you today? 🐦",
       options: [
         "🌐 Website Development",
         "📱 App Development",
@@ -952,22 +1031,45 @@ export default function Chatbot() {
     }, 1000 + Math.random() * 500); 
   };
 
-  const handleGeneralFAQ = (key: string, state: ChatbotState, messagesBefore: Message[]) => {
+  const handleGeneralFAQ = (key: string, text: string, state: ChatbotState, messagesBefore: Message[]) => {
     let faqText = "";
     let options = getOptionsForState(state);
 
+    const t = text.toLowerCase().trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "").replace(/\s+/g, " ").trim();
+    
+    // Check if the user also greeted us in the same message
+    const hasGreeting = [
+      "hi", "hello", "hey", "good morning", "good afternoon", "good evening", 
+      "gday", "namaste", "hola", "sup", "yo", "greeting", "greetings",
+      "hey there", "hi there", "hello there", "nice to meet you"
+    ].some(g => t === g || t.startsWith(g + " ") || t.endsWith(" " + g));
+    
+    const hasHowAreYou = ["how are you", "how is it going", "hows it going", "how are you doing", "whats up", "what is up"].some(p => t.includes(p));
+
+    let greetingPrefix = "";
+    if (hasHowAreYou) {
+      greetingPrefix = "I'm doing great, thanks for asking! 😊 Here is that info:\n\n";
+    } else if (hasGreeting) {
+      greetingPrefix = "Hello! Hope you're having a great day. 😊 Here is that info:\n\n";
+    }
+
     if (key === "location") {
-      faqText = "📍 **Visit Our Office!**\n\nWe would love to host you at our Global Headquarters:\n🏢 **Business Bay, 2nd Floor, Udupi–Manipal Highway, Kunjibettu, Udupi, Karnataka, India.**\n\nDrop by for a cup of coffee ☕ and let's talk about your next project! Would you like to schedule a call or go back?";
+      faqText = `${greetingPrefix}📍 **Visit Our Office!**\n\nWe would love to have you over! Here's where our main office is located:\n🏢 **Business Bay, 2nd Floor, Udupi–Manipal Highway, Kunjibettu, Udupi, Karnataka, India.**\n\nDrop by for a cup of coffee ☕ and we can chat about your project! Would you like to schedule a call or go back?`;
     } else if (key === "contact") {
-      faqText = "📞 **Let's Connect!**\n\nHere are the best ways to reach our team immediately:\n\n☎️ **Phone:** [+91 99863 89444](tel:+919986389444)\n📧 **Email:** [hello@clevercrow.in](mailto:hello@clevercrow.in)\n💬 **WhatsApp:** [+91 99863 89444](https://wa.me/919986389444)\n\nAlternatively, I can guide you through our quick pre-qualification form right here to submit your project details directly to our developers! Would you like to get started?";
+      faqText = `${greetingPrefix}📞 **Let's Connect!**\n\nHere's how you can reach our team:\n\n☎️ **Phone:** [+91 99863 89444](tel:+919986389444)\n💬 **WhatsApp:** [+91 99863 89444](https://wa.me/919986389444)\n📧 **Email:** [hello@clevercrow.in](mailto:hello@clevercrow.in)\n\n🔗 **Contact Form:** You can also fill out the form directly on our [Contact Page](/contact).\n\nIf you prefer, we can start estimating your project cost right now. It takes less than a minute. What would you like to do?`;
+      options = [
+        "📬 Contact Page",
+        "📋 Get a Quote",
+        "🔙 Main Menu"
+      ];
     } else if (key === "careers") {
-      faqText = "💼 **Join the Clever Crow Team!**\n\nWe are always on the lookout for talented creators, developers, and marketers. We offer internships and full-time careers in:\n\n💻 **Web & App Development**\n📈 **Digital Marketing**\n🎨 **UI/UX Design**\n\nApply directly on our portals:\n👉 [Internship Opportunities](file:///internship)\n👉 [Careers Portal](file:///careers)\n\nWe can't wait to see your application! 🚀";
+      faqText = `${greetingPrefix}💼 **Work With Us!**\n\nWe're always looking for talented developers, designers, and marketers. We offer internships and full-time roles in:\n\n💻 **Web & App Dev**\n📈 **Digital Marketing**\n🎨 **UI/UX Design**\n\nHave a look at our open roles and apply here:\n👉 [Internships](/internship)\n👉 [Careers](/careers)\n\nHope to see your application soon! 🚀`;
     } else if (key === "about") {
-      faqText = "🐦 **About Clever Crow**\n\nClever Crow is a premier digital growth agency dedicated to turning ambitious business goals into digital reality! Based in Udupi, India, we partner with clients globally to scale their digital footprint. 🌍\n\nHere is what we specialize in:\n🚀 **Custom Software Development** (Mobile & Web apps, SaaS products)\n🌐 **Stunning Web Experiences** (Corporate sites, E-commerce stores)\n🤖 **AI & Intelligent Automation** (Chatbots, WhatsApp integration, workflows)\n📈 **Performance Marketing** (Google Ads, Meta Ads, SEO, SMM)\n\nWe act as your extended technology and growth partner! What can we build or scale for you today?";
+      faqText = `${greetingPrefix}🐦 **About Clever Crow**\n\nClever Crow is a premier digital growth agency dedicated to turning ambitious business goals into digital reality! Based in Udupi, India, we partner with clients globally to scale their digital footprint. 🌍\n\nHere is what we specialize in:\n🚀 **Custom Software Development** (Mobile & Web apps, SaaS products)\n🌐 **Stunning Web Experiences** (Corporate sites, E-commerce stores)\n🤖 **AI & Intelligent Automation** (Chatbots, WhatsApp integration, workflows)\n📈 **Performance Marketing** (Google Ads, Meta Ads, SEO, SMM)\n\nWe act as your extended technology and growth partner! What can we build or scale for you today?`;
     } else if (key === "pricing") {
-      faqText = "💰 **Pricing & Project Proposals**\n\nAt Clever Crow, we believe in bespoke solutions rather than one-size-fits-all pricing. Because every project has unique features, complexity, and design demands, we provide customized proposals and itemized quotes.\n\nTo give you an accurate estimation, we follow a simple 3-step process:\n1️⃣ **Pre-qualify**: We check your project goals and budget range.\n2️⃣ **Consultation**: A brief 10-minute call to align on requirements.\n3️⃣ **Proposal**: A detailed, transparent proposal sent to your inbox!\n\nWould you like to get a quote right now by answering a couple of quick questions? It takes less than 60 seconds! ⚡";
+      faqText = `${greetingPrefix}💰 **Pricing & Quotes**\n\nSince every project has unique features and design requirements, we don't have standard packages. Instead, we give you a customized quote that fits your exact needs.\n\nTo get a proposal:\n1️⃣ Answer a few quick questions here about your goals and budget\n2️⃣ We'll schedule a quick 10-minute call to align on the details\n3️⃣ We'll email you a transparent proposal!\n\nWould you like to get started now? It takes less than 60 seconds! ⚡`;
     } else if (key === "services") {
-      faqText = "🛠️ **Our Core Services**\n\nWe offer a full suite of digital engineering and marketing services to help your business fly high! 🐦 Here is an overview of our capabilities:\n\n🌐 **Website Development**: Next.js/React apps, E-commerce stores, custom WordPress, and landing pages.\n📱 **App Development**: Native/Cross-platform mobile apps, customer portals, custom dashboards, and SaaS products.\n🤖 **AI & Automation**: AI chatbots, WhatsApp Business API setups, and no-code workflow automations.\n📈 **Digital Marketing**: High-performance Google & Meta Ads, LinkedIn advertising, SEO, and Social Media Management.\n\nWhich of these categories would you like to explore? Click an option below or type your choice! 👇";
+      faqText = `${greetingPrefix}🛠️ **What We Do**\n\nHere is a quick look at how we can help your business grow: 🐦\n\n🌐 **Website Dev**: Next.js/React apps, online stores, custom WordPress sites, and landing pages.\n📱 **App Dev**: Custom iOS/Android apps, client portals, internal dashboards, and SaaS products.\n🤖 **AI & Automation**: Website/WhatsApp AI chatbots and workflow integrations (Zapier/Make).\n📈 **Digital Marketing**: Google & Meta ads, LinkedIn campaigns, SEO, and social media management.\n\nWhich category would you like to check out? Click below or just type it in! 👇`;
       options = [
         "🌐 Website Development",
         "📱 App Development",
@@ -981,7 +1083,8 @@ export default function Chatbot() {
     addMessage({
       sender: "bot",
       text: faqText,
-      options: options
+      options: options,
+      cta: key === "contact" ? { text: "Go to Contact Page", url: "/contact" } : undefined
     });
   };
 
@@ -994,16 +1097,16 @@ export default function Chatbot() {
     const isAvailability = ["are you there", "anyone there", "is anyone here"].some(p => t.includes(p));
     const isHelp = ["can you help me"].some(p => t.includes(p));
 
-    let prefix = "Hello! Hope you are having a wonderful day. I'm the Clever Crow AI, your digital growth assistant. 🐦\n\n";
+    let prefix = "Hello there! 😊 Hope you're having a wonderful day. I'm the Clever Crow digital assistant.\n\n";
 
     if (isHowAreYou) {
-      prefix = "I'm doing great, thank you for asking! I'm here and ready to help you grow your business. 🚀\n\n";
+      prefix = "I'm doing great, thanks for asking! 😊 Ready to help you build or scale your business.\n\n";
     } else if (isWhoAreYou) {
-      prefix = "I'm the Clever Crow AI! 🐦 We help businesses build custom mobile & web apps, set up AI/WhatsApp automation, design premium websites, and scale with digital marketing.\n\n";
+      prefix = "I'm the Clever Crow assistant! 🐦 We help businesses design custom websites, build web/mobile apps, automate workflows (like WhatsApp/AI bots), and run Google/Meta ads.\n\n";
     } else if (isAvailability) {
-      prefix = "Yes, I'm here and ready to assist you! 🐦\n\n";
+      prefix = "Yes, I'm right here and ready to help! 😊\n\n";
     } else if (isHelp) {
-      prefix = "I would be glad to help you! Let's get right into it. 🐦\n\n";
+      prefix = "I'd love to help you! Let me know what you need. 😊\n\n";
     }
 
     let greetingResponse = prefix + "What can we build or grow for you today?";
@@ -1012,22 +1115,22 @@ export default function Chatbot() {
       greetingResponse = `${prefix}We were just exploring services under **${state.selectedCategory}**. Let's find the right service for your business. Please select an option below:`;
     } else if (state.stage === "service-details") {
       const serviceName = state.selectedServiceKey ? CHATBOT_SERVICES[state.selectedServiceKey].title : "this service";
-      greetingResponse = `${prefix}We were looking at **${serviceName}**. Would you like to get a custom quote/proposal for this, or go back?`;
+      greetingResponse = `${prefix}We were looking at **${serviceName}**. Would you like to get a customized quote for this, or go back?`;
     } else if (state.stage === "project-goal") {
       const serviceName = state.selectedServiceKey ? CHATBOT_SERVICES[state.selectedServiceKey].title : "your project";
       const service = state.selectedServiceKey ? CHATBOT_SERVICES[state.selectedServiceKey] : null;
       const question = service?.customGoalPrompt 
-        ? service.customGoalPrompt 
-        : `What is the primary goal of your project or the main features you need?`;
-      greetingResponse = `${prefix}We are in the process of generating your custom quote for **${serviceName || "your project"}**. \n\n${question}`;
+        ? `Awesome choice! 😊 ${service.customGoalPrompt}` 
+        : `Awesome choice! 😊 What's the main goal of your project or the key features you're looking to build?`;
+      greetingResponse = `${prefix}We were just working on your custom quote for **${serviceName || "your project"}**. \n\n${question}`;
     } else if (state.stage === "project-budget") {
-      greetingResponse = `${prefix}Let's finish setting up your quote. What is your estimated budget or timeline for this project?`;
+      greetingResponse = `${prefix}Let's finish setting up your quote. What estimated budget or timeline do you have in mind for this project?`;
     } else if (state.stage === "lead-name") {
-      greetingResponse = `${prefix}Let's finish setting up your quote. To prepare your proposal and schedule a brief call, could you please tell me your name?`;
+      greetingResponse = `${prefix}Let's finish setting up your quote. To put together a customized proposal and schedule a quick 10-minute call, what's your name?`;
     } else if (state.stage === "lead-email") {
-      greetingResponse = `${prefix}Almost done! What is the best email address to send the proposal to?`;
+      greetingResponse = `${prefix}Almost done! What's the best email address to send the proposal to?`;
     } else if (state.stage === "lead-phone") {
-      greetingResponse = `${prefix}Last step! What is your phone number (preferably WhatsApp) for quick updates?`;
+      greetingResponse = `${prefix}Last step! What's your phone number (WhatsApp works best for quick updates)? 📞`;
     }
 
     setHistory(prev => [...prev, { state, messages: messagesBefore }]);
@@ -1049,13 +1152,13 @@ export default function Chatbot() {
     
     let text = "";
     if (categoryName === "Website Development") {
-      text = "🌐 **Website Development Services**\n\nClever Crow builds high-performance corporate sites, custom e-commerce stores, easy-to-manage WordPress pages, and bespoke React/Next.js platforms.\n\nWhich website service would you like to explore?";
+      text = "🌐 **Website Development**\n\nWe build fast corporate sites, custom e-commerce stores, easy-to-edit WordPress layouts, and high-performance React/Next.js frontends.\n\nWhich website service would you like to check out? 😊";
     } else if (categoryName === "App Development") {
-      text = "📱 **App Development Services**\n\nWe design and develop custom mobile apps (iOS & Android), complex web applications, scalable SaaS products, custom CRM dashboards, and self-service portals.\n\nWhich app development service would you like to explore?";
+      text = "📱 **App Development**\n\nWe design and build custom iOS/Android apps, web applications, SaaS platforms, custom CRM portals, and dashboards.\n\nWhich app development service fits your project best? 😊";
     } else if (categoryName === "AI & Automation") {
-      text = "🤖 **AI & Automation Services**\n\nSupercharge your efficiency. We build AI chatbots for websites/WhatsApp, automate customer support, setup workflow integrations (Zapier/Make), and implement automated follow-up sequences.\n\nWhich AI or automation service would you like to explore?";
+      text = "🤖 **AI & Automation**\n\nWe help automate your operations! We build custom AI chatbots, set up WhatsApp Business automation, connect workflows (Zapier/Make), and build automated sales follow-up systems.\n\nWhat would you like to automate? 😊";
     } else if (categoryName === "Digital Marketing") {
-      text = "📈 **Digital Marketing Services**\n\nGrow your brand and generate high-quality business leads. We manage high-performance Google Ads, Meta Ads (Facebook & Instagram), LinkedIn Ads, SEO, and organic social media.\n\nWhich marketing service would you like to explore?";
+      text = "📈 **Digital Marketing**\n\nLet's get more leads and sales! We manage Google Search Ads, Meta (Facebook & Instagram) ads, LinkedIn campaigns, SEO, and social media branding.\n\nWhat are your marketing goals? 😊";
     }
     
     addMessage({
@@ -1074,7 +1177,13 @@ export default function Chatbot() {
     const val = text.trim();
     const valLower = val.toLowerCase();
 
-    // 1. Check for back/menu commands globally
+    // 1. Check for back/menu/contact-page commands globally
+    if (val === "📬 Contact Page" || valLower === "contact page") {
+      router.push("/contact");
+      setIsOpen(false);
+      return;
+    }
+
     if (valLower === "back" || valLower === "go back" || val === "👈 Back") {
       if (history.length > 0) {
         const lastItem = history[history.length - 1];
@@ -1099,7 +1208,7 @@ export default function Chatbot() {
         {
           id: "1",
           sender: "bot",
-          text: "Hi! I'm the Clever Crow AI. 🐦\n\nI can help you explore our services, get custom quotes, or connect with our team.\n\nWhat can we build or grow for you today?",
+          text: "Hi! Welcome to Clever Crow. 😊 I can help you explore our services, get a quick project estimate, or put you in touch with our team.\n\nWhat can we build or grow for you today? 🐦",
           options: getOptionsForState(startState)
         }
       ]);
@@ -1141,7 +1250,7 @@ export default function Chatbot() {
             return;
           }
           if (matched.type === "general") {
-            handleGeneralFAQ(matched.key, prevState, prevMessages);
+            handleGeneralFAQ(matched.key, val, prevState, prevMessages);
             return;
           }
         }
@@ -1171,7 +1280,7 @@ export default function Chatbot() {
           setChatState(nextState);
           addMessage({
             sender: "bot",
-            text: "Great! Let's get some project details. What is the primary goal of your project or the main features you need?",
+            text: "Awesome! Let's get a few quick details about your project. What is the main goal of your project or the key features you need? 😊",
             options: getOptionsForState(nextState)
           });
           return;
@@ -1179,7 +1288,7 @@ export default function Chatbot() {
 
         addMessage({
           sender: "bot",
-          text: "I'm here to help you explore our services, get quotes, or connect with our team. Please choose an option below:",
+          text: "No problem! I can help you explore our services, get custom quotes, or put you in touch with the team. Just click one of the options below: 😊",
           options: getOptionsForState(prevState)
         });
         break;
@@ -1204,7 +1313,7 @@ export default function Chatbot() {
             setChatState(nextState);
             addMessage({
               sender: "bot",
-              text: `**${service.title}**\n${service.description}\n\n**Key features & outcomes:**\n${service.highlights.map(h => `• ${h}`).join("\n")}`,
+              text: `**${service.title}**\n${service.description}\n\n✨ **Here are the key highlights:**\n${service.highlights.map(h => `• ${h}`).join("\n")}`,
               options: getOptionsForState(nextState)
             });
             return;
@@ -1214,7 +1323,7 @@ export default function Chatbot() {
             return;
           }
           if (matched.type === "general") {
-            handleGeneralFAQ(matched.key, prevState, prevMessages);
+            handleGeneralFAQ(matched.key, val, prevState, prevMessages);
             return;
           }
         }
@@ -1276,7 +1385,7 @@ export default function Chatbot() {
           setChatState(nextState);
           addMessage({
             sender: "bot",
-            text: `**${service.title}**\n${service.description}\n\n**Key features & outcomes:**\n${service.highlights.map(h => `• ${h}`).join("\n")}`,
+            text: `**${service.title}**\n${service.description}\n\n✨ **Here are the key highlights:**\n${service.highlights.map(h => `• ${h}`).join("\n")}`,
             options: getOptionsForState(nextState)
           });
           return;
@@ -1284,7 +1393,7 @@ export default function Chatbot() {
 
         addMessage({
           sender: "bot",
-          text: `Please select one of the services under ${prevState.selectedCategory} or use the buttons below.`,
+          text: `Take a look at the services under ${prevState.selectedCategory} or click one of the options below! 😊`,
           options: getOptionsForState(prevState)
         });
         break;
@@ -1298,7 +1407,7 @@ export default function Chatbot() {
             return;
           }
           if (matched.type === "general") {
-            handleGeneralFAQ(matched.key, prevState, prevMessages);
+            handleGeneralFAQ(matched.key, val, prevState, prevMessages);
             return;
           }
           if (matched.type === "service") {
@@ -1313,7 +1422,7 @@ export default function Chatbot() {
             setChatState(nextState);
             addMessage({
               sender: "bot",
-              text: `**${service.title}**\n${service.description}\n\n**Key features & outcomes:**\n${service.highlights.map(h => `• ${h}`).join("\n")}`,
+              text: `**${service.title}**\n${service.description}\n\n✨ **Here are the key highlights:**\n${service.highlights.map(h => `• ${h}`).join("\n")}`,
               options: getOptionsForState(nextState)
             });
             return;
@@ -1330,8 +1439,8 @@ export default function Chatbot() {
           
           const service = prevState.selectedServiceKey ? CHATBOT_SERVICES[prevState.selectedServiceKey] : null;
           const questionText = service?.customGoalPrompt 
-            ? service.customGoalPrompt 
-            : "Excellent! Let's pre-qualify your inquiry. What is the primary goal of your project or the main features you need?";
+            ? `Awesome choice! 😊 ${service.customGoalPrompt}` 
+            : "Awesome choice! 😊 What's the main goal of your project or the key features you're looking to build?";
             
           addMessage({
             sender: "bot",
@@ -1343,7 +1452,7 @@ export default function Chatbot() {
 
         addMessage({
           sender: "bot",
-          text: "Would you like to get a quote/proposal for this service, or go back?",
+          text: "Would you like to get a customized quote for this service, or go back to look at other options? 😊",
           options: getOptionsForState(prevState)
         });
         break;
@@ -1364,7 +1473,7 @@ export default function Chatbot() {
         setChatState(nextState);
         addMessage({
           sender: "bot",
-          text: "Understood. What is your estimated budget or timeline for this project?",
+          text: "Got it! 👌 What estimated budget or timeline do you have in mind for this project?",
           options: getOptionsForState(nextState)
         });
         break;
@@ -1385,7 +1494,7 @@ export default function Chatbot() {
         setChatState(nextState);
         addMessage({
           sender: "bot",
-          text: "Perfect! To send you a custom proposal and schedule a brief call, could you please tell me your name?",
+          text: "Perfect! 😊 To put together a customized proposal and schedule a quick 10-minute call, what's your name?",
           options: getOptionsForState(nextState)
         });
         break;
@@ -1400,7 +1509,7 @@ export default function Chatbot() {
         if (!validateName(val)) {
           addMessage({
             sender: "bot",
-            text: "Please enter a valid name (at least 2 characters).",
+            text: "Could you enter a valid name? (Just need at least 2 characters) 😊",
             options: getOptionsForState(prevState)
           });
           return;
@@ -1414,7 +1523,7 @@ export default function Chatbot() {
         setChatState(nextState);
         addMessage({
           sender: "bot",
-          text: `Thanks, ${val}! What is the best email address to send the proposal to?`,
+          text: `Nice to meet you, ${val}! 😊 What's the best email address to send the proposal to?`,
           options: getOptionsForState(nextState)
         });
         break;
@@ -1429,7 +1538,7 @@ export default function Chatbot() {
         if (!validateEmail(val)) {
           addMessage({
             sender: "bot",
-            text: "Please enter a valid email address.",
+            text: "Could you double check that email address? It looks like it might be missing a character or two! 😊",
             options: getOptionsForState(prevState)
           });
           return;
@@ -1443,7 +1552,7 @@ export default function Chatbot() {
         setChatState(nextState);
         addMessage({
           sender: "bot",
-          text: "Great! And what is your phone number (preferably WhatsApp for quick updates)?",
+          text: "Perfect. And what's your phone number (WhatsApp works best for quick updates)? 📞",
           options: getOptionsForState(nextState)
         });
         break;
@@ -1458,7 +1567,7 @@ export default function Chatbot() {
         if (!validatePhone(val)) {
           addMessage({
             sender: "bot",
-            text: "Please enter a valid phone number (e.g. +91 99863 89444 or 10-digit number).",
+            text: "Could you double check your phone number? (Make sure to include your country code if you're outside India) 📞",
             options: getOptionsForState(prevState)
           });
           return;
@@ -1494,7 +1603,7 @@ export default function Chatbot() {
           setChatState(nextState);
           addMessage({
             sender: "bot",
-            text: `Thank you so much, ${userData.name}! Your inquiry has been submitted successfully to the Clever Crow team. 🚀\n\nWe will review your project details and get in touch within 24 hours.\n\nIs there anything else I can help you with?`,
+            text: `Awesome, thanks ${userData.name}! 🙌 I've sent your details directly to our developers and consultants.\n\nWe will review your project details and get back to you within 24 hours. Talk soon! 🚀\n\nIs there anything else I can help you with today?`,
             options: getOptionsForState(nextState)
           });
         } else {
@@ -1582,7 +1691,31 @@ export default function Chatbot() {
                     }`}
                     style={{ maxWidth: '88%' }}
                   >
-                    <p className="whitespace-pre-wrap">{msg.text}</p>
+                    {msg.sender === "user" ? (
+                      <p className="whitespace-pre-wrap">{msg.text}</p>
+                    ) : (
+                      <div className="space-y-2">
+                        <div className="whitespace-pre-wrap">
+                          {parseMarkdown(msg.text, (url) => {
+                            router.push(url);
+                            setIsOpen(false);
+                          })}
+                        </div>
+                        {msg.cta && (
+                          <div className="pt-2">
+                            <button
+                              onClick={() => {
+                                router.push(msg.cta!.url);
+                                setIsOpen(false);
+                              }}
+                              className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-zinc-950 text-xs font-bold rounded-xl shadow-[0_4px_12px_rgba(245,158,11,0.2)] transition-all duration-300 transform active:scale-95 cursor-pointer"
+                            >
+                              📬 {msg.cta.text}
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               ))}
