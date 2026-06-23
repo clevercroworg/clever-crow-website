@@ -1013,11 +1013,11 @@ export default function LocalServicesLandingPage() {
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className="bg-zinc-950 py-12 border-t border-zinc-900 text-zinc-500 text-xs text-center">
+      <footer className="bg-white py-12 border-t border-zinc-100 text-zinc-500 text-xs text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <div className="flex justify-center items-center">
             <Image 
-              src="/logo-light.svg" 
+              src="/logo-dark.svg" 
               alt="Clever Crow Logo" 
               width={130} 
               height={36} 
