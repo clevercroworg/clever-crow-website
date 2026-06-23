@@ -382,9 +382,6 @@ export default function LocalServicesLandingPage() {
                   View Lead Plans
                 </button>
               </div>
-              <p className="text-xs font-bold text-yellow-400/90 tracking-wide uppercase">
-                ⚡ Lead generation plans starting from ₹18,000/month
-              </p>
             </div>
 
             {/* Hero Highlights */}
