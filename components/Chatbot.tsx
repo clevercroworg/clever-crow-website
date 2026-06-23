@@ -717,8 +717,8 @@ const matchInputToNavigation = (text: string) => {
   // Clean punctuation for easier matching of conversational phrases
   const cleanText = t.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "").replace(/\s+/g, " ").trim();
 
-  // Contact inquiries
-  if (
+  // Combined Services & Contact check
+  const hasContact = (
     t.includes("contact") || 
     t.includes("phone") || 
     t.includes("number") || 
@@ -729,12 +729,8 @@ const matchInputToNavigation = (text: string) => {
     t.includes("talk to") || 
     t.includes("speak to") || 
     t.includes("support")
-  ) {
-    return { type: "general", key: "contact" };
-  }
-
-  // Services & capabilities inquiries
-  if (
+  );
+  const hasServices = (
     t.includes("services") || 
     t.includes("service") || 
     t.includes("offer") || 
@@ -748,7 +744,19 @@ const matchInputToNavigation = (text: string) => {
     t.includes("solutions") || 
     t.includes("skills") || 
     t.includes("what do you do")
-  ) {
+  );
+
+  if (hasContact && hasServices) {
+    return { type: "general", key: "services_contact" };
+  }
+
+  // Contact inquiries
+  if (hasContact) {
+    return { type: "general", key: "contact" };
+  }
+
+  // Services & capabilities inquiries
+  if (hasServices) {
     return { type: "general", key: "services" };
   }
 
@@ -1062,6 +1070,16 @@ export default function Chatbot() {
         "📋 Get a Quote",
         "🔙 Main Menu"
       ];
+    } else if (key === "services_contact") {
+      faqText = `${greetingPrefix}🐦 **Clever Crow Services & Contact Info**\n\nHere is a quick look at the services we provide to help your business grow:\n\n🌐 **Website Dev**: Next.js/React apps, online stores, custom WordPress sites, and landing pages.\n📱 **App Dev**: Custom iOS/Android apps, client portals, internal dashboards, and SaaS products.\n🤖 **AI & Automation**: Website/WhatsApp AI chatbots and workflow integrations (Zapier/Make).\n📈 **Digital Marketing**: Google & Meta ads, LinkedIn campaigns, SEO, and social media management.\n\n---\n\n📞 **How to reach us:**\n☎️ **Phone:** [+91 99863 89444](tel:+919986389444)\n💬 **WhatsApp:** [+91 99863 89444](https://wa.me/919986389444)\n📧 **Email:** [hello@clevercrow.in](mailto:hello@clevercrow.in)\n\nFeel free to go to our [Contact Page](/contact) to submit an inquiry, or click one of the options below to explore services!`;
+      options = [
+        "📬 Contact Page",
+        "🌐 Website Development",
+        "📱 App Development",
+        "🤖 AI & Automation",
+        "📈 Digital Marketing",
+        "🔙 Main Menu"
+      ];
     } else if (key === "careers") {
       faqText = `${greetingPrefix}💼 **Work With Us!**\n\nWe're always looking for talented developers, designers, and marketers. We offer internships and full-time roles in:\n\n💻 **Web & App Dev**\n📈 **Digital Marketing**\n🎨 **UI/UX Design**\n\nHave a look at our open roles and apply here:\n👉 [Internships](/internship)\n👉 [Careers](/careers)\n\nHope to see your application soon! 🚀`;
     } else if (key === "about") {
@@ -1084,7 +1102,7 @@ export default function Chatbot() {
       sender: "bot",
       text: faqText,
       options: options,
-      cta: key === "contact" ? { text: "Go to Contact Page", url: "/contact" } : undefined
+      cta: (key === "contact" || key === "services_contact") ? { text: "Go to Contact Page", url: "/contact" } : undefined
     });
   };
 
