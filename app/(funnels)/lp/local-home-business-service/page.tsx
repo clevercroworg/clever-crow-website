@@ -107,7 +107,7 @@ export default function LocalServicesLandingPage() {
         budget: formState.budget,
         timeline: `Preferred Package: ${selectedPackage || "Not Selected"}`,
         message: formState.helpNeeded || "Requesting Free Growth Review",
-        source: "LP/Local-Services"
+        source: "LP/Local-Home-Business-Service"
       };
 
       const response = await fetch("/api/leads", {
@@ -1020,11 +1020,11 @@ export default function LocalServicesLandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           <div className="flex justify-center items-center">
             <Image 
-              src="/logo-dark.svg" 
+              src="/logo-light.svg" 
               alt="Clever Crow Logo" 
-              width={110} 
-              height={30} 
-              className="h-6 w-auto opacity-40 brightness-0 invert" 
+              width={130} 
+              height={36} 
+              className="h-7 w-auto opacity-80 hover:opacity-100 transition-opacity" 
             />
           </div>
           <p>© {new Date().getFullYear()} Clever Crow. All rights reserved.</p>
