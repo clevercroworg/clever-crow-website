@@ -1037,6 +1037,33 @@ export default function Chatbot() {
       options: getOptionsForState(state)
     });
   };
+ 
+  const transitionToCategory = (categoryName: string, prevState: ChatbotState, prevMessages: Message[]) => {
+    setHistory(prev => [...prev, { state: prevState, messages: prevMessages }]);
+    const nextState: ChatbotState = {
+      ...prevState,
+      stage: "category-select",
+      selectedCategory: categoryName
+    };
+    setChatState(nextState);
+    
+    let text = "";
+    if (categoryName === "Website Development") {
+      text = "🌐 **Website Development Services**\n\nClever Crow builds high-performance corporate sites, custom e-commerce stores, easy-to-manage WordPress pages, and bespoke React/Next.js platforms.\n\nWhich website service would you like to explore?";
+    } else if (categoryName === "App Development") {
+      text = "📱 **App Development Services**\n\nWe design and develop custom mobile apps (iOS & Android), complex web applications, scalable SaaS products, custom CRM dashboards, and self-service portals.\n\nWhich app development service would you like to explore?";
+    } else if (categoryName === "AI & Automation") {
+      text = "🤖 **AI & Automation Services**\n\nSupercharge your efficiency. We build AI chatbots for websites/WhatsApp, automate customer support, setup workflow integrations (Zapier/Make), and implement automated follow-up sequences.\n\nWhich AI or automation service would you like to explore?";
+    } else if (categoryName === "Digital Marketing") {
+      text = "📈 **Digital Marketing Services**\n\nGrow your brand and generate high-quality business leads. We manage high-performance Google Ads, Meta Ads (Facebook & Instagram), LinkedIn Ads, SEO, and organic social media.\n\nWhich marketing service would you like to explore?";
+    }
+    
+    addMessage({
+      sender: "bot",
+      text,
+      options: getOptionsForState(nextState)
+    });
+  };
 
   const processInput = async (
     text: string,
@@ -1093,8 +1120,7 @@ export default function Chatbot() {
             return;
           }
           if (matched.type === "category") {
-            // Treat as clicking a category option
-            processInput(matched.key, prevState, prevMessages);
+            transitionToCategory(matched.key, prevState, prevMessages);
             return;
           }
           if (matched.type === "service") {
@@ -1121,63 +1147,19 @@ export default function Chatbot() {
         }
 
         if (val.includes("Website Development")) {
-          pushToHistory();
-          const nextState: ChatbotState = {
-            ...prevState,
-            stage: "category-select",
-            selectedCategory: "Website Development"
-          };
-          setChatState(nextState);
-          addMessage({
-            sender: "bot",
-            text: "🌐 **Website Development Services**\n\nClever Crow builds high-performance corporate sites, custom e-commerce stores, easy-to-manage WordPress pages, and bespoke React/Next.js platforms.\n\nWhich website service would you like to explore?",
-            options: getOptionsForState(nextState)
-          });
+          transitionToCategory("Website Development", prevState, prevMessages);
           return;
         }
         if (val.includes("App Development")) {
-          pushToHistory();
-          const nextState: ChatbotState = {
-            ...prevState,
-            stage: "category-select",
-            selectedCategory: "App Development"
-          };
-          setChatState(nextState);
-          addMessage({
-            sender: "bot",
-            text: "📱 **App Development Services**\n\nWe design and develop custom mobile apps (iOS & Android), complex web applications, scalable SaaS products, custom CRM dashboards, and self-service portals.\n\nWhich app development service would you like to explore?",
-            options: getOptionsForState(nextState)
-          });
+          transitionToCategory("App Development", prevState, prevMessages);
           return;
         }
         if (val.includes("AI & Automation")) {
-          pushToHistory();
-          const nextState: ChatbotState = {
-            ...prevState,
-            stage: "category-select",
-            selectedCategory: "AI & Automation"
-          };
-          setChatState(nextState);
-          addMessage({
-            sender: "bot",
-            text: "🤖 **AI & Automation Services**\n\nSupercharge your efficiency. We build AI chatbots for websites/WhatsApp, automate customer support, setup workflow integrations (Zapier/Make), and implement automated follow-up sequences.\n\nWhich AI or automation service would you like to explore?",
-            options: getOptionsForState(nextState)
-          });
+          transitionToCategory("AI & Automation", prevState, prevMessages);
           return;
         }
         if (val.includes("Digital Marketing")) {
-          pushToHistory();
-          const nextState: ChatbotState = {
-            ...prevState,
-            stage: "category-select",
-            selectedCategory: "Digital Marketing"
-          };
-          setChatState(nextState);
-          addMessage({
-            sender: "bot",
-            text: "📈 **Digital Marketing Services**\n\nGrow your brand and generate high-quality business leads. We manage high-performance Google Ads, Meta Ads (Facebook & Instagram), LinkedIn Ads, SEO, and organic social media.\n\nWhich marketing service would you like to explore?",
-            options: getOptionsForState(nextState)
-          });
+          transitionToCategory("Digital Marketing", prevState, prevMessages);
           return;
         }
         if (val.includes("Quick Connect") || valLower.includes("connect")) {
@@ -1228,7 +1210,7 @@ export default function Chatbot() {
             return;
           }
           if (matched.type === "category" && matched.key !== prevState.selectedCategory) {
-            processInput(matched.key, prevState, prevMessages);
+            transitionToCategory(matched.key, prevState, prevMessages);
             return;
           }
           if (matched.type === "general") {
