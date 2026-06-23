@@ -856,7 +856,7 @@ export default function SalonLandingPage() {
                   <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest mb-3">Key Deliverables:</h4>
                   <ul className="space-y-2 text-xs text-slate-600">
                     <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Instagram content planning</li>
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 15–25 static posts / month</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 20 static posts / month</li>
                     <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 10+ edited reels / month</li>
                     <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Meta Ads management</li>
                     <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> WhatsApp lead campaigns</li>
@@ -896,7 +896,7 @@ export default function SalonLandingPage() {
                 <div>
                   <h4 className="text-xs font-black text-[#f7e7c4] uppercase tracking-widest mb-3">Key Deliverables:</h4>
                   <ul className="space-y-2 text-xs text-slate-300">
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> 25–35 premium posts / month</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> 35 premium posts / month</li>
                     <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> 15+ edited reels / month</li>
                     <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> Lead & Appointment campaigns</li>
                     <li className="flex items-start gap-2"><Check className="h-4 w-4 text-[#c29438] shrink-0 mt-0.5" /> Retargeting campaigns</li>
@@ -933,7 +933,7 @@ export default function SalonLandingPage() {
                 <div>
                   <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest mb-3">Key Deliverables:</h4>
                   <ul className="space-y-2 text-xs text-slate-600">
-                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 35+ premium posts / month</li>
+                    <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 40+ premium posts / month</li>
                     <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> 20+ edited reels / month</li>
                     <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> Meta & Google Ads management</li>
                     <li className="flex items-start gap-2"><Check className="h-4 w-4 text-green-600 shrink-0 mt-0.5" /> High-ticket service campaigns</li>
