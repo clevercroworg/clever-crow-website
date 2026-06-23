@@ -8,7 +8,8 @@ import { FaWhatsapp } from "react-icons/fa";
 import { 
   Phone, Award, MapPin, Calendar, Users, Globe, Check, 
   Loader2, HelpCircle, ChevronDown, CheckCircle2, ArrowRight,
-  Target, TrendingUp, Shield, Zap, Sparkles, MessageCircle, BarChart3
+  Target, TrendingUp, Shield, Zap, Sparkles, MessageCircle, BarChart3,
+  Search
 } from "lucide-react";
 
 export default function LocalServicesLandingPage() {
@@ -348,15 +349,15 @@ export default function LocalServicesLandingPage() {
         <div className="absolute -bottom-40 left-0 w-[400px] h-[400px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none z-0" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="flex flex-col items-center text-center lg:items-start lg:text-left max-w-4xl lg:max-w-3xl space-y-6">
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left max-w-4xl lg:max-w-3xl gap-6">
             
             {/* Tagline Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 select-none">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 select-none order-1">
               <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
               <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-300">Google & Meta Ads Strategy</span>
             </div>
 
-            <div className="space-y-4 w-full">
+            <div className="space-y-4 w-full order-2">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight text-white">
                 Get More Calls, Enquiries & Bookings for Your <span className="text-yellow-400">Local Service Business</span>
               </h1>
@@ -366,7 +367,7 @@ export default function LocalServicesLandingPage() {
             </div>
 
             {/* Dual CTAs & Pricing info */}
-            <div className="space-y-3 pt-2 w-full">
+            <div className="space-y-3 pt-2 w-full order-4 lg:order-3">
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
                 <button 
                   onClick={() => scrollToSection(formRef)}
@@ -385,21 +386,23 @@ export default function LocalServicesLandingPage() {
             </div>
 
             {/* Hero Highlights */}
-            <div className="pt-8 border-t border-white/10 w-full">
+            <div className="pt-8 border-t border-white/10 w-full order-3 lg:order-4">
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 {[
-                  "Meta Ads",
-                  "Google Ads",
-                  "WhatsApp Follow-up",
-                  "Lead Tracking",
-                  "More Local Enquiries"
+                  { label: "Meta Ads", icon: Target },
+                  { label: "Google Ads", icon: Search },
+                  { label: "WhatsApp Follow-up", icon: MessageCircle },
+                  { label: "Lead Tracking", icon: BarChart3 },
+                  { label: "More Local Enquiries", icon: TrendingUp }
                 ].map((item, index) => (
                   <div 
                     key={index}
-                    className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-yellow-400/30 transition-all hover:bg-white/[0.07]"
+                    className={`flex items-center justify-center gap-2 p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-yellow-400/30 transition-all hover:bg-white/[0.07] ${
+                      index === 4 ? "col-span-2 md:col-span-1" : "col-span-1"
+                    }`}
                   >
-                    <Check className="h-4 w-4 text-yellow-400 shrink-0" />
-                    <span className="text-xs font-bold text-zinc-200">{item}</span>
+                    <item.icon className="h-4 w-4 text-yellow-400 shrink-0" />
+                    <span className="text-xs font-bold text-zinc-200">{item.label}</span>
                   </div>
                 ))}
               </div>
