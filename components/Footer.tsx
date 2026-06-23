@@ -15,7 +15,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative w-full bg-[#FAF9F6] text-slate-600 font-sans border-t border-slate-200/80">
+    <footer className="relative w-full bg-white text-slate-600 font-sans border-t border-slate-200/80">
       <div className="mx-auto max-w-[1360px] px-6 lg:px-8 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
           
@@ -23,7 +23,7 @@ export default function Footer() {
           <div className="lg:col-span-3 flex flex-col items-start gap-6">
             <Link href="/" className="shrink-0 transition-transform hover:scale-105 active:scale-95">
               <Image
-                src="/CSS.svg"
+                src="/logo-dark.svg"
                 alt="Clever Crow"
                 width={160}
                 height={45}
