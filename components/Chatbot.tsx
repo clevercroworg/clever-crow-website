@@ -967,6 +967,17 @@ export default function Chatbot() {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (isOpen) {
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "chatbot_open", {
+          event_category: "Chatbot",
+          event_label: "Chatbot Opened",
+        });
+      }
+    }
+  }, [isOpen]);
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -1613,6 +1624,17 @@ export default function Chatbot() {
         setIsTyping(false);
 
         if (result.success) {
+          // Fire Google Ads & GA4 conversion tracking for Chatbot Lead Submission
+          if (typeof window !== "undefined" && (window as any).gtag) {
+            (window as any).gtag("event", "conversion", {
+              send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
+            });
+            (window as any).gtag("event", "GenerateLead", {
+              event_category: "Leads",
+              event_label: "Chatbot Lead Submit",
+            });
+          }
+
           pushToHistory();
           const nextState: ChatbotState = {
             ...prevState,
