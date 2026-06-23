@@ -380,7 +380,7 @@ export default function LocalServicesLandingPage() {
                   onClick={() => scrollToSection(packagesRef)}
                   className="w-full sm:w-auto px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider bg-zinc-900 hover:bg-zinc-800 text-zinc-100 border border-zinc-800 hover:border-zinc-700 transition-all cursor-pointer flex items-center justify-center"
                 >
-                  View Lead Plans
+                  View Pricing
                 </button>
               </div>
             </div>
