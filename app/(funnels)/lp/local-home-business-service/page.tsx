@@ -540,8 +540,8 @@ export default function LocalServicesLandingPage() {
           {/* Timeline steps */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 relative">
             {campaignSteps.map((step, index) => (
-              <div key={index} className="space-y-4 relative group">
-                <div className="flex items-center justify-between md:block">
+              <div key={index} className="flex flex-col items-center text-center md:items-start md:text-left space-y-4 relative group">
+                <div className="flex items-center justify-center md:block">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-zinc-900 text-yellow-400 font-black text-lg group-hover:bg-yellow-400 group-hover:text-zinc-950 transition-all shadow-md">
                     {step.num}
                   </div>
@@ -550,7 +550,7 @@ export default function LocalServicesLandingPage() {
                   )}
                 </div>
                 <h3 className="text-base font-black text-zinc-900 pt-2">{step.title}</h3>
-                <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed">{step.desc}</p>
+                <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed max-w-sm">{step.desc}</p>
               </div>
             ))}
           </div>
