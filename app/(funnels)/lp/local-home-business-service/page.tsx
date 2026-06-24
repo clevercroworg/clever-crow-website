@@ -10,7 +10,7 @@ import {
   Loader2, HelpCircle, ChevronDown, CheckCircle2, ArrowRight,
   Target, TrendingUp, Shield, Zap, Sparkles, MessageCircle, BarChart3,
   Search, Bug, Paintbrush, Wrench, Wind, Truck, Camera, Home, Hammer,
-  Briefcase
+  Briefcase, Instagram
 } from "lucide-react";
 
 export default function LocalServicesLandingPage() {
@@ -175,7 +175,7 @@ export default function LocalServicesLandingPage() {
     { title: "Google Ads", icon: Search },
     { title: "WhatsApp Follow-up", icon: FaWhatsapp },
     { title: "Lead Tracking", icon: BarChart3 },
-    { title: "Creative Strategy", icon: Sparkles }
+    { title: "Social Media", icon: Instagram }
   ];
 
   const serviceBenefits = [
