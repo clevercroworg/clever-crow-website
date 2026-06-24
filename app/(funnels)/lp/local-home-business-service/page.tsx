@@ -83,7 +83,7 @@ export default function LocalServicesLandingPage() {
   const [selectedPackage, setSelectedPackage] = useState("");
   const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("Electrical Services");
   
   // Form state
   const [formState, setFormState] = useState({
