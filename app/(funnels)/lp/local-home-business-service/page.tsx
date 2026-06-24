@@ -706,10 +706,7 @@ export default function LocalServicesLandingPage() {
               
               <div className="grid gap-4 sm:grid-cols-2">
                 {/* Full Name */}
-                <div className="space-y-1.5">
-                  <label htmlFor="name" className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 ml-2 block">
-                    Full Name *
-                  </label>
+                <div>
                   <input
                     id="name"
                     name="name"
@@ -717,16 +714,13 @@ export default function LocalServicesLandingPage() {
                     required
                     value={formState.name}
                     onChange={handleInputChange}
-                    placeholder="Enter name"
+                    placeholder="Full Name *"
                     className="w-full rounded-2xl border border-zinc-200 bg-white px-5 py-3.5 text-sm font-semibold text-zinc-800 focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/10 transition-all"
                   />
                 </div>
                 
                 {/* Phone Number */}
-                <div className="space-y-1.5">
-                  <label htmlFor="phone" className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 ml-2 block">
-                    Phone Number *
-                  </label>
+                <div>
                   <input
                     id="phone"
                     name="phone"
@@ -734,7 +728,7 @@ export default function LocalServicesLandingPage() {
                     required
                     value={formState.phone}
                     onChange={handleInputChange}
-                    placeholder="Enter phone number"
+                    placeholder="Phone Number *"
                     className="w-full rounded-2xl border border-zinc-200 bg-white px-5 py-3.5 text-sm font-semibold text-zinc-800 focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/10 transition-all"
                   />
                 </div>
@@ -742,26 +736,20 @@ export default function LocalServicesLandingPage() {
 
               <div className="grid gap-4 sm:grid-cols-2">
                 {/* Business Name */}
-                <div className="space-y-1.5">
-                  <label htmlFor="businessName" className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 ml-2 block">
-                    Business Name
-                  </label>
+                <div>
                   <input
                     id="businessName"
                     name="businessName"
                     type="text"
                     value={formState.businessName}
                     onChange={handleInputChange}
-                    placeholder="Enter business name"
+                    placeholder="Business Name"
                     className="w-full rounded-2xl border border-zinc-200 bg-white px-5 py-3.5 text-sm font-semibold text-zinc-800 focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/10 transition-all"
                   />
                 </div>
 
                 {/* Business Category */}
-                <div className="space-y-1.5">
-                  <label htmlFor="businessCategory" className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 ml-2 block">
-                    Business Category *
-                  </label>
+                <div>
                   <div className="relative">
                     <select
                       id="businessCategory"
@@ -783,88 +771,28 @@ export default function LocalServicesLandingPage() {
                 </div>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                {/* City / Service Area */}
-                <div className="space-y-1.5">
-                  <label htmlFor="serviceArea" className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 ml-2 block">
-                    City / Service Area
-                  </label>
-                  <input
-                    id="serviceArea"
-                    name="serviceArea"
-                    type="text"
-                    value={formState.serviceArea}
-                    onChange={handleInputChange}
-                    placeholder="E.g., Bangalore, Mumbai"
-                    className="w-full rounded-2xl border border-zinc-200 bg-white px-5 py-3.5 text-sm font-semibold text-zinc-800 focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/10 transition-all"
-                  />
-                </div>
-
-                {/* Running Ads */}
-                <div className="space-y-1.5">
-                  <label htmlFor="runningAds" className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 ml-2 block">
-                    Are you currently running ads?
-                  </label>
-                  <div className="relative">
-                    <select
-                      id="runningAds"
-                      name="runningAds"
-                      value={formState.runningAds}
-                      onChange={handleInputChange}
-                      className="w-full rounded-2xl border border-zinc-200 bg-white px-5 py-3.5 text-sm font-semibold text-zinc-800 appearance-none focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/10 transition-all"
-                    >
-                      <option value="">Select...</option>
-                      <option value="Yes, on Google & Meta">Yes, on Google & Meta</option>
-                      <option value="Yes, Google only">Yes, Google only</option>
-                      <option value="Yes, Meta only">Yes, Meta only</option>
-                      <option value="No, never">No, never</option>
-                      <option value="Tried previously, stopped">Tried previously, stopped</option>
-                    </select>
-                    <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-400">
-                      <ChevronDown size={14} className="stroke-[2.5]" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Monthly Budget */}
-              <div className="space-y-1.5">
-                <label htmlFor="budget" className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 ml-2 block">
-                  Monthly Marketing Budget *
-                </label>
-                <div className="relative">
-                  <select
-                    id="budget"
-                    name="budget"
-                    required
-                    value={formState.budget}
-                    onChange={handleInputChange}
-                    className="w-full rounded-2xl border border-zinc-200 bg-white px-5 py-3.5 text-sm font-semibold text-zinc-800 appearance-none focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/10 transition-all"
-                  >
-                    <option value="" disabled>Select marketing budget...</option>
-                    <option value="Under ₹15,000/mo">Under ₹15,000/mo</option>
-                    <option value="₹15,000 - ₹30,000/mo">₹15,000 - ₹30,000/mo</option>
-                    <option value="₹30,000 - ₹60,000/mo">₹30,000 - ₹60,000/mo</option>
-                    <option value="₹60,000+/mo">₹60,000+/mo</option>
-                  </select>
-                  <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-400">
-                    <ChevronDown size={14} className="stroke-[2.5]" />
-                  </div>
-                </div>
+              {/* City / Service Area */}
+              <div>
+                <input
+                  id="serviceArea"
+                  name="serviceArea"
+                  type="text"
+                  value={formState.serviceArea}
+                  onChange={handleInputChange}
+                  placeholder="City / Service Area"
+                  className="w-full rounded-2xl border border-zinc-200 bg-white px-5 py-3.5 text-sm font-semibold text-zinc-800 focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/10 transition-all"
+                />
               </div>
 
               {/* What do you need help with? */}
-              <div className="space-y-1.5">
-                <label htmlFor="helpNeeded" className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 ml-2 block">
-                  What do you need help with?
-                </label>
+              <div>
                 <textarea
                   id="helpNeeded"
                   name="helpNeeded"
                   rows={3}
                   value={formState.helpNeeded}
                   onChange={handleInputChange}
-                  placeholder="E.g., we want to target AC repair calls in South Bangalore, etc."
+                  placeholder="What do you need help with? (E.g., target AC repair calls in South Bangalore)"
                   className="w-full rounded-2xl border border-zinc-200 bg-white px-5 py-3.5 text-sm font-semibold text-zinc-800 placeholder:text-zinc-400 focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/10 transition-all resize-none"
                 />
               </div>
