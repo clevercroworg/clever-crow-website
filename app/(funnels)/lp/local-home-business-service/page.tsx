@@ -14,22 +14,71 @@ import {
 } from "lucide-react";
 import homeServicesData from "./home_services_data.json";
 
-const getCategoryCover = (category: string) => {
-  const mapping: { [key: string]: string } = {
-    "Pest Control": "https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?q=80&w=600&auto=format&fit=crop",
-    "Deep Cleaning": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=600&auto=format&fit=crop",
-    "Packers & Movers": "https://images.unsplash.com/photo-1524522173746-f628baad3644?q=80&w=600&auto=format&fit=crop",
-    "Appliance Repair": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=600&auto=format&fit=crop",
-    "AC Repair & Service": "https://images.unsplash.com/photo-1621905252507-b354bc25edac?q=80&w=600&auto=format&fit=crop",
-    "Waterproofing": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop",
-    "Water Purifier Service": "https://images.unsplash.com/photo-1527018601619-a508a2be00cd?q=80&w=600&auto=format&fit=crop",
-    "Electrical Services": "https://images.unsplash.com/photo-1621905251918-48416bd8575a?q=80&w=600&auto=format&fit=crop",
-    "Plumbing Services": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=600&auto=format&fit=crop",
-    "Balcony Grill": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&auto=format&fit=crop",
-    "Safety Nets": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=600&auto=format&fit=crop",
-    "Solar Services": "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=600&auto=format&fit=crop"
+const getCategoryCover = (category: string, index: number) => {
+  const mapping: { [key: string]: string[] } = {
+    "Pest Control": [
+      "https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1587324438673-56c52a0a2df3?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=600&auto=format&fit=crop"
+    ],
+    "Deep Cleaning": [
+      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1583907608452-714758a6a4b8?q=80&w=600&auto=format&fit=crop"
+    ],
+    "Packers & Movers": [
+      "https://images.unsplash.com/photo-1524522173746-f628baad3644?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600518464441-9154a4dea21b?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1595348020949-87cdfcd44174?q=80&w=600&auto=format&fit=crop"
+    ],
+    "Appliance Repair": [
+      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1626886750760-b3052824cf40?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1604328698692-f76ea9498e76?q=80&w=600&auto=format&fit=crop"
+    ],
+    "AC Repair & Service": [
+      "https://images.unsplash.com/photo-1621905252507-b354bc25edac?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=600&auto=format&fit=crop"
+    ],
+    "Waterproofing": [
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=600&auto=format&fit=crop"
+    ],
+    "Water Purifier Service": [
+      "https://images.unsplash.com/photo-1527018601619-a508a2be00cd?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1585832770485-e289c25f3c4c?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1608220179579-3994874132a7?q=80&w=600&auto=format&fit=crop"
+    ],
+    "Electrical Services": [
+      "https://images.unsplash.com/photo-1621905251918-48416bd8575a?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1460574283810-2aab119d8511?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1558224494-ef8b21880a2b?q=80&w=600&auto=format&fit=crop"
+    ],
+    "Plumbing Services": [
+      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1542013936693-8848e5740a7a?q=80&w=600&auto=format&fit=crop"
+    ],
+    "Balcony Grill": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600&auto=format&fit=crop"
+    ],
+    "Safety Nets": [
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=600&auto=format&fit=crop"
+    ],
+    "Solar Services": [
+      "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?q=80&w=600&auto=format&fit=crop"
+    ]
   };
-  return mapping[category] || "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=600&auto=format&fit=crop";
+  const list = mapping[category] || ["https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=600&auto=format&fit=crop"];
+  return list[index % list.length];
 };
 
 const getInitials = (name: string): string => {
@@ -460,7 +509,7 @@ export default function LocalServicesLandingPage() {
             {homeServicesData
               .filter(prospect => selectedCategory === "All" || prospect["Service Category"] === selectedCategory)
               .map((prospect: any, idx: number) => {
-                const cover = getCategoryCover(prospect["Service Category"]);
+                const cover = getCategoryCover(prospect["Service Category"], idx);
                 return (
                   <div 
                     key={idx} 
