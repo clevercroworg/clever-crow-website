@@ -12,6 +12,42 @@ import {
   Search, Bug, Paintbrush, Wrench, Wind, Truck, Camera, Home, Hammer,
   Briefcase, Instagram
 } from "lucide-react";
+import homeServicesData from "./home_services_data.json";
+
+const getCategoryCover = (category: string) => {
+  const mapping: { [key: string]: string } = {
+    "Pest Control": "https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?q=80&w=600&auto=format&fit=crop",
+    "Deep Cleaning": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=600&auto=format&fit=crop",
+    "Packers & Movers": "https://images.unsplash.com/photo-1524522173746-f628baad3644?q=80&w=600&auto=format&fit=crop",
+    "Appliance Repair": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=600&auto=format&fit=crop",
+    "AC Repair & Service": "https://images.unsplash.com/photo-1621905252507-b354bc25edac?q=80&w=600&auto=format&fit=crop",
+    "Waterproofing": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop",
+    "Water Purifier Service": "https://images.unsplash.com/photo-1527018601619-a508a2be00cd?q=80&w=600&auto=format&fit=crop",
+    "Electrical Services": "https://images.unsplash.com/photo-1621905251918-48416bd8575a?q=80&w=600&auto=format&fit=crop",
+    "Plumbing Services": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=600&auto=format&fit=crop",
+    "Balcony Grill": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&auto=format&fit=crop",
+    "Safety Nets": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=600&auto=format&fit=crop",
+    "Solar Services": "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=600&auto=format&fit=crop"
+  };
+  return mapping[category] || "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=600&auto=format&fit=crop";
+};
+
+const getInitials = (name: string): string => {
+  const clean = name.replace(/services|company|providers|india|unisex|&/gi, "").trim();
+  const words = clean.split(/\s+/).filter(Boolean);
+  if (words.length >= 2) {
+    return (words[0][0] + words[1][0]).toUpperCase();
+  }
+  return words[0] ? words[0][0].toUpperCase() : "S";
+};
+
+const cleanUrl = (url: string) => {
+  if (!url) return "";
+  if (!/^https?:\/\//i.test(url)) {
+    return `https://${url}`;
+  }
+  return url;
+};
 
 export default function LocalServicesLandingPage() {
   const router = useRouter();
@@ -47,6 +83,7 @@ export default function LocalServicesLandingPage() {
   const [selectedPackage, setSelectedPackage] = useState("");
   const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState("All");
   
   // Form state
   const [formState, setFormState] = useState({
@@ -175,7 +212,8 @@ export default function LocalServicesLandingPage() {
     { title: "Google Ads", icon: Search },
     { title: "WhatsApp Follow-up", icon: FaWhatsapp },
     { title: "Lead Tracking", icon: BarChart3 },
-    { title: "Social Media", icon: Instagram }
+    { title: "Social Media", icon: Instagram },
+    { title: "Google Maps / GBP", icon: MapPin }
   ];
 
   const serviceBenefits = [
@@ -334,7 +372,7 @@ export default function LocalServicesLandingPage() {
             
             <div className="space-y-4 w-full order-2">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight text-white">
-                Get More Calls, Enquiries & Bookings for Your <span className="text-yellow-400">Local Service Business</span>
+                Get More Calls & Enquiries for Your <span className="text-yellow-400">Local Service Business</span>
               </h1>
               <p className="text-base sm:text-lg md:text-xl font-medium text-zinc-300 max-w-3xl mx-auto lg:mx-0 leading-relaxed">
                 We help cleaning, pest control, painting, repair, maintenance and other local service businesses generate quality leads through Meta Ads, Google Ads and WhatsApp follow-up.
@@ -382,6 +420,138 @@ export default function LocalServicesLandingPage() {
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* --- PORTFOLIO SECTION --- */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-yellow-600 block">Our Reach</span>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-zinc-900">
+              Featured Home Service Portfolio & Campaigns
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
+              We help local home service businesses scale their bookings and build a dominant local presence. Filter by category to explore campaigns.
+            </p>
+          </div>
+
+          {/* Category Filter Tabs */}
+          <div className="flex flex-wrap justify-center gap-2 mb-12 max-w-5xl mx-auto">
+            {["All", "Pest Control", "Deep Cleaning", "Packers & Movers", "Appliance Repair", "AC Repair & Service", "Waterproofing", "Water Purifier Service", "Electrical Services", "Plumbing Services", "Balcony Grill", "Safety Nets", "Solar Services"].map(cat => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-4 py-2 rounded-full text-xs font-bold transition-all border cursor-pointer ${
+                  selectedCategory === cat
+                    ? "bg-yellow-400 border-yellow-400 text-zinc-950 shadow-md shadow-yellow-400/20"
+                    : "bg-zinc-50 border-zinc-200 text-zinc-600 hover:bg-zinc-100"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {homeServicesData
+              .filter(prospect => selectedCategory === "All" || prospect["Service Category"] === selectedCategory)
+              .map((prospect: any, idx: number) => {
+                const cover = getCategoryCover(prospect["Service Category"]);
+                return (
+                  <div 
+                    key={idx} 
+                    className="relative overflow-hidden bg-white rounded-3xl border border-zinc-100 hover:border-yellow-400/30 shadow-xs hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col group"
+                  >
+                    {/* Cover Image */}
+                    <div className="h-44 w-full relative overflow-hidden bg-zinc-50 border-b border-zinc-100">
+                      <Image 
+                        src={cover} 
+                        alt={prospect["Business Name"]} 
+                        fill 
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                      
+                      {/* Overlaid Badges */}
+                      <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
+                        <span className="text-[9px] font-black uppercase tracking-widest text-zinc-700 bg-white/90 backdrop-blur-xs px-2.5 py-1 rounded-full shadow-xs">
+                          {prospect["Service Category"]}
+                        </span>
+                        <span className="text-[9px] font-bold text-zinc-600 bg-white/90 backdrop-blur-xs px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
+                          <MapPin className="h-3 w-3 text-yellow-500" /> {prospect["Location / Coverage"]}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Logo/Icon Container */}
+                    <div className="relative px-6">
+                      <div className="absolute -top-7 left-6 h-14 w-14 rounded-2xl bg-white border border-zinc-100 shadow-sm p-1 flex items-center justify-center z-10 overflow-hidden">
+                        <div className="w-full h-full rounded-xl bg-gradient-to-br from-yellow-400/20 to-zinc-800/10 flex items-center justify-center">
+                          <span className="text-sm font-black text-yellow-600">
+                            {getInitials(prospect["Business Name"])}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Info Section */}
+                    <div className="pt-9 px-6 pb-6 flex-1 flex flex-col justify-between space-y-4">
+                      <div>
+                        <h3 className="text-base font-black text-zinc-900 leading-snug group-hover:text-yellow-600 transition-colors duration-300">
+                          {prospect["Business Name"]}
+                        </h3>
+                        {prospect.Notes && (
+                          <p className="text-xs text-zinc-500 mt-1.5 line-clamp-2 leading-relaxed">{prospect.Notes}</p>
+                        )}
+                      </div>
+
+                      {/* Actions */}
+                      <div className="pt-4 border-t border-zinc-100">
+                        <div className="flex flex-col gap-2">
+                          {prospect.Instagram && (
+                            <a 
+                              href={prospect.Instagram}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="w-full py-2 px-4 rounded-xl text-xs font-bold text-zinc-950 bg-yellow-400 hover:bg-yellow-500 transition-colors flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
+                            >
+                              <Instagram className="h-3.5 w-3.5" /> Instagram Profile
+                            </a>
+                          )}
+                          <div className="flex gap-2">
+                            {prospect.Website && (
+                              <a 
+                                href={cleanUrl(prospect.Website)}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="flex-1 py-2 px-3 rounded-xl text-[11px] font-bold text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200/80 transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                              >
+                                <Globe className="h-3.5 w-3.5 text-yellow-500" /> Website
+                              </a>
+                            )}
+                            {prospect["GMB / Google Maps Link"] && (
+                              <a 
+                                href={prospect["GMB / Google Maps Link"]}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="flex-1 py-2 px-3 rounded-xl text-[11px] font-bold text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200/80 transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                              >
+                                <MapPin className="h-3.5 w-3.5 text-yellow-500" /> Google Maps
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+
         </div>
       </section>
 
@@ -440,9 +610,7 @@ export default function LocalServicesLandingPage() {
             {setupDeliverables.map((item, index) => (
               <div 
                 key={index}
-                className={`flex flex-col items-center justify-center text-center p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-zinc-900/50 border border-zinc-800 hover:border-yellow-400/30 transition-all hover:bg-zinc-900 group ${
-                  index === 4 ? "col-span-2 lg:col-span-1" : "col-span-1"
-                }`}
+                className="flex flex-col items-center justify-center text-center p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-zinc-900/50 border border-zinc-800 hover:border-yellow-400/30 transition-all hover:bg-zinc-900 group col-span-1"
               >
                 <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl bg-yellow-400/10 text-yellow-400 group-hover:bg-yellow-400 group-hover:text-zinc-950 transition-all mb-3.5 sm:mb-5">
                   <item.icon className="h-5.5 w-5.5 sm:h-6 sm:w-6" />
@@ -514,19 +682,24 @@ export default function LocalServicesLandingPage() {
           </div>
 
           {/* Timeline steps */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 relative">
+          <div className="flex flex-col md:grid md:grid-cols-5 gap-6 relative">
             {campaignSteps.map((step, index) => (
-              <div key={index} className="flex flex-col items-center text-center md:items-start md:text-left space-y-4 relative group">
-                <div className="flex items-center justify-center md:block">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-zinc-900 text-yellow-400 font-black text-lg group-hover:bg-yellow-400 group-hover:text-zinc-950 transition-all shadow-md">
+              <div 
+                key={index} 
+                className="flex flex-row md:flex-col items-start gap-4 md:gap-0 md:space-y-4 relative group"
+              >
+                <div className="flex items-center shrink-0">
+                  <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-2xl bg-zinc-900 text-yellow-400 font-black text-sm md:text-lg group-hover:bg-yellow-400 group-hover:text-zinc-950 transition-all shadow-md">
                     {step.num}
                   </div>
                   {index < campaignSteps.length - 1 && (
                     <div className="hidden md:block absolute top-6 left-12 right-0 h-[2px] bg-zinc-100 z-0 group-hover:bg-yellow-200 transition-colors" />
                   )}
                 </div>
-                <h3 className="text-base font-black text-zinc-900 pt-2">{step.title}</h3>
-                <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed max-w-sm">{step.desc}</p>
+                <div className="space-y-1 md:space-y-2 pt-0.5 md:pt-0">
+                  <h3 className="text-sm md:text-base font-black text-zinc-900 leading-tight">{step.title}</h3>
+                  <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed max-w-sm">{step.desc}</p>
+                </div>
               </div>
             ))}
           </div>
