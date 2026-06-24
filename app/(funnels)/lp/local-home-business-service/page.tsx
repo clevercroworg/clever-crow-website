@@ -18,87 +18,87 @@ const getCategoryCover = (category: string, index: number) => {
   const mapping: { [key: string]: string[] } = {
     "Pest Control": [
       "https://images.unsplash.com/photo-1628352081506-83c43123ed6d?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1747659629851-a92bd71149f6?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1650895421894-07954c2134b7?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1711871545611-1ceca2441c29?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1707093981828-e0ff92ec9797?q=80&w=600&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?q=80&w=600&auto=format&fit=crop"
     ],
     "Deep Cleaning": [
-      "https://images.unsplash.com/photo-1740657254989-42fe9c3b8cce?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1558317374-067fb5f30001?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=600&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1563453392212-326f5e854473?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1627905646269-7f034dcc5738?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1686178827149-6d55c72d81df?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1603712725038-e9334ae8f39f?q=80&w=600&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?q=80&w=600&auto=format&fit=crop"
     ],
     "Packers & Movers": [
       "https://images.unsplash.com/photo-1616432043562-3671ea2e5242?q=80&w=600&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1592838064575-70ed626d3a0e?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1695222833131-54ee679ae8e5?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1485575301924-6891ef935dcd?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1473445730015-841f29a9490b?q=80&w=600&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1600518464441-9154a4dea21b?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=600&auto=format&fit=crop"
     ],
     "Appliance Repair": [
-      "https://images.unsplash.com/photo-1773177930183-2c5fb2884171?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1759434775823-40d8b9577a41?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1772974776381-68f1f5fef1aa?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1770991190796-a121c47467eb?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1759434768863-85483a898cd9?q=80&w=600&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1773177930183-2c5fb2884171?q=80&w=600&auto=format&fit=crop"
     ],
     "AC Repair & Service": [
-      "https://images.unsplash.com/photo-1718203862467-c33159fdc504?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1700124113583-81aa99ea2aa2?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1436473849883-bb3464c23e93?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1667983453881-4992fe86ab1b?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1726614846573-c1ac2e6161d1?q=80&w=600&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1585771724684-38269d6639fd?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1718203862467-c33159fdc504?q=80&w=600&auto=format&fit=crop"
     ],
     "Waterproofing": [
-      "https://images.unsplash.com/photo-1634853982486-c06f0e17940f?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1563174499-c1a4e1aa55ee?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1674485169641-bcb2bf6f1df9?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1645931468709-1d6b65004c2f?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1548346835-0345c02743f2?q=80&w=600&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?q=80&w=600&auto=format&fit=crop"
     ],
     "Water Purifier Service": [
-      "https://images.unsplash.com/photo-1669211659110-3f3db4119b65?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=80&w=600&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1589986005992-68bc7aa343c2?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1669211659202-722981df44f8?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1667404164793-5d73efb57b47?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1614598642118-7841d2d5bc18?q=80&w=600&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1527018601619-a508a2be00cd?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1614598642118-7841d2d5bc18?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1669211659110-3f3db4119b65?q=80&w=600&auto=format&fit=crop"
     ],
     "Electrical Services": [
-      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1635335874521-7987db781153?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1507494924047-60b8ee826ca9?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=600&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1621905251918-48416bd8575a?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1553873002-785d775854c9?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1601462904263-f2fa0c851cb9?q=80&w=600&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1553873002-785d775854c9?q=80&w=600&auto=format&fit=crop"
     ],
     "Plumbing Services": [
+      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=600&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1676210134188-4c05dd172f89?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1542013936693-884638332954?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1676210133055-eab6ef033ce3?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1749532125405-70950966b0e5?q=80&w=600&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1542013936693-884638332954?q=80&w=600&auto=format&fit=crop"
     ],
     "Balcony Grill": [
-      "https://images.unsplash.com/photo-1762529484060-1c7270bbbf22?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1774099113784-1d7ad4b4efc9?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1759228016331-274c4b470439?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1599481182960-c1ec9a3c1db8?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1773093760434-16f3a82066ab?q=80&w=600&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=600&auto=format&fit=crop"
     ],
     "Safety Nets": [
-      "https://images.unsplash.com/photo-1443933223857-9ca346228f72?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1578834728457-39dd09b3d1bf?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1718477183524-9591e306286e?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1534638770741-cf001961eeb8?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1691760300575-6cce80be7541?q=80&w=600&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1443933223857-9ca346228f72?q=80&w=600&auto=format&fit=crop"
     ],
     "Solar Services": [
       "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=600&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=600&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1558449028-b53a39d100fc?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1724041875334-0a6397111c7e?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1658298775754-5839ffd434cc?q=80&w=600&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1497440001374-f26997328c1b?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?q=80&w=600&auto=format&fit=crop"
     ]
   };
   const list = mapping[category] || ["https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=600&auto=format&fit=crop"];
