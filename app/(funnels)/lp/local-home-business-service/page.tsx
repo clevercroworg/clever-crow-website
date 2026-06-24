@@ -9,7 +9,8 @@ import {
   Phone, Award, MapPin, Calendar, Users, Globe, Check, 
   Loader2, HelpCircle, ChevronDown, CheckCircle2, ArrowRight,
   Target, TrendingUp, Shield, Zap, Sparkles, MessageCircle, BarChart3,
-  Search
+  Search, Bug, Paintbrush, Wrench, Wind, Truck, Camera, Home, Hammer,
+  Briefcase
 } from "lucide-react";
 
 export default function LocalServicesLandingPage() {
@@ -156,45 +157,25 @@ export default function LocalServicesLandingPage() {
   };
 
   const businessCategories = [
-    "Cleaning Services",
-    "Pest Control Companies",
-    "Painting Services",
-    "Repair & Maintenance Services",
-    "AC / Appliance Repair",
-    "Packers & Movers",
-    "Plumbing & Electrical Services",
-    "CCTV / Security Installation",
-    "Property Maintenance",
-    "Home Renovation Services",
-    "Other Local Service Businesses"
+    { name: "Cleaning Services", icon: Sparkles },
+    { name: "Pest Control Companies", icon: Bug },
+    { name: "Painting Services", icon: Paintbrush },
+    { name: "Repair & Maintenance Services", icon: Wrench },
+    { name: "AC / Appliance Repair", icon: Wind },
+    { name: "Packers & Movers", icon: Truck },
+    { name: "Plumbing & Electrical Services", icon: Zap },
+    { name: "CCTV / Security Installation", icon: Camera },
+    { name: "Property Maintenance", icon: Home },
+    { name: "Home Renovation Services", icon: Hammer },
+    { name: "Other Local Service Businesses", icon: Briefcase }
   ];
 
   const setupDeliverables = [
-    { 
-      title: "Meta Ads", 
-      desc: "Reach the right local audience on Facebook and Instagram with visually targeted ad sets.", 
-      icon: Target 
-    },
-    { 
-      title: "Google Ads", 
-      desc: "Show your business when customers are actively searching for your specific services on Google.", 
-      icon: SearchIcon 
-    },
-    { 
-      title: "WhatsApp Follow-up", 
-      desc: "Create a better, automated enquiry flow so incoming leads can be followed up quickly.", 
-      icon: MessageCircle 
-    },
-    { 
-      title: "Lead Tracking", 
-      desc: "Track exactly where leads are coming from, cost-per-lead, and which campaigns are performing.", 
-      icon: BarChart3 
-    },
-    { 
-      title: "Creative Strategy", 
-      desc: "Use high-converting, service-focused ad creatives designed to make local prospects click and call.", 
-      icon: Sparkles 
-    }
+    { title: "Meta Ads", icon: Target },
+    { title: "Google Ads", icon: Search },
+    { title: "WhatsApp Follow-up", icon: FaWhatsapp },
+    { title: "Lead Tracking", icon: BarChart3 },
+    { title: "Creative Strategy", icon: Sparkles }
   ];
 
   const serviceBenefits = [
@@ -351,12 +332,6 @@ export default function LocalServicesLandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left max-w-4xl lg:max-w-3xl gap-6">
             
-            {/* Tagline Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 select-none order-1">
-              <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
-              <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-300">Google & Meta Ads Strategy</span>
-            </div>
-
             <div className="space-y-4 w-full order-2">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight text-white">
                 Get More Calls, Enquiries & Bookings for Your <span className="text-yellow-400">Local Service Business</span>
@@ -369,13 +344,14 @@ export default function LocalServicesLandingPage() {
             {/* Dual CTAs & Pricing info */}
             <div className="space-y-3 pt-2 w-full order-4 lg:order-3">
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
-                <button 
-                  onClick={() => scrollToSection(formRef)}
+                <a 
+                  href="tel:+919986389444"
+                  onClick={trackCallClick}
                   className="w-full sm:w-auto px-8 py-4 rounded-full text-sm font-extrabold uppercase tracking-wider bg-yellow-400 hover:bg-yellow-500 text-zinc-950 border border-yellow-400 hover:border-yellow-500 transition-all shadow-lg hover:scale-[1.02] cursor-pointer flex items-center justify-center gap-2"
                 >
-                  <span>Enquire Now</span>
-                  <ArrowRight className="h-4.5 w-4.5" />
-                </button>
+                  <Phone className="h-4.5 w-4.5 shrink-0" />
+                  <span>+91 99863 89444</span>
+                </a>
                 <button 
                   onClick={() => scrollToSection(packagesRef)}
                   className="w-full sm:w-auto px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider bg-zinc-900 hover:bg-zinc-800 text-zinc-100 border border-zinc-800 hover:border-zinc-700 transition-all cursor-pointer flex items-center justify-center"
@@ -387,22 +363,19 @@ export default function LocalServicesLandingPage() {
 
             {/* Hero Highlights */}
             <div className="pt-8 border-t border-white/10 w-full order-3 lg:order-4">
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { label: "Meta Ads", icon: Target },
-                  { label: "Google Ads", icon: Search },
-                  { label: "WhatsApp Follow-up", icon: MessageCircle },
-                  { label: "Lead Tracking", icon: BarChart3 },
+                  { label: "12+ Years Experience", icon: Award },
+                  { label: "550+ Happy Clients", icon: Users },
+                  { label: "Meta & Google Ads", icon: Target },
                   { label: "More Local Enquiries", icon: TrendingUp }
                 ].map((item, index) => (
                   <div 
                     key={index}
-                    className={`flex items-center justify-center gap-2 p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-yellow-400/30 transition-all hover:bg-white/[0.07] ${
-                      index === 4 ? "col-span-2 md:col-span-1" : "col-span-1"
-                    }`}
+                    className="flex flex-col items-center justify-center text-center gap-3 p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-yellow-400/30 transition-all hover:bg-white/[0.07]"
                   >
-                    <item.icon className="h-4 w-4 text-yellow-400 shrink-0" />
-                    <span className="text-xs font-bold text-zinc-200">{item.label}</span>
+                    <item.icon className="h-7 w-7 text-yellow-400 shrink-0" />
+                    <span className="text-sm sm:text-base font-extrabold text-zinc-100 leading-tight">{item.label}</span>
                   </div>
                 ))}
               </div>
@@ -427,18 +400,18 @@ export default function LocalServicesLandingPage() {
           </div>
 
           {/* Grid of Business Categories */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {businessCategories.map((category, index) => (
               <div 
                 key={index}
-                className="flex items-center gap-4 p-5 rounded-3xl bg-zinc-50 border border-zinc-100 hover:border-yellow-400/40 hover:bg-white transition-all shadow-xs group"
+                className="flex items-center gap-2.5 sm:gap-4 p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-zinc-50 border border-zinc-100 hover:border-yellow-400/40 hover:bg-white transition-all shadow-xs group"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-yellow-400/10 text-yellow-600 group-hover:bg-yellow-400 group-hover:text-zinc-950 transition-all">
-                  <CheckCircle2 className="h-5 w-5" />
+                <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-yellow-400/10 text-yellow-600 group-hover:bg-yellow-400 group-hover:text-zinc-950 transition-all">
+                  <category.icon className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-extrabold text-zinc-900 group-hover:text-yellow-600 transition-colors">
-                    {category}
+                  <h3 className="text-xs sm:text-sm font-extrabold text-zinc-900 group-hover:text-yellow-600 transition-colors leading-tight">
+                    {category.name}
                   </h3>
                 </div>
               </div>
@@ -463,17 +436,20 @@ export default function LocalServicesLandingPage() {
           </div>
 
           {/* What We Set Up Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {setupDeliverables.map((item, index) => (
               <div 
                 key={index}
-                className="p-6 rounded-3xl bg-zinc-900/50 border border-zinc-800 hover:border-yellow-400/30 transition-all hover:bg-zinc-900 group"
+                className={`flex flex-col items-center justify-center text-center p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-zinc-900/50 border border-zinc-800 hover:border-yellow-400/30 transition-all hover:bg-zinc-900 group ${
+                  index === 4 ? "col-span-2 lg:col-span-1" : "col-span-1"
+                }`}
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-400/10 text-yellow-400 group-hover:bg-yellow-400 group-hover:text-zinc-950 transition-all mb-5">
-                  <item.icon className="h-6 w-6" />
+                <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl bg-yellow-400/10 text-yellow-400 group-hover:bg-yellow-400 group-hover:text-zinc-950 transition-all mb-3.5 sm:mb-5">
+                  <item.icon className="h-5.5 w-5.5 sm:h-6 sm:w-6" />
                 </div>
-                <h3 className="text-lg font-black text-white mb-2">{item.title}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
+                <h3 className="text-xs sm:text-sm md:text-base font-extrabold text-white leading-tight">
+                  {item.title}
+                </h3>
               </div>
             ))}
           </div>
@@ -797,7 +773,7 @@ export default function LocalServicesLandingPage() {
                     >
                       <option value="" disabled>Select category...</option>
                       {businessCategories.map((cat, i) => (
-                        <option key={i} value={cat}>{cat}</option>
+                        <option key={i} value={cat.name}>{cat.name}</option>
                       ))}
                     </select>
                     <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-400">
