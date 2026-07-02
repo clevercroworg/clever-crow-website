@@ -528,7 +528,7 @@ export default function AppDevServiceLayout({
                 key={i}
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.2 }}
-                className="group relative bg-white border border-slate-200/60 rounded-[2rem] px-5 py-6 shadow-sm hover:shadow-[0_20px_40px_rgba(0,0,0,0.02)] flex flex-col items-center text-center justify-between min-h-[280px] h-auto cursor-pointer"
+                className="group relative bg-white border border-slate-200/60 rounded-[2rem] px-5 py-6 shadow-sm hover:shadow-[0_20px_40px_rgba(0,0,0,0.02)] flex flex-col items-center text-center justify-between md:min-h-[280px] min-h-0 h-auto cursor-pointer"
               >
                 <div className="flex flex-col items-center w-full">
                   {/* Icon */}
@@ -664,11 +664,11 @@ export default function AppDevServiceLayout({
               </div>
 
               {/* 2. Middle Title Block (Middle-Left) */}
-              <div className="lg:col-span-4 flex flex-col items-start text-left">
-                <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-2 leading-none">
+              <div className="lg:col-span-3 flex flex-col items-start text-left">
+                <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-amber-500 mb-2.5 leading-none">
                   WHY CHOOSE CLEVER CROW?
                 </p>
-                <h2 className="text-xl md:text-2xl lg:text-[26px] font-black text-slate-900 tracking-tight leading-tight font-sans">
+                <h2 className="text-xl md:text-2xl lg:text-[28px] font-black text-slate-900 tracking-tight lg:leading-[1.15] leading-tight font-sans">
                   We Build Apps That <br />Drive Real Results
                 </h2>
               </div>
@@ -682,7 +682,7 @@ export default function AppDevServiceLayout({
               <div className="w-full h-[1px] bg-slate-200/60 my-2 lg:hidden col-span-1" />
 
               {/* 4. 2-Column Checklist (Right) */}
-              <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+              <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-x-6 gap-y-4">
                 {whyChooseDetailed.map((point, i) => {
                   const PointIcon = Check;
                   return (

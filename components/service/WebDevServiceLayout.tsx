@@ -233,6 +233,97 @@ function WebsiteMaintenanceIcon({ className }: { className?: string }) {
   );
 }
 
+// ─── Custom Digital Marketing Icons for WebDev Layout ───
+
+function GoogleSearchAdsIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3" width="18" height="18" rx="2" fill="#F0F7FF" stroke="#3B82F6" strokeWidth="1.5" />
+      <circle cx="9" cy="9" r="2.5" stroke="#3B82F6" strokeWidth="1.2" fill="#FFFFFF" />
+      <line x1="10.8" y1="10.8" x2="13" y2="13" stroke="#3B82F6" strokeWidth="1.2" strokeLinecap="round" />
+      <rect x="5" y="14" width="10" height="4" rx="1" fill="#FBBC05" />
+      <text x="6.5" y="17.2" fill="#FFFFFF" fontSize="3" fontWeight="bold" fontFamily="sans-serif">AD</text>
+      <line x1="16" y1="14.5" x2="19" y2="14.5" stroke="#94A3B8" strokeWidth="1" strokeLinecap="round" />
+      <line x1="16" y1="16.5" x2="18" y2="16.5" stroke="#94A3B8" strokeWidth="1" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function MetaAdsMegaphoneIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3" width="18" height="18" rx="3" fill="#EEF2F6" stroke="#4F46E5" strokeWidth="1.5" />
+      <path d="M3 13.5h18" stroke="#4F46E5" strokeWidth="1.2" />
+      <circle cx="6.5" cy="7.5" r="2" fill="#4F46E5" />
+      <rect x="10" y="6.5" width="6" height="1.5" rx="0.5" fill="#94A3B8" />
+      <rect x="10" y="9" width="8" height="2" rx="0.5" fill="#FBBC05" />
+      <rect x="5.5" y="15" width="13" height="4.5" rx="1" fill="#3B82F6" />
+    </svg>
+  );
+}
+
+function SeoTargetIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="9" stroke="#64748B" strokeWidth="1.2" strokeDasharray="2 2" fill="none" />
+      <circle cx="12" cy="12" r="5" stroke="#F97316" strokeWidth="1" fill="#FFEFE6" fillOpacity="0.4" />
+      <path d="M12 4C9.24 4 7 6.24 7 9c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5Zm0 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z" fill="#F97316" stroke="#FFFFFF" strokeWidth="0.5" />
+    </svg>
+  );
+}
+
+function SocialContentPencilIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="4" width="18" height="16" rx="2" fill="#FDF2F8" stroke="#EC4899" strokeWidth="1.5" />
+      <line x1="3" y1="8" x2="21" y2="8" stroke="#EC4899" strokeWidth="1.5" />
+      <line x1="7" y1="2" x2="7" y2="5" stroke="#EC4899" strokeWidth="2" strokeLinecap="round" />
+      <line x1="17" y1="2" x2="17" y2="5" stroke="#EC4899" strokeWidth="2" strokeLinecap="round" />
+      <rect x="6" y="11" width="3" height="3" rx="0.5" fill="#EC4899" opacity="0.6" />
+      <rect x="10.5" y="11" width="3" height="3" rx="0.5" fill="#EC4899" opacity="0.6" />
+      <rect x="6" y="15" width="3" height="3" rx="0.5" fill="#EC4899" opacity="0.6" />
+      <path d="M16 13l2.5-2.5 1 1-2.5 2.5H16v-1Z" fill="#F59E0B" />
+      <circle cx="19.5" cy="10.5" r="0.8" fill="#EC4899" />
+    </svg>
+  );
+}
+
+function LeadGenRocketIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="9" stroke="#F59E0B" strokeWidth="1.5" fill="#FEF3C7" fillOpacity="0.4" />
+      <path d="M12 6C9.24 6 7 8.24 7 11v1h10v-1c0-2.76-2.24-5-5-5Z" fill="#EF4444" />
+      <rect x="7" y="12" width="2.5" height="4" fill="#64748B" />
+      <rect x="14.5" y="12" width="2.5" height="4" fill="#64748B" />
+      <path d="M9 19c2 1.5 4 1.5 6 0" stroke="#EF4444" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M10 21c1.3 1 2.7 1 4 0" stroke="#EF4444" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function AnalyticsMonitorIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="3" width="20" height="14" rx="2" fill="#F8FAFC" stroke="#64748B" strokeWidth="1.5" />
+      <path d="M6 21h12m-6-4v4" stroke="#64748B" strokeWidth="1.5" strokeLinecap="round" />
+      <rect x="5" y="6" width="3" height="8" rx="0.5" fill="#F59E0B" />
+      <rect x="10.5" y="8" width="3" height="6" rx="0.5" fill="#3B82F6" />
+      <rect x="16" y="4" width="3" height="10" rx="0.5" fill="#10B981" />
+    </svg>
+  );
+}
+
+function WhatsAppSmartphoneIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="2" width="12" height="20" rx="3" fill="#ECFDF5" stroke="#10B981" strokeWidth="1.5" />
+      <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" fill="#10B981" />
+      <path d="M10.5 14.5l-1.5 1.5.5-2" fill="#10B981" />
+      <circle cx="12" cy="18" r="0.75" fill="#10B981" />
+    </svg>
+  );
+}
+
 const goalIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   home: CompanyProfileIcon,
   target: LeadGenerationIcon,
@@ -250,7 +341,14 @@ const serviceIconMap: Record<string, React.ComponentType<{ className?: string }>
   shoppingcart: EcommerceIcon,
   layout: LandingPagesIcon,
   refreshcw: WebsiteRedesignIcon,
-  wrench: WebsiteMaintenanceIcon
+  wrench: WebsiteMaintenanceIcon,
+  search: GoogleSearchAdsIcon,
+  megaphone: MetaAdsMegaphoneIcon,
+  target: SeoTargetIcon,
+  pencil: SocialContentPencilIcon,
+  rocket: LeadGenRocketIcon,
+  monitor: AnalyticsMonitorIcon,
+  smartphone: WhatsAppSmartphoneIcon
 };
 
 // Default technologies list with custom SVG badges

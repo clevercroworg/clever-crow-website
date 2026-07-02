@@ -461,10 +461,10 @@ export default function PremiumHero({ onCallbackClick }: { onCallbackClick?: () 
                                   <h5 className="text-[10.5px] font-black text-slate-800 leading-tight">{item.label}</h5>
                                   <p className="text-[9px] font-medium text-slate-400 mt-0.5 leading-tight">{item.desc}</p>
                                 </div>
-                                <div className={`w-7 h-4 shrink-0 rounded-full p-0.5 transition-colors duration-200 flex items-center ${settings[item.key as keyof typeof settings] ? 'bg-amber-500' : 'bg-slate-200'}`}>
+                                <div className={`w-7 h-4 shrink-0 rounded-full p-0.5 transition-colors duration-200 flex items-center ${settings[item.key as keyof typeof settings] ? 'bg-amber-500 justify-end' : 'bg-slate-200 justify-start'}`}>
                                   <motion.div
                                     layout
-                                    className="w-3.2 h-3.2 bg-white rounded-full shadow-sm"
+                                    className="w-3 h-3 bg-white rounded-full shadow-sm"
                                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
                                   />
                                 </div>

@@ -208,6 +208,255 @@ function InstagramBrandIcon({ className }: { className?: string }) {
   );
 }
 
+// ─── Custom High-Fidelity SVG Icons for Digital Marketing Sub-Services ───
+
+function KeywordResearchIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="10" cy="10" r="5" stroke="#F97316" strokeWidth="1.5" fill="#FFEFE6" />
+      <line x1="13.5" y1="13.5" x2="20" y2="20" stroke="#F97316" strokeWidth="1.8" strokeLinecap="round" />
+      <circle cx="10" cy="10" r="1.5" stroke="#64748B" strokeWidth="1" fill="none" />
+      <path d="M10 11.5v1.5h1v1h-1v1" stroke="#64748B" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function OnPageSeoIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3" width="18" height="18" rx="2" fill="#FFF8F5" stroke="#F97316" strokeWidth="1.5" />
+      <line x1="3" y1="8" x2="21" y2="8" stroke="#F97316" strokeWidth="1.5" />
+      <rect x="6" y="11" width="8" height="2" rx="0.5" fill="#F97316" opacity="0.8" />
+      <rect x="6" y="15" width="5" height="2" rx="0.5" fill="#94A3B8" />
+      <circle cx="16" cy="15" r="2.5" stroke="#F97316" strokeWidth="1.2" fill="#FFFFFF" />
+      <line x1="17.8" y1="16.8" x2="20" y2="19" stroke="#F97316" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function TechnicalSeoIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3" width="18" height="18" rx="2" fill="#FFF8F5" stroke="#F97316" strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="3.5" stroke="#F97316" strokeWidth="1.5" fill="none" />
+      <path d="M12 7.5V6m0 12v-1.5m4.5-4.5H18m-12 0h1.5m8.18-3.18l-1.06 1.06m-5.3 5.3l-1.06 1.06m6.36 0l-1.06-1.06m-5.3-5.3L6.34 8.82" stroke="#F97316" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M6 7L5 8l1 1" stroke="#94A3B8" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M18 7l1 1-1 1" stroke="#94A3B8" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ContentPlanningIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="4" width="18" height="16" rx="2" fill="#FDF2F8" stroke="#EC4899" strokeWidth="1.5" />
+      <line x1="3" y1="8" x2="21" y2="8" stroke="#EC4899" strokeWidth="1.5" />
+      <line x1="7" y1="2" x2="7" y2="5" stroke="#EC4899" strokeWidth="2" strokeLinecap="round" />
+      <line x1="17" y1="2" x2="17" y2="5" stroke="#EC4899" strokeWidth="2" strokeLinecap="round" />
+      <rect x="6" y="11" width="3" height="3" rx="0.5" fill="#EC4899" opacity="0.6" />
+      <rect x="10.5" y="11" width="3" height="3" rx="0.5" fill="#EC4899" opacity="0.6" />
+      <rect x="6" y="15" width="3" height="3" rx="0.5" fill="#EC4899" opacity="0.6" />
+      <path d="M16 13l2.5-2.5 1 1-2.5 2.5H16v-1Z" fill="#F59E0B" />
+      <circle cx="19.5" cy="10.5" r="0.8" fill="#EC4899" />
+    </svg>
+  );
+}
+
+function LocalSeoIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="9" stroke="#64748B" strokeWidth="1.2" strokeDasharray="2 2" fill="none" />
+      <circle cx="12" cy="12" r="5" stroke="#F97316" strokeWidth="1" fill="#FFEFE6" fillOpacity="0.4" />
+      <path d="M12 4C9.24 4 7 6.24 7 9c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5Zm0 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z" fill="#F97316" stroke="#FFFFFF" strokeWidth="0.5" />
+    </svg>
+  );
+}
+
+function PaidSearchIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3" width="18" height="18" rx="2" fill="#F0F7FF" stroke="#3B82F6" strokeWidth="1.5" />
+      <circle cx="9" cy="9" r="2.5" stroke="#3B82F6" strokeWidth="1.2" fill="#FFFFFF" />
+      <line x1="10.8" y1="10.8" x2="13" y2="13" stroke="#3B82F6" strokeWidth="1.2" strokeLinecap="round" />
+      <rect x="5" y="14" width="10" height="4" rx="1" fill="#FBBC05" />
+      <text x="6.5" y="17.2" fill="#FFFFFF" fontSize="3" fontWeight="bold" fontFamily="sans-serif">AD</text>
+      <line x1="16" y1="14.5" x2="19" y2="14.5" stroke="#94A3B8" strokeWidth="1" strokeLinecap="round" />
+      <line x1="16" y1="16.5" x2="18" y2="16.5" stroke="#94A3B8" strokeWidth="1" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function PaidSocialIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3" width="18" height="18" rx="3" fill="#EEF2F6" stroke="#4F46E5" strokeWidth="1.5" />
+      <path d="M3 13.5h18" stroke="#4F46E5" strokeWidth="1.2" />
+      <circle cx="6.5" cy="7.5" r="2" fill="#4F46E5" />
+      <rect x="10" y="6.5" width="6" height="1.5" rx="0.5" fill="#94A3B8" />
+      <rect x="10" y="9" width="8" height="2" rx="0.5" fill="#FBBC05" />
+      <rect x="5.5" y="15" width="13" height="4.5" rx="1" fill="#3B82F6" />
+    </svg>
+  );
+}
+
+function ConversionOptimizationIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 4h16l-6 7v7l-4 2v-9L4 4Z" fill="#ECFDF5" stroke="#10B981" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M12 8a2.5 2.5 0 1 1-2.5 2.5" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+      <path d="M8.5 9.5l1 1-1 1" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="12" cy="15" r="1.5" fill="#10B981" />
+    </svg>
+  );
+}
+
+function RetargetingIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="3.5" fill="#EEF2F6" stroke="#64748B" strokeWidth="1.5" />
+      <path d="M12 12m-1 0a1 1 0 1 0 2 0 1 1 0 1 0-2 0" fill="#64748B" />
+      <path d="M12 4.5A7.5 7.5 0 0 1 19.5 12h1.5" stroke="#3B82F6" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M18 10.5l1.5 1.5 1.5-1.5" stroke="#3B82F6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 19.5A7.5 7.5 0 0 1 4.5 12H3" stroke="#3B82F6" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M6 13.5L4.5 12 3 13.5" stroke="#3B82F6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function CreativeDesignIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="5" width="18" height="14" rx="2" fill="#F5F3FF" stroke="#8B5CF6" strokeWidth="1.5" />
+      <circle cx="9" cy="11" r="3" fill="#8B5CF6" opacity="0.6" stroke="#8B5CF6" strokeWidth="1" />
+      <path d="M14 8.5l4.5 4.5" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M16 7l1.5 1.5" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="14" cy="15" r="1.5" fill="#10B981" />
+    </svg>
+  );
+}
+
+function ReelsVideoIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="2" width="12" height="20" rx="3" fill="#FFF1F2" stroke="#E11D48" strokeWidth="1.5" />
+      <polygon points="10,9 15,12 10,15" fill="#E11D48" />
+      <line x1="8" y1="5" x2="16" y2="5" stroke="#FDA4AF" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="8" y1="19" x2="16" y2="19" stroke="#FDA4AF" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function CommunityManagementIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z" fill="#FDF2F8" stroke="#EC4899" strokeWidth="1.5" />
+      <path d="M8 10v4l3 1v-6l-3 1Z" fill="#EC4899" />
+      <path d="M11 11h2a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2h-2v-4Z" fill="#F59E0B" />
+      <path d="M6 12h2v0H6z" fill="#EC4899" />
+    </svg>
+  );
+}
+
+function HashtagStrategyIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 3v18M15 3v18M3 9h18M3 15h18" stroke="#EC4899" strokeWidth="2.2" strokeLinecap="round" />
+      <path d="M6 18l4-4 4 2 5-6" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="19" cy="10" r="1.5" fill="#F59E0B" />
+    </svg>
+  );
+}
+
+function GoogleTagManagerIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2L2 7l10 5 10-5-10-5Z" fill="#E0F2FE" stroke="#0EA5E9" strokeWidth="1.5" />
+      <path d="M2 17l10 5 10-5" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M2 12l10 5 10-5" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="8" y="7.5" width="8" height="4" rx="1" fill="#F59E0B" stroke="#FFFFFF" strokeWidth="0.5" />
+      <circle cx="10" cy="9.5" r="0.75" fill="#FFFFFF" />
+    </svg>
+  );
+}
+
+function DataLayerIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 5h20M2 12h20M2 19h20" stroke="#F97316" strokeWidth="2" strokeLinecap="round" />
+      <rect x="4" y="3.5" width="4" height="3" rx="0.5" fill="#F97316" />
+      <rect x="14" y="3.5" width="4" height="3" rx="0.5" fill="#94A3B8" />
+      <rect x="9" y="10.5" width="4" height="3" rx="0.5" fill="#F97316" />
+      <rect x="6" y="17.5" width="4" height="3" rx="0.5" fill="#94A3B8" />
+      <rect x="14" y="17.5" width="4" height="3" rx="0.5" fill="#F97316" />
+    </svg>
+  );
+}
+
+function LeadGenerationAdsIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="9" stroke="#F59E0B" strokeWidth="1.5" fill="#FEF3C7" fillOpacity="0.4" />
+      <path d="M12 6C9.24 6 7 8.24 7 11v1h10v-1c0-2.76-2.24-5-5-5Z" fill="#EF4444" />
+      <rect x="7" y="12" width="2.5" height="4" fill="#64748B" />
+      <rect x="14.5" y="12" width="2.5" height="4" fill="#64748B" />
+      <path d="M9 19c2 1.5 4 1.5 6 0" stroke="#EF4444" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M10 21c1.3 1 2.7 1 4 0" stroke="#EF4444" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function PerformanceMaxIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="9" stroke="#EA580C" strokeWidth="1.5" fill="#FFF7ED" />
+      <circle cx="12" cy="12" r="5" stroke="#EA580C" strokeWidth="1" strokeDasharray="2 2" />
+      <circle cx="12" cy="12" r="2.5" fill="#EA580C" />
+      <path d="M12 3v2m0 14v2M3 12h2m14 0h2" stroke="#64748B" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M18.5 5.5l-1.5 1.5M7 17l-1.5 1.5" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function CampaignOptimizationIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3" width="18" height="18" rx="2" fill="#F0FDFA" stroke="#0D9488" strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="3" stroke="#0D9488" strokeWidth="1.5" />
+      <path d="M12 7.5v-1.5m0 12v-1.5m4.5-4.5H18m-12 0h1.5" stroke="#0D9488" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M7 16l4-4 3 3 4-6" stroke="#F59E0B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M15 9h3v3" stroke="#F59E0B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function GoogleAnalyticsBrandIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3" width="18" height="18" rx="2" fill="#FFFBEB" stroke="#F59E0B" strokeWidth="1.5" />
+      <path d="M7 16V11" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M12 16V8" stroke="#EA580C" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M17 16V5" stroke="#D97706" strokeWidth="2.5" strokeLinecap="round" />
+      <circle cx="7" cy="11" r="1.2" fill="#F59E0B" />
+      <circle cx="12" cy="8" r="1.2" fill="#EA580C" />
+      <circle cx="17" cy="5" r="1.2" fill="#D97706" />
+    </svg>
+  );
+}
+
+function DashboardReportingIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="3" width="20" height="14" rx="2" fill="#F8FAFC" stroke="#3B82F6" strokeWidth="1.5" />
+      <path d="M6 21h12m-6-4v4" stroke="#64748B" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="2" y1="8" x2="22" y2="8" stroke="#3B82F6" strokeWidth="1" />
+      <line x1="9" y1="8" x2="9" y2="17" stroke="#3B82F6" strokeWidth="1" />
+      <circle cx="5.5" cy="12.5" r="1.5" stroke="#10B981" strokeWidth="1.2" fill="none" />
+      <rect x="12" y="11" width="6" height="1.5" rx="0.5" fill="#3B82F6" />
+      <rect x="12" y="14" width="4" height="1.5" rx="0.5" fill="#94A3B8" />
+    </svg>
+  );
+}
+
 const brandIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   google: GoogleBrandIcon,
   facebook: FacebookBrandIcon,
@@ -221,35 +470,44 @@ function getMarketingServiceConfig(title: string, iconKey: string) {
   const t = title.toLowerCase();
   const k = iconKey.toLowerCase();
 
-  // 1. Google Ads
-  if (t.includes("google") || k === "google" || k === "googleads") {
+  // 1. Keyword Research
+  if (t.includes("keyword")) {
     return {
-      IconSvg: GoogleAdsIcon,
+      IconSvg: KeywordResearchIcon,
       borderColor: "hover:border-amber-500/35",
       arrowColor: "group-hover:text-amber-600"
     };
   }
 
-  // 2. Meta Ads
-  if (t.includes("meta") || t.includes("facebook") || t.includes("instagram") || k === "meta" || k === "metaads" || k === "facebook" || k === "instagram") {
+  // 2. On-Page SEO
+  if (t.includes("on-page") || t.includes("onpage")) {
     return {
-      IconSvg: MetaAdsIcon,
-      borderColor: "hover:border-blue-500/35",
-      arrowColor: "group-hover:text-blue-600"
+      IconSvg: OnPageSeoIcon,
+      borderColor: "hover:border-orange-500/35",
+      arrowColor: "group-hover:text-orange-600"
     };
   }
 
-  // 3. WhatsApp Automation
-  if (t.includes("whatsapp") || k === "whatsapp" || k === "smartphone") {
+  // 3. Technical SEO
+  if (t.includes("technical seo") || t.includes("technical")) {
     return {
-      IconSvg: WhatsAppIcon,
-      borderColor: "hover:border-emerald-500/35",
-      arrowColor: "group-hover:text-emerald-600"
+      IconSvg: TechnicalSeoIcon,
+      borderColor: "hover:border-orange-500/35",
+      arrowColor: "group-hover:text-orange-600"
     };
   }
 
-  // 4. SEO / Organic Search
-  if (t.includes("seo") || t.includes("organic") || k === "search" || k === "target") {
+  // 4. Local SEO / Institutional SEO
+  if (t.includes("local seo") || t.includes("institutional seo") || t.includes("local")) {
+    return {
+      IconSvg: LocalSeoIcon,
+      borderColor: "hover:border-orange-500/35",
+      arrowColor: "group-hover:text-orange-600"
+    };
+  }
+
+  // 5. SEO (General fallback)
+  if (t.includes("seo") || k === "target" && t.includes("seo")) {
     return {
       IconSvg: SeoIcon,
       borderColor: "hover:border-orange-500/35",
@@ -257,35 +515,44 @@ function getMarketingServiceConfig(title: string, iconKey: string) {
     };
   }
 
-  // 5. Landing Pages
-  if (t.includes("landing") || t.includes("funnel") || k === "layout" || k === "browser") {
+  // 6. Content Planning
+  if (t.includes("content planning")) {
     return {
-      IconSvg: LandingPageIcon,
-      borderColor: "hover:border-blue-600/35",
-      arrowColor: "group-hover:text-blue-600"
+      IconSvg: ContentPlanningIcon,
+      borderColor: "hover:border-pink-500/35",
+      arrowColor: "group-hover:text-pink-600"
     };
   }
 
-  // 6. CRM & Follow-Up
-  if (t.includes("crm") || t.includes("follow") || k === "database" || k === "server") {
+  // 7. Reels & Video
+  if (t.includes("reels") || t.includes("video")) {
     return {
-      IconSvg: CrmIcon,
-      borderColor: "hover:border-orange-500/35",
-      arrowColor: "group-hover:text-orange-600"
+      IconSvg: ReelsVideoIcon,
+      borderColor: "hover:border-pink-500/35",
+      arrowColor: "group-hover:text-pink-600"
     };
   }
 
-  // 7. Analytics & Tracking
-  if (t.includes("analytics") || t.includes("tracking") || t.includes("tag") || k === "monitor" || k === "chart" || k === "linechart") {
+  // 8. Community Management
+  if (t.includes("community")) {
     return {
-      IconSvg: AnalyticsIcon,
-      borderColor: "hover:border-amber-500/35",
-      arrowColor: "group-hover:text-amber-600"
+      IconSvg: CommunityManagementIcon,
+      borderColor: "hover:border-pink-500/35",
+      arrowColor: "group-hover:text-pink-600"
     };
   }
 
-  // 8. Social Media Management
-  if (t.includes("social") || t.includes("content") || t.includes("copywriting") || k === "pencil" || k === "megaphone") {
+  // 9. Hashtag Strategy
+  if (t.includes("hashtag")) {
+    return {
+      IconSvg: HashtagStrategyIcon,
+      borderColor: "hover:border-pink-500/35",
+      arrowColor: "group-hover:text-pink-600"
+    };
+  }
+
+  // 9.5. Social Media Management
+  if (t.includes("social media") || t.includes("smm")) {
     return {
       IconSvg: SocialMediaIcon,
       borderColor: "hover:border-pink-500/35",
@@ -293,7 +560,159 @@ function getMarketingServiceConfig(title: string, iconKey: string) {
     };
   }
 
-  // 9. Performance Marketing (General)
+  // 10. Post Design / Creative Design / Creative Testing
+  if (t.includes("design") || t.includes("creative")) {
+    return {
+      IconSvg: CreativeDesignIcon,
+      borderColor: "hover:border-violet-500/35",
+      arrowColor: "group-hover:text-violet-600"
+    };
+  }
+
+  // 11. Paid Search / Search Campaigns / Google Ads Tracking / Google Ads Lead Gen / Google Ads Management
+  if (t.includes("search campaign") || t.includes("paid search") || t.includes("google ads")) {
+    return {
+      IconSvg: GoogleAdsIcon,
+      borderColor: "hover:border-amber-500/35",
+      arrowColor: "group-hover:text-amber-600"
+    };
+  }
+
+  // 11.5. Performance Max / PMax
+  if (t.includes("performance max") || t.includes("pmax")) {
+    return {
+      IconSvg: PerformanceMaxIcon,
+      borderColor: "hover:border-orange-500/35",
+      arrowColor: "group-hover:text-orange-600"
+    };
+  }
+
+  // 12. Paid Social / Meta Ads / Meta Pixel / Facebook Ads / Instagram Ads / Meta Ads Lead Gen / Meta Ads Management
+  if (t.includes("instagram ads")) {
+    return {
+      IconSvg: InstagramBrandIcon,
+      borderColor: "hover:border-pink-500/35",
+      arrowColor: "group-hover:text-pink-600"
+    };
+  }
+
+  if (t.includes("facebook ads")) {
+    return {
+      IconSvg: FacebookBrandIcon,
+      borderColor: "hover:border-blue-600/35",
+      arrowColor: "group-hover:text-blue-600"
+    };
+  }
+
+  if (t.includes("paid social") || t.includes("meta ads") || t.includes("facebook ads") || t.includes("instagram ads") || t.includes("meta pixel")) {
+    return {
+      IconSvg: MetaAdsIcon,
+      borderColor: "hover:border-blue-500/35",
+      arrowColor: "group-hover:text-blue-600"
+    };
+  }
+
+  // 13. Conversion Optimization
+  if (t.includes("conversion")) {
+    return {
+      IconSvg: ConversionOptimizationIcon,
+      borderColor: "hover:border-teal-500/35",
+      arrowColor: "group-hover:text-teal-600"
+    };
+  }
+
+  // 14. Retargeting
+  if (t.includes("retargeting")) {
+    return {
+      IconSvg: RetargetingIcon,
+      borderColor: "hover:border-slate-500/35",
+      arrowColor: "group-hover:text-slate-600"
+    };
+  }
+
+  // 14.5. Campaign Optimization / Optimization
+  if (t.includes("optimization")) {
+    return {
+      IconSvg: CampaignOptimizationIcon,
+      borderColor: "hover:border-teal-500/35",
+      arrowColor: "group-hover:text-teal-600"
+    };
+  }
+
+  // 15. GA4 Setup / Google Tag Manager / Tag / Data Layer / Tracking Setup / Lead Tracking / Attribution / Reporting / Analytics
+  if (t.includes("ga4") || t.includes("tag manager") || t.includes("data layer") || t.includes("tracking") || t.includes("attribution") || t.includes("reporting") || t.includes("analytics")) {
+    if (t.includes("ga4")) {
+      return {
+        IconSvg: GoogleAnalyticsBrandIcon,
+        borderColor: "hover:border-amber-500/35",
+        arrowColor: "group-hover:text-amber-600"
+      };
+    }
+    if (t.includes("tag manager")) {
+      return {
+        IconSvg: GoogleTagManagerIcon,
+        borderColor: "hover:border-blue-500/35",
+        arrowColor: "group-hover:text-blue-600"
+      };
+    }
+    if (t.includes("data layer")) {
+      return {
+        IconSvg: DataLayerIcon,
+        borderColor: "hover:border-amber-500/35",
+        arrowColor: "group-hover:text-amber-600"
+      };
+    }
+    if (t.includes("dashboard") || t.includes("reporting")) {
+      return {
+        IconSvg: DashboardReportingIcon,
+        borderColor: "hover:border-blue-500/35",
+        arrowColor: "group-hover:text-blue-600"
+      };
+    }
+    return {
+      IconSvg: AnalyticsIcon,
+      borderColor: "hover:border-amber-500/35",
+      arrowColor: "group-hover:text-amber-600"
+    };
+  }
+
+  // 16. Landing Page
+  if (t.includes("landing")) {
+    return {
+      IconSvg: LandingPageIcon,
+      borderColor: "hover:border-blue-600/35",
+      arrowColor: "group-hover:text-blue-600"
+    };
+  }
+
+  // 17. WhatsApp
+  if (t.includes("whatsapp")) {
+    return {
+      IconSvg: WhatsAppIcon,
+      borderColor: "hover:border-emerald-500/35",
+      arrowColor: "group-hover:text-emerald-600"
+    };
+  }
+
+  // 18. CRM
+  if (t.includes("crm")) {
+    return {
+      IconSvg: CrmIcon,
+      borderColor: "hover:border-orange-500/35",
+      arrowColor: "group-hover:text-orange-600"
+    };
+  }
+
+  // 19. Lead Gen Campaigns / Lead Generation (General fallback)
+  if (t.includes("lead gen") || t.includes("lead generation")) {
+    return {
+      IconSvg: LeadGenerationAdsIcon,
+      borderColor: "hover:border-amber-500/35",
+      arrowColor: "group-hover:text-amber-600"
+    };
+  }
+
+  // 20. Performance Marketing (General)
   if (t.includes("performance") || k === "rocket") {
     return {
       IconSvg: PerformanceMarketingIcon,
@@ -1030,7 +1449,7 @@ export default function DigitalMarketingServiceLayout({
 
           {/* Right: FAQ accordion in 2-column grid */}
           <div className="lg:col-span-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-sans">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-sans items-start">
               {faqs.map((faq, i) => (
                 <div 
                   key={i} 
