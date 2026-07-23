@@ -203,31 +203,31 @@ export default function ContactPage() {
                 </div>
 
                 {/* HQ & BRANCH OFFICES CARD */}
-                <div className="rounded-[2.5rem] bg-[#F4F6FB] border border-slate-200/80 p-6 sm:p-8 text-slate-800 relative overflow-hidden shadow-sm">
-                  {/* Ambient Glow */}
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-amber-200/10 blur-[80px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                <div className="rounded-[2.5rem] bg-white/80 border border-slate-200/70 p-6 sm:p-8 text-slate-800 relative overflow-hidden shadow-lg backdrop-blur-md">
+                  {/* Warm Ambient Flare */}
+                  <div className="absolute top-0 right-0 w-72 h-72 bg-amber-300/15 blur-[90px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
                   
                   <div className="relative z-10">
                     {/* Header with Title & Badge */}
-                    <div className="flex items-center justify-between mb-6 border-b border-slate-200/80 pb-4">
+                    <div className="flex items-center justify-between mb-6 border-b border-slate-200/60 pb-4">
                       <div className="flex items-center gap-3">
-                        <span className="text-xs font-black uppercase tracking-widest text-slate-500">
+                        <span className="text-xs font-black uppercase tracking-widest text-slate-400">
                           Our Offices
                         </span>
                       </div>
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-700 border border-blue-500/20">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-amber-500/10 text-amber-700 border border-amber-500/20">
                         Global Presence
                       </span>
                     </div>
 
                     {/* Office Selector Tabs (India | Singapore) */}
-                    <div className="grid grid-cols-2 bg-slate-200/70 p-1.5 rounded-2xl mb-7 gap-1">
+                    <div className="grid grid-cols-2 bg-slate-100 p-1.5 rounded-2xl mb-7 gap-1 border border-slate-200/60">
                       <button
                         type="button"
                         onClick={() => setActiveOfficeKey("india")}
                         className={`py-2.5 px-3 rounded-xl text-sm font-bold transition-all duration-200 text-center ${
                           activeOfficeKey === "india"
-                            ? "bg-white text-slate-900 shadow-md font-extrabold"
+                            ? "bg-white text-slate-900 shadow-md font-black border border-slate-200/50"
                             : "text-slate-500 hover:text-slate-900"
                         }`}
                       >
@@ -238,7 +238,7 @@ export default function ContactPage() {
                         onClick={() => setActiveOfficeKey("singapore")}
                         className={`py-2.5 px-3 rounded-xl text-sm font-bold transition-all duration-200 text-center ${
                           activeOfficeKey === "singapore"
-                            ? "bg-white text-slate-900 shadow-md font-extrabold"
+                            ? "bg-white text-slate-900 shadow-md font-black border border-slate-200/50"
                             : "text-slate-500 hover:text-slate-900"
                         }`}
                       >
@@ -247,10 +247,10 @@ export default function ContactPage() {
                     </div>
                     
                     {/* Active Office Details */}
-                    <div className="space-y-5 bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm">
+                    <div className="space-y-5 bg-[#FAF9F6] p-6 rounded-2xl border border-slate-200/60 shadow-sm">
                       <div className="flex gap-4 items-start">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 border border-slate-200 shrink-0 mt-0.5">
-                          <MapPin className="h-5 w-5 text-blue-600" />
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 border border-amber-100 shrink-0 mt-0.5">
+                          <MapPin className="h-5 w-5 text-amber-600" />
                         </div>
                         <div>
                           <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">
@@ -263,8 +263,8 @@ export default function ContactPage() {
                       </div>
 
                       <div className="flex gap-4 items-start">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 border border-slate-200 shrink-0 mt-0.5">
-                          <PhoneCall className="h-5 w-5 text-blue-600" />
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 border border-amber-100 shrink-0 mt-0.5">
+                          <PhoneCall className="h-5 w-5 text-amber-600" />
                         </div>
                         <div>
                           <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">
@@ -273,7 +273,7 @@ export default function ContactPage() {
                           <a
                             href={`tel:${activeOffice.phoneRaw}`}
                             onClick={trackCallClick}
-                            className="text-base font-black text-blue-600 hover:text-blue-700 transition-colors"
+                            className="text-base font-black text-amber-600 hover:text-amber-700 transition-colors"
                           >
                             {activeOffice.phone}
                           </a>
@@ -281,8 +281,8 @@ export default function ContactPage() {
                       </div>
 
                       <div className="flex gap-4 items-start">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 border border-slate-200 shrink-0 mt-0.5">
-                          <Clock className="h-5 w-5 text-blue-600" />
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 border border-amber-100 shrink-0 mt-0.5">
+                          <Clock className="h-5 w-5 text-amber-600" />
                         </div>
                         <div>
                           <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">
@@ -295,8 +295,8 @@ export default function ContactPage() {
                       </div>
 
                       <div className="flex gap-4 items-start">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 border border-slate-200 shrink-0 mt-0.5">
-                          <Globe2 className="h-5 w-5 text-blue-600" />
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 border border-amber-100 shrink-0 mt-0.5">
+                          <Globe2 className="h-5 w-5 text-amber-600" />
                         </div>
                         <div>
                           <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">
