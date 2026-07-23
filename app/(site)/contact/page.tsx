@@ -2,12 +2,55 @@
 
 import ContactForm from "@/components/contact/ContactForm";
 import WebPageSchema from "@/components/seo/WebPageSchema";
-import { PhoneCall, Mail, MapPin, Building2, Clock, Globe2, ArrowRight } from "lucide-react";
+import { PhoneCall, Mail, MapPin, Building2, Clock, Globe2 } from "lucide-react";
 import { FaWhatsapp, FaLinkedinIn, FaInstagram, FaFacebookF } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useState } from "react";
+
+type OfficeKey = "udupi" | "singapore";
+
+interface OfficeInfo {
+  id: OfficeKey;
+  city: string;
+  country: string;
+  address: string;
+  phone: string;
+  phoneRaw: string;
+  hours: string;
+  timezone: string;
+  mapEmbedUrl: string;
+}
+
+const offices: Record<OfficeKey, OfficeInfo> = {
+  udupi: {
+    id: "udupi",
+    city: "Udupi",
+    country: "India",
+    address: "2nd Floor, Business Bay Centre, Udupi–Manipal Highway, Kunjibettu, Udupi, Karnataka 576102, India",
+    phone: "+91 99863 89444",
+    phoneRaw: "+919986389444",
+    hours: "Monday - Saturday: 9:30 AM - 6:30 PM (IST)",
+    timezone: "Asia/Kolkata (GMT +5:30)",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3882.0683301323256!2d74.75867481153196!3d13.346025606502767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbcbb00641988d9%3A0x1910b2d04006bb2c!2sBusiness%20Bay%20Centre%2C%20Udupi!5e0!3m2!1sen!2sin!4v1769259024312!5m2!1sen!2sin",
+  },
+  singapore: {
+    id: "singapore",
+    city: "Singapore",
+    country: "Singapore",
+    address: "7 Temasek Boulevard, #12-07, Suntec Tower 1, Singapore 038987",
+    phone: "+65 8961 4646",
+    phoneRaw: "+6589614646",
+    hours: "Monday - Friday: 9:00 AM - 6:00 PM (SGT)",
+    timezone: "Asia/Singapore (GMT +8:00)",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7891823901174!2d103.85526977587884!3d1.295058561726059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19aef6d962ab%3A0x6a1bc9a96e1a9675!2s7%20Temasek%20Blvd%2C%20Suntec%20Tower%20One%2C%20Singapore%20038987!5e0!3m2!1sen!2sin!4v1769259000000!5m2!1sen!2sin",
+  },
+};
 
 export default function ContactPage() {
-  const trackCallClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const [activeOfficeKey, setActiveOfficeKey] = useState<OfficeKey>("udupi");
+  const activeOffice = offices[activeOfficeKey];
+
+  const trackCallClick = () => {
     if (typeof window !== "undefined" && (window as any).gtag) {
       (window as any).gtag("event", "conversion", {
         send_to: "AW-17335403082/ul0ECKr5i_QaEMqElcpA",
@@ -18,11 +61,19 @@ export default function ContactPage() {
   const contactMethods = [
     {
       icon: PhoneCall,
-      title: "Call Us",
+      title: "India Office",
       value: "+91 99863 89444",
       href: "tel:+919986389444",
       color: "text-blue-600",
       bg: "bg-blue-50 border border-blue-100/50",
+    },
+    {
+      icon: PhoneCall,
+      title: "Singapore Office",
+      value: "+65 8961 4646",
+      href: "tel:+6589614646",
+      color: "text-amber-600",
+      bg: "bg-amber-50 border border-amber-100/50",
     },
     {
       icon: FaWhatsapp,
@@ -112,20 +163,20 @@ export default function ContactPage() {
               </div>
 
               {/* Direct Connect Cards */}
-              <div className="grid sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
                 {contactMethods.map((method, idx) => (
                   <a
                     key={idx}
                     href={method.href}
                     onClick={method.href.startsWith("tel:") ? trackCallClick : undefined}
                     target={method.icon === FaWhatsapp ? "_blank" : undefined}
-                    className="group flex flex-col items-center text-center p-5 rounded-[2rem] border border-slate-200/60 bg-white/70 backdrop-blur-md transition-all duration-300 hover:bg-white hover:border-amber-500/40 hover:-translate-y-1 hover:shadow-xl"
+                    className="group flex flex-col items-center text-center p-4 rounded-[1.75rem] border border-slate-200/60 bg-white/70 backdrop-blur-md transition-all duration-300 hover:bg-white hover:border-amber-500/40 hover:-translate-y-1 hover:shadow-xl"
                   >
-                    <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-2xl ${method.bg} transition-all duration-300 group-hover:scale-105`}>
-                      <method.icon className={`h-5.5 w-5.5 ${method.color}`} strokeWidth={2} />
+                    <div className={`mb-2.5 flex h-10 w-10 items-center justify-center rounded-2xl ${method.bg} transition-all duration-300 group-hover:scale-105`}>
+                      <method.icon className={`h-5 w-5 ${method.color}`} strokeWidth={2} />
                     </div>
-                    <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">{method.title}</span>
-                    <span className="text-xs font-bold text-slate-800 uppercase truncate w-full px-1">{method.value}</span>
+                    <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-0.5">{method.title}</span>
+                    <span className="text-[11px] font-bold text-slate-800 uppercase truncate w-full px-0.5">{method.value}</span>
                   </a>
                 ))}
               </div>
@@ -148,48 +199,107 @@ export default function ContactPage() {
                    </div>
                 </div>
 
-                {/* HQ DETAILS CARD */}
-                <div className="rounded-[2.5rem] bg-white border border-slate-200/60 p-6 sm:p-8 text-slate-800 relative overflow-hidden shadow-sm">
-                  {/* Visual Ambient Flare */}
+                {/* HQ & BRANCH OFFICES CARD */}
+                <div className="rounded-[2.5rem] bg-[#F4F6FB] border border-slate-200/80 p-6 sm:p-8 text-slate-800 relative overflow-hidden shadow-sm">
+                  {/* Ambient Glow */}
                   <div className="absolute top-0 right-0 w-64 h-64 bg-amber-200/10 blur-[80px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
                   
                   <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-5">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 border border-amber-500/20 shrink-0">
-                        <Building2 className="h-4.5 w-4.5 text-amber-600" />
+                    {/* Header with Title & Badge */}
+                    <div className="flex items-center justify-between mb-6 border-b border-slate-200/80 pb-4">
+                      <div className="flex items-center gap-3">
+                        <span className="text-xs font-black uppercase tracking-widest text-slate-500">
+                          Our Offices
+                        </span>
                       </div>
-                      <h2 className="text-lg font-black text-slate-900 tracking-tight">Global Headquarters</h2>
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-700 border border-blue-500/20">
+                        Global Presence
+                      </span>
+                    </div>
+
+                    {/* Office Selector Tabs (Udupi | Singapore) */}
+                    <div className="grid grid-cols-2 bg-slate-200/70 p-1.5 rounded-2xl mb-7 gap-1">
+                      <button
+                        type="button"
+                        onClick={() => setActiveOfficeKey("udupi")}
+                        className={`py-2.5 px-3 rounded-xl text-sm font-bold transition-all duration-200 text-center ${
+                          activeOfficeKey === "udupi"
+                            ? "bg-white text-slate-900 shadow-md font-extrabold"
+                            : "text-slate-500 hover:text-slate-900"
+                        }`}
+                      >
+                        Udupi
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setActiveOfficeKey("singapore")}
+                        className={`py-2.5 px-3 rounded-xl text-sm font-bold transition-all duration-200 text-center ${
+                          activeOfficeKey === "singapore"
+                            ? "bg-white text-slate-900 shadow-md font-extrabold"
+                            : "text-slate-500 hover:text-slate-900"
+                        }`}
+                      >
+                        Singapore
+                      </button>
                     </div>
                     
-                    <div className="space-y-4">
-                      <div className="flex gap-4">
-                        <MapPin className="h-5 w-5 text-slate-400 shrink-0 mt-0.5" />
+                    {/* Active Office Details */}
+                    <div className="space-y-5 bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm">
+                      <div className="flex gap-4 items-start">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 border border-slate-200 shrink-0 mt-0.5">
+                          <MapPin className="h-5 w-5 text-blue-600" />
+                        </div>
                         <div>
-                          <h4 className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">Office Address</h4>
-                          <p className="text-sm font-bold leading-relaxed text-slate-600">
-                            2nd Floor, Business Bay Centre<br />
-                            Udupi–Manipal Highway, Kunjibettu<br />
-                            Udupi, Karnataka, Pin: 576102, India
+                          <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">
+                            Office Location ({activeOffice.country})
+                          </h4>
+                          <p className="text-sm font-bold leading-relaxed text-slate-800">
+                            {activeOffice.address}
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex gap-4">
-                        <Clock className="h-5 w-5 text-slate-400 shrink-0 mt-0.5" />
+                      <div className="flex gap-4 items-start">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 border border-slate-200 shrink-0 mt-0.5">
+                          <PhoneCall className="h-5 w-5 text-blue-600" />
+                        </div>
                         <div>
-                          <h4 className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">Working Hours</h4>
-                          <p className="text-sm font-bold text-slate-600">
-                            Mon - Sat: 9:30 AM - 6:30 PM (IST)<br />
-                            Sun: Closed
+                          <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">
+                            Direct Line
+                          </h4>
+                          <a
+                            href={`tel:${activeOffice.phoneRaw}`}
+                            onClick={trackCallClick}
+                            className="text-base font-black text-blue-600 hover:text-blue-700 transition-colors"
+                          >
+                            {activeOffice.phone}
+                          </a>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-4 items-start">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 border border-slate-200 shrink-0 mt-0.5">
+                          <Clock className="h-5 w-5 text-blue-600" />
+                        </div>
+                        <div>
+                          <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">
+                            Working Hours
+                          </h4>
+                          <p className="text-sm font-bold text-slate-800">
+                            {activeOffice.hours}
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex gap-4">
-                        <Globe2 className="h-5 w-5 text-slate-400 shrink-0 mt-0.5" />
+                      <div className="flex gap-4 items-start">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 border border-slate-200 shrink-0 mt-0.5">
+                          <Globe2 className="h-5 w-5 text-blue-600" />
+                        </div>
                         <div>
-                          <h4 className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">Timezone</h4>
-                          <p className="text-sm font-bold text-slate-600">Asia/Kolkata (GMT +5:30)</p>
+                          <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">
+                            Timezone
+                          </h4>
+                          <p className="text-sm font-bold text-slate-800">{activeOffice.timezone}</p>
                         </div>
                       </div>
                     </div>
@@ -215,10 +325,20 @@ export default function ContactPage() {
       {/* ================= HQ & MAP SECTION ================= */}
       <section className="relative px-6 pb-20 pt-8 lg:pt-12">
         <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-4 px-2">
+            <h3 className="text-lg font-bold text-slate-800">
+              Location Map &mdash; <span className="text-amber-600">{activeOffice.city}, {activeOffice.country}</span>
+            </h3>
+            <span className="text-xs font-semibold text-slate-500">
+              Click tabs above to switch office location
+            </span>
+          </div>
+
           {/* MAP CARD */}
           <div className="relative group rounded-[3rem] border border-slate-200/60 bg-white overflow-hidden shadow-xl h-[450px] sm:h-[500px] w-full">
-             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3882.0683301323256!2d74.75867481153196!3d13.346025606502767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbcbb00641988d9%3A0x1910b2d04006bb2c!2sBusiness%20Bay%20Centre%2C%20Udupi!5e0!3m2!1sen!2sin!4v1769259024312!5m2!1sen!2sin"
+            <iframe
+              key={activeOffice.id}
+              src={activeOffice.mapEmbedUrl}
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -241,3 +361,4 @@ export default function ContactPage() {
     </main>
   );
 }
+
