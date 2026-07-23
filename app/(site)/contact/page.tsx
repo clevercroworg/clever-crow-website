@@ -7,10 +7,11 @@ import { FaWhatsapp, FaLinkedinIn, FaInstagram, FaFacebookF } from "react-icons/
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-type OfficeKey = "udupi" | "singapore";
+type OfficeKey = "india" | "singapore";
 
 interface OfficeInfo {
   id: OfficeKey;
+  label: string;
   city: string;
   country: string;
   address: string;
@@ -22,9 +23,10 @@ interface OfficeInfo {
 }
 
 const offices: Record<OfficeKey, OfficeInfo> = {
-  udupi: {
-    id: "udupi",
-    city: "Udupi",
+  india: {
+    id: "india",
+    label: "India",
+    city: "India",
     country: "India",
     address: "2nd Floor, Business Bay Centre, Udupi–Manipal Highway, Kunjibettu, Udupi, Karnataka 576102, India",
     phone: "+91 99863 89444",
@@ -35,6 +37,7 @@ const offices: Record<OfficeKey, OfficeInfo> = {
   },
   singapore: {
     id: "singapore",
+    label: "Singapore",
     city: "Singapore",
     country: "Singapore",
     address: "7 Temasek Boulevard, #12-07, Suntec Tower 1, Singapore 038987",
@@ -47,7 +50,7 @@ const offices: Record<OfficeKey, OfficeInfo> = {
 };
 
 export default function ContactPage() {
-  const [activeOfficeKey, setActiveOfficeKey] = useState<OfficeKey>("udupi");
+  const [activeOfficeKey, setActiveOfficeKey] = useState<OfficeKey>("india");
   const activeOffice = offices[activeOfficeKey];
 
   const trackCallClick = () => {
@@ -217,18 +220,18 @@ export default function ContactPage() {
                       </span>
                     </div>
 
-                    {/* Office Selector Tabs (Udupi | Singapore) */}
+                    {/* Office Selector Tabs (India | Singapore) */}
                     <div className="grid grid-cols-2 bg-slate-200/70 p-1.5 rounded-2xl mb-7 gap-1">
                       <button
                         type="button"
-                        onClick={() => setActiveOfficeKey("udupi")}
+                        onClick={() => setActiveOfficeKey("india")}
                         className={`py-2.5 px-3 rounded-xl text-sm font-bold transition-all duration-200 text-center ${
-                          activeOfficeKey === "udupi"
+                          activeOfficeKey === "india"
                             ? "bg-white text-slate-900 shadow-md font-extrabold"
                             : "text-slate-500 hover:text-slate-900"
                         }`}
                       >
-                        Udupi
+                        India
                       </button>
                       <button
                         type="button"
