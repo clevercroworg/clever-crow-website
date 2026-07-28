@@ -11,12 +11,7 @@ export interface SetupModule {
 
 export const digitalMarketingSetupData = {
   hero: {
-    badges: [
-      "Complete Setup 2026",
-      "One-Time Setup",
-      "No Monthly Commitment",
-      "100% Client Ownership",
-    ],
+    badges: [],
     title: "Complete Digital Marketing Setup",
     accentTitle: "@ ₹19,999 + GST",
     subtitle: "A professionally configured digital marketing foundation for businesses ready to advertise, track leads, and scale online.",
