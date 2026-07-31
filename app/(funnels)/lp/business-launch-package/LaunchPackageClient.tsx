@@ -5,7 +5,7 @@ import "../lp.css";
 
 // Components
 import Header from "../components/Header";
-import HeroSection from "../components/HeroSection";
+import HeroLaunchPackage from "./HeroLaunchPackage";
 import LogoMarquee from "../components/LogoMarquee";
 import PerformanceExperts from "../components/PerformanceExperts";
 import SuccessStories from "../components/SuccessStories";
@@ -24,8 +24,8 @@ export default function LaunchPackageClient() {
       <div className="site-shell">
         <Header />
         <main id="top">
-          {/* Hero Section - Standard Dark Blue Navy Gradient, No Badges */}
-          <HeroSection data={launchPackageData.hero} />
+          {/* Custom Hero Section matching reference mockup */}
+          <HeroLaunchPackage onOpenModal={() => setIsModalOpen(true)} />
           
           <LogoMarquee />
 
