@@ -106,7 +106,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
               ))}
             </div>
           )}
-          <h1 className="mt-6 text-[1.75rem] leading-[1.2] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[3rem] lg:leading-[1.08]">
+          <h1 className={`${hero.badges && hero.badges.length > 0 ? "mt-6" : "mt-2"} text-[1.75rem] leading-[1.2] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[3rem] lg:leading-[1.08]`}>
             <span className="font-light text-white">{hero.title}</span>
             <span className="block font-extrabold offer-highlight">{hero.accentTitle}</span>
           </h1>

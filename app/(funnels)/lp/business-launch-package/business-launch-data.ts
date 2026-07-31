@@ -4,13 +4,13 @@ export const launchPackageData = {
   hero: {
     badges: [], // No badges in hero section as requested
     title: "Complete Business Launch Package",
-    accentTitle: "₹19,999 + GST",
+    accentTitle: "@ Just ₹19,999 + GST",
     subtitle: "Everything Your Business Needs to Start Getting Customers Online",
     highlights: [
-      "Website • Google • Facebook • Instagram • WhatsApp • Advertising Setup",
+      "Website • Google • Social • WhatsApp • Ads Setup",
       "One-Time Setup Only — No Monthly Commitment",
-      "100% Account Ownership",
-      "Get your business professionally set up across all major digital platforms. We create your website, Google presence, social media accounts, advertising systems and lead-generation setup so your business is ready to attract customers online.",
+      "100% Client Account Ownership Included",
+      "7–10 Working Days Fast Delivery Timeline",
     ],
     ctaLabel: "Get Started Today",
     ctaHref: "#package-details",
