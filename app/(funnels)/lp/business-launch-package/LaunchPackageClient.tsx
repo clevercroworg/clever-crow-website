@@ -85,28 +85,35 @@ export default function LaunchPackageClient() {
                 {launchPackageData.modules.map((module) => (
                   <div
                     key={module.number}
-                    className="relative rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm hover:shadow-md hover:border-amber-400 transition duration-300 flex flex-col justify-between"
+                    className="relative rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm hover:shadow-md hover:border-amber-400 transition duration-300 flex flex-col justify-between"
                   >
                     <div>
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="text-xs font-black tracking-widest text-amber-800 uppercase bg-amber-100 px-3 py-1 rounded-full border border-amber-300">
+                      {/* Heading & Padded Value Badge */}
+                      <div className="flex items-start justify-between gap-4 mb-4">
+                        <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight leading-snug">
                           {module.number}. {module.title}
-                        </span>
-                        <span className="text-xs font-semibold text-slate-700 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+                        </h3>
+                        <span className="text-xs font-bold text-amber-900 bg-amber-100 px-3.5 py-1.5 rounded-full border border-amber-300 shrink-0 whitespace-nowrap shadow-xs">
                           {module.value}
                         </span>
                       </div>
+
                       <p className="text-sm text-slate-600 mb-6 font-medium leading-relaxed">{module.description}</p>
-                      <div className="border-t border-slate-100 pt-4">
-                        <p className="text-xs font-bold text-amber-800 uppercase tracking-wider mb-3">Included</p>
-                        <ul className="space-y-2 text-sm text-slate-700">
+                      
+                      <div className="border-t border-slate-100 pt-5">
+                        <p className="text-xs font-bold text-amber-800 uppercase tracking-widest mb-3">INCLUDED</p>
+                        
+                        {/* Included Tag Cards with Tick Marks */}
+                        <div className="grid gap-2">
                           {module.included.map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-2.5">
-                              <span className="text-amber-600 font-bold shrink-0">•</span>
-                              <span>{item}</span>
-                            </li>
+                            <div key={idx} className="flex items-center gap-2.5 p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-amber-300 hover:bg-white transition">
+                              <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold flex items-center justify-center shrink-0 border border-emerald-300">
+                                ✓
+                              </span>
+                              <span className="text-xs sm:text-sm font-semibold text-slate-800">{item}</span>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
