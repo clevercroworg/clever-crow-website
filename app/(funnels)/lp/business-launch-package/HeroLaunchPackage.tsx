@@ -18,11 +18,11 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
           alt="Complete Business Launch Package Ecosystem Digital Showcase"
           fill
           priority
-          className="object-cover object-right md:object-right-top opacity-75 lg:opacity-90"
+          className="object-cover object-center opacity-100"
         />
-        {/* Left Side Dark Navy Gradient Overlay for Text Visibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#050814] via-[#050814]/95 sm:via-[#050814]/90 to-transparent lg:w-[65%] pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050814]/60 via-transparent to-[#050814] pointer-events-none" />
+        {/* Subtle Gradient Blend for Seamless Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050814]/90 via-[#050814]/60 to-transparent sm:w-[60%] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050814]/40 via-transparent to-[#050814] pointer-events-none" />
       </div>
 
       {/* 2. Main Hero Content Container */}
