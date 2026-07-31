@@ -11,54 +11,65 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
   return (
     <section className="relative overflow-hidden min-h-[640px] pt-20 sm:pt-24 pb-12 bg-[#050814] text-white flex flex-col justify-between">
       
-      {/* 1. Full 16:9 Ratio Background Image Layer */}
-      <div className="absolute inset-0 z-0">
+      {/* 1. Desktop 16:9 Landscape Background Layer (Hidden on Mobile) */}
+      <div className="hidden md:block absolute inset-0 z-0">
         <Image
           src="/images/landing-page/business-launch-hero.png"
-          alt="Complete Business Launch Package Ecosystem Digital Showcase"
+          alt="Complete Business Launch Package Ecosystem Digital Showcase Desktop"
           fill
           priority
           className="object-cover object-center opacity-100"
         />
-        {/* Subtle Gradient Blend for Seamless Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#050814]/90 via-[#050814]/60 to-transparent sm:w-[60%] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050814]/95 via-[#050814]/75 to-transparent w-[60%] pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#050814]/40 via-transparent to-[#050814] pointer-events-none" />
       </div>
 
-      {/* 2. Main Hero Content Container */}
+      {/* 2. Mobile 9:16 Portrait Background Layer (Only Visible on Mobile) */}
+      <div className="block md:hidden absolute inset-0 z-0">
+        <Image
+          src="/images/landing-page/business-launch-hero-mobile.png"
+          alt="Complete Business Launch Package Ecosystem Digital Showcase Mobile"
+          fill
+          priority
+          className="object-cover object-top opacity-90"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050814]/95 via-[#050814]/80 to-[#050814]/95 pointer-events-none" />
+      </div>
+
+      {/* 3. Main Hero Content Container */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
           
-          {/* Left Column (Overlaid on Background Image): Headline, Price Box, CTA & 2D Icon Grid */}
-          <div className="lg:col-span-7 space-y-6 pt-4">
+          {/* Left Column (Overlaid): Headline, Price Box, CTA & 2D Icon Grid */}
+          <div className="lg:col-span-7 space-y-5 sm:space-y-6 pt-2 sm:pt-4">
             
             {/* Top Pill Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/40 bg-[#0d1636]/90 px-4 py-1.5 text-xs font-semibold text-purple-200 backdrop-blur-md shadow-lg">
+            <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/40 bg-[#0d1636]/90 px-3.5 sm:px-4 py-1.5 text-xs font-semibold text-purple-200 backdrop-blur-md shadow-lg">
               <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
               <span className="uppercase tracking-wider">One-Time Business Setup</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-white drop-shadow-md">
-              Complete Business <br />
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] sm:leading-[1.08] text-white drop-shadow-md">
+              Complete Business <br className="hidden sm:inline" />
               <span className="text-white">
                 Launch Package
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-lg text-slate-200 font-medium max-w-xl leading-relaxed drop-shadow-xs">
+            <p className="text-sm sm:text-lg text-slate-200 font-medium max-w-xl leading-relaxed drop-shadow-xs">
               Everything your business needs to start getting customers online.
             </p>
 
             {/* Pricing Card (Dark Glass Box Overlaid) */}
-            <div className="rounded-2xl border border-blue-500/40 bg-[#0a1128]/95 p-5 sm:p-6 backdrop-blur-xl shadow-[0_0_35px_rgba(5,8,20,0.8)] max-w-md">
+            <div className="rounded-2xl border border-blue-500/40 bg-[#0a1128]/95 p-4 sm:p-6 backdrop-blur-xl shadow-[0_0_35px_rgba(5,8,20,0.8)] max-w-md">
               <span className="text-xs font-semibold text-slate-400 block">Worth ₹48,000+</span>
               <div className="mt-1 flex items-baseline gap-2">
                 <span className="text-3xl sm:text-4xl font-black text-[#f4c542]">₹19,999</span>
                 <span className="text-sm font-bold text-white">+ GST</span>
               </div>
-              <p className="mt-2 text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+              <p className="mt-2 text-xs font-semibold text-slate-300 flex items-center gap-1.5 flex-wrap">
                 <span>No Monthly Commitment</span>
                 <span>•</span>
                 <span>100% Ownership</span>
@@ -71,7 +82,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
                 href="https://wa.me/919986389444?text=Hi%20Clever%20Crow%2C%20I%27m%20interested%20in%20the%20Complete%20Business%20Launch%20Package%20(%E2%82%B919%2C999%2BGST)."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-between gap-6 rounded-full bg-[#f4c542] px-8 py-4 text-base font-bold text-black shadow-[0_8px_30px_rgba(244,197,66,0.35)] hover:brightness-110 hover:scale-[1.02] transition duration-200 group min-w-[260px]"
+                className="inline-flex items-center justify-between gap-6 rounded-full bg-[#f4c542] px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-black shadow-[0_8px_30px_rgba(244,197,66,0.35)] hover:brightness-110 hover:scale-[1.02] transition duration-200 group w-full sm:w-auto min-w-0 sm:min-w-[260px]"
               >
                 <span>Get Started Today</span>
                 <div className="flex items-center gap-3">
@@ -85,7 +96,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
 
             {/* 2D Platform Vector Icon Grid */}
             <div className="pt-4 border-t border-slate-800/80 max-w-xl">
-              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5 text-center">
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-2.5 text-center">
                 
                 {/* 1. Website (2D Globe Icon) */}
                 <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl bg-[#09132e]/80 border border-blue-900/40 backdrop-blur-md">
@@ -95,7 +106,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
                       <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                     </svg>
                   </div>
-                  <span className="text-[11px] font-semibold text-slate-200">Website</span>
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-slate-200">Website</span>
                 </div>
 
                 {/* 2. Domain & Hosting (2D Server/Layout Icon) */}
@@ -108,7 +119,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
                       <line x1="6" y1="17" x2="6.01" y2="17" strokeWidth="3" />
                     </svg>
                   </div>
-                  <span className="text-[11px] font-semibold text-slate-200">Domain & Hosting</span>
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-slate-200">Domain & Hosting</span>
                 </div>
 
                 {/* 3. Google Business (2D Map Pin Icon) */}
@@ -119,7 +130,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
                       <circle cx="12" cy="10" r="3" />
                     </svg>
                   </div>
-                  <span className="text-[11px] font-semibold text-slate-200">Google Business</span>
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-slate-200">Google Business</span>
                 </div>
 
                 {/* 4. Facebook & Instagram (2D Social Icon) */}
@@ -131,7 +142,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
                       <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" strokeWidth="3" />
                     </svg>
                   </div>
-                  <span className="text-[11px] font-semibold text-slate-200">Facebook & Instagram</span>
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-slate-200">Facebook & Instagram</span>
                 </div>
 
                 {/* 5. Ads Setup (2D Megaphone Icon) */}
@@ -142,7 +153,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
                       <path d="M12 12L2.1 10.05A10 10 0 0 0 12 22V12z" />
                     </svg>
                   </div>
-                  <span className="text-[11px] font-semibold text-slate-200">Ads Setup</span>
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-slate-200">Ads Setup</span>
                 </div>
 
                 {/* 6. WhatsApp (2D Chat Icon) */}
@@ -152,7 +163,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
                       <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
                     </svg>
                   </div>
-                  <span className="text-[11px] font-semibold text-slate-200">WhatsApp</span>
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-slate-200">WhatsApp</span>
                 </div>
 
               </div>
@@ -160,58 +171,58 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
 
           </div>
 
-          {/* Right Column Spacer (Space reserved so background image ecosystem shines through) */}
+          {/* Right Column Spacer for Desktop */}
           <div className="hidden lg:block lg:col-span-5 min-h-[420px]" />
 
         </div>
 
         {/* Bottom Trust Ribbon Bar (Full Width across bottom with 2D Icons) */}
-        <div className="mt-10 rounded-2xl border border-blue-900/60 bg-[#0a1128]/90 p-4 sm:p-5 backdrop-blur-xl shadow-2xl">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+        <div className="mt-8 sm:mt-10 rounded-2xl border border-blue-900/60 bg-[#0a1128]/90 p-3.5 sm:p-5 backdrop-blur-xl shadow-2xl">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-center">
             
             {/* 1. Businesses Served */}
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center shrink-0 border border-purple-500/30">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <div className="flex items-center justify-center gap-2.5 sm:gap-3">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center shrink-0 border border-purple-500/30">
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                   <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M23 21v-2a4 4 0 0 3-3.87" />
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
               </div>
-              <span className="text-xs sm:text-sm font-bold text-white">100+ Businesses Served</span>
+              <span className="text-[11px] sm:text-sm font-bold text-white">100+ Businesses Served</span>
             </div>
 
             {/* 2. Days Delivery */}
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-blue-500/20 text-blue-300 flex items-center justify-center shrink-0 border border-blue-500/30">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <div className="flex items-center justify-center gap-2.5 sm:gap-3">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-blue-500/20 text-blue-300 flex items-center justify-center shrink-0 border border-blue-500/30">
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
                 </svg>
               </div>
-              <span className="text-xs sm:text-sm font-bold text-white">7–10 Days Delivery</span>
+              <span className="text-[11px] sm:text-sm font-bold text-white">7–10 Days Delivery</span>
             </div>
 
             {/* 3. 100% Ownership */}
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0 border border-emerald-500/30">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <div className="flex items-center justify-center gap-2.5 sm:gap-3">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0 border border-emerald-500/30">
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                   <path d="m9 12 2 2 4-4" />
                 </svg>
               </div>
-              <span className="text-xs sm:text-sm font-bold text-white">100% Ownership</span>
+              <span className="text-[11px] sm:text-sm font-bold text-white">100% Ownership</span>
             </div>
 
             {/* 4. Support */}
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0 border border-amber-500/30">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <div className="flex items-center justify-center gap-2.5 sm:gap-3">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0 border border-amber-500/30">
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
                   <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
                 </svg>
               </div>
-              <span className="text-xs sm:text-sm font-bold text-white">30 Days Support</span>
+              <span className="text-[11px] sm:text-sm font-bold text-white">30 Days Support</span>
             </div>
 
           </div>
