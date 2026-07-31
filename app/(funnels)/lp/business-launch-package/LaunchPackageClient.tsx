@@ -7,7 +7,10 @@ import "../lp.css";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import LogoMarquee from "../components/LogoMarquee";
+import PerformanceExperts from "../components/PerformanceExperts";
+import SuccessStories from "../components/SuccessStories";
 import FaqSection from "../components/FaqSection";
+import ClientReviews from "../components/ClientReviews";
 import Footer from "@/components/Footer";
 import CallbackModal from "../components/CallbackModal";
 import WhatsAppButton from "../components/WhatsAppButton";
@@ -24,7 +27,6 @@ export default function LaunchPackageClient() {
           {/* Hero Section - Standard Dark Blue Navy Gradient, No Badges */}
           <HeroSection data={launchPackageData.hero} />
           
-          {/* All Sections Below Hero Have Clean White / Slate-50 Backgrounds */}
           <LogoMarquee />
 
           {/* Section 1: Total Package Value Table & Intro (White Section) */}
@@ -216,7 +218,7 @@ export default function LaunchPackageClient() {
             </div>
           </section>
 
-          {/* Section 4: Delivery Timeline & What We Need From You (Balanced Heights & 2-Column Grid) */}
+          {/* Section 4: Delivery Timeline & What We Need From You */}
           <section className="py-16 sm:py-24 bg-white border-t border-slate-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="grid gap-8 lg:grid-cols-12 items-stretch">
@@ -316,7 +318,7 @@ export default function LaunchPackageClient() {
             </div>
           </section>
 
-          {/* Section 6: Support Included & Not Included (Balanced Heights & 2-Column Layout) */}
+          {/* Section 6: Support Included & Not Included */}
           <section className="py-16 sm:py-24 bg-white border-t border-slate-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="text-center max-w-3xl mx-auto mb-12">
@@ -388,8 +390,21 @@ export default function LaunchPackageClient() {
             </div>
           </section>
 
+          {/* Social Proof & Portfolio / Case Studies Section */}
+          <PerformanceExperts />
+
+          <SuccessStories
+            data={launchPackageData.caseStudies}
+            title="Success Stories Across Industries"
+            subtitle="Explore how our digital marketing infrastructure drives growth for real businesses."
+            filterBy="platform"
+          />
+
           {/* Frequently Asked Questions */}
           <FaqSection data={launchPackageData.faqs} />
+
+          {/* Client Reviews Section */}
+          <ClientReviews />
 
           {/* Section 7: Final CTA Section (Blue BG, Compact Height, White Card) */}
           <section className="py-10 sm:py-12 bg-gradient-to-r from-[#0b1739] via-[#0f2456] to-[#0b1739] text-white text-center border-t border-blue-900/40 relative overflow-hidden">
