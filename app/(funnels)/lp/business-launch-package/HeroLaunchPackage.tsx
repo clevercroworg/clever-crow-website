@@ -11,7 +11,21 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
   return (
     <section className="relative overflow-hidden min-h-[640px] pt-20 sm:pt-24 pb-12 bg-[#050814] text-white flex flex-col justify-between">
       
-      {/* 1. Desktop 16:9 Landscape Background Layer (Hidden on Mobile) */}
+      {/* Background Ambient Neon Glow Effects (All Screens) */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-600/20 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-[450px] h-[350px] bg-blue-600/20 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute top-10 left-0 w-[350px] h-[300px] bg-indigo-600/15 rounded-full blur-[110px] pointer-events-none" />
+      
+      {/* Subtle Grid Pattern Overlay */}
+      <div 
+        className="absolute inset-0 opacity-15 pointer-events-none" 
+        style={{
+          backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px)`,
+          backgroundSize: `32px 32px`
+        }} 
+      />
+
+      {/* Desktop 16:9 Landscape Background Layer (Hidden on Mobile for 100% Crisp Mobile Text) */}
       <div className="hidden md:block absolute inset-0 z-0">
         <Image
           src="/images/landing-page/business-launch-hero.png"
@@ -24,23 +38,11 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
         <div className="absolute inset-0 bg-gradient-to-b from-[#050814]/40 via-transparent to-[#050814] pointer-events-none" />
       </div>
 
-      {/* 2. Mobile 9:16 Portrait Background Layer (Only Visible on Mobile) */}
-      <div className="block md:hidden absolute inset-0 z-0">
-        <Image
-          src="/images/landing-page/business-launch-hero-mobile.png"
-          alt="Complete Business Launch Package Ecosystem Digital Showcase Mobile"
-          fill
-          priority
-          className="object-cover object-top opacity-90"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050814]/95 via-[#050814]/80 to-[#050814]/95 pointer-events-none" />
-      </div>
-
-      {/* 3. Main Hero Content Container */}
+      {/* Main Hero Content Container */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 w-full my-auto">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
           
-          {/* Left Column (Overlaid): Headline, Price Box, CTA & 2D Icon Grid */}
+          {/* Left Column: Headline, Price Box, CTA & 2D Icon Grid */}
           <div className="lg:col-span-7 space-y-5 sm:space-y-6 pt-2 sm:pt-4">
             
             {/* Top Pill Badge */}
@@ -62,7 +64,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
               Everything your business needs to start getting customers online.
             </p>
 
-            {/* Pricing Card (Dark Glass Box Overlaid) */}
+            {/* Pricing Card (Dark Glass Box) */}
             <div className="rounded-2xl border border-blue-500/40 bg-[#0a1128]/95 p-4 sm:p-6 backdrop-blur-xl shadow-[0_0_35px_rgba(5,8,20,0.8)] max-w-md">
               <span className="text-xs font-semibold text-slate-400 block">Worth ₹48,000+</span>
               <div className="mt-1 flex items-baseline gap-2">
@@ -98,7 +100,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
             <div className="pt-4 border-t border-slate-800/80 max-w-xl">
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-2.5 text-center">
                 
-                {/* 1. Website (2D Globe Icon) */}
+                {/* 1. Website */}
                 <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl bg-[#09132e]/80 border border-blue-900/40 backdrop-blur-md">
                   <div className="w-7 h-7 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -109,7 +111,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
                   <span className="text-[10px] sm:text-[11px] font-semibold text-slate-200">Website</span>
                 </div>
 
-                {/* 2. Domain & Hosting (2D Server/Layout Icon) */}
+                {/* 2. Domain & Hosting */}
                 <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl bg-[#09132e]/80 border border-blue-900/40 backdrop-blur-md">
                   <div className="w-7 h-7 rounded-lg bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 flex items-center justify-center">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -122,7 +124,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
                   <span className="text-[10px] sm:text-[11px] font-semibold text-slate-200">Domain & Hosting</span>
                 </div>
 
-                {/* 3. Google Business (2D Map Pin Icon) */}
+                {/* 3. Google Business */}
                 <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl bg-[#09132e]/80 border border-blue-900/40 backdrop-blur-md">
                   <div className="w-7 h-7 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 flex items-center justify-center">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -133,7 +135,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
                   <span className="text-[10px] sm:text-[11px] font-semibold text-slate-200">Google Business</span>
                 </div>
 
-                {/* 4. Facebook & Instagram (2D Social Icon) */}
+                {/* 4. Facebook & Instagram */}
                 <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl bg-[#09132e]/80 border border-blue-900/40 backdrop-blur-md">
                   <div className="w-7 h-7 rounded-lg bg-pink-500/10 border border-pink-500/30 text-pink-400 flex items-center justify-center">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -145,7 +147,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
                   <span className="text-[10px] sm:text-[11px] font-semibold text-slate-200">Facebook & Instagram</span>
                 </div>
 
-                {/* 5. Ads Setup (2D Megaphone Icon) */}
+                {/* 5. Ads Setup */}
                 <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl bg-[#09132e]/80 border border-blue-900/40 backdrop-blur-md">
                   <div className="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -156,7 +158,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
                   <span className="text-[10px] sm:text-[11px] font-semibold text-slate-200">Ads Setup</span>
                 </div>
 
-                {/* 6. WhatsApp (2D Chat Icon) */}
+                {/* 6. WhatsApp */}
                 <div className="flex flex-col items-center gap-1.5 p-2 rounded-xl bg-[#09132e]/80 border border-blue-900/40 backdrop-blur-md">
                   <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -169,14 +171,28 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
               </div>
             </div>
 
+            {/* Dedicated Mobile Digital Showcase Graphic Card (Only Visible on Mobile) */}
+            <div className="block md:hidden pt-4">
+              <div className="relative rounded-2xl border border-slate-800 bg-[#090f26] p-2 shadow-2xl overflow-hidden">
+                <Image
+                  src="/images/landing-page/mobile-showcase-card.png"
+                  alt="Complete Business Launch Package Mobile Digital Showcase"
+                  width={600}
+                  height={600}
+                  className="w-full h-auto object-cover rounded-xl"
+                  priority
+                />
+              </div>
+            </div>
+
           </div>
 
-          {/* Right Column Spacer for Desktop */}
+          {/* Right Column Spacer for Desktop Layout */}
           <div className="hidden lg:block lg:col-span-5 min-h-[420px]" />
 
         </div>
 
-        {/* Bottom Trust Ribbon Bar (Full Width across bottom with 2D Icons) */}
+        {/* Bottom Trust Ribbon Bar (Full Width across bottom) */}
         <div className="mt-8 sm:mt-10 rounded-2xl border border-blue-900/60 bg-[#0a1128]/90 p-3.5 sm:p-5 backdrop-blur-xl shadow-2xl">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-center">
             
@@ -216,7 +232,7 @@ export default function HeroLaunchPackage({ onOpenModal }: HeroLaunchPackageProp
 
             {/* 4. Support */}
             <div className="flex items-center justify-center gap-2.5 sm:gap-3">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0 border border-amber-500/30">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0 border border-amber-300/30">
                 <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
                   <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
