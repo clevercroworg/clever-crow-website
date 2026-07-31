@@ -2,223 +2,270 @@ import { CaseStudy, FaqData } from "../website/website-data";
 
 export const launchPackageData = {
   hero: {
-    badges: [], // No badges in hero section as requested by user
+    badges: [], // No badges in hero section as requested
     title: "Complete Business Launch Package",
-    accentTitle: "@ Just ₹19,999 + GST",
+    accentTitle: "₹19,999 + GST",
     subtitle: "Everything Your Business Needs to Start Getting Customers Online",
     highlights: [
-      "Website • Google • Facebook • Instagram • WhatsApp • Ads Setup",
-      "One-Time Setup Only — No Compulsory Monthly Contract",
-      "100% Client Account Ownership & Assets Included",
-      "Fast 7–10 Working Days Delivery Timeline",
+      "Website • Google • Facebook • Instagram • WhatsApp • Advertising Setup",
+      "One-Time Setup Only — No Monthly Commitment",
+      "100% Account Ownership",
+      "Get your business professionally set up across all major digital platforms. We create your website, Google presence, social media accounts, advertising systems and lead-generation setup so your business is ready to attract customers online.",
     ],
-    ctaLabel: "View Package Details",
+    ctaLabel: "Get Started Today",
     ctaHref: "#package-details",
   },
-  pricing: {
-    preTitle: "COMPLETE ALL-IN-ONE SOLUTION",
-    title: "10 Essential Digital Assets Built For Your Business",
-    subtitle: "Stop juggling multiple agencies and freelancers. Get your entire digital ecosystem built by one expert team for ₹19,999 + GST.",
-    packages: [
-      {
-        label: "Complete Business Launch Package",
-        name: "One-Time Setup",
-        oldPrice: "₹48,000+",
-        price: "₹19,999",
-        description: "Everything your business needs to establish credibility, drive enquiries, and launch online ads seamlessly.",
-        featured: true,
-        features: [
-          "<strong>1. Professional Business Website (Value: ₹12,000)</strong><br/><span class='text-slate-600 text-xs'>Up to 5 pages, custom mobile design, Home, About, Services, Contact, Enquiry form, WhatsApp button, Click-to-call, Google Maps integration & SSL</span>",
-          "<strong>2. Domain & Hosting Included Free (Value: ₹5,000)</strong><br/><span class='text-slate-600 text-xs'>1 year .com / .in domain, 1 year website hosting, SSL certificate, basic backup setup & 1 professional email setup</span>",
-          "<strong>3. Google Business Profile (Value: ₹3,000)</strong><br/><span class='text-slate-600 text-xs'>Google Search & Maps setup, profile optimisation, working hours, product/service listings, address & photo uploads, verification assistance</span>",
-          "<strong>4. Facebook Business Page (Value: ₹3,000)</strong><br/><span class='text-slate-600 text-xs'>Page creation/optimisation, cover banner design, business info, CTA button & 6 branded posts</span>",
-          "<strong>5. Instagram Business Profile (Value: ₹3,000)</strong><br/><span class='text-slate-600 text-xs'>Business account setup/optimisation, bio writing, highlight covers & 6 branded posts</span>",
-          "<strong>6. 12 Branded Social Media Posts (Value: ₹6,000)</strong><br/><span class='text-slate-600 text-xs'>6 Facebook + 6 Instagram posts with business-focused graphics, captions & hashtags</span>",
-          "<strong>7. Google Ads Campaign Setup (Value: ₹5,000)</strong><br/><span class='text-slate-600 text-xs'>Account setup, 1 campaign, keyword research, ad groups, copy & enquiry extensions (ad budget extra)</span>",
-          "<strong>8. Meta Ads Campaign Setup (Value: ₹5,000)</strong><br/><span class='text-slate-600 text-xs'>Meta Business Manager setup, FB & IG ads account setup, 1 campaign, lead form & targeting (ad budget extra)</span>",
-          "<strong>9. WhatsApp Lead Generation Setup (Value: ₹2,000)</strong><br/><span class='text-slate-600 text-xs'>WhatsApp Business integration, click-to-chat on site, Meta connection & pre-filled messages</span>",
-          "<strong>10. Analytics & Lead Tracking (Value: ₹4,000)</strong><br/><span class='text-slate-600 text-xs'>Google Analytics setup, contact form tracking, WhatsApp click tracking, Google Ads conversion & Meta Pixel setup</span>",
-        ],
-      },
-    ],
-    quoteText: "Have custom requirements or specific needs?",
-    quoteHref: "tel:+919986389444",
-  },
+  summaryText: "Get your business professionally set up across all major digital platforms. We create your website, Google presence, social media accounts, advertising systems and lead-generation setup so your business is ready to attract customers online.",
+  
+  totalValueItems: [
+    { service: "Professional Business Website", value: "₹12,000" },
+    { service: "Domain and Hosting", value: "₹5,000" },
+    { service: "Google Business Profile", value: "₹3,000" },
+    { service: "Facebook Business Page", value: "₹3,000" },
+    { service: "Instagram Business Profile", value: "₹3,000" },
+    { service: "12 Social Media Posts", value: "₹6,000" },
+    { service: "Google Ads Setup", value: "₹5,000" },
+    { service: "Meta Ads Setup", value: "₹5,000" },
+    { service: "WhatsApp Integration", value: "₹2,000" },
+    { service: "Analytics and Lead Tracking", value: "₹4,000" },
+  ],
+
   modules: [
     {
-      number: "01",
+      number: "1",
       title: "Professional Business Website",
-      value: "₹12,000 Value",
+      value: "Value: ₹12,000",
       description: "A fast, mobile-friendly website designed to present your business professionally and generate enquiries.",
       included: [
         "Up to 5 website pages",
         "Custom professional design",
         "Mobile, tablet and desktop responsive",
-        "Home page, About Us page, Services/Products page, Contact page",
-        "Enquiry form & WhatsApp chat button",
-        "Click-to-call button & Google Maps integration",
-        "Basic search engine setup & SSL security certificate"
+        "Home page",
+        "About Us page",
+        "Services or Products page",
+        "Contact page",
+        "Enquiry form",
+        "WhatsApp chat button",
+        "Click-to-call button",
+        "Google Maps integration",
+        "Basic search engine setup",
+        "SSL security certificate"
       ]
     },
     {
-      number: "02",
+      number: "2",
       title: "Domain and Hosting Included Free",
-      value: "₹5,000 Value",
-      description: "Your website will be launched with its own custom domain name and high-speed hosting.",
+      value: "Value: ₹5,000",
+      description: "Your website will be launched with its own domain and hosting.",
       included: [
         "One .com or .in domain for one year",
         "Website hosting for one year",
-        "SSL certificate & website deployment",
+        "SSL certificate",
+        "Website deployment",
         "Basic backup setup",
-        "1 professional business email setup",
-        "Domain availability subject to confirmation"
+        "One professional business email setup",
+        "Domain availability is subject to confirmation."
       ]
     },
     {
-      number: "03",
+      number: "3",
       title: "Google Business Profile",
-      value: "₹3,000 Value",
-      description: "Help local customers discover your business on Google Search and Google Maps.",
+      value: "Value: ₹3,000",
+      description: "Help customers discover your business on Google Search and Google Maps.",
       included: [
         "Google Business Profile setup or optimisation",
         "Business name and category setup",
-        "Business description, address & service area configuration",
-        "Contact details, website linking & working hours",
-        "Product or service listings & photo uploads",
+        "Business description",
+        "Address and service area configuration",
+        "Contact details",
+        "Website linking",
+        "Working hours",
+        "Product or service listings",
+        "Business photo uploads",
+        "Google Maps setup",
         "Verification assistance"
       ]
     },
     {
-      number: "04",
+      number: "4",
       title: "Facebook Business Page",
-      value: "₹3,000 Value",
+      value: "Value: ₹3,000",
       description: "A professionally configured Facebook page that gives your business a credible online presence.",
       included: [
         "Facebook Business Page creation or optimisation",
-        "Profile image setup & cover banner design",
-        "Business info, About section & contact details",
-        "Website & WhatsApp linking with Call-to-action button",
+        "Profile image setup",
+        "Cover banner design",
+        "Business information",
+        "About section",
+        "Contact details",
+        "Website and WhatsApp linking",
+        "Call-to-action button",
         "6 professionally designed posts"
       ]
     },
     {
-      number: "05",
+      number: "5",
       title: "Instagram Business Profile",
-      value: "₹3,000 Value",
+      value: "Value: ₹3,000",
       description: "A professional Instagram presence designed to build trust and showcase your business.",
       included: [
         "Instagram Business Account setup or optimisation",
-        "Profile image setup & bio writing/optimisation",
-        "Contact buttons & website/WhatsApp linking",
+        "Profile image setup",
+        "Bio writing and optimisation",
+        "Contact buttons",
+        "Website and WhatsApp linking",
         "Highlight cover design",
         "6 professionally designed posts"
       ]
     },
     {
-      number: "06",
-      title: "12 Branded Social Media Posts",
-      value: "₹6,000 Value",
-      description: "Your business receives a ready-to-publish set of high quality branded content.",
+      number: "6",
+      title: "Social Media Content",
+      value: "Value: ₹6,000",
+      description: "Your business receives a ready-to-publish set of professional branded content.",
       included: [
         "12 professionally designed social media posts",
-        "6 Facebook posts + 6 Instagram posts",
+        "6 Facebook posts",
+        "6 Instagram posts",
         "Business-focused post designs",
-        "Promotional & service-related content",
-        "Captions for all posts & relevant hashtags"
+        "Promotional and service-related content",
+        "Captions for all posts",
+        "Relevant hashtags"
       ]
     },
     {
-      number: "07",
-      title: "Google Ads Campaign Setup",
-      value: "₹5,000 Value",
-      description: "We prepare your business to start receiving enquiries from people searching for your services.",
+      number: "7",
+      title: "Google Ads Setup",
+      value: "Value: ₹5,000",
+      description: "We prepare your business to start receiving enquiries from people actively searching for your services.",
       included: [
         "Google Ads account setup",
-        "1 campaign setup & keyword research",
-        "Location targeting & ad group structure",
-        "Ad copy setup & call/enquiry extensions",
-        "Basic conversion tracking & initial configuration",
-        "(Google advertising budget is not included)"
+        "One campaign setup",
+        "Keyword research",
+        "Location targeting",
+        "Ad group structure",
+        "Ad copy setup",
+        "Call and enquiry extensions",
+        "Basic conversion tracking",
+        "Initial campaign configuration",
+        "Google advertising budget is not included."
       ]
     },
     {
-      number: "08",
-      title: "Facebook & Instagram Ads Setup",
-      value: "₹5,000 Value",
-      description: "We prepare your Meta advertising system to start generating leads through FB and IG.",
+      number: "8",
+      title: "Facebook and Instagram Ads Setup",
+      value: "Value: ₹5,000",
+      description: "We prepare your Meta advertising system so your business can start generating leads through Facebook and Instagram.",
       included: [
-        "Meta Business Manager setup & FB Ads Account setup",
+        "Meta Business Manager setup",
+        "Facebook Ads Account setup",
         "Facebook and Instagram connection",
-        "1 campaign setup & audience targeting setup",
-        "Location targeting & lead form setup",
-        "WhatsApp campaign setup & basic lead tracking",
-        "(Meta advertising budget is not included)"
+        "One campaign setup",
+        "Audience targeting setup",
+        "Location targeting",
+        "Lead form setup",
+        "WhatsApp campaign setup, if applicable",
+        "Basic lead tracking",
+        "Meta advertising budget is not included."
       ]
     },
     {
-      number: "09",
+      number: "9",
       title: "WhatsApp Lead Generation Setup",
-      value: "₹2,000 Value",
-      description: "Make it easy for prospective customers to enquire directly through WhatsApp.",
+      value: "Value: ₹2,000",
+      description: "Make it easy for customers to enquire directly through WhatsApp.",
       included: [
         "WhatsApp Business integration",
         "WhatsApp button on the website",
         "Click-to-chat setup",
-        "Facebook & Instagram WhatsApp connection",
-        "Pre-filled enquiry message & lead routing setup"
+        "Facebook and Instagram WhatsApp connection",
+        "Pre-filled enquiry message",
+        "Lead routing setup"
       ]
     },
     {
       number: "10",
-      title: "Analytics & Lead Tracking",
-      value: "₹4,000 Value",
-      description: "Understand exactly where your website visitors and customer enquiries are coming from.",
+      title: "Analytics and Lead Tracking",
+      value: "Value: ₹4,000",
+      description: "Understand where your website visitors and enquiries are coming from.",
       included: [
         "Google Analytics setup",
         "Website visitor tracking",
-        "Contact form & WhatsApp click tracking",
+        "Contact form tracking",
+        "WhatsApp click tracking",
         "Phone call click tracking",
-        "Google Ads conversion tracking & Meta Pixel setup",
-        "Basic performance tracking configuration"
+        "Google Ads conversion tracking",
+        "Meta Pixel setup",
+        "Basic performance dashboard"
       ]
     }
   ],
-  targetAudience: [
-    "New Businesses & Startups",
-    "Local Businesses",
-    "Restaurants & Cafés",
-    "Salons & Spas",
-    "Clinics & Healthcare",
-    "Builders & Real Estate",
-    "Retail Stores",
-    "Manufacturers",
-    "Consultants & Agencies",
-    "Professional Service Providers",
-    "Small & Medium Enterprises (SMEs)"
+
+  whyValuableText: "Instead of working with different vendors for your website, Google profile, social media and advertising setup, you receive everything from one professional team.",
+  
+  endResultItems: [
+    "A professional website",
+    "Domain and hosting",
+    "Google Search and Maps presence",
+    "Facebook Business Page",
+    "Instagram Business Profile",
+    "12 professional social media posts",
+    "Google Ads setup",
+    "Facebook and Instagram Ads setup",
+    "WhatsApp lead system",
+    "Analytics and conversion tracking"
   ],
+
+  targetAudience: [
+    "New businesses",
+    "Startups",
+    "Local businesses",
+    "Restaurants and cafés",
+    "Salons and spas",
+    "Clinics and healthcare businesses",
+    "Builders and real-estate companies",
+    "Retail stores",
+    "Manufacturers",
+    "Consultants",
+    "Professional service providers",
+    "Small and medium businesses"
+  ],
+
+  deliveryTimeline: {
+    days: "7–10 Working Days",
+    note: "The delivery timeline begins after receiving the required business details, content, images, approvals and account access. Third-party account verification and approval timelines may vary."
+  },
+
   requirementsNeeded: [
     "Business name and logo",
-    "Business contact details (Phone, Email, Address)",
-    "List of services or products offered",
-    "Brief business description",
-    "Photos and videos (if available)",
-    "Address and service area locations",
-    "Existing social media / Google account access (if created)",
-    "Preferred domain name choice"
+    "Business contact details",
+    "List of services or products",
+    "Business description",
+    "Photos and videos, if available",
+    "Address and service locations",
+    "Social media account access, if already created",
+    "Google account access",
+    "Domain preference"
   ],
-  ownershipItems: [
-    "Website Code & Content",
-    "Domain Name Registration",
-    "Website Hosting Account",
-    "Google Business Profile",
-    "Facebook Business Page",
-    "Instagram Business Account",
-    "Google Ads Account",
-    "Meta Ads Manager Account",
-    "Google Analytics Account",
-    "Website Enquiries & Lead Data"
-  ],
+
+  accountOwnership: {
+    intro: "All accounts and digital assets will be created under the client’s ownership wherever the platform allows.",
+    items: [
+      "Website",
+      "Domain",
+      "Hosting",
+      "Google Business Profile",
+      "Facebook Page",
+      "Instagram Account",
+      "Google Ads Account",
+      "Meta Ads Account",
+      "Google Analytics",
+      "Website enquiries and lead data"
+    ]
+  },
+
   supportDetails: {
+    title: "30 Days of Post-Launch Support",
     included: [
       "Account access assistance",
       "Minor setup corrections",
@@ -228,49 +275,54 @@ export const launchPackageData = {
       "Basic technical guidance"
     ],
     notIncluded: [
-      "Google Ads or Meta Ads ad budget",
+      "Google Ads budget",
+      "Facebook or Instagram Ads budget",
       "Monthly advertising management",
       "Daily campaign optimisation",
       "Monthly social media management",
-      "Video production & professional photography",
-      "Advanced SEO & E-commerce payment gateways",
-      "Ongoing hosting & domain renewals after Year 1"
-    ]
+      "Video production",
+      "Professional photography",
+      "Advanced SEO",
+      "Ecommerce functionality",
+      "Payment gateway integration",
+      "Advanced website features",
+      "Ongoing hosting after the first year",
+      "Domain renewal after the first year"
+    ],
+    note: "These services can be added separately based on your requirements."
   },
+
   faqs: [
     {
       question: "Is this a monthly package?",
-      answer: "No. This is a one-time setup package for ₹19,999 + GST. There is no compulsory monthly commitment. Ongoing digital marketing management can be added separately based on your requirements."
+      answer: "No. This is a one-time setup package. There is no compulsory monthly commitment."
     },
     {
       question: "Is the website included?",
-      answer: "Yes! The package includes a custom-designed, fast, mobile-friendly business website with up to 5 pages (Home, About Us, Services/Products, Contact, Enquiry form, WhatsApp button, Google Maps integration, SSL certificate)."
+      answer: "Yes. The package includes a professional business website with up to 5 pages."
     },
     {
       question: "Are domain and hosting included?",
-      answer: "Yes. One .com or .in domain for one year and website hosting for one year are included free of charge, subject to domain name availability."
+      answer: "Yes. One domain and one year of hosting are included, subject to domain availability."
     },
     {
       question: "Are social media posts included?",
-      answer: "Yes. The package includes 12 professionally designed social media posts (6 for Facebook and 6 for Instagram) with custom graphics, captions, and relevant hashtags."
+      answer: "Yes. The package includes 12 professionally designed posts: 6 for Facebook and 6 for Instagram."
     },
     {
       question: "Will you run advertisements?",
-      answer: "We set up 1 complete Google Ads campaign and 1 complete Meta (Facebook & Instagram) Ads campaign with lead forms, conversion tracking, and extensions ready to launch. Note that the actual advertising budget paid to Google/Meta is not included."
+      answer: "We will set up one Google Ads campaign and one Meta Ads campaign. The advertising budget and ongoing campaign management are separate."
     },
     {
-      question: "Who owns the accounts created?",
-      answer: "100% Client Ownership. The client retains full ownership of the website, domain, hosting, Google Business Profile, Facebook Page, Instagram Account, Google Ads Account, Meta Ads Account, Google Analytics, and lead data."
+      question: "Who owns the accounts?",
+      answer: "The client retains ownership of the website, domain, hosting, Google accounts, social media accounts and advertising accounts."
     },
     {
       question: "How quickly will the setup be completed?",
-      answer: "The complete setup is generally delivered within 7–10 working days after receiving all required business details, logo, content, images, approvals, and account access."
-    },
-    {
-      question: "What support is provided post-launch?",
-      answer: "You receive 30 Days of Post-Launch Support including account access assistance, minor setup corrections, website bug fixes, tracking verification, platform connection support, and basic technical guidance."
+      answer: "The complete setup will generally be delivered within 7–10 working days after receiving all required information and approvals."
     }
   ] as FaqData[],
+
   caseStudies: [
     { 
       id: "bgs-google", 
