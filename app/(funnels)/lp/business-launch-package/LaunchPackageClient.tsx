@@ -7,10 +7,7 @@ import "../lp.css";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import LogoMarquee from "../components/LogoMarquee";
-import PerformanceExperts from "../components/PerformanceExperts";
-import SuccessStories from "../components/SuccessStories";
 import FaqSection from "../components/FaqSection";
-import ClientReviews from "../components/ClientReviews";
 import Footer from "@/components/Footer";
 import CallbackModal from "../components/CallbackModal";
 import WhatsAppButton from "../components/WhatsAppButton";
@@ -27,10 +24,11 @@ export default function LaunchPackageClient() {
           {/* Hero Section - Standard Dark Blue Navy Gradient, No Badges */}
           <HeroSection data={launchPackageData.hero} />
           
+          {/* All Sections Below Hero Have Clean White / Slate-50 Backgrounds */}
           <LogoMarquee />
 
-          {/* Section 1: What You Get & Total Package Value Table */}
-          <section id="package-details" className="py-16 sm:py-24 bg-slate-50 relative overflow-hidden">
+          {/* Section 1: Total Package Value Table & Intro (White Section) */}
+          <section id="package-details" className="py-16 sm:py-24 bg-slate-50 border-t border-slate-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="text-center max-w-3xl mx-auto">
                 <span className="inline-block rounded-full bg-amber-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-amber-800 border border-amber-500/20 mb-4">
@@ -43,48 +41,44 @@ export default function LaunchPackageClient() {
                   {launchPackageData.summaryText}
                 </p>
 
-                {/* Price & Value Callout Banner */}
-                <div className="mt-8 rounded-3xl border border-amber-300 bg-gradient-to-r from-amber-500/10 via-amber-400/20 to-amber-500/10 p-6 sm:p-8 shadow-md text-left">
-                  <div className="grid gap-6 lg:grid-cols-12 items-center">
-                    <div className="lg:col-span-7">
-                      <h3 className="text-xl font-bold text-slate-900 mb-4">Total Package Value</h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-slate-700">
-                        {launchPackageData.totalValueItems.map((item, idx) => (
-                          <div key={idx} className="flex justify-between border-b border-amber-200/60 pb-1">
-                            <span>{item.service}</span>
-                            <span className="font-semibold text-slate-900">{item.value}</span>
-                          </div>
-                        ))}
+                {/* Total Value Summary Callout Table */}
+                <div className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm text-left">
+                  <h3 className="text-xl font-bold text-slate-900 mb-4">Total Package Value</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-700">
+                    {launchPackageData.totalValueItems.map((item, idx) => (
+                      <div key={idx} className="flex justify-between border-b border-slate-100 pb-2">
+                        <span>{item.service}</span>
+                        <span className="font-semibold text-slate-900">{item.value}</span>
                       </div>
-                      <div className="mt-3 pt-2 flex justify-between text-sm sm:text-base font-bold text-slate-900 border-t border-amber-400">
-                        <span>Total Value:</span>
-                        <span className="text-amber-800 font-extrabold">₹48,000+</span>
-                      </div>
-                    </div>
+                    ))}
+                  </div>
+                  <div className="mt-4 pt-3 flex justify-between items-center text-base sm:text-lg font-bold text-slate-900 border-t border-amber-400">
+                    <span>Total Value:</span>
+                    <span className="text-amber-800 font-extrabold text-xl sm:text-2xl">₹48,000+</span>
+                  </div>
 
-                    <div className="lg:col-span-5 bg-white p-6 rounded-2xl border border-amber-300 shadow-sm text-center">
-                      <p className="text-xs font-bold uppercase tracking-wider text-amber-800">Special Package Price</p>
-                      <div className="text-3xl sm:text-4xl font-black text-slate-900 mt-1">
-                        ₹19,999 <span className="text-lg font-bold text-amber-700">+ GST</span>
-                      </div>
-                      <p className="text-xs font-semibold text-slate-600 mt-1">One-Time Setup Only</p>
-                      <p className="text-[11px] text-slate-500 mt-2 leading-tight">
+                  <div className="mt-6 p-5 rounded-2xl bg-amber-500/10 border border-amber-400/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                      <span className="text-xs font-bold text-amber-800 uppercase tracking-wider block">Special Package Price</span>
+                      <span className="text-2xl sm:text-4xl font-black text-slate-900">₹19,999 + GST</span>
+                      <span className="text-xs text-slate-600 ml-2 font-semibold">(One-Time Setup Only)</span>
+                      <p className="text-[11px] text-slate-600 mt-1">
                         No compulsory monthly contract. Ongoing digital marketing management can be added separately based on your requirements.
                       </p>
-                      <a
-                        href="https://wa.me/919986389444?text=Hi%20Clever%20Crow%2C%20I%27m%20interested%20in%20the%20Complete%20Business%20Launch%20Package%20(%E2%82%B919%2C999%2BGST)."
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-4 inline-flex items-center justify-center rounded-xl bg-[#f4c542] px-6 py-3 text-sm font-bold text-black shadow-md hover:brightness-105 transition w-full"
-                      >
-                        Get Started Today
-                      </a>
                     </div>
+                    <a
+                      href="https://wa.me/919986389444?text=Hi%20Clever%20Crow%2C%20I%27m%20interested%20in%20the%20Complete%20Business%20Launch%20Package%20(%E2%82%B919%2C999%2BGST)."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-xl bg-[#f4c542] px-6 py-3.5 text-sm font-bold text-black shadow-md hover:brightness-105 transition shrink-0 w-full sm:w-auto"
+                    >
+                      Get Started Today
+                    </a>
                   </div>
                 </div>
               </div>
 
-              {/* 10 Modules List */}
+              {/* 10 Detailed Modules Grid */}
               <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
                 {launchPackageData.modules.map((module) => (
                   <div
@@ -100,7 +94,7 @@ export default function LaunchPackageClient() {
                           {module.value}
                         </span>
                       </div>
-                      <p className="text-sm text-slate-600 mb-6 font-medium">{module.description}</p>
+                      <p className="text-sm text-slate-600 mb-6 font-medium leading-relaxed">{module.description}</p>
                       <div className="border-t border-slate-100 pt-4">
                         <p className="text-xs font-bold text-amber-800 uppercase tracking-wider mb-3">Included</p>
                         <ul className="space-y-2 text-sm text-slate-700">
@@ -119,7 +113,7 @@ export default function LaunchPackageClient() {
             </div>
           </section>
 
-          {/* Section 2: Why This Package Is Valuable */}
+          {/* Section 2: Why This Package Is Valuable (White Section) */}
           <section className="py-16 sm:py-24 bg-white border-t border-slate-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="grid gap-12 lg:grid-cols-2 items-center">
@@ -152,7 +146,7 @@ export default function LaunchPackageClient() {
             </div>
           </section>
 
-          {/* Section 3: Perfect For */}
+          {/* Section 3: Perfect For (Slate-50 Section) */}
           <section className="py-16 sm:py-24 bg-slate-50 border-t border-slate-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="text-center max-w-3xl mx-auto mb-12">
@@ -177,7 +171,7 @@ export default function LaunchPackageClient() {
             </div>
           </section>
 
-          {/* Section 4: Delivery Timeline & What We Need From You */}
+          {/* Section 4: Delivery Timeline & What We Need From You (White Section) */}
           <section className="py-16 sm:py-24 bg-white border-t border-slate-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="grid gap-10 lg:grid-cols-2">
@@ -213,7 +207,7 @@ export default function LaunchPackageClient() {
             </div>
           </section>
 
-          {/* Section 5: Account Ownership */}
+          {/* Section 5: Account Ownership (Slate-50 Section) */}
           <section className="py-16 sm:py-24 bg-slate-50 border-t border-slate-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="text-center max-w-3xl mx-auto mb-12">
@@ -242,7 +236,7 @@ export default function LaunchPackageClient() {
             </div>
           </section>
 
-          {/* Section 6: Support Included & Not Included */}
+          {/* Section 6: Support Included & Not Included (White Section) */}
           <section className="py-16 sm:py-24 bg-white border-t border-slate-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="text-center max-w-3xl mx-auto mb-12">
@@ -289,35 +283,25 @@ export default function LaunchPackageClient() {
             </div>
           </section>
 
-          {/* Social Proof & Case Studies */}
-          <PerformanceExperts />
-          
-          <SuccessStories
-            data={launchPackageData.caseStudies}
-            title="Proven Results Across Industries"
-            subtitle="Explore how our digital marketing infrastructure drives growth for real businesses."
-            filterBy="platform"
-          />
-
           {/* Frequently Asked Questions */}
           <FaqSection data={launchPackageData.faqs} />
 
-          {/* Section 7: Final CTA Section */}
-          <section className="py-16 sm:py-24 bg-gradient-to-b from-slate-900 to-slate-950 text-white text-center">
+          {/* Section 7: Final CTA Section (Blue BG, Compact Height, White Card) */}
+          <section className="py-10 sm:py-12 bg-gradient-to-r from-[#0b1739] via-[#0f2456] to-[#0b1739] text-white text-center border-t border-blue-900/40 relative overflow-hidden">
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-              <h2 className="text-3xl font-extrabold sm:text-4xl lg:text-5xl">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">
                 Ready to Launch Your Business Online?
               </h2>
-              <p className="mt-4 text-lg text-slate-300 max-w-2xl mx-auto">
+              <p className="mt-2 text-sm sm:text-base text-blue-100/90 max-w-2xl mx-auto">
                 Get your website, Google presence, social media accounts, advertising systems and WhatsApp lead setup completed by one professional team.
               </p>
 
-              <div className="mt-10 mx-auto max-w-md bg-white text-slate-900 p-8 rounded-3xl shadow-2xl border border-amber-400">
-                <h3 className="text-xl font-bold">Complete Business Launch Package</h3>
-                <div className="text-4xl font-black text-slate-900 mt-2">
-                  ₹19,999 <span className="text-base font-bold text-amber-700">+ GST</span>
+              <div className="mt-6 mx-auto max-w-sm bg-white text-slate-900 p-5 sm:p-6 rounded-2xl shadow-2xl border-2 border-[#f4c542]">
+                <h3 className="text-base font-bold text-slate-900">Complete Business Launch Package</h3>
+                <div className="text-3xl font-black text-slate-900 mt-1">
+                  ₹19,999 <span className="text-xs font-bold text-amber-700">+ GST</span>
                 </div>
-                <div className="mt-4 space-y-1.5 text-xs font-semibold text-slate-600">
+                <div className="mt-3 space-y-1 text-xs font-semibold text-slate-600">
                   <p>• One-Time Setup</p>
                   <p>• No Monthly Commitment</p>
                   <p>• Domain and Hosting Included</p>
@@ -326,15 +310,13 @@ export default function LaunchPackageClient() {
                   href="https://wa.me/919986389444?text=Hi%20Clever%20Crow%2C%20I%27m%20interested%20in%20the%20Complete%20Business%20Launch%20Package%20(%E2%82%B919%2C999%2BGST)."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center justify-center rounded-xl bg-[#f4c542] px-8 py-4 text-base font-bold text-black shadow-lg hover:brightness-110 transition w-full"
+                  className="mt-5 inline-flex items-center justify-center rounded-xl bg-[#f4c542] px-6 py-3 text-sm font-bold text-black shadow-md hover:brightness-110 transition w-full"
                 >
                   Get Started Today
                 </a>
               </div>
             </div>
           </section>
-
-          <ClientReviews />
         </main>
 
         <Footer />
