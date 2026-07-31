@@ -113,33 +113,78 @@ export default function LaunchPackageClient() {
             </div>
           </section>
 
-          {/* Section 2: Why This Package Is Valuable (White Section) */}
+          {/* Section 2: Why This Package Is Valuable (Balanced Grid & Occupied Heights) */}
           <section className="py-16 sm:py-24 bg-white border-t border-slate-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="grid gap-12 lg:grid-cols-2 items-center">
-                <div>
-                  <span className="text-xs font-bold tracking-widest text-amber-800 uppercase bg-amber-100 px-3.5 py-1.5 rounded-full border border-amber-300">
-                    Package Benefits
-                  </span>
-                  <h2 className="mt-4 text-3xl font-extrabold text-slate-900 sm:text-4xl">
-                    Why This Package Is Valuable
-                  </h2>
-                  <p className="mt-4 text-base leading-relaxed text-slate-700">
-                    {launchPackageData.whyValuableText}
-                  </p>
+              <div className="grid gap-10 lg:grid-cols-12 items-stretch">
+                {/* Left Column: Heading & 3 Benefit Feature Cards */}
+                <div className="lg:col-span-5 flex flex-col justify-between">
+                  <div>
+                    <span className="text-xs font-bold tracking-widest text-amber-800 uppercase bg-amber-100 px-3.5 py-1.5 rounded-full border border-amber-300">
+                      Package Benefits
+                    </span>
+                    <h2 className="mt-4 text-3xl font-extrabold text-slate-900 sm:text-4xl">
+                      Why This Package Is Valuable
+                    </h2>
+                    <p className="mt-3 text-base leading-relaxed text-slate-700">
+                      {launchPackageData.whyValuableText}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 space-y-3">
+                    <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-3">
+                      <span className="w-7 h-7 rounded-lg bg-amber-100 text-amber-800 font-bold flex items-center justify-center text-xs shrink-0 mt-0.5 border border-amber-300">1</span>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">One Dedicated Team</h4>
+                        <p className="text-xs text-slate-600 mt-0.5">No need to hire separate web designers, ads managers, or SEO freelancers.</p>
+                      </div>
+                    </div>
+
+                    <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-3">
+                      <span className="w-7 h-7 rounded-lg bg-amber-100 text-amber-800 font-bold flex items-center justify-center text-xs shrink-0 mt-0.5 border border-amber-300">2</span>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">Consistent Brand Identity</h4>
+                        <p className="text-xs text-slate-600 mt-0.5">Matching design, copy, and messaging across your website, Google, FB & IG.</p>
+                      </div>
+                    </div>
+
+                    <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-3">
+                      <span className="w-7 h-7 rounded-lg bg-amber-100 text-amber-800 font-bold flex items-center justify-center text-xs shrink-0 mt-0.5 border border-amber-300">3</span>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">Turnkey Infrastructure</h4>
+                        <p className="text-xs text-slate-600 mt-0.5">Full analytics, lead forms, and advertising systems ready on day one.</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8 shadow-sm">
-                  <h3 className="text-xl font-bold text-slate-900 mb-4">
-                    At the end of the project, your business will have:
-                  </h3>
-                  <div className="grid gap-2.5">
-                    {launchPackageData.endResultItems.map((item, index) => (
-                      <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-white border border-slate-200">
-                        <span className="text-amber-600 font-bold">•</span>
-                        <span className="text-sm font-semibold text-slate-800">{item}</span>
-                      </div>
-                    ))}
+                {/* Right Column: End-Result Deliverables Checklist Card */}
+                <div className="lg:col-span-7 rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8 shadow-sm flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+                      <h3 className="text-lg sm:text-xl font-bold text-slate-900">
+                        At the end of the project, your business will have:
+                      </h3>
+                      <span className="text-[11px] font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300 shrink-0 hidden sm:inline-block">
+                        10 Complete Deliverables
+                      </span>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-3">
+                      {launchPackageData.endResultItems.map((item, index) => (
+                        <div key={index} className="flex items-center gap-3 p-3 rounded-xl bg-white border border-slate-200 shadow-xs hover:border-amber-300 transition">
+                          <span className="w-5 h-5 rounded-full bg-amber-100 text-amber-800 text-xs font-bold flex items-center justify-center shrink-0 border border-amber-300">
+                            ✓
+                          </span>
+                          <span className="text-xs font-semibold text-slate-800">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600 font-medium">
+                    <span>• 100% Client Ownership</span>
+                    <span>• Ready in 7–10 Working Days</span>
                   </div>
                 </div>
               </div>
@@ -171,37 +216,72 @@ export default function LaunchPackageClient() {
             </div>
           </section>
 
-          {/* Section 4: Delivery Timeline & What We Need From You (White Section) */}
+          {/* Section 4: Delivery Timeline & What We Need From You (Balanced Heights & 2-Column Grid) */}
           <section className="py-16 sm:py-24 bg-white border-t border-slate-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="grid gap-10 lg:grid-cols-2">
-                {/* Delivery Timeline */}
-                <div className="rounded-3xl border border-amber-300 bg-amber-50/50 p-6 sm:p-8">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-xl bg-amber-200 text-amber-900 flex items-center justify-center font-bold text-lg">
-                      ⏱
+              <div className="grid gap-8 lg:grid-cols-12 items-stretch">
+                {/* Delivery Timeline Card */}
+                <div className="lg:col-span-5 rounded-3xl border border-amber-300 bg-amber-50/50 p-6 sm:p-8 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 rounded-xl bg-amber-200 text-amber-900 flex items-center justify-center font-bold text-lg border border-amber-300">
+                        ⏱
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-slate-900">Delivery Timeline</h3>
+                        <p className="text-base text-amber-900 font-extrabold">{launchPackageData.deliveryTimeline.days}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-slate-900">Delivery Timeline</h3>
-                      <p className="text-base text-amber-900 font-extrabold">{launchPackageData.deliveryTimeline.days}</p>
+                    <p className="text-sm text-slate-700 leading-relaxed mb-6">
+                      {launchPackageData.deliveryTimeline.note}
+                    </p>
+
+                    <div className="space-y-2.5">
+                      <div className="p-3 rounded-xl bg-white border border-amber-200 flex items-center gap-3">
+                        <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-800 text-xs font-bold flex items-center justify-center shrink-0">1</span>
+                        <span className="text-xs font-semibold text-slate-800">Days 1–3: Asset collection & Website Design</span>
+                      </div>
+                      <div className="p-3 rounded-xl bg-white border border-amber-200 flex items-center gap-3">
+                        <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-800 text-xs font-bold flex items-center justify-center shrink-0">2</span>
+                        <span className="text-xs font-semibold text-slate-800">Days 4–7: Social Profiles & Ad Campaigns Setup</span>
+                      </div>
+                      <div className="p-3 rounded-xl bg-white border border-amber-200 flex items-center gap-3">
+                        <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-800 text-xs font-bold flex items-center justify-center shrink-0">3</span>
+                        <span className="text-xs font-semibold text-slate-800">Days 8–10: Tracking Verification & Final Launch</span>
+                      </div>
                     </div>
                   </div>
-                  <p className="text-sm text-slate-700 leading-relaxed">
-                    {launchPackageData.deliveryTimeline.note}
-                  </p>
+
+                  <div className="mt-6 pt-4 border-t border-amber-200 text-xs text-amber-900 font-semibold">
+                    ⚡ Fast 7–10 Working Days Turnaround
+                  </div>
                 </div>
 
-                {/* What We Need From You */}
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
-                  <h3 className="text-xl font-bold text-slate-900 mb-6">What We Need From You</h3>
-                  <ul className="grid gap-2 text-sm text-slate-700">
-                    {launchPackageData.requirementsNeeded.map((req, index) => (
-                      <li key={index} className="flex items-center gap-3 p-2.5 rounded-lg bg-white border border-slate-200">
-                        <span className="text-amber-600 font-bold">•</span>
-                        <span className="text-xs font-medium text-slate-800">{req}</span>
-                      </li>
-                    ))}
-                  </ul>
+                {/* What We Need From You Card */}
+                <div className="lg:col-span-7 rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+                      <h3 className="text-xl font-bold text-slate-900">What We Need From You</h3>
+                      <span className="text-xs font-bold text-slate-700 bg-white px-3 py-1 rounded-full border border-slate-200">
+                        Initial Onboarding Checklist
+                      </span>
+                    </div>
+
+                    <ul className="grid sm:grid-cols-2 gap-2.5 text-sm text-slate-700">
+                      {launchPackageData.requirementsNeeded.map((req, index) => (
+                        <li key={index} className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200 shadow-xs">
+                          <span className="w-5 h-5 rounded-full bg-amber-100 text-amber-800 text-xs font-bold flex items-center justify-center shrink-0 border border-amber-300">
+                            {index + 1}
+                          </span>
+                          <span className="text-xs font-medium text-slate-800">{req}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-slate-200 text-xs text-slate-600 font-medium">
+                    • Provide details upon project start to ensure 7–10 days delivery timeline.
+                  </div>
                 </div>
               </div>
             </div>
@@ -236,48 +316,73 @@ export default function LaunchPackageClient() {
             </div>
           </section>
 
-          {/* Section 6: Support Included & Not Included (White Section) */}
+          {/* Section 6: Support Included & Not Included (Balanced Heights & 2-Column Layout) */}
           <section className="py-16 sm:py-24 bg-white border-t border-slate-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="text-center max-w-3xl mx-auto mb-12">
-                <h2 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
+                <span className="text-xs font-bold tracking-widest text-emerald-800 uppercase bg-emerald-100 px-3.5 py-1.5 rounded-full border border-emerald-300">
+                  Post-Launch Assurance
+                </span>
+                <h2 className="mt-4 text-3xl font-extrabold text-slate-900 sm:text-4xl">
                   Support Included
                 </h2>
-                <p className="mt-2 text-lg font-bold text-amber-800">
+                <p className="mt-2 text-base font-bold text-amber-800">
                   {launchPackageData.supportDetails.title}
                 </p>
               </div>
 
-              <div className="grid gap-8 sm:grid-cols-2">
-                <div className="p-6 sm:p-8 rounded-3xl border border-emerald-200 bg-slate-50 shadow-sm">
-                  <h3 className="text-xl font-bold text-slate-900 mb-4">
-                    Support includes:
-                  </h3>
-                  <ul className="space-y-2.5 text-sm text-slate-700">
-                    {launchPackageData.supportDetails.included.map((inc, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="text-emerald-600 font-bold">•</span>
-                        <span>{inc}</span>
-                      </li>
-                    ))}
-                  </ul>
+              <div className="grid gap-8 lg:grid-cols-2 items-stretch">
+                {/* Left Card: Included Support */}
+                <div className="p-6 sm:p-8 rounded-3xl border border-emerald-300 bg-emerald-50/40 shadow-sm flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between border-b border-emerald-200 pb-4 mb-6">
+                      <h3 className="text-xl font-bold text-slate-900">Support includes:</h3>
+                      <span className="text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">
+                        30 Days Post-Launch
+                      </span>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-3">
+                      {launchPackageData.supportDetails.included.map((inc, i) => (
+                        <div key={i} className="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-emerald-200 shadow-xs">
+                          <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center justify-center shrink-0 border border-emerald-300">
+                            ✓
+                          </span>
+                          <span className="text-xs font-semibold text-slate-800">{inc}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-6 p-4 rounded-2xl bg-white border border-emerald-200 text-xs text-slate-700">
+                    <span className="font-bold text-emerald-800 block mb-1">🛡 30-Day Setup Guarantee</span>
+                    Free assistance with account access, setup corrections, and tracking verification to ensure your system operates smoothly.
+                  </div>
                 </div>
 
-                <div className="p-6 sm:p-8 rounded-3xl border border-slate-200 bg-slate-50 shadow-sm">
-                  <h3 className="text-xl font-bold text-slate-700 mb-4">
-                    Not Included
-                  </h3>
-                  <ul className="space-y-2 text-xs text-slate-600">
-                    {launchPackageData.supportDetails.notIncluded.map((ninc, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="text-slate-400">•</span>
-                        <span>{ninc}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-4 text-xs text-slate-600 italic">
+                {/* Right Card: Not Included */}
+                <div className="p-6 sm:p-8 rounded-3xl border border-slate-200 bg-slate-50 shadow-sm flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+                      <h3 className="text-xl font-bold text-slate-800">Not Included in Base Setup</h3>
+                      <span className="text-xs font-bold text-slate-600 bg-white px-3 py-1 rounded-full border border-slate-200">
+                        Add-On Services
+                      </span>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-2 text-xs text-slate-600">
+                      {launchPackageData.supportDetails.notIncluded.map((ninc, i) => (
+                        <div key={i} className="flex items-center gap-2 p-2 rounded-lg bg-white border border-slate-200">
+                          <span className="text-slate-400 font-bold shrink-0">•</span>
+                          <span className="font-medium text-slate-700">{ninc}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-slate-200 text-xs text-slate-600 italic">
                     {launchPackageData.supportDetails.note}
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>
