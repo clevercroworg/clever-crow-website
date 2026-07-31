@@ -200,25 +200,45 @@ export default function LaunchPackageClient() {
             </div>
           </section>
 
-          {/* Section 3: Perfect For (Slate-50 Section) */}
-          <section className="py-16 sm:py-24 bg-slate-50 border-t border-slate-200">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="text-center max-w-3xl mx-auto mb-12">
+          {/* Section 3: Perfect For (Reduced Height & Single-Line Slow Marquee Carousel) */}
+          <section className="py-10 sm:py-12 bg-slate-50 border-t border-slate-200 overflow-hidden">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-6">
+              <div className="text-center max-w-3xl mx-auto">
                 <span className="text-xs font-bold tracking-widest text-amber-800 uppercase bg-amber-100 px-3.5 py-1.5 rounded-full border border-amber-300">
                   Target Audience
                 </span>
-                <h2 className="mt-4 text-3xl font-extrabold text-slate-900 sm:text-4xl">
+                <h2 className="mt-3 text-2xl font-extrabold text-slate-900 sm:text-3xl">
                   Perfect For
                 </h2>
               </div>
+            </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {/* Single Line Slow Infinite Marquee Carousel */}
+            <div className="logo-marquee">
+              <div className="logo-track" style={{ animationDuration: "35s" }}>
                 {launchPackageData.targetAudience.map((audience, idx) => (
                   <div
-                    key={idx}
-                    className="p-4 rounded-xl border border-slate-200 bg-white hover:border-amber-400 hover:shadow-sm transition text-center flex items-center justify-center"
+                    key={`a-${idx}`}
+                    className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-slate-200 bg-white shadow-xs hover:border-amber-400 hover:shadow-sm transition shrink-0 whitespace-nowrap"
                   >
-                    <span className="text-sm font-semibold text-slate-800">• {audience}</span>
+                    <span className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold flex items-center justify-center shrink-0 border border-emerald-300">
+                      ✓
+                    </span>
+                    <span className="text-xs sm:text-sm font-bold text-slate-800">{audience}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="logo-track" aria-hidden="true" style={{ animationDuration: "35s" }}>
+                {launchPackageData.targetAudience.map((audience, idx) => (
+                  <div
+                    key={`b-${idx}`}
+                    className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-slate-200 bg-white shadow-xs hover:border-amber-400 hover:shadow-sm transition shrink-0 whitespace-nowrap"
+                  >
+                    <span className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold flex items-center justify-center shrink-0 border border-emerald-300">
+                      ✓
+                    </span>
+                    <span className="text-xs sm:text-sm font-bold text-slate-800">{audience}</span>
                   </div>
                 ))}
               </div>
