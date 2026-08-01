@@ -148,6 +148,26 @@ export default function HeroSection({ data }: HeroSectionProps) {
           {/* -------------------------------------------------------- */}
           <div className="lg:col-span-4 xl:col-span-4 space-y-6 text-left">
 
+            {/* Desktop Feature Badges/Chips (Top Left) */}
+            <div className="hidden lg:flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-xs font-bold text-slate-200 backdrop-blur-md shadow-sm hover:border-[#FFC72C]/40 transition">
+                <Code2 className="w-3.5 h-3.5 text-[#FFC72C]" />
+                WEBSITE DEVELOPMENT
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-xs font-bold text-slate-200 backdrop-blur-md shadow-sm hover:border-[#FFC72C]/40 transition">
+                <TrendingUp className="w-3.5 h-3.5 text-[#FFC72C]" />
+                CONVERSION FOCUSED
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-xs font-bold text-slate-200 backdrop-blur-md shadow-sm hover:border-[#FFC72C]/40 transition">
+                <Rocket className="w-3.5 h-3.5 text-[#FFC72C]" />
+                SEO • SPEED OPTIMIZED
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-xs font-bold text-slate-200 backdrop-blur-md shadow-sm hover:border-[#FFC72C]/40 transition">
+                <Smartphone className="w-3.5 h-3.5 text-[#FFC72C]" />
+                MOBILE FIRST
+              </span>
+            </div>
+
             {/* Massive Bold Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-[3.6rem] font-black text-white leading-[1.08] tracking-tight">
               Your Website.
@@ -467,29 +487,29 @@ export default function HeroSection({ data }: HeroSectionProps) {
         </div>
 
         {/* ============================================================ */}
-        {/* 3. BOTTOM FEATURE BADGES BAR (2x2 Grid - 2 Lines)            */}
+        {/* 3. MOBILE ONLY: BOTTOM FEATURE BADGES BAR (2x2 Grid - 2 Lines) */}
         {/* ============================================================ */}
-        <div className="mt-12 sm:mt-16 pt-8 border-t border-white/10 flex flex-col items-center justify-center gap-3 z-10 relative">
+        <div className="lg:hidden mt-10 pt-6 border-t border-white/10 flex flex-col items-center justify-center gap-2.5 z-10 relative">
           {/* Line 1: 2 Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] border border-white/12 text-xs sm:text-sm font-bold text-slate-200 backdrop-blur-md shadow-md hover:border-[#FFC72C]/50 hover:bg-white/[0.08] transition">
-              <Code2 className="w-4 h-4 text-[#FFC72C]" />
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/12 text-xs font-bold text-slate-200 backdrop-blur-md shadow-md">
+              <Code2 className="w-3.5 h-3.5 text-[#FFC72C]" />
               WEBSITE DEVELOPMENT
             </span>
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] border border-white/12 text-xs sm:text-sm font-bold text-slate-200 backdrop-blur-md shadow-md hover:border-[#FFC72C]/50 hover:bg-white/[0.08] transition">
-              <TrendingUp className="w-4 h-4 text-[#FFC72C]" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/12 text-xs font-bold text-slate-200 backdrop-blur-md shadow-md">
+              <TrendingUp className="w-3.5 h-3.5 text-[#FFC72C]" />
               CONVERSION FOCUSED
             </span>
           </div>
 
           {/* Line 2: 2 Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] border border-white/12 text-xs sm:text-sm font-bold text-slate-200 backdrop-blur-md shadow-md hover:border-[#FFC72C]/50 hover:bg-white/[0.08] transition">
-              <Rocket className="w-4 h-4 text-[#FFC72C]" />
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/12 text-xs font-bold text-slate-200 backdrop-blur-md shadow-md">
+              <Rocket className="w-3.5 h-3.5 text-[#FFC72C]" />
               SEO • SPEED OPTIMIZED
             </span>
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] border border-white/12 text-xs sm:text-sm font-bold text-slate-200 backdrop-blur-md shadow-md hover:border-[#FFC72C]/50 hover:bg-white/[0.08] transition">
-              <Smartphone className="w-4 h-4 text-[#FFC72C]" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/12 text-xs font-bold text-slate-200 backdrop-blur-md shadow-md">
+              <Smartphone className="w-3.5 h-3.5 text-[#FFC72C]" />
               MOBILE FIRST
             </span>
           </div>
