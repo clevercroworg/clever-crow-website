@@ -552,32 +552,7 @@ export default function SuccessStories({
                     </div>
                   </div>
 
-                  {/* 3-Column Key Metric Highlights */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div className="p-4 rounded-2xl bg-[#f8fafc] border border-slate-200/80">
-                      <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-                        <ShieldCheck className="w-3.5 h-3.5 text-amber-500" />
-                        PRIMARY METRIC
-                      </span>
-                      <p className="text-xl font-black text-[#d97706] mt-1">{selectedCase.primaryMetric}</p>
-                    </div>
 
-                    <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/80">
-                      <span className="text-[10px] font-extrabold text-emerald-700 uppercase tracking-widest flex items-center gap-1.5">
-                        <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
-                        GROWTH LIFT
-                      </span>
-                      <p className="text-xl font-black text-emerald-800 mt-1">{selectedCase.secondaryMetric}</p>
-                    </div>
-
-                    <div className="p-4 rounded-2xl bg-indigo-50/70 border border-indigo-200/80">
-                      <span className="text-[10px] font-extrabold text-indigo-700 uppercase tracking-widest flex items-center gap-1.5">
-                        <Zap className="w-3.5 h-3.5 text-indigo-600" />
-                        PLATFORM STATUS
-                      </span>
-                      <p className="text-xl font-black text-indigo-900 mt-1">Live & Active</p>
-                    </div>
-                  </div>
 
                   {/* Project Overview */}
                   <div>
