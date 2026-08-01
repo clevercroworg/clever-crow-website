@@ -487,29 +487,24 @@ export default function HeroSection({ data }: HeroSectionProps) {
         </div>
 
         {/* ============================================================ */}
-        {/* 3. MOBILE ONLY: BOTTOM FEATURE BADGES BAR (2x2 Grid - 2 Lines) */}
+        {/* 3. MOBILE ONLY: BOTTOM FEATURE BADGES BAR (Strict 2x2 Grid)   */}
         {/* ============================================================ */}
-        <div className="lg:hidden mt-10 pt-6 border-t border-white/10 flex flex-col items-center justify-center gap-2.5 z-10 relative">
-          {/* Line 1: 2 Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/12 text-xs font-bold text-slate-200 backdrop-blur-md shadow-md">
-              <Code2 className="w-3.5 h-3.5 text-[#FFC72C]" />
-              WEBSITE DEVELOPMENT
+        <div className="lg:hidden mt-8 pt-6 border-t border-white/10 z-10 relative px-2">
+          <div className="grid grid-cols-2 gap-2 max-w-[340px] sm:max-w-sm mx-auto">
+            <span className="inline-flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-full bg-white/[0.05] border border-white/12 text-[10px] sm:text-xs font-extrabold text-slate-200 backdrop-blur-md shadow-md text-center whitespace-nowrap">
+              <Code2 className="w-3.5 h-3.5 text-[#FFC72C] shrink-0" />
+              WEBSITE DEV
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/12 text-xs font-bold text-slate-200 backdrop-blur-md shadow-md">
-              <TrendingUp className="w-3.5 h-3.5 text-[#FFC72C]" />
+            <span className="inline-flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-full bg-white/[0.05] border border-white/12 text-[10px] sm:text-xs font-extrabold text-slate-200 backdrop-blur-md shadow-md text-center whitespace-nowrap">
+              <TrendingUp className="w-3.5 h-3.5 text-[#FFC72C] shrink-0" />
               CONVERSION FOCUSED
             </span>
-          </div>
-
-          {/* Line 2: 2 Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/12 text-xs font-bold text-slate-200 backdrop-blur-md shadow-md">
-              <Rocket className="w-3.5 h-3.5 text-[#FFC72C]" />
-              SEO • SPEED OPTIMIZED
+            <span className="inline-flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-full bg-white/[0.05] border border-white/12 text-[10px] sm:text-xs font-extrabold text-slate-200 backdrop-blur-md shadow-md text-center whitespace-nowrap">
+              <Rocket className="w-3.5 h-3.5 text-[#FFC72C] shrink-0" />
+              SEO & SPEED
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/12 text-xs font-bold text-slate-200 backdrop-blur-md shadow-md">
-              <Smartphone className="w-3.5 h-3.5 text-[#FFC72C]" />
+            <span className="inline-flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-full bg-white/[0.05] border border-white/12 text-[10px] sm:text-xs font-extrabold text-slate-200 backdrop-blur-md shadow-md text-center whitespace-nowrap">
+              <Smartphone className="w-3.5 h-3.5 text-[#FFC72C] shrink-0" />
               MOBILE FIRST
             </span>
           </div>
