@@ -144,29 +144,9 @@ export default function HeroSection({ data }: HeroSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-8 items-center">
 
           {/* -------------------------------------------------------- */}
-          {/* LEFT COLUMN: Feature Chips, Headline, Paragraph, Trust    */}
+          {/* LEFT COLUMN: Headline, Paragraph, Trust, Stats            */}
           {/* -------------------------------------------------------- */}
           <div className="lg:col-span-4 xl:col-span-4 space-y-6 text-left">
-            
-            {/* Feature Badges/Chips */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-xs font-bold text-slate-200 backdrop-blur-md shadow-sm hover:border-[#FFC72C]/40 transition">
-                <Code2 className="w-3.5 h-3.5 text-[#FFC72C]" />
-                WEBSITE DEVELOPMENT
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-xs font-bold text-slate-200 backdrop-blur-md shadow-sm hover:border-[#FFC72C]/40 transition">
-                <TrendingUp className="w-3.5 h-3.5 text-[#FFC72C]" />
-                CONVERSION FOCUSED
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-xs font-bold text-slate-200 backdrop-blur-md shadow-sm hover:border-[#FFC72C]/40 transition">
-                <Rocket className="w-3.5 h-3.5 text-[#FFC72C]" />
-                SEO • SPEED OPTIMIZED
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-xs font-bold text-slate-200 backdrop-blur-md shadow-sm hover:border-[#FFC72C]/40 transition">
-                <Smartphone className="w-3.5 h-3.5 text-[#FFC72C]" />
-                MOBILE FIRST
-              </span>
-            </div>
 
             {/* Massive Bold Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-[3.6rem] font-black text-white leading-[1.08] tracking-tight">
@@ -485,6 +465,29 @@ export default function HeroSection({ data }: HeroSectionProps) {
           </div>
 
         </div>
+
+        {/* ============================================================ */}
+        {/* 3. BOTTOM FEATURE BADGES BAR                                  */}
+        {/* ============================================================ */}
+        <div className="mt-12 sm:mt-16 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-3 sm:gap-4 z-10 relative">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] border border-white/12 text-xs sm:text-sm font-bold text-slate-200 backdrop-blur-md shadow-md hover:border-[#FFC72C]/50 hover:bg-white/[0.08] transition">
+            <Code2 className="w-4 h-4 text-[#FFC72C]" />
+            WEBSITE DEVELOPMENT
+          </span>
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] border border-white/12 text-xs sm:text-sm font-bold text-slate-200 backdrop-blur-md shadow-md hover:border-[#FFC72C]/50 hover:bg-white/[0.08] transition">
+            <TrendingUp className="w-4 h-4 text-[#FFC72C]" />
+            CONVERSION FOCUSED
+          </span>
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] border border-white/12 text-xs sm:text-sm font-bold text-slate-200 backdrop-blur-md shadow-md hover:border-[#FFC72C]/50 hover:bg-white/[0.08] transition">
+            <Rocket className="w-4 h-4 text-[#FFC72C]" />
+            SEO • SPEED OPTIMIZED
+          </span>
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] border border-white/12 text-xs sm:text-sm font-bold text-slate-200 backdrop-blur-md shadow-md hover:border-[#FFC72C]/50 hover:bg-white/[0.08] transition">
+            <Smartphone className="w-4 h-4 text-[#FFC72C]" />
+            MOBILE FIRST
+          </span>
+        </div>
+
       </div>
     </section>
   );
