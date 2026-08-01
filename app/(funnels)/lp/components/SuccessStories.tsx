@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { Search, ExternalLink, Sparkles, ChevronRight, X, ChevronDown, Filter, ArrowUpRight, Globe, ShieldCheck, TrendingUp, Zap, CheckCircle2 } from "lucide-react";
 
 export interface CaseStudy {
   id: string;
@@ -31,10 +32,9 @@ const defaultCaseStudies: CaseStudy[] = [
     platform: "google",
     tags: ["Google Ads", "Lead Generation"],
     duration: "3 Month Campaign",
-    summary: "To drive admission enquiries, we structured search and display campaigns around program keywords and campus location intent. With weekly A/B testing on ad copy and landing pages, CPL dropped steadily while qualified leads climbed.",
+    summary: "To drive admission enquiries, we structured search and display campaigns around program keywords and campus location intent.",
     image: "/landing-page/google-ads/case-studies/bgs-global.jpg"
   }
-  // ... other defaults omitted for brevity, they are still in memory
 ];
 
 type SuccessStoriesProps = {
@@ -46,337 +46,587 @@ type SuccessStoriesProps = {
   isAppPortfolio?: boolean;
 };
 
-export default function SuccessStories({ data, title, subtitle, filterBy, hideMetrics = false, isAppPortfolio = false }: SuccessStoriesProps) {
+// Brand logo background color palette generator based on title
+function getBrandLogoTheme(title: string, category: string) {
+  const t = title.toLowerCase();
+  if (t.includes("topmate")) return { bg: "bg-black text-[#F97316]", letter: "t" };
+  if (t.includes("bitespeed")) return { bg: "bg-[#6366F1] text-white", letter: "B" };
+  if (t.includes("murf")) return { bg: "bg-[#0F172A] text-[#F59E0B]", letter: "M" };
+
+  switch (category.toLowerCase()) {
+    case "hospitality":
+      return { bg: "bg-gradient-to-br from-amber-600 to-orange-700 text-white", letter: title.charAt(0) };
+    case "healthcare":
+      return { bg: "bg-gradient-to-br from-emerald-600 to-teal-700 text-white", letter: title.charAt(0) };
+    case "saas":
+      return { bg: "bg-gradient-to-br from-blue-600 to-indigo-700 text-white", letter: title.charAt(0) };
+    case "ecommerce":
+      return { bg: "bg-gradient-to-br from-purple-600 to-pink-700 text-white", letter: title.charAt(0) };
+    case "real estate":
+      return { bg: "bg-gradient-to-br from-amber-700 to-yellow-800 text-white", letter: title.charAt(0) };
+    case "education":
+      return { bg: "bg-gradient-to-br from-cyan-600 to-sky-700 text-white", letter: title.charAt(0) };
+    default:
+      return { bg: "bg-slate-900 text-amber-400", letter: title.charAt(0) };
+  }
+}
+
+// Media box fallback theme generator
+function getMediaBoxGradient(category: string) {
+  switch (category.toLowerCase()) {
+    case "hospitality":
+      return "from-[#1a0f0a] via-[#2d1810] to-[#0f0a07] text-amber-200 border-amber-900/40";
+    case "healthcare":
+      return "from-[#0a1f18] via-[#0d2e24] to-[#071410] text-emerald-200 border-emerald-900/40";
+    case "saas":
+      return "from-[#0f172a] via-[#1e1b4b] to-[#090d16] text-indigo-200 border-indigo-900/40";
+    case "ecommerce":
+      return "from-[#1e102a] via-[#2d123d] to-[#12081a] text-purple-200 border-purple-900/40";
+    case "real estate":
+      return "from-[#1c130b] via-[#2b1c0e] to-[#100b06] text-amber-200 border-amber-900/40";
+    case "education":
+      return "from-[#0c1a24] via-[#132838] to-[#071017] text-sky-200 border-sky-900/40";
+    default:
+      return "from-slate-900 via-slate-950 to-black text-slate-200 border-slate-800";
+  }
+}
+
+export default function SuccessStories({
+  data,
+  title,
+  subtitle,
+  filterBy,
+  hideMetrics = false,
+  isAppPortfolio = false
+}: SuccessStoriesProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [visibleCount, setVisibleCount] = useState(9);
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const displayCaseStudies = data ?? defaultCaseStudies;
-
-  // Extract unique categories if there are more than 10 items (indicating a large portfolio)
   const filterMode = filterBy ?? "category";
-  const categories = useMemo(() => {
-    if (displayCaseStudies.length <= 10) return null;
-    const items = filterMode === "platform"
-      ? Array.from(new Set(displayCaseStudies.map(cs => cs.platform)))
-      : Array.from(new Set(displayCaseStudies.map(cs => cs.category)));
-    return ["All", ...items];
+
+  // Calculate unique categories with item counts
+  const categoriesWithCounts = useMemo(() => {
+    const counts: Record<string, number> = { All: displayCaseStudies.length };
+    displayCaseStudies.forEach((cs) => {
+      const key = filterMode === "platform" ? cs.platform : cs.category;
+      counts[key] = (counts[key] || 0) + 1;
+    });
+    return Object.entries(counts).map(([name, count]) => ({ name, count }));
   }, [displayCaseStudies, filterMode]);
 
-  const [activeCategory, setActiveCategory] = useState("All");
+  // URL Query Sync: Load selected category from URL search parameter on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const categoryParam = params.get("category");
+      if (categoryParam) {
+        const match = categoriesWithCounts.find(
+          (c) => c.name.toLowerCase() === categoryParam.toLowerCase()
+        );
+        if (match) {
+          setActiveCategory(match.name);
+        }
+      }
+    }
+  }, [categoriesWithCounts]);
 
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Update category and sync state with URL query parameter
+  const handleSelectCategory = (categoryName: string) => {
+    setActiveCategory(categoryName);
+    setIsDropdownOpen(false);
+    setVisibleCount(9);
+
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      if (categoryName === "All") {
+        url.searchParams.delete("category");
+      } else {
+        url.searchParams.set("category", categoryName);
+      }
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
+
+  // Filter case studies by active category & search query
   const filteredCaseStudies = useMemo(() => {
-    if (activeCategory === "All") return displayCaseStudies;
-    return displayCaseStudies.filter(cs => {
-      return filterMode === "platform" ? cs.platform === activeCategory : cs.category === activeCategory;
+    return displayCaseStudies.filter((cs) => {
+      const matchesCategory =
+        activeCategory === "All" ||
+        (filterMode === "platform" ? cs.platform === activeCategory : cs.category === activeCategory);
+
+      const matchesSearch =
+        searchQuery.trim() === "" ||
+        cs.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        cs.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        cs.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (cs.link && cs.link.toLowerCase().includes(searchQuery.toLowerCase()));
+
+      return matchesCategory && matchesSearch;
     });
-  }, [displayCaseStudies, activeCategory, filterMode]);
+  }, [displayCaseStudies, activeCategory, searchQuery, filterMode]);
 
-  const selectedCase = displayCaseStudies.find(cs => cs.id === selectedId);
+  const selectedCase = displayCaseStudies.find((cs) => cs.id === selectedId);
 
-  const displayTitle = title ?? "Google Ads Success Stories";
-  const displaySubtitle = subtitle ?? "Real campaigns, real data, and proven growth for businesses scaling with Clever Crow.";
+  const displayTitle = title ?? "Our Website";
+  const displaySubtitle =
+    subtitle ??
+    "Explore 150+ live client websites built across 11 key industries: Hospitality, Healthcare, SaaS, E-commerce, Real Estate, Education, Manufacturing, Wellness, FinTech, Retail & Lifestyle, and F&B.";
+
+  const handleImageError = (id: string) => {
+    setFailedImages((prev) => ({ ...prev, [id]: true }));
+  };
+
+  const activeCategoryObj = categoriesWithCounts.find((c) => c.name === activeCategory) || {
+    name: activeCategory,
+    count: filteredCaseStudies.length
+  };
 
   return (
-    <section id="portfolio" className="bg-slate-50 py-16 sm:py-24 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 -translate-y-12 translate-x-12 blur-3xl opacity-10 pointer-events-none">
-        <div className="h-96 w-96 rounded-full bg-brand-main" />
-      </div>
+    <section id="portfolio" className="bg-[#faf9f6] text-slate-900 py-16 sm:py-24 relative overflow-visible border-t border-slate-200/70">
+      {/* Soft Golden Background Ambient Glows */}
+      <div className="absolute top-10 left-10 w-[600px] h-[500px] bg-[#fef3c7]/50 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-10 right-10 w-[600px] h-[500px] bg-[#fff7ed]/60 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-            {displayTitle}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Header Section */}
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[#fceabb] bg-[#fff8e6] px-4 py-1.5 text-xs font-extrabold uppercase tracking-wider text-[#b8860b] shadow-xs mb-4">
+            <ShieldCheck className="w-4 h-4 text-[#d97706]" />
+            VERIFIED CLIENT WEBSITES
+          </span>
+
+          <h2 className="text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl flex items-center justify-center gap-2 flex-wrap">
+            <span>Our Website</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d97706] via-[#f59e0b] to-[#b45309]">
+              Portfolio
+            </span>
           </h2>
-          <p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+
+          <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed font-medium max-w-2xl mx-auto">
             {displaySubtitle}
           </p>
         </div>
 
-        {/* Categories Tabs */}
-        {categories && (
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${activeCategory === cat
-                    ? "bg-brand-main text-black shadow-lg shadow-brand-main/20 scale-105"
-                    : "bg-white text-slate-400 hover:bg-slate-100 border border-slate-200"
-                  }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredCaseStudies.map((cs) => (
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                type: "tween",
-                ease: "easeOut",
-                duration: 0.25
-              }}
-              key={`${activeCategory}-${cs.id}`}
-                onClick={() => {
-                  if (cs.link) {
-                    window.open(cs.link, "_blank", "noopener,noreferrer");
-                  } else {
-                    setSelectedId(cs.id);
-                  }
+        {/* Search Bar & Industry Dropdown Filter Control Bar */}
+        <div className="mb-12 max-w-3xl mx-auto relative z-40">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+            
+            {/* Search Box Pill */}
+            <div className="relative md:col-span-7">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setVisibleCount(9);
                 }}
-                className="group relative cursor-pointer bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 flex flex-col"
-                whileHover={{ y: -8 }}
+                placeholder="Search websites by brand or keyword..."
+                className="w-full pl-11 pr-8 py-3.5 rounded-full bg-white border border-slate-200/90 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f59e0b] focus:ring-2 focus:ring-[#f59e0b]/20 transition shadow-sm font-medium"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+
+            {/* Dropdown Industry Selector Pill */}
+            <div className="relative md:col-span-5 z-50" ref={dropdownRef}>
+              <button
+                type="button"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="w-full flex items-center justify-between gap-3 px-5 py-3.5 rounded-full bg-white border border-slate-200/90 text-sm font-bold text-slate-800 hover:border-[#f59e0b] transition shadow-sm group cursor-pointer"
               >
-                {/* Image Container */}
-                {isAppPortfolio ? (
-                  <div className="relative h-48 w-full overflow-hidden bg-slate-900 flex items-center justify-center border-b border-slate-100/5">
-                    {/* Blurred background */}
-                    <Image
-                      src={cs.image}
-                      alt=""
-                      fill
-                      className="object-cover blur-xl opacity-20 scale-125 select-none pointer-events-none"
-                      unoptimized={true}
-                    />
-                    {/* Centered contained logo */}
-                    <div className="relative z-10 h-28 w-28 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_8px_16px_rgba(0,0,0,0.4)]">
+                <div className="flex items-center gap-2 truncate">
+                  <Filter className="w-4 h-4 text-[#d97706] shrink-0" />
+                  <span className="text-slate-500 text-xs font-semibold">Industry:</span>
+                  <span className="truncate text-slate-900 font-extrabold">{activeCategoryObj.name}</span>
+                  <span className="text-[11px] font-black px-2 py-0.5 rounded-full bg-[#fcd34d] text-slate-900 shrink-0 shadow-xs">
+                    {activeCategoryObj.count}
+                  </span>
+                </div>
+                <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ${isDropdownOpen ? "rotate-180 text-[#d97706]" : ""}`} />
+              </button>
+
+              {/* Dropdown Options Popup with Elegant Custom Scrollbar */}
+              <AnimatePresence>
+                {isDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 top-full mt-2 w-full min-w-[250px] bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden z-[100] p-2 max-h-80 overflow-y-auto ring-1 ring-black/5 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-[#f59e0b]"
+                  >
+                    {categoriesWithCounts.map(({ name, count }) => {
+                      const isSelected = activeCategory === name;
+                      return (
+                        <button
+                          key={name}
+                          onClick={() => handleSelectCategory(name)}
+                          className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition text-left cursor-pointer mb-0.5 ${
+                            isSelected
+                              ? "bg-[#fcd34d] text-slate-950 font-extrabold shadow-xs"
+                              : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                          }`}
+                        >
+                          <span className="truncate">{name}</span>
+                          <span
+                            className={`text-[10px] px-2.5 py-0.5 rounded-full font-black ml-2 shrink-0 ${
+                              isSelected ? "bg-black/15 text-slate-950" : "bg-slate-100 text-slate-600 border border-slate-200"
+                            }`}
+                          >
+                            {count}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Portfolio Showcase Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+          <AnimatePresence mode="popLayout">
+            {filteredCaseStudies.slice(0, visibleCount).map((cs) => {
+              const isImageBroken = failedImages[cs.id];
+              const logoTheme = getBrandLogoTheme(cs.title, cs.category);
+              const mediaBoxGrad = getMediaBoxGradient(cs.category);
+
+              return (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.97, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.97, y: 15 }}
+                  transition={{ duration: 0.25 }}
+                  key={cs.id}
+                  className="group relative bg-white rounded-[28px] border border-slate-100 p-3.5 sm:p-4 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
+                >
+                  {/* Top Inner Rounded Media Container */}
+                  <div className="relative aspect-[16/11] w-full rounded-[22px] overflow-hidden bg-slate-950 flex items-center justify-center border border-slate-100/60 shadow-inner cursor-pointer" onClick={() => setSelectedId(cs.id)}>
+                    {!isImageBroken ? (
                       <Image
                         src={cs.image}
                         alt={cs.title}
                         fill
-                        className="object-contain rounded-[24px]"
-                        unoptimized={true}
+                        onError={() => handleImageError(cs.id)}
+                        className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                        unoptimized
                       />
-                    </div>
-                  </div>
-                ) : (
-                  <div className="relative h-48 w-full overflow-hidden">
-                    <Image
-                      src={cs.image}
-                      alt={cs.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      unoptimized={true}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-60" />
-                    
-                    {/* Platform Badge on Image */}
-                    <div className="absolute top-4 left-4 flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900/90 backdrop-blur-md shadow-md border border-slate-700/50 z-10">
-                      {cs.platform === "google" && (
-                        <svg className="h-4 w-4" viewBox="0 0 24 24">
-                          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" />
-                          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                        </svg>
-                      )}
-                      {cs.platform === "meta" && (
-                        <svg className="h-4 w-4 text-blue-500 fill-current" viewBox="0 0 24 24">
-                          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                        </svg>
-                      )}
-                      {cs.platform === "seo" && (
-                        <svg className="h-4 w-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                        </svg>
-                      )}
-                      {(cs.platform === "web" || (!cs.platform && cs.platform !== "google" && cs.platform !== "meta" && cs.platform !== "seo")) && (
-                        <svg className="h-4 w-4 text-[#f4c542]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <circle cx="12" cy="12" r="10" />
-                          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                        </svg>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {/* Content Box */}
-                <div className="p-6 flex flex-col flex-grow">
-                  <div className="flex items-center justify-between mb-4">
-                    {isAppPortfolio ? (
-                      <div className="flex items-center gap-1.5">
-                        <span className="inline-flex items-center gap-1.5 rounded bg-slate-100 px-2 py-0.5 text-[9px] font-extrabold text-slate-600 border border-slate-200/40">
-                          <svg className="h-2.5 w-2.5 text-slate-500" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.1 16.67C20.08 16.74 19.67 18.11 18.71 19.5M15.97 4.17C16.63 3.37 17.07 2.28 16.95 1C15.85 1.04 14.51 1.73 13.73 2.64C13.07 3.41 12.49 4.52 12.64 5.78C13.87 5.87 15.12 5.17 15.97 4.17Z" />
-                          </svg>
-                          <svg className="h-2.5 w-2.5 text-slate-500" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17.523 15.3l1.834 3.177c.291.503.118 1.15-.385 1.441-.504.291-1.151.118-1.44-.385L15.68 16.32c-1.09.48-2.298.76-3.68.76s-2.59-.28-3.68-.76l-1.852 3.213c-.29.503-.937.676-1.44.385-.503-.29-.676-.938-.385-1.44l1.834-3.178C4.195 13.737 2.5 10.976 2.5 7.72H21.5c0 3.256-1.695 6.017-3.977 7.58M7 10.25a.75.75 0 100-1.5.75.75 0 000 1.5m10 0a.75.75 0 100-1.5.75.75 0 000 1.5M12 2a.5.5 0 01.5.5v1.5a.5.5 0 01-1 0V2.5A.5.5 0 0112 2" />
-                          </svg>
-                          <span>iOS & Android</span>
-                        </span>
-                      </div>
                     ) : (
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{cs.location}</span>
+                      /* Rich Color Theme Fallback when screenshot image is not locally present */
+                      <div className={`w-full h-full bg-gradient-to-br ${mediaBoxGrad} p-6 flex flex-col justify-between relative overflow-hidden`}>
+                        <div className="absolute -bottom-4 -right-4 opacity-15 select-none">
+                          <span className="text-9xl font-black">{cs.title.charAt(0)}</span>
+                        </div>
+                        <div className="relative z-10">
+                          <h4 className="text-2xl font-black text-white leading-tight tracking-tight drop-shadow-md">
+                            {cs.title}
+                          </h4>
+                          <p className="text-xs text-slate-300 mt-1 font-medium line-clamp-2">
+                            {cs.summary}
+                          </p>
+                        </div>
+                        <div className="relative z-10 flex items-center justify-between text-xs pt-3 border-t border-white/10">
+                          <span className="font-extrabold text-amber-300">⚡ {cs.primaryMetric}</span>
+                          <span className="text-[11px] font-semibold text-slate-300">{cs.location}</span>
+                        </div>
+                      </div>
                     )}
 
-                    {isAppPortfolio && cs.builtWith ? (
-                      <span className="text-[10px] font-extrabold text-brand-main bg-brand-main/10 border border-brand-main/20 rounded-full px-2.5 py-0.5 uppercase tracking-wider shadow-sm">
-                        {cs.builtWith}
+                    {/* Floating White Capsule Category Badge Top-Left */}
+                    <div className="absolute top-3.5 left-3.5 z-10">
+                      <span className="text-[10px] font-black uppercase tracking-wider bg-white text-slate-900 px-3.5 py-1.5 rounded-full shadow-md border border-slate-100">
+                        {cs.category}
                       </span>
-                    ) : (
-                      <p className="text-[10px] font-bold text-brand-main uppercase tracking-widest">{cs.category}</p>
-                    )}
-                  </div>
-
-                  <div className="mb-4">
-                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-brand-main transition-colors mb-1">{cs.title}</h3>
-                    {cs.summary && (
-                      <p className="mt-1.5 text-xs text-slate-500 line-clamp-3 leading-relaxed font-medium">
-                        {cs.summary}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Metrics Grid */}
-                  {!hideMetrics && (
-                    <div className="grid grid-cols-2 gap-3 mb-4">
-                      <div className="rounded-xl bg-slate-50 p-2.5 border border-slate-100 group-hover:bg-white group-hover:border-slate-200 transition-all">
-                        <p className="text-[8px] font-bold text-slate-400 uppercase mb-0.5">
-                          {isAppPortfolio ? "App Focus" : "Impact"}
-                        </p>
-                        <p className="text-xs font-black text-slate-900 leading-tight">{cs.primaryMetric}</p>
-                      </div>
-                      <div className={`rounded-xl p-2.5 border transition-all ${
-                        isAppPortfolio 
-                          ? "bg-amber-50/60 border-amber-100/60 group-hover:bg-amber-100/10 text-amber-700" 
-                          : "bg-emerald-50 border-emerald-100 group-hover:bg-emerald-100/20 text-emerald-700"
-                      }`}>
-                        <p className={`text-[8px] font-bold uppercase mb-0.5 ${
-                          isAppPortfolio ? "text-amber-600" : "text-emerald-500"
-                        }`}>
-                          {isAppPortfolio ? "Key Highlight" : "Growth"}
-                        </p>
-                        <p className="text-xs font-black leading-tight">{cs.secondaryMetric}</p>
-                      </div>
                     </div>
-                  )}
 
-                  {/* Tags Badges */}
-                  {cs.tags && cs.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {cs.tags.slice(0, 3).map((tag) => (
-                        <span key={tag} className="text-[9px] font-bold text-slate-500 bg-slate-100 border border-slate-200/40 rounded px-2 py-0.5 uppercase tracking-wide">
-                          {tag}
+                    {/* Floating White Capsule Live Badge Top-Right */}
+                    <div className="absolute top-3.5 right-3.5 z-10">
+                      <span className="inline-flex items-center gap-1.5 text-[10px] font-black text-slate-900 bg-white px-3 py-1.5 rounded-full shadow-md border border-slate-100">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                        LIVE
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Card Content Body Below Thumbnail (Sleek Clean Layout) */}
+                  <div className="pt-4 px-1 pb-1 flex flex-col justify-between flex-grow">
+                    
+                    {/* Brand Header: Logo Monogram + Title + Location */}
+                    <div className="flex items-center justify-between gap-3 mb-3">
+                      <div className="flex items-center gap-3 min-w-0">
+                        {/* Brand Logo Monogram Box */}
+                        <div className={`w-11 h-11 rounded-2xl flex items-center justify-center font-black text-lg shadow-sm shrink-0 ${logoTheme.bg}`}>
+                          {logoTheme.letter}
+                        </div>
+
+                        {/* Title & Short Summary */}
+                        <div className="min-w-0">
+                          <h3 className="text-lg font-extrabold text-slate-900 group-hover:text-[#6366F1] transition-colors leading-tight truncate cursor-pointer" onClick={() => setSelectedId(cs.id)}>
+                            {cs.title}
+                          </h3>
+                          <p className="text-[11px] text-slate-500 font-medium truncate mt-0.5">
+                            {cs.summary}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Location Indicator */}
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider shrink-0 flex items-center gap-1">
+                        <Globe className="w-3 h-3 text-slate-400" />
+                        {cs.location}
+                      </span>
+                    </div>
+
+                    {/* Footer Action Links */}
+                    <div className="mt-4 pt-3 border-t border-slate-100/80 flex items-center justify-between text-xs">
+                      {cs.link ? (
+                        <a
+                          href={cs.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 font-extrabold text-[#6366F1] hover:text-[#4F46E5] transition"
+                        >
+                          <span>View Live Site</span>
+                          <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                        </a>
+                      ) : (
+                        <span className="font-extrabold text-[#6366F1] flex items-center gap-1">
+                          View Live Site <ArrowUpRight className="w-3.5 h-3.5" />
                         </span>
-                      ))}
-                    </div>
-                  )}
+                      )}
 
-                  {/* Bottom Info */}
-                  <div className="mt-auto flex items-center justify-between pt-4 border-t border-slate-100">
-                    <p className="text-[10px] text-slate-400 font-medium">{cs.duration}</p>
-                    <div className="flex items-center text-[10px] font-bold text-brand-main uppercase tracking-wider">
-                      {cs.link ? (isAppPortfolio ? "View App" : "View Project") : "Know More"}
-                      <svg className="ml-1.5 h-3 w-3 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
+                      <button
+                        onClick={() => setSelectedId(cs.id)}
+                        className="font-bold text-slate-600 hover:text-slate-900 flex items-center gap-1 transition cursor-pointer"
+                      >
+                        <span>Project Details</span>
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </button>
                     </div>
+
                   </div>
-                </div>
-            </motion.div>
-          ))}
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </div>
+
+        {/* Empty State */}
+        {filteredCaseStudies.length === 0 && (
+          <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 max-w-xl mx-auto shadow-sm">
+            <p className="text-lg font-bold text-slate-900">No websites found matching your search</p>
+            <p className="text-sm text-slate-600 mt-1">Try selecting a different category or clearing your search term.</p>
+            <button
+              onClick={() => handleSelectCategory("All")}
+              className="mt-4 inline-flex items-center px-5 py-2.5 rounded-full bg-[#fcd34d] text-slate-950 text-xs font-extrabold uppercase tracking-wider shadow-sm hover:brightness-105 transition"
+            >
+              Reset Filters
+            </button>
+          </div>
+        )}
+
+        {/* View More Projects Center Pill Button */}
+        {visibleCount < filteredCaseStudies.length && (
+          <div className="text-center mt-12">
+            <button
+              onClick={() => setVisibleCount((prev) => prev + 9)}
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white hover:bg-slate-50 text-slate-900 text-sm font-extrabold border border-slate-200 transition shadow-md hover:border-[#f59e0b] hover:shadow-lg cursor-pointer"
+            >
+              <Sparkles className="w-4 h-4 text-[#f59e0b]" />
+              <span>View More Projects</span>
+              <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* Enhanced Modal */}
+      {/* World-Class Project Detail Modal Popup */}
       <AnimatePresence>
         {selectedId && selectedCase && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-y-auto bg-[#0B1120]/80 backdrop-blur-md">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-y-auto bg-slate-950/80 backdrop-blur-md">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedId(null)}
-              className="absolute inset-0 cursor-zoom-out"
+              className="absolute inset-0 cursor-pointer"
             />
             <motion.div
-              className="relative w-full max-w-2xl bg-white rounded-[40px] shadow-2xl overflow-hidden"
-              initial={{ scale: 0.95, opacity: 0, y: 15 }}
+              className="relative w-full max-w-3xl bg-white border border-slate-200 rounded-[32px] shadow-2xl overflow-hidden text-slate-900 my-8 max-h-[90vh] flex flex-col z-10"
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 15 }}
-              transition={{ type: "tween", ease: "easeOut", duration: 0.25 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
             >
+              {/* Floating Close Button */}
               <button
                 onClick={() => setSelectedId(null)}
-                className="absolute top-6 right-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-900/10 text-slate-900 hover:bg-slate-900/20 transition-colors"
-                aria-label="Close"
+                className="absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 backdrop-blur-md text-slate-700 hover:text-slate-950 border border-slate-200 shadow-md transition cursor-pointer"
               >
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <X className="h-5 w-5" />
               </button>
 
-              <div className="relative h-64 w-full">
-                <Image
-                  src={selectedCase.image}
-                  alt={selectedCase.title}
-                  fill
-                  className="object-cover"
-                  unoptimized={true}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
-                <div className="absolute bottom-8 left-8 right-8">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="inline-flex items-center rounded-full bg-brand-main px-3 py-1 text-[10px] font-bold text-black uppercase tracking-wider">
+              {/* Scrollable Container inside Modal */}
+              <div className="overflow-y-auto max-h-[90vh] no-scrollbar">
+
+                {/* Top Full-Width Hero Preview Image Box */}
+                <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-950 flex items-center justify-center border-b border-slate-100">
+                  {!failedImages[selectedCase.id] ? (
+                    <Image
+                      src={selectedCase.image}
+                      alt={selectedCase.title}
+                      fill
+                      onError={() => handleImageError(selectedCase.id)}
+                      className="object-cover object-top"
+                      unoptimized
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 p-8 flex flex-col justify-end text-white">
+                      <h3 className="text-3xl font-black">{selectedCase.title}</h3>
+                      <p className="text-sm text-slate-300 mt-1">{selectedCase.summary}</p>
+                    </div>
+                  )}
+
+                  {/* Overlaid Badges on Image */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="text-xs font-black uppercase tracking-wider bg-white text-slate-900 px-4 py-1.5 rounded-full shadow-md border border-slate-100">
                       {selectedCase.category}
                     </span>
-                    <span className="text-xs font-medium text-white/90">{selectedCase.location}</span>
                   </div>
-                  <h3 className="text-3xl font-bold text-white">{selectedCase.title}</h3>
+
+                  <div className="absolute top-4 right-16 z-10">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-black text-slate-900 bg-white px-3.5 py-1.5 rounded-full shadow-md border border-slate-100">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      LIVE SITE
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              <div className="p-8 sm:p-10">
-                {!hideMetrics && (
-                  <div className="grid grid-cols-2 gap-4 mb-10">
-                    <div className="rounded-3xl bg-slate-50 p-6 border border-slate-100">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Primary Outcome</p>
-                      <p className="text-2xl font-black text-slate-900">{selectedCase.primaryMetric}</p>
+                {/* Modal Main Content Body */}
+                <div className="p-6 sm:p-8 space-y-6">
+                  
+                  {/* Brand Header */}
+                  <div className="flex items-center gap-4">
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center font-black text-2xl shadow-md shrink-0 ${getBrandLogoTheme(selectedCase.title, selectedCase.category).bg}`}>
+                      {getBrandLogoTheme(selectedCase.title, selectedCase.category).letter}
                     </div>
-                    <div className="rounded-3xl bg-emerald-50 p-6 border border-emerald-100">
-                      <p className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest mb-2">Growth Lift</p>
-                      <p className="text-2xl font-black text-emerald-700">{selectedCase.secondaryMetric}</p>
+                    <div>
+                      <div className="flex items-center gap-2 mb-0.5">
+                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1">
+                          <Globe className="w-3.5 h-3.5 text-slate-400" />
+                          {selectedCase.location}
+                        </span>
+                        <span className="text-slate-300">•</span>
+                        <span className="text-xs font-bold text-[#6366F1]">Verified Case Study</span>
+                      </div>
+                      <h3 className="text-2xl sm:text-3xl font-black text-slate-900">{selectedCase.title}</h3>
                     </div>
                   </div>
-                )}
 
-                <div className="space-y-8">
+                  {/* 3-Column Key Metric Highlights */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="p-4 rounded-2xl bg-[#f8fafc] border border-slate-200/80">
+                      <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
+                        <ShieldCheck className="w-3.5 h-3.5 text-amber-500" />
+                        PRIMARY METRIC
+                      </span>
+                      <p className="text-xl font-black text-[#d97706] mt-1">{selectedCase.primaryMetric}</p>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/80">
+                      <span className="text-[10px] font-extrabold text-emerald-700 uppercase tracking-widest flex items-center gap-1.5">
+                        <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
+                        GROWTH LIFT
+                      </span>
+                      <p className="text-xl font-black text-emerald-800 mt-1">{selectedCase.secondaryMetric}</p>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-indigo-50/70 border border-indigo-200/80">
+                      <span className="text-[10px] font-extrabold text-indigo-700 uppercase tracking-widest flex items-center gap-1.5">
+                        <Zap className="w-3.5 h-3.5 text-indigo-600" />
+                        PLATFORM STATUS
+                      </span>
+                      <p className="text-xl font-black text-indigo-900 mt-1">Live & Active</p>
+                    </div>
+                  </div>
+
+                  {/* Project Overview */}
                   <div>
-                    <h4 className="text-slate-900 text-sm font-bold mb-3 uppercase tracking-wider">Challenge & Strategy</h4>
-                    <p className="text-slate-600 leading-relaxed text-sm">
+                    <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                      <CheckCircle2 className="w-4 h-4 text-[#6366F1]" />
+                      PROJECT SUMMARY & STRATEGY
+                    </h4>
+                    <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
                       {selectedCase.summary}
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-4 pt-8 border-t border-slate-100">
-                    <div className="flex flex-wrap gap-2">
-                      {selectedCase.tags.map(tag => (
-                        <span key={tag} className="text-[9px] font-bold text-slate-400 uppercase tracking-widest border border-slate-200 rounded-full px-3 py-1">
-                          {tag}
-                        </span>
-                      ))}
+                  {/* Tags */}
+                  {selectedCase.tags && selectedCase.tags.length > 0 && (
+                    <div>
+                      <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">SERVICES & SCOPE</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedCase.tags.map((tag) => (
+                          <span key={tag} className="text-xs font-bold bg-slate-100 border border-slate-200 text-slate-700 px-3.5 py-1.5 rounded-full">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
+                  )}
 
-                    {selectedCase.link && (
+                  {/* Action Footer */}
+                  {selectedCase.link && (
+                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                      <button
+                        onClick={() => setSelectedId(null)}
+                        className="text-xs font-bold text-slate-500 hover:text-slate-800 px-4 py-2"
+                      >
+                        Back to Portfolio
+                      </button>
                       <a
                         href={selectedCase.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="ml-auto inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-brand-main text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 transition-all"
+                        className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-[#6366F1] hover:bg-[#4F46E5] text-white font-extrabold text-sm shadow-lg shadow-[#6366F1]/25 transition"
                       >
-                        Visit Live Website
-                        <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
+                        <span>Visit Live Website</span>
+                        <ArrowUpRight className="w-4.5 h-4.5 stroke-[2.5]" />
                       </a>
-                    )}
-                  </div>
+                    </div>
+                  )}
+
                 </div>
+
               </div>
             </motion.div>
           </div>
