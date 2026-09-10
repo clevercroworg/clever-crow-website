@@ -717,6 +717,13 @@ const matchInputToNavigation = (text: string) => {
   // Clean punctuation for easier matching of conversational phrases
   const cleanText = t.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "").replace(/\s+/g, " ").trim();
 
+  // If the query is an open-ended conversational inquiry (has question marks, >3 words, or asks about reviews/social proof), defer to the AI representative
+  const isQuestionOrLong = t.includes("?") || cleanText.split(" ").length > 3;
+  const isReviewQuery = t.includes("review") || t.includes("testimonial") || t.includes("rating") || t.includes("feedback") || t.includes("social proof");
+  if (isQuestionOrLong || isReviewQuery) {
+    return null;
+  }
+
   // Combined Services & Contact check
   const hasContact = (
     t.includes("contact") || 
@@ -818,34 +825,119 @@ const matchInputToNavigation = (text: string) => {
   return null;
 };
 
-const parseMarkdown = (text: string, onLinkClick?: (url: string) => void) => {
-  const lines = text.split("\n");
-  
+const cleanAndNormalizeText = (text: string): string => {
+  if (!text) return "";
+
+  // 1. Replace <br>, <br/>, <br /> with standard newlines
+  let t = text.replace(/<br\s*\/?>/gi, "\n");
+
+  // 2. Decode common HTML entities
+  t = t
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&')
+    .replace(/&ldquo;/g, '"')
+    .replace(/&rdquo;/g, '"')
+    .replace(/&mdash;/g, '—')
+    .replace(/&bull;/g, '•')
+    .replace(/&nbsp;/g, ' ');
+
+  // 3. Remove table separator lines like |---|---| or |:---|:---|
+  t = t.replace(/^\s*\|[-:\s|]+\|\s*$/gm, "");
+
+  // 4. Transform any markdown table rows | Key | Value | into clean bullet points
+  const rawLines = t.split("\n");
+  const processedLines: string[] = [];
+
+  for (const line of rawLines) {
+    const trimmed = line.trim();
+    if (trimmed.startsWith("|") && trimmed.endsWith("|")) {
+      const cells = trimmed
+        .slice(1, -1)
+        .split("|")
+        .map((c) => c.trim())
+        .filter(Boolean);
+
+      // Skip table header rows like | 📌 | Details | or | Category | Details |
+      if (
+        cells.length === 0 ||
+        (cells.length === 2 &&
+          (cells[0].toLowerCase() === "category" ||
+            cells[0].toLowerCase() === "📌" ||
+            cells[1].toLowerCase() === "details"))
+      ) {
+        continue;
+      }
+
+      if (cells.length === 2) {
+        const cleanKey = cells[0].replace(/\*\*/g, "").replace(/\*/g, "");
+        processedLines.push(`• **${cleanKey}:** ${cells[1]}`);
+      } else if (cells.length > 2) {
+        processedLines.push(`• ${cells.join(" — ")}`);
+      } else if (cells.length === 1) {
+        processedLines.push(`• ${cells[0]}`);
+      }
+    } else {
+      processedLines.push(line);
+    }
+  }
+
+  // 5. De-duplicate consecutive identical lines (prevents repeated sign-offs)
+  const deduped: string[] = [];
+  for (const l of processedLines) {
+    if (deduped.length > 0 && l.trim() !== "" && l.trim() === deduped[deduped.length - 1].trim()) {
+      continue;
+    }
+    deduped.push(l);
+  }
+
+  // 6. Normalize 3+ consecutive newlines into 2
+  return deduped.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+};
+
+const parseMarkdown = (rawText: string, onLinkClick?: (url: string) => void) => {
+  const normalizedText = cleanAndNormalizeText(rawText);
+  const lines = normalizedText.split("\n");
+
   return lines.map((line, lineIdx) => {
+    const trimmedLine = line.trim();
+    const isBullet = trimmedLine.startsWith("•") || trimmedLine.startsWith("- ") || trimmedLine.startsWith("* ");
+    const contentToParse = isBullet ? trimmedLine.replace(/^[•\-*]\s*/, "") : line;
+
     const parts: React.ReactNode[] = [];
-    const regex = /(\*\*.*?\*\*|\[.*?\]\(.*?\))/g;
+    const regex = /(\*\*.*?\*\*|\*[^*]+?\*|\[.*?\]\(.*?\))/g;
     let match;
     let lastIndex = 0;
-    
-    while ((match = regex.exec(line)) !== null) {
+
+    while ((match = regex.exec(contentToParse)) !== null) {
       const matchIndex = match.index;
       const matchText = match[0];
-      
+
       if (matchIndex > lastIndex) {
-        parts.push(line.substring(lastIndex, matchIndex));
+        parts.push(contentToParse.substring(lastIndex, matchIndex));
       }
-      
+
       if (matchText.startsWith("**") && matchText.endsWith("**")) {
         const boldText = matchText.slice(2, -2);
-        parts.push(<strong key={matchIndex} className="font-extrabold text-slate-900">{boldText}</strong>);
+        parts.push(
+          <strong key={matchIndex} className="font-extrabold text-slate-900">
+            {boldText}
+          </strong>
+        );
+      } else if (matchText.startsWith("*") && matchText.endsWith("*") && matchText.length > 2) {
+        const italicText = matchText.slice(1, -1);
+        parts.push(
+          <em key={matchIndex} className="italic text-slate-700">
+            {italicText}
+          </em>
+        );
       } else if (matchText.startsWith("[") && matchText.includes("](")) {
         const closeBracketIdx = matchText.indexOf("]");
         const linkText = matchText.slice(1, closeBracketIdx);
         const linkUrl = matchText.slice(closeBracketIdx + 2, -1);
-        
+
         const isLocal = linkUrl.startsWith("/") || linkUrl.startsWith("file://");
         const cleanUrl = linkUrl.startsWith("file://") ? linkUrl.replace("file://", "") : linkUrl;
-        
+
         if (isLocal) {
           parts.push(
             <a
@@ -876,16 +968,31 @@ const parseMarkdown = (text: string, onLinkClick?: (url: string) => void) => {
           );
         }
       }
-      
+
       lastIndex = regex.lastIndex;
     }
-    
-    if (lastIndex < line.length) {
-      parts.push(line.substring(lastIndex));
+
+    if (lastIndex < contentToParse.length) {
+      parts.push(contentToParse.substring(lastIndex));
     }
-    
+
+    if (trimmedLine === "") {
+      return <div key={lineIdx} className="h-2" />;
+    }
+
+    if (isBullet) {
+      return (
+        <div key={lineIdx} className="flex items-start gap-2 my-1 pl-1">
+          <span className="text-amber-500 font-black text-sm shrink-0 leading-relaxed">•</span>
+          <div className="flex-1 leading-relaxed text-slate-800 text-[13.5px]">
+            {parts.length > 0 ? parts : " "}
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div key={lineIdx} className="min-h-[1.25rem]">
+      <div key={lineIdx} className="leading-relaxed text-slate-800 text-[13.5px] min-h-[1.25rem]">
         {parts.length > 0 ? parts : " "}
       </div>
     );
@@ -1197,6 +1304,96 @@ export default function Chatbot() {
     });
   };
 
+  const askAiRepresentative = async (
+    queryText: string,
+    prevState: ChatbotState,
+    prevMessages: Message[],
+    customOptions?: string[]
+  ) => {
+    setIsTyping(true);
+    try {
+      const chatHistory = [
+        ...prevMessages.map((m) => ({
+          role: m.sender === "bot" ? "assistant" : "user",
+          content: m.text,
+        })),
+        { role: "user", content: queryText },
+      ];
+
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: chatHistory }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setIsTyping(false);
+        if (data?.reply) {
+          setHistory((prev) => [...prev, { state: prevState, messages: prevMessages }]);
+
+          let tailoredOptions = customOptions;
+          if (!tailoredOptions) {
+            if (data.category === "pricing" || data.category === "package_launch") {
+              tailoredOptions = [
+                "📋 Get a Quote",
+                "🚀 Business Launch Package",
+                "💬 WhatsApp Chat",
+                "🔙 Main Menu",
+              ];
+            } else if (data.category === "location" || data.category === "contact") {
+              tailoredOptions = [
+                "📬 Contact Page",
+                "💬 WhatsApp Chat",
+                "📋 Get a Quote",
+                "🔙 Main Menu",
+              ];
+            } else if (data.category === "portfolio" || data.category === "reviews") {
+              tailoredOptions = [
+                "📋 Get a Quote",
+                "💬 WhatsApp Chat",
+                "🌐 Website Development",
+                "🔙 Main Menu",
+              ];
+            } else if (data.category === "careers") {
+              tailoredOptions = [
+                "👉 View Careers",
+                "👉 View Internships",
+                "💬 WhatsApp Chat",
+                "🔙 Main Menu",
+              ];
+            } else {
+              tailoredOptions = [
+                "📋 Get a Quote",
+                "💰 View Pricing",
+                "📞 Let's Connect",
+                "🌐 Website Development",
+                "🔙 Main Menu",
+              ];
+            }
+          }
+
+          addMessage({
+            sender: "bot",
+            text: data.reply,
+            options: tailoredOptions,
+          });
+          return;
+        }
+      }
+    } catch (err) {
+      console.error("AI representative query error:", err);
+    }
+
+    setIsTyping(false);
+    setHistory((prev) => [...prev, { state: prevState, messages: prevMessages }]);
+    addMessage({
+      sender: "bot",
+      text: "I don't have that specific operational detail on hand right now, but I can get you directly in touch with our support team. Please drop your email or contact number so we can follow up.\n\nYou can also reach us directly at **+91 99863 89444** or **hello@clevercrow.in**.",
+      options: ["📋 Get a Quote", "💬 WhatsApp Chat", "📞 Let's Connect", "🔙 Main Menu"],
+    });
+  };
+
   const processInput = async (
     text: string,
     prevState: ChatbotState,
@@ -1205,6 +1402,66 @@ export default function Chatbot() {
     setIsTyping(false);
     const val = text.trim();
     const valLower = val.toLowerCase();
+
+    // Global quick action triggers
+    if (val === "💬 WhatsApp Chat" || valLower === "whatsapp" || valLower === "whatsapp chat") {
+      if (typeof window !== "undefined") {
+        window.open("https://wa.me/919986389444", "_blank");
+      }
+      return;
+    }
+
+    if (val === "👉 View Careers") {
+      router.push("/careers");
+      setIsOpen(false);
+      return;
+    }
+
+    if (val === "👉 View Internships") {
+      router.push("/internship");
+      setIsOpen(false);
+      return;
+    }
+
+    if (val === "🚀 Business Launch Package" || valLower === "business launch package") {
+      await askAiRepresentative("Tell me about the complete business launch package", prevState, prevMessages);
+      return;
+    }
+
+    if (val === "💰 View Pricing" || valLower === "view pricing") {
+      await askAiRepresentative("What are your website packages and pricing?", prevState, prevMessages);
+      return;
+    }
+
+    if (val === "📍 Office Locations" || valLower === "office locations") {
+      await askAiRepresentative("Where are your offices located?", prevState, prevMessages);
+      return;
+    }
+
+    if (val === "🏆 Portfolio & Proof" || valLower === "portfolio & proof") {
+      await askAiRepresentative("Show me your past work and portfolio case studies", prevState, prevMessages);
+      return;
+    }
+
+    if (val === "📞 Let's Connect" || valLower === "let's connect") {
+      handleGeneralFAQ("contact", val, prevState, prevMessages);
+      return;
+    }
+
+    if (val === "📋 Get a Quote" || valLower === "get a quote") {
+      setHistory((prev) => [...prev, { state: prevState, messages: prevMessages }]);
+      const nextState: ChatbotState = {
+        ...prevState,
+        stage: "project-goal",
+      };
+      setChatState(nextState);
+      addMessage({
+        sender: "bot",
+        text: "Awesome! What's the main goal of your project or the key features you need? 😊",
+        options: getOptionsForState(nextState),
+      });
+      return;
+    }
 
     // 1. Check for back/menu/contact-page commands globally
     if (val === "📬 Contact Page" || valLower === "contact page") {
@@ -1315,12 +1572,8 @@ export default function Chatbot() {
           return;
         }
 
-        addMessage({
-          sender: "bot",
-          text: "No problem! I can help you explore our services, get custom quotes, or put you in touch with the team. Just click one of the options below: 😊",
-          options: getOptionsForState(prevState)
-        });
-        break;
+        await askAiRepresentative(val, prevState, prevMessages);
+        return;
       }
 
       case "category-select": {
@@ -1420,12 +1673,12 @@ export default function Chatbot() {
           return;
         }
 
-        addMessage({
-          sender: "bot",
-          text: `Take a look at the services under ${prevState.selectedCategory} or click one of the options below! 😊`,
-          options: getOptionsForState(prevState)
-        });
-        break;
+        await askAiRepresentative(val, prevState, prevMessages, [
+          "📋 Get a Quote",
+          "👈 Back",
+          "🔙 Main Menu"
+        ]);
+        return;
       }
 
       case "service-details": {
@@ -1479,18 +1732,27 @@ export default function Chatbot() {
           return;
         }
 
-        addMessage({
-          sender: "bot",
-          text: "Would you like to get a customized quote for this service, or go back to look at other options? 😊",
-          options: getOptionsForState(prevState)
-        });
-        break;
+        await askAiRepresentative(val, prevState, prevMessages, [
+          "📋 Get a Quote",
+          "👈 Back",
+          "🔙 Main Menu"
+        ]);
+        return;
       }
 
       case "project-goal": {
         const matched = matchInputToNavigation(val);
         if (matched && matched.type === "general" && matched.key === "greeting") {
           handleGreeting(val, prevState, prevMessages);
+          return;
+        }
+        const isGoalQuestion = val.includes("?") || valLower.startsWith("what") || valLower.startsWith("how") || valLower.startsWith("can") || valLower.startsWith("do you") || valLower.startsWith("tell");
+        if (isGoalQuestion) {
+          await askAiRepresentative(val, prevState, prevMessages, [
+            ...(prevState.selectedServiceKey && CHATBOT_SERVICES[prevState.selectedServiceKey]?.customGoalOptions || []),
+            "👈 Back",
+            "🔙 Main Menu"
+          ]);
           return;
         }
         pushToHistory();
@@ -1512,6 +1774,19 @@ export default function Chatbot() {
         const matched = matchInputToNavigation(val);
         if (matched && matched.type === "general" && matched.key === "greeting") {
           handleGreeting(val, prevState, prevMessages);
+          return;
+        }
+        const isBudgetQuestion = val.includes("?") || valLower.startsWith("what") || valLower.startsWith("how") || valLower.startsWith("can") || valLower.startsWith("do you") || valLower.startsWith("tell");
+        if (isBudgetQuestion) {
+          await askAiRepresentative(val, prevState, prevMessages, [
+            "Under $1,500",
+            "$1,500 - $4,000",
+            "$4,000 - $10,000",
+            "$10,000+",
+            "Deciding / Discuss on call",
+            "👈 Back",
+            "🔙 Main Menu"
+          ]);
           return;
         }
         pushToHistory();
