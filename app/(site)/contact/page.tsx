@@ -7,10 +7,8 @@ import { FaWhatsapp, FaLinkedinIn, FaInstagram, FaFacebookF } from "react-icons/
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-type OfficeKey = "india" | "singapore";
-
 interface OfficeInfo {
-  id: OfficeKey;
+  id: string;
   label: string;
   city: string;
   country: string;
@@ -22,36 +20,21 @@ interface OfficeInfo {
   mapEmbedUrl: string;
 }
 
-const offices: Record<OfficeKey, OfficeInfo> = {
-  india: {
-    id: "india",
-    label: "India",
-    city: "India",
-    country: "India",
-    address: "2nd Floor, Business Bay Centre, Udupi–Manipal Highway, Kunjibettu, Udupi, Karnataka 576102, India",
-    phone: "+91 99863 89444",
-    phoneRaw: "+919986389444",
-    hours: "Monday - Saturday: 9:30 AM - 6:30 PM (IST)",
-    timezone: "Asia/Kolkata (GMT +5:30)",
-    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3882.0683301323256!2d74.75867481153196!3d13.346025606502767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbcbb00641988d9%3A0x1910b2d04006bb2c!2sBusiness%20Bay%20Centre%2C%20Udupi!5e0!3m2!1sen!2sin!4v1769259024312!5m2!1sen!2sin",
-  },
-  singapore: {
-    id: "singapore",
-    label: "Singapore",
-    city: "Singapore",
-    country: "Singapore",
-    address: "7 Temasek Boulevard, #12-07, Suntec Tower 1, Singapore 038987",
-    phone: "+65 8961 4646",
-    phoneRaw: "+6589614646",
-    hours: "Monday - Friday: 9:00 AM - 6:00 PM (SGT)",
-    timezone: "Asia/Singapore (GMT +8:00)",
-    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7891823901174!2d103.85526977587884!3d1.295058561726059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19aef6d962ab%3A0x6a1bc9a96e1a9675!2s7%20Temasek%20Blvd%2C%20Suntec%20Tower%20One%2C%20Singapore%20038987!5e0!3m2!1sen!2sin!4v1769259000000!5m2!1sen!2sin",
-  },
+const mainOffice: OfficeInfo = {
+  id: "india",
+  label: "Headquarters",
+  city: "Udupi",
+  country: "India",
+  address: "2nd Floor, Business Bay Centre, Udupi–Manipal Highway, Kunjibettu, Udupi, Karnataka 576102, India",
+  phone: "+91 99863 89444",
+  phoneRaw: "+919986389444",
+  hours: "Monday - Saturday: 9:30 AM - 6:30 PM (IST)",
+  timezone: "Asia/Kolkata (GMT +5:30)",
+  mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3882.0683301323256!2d74.75867481153196!3d13.346025606502767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbcbb00641988d9%3A0x1910b2d04006bb2c!2sBusiness%20Bay%20Centre%2C%20Udupi!5e0!3m2!1sen!2sin!4v1769259024312!5m2!1sen!2sin",
 };
 
 export default function ContactPage() {
-  const [activeOfficeKey, setActiveOfficeKey] = useState<OfficeKey>("india");
-  const activeOffice = offices[activeOfficeKey];
+  const activeOffice = mainOffice;
 
   const trackCallClick = () => {
     if (typeof window !== "undefined" && (window as any).gtag) {
@@ -64,19 +47,11 @@ export default function ContactPage() {
   const contactMethods = [
     {
       icon: PhoneCall,
-      title: "India Office",
+      title: "Call Us",
       value: "+91 99863 89444",
       href: "tel:+919986389444",
       color: "text-blue-600",
       bg: "bg-blue-50 border border-blue-100/50",
-    },
-    {
-      icon: PhoneCall,
-      title: "Singapore Office",
-      value: "+65 8961 4646",
-      href: "tel:+6589614646",
-      color: "text-amber-600",
-      bg: "bg-amber-50 border border-amber-100/50",
     },
     {
       icon: FaWhatsapp,
@@ -166,7 +141,7 @@ export default function ContactPage() {
               </div>
 
               {/* Direct Connect Cards */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
                 {contactMethods.map((method, idx) => (
                   <a
                     key={idx}
@@ -202,7 +177,7 @@ export default function ContactPage() {
                    </div>
                 </div>
 
-                {/* HQ & BRANCH OFFICES CARD */}
+                {/* HQ OFFICE CARD */}
                 <div className="rounded-[2.5rem] bg-white/80 border border-slate-200/70 p-6 sm:p-8 text-slate-800 relative overflow-hidden shadow-lg backdrop-blur-md">
                   {/* Warm Ambient Flare */}
                   <div className="absolute top-0 right-0 w-72 h-72 bg-amber-300/15 blur-[90px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
@@ -212,40 +187,14 @@ export default function ContactPage() {
                     <div className="flex items-center justify-between mb-6 border-b border-slate-200/60 pb-4">
                       <div className="flex items-center gap-3">
                         <span className="text-xs font-black uppercase tracking-widest text-slate-400">
-                          Our Offices
+                          Our Office
                         </span>
                       </div>
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-amber-500/10 text-amber-700 border border-amber-500/20">
-                        Global Presence
+                        Headquarters
                       </span>
                     </div>
 
-                    {/* Office Selector Tabs (India | Singapore) */}
-                    <div className="grid grid-cols-2 bg-slate-100 p-1.5 rounded-2xl mb-7 gap-1 border border-slate-200/60">
-                      <button
-                        type="button"
-                        onClick={() => setActiveOfficeKey("india")}
-                        className={`py-2.5 px-3 rounded-xl text-sm font-bold transition-all duration-200 text-center ${
-                          activeOfficeKey === "india"
-                            ? "bg-white text-slate-900 shadow-md font-black border border-slate-200/50"
-                            : "text-slate-500 hover:text-slate-900"
-                        }`}
-                      >
-                        India
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setActiveOfficeKey("singapore")}
-                        className={`py-2.5 px-3 rounded-xl text-sm font-bold transition-all duration-200 text-center ${
-                          activeOfficeKey === "singapore"
-                            ? "bg-white text-slate-900 shadow-md font-black border border-slate-200/50"
-                            : "text-slate-500 hover:text-slate-900"
-                        }`}
-                      >
-                        Singapore
-                      </button>
-                    </div>
-                    
                     {/* Active Office Details */}
                     <div className="space-y-5 bg-[#FAF9F6] p-6 rounded-2xl border border-slate-200/60 shadow-sm">
                       <div className="flex gap-4 items-start">
@@ -254,7 +203,7 @@ export default function ContactPage() {
                         </div>
                         <div>
                           <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">
-                            Office Location ({activeOffice.country})
+                            Office Location
                           </h4>
                           <p className="text-sm font-bold leading-relaxed text-slate-800">
                             {activeOffice.address}
@@ -332,9 +281,6 @@ export default function ContactPage() {
             <h3 className="text-lg font-bold text-slate-800">
               Location Map &mdash; <span className="text-amber-600">{activeOffice.city}, {activeOffice.country}</span>
             </h3>
-            <span className="text-xs font-semibold text-slate-500">
-              Click tabs above to switch office location
-            </span>
           </div>
 
           {/* MAP CARD */}

@@ -22,16 +22,12 @@ Business Name: Clever Crow (Clever Crow Strategies)
 Tagline: Premier digital growth and technology agency helping ambitious businesses engineer predictable revenue and scale online.
 Satisfaction: Over 40+ brands served with a 4.9/5 satisfaction score across 10+ industries with 5+ years of excellence.
 
-Offices & Global Presence:
-1. India Office (Headquarters):
+Offices & Presence:
+- Headquarters (India):
    - Address: 2nd Floor, Business Bay Centre, Udupi–Manipal Highway, Kunjibettu, Udupi, Karnataka 576102, India
    - Phone / WhatsApp: +91 99863 89444
    - Hours: Monday - Saturday: 9:30 AM - 6:30 PM (IST)
    - Note: Visitors are warmly welcome to drop by for a coffee and discuss projects in person!
-2. Singapore Office:
-   - Address: 7 Temasek Boulevard, #12-07, Suntec Tower 1, Singapore 038987
-   - Phone: +65 8961 4646
-   - Hours: Monday - Friday: 9:00 AM - 6:00 PM (SGT)
 
 Online & Direct Contact:
 - Phone / WhatsApp: +91 99863 89444 (https://wa.me/919986389444)
@@ -188,7 +184,7 @@ export const CACHED_RESPONSES: CachedQA[] = [
     reply: `✨ **Clever Crow – At a Glance**
 
 • **Who We Are:** Premier digital growth and technology agency engineering high-performance websites, custom apps, AI automation, and high-ROI digital marketing.
-• **Global Footprint:** Offices in **India (Udupi)** and **Singapore**, partnering with clients worldwide.
+• **Headquarters:** Based in **Udupi, Karnataka, India**, partnering with ambitious clients globally.
 • **Proven Track Record:** **4.9/5 client satisfaction** across 40+ brands, 10+ industries, and 5+ years of excellence.
 
 🎯 **Core Expertise:**
@@ -197,9 +193,8 @@ export const CACHED_RESPONSES: CachedQA[] = [
 • **AI & Automation:** Custom AI chatbots, official WhatsApp Business API, and automated lead follow-ups.
 • **Digital Marketing:** High-intent Google Ads, Meta Ads (FB & IG), LinkedIn campaigns, and data-driven SEO.
 
-📍 **Offices:**
-• **India HQ:** Business Bay, 2nd Floor, Udupi–Manipal Highway, Kunjibettu, Udupi (Drop by for a coffee! ☕)
-• **Singapore:** 7 Temasek Boulevard, Suntec Tower 1
+📍 **Office Location:**
+• **Headquarters:** Business Bay, 2nd Floor, Udupi–Manipal Highway, Kunjibettu, Udupi, Karnataka (Drop by for a coffee! ☕)
 
 📞 **Quick Connect:**
 • WhatsApp / Call: [+91 99863 89444](https://wa.me/919986389444)
@@ -312,7 +307,7 @@ Everything your business needs to start attracting paying customers online:
 Would you like to reserve your launch package today? [Contact Us](/contact)`,
   },
 
-  // 5. Office Locations (India + Singapore)
+  // 5. Office Location (India Headquarters)
   {
     id: "office-locations",
     category: "location",
@@ -322,25 +317,16 @@ Would you like to reserve your launch package today? [Contact Us](/contact)`,
       c.includes("where is your office") ||
       c.includes("location") ||
       c.includes("udupi office") ||
-      c.includes("singapore office") ||
       c.includes("visit your office") ||
       c.includes("where is clever crow") ||
       c === "address" ||
       c === "location",
-    reply: `📍 **Clever Crow Office Locations**
+    reply: `📍 **Clever Crow Headquarters**
 
-We operate across two international hubs:
-
-🇮🇳 **India Headquarters:**
 • **Address:** 2nd Floor, Business Bay Centre, Udupi–Manipal Highway, Kunjibettu, Udupi, Karnataka 576102, India
 • **Working Hours:** Monday – Saturday: 9:30 AM – 6:30 PM (IST)
 • **Direct Line:** [+91 99863 89444](tel:+919986389444)
 • *Drop by for a cup of coffee ☕ and let's discuss your project in person!*
-
-🇸🇬 **Singapore Office:**
-• **Address:** 7 Temasek Boulevard, #12-07, Suntec Tower 1, Singapore 038987
-• **Working Hours:** Monday – Friday: 9:00 AM – 6:00 PM (SGT)
-• **Direct Line:** [+65 8961 4646](tel:+6589614646)
 
 You can also reach us directly on WhatsApp at [+91 99863 89444](https://wa.me/919986389444) or email [hello@clevercrow.in](mailto:hello@clevercrow.in). Would you like to schedule an in-person or virtual call?`,
   },
@@ -366,8 +352,7 @@ You can also reach us directly on WhatsApp at [+91 99863 89444](https://wa.me/91
 Our growth engineers are ready to assist you:
 
 • 💬 **WhatsApp (Instant):** [+91 99863 89444](https://wa.me/919986389444)
-• ☎️ **India Phone:** [+91 99863 89444](tel:+919986389444)
-• ☎️ **Singapore Phone:** [+65 8961 4646](tel:+6589614646)
+• ☎️ **Phone:** [+91 99863 89444](tel:+919986389444)
 • 📧 **Email:** [hello@clevercrow.in](mailto:hello@clevercrow.in)
 • 📝 **Direct Inquiry:** [clevercrow.in/contact](/contact)
 
