@@ -178,6 +178,139 @@ const HOW_IT_WORKS_STEPS = [
   },
 ];
 
+const PORTFOLIO_CLIENTS = [
+  {
+    id: "kautilya",
+    name: "Kautilya Vidyalaya",
+    displayUrl: "kautilyavidyalaya.edu.in",
+    url: "https://kautilyavidyalaya.edu.in/",
+    category: "CBSE & Kindergarten",
+    type: "school",
+    location: "Mysuru",
+    image: "/images/portfolio/kautilya.png",
+  },
+  {
+    id: "klay",
+    name: "KLAY Prep Schools and DayCare",
+    displayUrl: "klay.co.in",
+    url: "https://klay.co.in/foundational-development-program/chennai/anna-nagar/",
+    category: "Prep School & DayCare",
+    type: "preschool",
+    location: "Anna Nagar, Chennai",
+    image: "/images/portfolio/klay.png",
+  },
+  {
+    id: "maplebear",
+    name: "Maple Bear Canadian Preschool",
+    displayUrl: "maplebearsouthasia.com",
+    url: "https://www.maplebearsouthasia.com/jubileehills/",
+    category: "Canadian Preschool",
+    type: "preschool",
+    location: "Jubilee Hills, Hyd",
+    image: "/images/portfolio/maplebear.png",
+  },
+  {
+    id: "kangarookids",
+    name: "Kangaroo Kids International",
+    displayUrl: "kangarookids.in",
+    url: "https://www.kangarookids.in/",
+    category: "International Preschool",
+    type: "preschool",
+    location: "Pan-India",
+    image: "/images/portfolio/kangarookids.png",
+  },
+  {
+    id: "littlemillennium",
+    name: "Little Millennium",
+    displayUrl: "littlemillennium.com",
+    url: "https://www.littlemillennium.com/",
+    category: "Preschool Network",
+    type: "preschool",
+    location: "Pan-India",
+    image: "/images/portfolio/littlemillennium.png",
+  },
+  {
+    id: "bgsnps",
+    name: "BGS National Public School",
+    displayUrl: "bgsnps.edu.in",
+    url: "https://bgsnps.edu.in/",
+    category: "Public School & Early Years",
+    type: "school",
+    location: "Bangalore",
+    image: "/images/portfolio/bgsnps.png",
+  },
+  {
+    id: "iamyello",
+    name: "Yello Early Learning Center",
+    displayUrl: "iamyello.com",
+    url: "https://iamyello.com/",
+    category: "Preschool & Daycare",
+    type: "preschool",
+    location: "Bangalore",
+    image: "/images/portfolio/iamyello.png",
+  },
+  {
+    id: "vishwavidyapeeth",
+    name: "Vishwa Vidyapeeth",
+    displayUrl: "vishwavidyapeeth.edu.in",
+    url: "https://vishwavidyapeeth.edu.in/",
+    category: "ICSE / CBSE & Kindergarten",
+    type: "school",
+    location: "Bangalore",
+    image: "/images/portfolio/vishwavidyapeeth.png",
+  },
+  {
+    id: "kidscastle",
+    name: "Kids Castle Preschool",
+    displayUrl: "kidscastlepreschool.com",
+    url: "https://kidscastlepreschool.com/",
+    category: "Playgroup & Daycare",
+    type: "preschool",
+    location: "Bangalore",
+    image: "/images/portfolio/kidscastle.png",
+  },
+  {
+    id: "timekids",
+    name: "T.I.M.E. Kids Preschool",
+    displayUrl: "timekidspreschoolsannanagar.com",
+    url: "https://timekidspreschoolsannanagar.com/",
+    category: "Early Childhood Education",
+    type: "preschool",
+    location: "Anna Nagar, Chennai",
+    image: "/images/portfolio/timekids.png",
+  },
+  {
+    id: "pepschool",
+    name: "PEP School V2",
+    displayUrl: "pepschoolv2.com",
+    url: "https://www.pepschoolv2.com/",
+    category: "Progressive Early Years & K-12",
+    type: "school",
+    location: "Bangalore",
+    image: "/images/portfolio/pepschool.png",
+  },
+  {
+    id: "ampasishya",
+    name: "Ampa Sishya School",
+    displayUrl: "ampasishya.com",
+    url: "https://ampasishya.com/",
+    category: "Early Learning & School",
+    type: "school",
+    location: "Chennai",
+    image: "/images/portfolio/ampasishya.png",
+  },
+  {
+    id: "mylittleberries",
+    name: "My Little Berries",
+    displayUrl: "mylittleberries.in",
+    url: "https://mylittleberries.in/",
+    category: "Preschool & Activity Centre",
+    type: "preschool",
+    location: "Bangalore",
+    image: "/images/portfolio/mylittleberries.png",
+  },
+];
+
 const TRUST_STATS = [
   { label: "Preschools & Daycares Supported", value: "25+", sub: "Pan-India Centers" },
   { label: "Neighborhood Radius Targeting", value: "3 - 5 km", sub: "Hyperlocal Precision" },
@@ -589,6 +722,12 @@ export default function PreschoolLandingClient() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
+  const [portfolioFilter, setPortfolioFilter] = useState<"all" | "preschool" | "school">("all");
+
+  const filteredPortfolio = PORTFOLIO_CLIENTS.filter((item) => {
+    if (portfolioFilter === "all") return true;
+    return item.type === portfolioFilter;
+  });
 
   // Dedicated inline form state
   const [inlineName, setInlineName] = useState("");
@@ -1032,44 +1171,148 @@ export default function PreschoolLandingClient() {
         </section>
 
         {/* ----------------------------------------------------------- */}
-        {/* 5. TRUST AND EXPERIENCE SECTION */}
+        {/* 5. OUR WORK / CLIENT PORTFOLIO SECTION */}
         {/* ----------------------------------------------------------- */}
-        <section className="py-16 sm:py-24 bg-[#faf8f5] border-b border-slate-200">
+        <section id="our-work" className="py-20 sm:py-28 bg-[#faf8f5] border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-14">
-              <span className="inline-block rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-900 border border-amber-200 mb-3">
-                Proven Track Record
-              </span>
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-950 text-white text-[11px] font-black tracking-wider uppercase shadow-xs mb-3">
+                <School className="w-3.5 h-3.5 text-[#f4c542]" />
+                <span>Featured Client Portfolio</span>
+              </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
-                We’ve Helped 25+ Preschools & Daycares Grow Admissions
+                Preschools & Schools We Work With
               </h2>
               <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-                From standalone Montessori campuses to franchise chains, our admission
-                growth systems turn vacant seats into full classrooms.
+                Real partner campuses, live web platforms, and admissions ecosystems engineered to convert parent interest into confirmed enrolments.
               </p>
+
+              {/* Filter Tabs */}
+              <div className="flex items-center justify-center gap-2 mt-8 flex-wrap">
+                <button
+                  onClick={() => setPortfolioFilter("all")}
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+                    portfolioFilter === "all"
+                      ? "bg-slate-950 text-[#f4c542] shadow-sm"
+                      : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
+                  }`}
+                >
+                  All Institutions ({PORTFOLIO_CLIENTS.length})
+                </button>
+                <button
+                  onClick={() => setPortfolioFilter("preschool")}
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+                    portfolioFilter === "preschool"
+                      ? "bg-slate-950 text-[#f4c542] shadow-sm"
+                      : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
+                  }`}
+                >
+                  Preschools & Daycares ({PORTFOLIO_CLIENTS.filter((c) => c.type === "preschool").length})
+                </button>
+                <button
+                  onClick={() => setPortfolioFilter("school")}
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
+                    portfolioFilter === "school"
+                      ? "bg-slate-950 text-[#f4c542] shadow-sm"
+                      : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
+                  }`}
+                >
+                  Schools & K-12 ({PORTFOLIO_CLIENTS.filter((c) => c.type === "school").length})
+                </button>
+              </div>
             </div>
 
-            {/* 6 Work Completed Areas */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {WORK_COMPLETED_AREAS.map((item, idx) => {
-                const IconComp = item.icon;
-                return (
-                  <div
-                    key={idx}
-                    className="p-6 rounded-2xl border border-slate-200 bg-white hover:border-amber-400 hover:shadow-xs transition"
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-800 flex items-center justify-center mb-4 border border-amber-200">
-                      <IconComp className="w-5 h-5" />
+            {/* Portfolio Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+              {filteredPortfolio.map((item) => (
+                <div
+                  key={item.id}
+                  className="group flex flex-col rounded-2xl border border-slate-200/90 bg-white overflow-hidden shadow-xs hover:shadow-xl hover:border-amber-400/80 transition-all duration-300"
+                >
+                  {/* Browser Window Header */}
+                  <div className="flex items-center justify-between px-3.5 py-2.5 bg-slate-900 border-b border-slate-800 text-slate-400 text-[11px]">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-rose-500/90" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500/90" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/90" />
                     </div>
-                    <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                      {item.desc}
-                    </p>
+                    <div className="truncate max-w-[210px] font-mono text-[10px] text-slate-300 px-2 py-0.5 rounded bg-slate-800/80 border border-slate-700/60">
+                      {item.displayUrl}
+                    </div>
+                    <div className="w-6" />
                   </div>
-                );
-              })}
+
+                  {/* Screenshot Viewport */}
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative block aspect-[16/10] overflow-hidden bg-slate-100 group/link"
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      width={720}
+                      height={450}
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-slate-950/0 group-hover:bg-slate-950/30 transition-colors duration-300 flex items-center justify-center">
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-900/95 text-white text-xs font-bold shadow-lg backdrop-blur-xs">
+                        <span>Visit Website</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 text-[#f4c542]" />
+                      </span>
+                    </div>
+                  </a>
+
+                  {/* Minimal Card Footer */}
+                  <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 gap-3">
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-900 bg-amber-50 px-2.5 py-0.5 rounded-md border border-amber-200/70">
+                          {item.category}
+                        </span>
+                        <span className="text-xs text-slate-500 flex items-center gap-1 font-medium">
+                          <MapPin className="w-3 h-3 text-slate-400" />
+                          {item.location}
+                        </span>
+                      </div>
+                      <h3 className="text-base font-black text-slate-900 tracking-tight group-hover:text-amber-800 transition line-clamp-1">
+                        {item.name}
+                      </h3>
+                    </div>
+
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-between pt-2.5 border-t border-slate-100 text-xs font-bold text-slate-600 hover:text-slate-950 transition"
+                    >
+                      <span>Explore Live Website</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom Proof Metric Banner */}
+            <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+              <div>
+                <h4 className="text-lg font-black text-slate-900">
+                  Want your school or preschool featured with predictable admissions?
+                </h4>
+                <p className="text-sm text-slate-600 mt-1">
+                  We build customized hyperlocal ad campaigns and WhatsApp conversion systems for your specific 3-5 km catchment area.
+                </p>
+              </div>
+              <button
+                onClick={openAuditModal}
+                className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-[#f4c542] hover:brightness-105 text-slate-950 font-black text-sm px-6 py-3 shadow-xs transition cursor-pointer"
+              >
+                <span>Request Free Audit</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </section>
