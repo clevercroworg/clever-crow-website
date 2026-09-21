@@ -368,6 +368,41 @@ a {
   opacity: 1;
 }
 
+/* ------------------------------------------------------------------ */
+/* Partner Carousel Marquee (Section 2) */
+/* ------------------------------------------------------------------ */
+.partner-carousel-marquee {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  mask-image: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+
+.partner-carousel-track {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding-right: 0.875rem;
+  min-width: max-content;
+  animation: partnerMarqueeScroll 26s linear infinite;
+  will-change: transform;
+}
+
+.partner-carousel-marquee:hover .partner-carousel-track {
+  animation-play-state: paused;
+}
+
+@keyframes partnerMarqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 .pricing-light-section {
   background:
     linear-gradient(180deg, rgba(248, 250, 252, 0.98), rgba(241, 245, 249, 0.98)),

@@ -375,13 +375,69 @@ const WHAT_WE_DO_SERVICES = [
 ];
 
 const PLATFORM_PARTNERS = [
-  { name: "Google", icon: SiGoogle, color: "text-[#4285F4]" },
-  { name: "Google Maps", icon: SiGooglemaps, color: "text-[#EA4335]" },
-  { name: "Facebook", icon: SiFacebook, color: "text-[#1877F2]" },
-  { name: "Instagram", icon: SiInstagram, color: "text-[#E4405F]" },
-  { name: "WhatsApp", icon: SiWhatsapp, color: "text-[#25D366]" },
-  { name: "YouTube", icon: SiYoutube, color: "text-[#FF0000]" },
-  { name: "ChatGPT", icon: SiOpenai, color: "text-[#10A37F]" },
+  {
+    name: "Google",
+    role: "Search & Ads",
+    sub: "High-Intent Discovery",
+    icon: SiGoogle,
+    color: "text-[#4285F4]",
+    bg: "bg-blue-50",
+    border: "border-blue-200/80",
+  },
+  {
+    name: "Google Maps",
+    role: "Local Discovery",
+    sub: "3–5 km Catchment Area",
+    icon: SiGooglemaps,
+    color: "text-[#EA4335]",
+    bg: "bg-red-50",
+    border: "border-red-200/80",
+  },
+  {
+    name: "Facebook",
+    role: "Meta Ad Campaigns",
+    sub: "Hyperlocal Parent Feeds",
+    icon: SiFacebook,
+    color: "text-[#1877F2]",
+    bg: "bg-blue-50",
+    border: "border-blue-200/80",
+  },
+  {
+    name: "Instagram",
+    role: "Visual Branding",
+    sub: "Campus Reels & Stories",
+    icon: SiInstagram,
+    color: "text-[#E4405F]",
+    bg: "bg-pink-50",
+    border: "border-pink-200/80",
+  },
+  {
+    name: "WhatsApp",
+    role: "1-Tap Inquiries",
+    sub: "Fast Admission Chats",
+    icon: SiWhatsapp,
+    color: "text-[#25D366]",
+    bg: "bg-emerald-50",
+    border: "border-emerald-200/80",
+  },
+  {
+    name: "YouTube",
+    role: "Video Showcase",
+    sub: "Parent Walkthroughs",
+    icon: SiYoutube,
+    color: "text-[#FF0000]",
+    bg: "bg-red-50",
+    border: "border-red-200/80",
+  },
+  {
+    name: "ChatGPT",
+    role: "AI Search & AEO",
+    sub: "AI Answer Optimization",
+    icon: SiOpenai,
+    color: "text-[#10A37F]",
+    bg: "bg-emerald-50",
+    border: "border-emerald-200/80",
+  },
 ];
 
 const AUDIT_INCLUDES = [
@@ -965,26 +1021,63 @@ export default function PreschoolLandingClient() {
               })}
             </div>
 
-            {/* Partners & Platforms Minimal Ecosystem Strip */}
+            {/* -------------------------------------------------------- */}
+            {/* PLATFORM PARTNERS CAROUSEL */}
+            {/* -------------------------------------------------------- */}
             <div className="mt-12 sm:mt-14 pt-8 border-t border-slate-200/80">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-4 bg-slate-50/90 rounded-2xl border border-slate-200/80 p-4 sm:p-5">
-                <div className="flex items-center gap-2 text-center lg:text-left">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                  <span className="text-xs font-black uppercase tracking-wider text-slate-800">
-                    Platform Partners & AI Ecosystem
-                  </span>
-                </div>
+              <div className="text-center mb-4 sm:mb-5">
+                <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-slate-500">
+                  Integrated Across Official Ad &amp; AI Search Channels
+                </span>
+              </div>
 
-                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
-                  {PLATFORM_PARTNERS.map((p) => {
-                    const Icon = p.icon;
+              <div className="partner-carousel-marquee py-1">
+                <div className="partner-carousel-track">
+                  {PLATFORM_PARTNERS.map((partner) => {
+                    const Icon = partner.icon;
                     return (
                       <div
-                        key={p.name}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200/90 text-xs font-bold text-slate-800 shadow-2xs hover:border-amber-400 hover:shadow-xs transition"
+                        key={`p1-${partner.name}`}
+                        className="group flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400 hover:shadow-xs transition-all duration-200 shrink-0"
                       >
-                        <Icon className={`w-3.5 h-3.5 ${p.color}`} />
-                        <span>{p.name}</span>
+                        <div
+                          className={`w-9 h-9 rounded-xl ${partner.bg} ${partner.border} border flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}
+                        >
+                          <Icon className={`w-4 h-4 ${partner.color}`} />
+                        </div>
+                        <div className="flex flex-col text-left">
+                          <span className="text-xs sm:text-sm font-black text-slate-900 leading-tight">
+                            {partner.name}
+                          </span>
+                          <span className="text-[10px] sm:text-[11px] font-semibold text-slate-500 leading-tight">
+                            {partner.role}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="partner-carousel-track" aria-hidden="true">
+                  {PLATFORM_PARTNERS.map((partner) => {
+                    const Icon = partner.icon;
+                    return (
+                      <div
+                        key={`p2-${partner.name}`}
+                        className="group flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-white border border-slate-200/90 hover:border-amber-400 hover:shadow-xs transition-all duration-200 shrink-0"
+                      >
+                        <div
+                          className={`w-9 h-9 rounded-xl ${partner.bg} ${partner.border} border flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}
+                        >
+                          <Icon className={`w-4 h-4 ${partner.color}`} />
+                        </div>
+                        <div className="flex flex-col text-left">
+                          <span className="text-xs sm:text-sm font-black text-slate-900 leading-tight">
+                            {partner.name}
+                          </span>
+                          <span className="text-[10px] sm:text-[11px] font-semibold text-slate-500 leading-tight">
+                            {partner.role}
+                          </span>
+                        </div>
                       </div>
                     );
                   })}
