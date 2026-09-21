@@ -777,13 +777,13 @@ export default function PreschoolLandingClient() {
           {/* 1. HERO SECTION (Editorial Agency Vibe, Not SaaS) */}
           {/* ----------------------------------------------------------- */}
           <section
-            className="relative pt-24 sm:pt-28 lg:pt-32 pb-16 sm:pb-20 lg:pb-24 bg-gradient-to-b from-[#faf8f5] via-white to-white border-b border-slate-200"
+            className="relative pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-14 lg:pb-16 bg-gradient-to-b from-[#faf8f5] via-white to-white border-b border-slate-200"
           >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               
               {/* Left Column: Direct Educational Marketing Copy */}
-              <div className="lg:col-span-7 space-y-6 text-left">
+              <div className="lg:col-span-7 space-y-5 text-left">
                 {/* Eyebrow / Category Tag */}
                 <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
                   <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-950 text-white text-[11px] font-black tracking-wider uppercase shadow-xs">
@@ -797,7 +797,7 @@ export default function PreschoolLandingClient() {
                 </div>
 
                 {/* Main Headline */}
-                <h1 className="text-3xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-950 tracking-tight leading-[1.12]">
+                <h1 className="text-3xl sm:text-4xl lg:text-[2.85rem] xl:text-[3.15rem] font-black text-slate-950 tracking-tight leading-[1.14]">
                   Generate More Admission Enquiries for{" "}
                   <span className="text-amber-800 underline decoration-[#f4c542] decoration-4 underline-offset-4">
                     Your Preschool
@@ -805,17 +805,17 @@ export default function PreschoolLandingClient() {
                 </h1>
 
                 {/* Supporting Copy */}
-                <p className="text-base sm:text-lg text-slate-700 leading-relaxed max-w-2xl font-normal">
+                <p className="text-base sm:text-[17px] text-slate-600 leading-relaxed max-w-2xl font-normal">
                   We help preschools and daycare centres reach nearby parents and generate relevant admission enquiries through Meta Ads, Google visibility, landing pages and WhatsApp.
                 </p>
 
                 {/* Trust Line */}
-                <div className="flex items-center gap-3 pt-1">
+                <div className="flex items-center gap-2.5 pt-0.5">
                   <div className="flex -space-x-1.5">
                     {[1, 2, 3, 4].map((i) => (
                       <div
                         key={i}
-                        className="w-7 h-7 rounded-full border-2 border-white bg-amber-400 text-slate-950 flex items-center justify-center text-[10px] font-black shadow-2xs"
+                        className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border-2 border-white bg-amber-400 text-slate-950 flex items-center justify-center text-[10px] font-black shadow-2xs"
                       >
                         ✓
                       </div>
@@ -827,50 +827,52 @@ export default function PreschoolLandingClient() {
                 </div>
 
                 {/* CTAs */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
                   <button
                     onClick={scrollToAuditSection}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-base px-7 py-3.5 shadow-sm transition group cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 h-12 px-5 sm:px-6 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-xs sm:text-sm shadow-xs transition shrink-0 cursor-pointer whitespace-nowrap"
                   >
                     <span>Get Your Admission Enquiry Plan</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="w-4 h-4" />
                   </button>
 
                   <a
                     href={WHATSAPP_EXPERT_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-sm sm:text-base px-6 py-3.5 transition shadow-2xs"
+                    className="inline-flex items-center justify-center gap-2 h-12 px-5 sm:px-6 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-xs sm:text-sm transition shadow-2xs shrink-0 cursor-pointer whitespace-nowrap"
                   >
-                    <FaWhatsapp className="w-5 h-5 text-emerald-600" />
+                    <FaWhatsapp className="w-4 h-4 text-emerald-600" />
                     <span>Chat With Our Preschool Marketing Team</span>
                   </a>
                 </div>
 
-                {/* Assurance Points */}
-                <div className="pt-2.5 flex flex-wrap items-center gap-y-2 gap-x-5 text-xs text-slate-700 font-semibold border-t border-slate-200/80">
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    Target parents within a 3–5 km radius
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    Meta Ads enquiry campaigns
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    Landing page and WhatsApp integration
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    Lead tracking and campaign optimisation
-                  </span>
+                {/* Bottom Points (Structured 2-Column Grid) */}
+                <div className="pt-3 border-t border-slate-200/80">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+                    <div className="flex items-center gap-2 text-xs sm:text-[13px] text-slate-700 font-medium">
+                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>Target parents within a 3–5 km radius</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs sm:text-[13px] text-slate-700 font-medium">
+                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>Meta Ads enquiry campaigns</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs sm:text-[13px] text-slate-700 font-medium">
+                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>Landing page and WhatsApp integration</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs sm:text-[13px] text-slate-700 font-medium">
+                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>Lead tracking and campaign optimisation</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               {/* Right Column: Clean Editorial Photo Showcase */}
               <div className="lg:col-span-5">
-                <div className="rounded-3xl border border-slate-200/90 bg-white p-3 shadow-lg">
+                <div className="rounded-3xl border border-slate-200/90 bg-white p-2.5 sm:p-3 shadow-md">
                   <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
                     <Image
                       src="/images/preschool-director-parents.jpg"
@@ -882,16 +884,16 @@ export default function PreschoolLandingClient() {
                   </div>
 
                   {/* Clean Editorial Caption Strip */}
-                  <div className="p-4 bg-slate-50 rounded-2xl mt-3 flex items-center justify-between border border-slate-100">
-                    <div>
-                      <p className="text-xs font-bold text-slate-900">
+                  <div className="px-3.5 py-2.5 bg-slate-50 rounded-xl mt-2.5 flex items-center justify-between gap-3 border border-slate-100">
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold text-slate-900 truncate">
                         Preschool Admission Consultation
                       </p>
-                      <p className="text-[11px] text-slate-600 mt-0.5">
+                      <p className="text-[11px] text-slate-600 mt-0.5 line-clamp-1">
                         Equipping directors to turn parent visits into confirmed admissions
                       </p>
                     </div>
-                    <span className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300 shrink-0 ml-3">
+                    <span className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300 shrink-0">
                       Admission Growth
                     </span>
                   </div>
