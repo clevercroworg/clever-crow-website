@@ -788,27 +788,25 @@ export default function PreschoolLandingClient() {
                 <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
                   <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-950 text-white text-[11px] font-black tracking-wider uppercase shadow-xs">
                     <School className="w-3.5 h-3.5 text-[#f4c542]" />
-                    <span>Education Growth</span>
+                    <span>PRESCHOOL &amp; DAYCARE MARKETING</span>
                   </div>
                   <span className="hidden sm:inline-block h-3.5 w-px bg-slate-300" />
                   <span className="text-xs sm:text-[13px] font-bold text-slate-800 tracking-tight">
-                    Preschool & Daycare Admission System
+                    Reach More Parents in Your Local Area
                   </span>
                 </div>
 
                 {/* Main Headline */}
                 <h1 className="text-3xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-950 tracking-tight leading-[1.12]">
-                  Turn Parent Enquiries Into{" "}
+                  Generate More Admission Enquiries for{" "}
                   <span className="text-amber-800 underline decoration-[#f4c542] decoration-4 underline-offset-4">
-                    Preschool Enrolments
+                    Your Preschool
                   </span>
                 </h1>
 
                 {/* Supporting Copy */}
                 <p className="text-base sm:text-lg text-slate-700 leading-relaxed max-w-2xl font-normal">
-                  We help preschools and daycare centres reach nearby parents, generate
-                  qualified admission enquiries and improve follow-ups—so more families
-                  book visits and complete admissions.
+                  We help preschools and daycare centres reach nearby parents and generate relevant admission enquiries through Meta Ads, Google visibility, landing pages and WhatsApp.
                 </p>
 
                 {/* Trust Line */}
@@ -824,7 +822,7 @@ export default function PreschoolLandingClient() {
                     ))}
                   </div>
                   <p className="text-xs sm:text-sm font-bold text-slate-800">
-                    Experience supporting 25+ preschools and daycare centres
+                    Experience working with 25+ preschools and daycare centres
                   </p>
                 </div>
 
@@ -834,7 +832,7 @@ export default function PreschoolLandingClient() {
                     onClick={scrollToAuditSection}
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-base px-7 py-3.5 shadow-sm transition group cursor-pointer"
                   >
-                    <span>Get a Free Admission Growth Audit</span>
+                    <span>Get Your Admission Enquiry Plan</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </button>
 
@@ -845,23 +843,27 @@ export default function PreschoolLandingClient() {
                     className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-sm sm:text-base px-6 py-3.5 transition shadow-2xs"
                   >
                     <FaWhatsapp className="w-5 h-5 text-emerald-600" />
-                    <span>Chat With an Admission Expert</span>
+                    <span>Chat With Our Preschool Marketing Team</span>
                   </a>
                 </div>
 
                 {/* Assurance Points */}
-                <div className="pt-2 flex flex-wrap items-center gap-y-2 gap-x-5 text-xs text-slate-600 font-medium border-t border-slate-100">
+                <div className="pt-2.5 flex flex-wrap items-center gap-y-2 gap-x-5 text-xs text-slate-700 font-semibold border-t border-slate-200/80">
                   <span className="flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-                    3-5 km Radius Targeting
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    Target parents within a 3–5 km radius
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-                    WhatsApp Follow-Up Scripts
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    Meta Ads enquiry campaigns
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-                    Campus Visit Scheduling
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    Landing page and WhatsApp integration
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    Lead tracking and campaign optimisation
                   </span>
                 </div>
               </div>
