@@ -637,24 +637,44 @@ export default function PreschoolLandingClient() {
               <div className="max-w-3xl space-y-6 sm:space-y-6 text-left">
                 
                 {/* Eyebrow / Small Label */}
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-950 text-white text-[11px] sm:text-xs font-black tracking-wider uppercase shadow-xs">
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-950 text-white text-[11px] sm:text-xs font-black tracking-wider uppercase shadow-xs"
+                >
                   <School className="w-3.5 h-3.5 text-[#f4c542]" />
                   <span>MARKETING FOR PRESCHOOLS &amp; DAYCARE CENTRES</span>
-                </div>
+                </motion.div>
 
                 {/* Main Headline */}
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.65rem] font-black text-slate-950 tracking-tight leading-[1.12]">
+                <motion.h1
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.65rem] font-black text-slate-950 tracking-tight leading-[1.12]"
+                >
                   <span className="block">More Local Parents.</span>
                   <span className="block text-slate-950 mt-1 sm:mt-1.5">More Admission Enquiries.</span>
-                </h1>
+                </motion.h1>
 
                 {/* Supporting Copy */}
-                <p className="text-base sm:text-lg lg:text-[19px] text-slate-600 leading-relaxed max-w-2xl font-normal">
+                <motion.p
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="text-base sm:text-lg lg:text-[19px] text-slate-600 leading-relaxed max-w-2xl font-normal"
+                >
                   We help nearby parents discover your centre and enquire through Google, Instagram, Facebook and WhatsApp.
-                </p>
+                </motion.p>
 
                 {/* Trust Line */}
-                <div className="flex items-center gap-2.5 pt-0.5">
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex items-center gap-2.5 pt-0.5"
+                >
                   <div className="flex -space-x-1.5">
                     {[1, 2, 3, 4].map((i) => (
                       <div
@@ -668,10 +688,15 @@ export default function PreschoolLandingClient() {
                   <p className="text-xs sm:text-sm font-bold text-slate-800">
                     Experience working with 25+ preschools and daycare centres.
                   </p>
-                </div>
+                </motion.div>
 
                 {/* CTAs */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1"
+                >
                   <a
                     href={PHONE_HREF}
                     className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-sm sm:text-base shadow-xs transition shrink-0 cursor-pointer whitespace-nowrap"
@@ -689,7 +714,7 @@ export default function PreschoolLandingClient() {
                     <FaWhatsapp className="w-4 h-4 text-emerald-600" />
                     <span>Talk on WhatsApp</span>
                   </a>
-                </div>
+                </motion.div>
               </div>
             </div>
           </section>
@@ -698,11 +723,17 @@ export default function PreschoolLandingClient() {
         {/* PARTNER SCHOOLS & PRESCHOOLS LOGO CAROUSEL */}
         {/* ----------------------------------------------------------- */}
         <section className="school-logo-marquee-section" aria-label="Partner School Logos">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-3.5 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-3.5 text-center"
+          >
             <p className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-slate-500">
               Trusted Admission Marketing Partner Across 25+ Leading Preschools &amp; Schools
             </p>
-          </div>
+          </motion.div>
 
           <div className="school-logo-marquee">
             <div className="school-logo-track">
@@ -750,7 +781,14 @@ export default function PreschoolLandingClient() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               {TRUST_STATS.map((stat, i) => (
-                <div key={i} className="space-y-1">
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-30px" }}
+                  transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className="space-y-1"
+                >
                   <p className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900">
                     {stat.value}
                   </p>
@@ -760,7 +798,7 @@ export default function PreschoolLandingClient() {
                   <p className="text-[11px] text-amber-800 font-medium">
                     {stat.sub}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -771,7 +809,13 @@ export default function PreschoolLandingClient() {
         {/* ----------------------------------------------------------- */}
         <section className="py-16 sm:py-24 bg-white border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-4xl mx-auto mb-14 sm:mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center max-w-4xl mx-auto mb-14 sm:mb-16"
+            >
               <span className="inline-block rounded-full bg-amber-100/70 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-900 border border-amber-200/80 mb-3">
                 Full-Service Admission Growth
               </span>
@@ -781,15 +825,19 @@ export default function PreschoolLandingClient() {
               <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                 We help your centre reach nearby parents, build trust and generate admission enquiries.
               </p>
-            </div>
+            </motion.div>
 
             {/* 6 Tangible Service Capability Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-              {WHAT_WE_DO_SERVICES.map((item) => {
+              {WHAT_WE_DO_SERVICES.map((item, idx) => {
                 const IconComponent = item.icon;
                 return (
-                  <div
+                  <motion.div
                     key={item.id}
+                    initial={{ opacity: 0, y: 32 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
                     className="group rounded-2xl bg-white p-6 sm:p-7 border border-slate-200/90 shadow-xs hover:shadow-lg hover:border-slate-300 transition-all duration-200 flex flex-col justify-between text-left"
                   >
                     <div>
@@ -958,7 +1006,7 @@ export default function PreschoolLandingClient() {
                         </div>
                       )}
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
@@ -966,7 +1014,13 @@ export default function PreschoolLandingClient() {
             {/* -------------------------------------------------------- */}
             {/* PLATFORM PARTNERS CAROUSEL */}
             {/* -------------------------------------------------------- */}
-            <div className="mt-12 sm:mt-14 pt-8 border-t border-slate-200/80">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-12 sm:mt-14 pt-8 border-t border-slate-200/80"
+            >
               <div className="text-center mb-4 sm:mb-5">
                 <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-slate-500">
                   Integrated Across Official Ad &amp; AI Search Channels
@@ -1025,7 +1079,7 @@ export default function PreschoolLandingClient() {
                   })}
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -1034,7 +1088,13 @@ export default function PreschoolLandingClient() {
         {/* ----------------------------------------------------------- */}
         <section id="our-work" className="py-20 sm:py-28 bg-[#faf8f5] border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-4xl mx-auto mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center max-w-4xl mx-auto mb-12"
+            >
               <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-950 text-white text-[11px] font-black tracking-wider uppercase shadow-xs mb-3">
                 <School className="w-3.5 h-3.5 text-[#f4c542]" />
                 <span>Featured Client Portfolio</span>
@@ -1079,13 +1139,17 @@ export default function PreschoolLandingClient() {
                   Schools & K-12 ({PORTFOLIO_CLIENTS.filter((c) => c.type === "school").length})
                 </button>
               </div>
-            </div>
+            </motion.div>
 
             {/* Portfolio Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-              {filteredPortfolio.map((item) => (
-                <div
+              {filteredPortfolio.map((item, idx) => (
+                <motion.div
                   key={item.id}
+                  initial={{ opacity: 0, y: 32 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   className="group flex flex-col rounded-2xl border border-slate-200/90 bg-white overflow-hidden shadow-xs hover:shadow-xl hover:border-amber-400/80 transition-all duration-300"
                 >
                   {/* Browser Window Header */}
@@ -1161,12 +1225,18 @@ export default function PreschoolLandingClient() {
                       <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
                     </a>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
             {/* Bottom Proof Metric Banner */}
-            <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-12 p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left"
+            >
               <div>
                 <h4 className="text-lg font-black text-slate-900">
                   Want your school or preschool featured with predictable admissions?
@@ -1182,7 +1252,7 @@ export default function PreschoolLandingClient() {
                 <Phone className="w-4 h-4" />
                 <span>Call {PHONE_NUMBER}</span>
               </a>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -1198,7 +1268,13 @@ export default function PreschoolLandingClient() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 {/* Left Column: Scope & Value */}
-                <div className="lg:col-span-7 space-y-4 text-left">
+                <motion.div
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="lg:col-span-7 space-y-4 text-left"
+                >
                   <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-950 text-white text-[11px] font-black tracking-wider uppercase shadow-xs">
                     <School className="w-3.5 h-3.5 text-[#f4c542]" />
                     <span>1-on-1 Growth Consultation</span>
@@ -1239,10 +1315,16 @@ export default function PreschoolLandingClient() {
                       <span>Zero obligation • 100% confidential</span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Right Column: High-Vibe CTA Card */}
-                <div className="lg:col-span-5">
+                <motion.div
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                  className="lg:col-span-5"
+                >
                   <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-7 shadow-xs space-y-4 text-center sm:text-left">
                     <div>
                       <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 inline-flex items-center gap-1.5 mb-2">
@@ -1283,7 +1365,7 @@ export default function PreschoolLandingClient() {
                       Direct WhatsApp: <span className="font-semibold text-slate-600">+91 99863 89444</span> • Mon–Sat (9:30 AM – 6:30 PM)
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
               </div>
             </div>
@@ -1295,7 +1377,13 @@ export default function PreschoolLandingClient() {
         {/* ----------------------------------------------------------- */}
         <section className="py-16 sm:py-24 bg-white border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-4xl mx-auto mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center max-w-4xl mx-auto mb-16"
+            >
               <span className="inline-block rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-200 mb-3">
                 Execution Roadmap
               </span>
@@ -1306,13 +1394,17 @@ export default function PreschoolLandingClient() {
                 A seamless 5-step operational rollout designed to get qualified parent
                 enquiries flowing without disruption to your daily school schedule.
               </p>
-            </div>
+            </motion.div>
 
             {/* 5 Process Steps */}
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-              {HOW_IT_WORKS_STEPS.map((step) => (
-                <div
+              {HOW_IT_WORKS_STEPS.map((step, idx) => (
+                <motion.div
                   key={step.stepNum}
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   className="rounded-2xl border border-slate-200/90 bg-[#faf8f5] hover:bg-white p-5 flex flex-col justify-between hover:border-amber-400 hover:shadow-xs transition"
                 >
                   <div>
@@ -1336,7 +1428,7 @@ export default function PreschoolLandingClient() {
                   <div className="mt-4 pt-3 border-t border-slate-200/80 text-[11px] font-bold text-amber-800">
                     Stage {step.stepNum}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -1350,7 +1442,13 @@ export default function PreschoolLandingClient() {
           className="py-16 sm:py-24 bg-[#faf9f6] border-b border-slate-200/80 scroll-mt-16"
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center max-w-3xl mx-auto mb-12 sm:mb-14"
+            >
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-300/80 text-amber-950 text-[11px] font-black tracking-wider uppercase shadow-2xs mb-3.5">
                 <Award className="w-3.5 h-3.5 text-amber-700" />
                 <span>Our Education Experience</span>
@@ -1364,13 +1462,17 @@ export default function PreschoolLandingClient() {
               <p className="mt-3.5 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                 Our education marketing experience spans early childhood, K-12 campuses, medical colleges, and aviation academies. Here are selected outcomes reported during client engagements.
               </p>
-            </div>
+            </motion.div>
 
             {/* Display six cards in a 3 x 2 desktop grid. Two columns on tablets, one on mobile */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-              {CASE_STUDIES_DATA.map((item) => (
-                <div
+              {CASE_STUDIES_DATA.map((item, idx) => (
+                <motion.div
                   key={item.id}
+                  initial={{ opacity: 0, y: 32 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:shadow-md hover:border-slate-300 transition-all duration-200 flex flex-col justify-between text-left"
                 >
                   <div>
@@ -1455,16 +1557,22 @@ export default function PreschoolLandingClient() {
                       <span>Verified Outcome</span>
                     </span>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
             {/* Small Note Below the Cards */}
-            <div className="mt-10 sm:mt-12 text-center max-w-2xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-10 sm:mt-12 text-center max-w-2xl mx-auto"
+            >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200/90 text-xs text-slate-600 font-medium shadow-2xs">
                 <span>Selected past outcomes. Results vary by institution, location, budget and admissions follow-up.</span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -1473,7 +1581,13 @@ export default function PreschoolLandingClient() {
         {/* ----------------------------------------------------------- */}
         <section className="py-16 sm:py-24 bg-white border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-4xl mx-auto mb-14">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center max-w-4xl mx-auto mb-14"
+            >
               <span className="inline-block rounded-full bg-rose-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-700 border border-rose-200 mb-3">
                 The Admission Bottleneck
               </span>
@@ -1485,15 +1599,19 @@ export default function PreschoolLandingClient() {
                 Most preschools lose admissions not because their campus is bad, but because
                 their marketing and enquiry follow-ups are broken.
               </p>
-            </div>
+            </motion.div>
 
             {/* 6 Problem Cards (Clean Educational Grid) */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {PROBLEMS_DATA.map((item, idx) => {
                 const IconComponent = item.icon;
                 return (
-                  <div
+                  <motion.div
                     key={item.id}
+                    initial={{ opacity: 0, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
                     className="rounded-2xl border border-slate-200/90 bg-[#faf8f5] hover:bg-white p-6 shadow-xs hover:border-amber-400 hover:shadow-sm transition flex flex-col justify-between"
                   >
                     <div>
@@ -1520,13 +1638,19 @@ export default function PreschoolLandingClient() {
                         {item.impact}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
 
             {/* Closing Statement Callout Banner */}
-            <div className="mt-12 rounded-2xl border-2 border-amber-300 bg-[#fffdf7] p-6 sm:p-8 text-center max-w-3xl mx-auto shadow-xs">
+            <motion.div
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-12 rounded-2xl border-2 border-amber-300 bg-[#fffdf7] p-6 sm:p-8 text-center max-w-3xl mx-auto shadow-xs"
+            >
               <p className="text-lg sm:text-xl font-bold text-slate-900 leading-relaxed">
                 “More leads alone will not solve the problem. You need the right parents,
                 a clear follow-up process and an admission-focused campaign.”
@@ -1534,7 +1658,7 @@ export default function PreschoolLandingClient() {
               <p className="mt-2.5 text-xs font-bold text-amber-900 uppercase tracking-widest">
                 — The Clever Crow Admission Growth Method
               </p>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -1543,7 +1667,13 @@ export default function PreschoolLandingClient() {
         {/* ----------------------------------------------------------- */}
         <section id="faq" className="py-16 sm:py-24 bg-[#faf8f5] border-b border-slate-200">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-14">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center mb-14"
+            >
               <span className="inline-block rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-800 border border-slate-200 mb-3">
                 Direct Answers
               </span>
@@ -1553,14 +1683,18 @@ export default function PreschoolLandingClient() {
               <p className="mt-3 text-base text-slate-600 font-normal">
                 Transparent information on how we work with preschool and daycare owners.
               </p>
-            </div>
+            </motion.div>
 
             <div className="space-y-3.5">
               {FAQS.map((faq, idx) => {
                 const isOpen = openFaq === idx;
                 return (
-                  <div
+                  <motion.div
                     key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-30px" }}
+                    transition={{ duration: 0.45, delay: idx * 0.05, ease: [0.22, 1, 0.36, 1] }}
                     className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-2xs transition"
                   >
                     <button
@@ -1591,7 +1725,7 @@ export default function PreschoolLandingClient() {
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
@@ -1602,7 +1736,13 @@ export default function PreschoolLandingClient() {
         {/* 9. FINAL CTA (Refined, Non-Gimmicky Banner) */}
         {/* ----------------------------------------------------------- */}
         <section className="py-20 sm:py-24 bg-[#0a1224] text-white text-center relative overflow-hidden">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10 space-y-6"
+          >
             <span className="inline-block rounded-full bg-amber-400/20 px-4 py-1 text-xs font-bold uppercase tracking-wider text-amber-300 border border-amber-400/30">
               Fill Your Vacant Seats
             </span>
@@ -1640,7 +1780,7 @@ export default function PreschoolLandingClient() {
             <p className="text-xs text-slate-400 pt-2 font-medium">
               Zero obligation • Custom 3-5 km catchment analysis • Built specifically for preschool owners
             </p>
-          </div>
+          </motion.div>
         </section>
       </main>
 
