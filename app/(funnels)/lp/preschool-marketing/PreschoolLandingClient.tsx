@@ -188,6 +188,7 @@ const PORTFOLIO_CLIENTS = [
     type: "school",
     location: "Mysuru",
     image: "/images/portfolio/kautilya.png",
+    logo: "/images/logos/kautilya.webp",
   },
   {
     id: "klay",
@@ -198,6 +199,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Anna Nagar, Chennai",
     image: "/images/portfolio/klay.png",
+    logo: "/images/logos/klay.png",
   },
   {
     id: "maplebear",
@@ -208,6 +210,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Jubilee Hills, Hyd",
     image: "/images/portfolio/maplebear.png",
+    logo: "/images/logos/maplebear.png",
   },
   {
     id: "kangarookids",
@@ -218,6 +221,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Pan-India",
     image: "/images/portfolio/kangarookids.png",
+    logo: "/images/logos/kangarookids.svg",
   },
   {
     id: "littlemillennium",
@@ -228,6 +232,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Pan-India",
     image: "/images/portfolio/littlemillennium.png",
+    logo: "/images/logos/littlemillennium.png",
   },
   {
     id: "bgsnps",
@@ -238,6 +243,7 @@ const PORTFOLIO_CLIENTS = [
     type: "school",
     location: "Bangalore",
     image: "/images/portfolio/bgsnps.png",
+    logo: "/images/logos/bgsnps.png",
   },
   {
     id: "iamyello",
@@ -248,6 +254,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Bangalore",
     image: "/images/portfolio/iamyello.png",
+    logo: "/images/logos/iamyello.svg",
   },
   {
     id: "vishwavidyapeeth",
@@ -258,6 +265,7 @@ const PORTFOLIO_CLIENTS = [
     type: "school",
     location: "Bangalore",
     image: "/images/portfolio/vishwavidyapeeth.png",
+    logo: "/images/logos/vishwavidyapeeth.webp",
   },
   {
     id: "kidscastle",
@@ -268,6 +276,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Bangalore",
     image: "/images/portfolio/kidscastle.png",
+    logo: "/images/logos/kidscastle.png",
   },
   {
     id: "timekids",
@@ -278,6 +287,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Anna Nagar, Chennai",
     image: "/images/portfolio/timekids.png",
+    logo: "/images/logos/timekids.png",
   },
   {
     id: "pepschool",
@@ -288,6 +298,7 @@ const PORTFOLIO_CLIENTS = [
     type: "school",
     location: "Bangalore",
     image: "/images/portfolio/pepschool.png",
+    logo: "/images/logos/pepschool.webp",
   },
   {
     id: "ampasishya",
@@ -298,6 +309,7 @@ const PORTFOLIO_CLIENTS = [
     type: "school",
     location: "Chennai",
     image: "/images/portfolio/ampasishya.png",
+    logo: "/images/logos/ampasishya.png",
   },
   {
     id: "mylittleberries",
@@ -308,6 +320,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Bangalore",
     image: "/images/portfolio/mylittleberries.png",
+    logo: "/images/logos/mylittleberries.png",
   },
 ];
 
@@ -888,6 +901,55 @@ export default function PreschoolLandingClient() {
         </section>
 
         {/* ----------------------------------------------------------- */}
+        {/* PARTNER SCHOOLS & PRESCHOOLS LOGO CAROUSEL */}
+        {/* ----------------------------------------------------------- */}
+        <section className="school-logo-marquee-section" aria-label="Partner School Logos">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-3.5 text-center">
+            <p className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-slate-500">
+              Trusted Admission Marketing Partner Across 25+ Leading Preschools &amp; Schools
+            </p>
+          </div>
+
+          <div className="school-logo-marquee">
+            <div className="school-logo-track">
+              {PORTFOLIO_CLIENTS.map((item) => (
+                <a
+                  key={`track1-${item.id}`}
+                  href="#our-work"
+                  title={`${item.name} (${item.location}) — View Showcase`}
+                  className="school-logo-item group"
+                >
+                  <img
+                    src={item.logo}
+                    alt={`${item.name} logo`}
+                    className="school-logo-img"
+                    loading="lazy"
+                  />
+                </a>
+              ))}
+            </div>
+            <div className="school-logo-track" aria-hidden="true">
+              {PORTFOLIO_CLIENTS.map((item) => (
+                <a
+                  key={`track2-${item.id}`}
+                  href="#our-work"
+                  tabIndex={-1}
+                  title={`${item.name} (${item.location}) — View Showcase`}
+                  className="school-logo-item group"
+                >
+                  <img
+                    src={item.logo}
+                    alt={`${item.name} logo`}
+                    className="school-logo-img"
+                    loading="lazy"
+                  />
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ----------------------------------------------------------- */}
         {/* Trust Stats Bar */}
         {/* ----------------------------------------------------------- */}
         <div className="bg-slate-50 border-b border-slate-200 py-8">
@@ -1213,9 +1275,19 @@ export default function PreschoolLandingClient() {
                           {item.location}
                         </span>
                       </div>
-                      <h3 className="text-base font-black text-slate-900 tracking-tight group-hover:text-amber-800 transition line-clamp-1">
-                        {item.name}
-                      </h3>
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-lg bg-slate-50 border border-slate-200/80 p-1 flex items-center justify-center shrink-0">
+                          <img
+                            src={item.logo}
+                            alt={`${item.name} logo`}
+                            className="w-full h-full object-contain"
+                            loading="lazy"
+                          />
+                        </div>
+                        <h3 className="text-base font-black text-slate-900 tracking-tight group-hover:text-amber-800 transition line-clamp-1">
+                          {item.name}
+                        </h3>
+                      </div>
                     </div>
 
                     <a

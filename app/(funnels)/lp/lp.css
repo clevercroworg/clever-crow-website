@@ -285,6 +285,89 @@ a {
   text-transform: uppercase;
 }
 
+/* ------------------------------------------------------------------ */
+/* Partner Schools Small Carousel Section (Just After Hero)           */
+/* ------------------------------------------------------------------ */
+.school-logo-marquee-section {
+  position: relative;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  padding: 1.5rem 0 1.75rem 0;
+  overflow: hidden;
+}
+
+.school-logo-marquee {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.school-logo-track {
+  display: flex;
+  align-items: center;
+  min-width: max-content;
+  animation: schoolMarqueeScroll 32s linear infinite;
+  will-change: transform;
+}
+
+.school-logo-marquee:hover .school-logo-track {
+  animation-play-state: paused;
+}
+
+@keyframes schoolMarqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.school-logo-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 3.25rem;
+  text-decoration: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+
+@media (min-width: 640px) {
+  .school-logo-item {
+    margin-right: 4.5rem;
+  }
+}
+
+.school-logo-item:hover {
+  transform: translateY(-2px) scale(1.08);
+}
+
+.school-logo-img {
+  height: 2.75rem; /* 44px on mobile */
+  max-width: 10.5rem; /* 168px */
+  width: auto;
+  object-fit: contain;
+  opacity: 0.95;
+  transition: all 220ms ease;
+  filter: none !important;
+}
+
+@media (min-width: 640px) {
+  .school-logo-img {
+    height: 3.25rem; /* 52px on desktop */
+    max-width: 12.5rem; /* 200px */
+  }
+}
+
+.school-logo-item:hover .school-logo-img {
+  opacity: 1;
+}
+
 .pricing-light-section {
   background:
     linear-gradient(180deg, rgba(248, 250, 252, 0.98), rgba(241, 245, 249, 0.98)),
