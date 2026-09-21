@@ -295,8 +295,11 @@ const CASE_STUDIES_DATA = [
     name: "Kautilya Vidyalaya",
     category: "CBSE & Kindergarten Campus",
     logo: "/images/logos/kautilya.webp",
-    result: "95% of Available Seats Filled",
-    services: "End-to-end digital marketing",
+    stat: "95%",
+    statLabel: "Seats Filled",
+    headline: "95% of Available Seats Filled Across Campus",
+    context: "Kindergarten & primary batch admissions secured",
+    services: "End-to-End Digital Marketing",
     duration: "3-year engagement",
     url: "https://kautilyavidyalaya.edu.in/",
     displayUrl: "kautilyavidyalaya.edu.in",
@@ -307,8 +310,11 @@ const CASE_STUDIES_DATA = [
     subName: "Siddaganga Institute of Technology",
     category: "Higher Education & Engineering",
     logo: "/images/logos/sit.png",
-    result: "80% of Enquiries Through Organic Search & Google Business Profile",
-    services: "SEO · Google Business Profile Optimisation",
+    stat: "80%",
+    statLabel: "Organic Inbound",
+    headline: "80% of Enquiries via Search & Google Business Profile",
+    context: "Dominated organic student search and local rankings",
+    services: "SEO & Google Business Profile",
     duration: "2-year engagement",
     url: "https://sit.ac.in/",
     displayUrl: "sit.ac.in",
@@ -319,8 +325,11 @@ const CASE_STUDIES_DATA = [
     subName: "BGS Global Institute of Medical Sciences",
     category: "Medical Sciences Institution",
     logo: "/images/logos/bgsgims.svg",
-    result: "100% of Available Seats Filled",
-    services: "End-to-end digital marketing",
+    stat: "100%",
+    statLabel: "Intake Secured",
+    headline: "100% of Available Seats Filled for Batch Intake",
+    context: "Structured enrollment funnel for medical programs",
+    services: "End-to-End Digital Marketing",
     duration: "4-year engagement",
     url: "https://www.bgsgims.edu.in/",
     displayUrl: "bgsgims.edu.in",
@@ -331,8 +340,11 @@ const CASE_STUDIES_DATA = [
     subName: "Academy of Aviation",
     category: "Flight Training & Pilot Academy",
     logo: "/images/logos/carver.png",
-    result: "80% of Available Seats Filled",
-    services: "Lead generation",
+    stat: "80%",
+    statLabel: "Pilot Intake",
+    headline: "80% of Available Seats Filled Across Hubs",
+    context: "Commercial flight student lead acquisition pan-India",
+    services: "Lead Generation & Intake",
     duration: "1-year engagement",
     url: "https://carveraviation.com/",
     displayUrl: "carveraviation.com",
@@ -343,8 +355,11 @@ const CASE_STUDIES_DATA = [
     subName: "Aviation Academy",
     category: "Aerospace & Aircraft Maintenance",
     logo: "/images/logos/vsmaerospace.png",
-    result: "Seat Occupancy Grew From 10% to 60% in 1 Year",
-    services: "End-to-end digital marketing",
+    stat: "10% → 60%",
+    statLabel: "Occupancy Growth",
+    headline: "Seat Occupancy Grew from 10% to 60% in 1 Year",
+    context: "Turnaround enrollment for aircraft maintenance batch",
+    services: "End-to-End Digital Marketing",
     duration: "2-year engagement",
     url: "https://vsmaerospace.in/",
     displayUrl: "vsmaerospace.in",
@@ -354,8 +369,11 @@ const CASE_STUDIES_DATA = [
     name: "The Cambridge International School",
     category: "Early Years & International School",
     logo: "/images/logos/cambridge.png",
-    result: "100% of Available Seats Filled by February",
-    services: "End-to-end digital marketing",
+    stat: "100%",
+    statLabel: "Early Closure",
+    headline: "100% of Available Seats Filled by February",
+    context: "Early admissions target closed ahead of academic cycle",
+    services: "End-to-End Digital Marketing",
     duration: "3-year engagement",
     url: "https://thecambridgeinternationalschool.com/",
     displayUrl: "thecambridgeinternationalschool.com",
@@ -405,45 +423,75 @@ const WORK_COMPLETED_AREAS = [
 const WHAT_WE_DO_SERVICES = [
   {
     num: "01",
-    title: "Build Your Website",
-    desc: "Create a professional, mobile-friendly website showcasing your programmes, facilities and activities, with easy enquiry options. Domain and hosting are included.",
-    feature: "Domain and hosting included",
+    tag: "Admissions Hub",
+    title: "Preschool Website",
+    tagline: "Mobile-first admissions portal built to convert visiting parents into campus tours.",
+    deliverables: ["Mobile-Ready Design", "Instant WhatsApp Button", "Free Domain & Hosting"],
     icon: Globe,
+    badgeBg: "bg-amber-100 text-amber-900 border-amber-200",
+    iconBg: "bg-amber-50 text-amber-700 border-amber-200",
+    chipBg: "bg-amber-50/80 text-amber-950 border-amber-200/80",
+    dotColor: "bg-amber-500",
   },
   {
     num: "02",
-    title: "Improve Your Search Visibility",
-    desc: "Set up SEO, AEO and GEO to help search engines and AI-powered tools understand your centre, programmes and location.",
-    feature: "SEO, AEO & GEO configured",
+    tag: "Local Discovery",
+    title: "Search Visibility (SEO & AI)",
+    tagline: "Rank at the top of Google and AI tools when parents search in your neighborhood.",
+    deliverables: ["'Preschool Near Me' Rank", "Google Search & Maps", "AI Search (AEO & GEO)"],
     icon: Search,
+    badgeBg: "bg-sky-100 text-sky-900 border-sky-200",
+    iconBg: "bg-sky-50 text-sky-700 border-sky-200",
+    chipBg: "bg-sky-50/80 text-sky-950 border-sky-200/80",
+    dotColor: "bg-sky-500",
   },
   {
     num: "03",
-    title: "Optimise Your Google Business Profile",
-    desc: "Improve your profile with accurate information, services and photos so nearby parents can find your centre and contact you through Google Search and Maps.",
-    feature: "Google Search & Maps setup",
+    tag: "Direct Inbound",
+    title: "Google Business Profile",
+    tagline: "Turn Google Maps into your steady daily stream of direct phone calls and visits.",
+    deliverables: ["Verified Map Pin", "Direct Call & Map Clicks", "Photos & Reviews Setup"],
     icon: MapPin,
+    badgeBg: "bg-emerald-100 text-emerald-900 border-emerald-200",
+    iconBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    chipBg: "bg-emerald-50/80 text-emerald-950 border-emerald-200/80",
+    dotColor: "bg-emerald-500",
   },
   {
     num: "04",
-    title: "Manage Your Social Media",
-    desc: "Create and publish 20 branded posts across Facebook and Instagram, including designs, captions and relevant hashtags that speak to local parents.",
-    feature: "20 branded posts across FB & IG",
+    tag: "Parent Trust",
+    title: "Active Social Media",
+    tagline: "Consistent branded posts that build high credibility and trust with local parents.",
+    deliverables: ["20 Branded Creatives/Mo", "Instagram & Facebook Feeds", "Activity & Trust Highlights"],
     icon: Megaphone,
+    badgeBg: "bg-rose-100 text-rose-900 border-rose-200",
+    iconBg: "bg-rose-50 text-rose-700 border-rose-200",
+    chipBg: "bg-rose-50/80 text-rose-950 border-rose-200/80",
+    dotColor: "bg-rose-500",
   },
   {
     num: "05",
-    title: "Generate Enquiries Through Ads",
-    desc: "Run Google, Facebook and Instagram campaigns to reach relevant parents and encourage enquiries through WhatsApp, calls and forms.",
-    feature: "WhatsApp, call & form enquiry ads",
+    tag: "3–5 km Radius",
+    title: "Targeted Admission Ads",
+    tagline: "Hyperlocal ad campaigns reaching parents living strictly within a 3–5 km radius.",
+    deliverables: ["3–5 km Catchment Radius", "Direct WhatsApp Leads", "Zero Wasted Ad Spend"],
     icon: Target,
+    badgeBg: "bg-orange-100 text-orange-900 border-orange-200",
+    iconBg: "bg-orange-50 text-orange-700 border-orange-200",
+    chipBg: "bg-orange-50/80 text-orange-950 border-orange-200/80",
+    dotColor: "bg-orange-500",
   },
   {
     num: "06",
-    title: "Track Enquiries and Improve Campaigns",
-    desc: "Measure campaign performance and use your team’s feedback to refine targeting, messaging and spending to improve enquiry quality.",
-    feature: "Performance tracking & spend tuning",
+    tag: "Lead Intelligence",
+    title: "Enquiry Tracking & CRM",
+    tagline: "Full visibility into every parent enquiry, campus visit, and confirmed admission.",
+    deliverables: ["Live Enquiry Dashboard", "Cost-Per-Visit Metrics", "Weekly Lead Tuning"],
     icon: BarChart3,
+    badgeBg: "bg-indigo-100 text-indigo-900 border-indigo-200",
+    iconBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
+    chipBg: "bg-indigo-50/80 text-indigo-950 border-indigo-200/80",
+    dotColor: "bg-indigo-500",
   },
 ];
 
@@ -550,273 +598,10 @@ const FAQS = [
 ];
 
 // -------------------------------------------------------------
-// Component: Modal Form for Instant Audit
-// -------------------------------------------------------------
-
-function AuditModal({
-  isOpen,
-  onClose,
-  prefilledGoal = "Fill Vacant Seats",
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  prefilledGoal?: string;
-}) {
-  const router = useRouter();
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [schoolName, setSchoolName] = useState("");
-  const [location, setLocation] = useState("");
-  const [centerType, setCenterType] = useState("Standalone Preschool");
-  const [goal, setGoal] = useState(prefilledGoal);
-  const [loading, setLoading] = useState(false);
-  const [statusMsg, setStatusMsg] = useState("");
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add("modal-open");
-    } else {
-      document.body.classList.remove("modal-open");
-    }
-    return () => document.body.classList.remove("modal-open");
-  }, [isOpen]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onClose]);
-
-  if (!isOpen) return null;
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name || !phone || !schoolName) {
-      setStatusMsg("Please enter your name, phone number, and preschool name.");
-      return;
-    }
-    setLoading(true);
-    setStatusMsg("");
-
-    try {
-      const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-      const message = `Preschool Admission Growth Audit Request (Modal Form):
-- Preschool/Daycare: ${schoolName}
-- City & Locality: ${location || "Not specified"}
-- Center Type: ${centerType}
-- Primary Objective: ${goal}
-- Landing Page URL: ${currentUrl}`;
-
-      const response = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          phone,
-          email,
-          company: schoolName,
-          service: "Preschool Admission Growth Audit",
-          message,
-          source: "Preschool Admission Landing Page (Audit Modal)",
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Unable to submit. Please try again.");
-      }
-
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("event", "conversion", {
-          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
-        });
-        (window as any).gtag("event", "GenerateLead", {
-          event_category: "Preschool Admission Audit",
-          event_label: "Audit Modal Submit",
-        });
-      }
-
-      onClose();
-      router.push("/thank-you");
-    } catch (err: any) {
-      setStatusMsg(err.message || "An error occurred. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
-      <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity" onClick={onClose} />
-
-      <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-200 p-6 sm:p-8 z-10 my-8">
-        <button
-          type="button"
-          className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
-          onClick={onClose}
-          aria-label="Close modal"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-            <path d="M18 6L6 18M6 6l12 12" />
-          </svg>
-        </button>
-
-        <div className="mb-5">
-          <span className="inline-block px-3 py-1 rounded-full bg-amber-50 text-amber-900 border border-amber-200 text-xs font-bold uppercase tracking-wider mb-2">
-            100% Free • No Obligation
-          </span>
-          <h2 className="text-2xl font-black text-slate-900 tracking-tight">
-            Request Your Admission Growth Audit
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 mt-1">
-            We&apos;ll review your current admission process and identify practical opportunities to generate and convert more parent enquiries.
-          </p>
-        </div>
-
-        <form className="space-y-3.5" onSubmit={handleSubmit}>
-          <div>
-            <label className="block text-xs font-bold text-slate-700 mb-1">
-              Your Name & Role *
-            </label>
-            <input
-              type="text"
-              required
-              placeholder="e.g. Shalini Sharma (Center Director / Owner)"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                WhatsApp / Phone *
-              </label>
-              <input
-                type="tel"
-                required
-                placeholder="+91 98765 43210"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Email Address
-              </label>
-              <input
-                type="email"
-                placeholder="director@preschool.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Preschool / Daycare Name *
-              </label>
-              <input
-                type="text"
-                required
-                placeholder="e.g. Maple Tree Montessori"
-                value={schoolName}
-                onChange={(e) => setSchoolName(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                City & Locality *
-              </label>
-              <input
-                type="text"
-                placeholder="e.g. Whitefield, Bengaluru"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Center Setup
-              </label>
-              <select
-                value={centerType}
-                onChange={(e) => setCenterType(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-              >
-                <option value="Standalone Preschool">Standalone Preschool</option>
-                <option value="Franchise Branch">Franchise Branch</option>
-                <option value="Multi-Center Group">Multi-Center / Chain</option>
-                <option value="Daycare & Playgroup">Daycare & Playgroup</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
-                Primary Goal
-              </label>
-              <select
-                value={goal}
-                onChange={(e) => setGoal(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-              >
-                <option value="Fill Vacant Seats">Fill Vacant Seats</option>
-                <option value="Book More Campus Visits">Book More Campus Visits</option>
-                <option value="Fix WhatsApp Follow-ups">Fix WhatsApp Follow-ups</option>
-                <option value="Launch New Academic Year">New Academic Year</option>
-                <option value="Expand Daycare Enrollment">Expand Daycare Enrollment</option>
-              </select>
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full mt-2 py-3.5 px-6 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-sm sm:text-base shadow-sm transition flex items-center justify-center gap-2 cursor-pointer"
-          >
-            {loading ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                <span>Preparing Audit Request...</span>
-              </>
-            ) : (
-              <>
-                <span>Request My Free Audit</span>
-                <ArrowRight className="w-4 h-4" />
-              </>
-            )}
-          </button>
-
-          {statusMsg && (
-            <p className="text-xs text-rose-600 text-center mt-2 font-semibold">{statusMsg}</p>
-          )}
-
-          <p className="text-[11px] text-slate-500 text-center pt-1">
-            🔒 100% Confidential. Custom neighborhood assessment delivered within 24-48 hours.
-          </p>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-// -------------------------------------------------------------
 // Main Preschool Landing Page Client Component
 // -------------------------------------------------------------
 
 export default function PreschoolLandingClient() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
   const [portfolioFilter, setPortfolioFilter] = useState<"all" | "preschool" | "school">("all");
@@ -837,16 +622,8 @@ export default function PreschoolLandingClient() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const openAuditModal = () => setIsModalOpen(true);
-
-  const scrollToAuditSection = () => {
-    const el = document.getElementById("free-audit-offer");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    } else {
-      openAuditModal();
-    }
-  };
+  const PHONE_NUMBER = "+91 99863 89444";
+  const PHONE_HREF = "tel:+919986389444";
 
   const WHATSAPP_EXPERT_LINK =
     "https://wa.me/919986389444?text=Hi%20Clever%20Crow%20Team%2C%20I%20am%20a%20preschool%20%2F%20daycare%20director%20interested%20in%20the%20Free%20Admission%20Growth%20Audit.";
@@ -919,14 +696,13 @@ export default function PreschoolLandingClient() {
 
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
-                  <button
-                    type="button"
-                    onClick={openAuditModal}
+                  <a
+                    href={PHONE_HREF}
                     className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-sm sm:text-base shadow-xs transition shrink-0 cursor-pointer whitespace-nowrap"
                   >
-                    <span>Get Our Packages</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                    <Phone className="w-4 h-4" />
+                    <span>Call {PHONE_NUMBER}</span>
+                  </a>
 
                   <a
                     href={WHATSAPP_EXPERT_LINK}
@@ -1031,34 +807,50 @@ export default function PreschoolLandingClient() {
               </p>
             </div>
 
-            {/* 6 Minimal Service Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* 6 School-Vibed Capability Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
               {WHAT_WE_DO_SERVICES.map((item) => {
                 const IconComponent = item.icon;
                 return (
                   <div
                     key={item.title}
-                    className="group rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:border-amber-400 hover:shadow-md transition-all duration-200 flex flex-col justify-between"
+                    className="group rounded-3xl bg-white p-6 sm:p-7 border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-slate-300 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between text-left"
                   >
                     <div>
-                      {/* Top Bar: Clean Brand Icon (Numbers Removed as requested) */}
-                      <div className="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-200/70 text-amber-800 flex items-center justify-center mb-5 group-hover:bg-[#f4c542] group-hover:border-[#f4c542] group-hover:text-slate-950 transition-colors shadow-2xs">
-                        <IconComponent className="w-5 h-5" />
+                      {/* Top Row: Colorful School-Vibe Icon Vessel & Tag Pill */}
+                      <div className="flex items-center justify-between gap-3 mb-5">
+                        <div
+                          className={`w-12 h-12 rounded-2xl flex items-center justify-center border shadow-2xs group-hover:scale-105 transition-transform ${item.iconBg}`}
+                        >
+                          <IconComponent className="w-5 h-5 stroke-[2.2]" />
+                        </div>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider border ${item.badgeBg}`}
+                        >
+                          {item.tag}
+                        </span>
                       </div>
 
-                      {/* Title & Description */}
-                      <h3 className="text-lg sm:text-xl font-bold text-slate-950 leading-snug group-hover:text-amber-900 transition-colors">
+                      {/* Title & Crisp Value Proposition */}
+                      <h3 className="text-lg sm:text-xl font-black text-slate-950 leading-snug tracking-tight">
                         {item.title}
                       </h3>
-                      <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                        {item.desc}
+                      <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                        {item.tagline}
                       </p>
                     </div>
 
-                    {/* Bottom Feature Line */}
-                    <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-700 font-medium">
-                      <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                      <span>{item.feature}</span>
+                    {/* School-Vibe Deliverable Chips (Warm, tactile, colored dots) */}
+                    <div className="mt-6 flex flex-wrap gap-1.5 pt-1">
+                      {item.deliverables.map((chip) => (
+                        <span
+                          key={chip}
+                          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-[11px] sm:text-xs font-bold border transition-colors ${item.chipBg}`}
+                        >
+                          <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${item.dotColor}`} />
+                          <span>{chip}</span>
+                        </span>
+                      ))}
                     </div>
                   </div>
                 );
@@ -1277,13 +1069,13 @@ export default function PreschoolLandingClient() {
                   We build customized hyperlocal ad campaigns and WhatsApp conversion systems for your specific 3-5 km catchment area.
                 </p>
               </div>
-              <button
-                onClick={openAuditModal}
+              <a
+                href={PHONE_HREF}
                 className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-[#f4c542] hover:brightness-105 text-slate-950 font-black text-sm px-6 py-3 shadow-xs transition cursor-pointer"
               >
-                <span>Request Free Audit</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+                <Phone className="w-4 h-4" />
+                <span>Call {PHONE_NUMBER}</span>
+              </a>
             </div>
           </div>
         </section>
@@ -1372,13 +1164,13 @@ export default function PreschoolLandingClient() {
                       </a>
 
                       {/* Secondary Call Request Button */}
-                      <button
-                        onClick={openAuditModal}
+                      <a
+                        href={PHONE_HREF}
                         className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-sm px-6 py-3 transition cursor-pointer"
                       >
-                        <span>Schedule Growth Audit Call</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </button>
+                        <Phone className="w-4 h-4" />
+                        <span>Call {PHONE_NUMBER}</span>
+                      </a>
                     </div>
 
                     <p className="text-[11px] text-slate-400 text-center pt-1 font-medium">
@@ -1449,10 +1241,10 @@ export default function PreschoolLandingClient() {
         {/* ----------------------------------------------------------- */}
         <section
           id="education-experience"
-          className="py-20 sm:py-28 bg-[#faf8f5] border-b border-slate-200 scroll-mt-16"
+          className="py-16 sm:py-24 bg-[#faf9f6] border-b border-slate-200/80 scroll-mt-16"
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-300/80 text-amber-950 text-[11px] font-black tracking-wider uppercase shadow-2xs mb-3.5">
                 <Award className="w-3.5 h-3.5 text-amber-700" />
                 <span>Our Education Experience</span>
@@ -1464,92 +1256,95 @@ export default function PreschoolLandingClient() {
               </h2>
 
               <p className="mt-3.5 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
-                Our education experience spans schools, higher education and aviation training. Here are selected outcomes reported during our client engagements.
+                Our education marketing experience spans early childhood, K-12 campuses, medical colleges, and aviation academies. Here are selected outcomes reported during client engagements.
               </p>
             </div>
 
-            {/* Display six cards in a 3 x 2 desktop grid. Use two columns on tablets and one on mobile */}
+            {/* Display six cards in a 3 x 2 desktop grid. Two columns on tablets, one on mobile */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
               {CASE_STUDIES_DATA.map((item) => (
                 <div
                   key={item.id}
-                  className="group rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs hover:shadow-xl hover:border-amber-400/90 transition-all duration-300 flex flex-col justify-between relative overflow-hidden text-left"
+                  className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:shadow-md hover:border-slate-300 transition-all duration-200 flex flex-col justify-between text-left"
                 >
-                  {/* Subtle top amber highlight on hover */}
-                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-400 via-[#f4c542] to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-
                   <div>
-                    {/* Top Row: Logo Vessel & Tenure Badge */}
-                    <div className="flex items-center justify-between gap-3 pb-2">
-                      <div className="h-12 w-32 px-3 py-1.5 rounded-xl bg-slate-50/90 border border-slate-200/70 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-white group-hover:border-amber-300 transition-all duration-200">
+                    {/* Top Row: Clean Logo on Left, Tenure Badge on Right */}
+                    <div className="flex items-center justify-between gap-3 h-10 mb-4">
+                      <div className="h-9 w-32 sm:w-36 flex items-center justify-start shrink-0">
                         <Image
                           src={item.logo}
                           alt={item.name}
-                          width={110}
-                          height={34}
-                          className="max-h-8 w-auto object-contain"
+                          width={130}
+                          height={36}
+                          className="max-h-8 sm:max-h-9 w-auto object-contain object-left"
                         />
                       </div>
 
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold text-amber-900 bg-amber-50 border border-amber-200/80 shadow-2xs shrink-0">
-                        <Clock className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold text-slate-600 bg-slate-100/90 border border-slate-200/80 shrink-0">
+                        <Clock className="w-3 h-3 text-slate-400 shrink-0" />
                         <span>{item.duration}</span>
                       </span>
                     </div>
 
-                    {/* Full-width Institution Name & Sector */}
-                    <div className="mt-4 mb-5 min-h-[56px] flex flex-col justify-center">
-                      <h3 className="text-lg sm:text-xl font-black text-slate-950 leading-snug group-hover:text-amber-900 transition-colors">
+                    {/* Institution Name & Sector Header */}
+                    <div className="min-h-[50px] flex flex-col justify-center mb-3">
+                      <h3 className="text-base sm:text-lg font-bold text-slate-950 leading-snug">
                         {item.name}
                       </h3>
-                      <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mt-1">
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mt-0.5">
                         {item.category}
                       </p>
                     </div>
 
-                    {/* Prominent Result Headline Banner (Consistent Min-Height) */}
-                    <div className="rounded-2xl bg-gradient-to-br from-amber-50/90 via-[#fffdf7] to-amber-100/40 border border-amber-200/90 p-5 mb-5 flex flex-col justify-center min-h-[116px] shadow-2xs group-hover:border-amber-300/90 group-hover:shadow-xs transition-all">
-                      <div className="flex items-center gap-1.5 mb-2">
-                        <div className="w-5 h-5 rounded-md bg-[#f4c542] text-slate-950 flex items-center justify-center shrink-0 shadow-2xs">
-                          <TrendingUp className="w-3 h-3 stroke-[2.5]" />
+                    {/* Metric & Outcome Block (Hairline-Divided, Perfectly Aligned) */}
+                    <div className="py-4 border-y border-slate-100 flex flex-col justify-between min-h-[120px] mb-3.5">
+                      <div className="flex items-baseline justify-between gap-2">
+                        <div className="text-3xl sm:text-[2rem] font-black text-slate-950 tracking-tight leading-none">
+                          {item.stat}
                         </div>
-                        <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-amber-900">
-                          Prominent Result Reported
+                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/70 shrink-0">
+                          <TrendingUp className="w-3 h-3 text-emerald-600" />
+                          <span>{item.statLabel}</span>
                         </span>
                       </div>
-                      <p className="text-base sm:text-[1.18rem] font-black text-slate-950 leading-snug tracking-tight">
-                        {item.result}
-                      </p>
+
+                      <div className="mt-2.5">
+                        <p className="text-xs sm:text-[13px] font-bold text-slate-800 leading-snug">
+                          {item.headline}
+                        </p>
+                        <p className="text-[11px] text-slate-500 font-medium mt-1 leading-normal">
+                          {item.context}
+                        </p>
+                      </div>
                     </div>
 
-                    {/* Services Provided Section */}
-                    <div className="space-y-1.5 mb-6">
-                      <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
-                        Services Provided
+                    {/* Services Scope Row */}
+                    <div className="flex items-center justify-between text-xs min-h-[26px] mb-3">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        Scope
                       </span>
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200/70 text-xs sm:text-sm font-bold text-slate-800">
-                        <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                        <span>{item.services}</span>
-                      </div>
+                      <span className="font-semibold text-slate-700">
+                        {item.services}
+                      </span>
                     </div>
                   </div>
 
-                  {/* Card Footer: Institution Website Link */}
-                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                  {/* Card Footer: Verified Website Source */}
+                  <div className="pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs">
                     {item.url ? (
                       <a
                         href={item.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-bold text-slate-600 hover:text-amber-900 transition group/link"
+                        className="inline-flex items-center gap-1 font-semibold text-slate-500 hover:text-slate-900 transition-colors group/link"
                       >
-                        <span>{item.displayUrl}</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover/link:text-amber-600 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                        <span className="hover:underline underline-offset-2">{item.displayUrl}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover/link:text-slate-700 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                       </a>
                     ) : (
                       <span className="text-xs font-semibold text-slate-400">Education Partner</span>
                     )}
-                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2.5 py-0.5 rounded-full shadow-2xs">
+                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-full">
                       <ShieldCheck className="w-3 h-3 text-emerald-600" />
                       <span>Verified Outcome</span>
                     </span>
@@ -1559,7 +1354,7 @@ export default function PreschoolLandingClient() {
             </div>
 
             {/* Small Note Below the Cards */}
-            <div className="mt-12 sm:mt-14 text-center max-w-2xl mx-auto">
+            <div className="mt-10 sm:mt-12 text-center max-w-2xl mx-auto">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200/90 text-xs text-slate-600 font-medium shadow-2xs">
                 <span>Selected past outcomes. Results vary by institution, location, budget and admissions follow-up.</span>
               </div>
@@ -1717,13 +1512,13 @@ export default function PreschoolLandingClient() {
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button
-                onClick={openAuditModal}
+              <a
+                href={PHONE_HREF}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#f4c542] hover:brightness-105 text-slate-950 font-black text-base px-8 py-3.5 shadow-md transition cursor-pointer"
               >
-                <span>Request My Free Audit</span>
-                <ArrowRight className="w-5 h-5" />
-              </button>
+                <Phone className="w-5 h-5" />
+                <span>Call {PHONE_NUMBER}</span>
+              </a>
 
               <a
                 href={WHATSAPP_EXPERT_LINK}
@@ -1758,9 +1553,6 @@ export default function PreschoolLandingClient() {
         <FaWhatsapp className="w-6 h-6 text-white" />
         <span className="hidden sm:inline">Chat With Admission Expert</span>
       </a>
-
-      {/* Instant Audit Modal */}
-      <AuditModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </main>
   );
 }
