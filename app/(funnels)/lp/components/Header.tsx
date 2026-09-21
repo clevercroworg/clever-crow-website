@@ -3,7 +3,11 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
  
-export default function Header() {
+interface HeaderProps {
+  whatsappMessage?: string;
+}
+
+export default function Header({ whatsappMessage }: HeaderProps = {}) {
   const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
  
   useEffect(() => {
@@ -63,7 +67,7 @@ export default function Header() {
             </svg>
           </a>
           <a
-            href="https://wa.me/919986389444?text=Hi%20Clever%20crow%20Team%20%2C%20I%27m%20intresered%20in%20google%20ads%20%2C%20can%20we%20have%20a%20converstaion"
+            href={`https://wa.me/919986389444?text=${encodeURIComponent(whatsappMessage || "Hi Clever crow Team , I'm intresered in google ads , can we have a converstaion")}`}
             onClick={trackWhatsAppClick}
             target="_blank"
             rel="noreferrer"
