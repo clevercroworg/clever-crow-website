@@ -803,7 +803,7 @@ export default function PreschoolLandingClient() {
                 className="object-cover object-center lg:object-[right_center] opacity-90 sm:opacity-95 lg:opacity-100"
               />
               {/* Soft Gradient Overlay: Clean visible background with solid readable wash on the left content side */}
-              <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 via-45% to-transparent w-full lg:w-[60%]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/90 via-35% to-white/70 lg:to-transparent w-full lg:w-[62%]" />
               <div className="absolute inset-0 bg-gradient-to-t from-white/40 via-transparent to-transparent" />
             </div>
 
@@ -950,8 +950,9 @@ export default function PreschoolLandingClient() {
               <span className="inline-block rounded-full bg-amber-100/70 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-900 border border-amber-200/80 mb-3">
                 Full-Service Admission Growth
               </span>
-              <h2 className="text-[1.12rem] min-[360px]:text-[1.25rem] min-[390px]:text-[1.4rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight whitespace-nowrap">
-                What We Can Do for Your Preschool
+              <h2 className="text-2xl min-[390px]:text-[1.65rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight text-center leading-tight">
+                <span className="block sm:inline">What We Can Do </span>
+                <span className="block sm:inline">for Your Preschool</span>
               </h2>
               <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                 We help your centre reach nearby parents, build trust and generate admission enquiries.
@@ -1068,8 +1069,9 @@ export default function PreschoolLandingClient() {
                 <School className="w-3.5 h-3.5 text-[#f4c542]" />
                 <span>Featured Client Portfolio</span>
               </div>
-              <h2 className="text-[1.12rem] min-[360px]:text-[1.25rem] min-[390px]:text-[1.4rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight whitespace-nowrap">
-                Preschools &amp; Schools We Work With
+              <h2 className="text-2xl min-[390px]:text-[1.65rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight text-center leading-tight">
+                <span className="block sm:inline">Preschools &amp; Schools </span>
+                <span className="block sm:inline">We Work With</span>
               </h2>
               <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                 Real partner campuses, live web platforms, and admissions ecosystems engineered to convert parent interest into confirmed enrolments.
@@ -1328,8 +1330,9 @@ export default function PreschoolLandingClient() {
               <span className="inline-block rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-200 mb-3">
                 Execution Roadmap
               </span>
-              <h2 className="text-[1.12rem] min-[360px]:text-[1.25rem] min-[390px]:text-[1.4rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight whitespace-nowrap">
-                From Campaign Launch to Enrolment
+              <h2 className="text-2xl min-[390px]:text-[1.65rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight text-center leading-tight">
+                <span className="block sm:inline">From Campaign Launch </span>
+                <span className="block sm:inline">to Enrolment</span>
               </h2>
               <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                 A seamless 5-step operational rollout designed to get qualified parent
@@ -1450,7 +1453,7 @@ export default function PreschoolLandingClient() {
               <span className="inline-block rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-800 border border-slate-200 mb-3">
                 Direct Answers
               </span>
-              <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight whitespace-nowrap">
+              <h2 className="text-xl min-[390px]:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight whitespace-nowrap text-center mx-auto">
                 Frequently Asked Questions
               </h2>
               <p className="mt-3 text-base text-slate-600 font-normal">
