@@ -289,6 +289,79 @@ const PORTFOLIO_CLIENTS = [
   },
 ];
 
+const CASE_STUDIES_DATA = [
+  {
+    id: "kautilya",
+    name: "Kautilya Vidyalaya",
+    category: "CBSE & Kindergarten Campus",
+    logo: "/images/logos/kautilya.webp",
+    result: "95% of Available Seats Filled",
+    services: "End-to-end digital marketing",
+    duration: "3-year engagement",
+    url: "https://kautilyavidyalaya.edu.in/",
+    displayUrl: "kautilyavidyalaya.edu.in",
+  },
+  {
+    id: "sit",
+    name: "SIT",
+    subName: "Siddaganga Institute of Technology",
+    category: "Higher Education & Engineering",
+    logo: "/images/logos/sit.png",
+    result: "80% of Enquiries Through Organic Search & Google Business Profile",
+    services: "SEO · Google Business Profile Optimisation",
+    duration: "2-year engagement",
+    url: "https://sit.ac.in/",
+    displayUrl: "sit.ac.in",
+  },
+  {
+    id: "bgsgims",
+    name: "BGS GIMS",
+    subName: "BGS Global Institute of Medical Sciences",
+    category: "Medical Sciences Institution",
+    logo: "/images/logos/bgsgims.svg",
+    result: "100% of Available Seats Filled",
+    services: "End-to-end digital marketing",
+    duration: "4-year engagement",
+    url: "https://www.bgsgims.edu.in/",
+    displayUrl: "bgsgims.edu.in",
+  },
+  {
+    id: "carver",
+    name: "Carver Aviation",
+    subName: "Academy of Aviation",
+    category: "Flight Training & Pilot Academy",
+    logo: "/images/logos/carver.png",
+    result: "80% of Available Seats Filled",
+    services: "Lead generation",
+    duration: "1-year engagement",
+    url: "https://carveraviation.com/",
+    displayUrl: "carveraviation.com",
+  },
+  {
+    id: "vsmaerospace",
+    name: "VSM Aerospace",
+    subName: "Aviation Academy",
+    category: "Aerospace & Aircraft Maintenance",
+    logo: "/images/logos/vsmaerospace.png",
+    result: "Seat Occupancy Grew From 10% to 60% in 1 Year",
+    services: "End-to-end digital marketing",
+    duration: "2-year engagement",
+    url: "https://vsmaerospace.in/",
+    displayUrl: "vsmaerospace.in",
+  },
+  {
+    id: "cambridge",
+    name: "The Cambridge International School",
+    category: "Early Years & International School",
+    logo: "/images/logos/cambridge.png",
+    result: "100% of Available Seats Filled by February",
+    services: "End-to-end digital marketing",
+    duration: "3-year engagement",
+    url: "https://thecambridgeinternationalschool.com/",
+    displayUrl: "thecambridgeinternationalschool.com",
+  },
+];
+
 const TRUST_STATS = [
   { label: "Preschools & Daycares Supported", value: "25+", sub: "Pan-India Centers" },
   { label: "Neighborhood Radius Targeting", value: "3 - 5 km", sub: "Hyperlocal Precision" },
@@ -950,9 +1023,8 @@ export default function PreschoolLandingClient() {
               <span className="inline-block rounded-full bg-amber-100/70 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-900 border border-amber-200/80 mb-3">
                 Full-Service Admission Growth
               </span>
-              <h2 className="text-2xl min-[390px]:text-[1.65rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight text-center leading-tight">
-                <span className="block sm:inline">What We Can Do </span>
-                <span className="block sm:inline">for Your Preschool</span>
+              <h2 className="text-[1.05rem] min-[360px]:text-[1.12rem] min-[390px]:text-[1.22rem] min-[420px]:text-[1.32rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-[-0.03em] whitespace-nowrap text-center">
+                What We Can Do for Your Preschool
               </h2>
               <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                 We help your centre reach nearby parents, build trust and generate admission enquiries.
@@ -1069,9 +1141,8 @@ export default function PreschoolLandingClient() {
                 <School className="w-3.5 h-3.5 text-[#f4c542]" />
                 <span>Featured Client Portfolio</span>
               </div>
-              <h2 className="text-2xl min-[390px]:text-[1.65rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight text-center leading-tight">
-                <span className="block sm:inline">Preschools &amp; Schools </span>
-                <span className="block sm:inline">We Work With</span>
+              <h2 className="text-[1.05rem] min-[360px]:text-[1.12rem] min-[390px]:text-[1.22rem] min-[420px]:text-[1.32rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-[-0.03em] whitespace-nowrap text-center">
+                Preschools &amp; Schools We Work With
               </h2>
               <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                 Real partner campuses, live web platforms, and admissions ecosystems engineered to convert parent interest into confirmed enrolments.
@@ -1330,9 +1401,8 @@ export default function PreschoolLandingClient() {
               <span className="inline-block rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-200 mb-3">
                 Execution Roadmap
               </span>
-              <h2 className="text-2xl min-[390px]:text-[1.65rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight text-center leading-tight">
-                <span className="block sm:inline">From Campaign Launch </span>
-                <span className="block sm:inline">to Enrolment</span>
+              <h2 className="text-[1.05rem] min-[360px]:text-[1.12rem] min-[390px]:text-[1.22rem] min-[420px]:text-[1.32rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-[-0.03em] whitespace-nowrap text-center">
+                From Campaign Launch to Enrolment
               </h2>
               <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                 A seamless 5-step operational rollout designed to get qualified parent
@@ -1375,9 +1445,127 @@ export default function PreschoolLandingClient() {
         </section>
 
         {/* ----------------------------------------------------------- */}
+        {/* 7. OUR EDUCATION EXPERIENCE (Case Studies & Proven Outcomes) */}
+        {/* ----------------------------------------------------------- */}
+        <section
+          id="education-experience"
+          className="py-16 sm:py-24 bg-white border-b border-slate-200 scroll-mt-16"
+        >
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-50 border border-amber-200/80 text-amber-950 text-[11px] font-black tracking-wider uppercase shadow-2xs mb-3.5">
+                <Award className="w-3.5 h-3.5 text-amber-700" />
+                <span>Our Education Experience</span>
+              </div>
+
+              <h2 className="text-2xl min-[390px]:text-[1.75rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight text-center leading-tight">
+                <span className="sm:block">Results From Our Work </span>
+                <span className="sm:block">With Education Institutions</span>
+              </h2>
+
+              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+                Our education experience spans schools, higher education and aviation training. Here are selected outcomes reported during our client engagements.
+              </p>
+            </div>
+
+            {/* Display six cards in a 3 x 2 desktop grid. Use two columns on tablets and one on mobile */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+              {CASE_STUDIES_DATA.map((item) => (
+                <div
+                  key={item.id}
+                  className="group rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-[#faf8f5] hover:bg-white p-6 sm:p-7 shadow-2xs hover:shadow-md hover:border-amber-400/80 transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
+                >
+                  {/* Subtle top accent highlight on hover */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-[#f4c542] to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                  <div>
+                    {/* Institution Logo, Name & Duration */}
+                    <div className="flex items-start justify-between gap-3 mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-white border border-slate-200/90 p-1.5 flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 group-hover:border-amber-300 transition-all duration-200">
+                          <Image
+                            src={item.logo}
+                            alt={item.name}
+                            width={44}
+                            height={44}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        </div>
+                        <div className="flex flex-col text-left">
+                          <h3 className="text-base sm:text-lg font-bold text-slate-950 leading-tight group-hover:text-amber-900 transition-colors">
+                            {item.name}
+                          </h3>
+                          <span className="text-[11px] sm:text-xs font-semibold text-slate-500 mt-0.5">
+                            {item.category}
+                          </span>
+                        </div>
+                      </div>
+
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-bold text-amber-950 bg-amber-100/70 border border-amber-300/70 shrink-0">
+                        <Clock className="w-3 h-3 text-amber-700" />
+                        <span>{item.duration}</span>
+                      </span>
+                    </div>
+
+                    {/* Prominent Result Headline */}
+                    <div className="my-5 rounded-2xl bg-white border border-amber-200/90 p-4 sm:p-5 shadow-2xs group-hover:border-amber-300 group-hover:shadow-xs transition-all text-left">
+                      <div className="flex items-center gap-1.5 mb-1.5">
+                        <TrendingUp className="w-4 h-4 text-amber-600 shrink-0" />
+                        <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-amber-900">
+                          Prominent Result Reported
+                        </span>
+                      </div>
+                      <p className="text-base sm:text-[1.15rem] font-black text-slate-950 leading-snug tracking-tight">
+                        {item.result}
+                      </p>
+                    </div>
+
+                    {/* Services Provided */}
+                    <div className="space-y-1.5 pt-1 text-left">
+                      <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                        Services Provided
+                      </span>
+                      <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
+                        <div className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                        <span>{item.services}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card Footer: Institution Website Link */}
+                  {item.url && (
+                    <div className="mt-6 pt-3.5 border-t border-slate-200/80 flex items-center justify-between">
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-amber-800 transition group/link"
+                      >
+                        <span>{item.displayUrl}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover/link:text-amber-600 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                      </a>
+                      <span className="text-[10px] sm:text-[11px] font-semibold text-slate-400">
+                        Verified Outcome
+                      </span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Small Note Below the Cards */}
+            <div className="mt-10 sm:mt-12 text-center max-w-2xl mx-auto">
+              <p className="text-xs sm:text-sm text-slate-500 font-normal leading-relaxed">
+                Selected past outcomes. Results vary by institution, location, budget and admissions follow-up.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ----------------------------------------------------------- */}
         {/* THE ADMISSION BOTTLENECK (Admission Friction Points) */}
         {/* ----------------------------------------------------------- */}
-        <section className="py-16 sm:py-24 bg-white border-b border-slate-200">
+        <section className="py-16 sm:py-24 bg-[#faf8f5] border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-4xl mx-auto mb-14">
               <span className="inline-block rounded-full bg-rose-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-700 border border-rose-200 mb-3">
@@ -1447,7 +1635,7 @@ export default function PreschoolLandingClient() {
         {/* ----------------------------------------------------------- */}
         {/* 8. FREQUENTLY ASKED QUESTIONS (FAQ) */}
         {/* ----------------------------------------------------------- */}
-        <section id="faq" className="py-16 sm:py-24 bg-[#faf8f5] border-b border-slate-200">
+        <section id="faq" className="py-16 sm:py-24 bg-white border-b border-slate-200">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-14">
               <span className="inline-block rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-800 border border-slate-200 mb-3">
