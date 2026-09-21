@@ -10,7 +10,6 @@ import {
   Phone,
   MessageSquare,
   ArrowRight,
-  CheckCircle2,
   AlertCircle,
   Calendar,
   MapPin,
@@ -97,51 +96,6 @@ const PROBLEMS_DATA = [
       "Preschools spend every academic season on print flyers, directories, or generic digital agencies without knowing which specific campaign yielded confirmed student enrolments.",
     impact: "Zero visibility into true Cost Per Enrolled Student or marketing ROI.",
     icon: PieChart,
-  },
-];
-
-const THREE_STEP_SYSTEM = [
-  {
-    step: "Step 01",
-    phase: "Hyperlocal Awareness",
-    title: "Reach Nearby Parents",
-    description:
-      "Preschool choice is strictly hyperlocal. We reach families living within a tight 3 to 5 km radius of your campus using pinpoint geographic and demographic targeting.",
-    features: [
-      "Local Meta advertising (Facebook & Instagram Feed + Story campaigns)",
-      "Radius-bounded geo-fencing focused on parents with toddlers & young kids (ages 1.5 - 6)",
-      "Admission-focused creatives showcasing infrastructure, hygiene, safety, and curriculum",
-      "Google Search & Google Maps visibility for high-intent 'preschool near me' searches",
-    ],
-    highlight: "Zero ad spend wasted on long-distance parents",
-  },
-  {
-    step: "Step 02",
-    phase: "High-Intent Inflow",
-    title: "Generate Qualified Enquiries",
-    description:
-      "We replace high-friction long forms with direct WhatsApp funnels and high-speed mobile landing pages that capture genuine parent intent immediately.",
-    features: [
-      "Direct Click-to-WhatsApp admission campaigns with automated conversational greetings",
-      "High-converting, mobile-first landing pages tailored to each program (Playgroup, Nursery, Daycare)",
-      "Parent qualification filters (child's age, target academic session, program requirement)",
-      "Enquiry tracking and instant routing to your center counselor or director",
-    ],
-    highlight: "Pre-qualified parents, not casual clickers",
-  },
-  {
-    step: "Step 03",
-    phase: "Enrolment Engine",
-    title: "Convert Enquiries Into Admissions",
-    description:
-      "Generating parent enquiries is only half the battle. We systematize your admission desk follow-ups to maximize campus visit show-ups and close confirmed enrolments.",
-    features: [
-      "Proven WhatsApp response templates & counselor phone scripts",
-      "Structured 5-touch follow-up sequences that revive hesitant parents",
-      "Campus-visit booking architecture with automated calendar reminders",
-      "Lead status tracking, visit conversion analytics, and transparent admission reporting",
-    ],
-    highlight: "Predictable conversion from enquiry to confirmed seat",
   },
 ];
 
@@ -828,50 +782,28 @@ export default function PreschoolLandingClient() {
 
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
-                  <button
-                    onClick={scrollToAuditSection}
-                    className="inline-flex items-center justify-center gap-2 h-12 px-5 sm:px-6 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-xs sm:text-sm shadow-xs transition shrink-0 cursor-pointer whitespace-nowrap"
+                  <a
+                    href="tel:+919986389444"
+                    className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-sm sm:text-base shadow-xs transition shrink-0 cursor-pointer whitespace-nowrap"
                   >
-                    <span>Get Your Admission Enquiry Plan</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                    <Phone className="w-4 h-4" />
+                    <span>+91 99863 89444</span>
+                  </a>
 
                   <a
                     href={WHATSAPP_EXPERT_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 h-12 px-5 sm:px-6 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-xs sm:text-sm transition shadow-2xs shrink-0 cursor-pointer whitespace-nowrap"
+                    className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-sm sm:text-base transition shadow-2xs shrink-0 cursor-pointer whitespace-nowrap"
                   >
                     <FaWhatsapp className="w-4 h-4 text-emerald-600" />
-                    <span>Chat With Our Preschool Marketing Team</span>
+                    <span>Chat With Our Marketing Team</span>
                   </a>
-                </div>
-
-                {/* Bottom Points (Structured 2-Column Grid) */}
-                <div className="pt-3.5 border-t border-slate-200/80">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
-                    <div className="flex items-center gap-2 text-xs sm:text-[13px] text-slate-700 font-medium">
-                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span>Target parents within a 3–5 km radius</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs sm:text-[13px] text-slate-700 font-medium">
-                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span>Meta Ads enquiry campaigns</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs sm:text-[13px] text-slate-700 font-medium">
-                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span>Landing page and WhatsApp integration</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs sm:text-[13px] text-slate-700 font-medium">
-                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span>Lead tracking and campaign optimisation</span>
-                    </div>
-                  </div>
                 </div>
               </div>
 
-              {/* Right Column: Clean Editorial Photo Showcase */}
-              <div className="lg:col-span-5">
+              {/* Right Column: Clean Editorial Photo Showcase (Hidden on Mobile) */}
+              <div className="hidden lg:block lg:col-span-5">
                 <div className="rounded-3xl border border-slate-200/90 bg-white p-2.5 sm:p-3 shadow-md">
                   <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
                     <Image
@@ -977,151 +909,7 @@ export default function PreschoolLandingClient() {
         </div>
 
         {/* ----------------------------------------------------------- */}
-        {/* 2. PROBLEM SECTION (Restructured: Admission Friction Points) */}
-        {/* ----------------------------------------------------------- */}
-        <section className="py-16 sm:py-24 bg-white border-b border-slate-200">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-14">
-              <span className="inline-block rounded-full bg-rose-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-700 border border-rose-200 mb-3">
-                The Admission Bottleneck
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
-                Getting Enquiries, But Not Enough Enrolments?
-              </h2>
-              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-                Most preschools lose admissions not because their campus is bad, but because
-                their marketing and enquiry follow-ups are broken.
-              </p>
-            </div>
-
-            {/* 6 Problem Cards (Clean Educational Grid) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {PROBLEMS_DATA.map((item, idx) => {
-                const IconComponent = item.icon;
-                return (
-                  <div
-                    key={item.id}
-                    className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs hover:border-amber-400 hover:shadow-sm transition flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="text-xs font-mono font-bold text-slate-400">
-                          Problem 0{idx + 1}
-                        </span>
-                        <span className="text-[11px] font-bold text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200">
-                          {item.gap}
-                        </span>
-                      </div>
-
-                      <h3 className="text-lg font-bold text-slate-950 leading-snug">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                        {item.detail}
-                      </p>
-                    </div>
-
-                    <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-start gap-2">
-                      <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                      <p className="text-xs text-rose-800 font-semibold leading-tight">
-                        {item.impact}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Closing Statement Callout Banner */}
-            <div className="mt-12 rounded-2xl border-2 border-amber-300 bg-[#fffdf7] p-6 sm:p-8 text-center max-w-3xl mx-auto shadow-xs">
-              <p className="text-lg sm:text-xl font-bold text-slate-900 leading-relaxed">
-                “More leads alone will not solve the problem. You need the right parents,
-                a clear follow-up process and an admission-focused campaign.”
-              </p>
-              <p className="mt-2.5 text-xs font-bold text-amber-900 uppercase tracking-widest">
-                — The Clever Crow Admission Growth Method
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* ----------------------------------------------------------- */}
-        {/* 3. THE SOLUTION (3-Step Growth System) */}
-        {/* ----------------------------------------------------------- */}
-        <section className="py-16 sm:py-24 bg-[#faf8f5] border-b border-slate-200">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="inline-block rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-900 border border-amber-200 mb-3">
-                Proven Methodology
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
-                A Complete Preschool Admission Growth System
-              </h2>
-              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-                A structured, repeatable framework engineered specifically to bridge the
-                gap between neighborhood parent impressions and paid preschool enrolments.
-              </p>
-            </div>
-
-            {/* 3 Step Cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {THREE_STEP_SYSTEM.map((step) => (
-                <div
-                  key={step.step}
-                  className="rounded-3xl border border-slate-200 bg-white p-7 sm:p-8 shadow-xs hover:border-amber-400 hover:shadow-md transition flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-xs font-extrabold uppercase px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-200">
-                        {step.step}
-                      </span>
-                      <span className="text-xs font-bold text-slate-500">
-                        {step.phase}
-                      </span>
-                    </div>
-
-                    <h3 className="text-2xl font-black text-slate-900 mb-3">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6 font-normal">
-                      {step.description}
-                    </p>
-
-                    <div className="space-y-3 pt-1">
-                      {step.features.map((feat, fidx) => (
-                        <div key={fidx} className="flex items-start gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                          <span className="text-xs sm:text-sm text-slate-800 leading-snug font-medium">
-                            {feat}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mt-8 pt-4 border-t border-slate-100">
-                    <span className="inline-block text-xs font-bold text-amber-900 bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-200">
-                      ★ {step.highlight}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-12 text-center">
-              <button
-                onClick={scrollToAuditSection}
-                className="inline-flex items-center gap-2 rounded-xl bg-[#f4c542] hover:brightness-105 px-8 py-3.5 text-sm sm:text-base font-black text-slate-950 shadow-sm transition cursor-pointer"
-              >
-                <span>Audit Your Admission Process</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </section>
-
-        {/* ----------------------------------------------------------- */}
-        {/* 4. HOW IT WORKS (Timeline) */}
+        {/* EXECUTION ROADMAP: From Campaign Launch to Enrolment */}
         {/* ----------------------------------------------------------- */}
         <section className="py-16 sm:py-24 bg-white border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -1494,9 +1282,78 @@ export default function PreschoolLandingClient() {
         </section>
 
         {/* ----------------------------------------------------------- */}
-        {/* 8. FREQUENTLY ASKED QUESTIONS (FAQ) */}
+        {/* THE ADMISSION BOTTLENECK (Admission Friction Points) */}
         {/* ----------------------------------------------------------- */}
         <section className="py-16 sm:py-24 bg-white border-b border-slate-200">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <span className="inline-block rounded-full bg-rose-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-700 border border-rose-200 mb-3">
+                The Admission Bottleneck
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
+                Getting Enquiries, But Not Enough Enrolments?
+              </h2>
+              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+                Most preschools lose admissions not because their campus is bad, but because
+                their marketing and enquiry follow-ups are broken.
+              </p>
+            </div>
+
+            {/* 6 Problem Cards (Clean Educational Grid) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {PROBLEMS_DATA.map((item, idx) => {
+                const IconComponent = item.icon;
+                return (
+                  <div
+                    key={item.id}
+                    className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs hover:border-amber-400 hover:shadow-sm transition flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-xs font-mono font-bold text-slate-400">
+                          Problem 0{idx + 1}
+                        </span>
+                        <span className="text-[11px] font-bold text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200">
+                          {item.gap}
+                        </span>
+                      </div>
+
+                      <h3 className="text-lg font-bold text-slate-950 leading-snug">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                        {item.detail}
+                      </p>
+                    </div>
+
+                    <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-start gap-2">
+                      <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                      <p className="text-xs text-rose-800 font-semibold leading-tight">
+                        {item.impact}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Closing Statement Callout Banner */}
+            <div className="mt-12 rounded-2xl border-2 border-amber-300 bg-[#fffdf7] p-6 sm:p-8 text-center max-w-3xl mx-auto shadow-xs">
+              <p className="text-lg sm:text-xl font-bold text-slate-900 leading-relaxed">
+                “More leads alone will not solve the problem. You need the right parents,
+                a clear follow-up process and an admission-focused campaign.”
+              </p>
+              <p className="mt-2.5 text-xs font-bold text-amber-900 uppercase tracking-widest">
+                — The Clever Crow Admission Growth Method
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ----------------------------------------------------------- */}
+        {/* 8. FREQUENTLY ASKED QUESTIONS (FAQ) */}
+        {/* ----------------------------------------------------------- */}
+        <section id="faq" className="py-16 sm:py-24 bg-[#faf8f5] border-b border-slate-200">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-14">
               <span className="inline-block rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-800 border border-slate-200 mb-3">
