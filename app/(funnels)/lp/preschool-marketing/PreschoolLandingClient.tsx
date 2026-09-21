@@ -729,16 +729,6 @@ export default function PreschoolLandingClient() {
     return item.type === portfolioFilter;
   });
 
-  // Dedicated inline form state
-  const [inlineName, setInlineName] = useState("");
-  const [inlinePhone, setInlinePhone] = useState("");
-  const [inlineEmail, setInlineEmail] = useState("");
-  const [inlineSchool, setInlineSchool] = useState("");
-  const [inlineLocation, setInlineLocation] = useState("");
-  const [inlineCenterType, setInlineCenterType] = useState("Standalone Preschool");
-  const [inlineGoal, setInlineGoal] = useState("Fill Vacant Seats");
-  const [inlineLoading, setInlineLoading] = useState(false);
-  const [inlineStatusMsg, setInlineStatusMsg] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -758,60 +748,6 @@ export default function PreschoolLandingClient() {
       el.scrollIntoView({ behavior: "smooth" });
     } else {
       openAuditModal();
-    }
-  };
-
-  const handleInlineSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!inlineName || !inlinePhone || !inlineSchool) {
-      setInlineStatusMsg("Please provide your name, phone number, and preschool name.");
-      return;
-    }
-    setInlineLoading(true);
-    setInlineStatusMsg("");
-
-    try {
-      const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-      const message = `Preschool Admission Growth Audit Request (Inline Form):
-- Preschool / Daycare: ${inlineSchool}
-- Locality / City: ${inlineLocation || "Not provided"}
-- Center Type: ${inlineCenterType}
-- Target Priority: ${inlineGoal}
-- Landed URL: ${currentUrl}`;
-
-      const response = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: inlineName,
-          phone: inlinePhone,
-          email: inlineEmail,
-          company: inlineSchool,
-          service: "Preschool Admission Growth Audit",
-          message,
-          source: "Preschool Admission Landing Page (Inline Section)",
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Something went wrong. Please try again.");
-      }
-
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("event", "conversion", {
-          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
-        });
-        (window as any).gtag("event", "GenerateLead", {
-          event_category: "Preschool Admission Audit",
-          event_label: "Inline Form Submit",
-        });
-      }
-
-      router.push("/thank-you");
-    } catch (err: any) {
-      setInlineStatusMsg(err.message || "An error occurred.");
-    } finally {
-      setInlineLoading(false);
     }
   };
 
@@ -1379,204 +1315,100 @@ export default function PreschoolLandingClient() {
         </section>
 
         {/* ----------------------------------------------------------- */}
-        {/* 7. FREE AUDIT OFFER & INTAKE FORM */}
+        {/* 7. TALK TO AN ADMISSION EXPERT / CONSULTATION SECTION */}
         {/* ----------------------------------------------------------- */}
         <section
           id="free-audit-offer"
-          className="py-16 sm:py-24 bg-[#faf8f5] border-b border-slate-200"
+          className="py-12 sm:py-16 bg-[#faf8f5] border-b border-slate-200 scroll-mt-20"
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border-2 border-amber-300 bg-white p-6 sm:p-10 lg:p-12 shadow-sm">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+            <div className="rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-10 lg:p-12 shadow-xs">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
-                {/* Left Column: Scope of the Audit */}
-                <div className="lg:col-span-6 space-y-6">
-                  <span className="inline-block rounded-full bg-amber-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-900 border border-amber-200">
-                    Free Consultation • No Commitment
-                  </span>
-
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight leading-tight">
-                    Get Your Free Preschool Admission Growth Audit
-                  </h2>
-
-                  <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal">
-                    We’ll review your current admission process and identify practical
-                    opportunities to generate and convert more parent enquiries.
-                  </p>
-
-                  <div className="border-t border-slate-100 pt-5">
-                    <p className="text-xs font-bold text-amber-900 uppercase tracking-wider mb-4">
-                      The Audit Includes:
-                    </p>
-                    <div className="space-y-3">
-                      {AUDIT_INCLUDES.map((item, idx) => (
-                        <div key={idx} className="flex items-start gap-2.5">
-                          <div className="w-5 h-5 rounded-full bg-amber-100 text-amber-900 flex items-center justify-center shrink-0 mt-0.5 border border-amber-300">
-                            <Check className="w-3 h-3" />
-                          </div>
-                          <span className="text-xs sm:text-sm text-slate-800 font-medium leading-snug">
-                            {item}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                {/* Left Column: Scope & Value */}
+                <div className="lg:col-span-7 space-y-4 text-left">
+                  <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-950 text-white text-[11px] font-black tracking-wider uppercase shadow-xs">
+                    <School className="w-3.5 h-3.5 text-[#f4c542]" />
+                    <span>1-on-1 Growth Consultation</span>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-3">
-                    <ShieldCheck className="w-6 h-6 text-amber-600 shrink-0" />
-                    <p className="text-xs text-slate-600">
-                      Private & data-backed. You receive clear recommendations specifically
-                      for your branch locality within 24-48 hours.
-                    </p>
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-950 tracking-tight leading-snug">
+                    Speak Directly With a Preschool Admission Strategist
+                  </h2>
+
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal max-w-2xl">
+                    Skip long forms. Connect directly with our education campaign leads to evaluate your branch locality, 3–5 km parent catchment, and enquiry-to-visit conversion bottlenecks.
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+                    <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-800">
+                      <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                        <Check className="w-2.5 h-2.5" />
+                      </div>
+                      <span>Custom 3-5 km catchment analysis</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-800">
+                      <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                        <Check className="w-2.5 h-2.5" />
+                      </div>
+                      <span>Local competitor fee benchmarking</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-800">
+                      <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                        <Check className="w-2.5 h-2.5" />
+                      </div>
+                      <span>WhatsApp follow-up scripts review</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-800">
+                      <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                        <Check className="w-2.5 h-2.5" />
+                      </div>
+                      <span>Zero obligation • 100% confidential</span>
+                    </div>
                   </div>
                 </div>
 
-                {/* Right Column: Clean White Form */}
-                <div className="lg:col-span-6">
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6 sm:p-8">
-                    <div className="mb-5">
-                      <h3 className="text-xl font-bold text-slate-900">
-                        Claim Your Audit in 60 Seconds
+                {/* Right Column: High-Vibe CTA Card */}
+                <div className="lg:col-span-5">
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-6 sm:p-7 shadow-xs space-y-4 text-center sm:text-left">
+                    <div>
+                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 inline-flex items-center gap-1.5 mb-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        Admissions Specialists Online
+                      </span>
+                      <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                        Start Your Growth Discussion
                       </h3>
-                      <p className="text-xs text-slate-500 mt-1">
-                        Enter your preschool information below. Our growth specialist will evaluate your center.
+                      <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                        Talk directly with our team. We typically respond within minutes during campus hours.
                       </p>
                     </div>
 
-                    <form onSubmit={handleInlineSubmit} className="space-y-3.5">
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
-                          Director / Owner Name *
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          placeholder="e.g. Shalini Sharma"
-                          value={inlineName}
-                          onChange={(e) => setInlineName(e.target.value)}
-                          className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-                        />
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                          <label className="block text-xs font-bold text-slate-700 mb-1">
-                            WhatsApp / Phone *
-                          </label>
-                          <input
-                            type="tel"
-                            required
-                            placeholder="+91 98765 43210"
-                            value={inlinePhone}
-                            onChange={(e) => setInlinePhone(e.target.value)}
-                            className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs font-bold text-slate-700 mb-1">
-                            Email Address
-                          </label>
-                          <input
-                            type="email"
-                            placeholder="director@preschool.com"
-                            value={inlineEmail}
-                            onChange={(e) => setInlineEmail(e.target.value)}
-                            className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                          <label className="block text-xs font-bold text-slate-700 mb-1">
-                            Preschool / Daycare Name *
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="e.g. Maple Tree Montessori"
-                            value={inlineSchool}
-                            onChange={(e) => setInlineSchool(e.target.value)}
-                            className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs font-bold text-slate-700 mb-1">
-                            Locality & City *
-                          </label>
-                          <input
-                            type="text"
-                            placeholder="e.g. Whitefield, Bengaluru"
-                            value={inlineLocation}
-                            onChange={(e) => setInlineLocation(e.target.value)}
-                            className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                          <label className="block text-xs font-bold text-slate-700 mb-1">
-                            Center Setup
-                          </label>
-                          <select
-                            value={inlineCenterType}
-                            onChange={(e) => setInlineCenterType(e.target.value)}
-                            className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-                          >
-                            <option value="Standalone Preschool">Standalone Preschool</option>
-                            <option value="Franchise Branch">Franchise Branch</option>
-                            <option value="Multi-Branch Chain">Multi-Branch Chain</option>
-                            <option value="Daycare & Playgroup">Daycare & Playgroup</option>
-                          </select>
-                        </div>
-
-                        <div>
-                          <label className="block text-xs font-bold text-slate-700 mb-1">
-                            Primary Goal
-                          </label>
-                          <select
-                            value={inlineGoal}
-                            onChange={(e) => setInlineGoal(e.target.value)}
-                            className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 transition"
-                          >
-                            <option value="Fill Vacant Seats">Fill Vacant Seats</option>
-                            <option value="Book More Campus Visits">Book More Campus Visits</option>
-                            <option value="Fix WhatsApp Follow-ups">Fix WhatsApp Follow-ups</option>
-                            <option value="Launch New Academic Year">New Academic Year</option>
-                            <option value="Grow Daycare Admissions">Grow Daycare Admissions</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <button
-                        type="submit"
-                        disabled={inlineLoading}
-                        className="w-full mt-2 py-3.5 px-6 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-sm sm:text-base shadow-sm transition flex items-center justify-center gap-2 cursor-pointer"
+                    <div className="space-y-2.5 pt-1">
+                      {/* Primary WhatsApp Action */}
+                      <a
+                        href={WHATSAPP_EXPERT_LINK}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full inline-flex items-center justify-center gap-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-bold text-sm sm:text-base px-6 py-3.5 shadow-sm transition"
                       >
-                        {inlineLoading ? (
-                          <>
-                            <Loader2 className="w-5 h-5 animate-spin" />
-                            <span>Analyzing Center Details...</span>
-                          </>
-                        ) : (
-                          <>
-                            <span>Request My Free Audit</span>
-                            <ArrowRight className="w-4 h-4" />
-                          </>
-                        )}
+                        <FaWhatsapp className="w-5 h-5 text-white" />
+                        <span>Talk to Admission Expert</span>
+                      </a>
+
+                      {/* Secondary Call Request Button */}
+                      <button
+                        onClick={openAuditModal}
+                        className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-sm px-6 py-3 transition cursor-pointer"
+                      >
+                        <span>Schedule Growth Audit Call</span>
+                        <ArrowRight className="w-4 h-4" />
                       </button>
+                    </div>
 
-                      {inlineStatusMsg && (
-                        <p className="text-xs text-rose-600 text-center mt-2 font-bold">
-                          {inlineStatusMsg}
-                        </p>
-                      )}
-
-                      <p className="text-[11px] text-slate-500 text-center pt-1 font-medium">
-                        ⚡ We usually respond within 1 business day via WhatsApp or Call.
-                      </p>
-                    </form>
+                    <p className="text-[11px] text-slate-400 text-center pt-1 font-medium">
+                      Direct WhatsApp: <span className="font-semibold text-slate-600">+91 99863 89444</span> • Mon–Sat (9:30 AM – 6:30 PM)
+                    </p>
                   </div>
                 </div>
 
