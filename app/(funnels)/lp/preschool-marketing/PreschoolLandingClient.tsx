@@ -422,76 +422,52 @@ const WORK_COMPLETED_AREAS = [
 
 const WHAT_WE_DO_SERVICES = [
   {
+    id: "website",
     num: "01",
-    tag: "Admissions Hub",
     title: "Preschool Website",
     tagline: "Mobile-first admissions portal built to convert visiting parents into campus tours.",
-    deliverables: ["Mobile-Ready Design", "Instant WhatsApp Button", "Free Domain & Hosting"],
     icon: Globe,
-    badgeBg: "bg-amber-100 text-amber-900 border-amber-200",
-    iconBg: "bg-amber-50 text-amber-700 border-amber-200",
-    chipBg: "bg-amber-50/80 text-amber-950 border-amber-200/80",
-    dotColor: "bg-amber-500",
+    accentColor: "text-amber-700 bg-amber-50 border-amber-200/70",
   },
   {
+    id: "search",
     num: "02",
-    tag: "Local Discovery",
     title: "Search Visibility (SEO & AI)",
     tagline: "Rank at the top of Google and AI tools when parents search in your neighborhood.",
-    deliverables: ["'Preschool Near Me' Rank", "Google Search & Maps", "AI Search (AEO & GEO)"],
     icon: Search,
-    badgeBg: "bg-sky-100 text-sky-900 border-sky-200",
-    iconBg: "bg-sky-50 text-sky-700 border-sky-200",
-    chipBg: "bg-sky-50/80 text-sky-950 border-sky-200/80",
-    dotColor: "bg-sky-500",
+    accentColor: "text-sky-700 bg-sky-50 border-sky-200/70",
   },
   {
+    id: "gbp",
     num: "03",
-    tag: "Direct Inbound",
     title: "Google Business Profile",
     tagline: "Turn Google Maps into your steady daily stream of direct phone calls and visits.",
-    deliverables: ["Verified Map Pin", "Direct Call & Map Clicks", "Photos & Reviews Setup"],
     icon: MapPin,
-    badgeBg: "bg-emerald-100 text-emerald-900 border-emerald-200",
-    iconBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    chipBg: "bg-emerald-50/80 text-emerald-950 border-emerald-200/80",
-    dotColor: "bg-emerald-500",
+    accentColor: "text-emerald-700 bg-emerald-50 border-emerald-200/70",
   },
   {
+    id: "social",
     num: "04",
-    tag: "Parent Trust",
     title: "Active Social Media",
     tagline: "Consistent branded posts that build high credibility and trust with local parents.",
-    deliverables: ["20 Branded Creatives/Mo", "Instagram & Facebook Feeds", "Activity & Trust Highlights"],
     icon: Megaphone,
-    badgeBg: "bg-rose-100 text-rose-900 border-rose-200",
-    iconBg: "bg-rose-50 text-rose-700 border-rose-200",
-    chipBg: "bg-rose-50/80 text-rose-950 border-rose-200/80",
-    dotColor: "bg-rose-500",
+    accentColor: "text-rose-700 bg-rose-50 border-rose-200/70",
   },
   {
+    id: "ads",
     num: "05",
-    tag: "3–5 km Radius",
     title: "Targeted Admission Ads",
     tagline: "Hyperlocal ad campaigns reaching parents living strictly within a 3–5 km radius.",
-    deliverables: ["3–5 km Catchment Radius", "Direct WhatsApp Leads", "Zero Wasted Ad Spend"],
     icon: Target,
-    badgeBg: "bg-orange-100 text-orange-900 border-orange-200",
-    iconBg: "bg-orange-50 text-orange-700 border-orange-200",
-    chipBg: "bg-orange-50/80 text-orange-950 border-orange-200/80",
-    dotColor: "bg-orange-500",
+    accentColor: "text-orange-700 bg-orange-50 border-orange-200/70",
   },
   {
+    id: "crm",
     num: "06",
-    tag: "Lead Intelligence",
     title: "Enquiry Tracking & CRM",
     tagline: "Full visibility into every parent enquiry, campus visit, and confirmed admission.",
-    deliverables: ["Live Enquiry Dashboard", "Cost-Per-Visit Metrics", "Weekly Lead Tuning"],
     icon: BarChart3,
-    badgeBg: "bg-indigo-100 text-indigo-900 border-indigo-200",
-    iconBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
-    chipBg: "bg-indigo-50/80 text-indigo-950 border-indigo-200/80",
-    dotColor: "bg-indigo-500",
+    accentColor: "text-indigo-700 bg-indigo-50 border-indigo-200/70",
   },
 ];
 
@@ -807,50 +783,180 @@ export default function PreschoolLandingClient() {
               </p>
             </div>
 
-            {/* 6 School-Vibed Capability Cards */}
+            {/* 6 Tangible Service Capability Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
               {WHAT_WE_DO_SERVICES.map((item) => {
                 const IconComponent = item.icon;
                 return (
                   <div
-                    key={item.title}
-                    className="group rounded-3xl bg-white p-6 sm:p-7 border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-slate-300 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between text-left"
+                    key={item.id}
+                    className="group rounded-2xl bg-white p-6 sm:p-7 border border-slate-200/90 shadow-xs hover:shadow-lg hover:border-slate-300 transition-all duration-200 flex flex-col justify-between text-left"
                   >
                     <div>
-                      {/* Top Row: Colorful School-Vibe Icon Vessel & Tag Pill */}
-                      <div className="flex items-center justify-between gap-3 mb-5">
+                      {/* Top Header: Icon & Number */}
+                      <div className="flex items-center justify-between gap-3 mb-4">
                         <div
-                          className={`w-12 h-12 rounded-2xl flex items-center justify-center border shadow-2xs group-hover:scale-105 transition-transform ${item.iconBg}`}
+                          className={`w-11 h-11 rounded-xl flex items-center justify-center border shadow-2xs group-hover:scale-105 transition-transform ${item.accentColor}`}
                         >
                           <IconComponent className="w-5 h-5 stroke-[2.2]" />
                         </div>
-                        <span
-                          className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider border ${item.badgeBg}`}
-                        >
-                          {item.tag}
+                        <span className="text-xs font-mono font-bold text-slate-400">
+                          {item.num}
                         </span>
                       </div>
 
-                      {/* Title & Crisp Value Proposition */}
-                      <h3 className="text-lg sm:text-xl font-black text-slate-950 leading-snug tracking-tight">
+                      {/* Title & Concise Value Proposition */}
+                      <h3 className="text-lg sm:text-xl font-bold text-slate-950 leading-snug tracking-tight">
                         {item.title}
                       </h3>
-                      <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                      <p className="mt-1.5 text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal min-h-[38px]">
                         {item.tagline}
                       </p>
                     </div>
 
-                    {/* School-Vibe Deliverable Chips (Warm, tactile, colored dots) */}
-                    <div className="mt-6 flex flex-wrap gap-1.5 pt-1">
-                      {item.deliverables.map((chip) => (
-                        <span
-                          key={chip}
-                          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-[11px] sm:text-xs font-bold border transition-colors ${item.chipBg}`}
-                        >
-                          <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${item.dotColor}`} />
-                          <span>{chip}</span>
-                        </span>
-                      ))}
+                    {/* Deliverable Mockup / Concrete Preview (No pills, no badges) */}
+                    <div className="mt-5">
+                      {item.id === "website" && (
+                        <div className="rounded-xl bg-slate-50 border border-slate-200/80 p-3 shadow-2xs">
+                          <div className="flex items-center gap-1.5 pb-2 mb-2 border-b border-slate-200/60">
+                            <div className="flex gap-1">
+                              <span className="w-2 h-2 rounded-full bg-rose-400" />
+                              <span className="w-2 h-2 rounded-full bg-amber-400" />
+                              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                            </div>
+                            <span className="text-[10px] text-slate-500 font-mono bg-white px-2 py-0.5 rounded border border-slate-200/60 mx-auto">
+                              yourpreschool.in
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-[11px] font-bold text-slate-900">Admissions Open 2026-27</span>
+                            <span className="text-[9px] font-semibold text-amber-800 bg-amber-100/80 px-1.5 py-0.5 rounded">Ages 1.5–6</span>
+                          </div>
+                          <div className="grid grid-cols-2 gap-1.5">
+                            <div className="h-6 rounded bg-[#f4c542] text-slate-950 text-[10px] font-bold flex items-center justify-center">
+                              Book Visit
+                            </div>
+                            <div className="h-6 rounded bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center gap-1">
+                              <FaWhatsapp className="w-2.5 h-2.5" />
+                              <span>WhatsApp</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {item.id === "search" && (
+                        <div className="rounded-xl bg-slate-50 border border-slate-200/80 p-3 shadow-2xs space-y-2">
+                          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-white border border-slate-200 text-[10px] text-slate-600">
+                            <Search className="w-3 h-3 text-sky-600 shrink-0" />
+                            <span className="truncate font-medium">best preschool near me</span>
+                          </div>
+                          <div className="bg-white rounded-lg p-2 border border-slate-200/60 shadow-2xs">
+                            <div className="text-[9px] font-bold text-emerald-700">#1 Result • Google Search</div>
+                            <div className="text-[11px] font-bold text-sky-800 truncate mt-0.5">
+                              Your Preschool Campus — Enrol Today
+                            </div>
+                            <div className="flex items-center gap-1 text-[10px] text-amber-500 mt-1">
+                              <span>★★★★★</span>
+                              <span className="text-slate-500 text-[9px] font-medium">4.9 (80+ Reviews)</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {item.id === "gbp" && (
+                        <div className="rounded-xl bg-slate-50 border border-slate-200/80 p-3 shadow-2xs space-y-2">
+                          <div className="bg-white rounded-lg p-2.5 border border-slate-200/60 shadow-2xs">
+                            <div className="flex items-start justify-between gap-1">
+                              <div>
+                                <div className="text-[11px] font-bold text-slate-900">Your Preschool &amp; Daycare</div>
+                                <div className="text-[9px] text-emerald-700 font-semibold flex items-center gap-1 mt-0.5">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                  <span>Verified Pin • Open 8:30 AM</span>
+                                </div>
+                              </div>
+                              <span className="text-[9px] font-semibold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">0.8 km</span>
+                            </div>
+                            <div className="grid grid-cols-2 gap-1.5 pt-2">
+                              <div className="h-6 rounded bg-slate-100 text-slate-800 text-[10px] font-bold flex items-center justify-center gap-1">
+                                <Phone className="w-2.5 h-2.5 text-slate-600" />
+                                <span>Call Centre</span>
+                              </div>
+                              <div className="h-6 rounded bg-sky-50 text-sky-700 text-[10px] font-bold flex items-center justify-center gap-1">
+                                <Compass className="w-2.5 h-2.5 text-sky-600" />
+                                <span>Directions</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {item.id === "social" && (
+                        <div className="rounded-xl bg-slate-50 border border-slate-200/80 p-3 shadow-2xs space-y-2">
+                          <div className="bg-white rounded-lg p-2.5 border border-slate-200/60 shadow-2xs space-y-1.5">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-1.5">
+                                <div className="w-5 h-5 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-[9px] font-black">
+                                  P
+                                </div>
+                                <span className="text-[10px] font-bold text-slate-800">yourpreschool</span>
+                              </div>
+                              <span className="text-[9px] font-medium text-slate-400">20 Posts / Mo</span>
+                            </div>
+                            <div className="rounded bg-rose-50/50 p-2 text-center border border-rose-100/70">
+                              <p className="text-[10px] font-bold text-slate-800">
+                                🎨 Sensory Play &amp; Montessori Activity Day!
+                              </p>
+                              <span className="text-[9px] text-slate-500 font-normal">Parent Community Highlights</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {item.id === "ads" && (
+                        <div className="rounded-xl bg-slate-50 border border-slate-200/80 p-3 shadow-2xs space-y-2">
+                          <div className="bg-white rounded-lg p-2.5 border border-slate-200/60 shadow-2xs space-y-2">
+                            <div className="flex items-center justify-between">
+                              <span className="text-[9px] font-extrabold uppercase text-slate-400 tracking-wider">
+                                Sponsored Ad
+                              </span>
+                              <span className="text-[9px] font-semibold text-orange-800 bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200/60">
+                                3–5 km Catchment Only
+                              </span>
+                            </div>
+                            <p className="text-[10px] font-medium text-slate-700 leading-snug">
+                              Admissions open for Playgroup &amp; Nursery. Connect with our campus director.
+                            </p>
+                            <div className="h-6 rounded bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center gap-1 shadow-2xs">
+                              <FaWhatsapp className="w-2.5 h-2.5" />
+                              <span>Enquire on WhatsApp</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {item.id === "crm" && (
+                        <div className="rounded-xl bg-slate-50 border border-slate-200/80 p-3 shadow-2xs">
+                          <div className="bg-white rounded-lg p-2.5 border border-slate-200/60 shadow-2xs">
+                            <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                              Admission Funnel Tracking
+                            </div>
+                            <div className="grid grid-cols-3 gap-1.5 text-center">
+                              <div className="p-1 rounded bg-slate-50 border border-slate-100">
+                                <div className="text-xs font-black text-slate-900">45</div>
+                                <div className="text-[8px] font-semibold text-slate-500 uppercase">Enquiries</div>
+                              </div>
+                              <div className="p-1 rounded bg-amber-50/70 border border-amber-100">
+                                <div className="text-xs font-black text-amber-900">28</div>
+                                <div className="text-[8px] font-semibold text-amber-700 uppercase">Tours</div>
+                              </div>
+                              <div className="p-1 rounded bg-emerald-50/70 border border-emerald-100">
+                                <div className="text-xs font-black text-emerald-900">19</div>
+                                <div className="text-[8px] font-semibold text-emerald-700 uppercase">Enrolled</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 );
