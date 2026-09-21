@@ -787,37 +787,44 @@ export default function PreschoolLandingClient() {
           {/* ----------------------------------------------------------- */}
           {/* 1. HERO SECTION (Editorial Agency Vibe, Not SaaS) */}
           {/* ----------------------------------------------------------- */}
+          {/* ----------------------------------------------------------- */}
+          {/* 1. HERO SECTION (Wide Background Image, No Right Card) */}
+          {/* ----------------------------------------------------------- */}
           <section
-            className="relative pt-28 sm:pt-32 lg:pt-36 pb-16 sm:pb-20 lg:pb-24 bg-gradient-to-b from-[#faf8f5] via-white to-white border-b border-slate-200"
+            className="relative pt-28 sm:pt-32 lg:pt-36 pb-16 sm:pb-20 lg:pb-24 overflow-hidden border-b border-slate-200 bg-[#faf8f5]"
           >
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              
-              {/* Left Column: Direct Educational Marketing Copy */}
-              <div className="lg:col-span-7 space-y-6 sm:space-y-6 text-left">
-                {/* Eyebrow / Category Tag */}
-                <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
-                  <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-950 text-white text-[11px] font-black tracking-wider uppercase shadow-xs">
-                    <School className="w-3.5 h-3.5 text-[#f4c542]" />
-                    <span>PRESCHOOL &amp; DAYCARE MARKETING</span>
-                  </div>
-                  <span className="hidden sm:inline-block h-3.5 w-px bg-slate-300" />
-                  <span className="text-xs sm:text-[13px] font-bold text-slate-800 tracking-tight">
-                    Reach More Parents in Your Local Area
-                  </span>
+            {/* Full-width Wide Background Image for Web Version */}
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+              <Image
+                src="/images/preschool-hero-bg.jpg"
+                alt="Modern Preschool Learning Environment"
+                fill
+                priority
+                className="object-cover object-center lg:object-[right_center] opacity-90 sm:opacity-95 lg:opacity-100"
+              />
+              {/* Soft Gradient Overlay: Clean visible background with solid readable wash on the left content side */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 via-45% to-transparent w-full lg:w-[60%]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white/40 via-transparent to-transparent" />
+            </div>
+
+            <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="max-w-3xl space-y-6 sm:space-y-6 text-left">
+                
+                {/* Eyebrow / Small Label */}
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-950 text-white text-[11px] sm:text-xs font-black tracking-wider uppercase shadow-xs">
+                  <School className="w-3.5 h-3.5 text-[#f4c542]" />
+                  <span>MARKETING FOR PRESCHOOLS &amp; DAYCARE CENTRES</span>
                 </div>
 
                 {/* Main Headline */}
-                <h1 className="text-3xl sm:text-4xl lg:text-[2.85rem] xl:text-[3.15rem] font-black text-slate-950 tracking-tight leading-[1.14]">
-                  Generate More Admission Enquiries for{" "}
-                  <span className="text-amber-800 underline decoration-[#f4c542] decoration-4 underline-offset-4">
-                    Your Preschool
-                  </span>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.65rem] font-black text-slate-950 tracking-tight leading-[1.12]">
+                  <span className="block">More Local Parents.</span>
+                  <span className="block text-slate-950 mt-1 sm:mt-1.5">More Admission Enquiries.</span>
                 </h1>
 
                 {/* Supporting Copy */}
-                <p className="text-base sm:text-[17px] text-slate-600 leading-relaxed max-w-2xl font-normal">
-                  We help preschools and daycare centres reach nearby parents and generate relevant admission enquiries through Meta Ads, Google visibility, landing pages and WhatsApp.
+                <p className="text-base sm:text-lg lg:text-[19px] text-slate-600 leading-relaxed max-w-2xl font-normal">
+                  We help nearby parents discover your centre and enquire through Google, Instagram, Facebook and WhatsApp.
                 </p>
 
                 {/* Trust Line */}
@@ -826,26 +833,27 @@ export default function PreschoolLandingClient() {
                     {[1, 2, 3, 4].map((i) => (
                       <div
                         key={i}
-                        className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border-2 border-white bg-amber-400 text-slate-950 flex items-center justify-center text-[10px] font-black shadow-2xs"
+                        className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border-2 border-white bg-[#f4c542] text-slate-950 flex items-center justify-center text-[10px] font-black shadow-2xs"
                       >
                         ✓
                       </div>
                     ))}
                   </div>
                   <p className="text-xs sm:text-sm font-bold text-slate-800">
-                    Experience working with 25+ preschools and daycare centres
+                    Experience working with 25+ preschools and daycare centres.
                   </p>
                 </div>
 
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
-                  <a
-                    href="tel:+919986389444"
+                  <button
+                    type="button"
+                    onClick={openAuditModal}
                     className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-sm sm:text-base shadow-xs transition shrink-0 cursor-pointer whitespace-nowrap"
                   >
-                    <Phone className="w-4 h-4" />
-                    <span>+91 99863 89444</span>
-                  </a>
+                    <span>Get Our Packages</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
 
                   <a
                     href={WHATSAPP_EXPERT_LINK}
@@ -854,44 +862,12 @@ export default function PreschoolLandingClient() {
                     className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-sm sm:text-base transition shadow-2xs shrink-0 cursor-pointer whitespace-nowrap"
                   >
                     <FaWhatsapp className="w-4 h-4 text-emerald-600" />
-                    <span>Chat With Our Marketing Team</span>
+                    <span>Talk on WhatsApp</span>
                   </a>
                 </div>
               </div>
-
-              {/* Right Column: Clean Editorial Photo Showcase (Hidden on Mobile) */}
-              <div className="hidden lg:block lg:col-span-5">
-                <div className="rounded-3xl border border-slate-200/90 bg-white p-2.5 sm:p-3 shadow-md">
-                  <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
-                    <Image
-                      src="/images/preschool-director-parents.jpg"
-                      alt="Preschool Center Director consulting with prospective parents in an admission office"
-                      fill
-                      className="object-cover"
-                      priority
-                    />
-                  </div>
-
-                  {/* Clean Editorial Caption Strip */}
-                  <div className="px-3.5 py-2.5 bg-slate-50 rounded-xl mt-2.5 flex items-center justify-between gap-3 border border-slate-100">
-                    <div className="min-w-0">
-                      <p className="text-xs font-bold text-slate-900 truncate">
-                        Preschool Admission Consultation
-                      </p>
-                      <p className="text-[11px] text-slate-600 mt-0.5 line-clamp-1">
-                        Equipping directors to turn parent visits into confirmed admissions
-                      </p>
-                    </div>
-                    <span className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300 shrink-0">
-                      Admission Growth
-                    </span>
-                  </div>
-                </div>
-              </div>
-
             </div>
-          </div>
-        </section>
+          </section>
 
         {/* ----------------------------------------------------------- */}
         {/* PARTNER SCHOOLS & PRESCHOOLS LOGO CAROUSEL */}
@@ -970,14 +946,14 @@ export default function PreschoolLandingClient() {
         {/* ----------------------------------------------------------- */}
         <section className="py-16 sm:py-24 bg-white border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+            <div className="text-center max-w-4xl mx-auto mb-14 sm:mb-16">
               <span className="inline-block rounded-full bg-amber-100/70 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-900 border border-amber-200/80 mb-3">
                 Full-Service Admission Growth
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
+              <h2 className="text-[1.12rem] min-[360px]:text-[1.25rem] min-[390px]:text-[1.4rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight whitespace-nowrap">
                 What We Can Do for Your Preschool
               </h2>
-              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                 We help your centre reach nearby parents, build trust and generate admission enquiries.
               </p>
             </div>
@@ -988,18 +964,13 @@ export default function PreschoolLandingClient() {
                 const IconComponent = item.icon;
                 return (
                   <div
-                    key={item.num}
+                    key={item.title}
                     className="group rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:border-amber-400 hover:shadow-md transition-all duration-200 flex flex-col justify-between"
                   >
                     <div>
-                      {/* Top Bar: Monospace Number & Icon */}
-                      <div className="flex items-center justify-between mb-5">
-                        <span className="text-xs font-mono font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200/70 group-hover:bg-[#f4c542] group-hover:border-[#f4c542] group-hover:text-slate-950 transition-colors">
-                          {item.num}
-                        </span>
-                        <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200/60 text-amber-800 flex items-center justify-center">
-                          <IconComponent className="w-4 h-4" />
-                        </div>
+                      {/* Top Bar: Clean Brand Icon (Numbers Removed as requested) */}
+                      <div className="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-200/70 text-amber-800 flex items-center justify-center mb-5 group-hover:bg-[#f4c542] group-hover:border-[#f4c542] group-hover:text-slate-950 transition-colors shadow-2xs">
+                        <IconComponent className="w-5 h-5" />
                       </div>
 
                       {/* Title & Description */}
@@ -1092,15 +1063,15 @@ export default function PreschoolLandingClient() {
         {/* ----------------------------------------------------------- */}
         <section id="our-work" className="py-20 sm:py-28 bg-[#faf8f5] border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="text-center max-w-4xl mx-auto mb-12">
               <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-950 text-white text-[11px] font-black tracking-wider uppercase shadow-xs mb-3">
                 <School className="w-3.5 h-3.5 text-[#f4c542]" />
                 <span>Featured Client Portfolio</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
-                Preschools & Schools We Work With
+              <h2 className="text-[1.12rem] min-[360px]:text-[1.25rem] min-[390px]:text-[1.4rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight whitespace-nowrap">
+                Preschools &amp; Schools We Work With
               </h2>
-              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                 Real partner campuses, live web platforms, and admissions ecosystems engineered to convert parent interest into confirmed enrolments.
               </p>
 
@@ -1263,7 +1234,8 @@ export default function PreschoolLandingClient() {
                   </div>
 
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-950 tracking-tight leading-snug">
-                    Speak Directly With a Preschool Admission Strategist
+                    <span className="sm:block">Speak Directly With a</span>
+                    <span className="sm:block">Preschool Admission Strategist</span>
                   </h2>
 
                   <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal max-w-2xl">
@@ -1352,14 +1324,14 @@ export default function PreschoolLandingClient() {
         {/* ----------------------------------------------------------- */}
         <section className="py-16 sm:py-24 bg-[#faf8f5] border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="text-center max-w-4xl mx-auto mb-16">
               <span className="inline-block rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-200 mb-3">
                 Execution Roadmap
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
+              <h2 className="text-[1.12rem] min-[360px]:text-[1.25rem] min-[390px]:text-[1.4rem] sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight whitespace-nowrap">
                 From Campaign Launch to Enrolment
               </h2>
-              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                 A seamless 5-step operational rollout designed to get qualified parent
                 enquiries flowing without disruption to your daily school schedule.
               </p>
@@ -1404,14 +1376,15 @@ export default function PreschoolLandingClient() {
         {/* ----------------------------------------------------------- */}
         <section className="py-16 sm:py-24 bg-white border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-14">
+            <div className="text-center max-w-4xl mx-auto mb-14">
               <span className="inline-block rounded-full bg-rose-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-700 border border-rose-200 mb-3">
                 The Admission Bottleneck
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
-                Getting Enquiries, But Not Enough Enrolments?
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
+                <span className="sm:block">Getting Enquiries,</span>
+                <span className="sm:block">But Not Enough Enrolments?</span>
               </h2>
-              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
                 Most preschools lose admissions not because their campus is bad, but because
                 their marketing and enquiry follow-ups are broken.
               </p>
@@ -1477,7 +1450,7 @@ export default function PreschoolLandingClient() {
               <span className="inline-block rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-800 border border-slate-200 mb-3">
                 Direct Answers
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
+              <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight whitespace-nowrap">
                 Frequently Asked Questions
               </h2>
               <p className="mt-3 text-base text-slate-600 font-normal">
@@ -1537,8 +1510,9 @@ export default function PreschoolLandingClient() {
               Fill Your Vacant Seats
             </span>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
-              Your Next Admissions Could Be Coming From Parents Nearby
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+              <span className="sm:block">Your Next Admissions Could Be</span>
+              <span className="sm:block">Coming From Parents Nearby</span>
             </h2>
 
             <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
