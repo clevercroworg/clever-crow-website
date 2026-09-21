@@ -188,7 +188,7 @@ const PORTFOLIO_CLIENTS = [
     type: "school",
     location: "Mysuru",
     image: "/images/portfolio/kautilya.png",
-    logo: "/images/logos/kautilya.webp",
+    logo: "/images/logos/kautilya.webp?v=3",
   },
   {
     id: "klay",
@@ -199,7 +199,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Anna Nagar, Chennai",
     image: "/images/portfolio/klay.png",
-    logo: "/images/logos/klay.png",
+    logo: "/images/logos/klay.png?v=3",
   },
   {
     id: "maplebear",
@@ -210,7 +210,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Jubilee Hills, Hyd",
     image: "/images/portfolio/maplebear.png",
-    logo: "/images/logos/maplebear.png",
+    logo: "/images/logos/maplebear.png?v=3",
   },
   {
     id: "kangarookids",
@@ -221,7 +221,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Pan-India",
     image: "/images/portfolio/kangarookids.png",
-    logo: "/images/logos/kangarookids.svg",
+    logo: "/images/logos/kangarookids.svg?v=3",
   },
   {
     id: "littlemillennium",
@@ -232,7 +232,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Pan-India",
     image: "/images/portfolio/littlemillennium.png",
-    logo: "/images/logos/littlemillennium.png",
+    logo: "/images/logos/littlemillennium.png?v=3",
   },
   {
     id: "bgsnps",
@@ -243,7 +243,7 @@ const PORTFOLIO_CLIENTS = [
     type: "school",
     location: "Bangalore",
     image: "/images/portfolio/bgsnps.png",
-    logo: "/images/logos/bgsnps.png",
+    logo: "/images/logos/bgsnps.png?v=3",
   },
   {
     id: "iamyello",
@@ -254,7 +254,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Bangalore",
     image: "/images/portfolio/iamyello.png",
-    logo: "/images/logos/iamyello.svg",
+    logo: "/images/logos/iamyello.svg?v=3",
   },
   {
     id: "vishwavidyapeeth",
@@ -265,7 +265,7 @@ const PORTFOLIO_CLIENTS = [
     type: "school",
     location: "Bangalore",
     image: "/images/portfolio/vishwavidyapeeth.png",
-    logo: "/images/logos/vishwavidyapeeth.webp",
+    logo: "/images/logos/vishwavidyapeeth.webp?v=3",
   },
   {
     id: "kidscastle",
@@ -276,7 +276,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Bangalore",
     image: "/images/portfolio/kidscastle.png",
-    logo: "/images/logos/kidscastle.png",
+    logo: "/images/logos/kidscastle.png?v=3",
   },
   {
     id: "timekids",
@@ -287,7 +287,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Anna Nagar, Chennai",
     image: "/images/portfolio/timekids.png",
-    logo: "/images/logos/timekids.png",
+    logo: "/images/logos/timekids.png?v=3",
   },
   {
     id: "pepschool",
@@ -298,7 +298,7 @@ const PORTFOLIO_CLIENTS = [
     type: "school",
     location: "Bangalore",
     image: "/images/portfolio/pepschool.png",
-    logo: "/images/logos/pepschool.webp",
+    logo: "/images/logos/pepschool.webp?v=3",
   },
   {
     id: "ampasishya",
@@ -309,7 +309,7 @@ const PORTFOLIO_CLIENTS = [
     type: "school",
     location: "Chennai",
     image: "/images/portfolio/ampasishya.png",
-    logo: "/images/logos/ampasishya.png",
+    logo: "/images/logos/ampasishya.png?v=3",
   },
   {
     id: "mylittleberries",
@@ -320,7 +320,7 @@ const PORTFOLIO_CLIENTS = [
     type: "preschool",
     location: "Bangalore",
     image: "/images/portfolio/mylittleberries.png",
-    logo: "/images/logos/mylittleberries.png",
+    logo: "/images/logos/mylittleberries.png?v=3",
   },
 ];
 
