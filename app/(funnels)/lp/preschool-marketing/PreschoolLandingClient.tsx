@@ -777,13 +777,13 @@ export default function PreschoolLandingClient() {
           {/* 1. HERO SECTION (Editorial Agency Vibe, Not SaaS) */}
           {/* ----------------------------------------------------------- */}
           <section
-            className="relative pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-14 lg:pb-16 bg-gradient-to-b from-[#faf8f5] via-white to-white border-b border-slate-200"
+            className="relative pt-28 sm:pt-32 lg:pt-36 pb-16 sm:pb-20 lg:pb-24 bg-gradient-to-b from-[#faf8f5] via-white to-white border-b border-slate-200"
           >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               
               {/* Left Column: Direct Educational Marketing Copy */}
-              <div className="lg:col-span-7 space-y-5 text-left">
+              <div className="lg:col-span-7 space-y-6 sm:space-y-6 text-left">
                 {/* Eyebrow / Category Tag */}
                 <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
                   <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-slate-950 text-white text-[11px] font-black tracking-wider uppercase shadow-xs">
@@ -848,8 +848,8 @@ export default function PreschoolLandingClient() {
                 </div>
 
                 {/* Bottom Points (Structured 2-Column Grid) */}
-                <div className="pt-3 border-t border-slate-200/80">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+                <div className="pt-3.5 border-t border-slate-200/80">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
                     <div className="flex items-center gap-2 text-xs sm:text-[13px] text-slate-700 font-medium">
                       <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>Target parents within a 3–5 km radius</span>
