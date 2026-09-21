@@ -31,9 +31,20 @@ import {
   Globe,
   Star,
   CheckCircle,
-  ArrowUpRight
+  ArrowUpRight,
+  Search,
+  BarChart3
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import {
+  SiGoogle,
+  SiGooglemaps,
+  SiFacebook,
+  SiInstagram,
+  SiWhatsapp,
+  SiYoutube,
+  SiOpenai
+} from "react-icons/si";
 import Footer from "@/components/Footer";
 import Header from "../components/Header";
 import "../lp.css";
@@ -318,69 +329,59 @@ const WORK_COMPLETED_AREAS = [
   },
 ];
 
-const DELIVERABLE_PILLARS = [
+const WHAT_WE_DO_SERVICES = [
   {
-    pillar: "Pillar 1: Hyperlocal Parent Reach",
-    subtitle: "Getting your campus discovered by parents living within 3 to 5 km",
-    items: [
-      {
-        title: "Admission Campaign Strategy",
-        desc: "Tailored enrolment roadmap factoring in campus capacity, intake cycles, and nearby competitor preschools.",
-      },
-      {
-        title: "Meta & Google Advertising",
-        desc: "Targeted Facebook, Instagram, and Google Search campaigns focused on parents of kids aged 1.5 to 6 years.",
-      },
-      {
-        title: "Static & Video Creatives",
-        desc: "Clean, professional banners and short video ads highlighting classroom safety, infrastructure, and care.",
-      },
-      {
-        title: "Local SEO & Google Business Profile",
-        desc: "Campus map pin optimization and parent review strategies for top organic ranking on Google Maps.",
-      },
-    ],
+    num: "01",
+    title: "Build Your Website",
+    desc: "Create a professional, mobile-friendly website showcasing your programmes, facilities and activities, with easy enquiry options. Domain and hosting are included.",
+    feature: "Domain and hosting included",
+    icon: Globe,
   },
   {
-    pillar: "Pillar 2: Enquiry Capture & Digital Funnel",
-    subtitle: "Turning parent clicks into qualified phone calls and WhatsApp chats",
-    items: [
-      {
-        title: "Landing-Page Development",
-        desc: "High-converting, mobile-first admission pages that convert paid traffic into phone numbers and visits.",
-      },
-      {
-        title: "WhatsApp Enquiry Funnel",
-        desc: "Frictionless Click-to-WhatsApp setups that let parents connect with your admissions desk in one tap.",
-      },
-      {
-        title: "Lead Qualification Process",
-        desc: "Clear criteria to capture child age, target grade (Playgroup, Nursery, Jr/Sr KG), and joining date.",
-      },
-      {
-        title: "Website Improvement",
-        desc: "Conversion-rate audits and enhancements for your existing school website to eliminate drop-offs.",
-      },
-    ],
+    num: "02",
+    title: "Improve Your Search Visibility",
+    desc: "Set up SEO, AEO and GEO to help search engines and AI-powered tools understand your centre, programmes and location.",
+    feature: "SEO, AEO & GEO configured",
+    icon: Search,
   },
   {
-    pillar: "Pillar 3: Conversion & Admission Operations",
-    subtitle: "Empowering your counselors to turn enquiries into confirmed admissions",
-    items: [
-      {
-        title: "Follow-Up Message Templates",
-        desc: "Copy-paste WhatsApp scripts for brochure sharing, campus visit invites, reminders, and fee handling.",
-      },
-      {
-        title: "CRM & Admission Automation",
-        desc: "Instant routing of new parent leads to center directors and counselors with automated reminders.",
-      },
-      {
-        title: "Performance Reporting",
-        desc: "Transparent dashboards showing ad spend, enquiries, booked campus visits, and cost per enrolled child.",
-      },
-    ],
+    num: "03",
+    title: "Optimise Your Google Business Profile",
+    desc: "Improve your profile with accurate information, services and photos so nearby parents can find your centre and contact you through Google Search and Maps.",
+    feature: "Google Search & Maps setup",
+    icon: MapPin,
   },
+  {
+    num: "04",
+    title: "Manage Your Social Media",
+    desc: "Create and publish 20 branded posts across Facebook and Instagram, including designs, captions and relevant hashtags that speak to local parents.",
+    feature: "20 branded posts across FB & IG",
+    icon: Megaphone,
+  },
+  {
+    num: "05",
+    title: "Generate Enquiries Through Ads",
+    desc: "Run Google, Facebook and Instagram campaigns to reach relevant parents and encourage enquiries through WhatsApp, calls and forms.",
+    feature: "WhatsApp, call & form enquiry ads",
+    icon: Target,
+  },
+  {
+    num: "06",
+    title: "Track Enquiries and Improve Campaigns",
+    desc: "Measure campaign performance and use your team’s feedback to refine targeting, messaging and spending to improve enquiry quality.",
+    feature: "Performance tracking & spend tuning",
+    icon: BarChart3,
+  },
+];
+
+const PLATFORM_PARTNERS = [
+  { name: "Google", icon: SiGoogle, color: "text-[#4285F4]" },
+  { name: "Google Maps", icon: SiGooglemaps, color: "text-[#EA4335]" },
+  { name: "Facebook", icon: SiFacebook, color: "text-[#1877F2]" },
+  { name: "Instagram", icon: SiInstagram, color: "text-[#E4405F]" },
+  { name: "WhatsApp", icon: SiWhatsapp, color: "text-[#25D366]" },
+  { name: "YouTube", icon: SiYoutube, color: "text-[#FF0000]" },
+  { name: "ChatGPT", icon: SiOpenai, color: "text-[#10A37F]" },
 ];
 
 const AUDIT_INCLUDES = [
@@ -909,53 +910,86 @@ export default function PreschoolLandingClient() {
         </div>
 
         {/* ----------------------------------------------------------- */}
-        {/* EXECUTION ROADMAP: From Campaign Launch to Enrolment */}
+        {/* 2. WHAT WE CAN DO FOR YOUR PRESCHOOL */}
         {/* ----------------------------------------------------------- */}
         <section className="py-16 sm:py-24 bg-white border-b border-slate-200">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="inline-block rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-200 mb-3">
-                Execution Roadmap
+            <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+              <span className="inline-block rounded-full bg-amber-100/70 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-900 border border-amber-200/80 mb-3">
+                Full-Service Admission Growth
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
-                From Campaign Launch to Enrolment
+                What We Can Do for Your Preschool
               </h2>
               <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-                A seamless 5-step operational rollout designed to get qualified parent
-                enquiries flowing without disruption to your daily school schedule.
+                We help your centre reach nearby parents, build trust and generate admission enquiries.
               </p>
             </div>
 
-            {/* 5 Process Steps */}
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-              {HOW_IT_WORKS_STEPS.map((step) => (
-                <div
-                  key={step.stepNum}
-                  className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 flex flex-col justify-between hover:bg-white hover:border-amber-400 hover:shadow-xs transition"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 font-black text-xs flex items-center justify-center">
-                        {step.stepNum}
-                      </span>
-                      <span className="text-[10px] font-bold text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200">
-                        {step.timeframe}
-                      </span>
+            {/* 6 Minimal Service Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {WHAT_WE_DO_SERVICES.map((item) => {
+                const IconComponent = item.icon;
+                return (
+                  <div
+                    key={item.num}
+                    className="group rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:border-amber-400 hover:shadow-md transition-all duration-200 flex flex-col justify-between"
+                  >
+                    <div>
+                      {/* Top Bar: Monospace Number & Icon */}
+                      <div className="flex items-center justify-between mb-5">
+                        <span className="text-xs font-mono font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200/70 group-hover:bg-[#f4c542] group-hover:border-[#f4c542] group-hover:text-slate-950 transition-colors">
+                          {item.num}
+                        </span>
+                        <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200/60 text-amber-800 flex items-center justify-center">
+                          <IconComponent className="w-4 h-4" />
+                        </div>
+                      </div>
+
+                      {/* Title & Description */}
+                      <h3 className="text-lg sm:text-xl font-bold text-slate-950 leading-snug group-hover:text-amber-900 transition-colors">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                        {item.desc}
+                      </p>
                     </div>
 
-                    <h3 className="text-base font-bold text-slate-900 mb-2">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                      {step.desc}
-                    </p>
+                    {/* Bottom Feature Line */}
+                    <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-700 font-medium">
+                      <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <span>{item.feature}</span>
+                    </div>
                   </div>
+                );
+              })}
+            </div>
 
-                  <div className="mt-4 pt-3 border-t border-slate-200/80 text-[11px] font-bold text-amber-800">
-                    Stage {step.stepNum}
-                  </div>
+            {/* Partners & Platforms Minimal Ecosystem Strip */}
+            <div className="mt-12 sm:mt-14 pt-8 border-t border-slate-200/80">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-4 bg-slate-50/90 rounded-2xl border border-slate-200/80 p-4 sm:p-5">
+                <div className="flex items-center gap-2 text-center lg:text-left">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                  <span className="text-xs font-black uppercase tracking-wider text-slate-800">
+                    Platform Partners & AI Ecosystem
+                  </span>
                 </div>
-              ))}
+
+                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+                  {PLATFORM_PARTNERS.map((p) => {
+                    const Icon = p.icon;
+                    return (
+                      <div
+                        key={p.name}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200/90 text-xs font-bold text-slate-800 shadow-2xs hover:border-amber-400 hover:shadow-xs transition"
+                      >
+                        <Icon className={`w-3.5 h-3.5 ${p.color}`} />
+                        <span>{p.name}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1118,75 +1152,14 @@ export default function PreschoolLandingClient() {
         </section>
 
         {/* ----------------------------------------------------------- */}
-        {/* 6. DELIVERABLES SECTION (Capabilities, Not Fixed Packages) */}
-        {/* ----------------------------------------------------------- */}
-        <section className="py-16 sm:py-24 bg-white border-b border-slate-200">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-14">
-              <span className="inline-block rounded-full bg-blue-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-blue-800 border border-blue-200 mb-3">
-                Full Scope of Management
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
-                What We Can Manage for Your Preschool
-              </h2>
-              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-                We don’t force rigid cookie-cutter packages. We manage the exact combination of
-                capabilities required to fill your vacant seats.
-              </p>
-            </div>
-
-            {/* 3 Structured Capability Pillars */}
-            <div className="space-y-8">
-              {DELIVERABLE_PILLARS.map((pillar, pIdx) => (
-                <div
-                  key={pIdx}
-                  className="rounded-3xl border border-slate-200 bg-slate-50/50 p-6 sm:p-8"
-                >
-                  <div className="mb-6">
-                    <h3 className="text-xl font-black text-slate-900">
-                      {pillar.pillar}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                      {pillar.subtitle}
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {pillar.items.map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="rounded-2xl border border-slate-200 bg-white p-5 flex flex-col justify-between shadow-2xs hover:border-amber-400 transition"
-                      >
-                        <div>
-                          <h4 className="text-sm font-bold text-slate-900 mb-1.5">
-                            {item.title}
-                          </h4>
-                          <p className="text-xs text-slate-600 leading-relaxed">
-                            {item.desc}
-                          </p>
-                        </div>
-                        <div className="mt-4 pt-2.5 border-t border-slate-100 flex items-center gap-1 text-[11px] font-bold text-emerald-700">
-                          <CheckCircle className="w-3.5 h-3.5" />
-                          <span>Managed In Scope</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ----------------------------------------------------------- */}
-        {/* 7. TALK TO AN ADMISSION EXPERT / CONSULTATION SECTION */}
+        {/* 1-ON-1 GROWTH CONSULTATION */}
         {/* ----------------------------------------------------------- */}
         <section
           id="free-audit-offer"
-          className="py-12 sm:py-16 bg-[#faf8f5] border-b border-slate-200 scroll-mt-20"
+          className="py-12 sm:py-16 bg-white border-b border-slate-200 scroll-mt-20"
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-10 lg:p-12 shadow-xs">
+            <div className="rounded-3xl border border-slate-200/90 bg-[#faf8f5] p-6 sm:p-10 lg:p-12 shadow-xs">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 {/* Left Column: Scope & Value */}
@@ -1234,7 +1207,7 @@ export default function PreschoolLandingClient() {
 
                 {/* Right Column: High-Vibe CTA Card */}
                 <div className="lg:col-span-5">
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-6 sm:p-7 shadow-xs space-y-4 text-center sm:text-left">
+                  <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-7 shadow-xs space-y-4 text-center sm:text-left">
                     <div>
                       <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 inline-flex items-center gap-1.5 mb-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -1277,6 +1250,58 @@ export default function PreschoolLandingClient() {
                 </div>
 
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ----------------------------------------------------------- */}
+        {/* EXECUTION ROADMAP: From Campaign Launch to Enrolment */}
+        {/* ----------------------------------------------------------- */}
+        <section className="py-16 sm:py-24 bg-[#faf8f5] border-b border-slate-200">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <span className="inline-block rounded-full bg-emerald-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-800 border border-emerald-200 mb-3">
+                Execution Roadmap
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
+                From Campaign Launch to Enrolment
+              </h2>
+              <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+                A seamless 5-step operational rollout designed to get qualified parent
+                enquiries flowing without disruption to your daily school schedule.
+              </p>
+            </div>
+
+            {/* 5 Process Steps */}
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+              {HOW_IT_WORKS_STEPS.map((step) => (
+                <div
+                  key={step.stepNum}
+                  className="rounded-2xl border border-slate-200 bg-white p-5 flex flex-col justify-between hover:border-amber-400 hover:shadow-xs transition"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 font-black text-xs flex items-center justify-center">
+                        {step.stepNum}
+                      </span>
+                      <span className="text-[10px] font-bold text-slate-500 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">
+                        {step.timeframe}
+                      </span>
+                    </div>
+
+                    <h3 className="text-base font-bold text-slate-900 mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                      {step.desc}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-slate-200/80 text-[11px] font-bold text-amber-800">
+                    Stage {step.stepNum}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
