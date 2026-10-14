@@ -1,10 +1,6 @@
 // Conversion events from the developer brief. Payloads carry only a placement label:
-// never names, phone numbers, emails or free-text answers.
-type CollegeEvent =
-  | "college_plan_cta_click"
-  | "college_whatsapp_click"
-  | "college_form_start"
-  | "college_lead_submit";
+// never names, phone numbers or free-text answers.
+type CollegeEvent = "college_call_click" | "college_whatsapp_click";
 
 type Gtag = (...args: unknown[]) => void;
 

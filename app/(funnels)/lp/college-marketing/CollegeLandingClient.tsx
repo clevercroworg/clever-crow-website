@@ -3,13 +3,12 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { MotionConfig, motion } from "framer-motion";
-import { ArrowRight, Building2, Check, ChevronDown, Info, ShieldCheck } from "lucide-react";
+import { ArrowRight, Building2, Check, ChevronDown, Info, Phone } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import "../lp.css";
-import CollegeEnquiryForm from "./CollegeEnquiryForm";
 import type { CaseStudy } from "./case-studies";
 import {
-  ENQUIRY,
+  ADS_CALL_CONVERSION,
   EXPERIENCE,
   FAQS,
   FOOTER,
@@ -18,13 +17,20 @@ import {
   IMPROVE,
   INSTITUTIONS,
   NAV_LINKS,
+  PHONE_DISPLAY,
+  PHONE_HREF,
   PLAN_BASIS,
   REPORTING,
   RESULTS,
   SERVICES,
   WHATSAPP_LINK,
 } from "./college-data";
-import { trackCollegeEvent } from "./tracking";
+import { sendGtag, trackCollegeEvent } from "./tracking";
+
+function trackCall(placement: string) {
+  trackCollegeEvent("college_call_click", placement);
+  sendGtag("event", "conversion", { send_to: ADS_CALL_CONVERSION });
+}
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -71,15 +77,15 @@ function SectionHeading({ eyebrow, title, intro }: { eyebrow: string; title: str
   );
 }
 
-function PlanCta({ placement, className = "" }: { placement: string; className?: string }) {
+function CallCta({ placement, className = "" }: { placement: string; className?: string }) {
   return (
     <a
-      href="#enquiry"
-      onClick={() => trackCollegeEvent("college_plan_cta_click", placement)}
+      href={PHONE_HREF}
+      onClick={() => trackCall(placement)}
       className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#f4c542] px-6 py-3 text-center text-sm font-black sm:whitespace-nowrap text-slate-950 shadow-xs transition hover:brightness-105 active:scale-[0.99] sm:text-base ${FOCUS_RING} ${className}`}
     >
-      <span>{HERO.primaryCta}</span>
-      <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+      <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
+      <span>Call {PHONE_DISPLAY}</span>
     </a>
   );
 }
@@ -103,8 +109,6 @@ export default function CollegeLandingClient({ caseStudies }: { caseStudies: Cas
   const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [heroInView, setHeroInView] = useState(true);
-  const [enquiryInView, setEnquiryInView] = useState(false);
-  const hideStickyBar = heroInView || enquiryInView;
 
   const hasResults = caseStudies.length > 0;
   const navLinks = NAV_LINKS.filter((link) => hasResults || link.href !== "#results");
@@ -116,20 +120,12 @@ export default function CollegeLandingClient({ caseStudies }: { caseStudies: Cas
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // The mobile sticky bar stays hidden while the hero CTAs or the form are on screen,
-  // so it never duplicates them or covers fields and consent.
+  // The mobile sticky bar stays hidden while the hero CTAs are on screen, so it never duplicates them.
   useEffect(() => {
     const hero = document.getElementById("top");
-    const enquiry = document.getElementById("enquiry");
-    if (!hero || !enquiry) return;
-    const observer = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (entry.target === hero) setHeroInView(entry.isIntersecting);
-        if (entry.target === enquiry) setEnquiryInView(entry.isIntersecting);
-      }
-    });
+    if (!hero) return;
+    const observer = new IntersectionObserver(([entry]) => setHeroInView(entry.isIntersecting));
     observer.observe(hero);
-    observer.observe(enquiry);
     return () => observer.disconnect();
   }, []);
 
@@ -169,12 +165,13 @@ export default function CollegeLandingClient({ caseStudies }: { caseStudies: Cas
             </nav>
 
             <a
-              href="#enquiry"
-              onClick={() => trackCollegeEvent("college_plan_cta_click", "header")}
-              className={`inline-flex h-10 shrink-0 items-center justify-center rounded-full bg-[#f4c542] px-4 text-sm font-black text-slate-950 shadow-xs transition hover:brightness-105 sm:h-11 sm:px-5 ${FOCUS_RING}`}
+              href={PHONE_HREF}
+              onClick={() => trackCall("header")}
+              className={`inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full bg-[#f4c542] px-4 text-sm font-black text-slate-950 shadow-xs transition hover:brightness-105 sm:h-11 sm:px-5 ${FOCUS_RING}`}
             >
-              <span className="sm:hidden">Enquire Now</span>
-              <span className="hidden sm:inline">Get a Marketing Plan</span>
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              <span className="sm:hidden">Call Now</span>
+              <span className="hidden sm:inline">Call {PHONE_DISPLAY}</span>
             </a>
           </div>
         </header>
@@ -218,7 +215,7 @@ export default function CollegeLandingClient({ caseStudies }: { caseStudies: Cas
                 </ul>
 
                 <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:flex-wrap sm:items-center">
-                  <PlanCta placement="hero" />
+                  <CallCta placement="hero" />
                   <WhatsAppCta placement="hero" label={HERO.secondaryCta} />
                 </div>
 
@@ -554,71 +551,6 @@ export default function CollegeLandingClient({ caseStudies }: { caseStudies: Cas
               </div>
             </div>
           </section>
-
-          {/* ----------------------------------------------------------- */}
-          {/* 9. ENQUIRY FORM – FINAL CTA */}
-          {/* ----------------------------------------------------------- */}
-          <section id="enquiry" className="scroll-mt-24 bg-[#0a1224] py-12 text-white sm:py-16 lg:py-24">
-            {/* Grid order: on phones the form comes right after the intro; on desktop the form spans both rows on the right. */}
-            <div className={`${CONTAINER} grid grid-cols-1 items-start gap-x-14 gap-y-10 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-y-8`}>
-              <Reveal className="space-y-5 lg:col-span-5 lg:col-start-1 lg:row-start-1">
-                <span className="inline-block rounded-full border border-amber-400/30 bg-amber-400/20 px-4 py-1 text-xs font-bold uppercase tracking-wider text-amber-300">
-                  College Marketing Enquiry
-                </span>
-                <h2 className="text-balance text-3xl font-black leading-tight tracking-tight sm:text-4xl lg:text-[2.6rem]">
-                  {ENQUIRY.heading}
-                </h2>
-                <p className="text-base leading-relaxed text-slate-300 sm:text-lg">{ENQUIRY.intro}</p>
-                <p className="flex items-start gap-2 text-sm font-medium text-slate-300">
-                  <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" aria-hidden="true" />
-                  {ENQUIRY.audienceNote}
-                </p>
-              </Reveal>
-
-              <div className="rounded-3xl bg-white p-6 text-slate-900 shadow-xl sm:p-8 lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1 lg:p-10">
-                <h3 className="text-xl font-black tracking-tight text-slate-950">Tell us about your institution</h3>
-                <p className="mt-1 text-sm text-slate-500">
-                  Fields marked <span className="text-rose-600">*</span> are required.
-                </p>
-                <div className="mt-6 border-t border-slate-100 pt-6">
-                  <CollegeEnquiryForm />
-                </div>
-              </div>
-
-              <div className="space-y-4 lg:col-span-5 lg:col-start-1 lg:row-start-2">
-                <Reveal delay={0.1} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
-                  <p className="text-xs font-black uppercase tracking-widest text-amber-300">What happens next</p>
-                  <ol className="mt-5 space-y-5">
-                    {ENQUIRY.nextSteps.map((step, idx) => (
-                      <li key={step.title} className="flex gap-4">
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#f4c542] text-sm font-black text-slate-950">
-                          {idx + 1}
-                        </span>
-                        <span>
-                          <span className="block text-base font-bold text-white">{step.title}</span>
-                          <span className="mt-0.5 block text-sm leading-relaxed text-slate-400">{step.desc}</span>
-                        </span>
-                      </li>
-                    ))}
-                  </ol>
-                </Reveal>
-
-                <Reveal delay={0.15} className="flex flex-col gap-4 rounded-2xl border border-emerald-400/20 bg-emerald-400/[0.06] p-5 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-sm font-semibold text-slate-200">{ENQUIRY.alternative}</p>
-                  <a
-                    href={WHATSAPP_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackCollegeEvent("college_whatsapp_click", "enquiry_aside")}
-                    className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 text-sm font-bold text-white transition hover:bg-emerald-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  >
-                    <FaWhatsapp className="h-4 w-4" aria-hidden="true" />
-                    {ENQUIRY.alternativeCta}
-                  </a>
-                </Reveal>
-              </div>
-            </div>
-          </section>
         </main>
 
         {/* ----------------------------------------------------------- */}
@@ -647,21 +579,22 @@ export default function CollegeLandingClient({ caseStudies }: { caseStudies: Cas
           </div>
         </footer>
 
-        {/* Mobile sticky CTA: hidden on desktop and while the enquiry form is visible */}
+        {/* Mobile sticky CTA: hidden on desktop and while the hero CTAs are visible */}
         <div
           className={`fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur transition-transform duration-300 md:hidden ${
-            hideStickyBar ? "translate-y-full" : "translate-y-0"
+            heroInView ? "translate-y-full" : "translate-y-0"
           }`}
-          aria-hidden={hideStickyBar}
-          inert={hideStickyBar}
+          aria-hidden={heroInView}
+          inert={heroInView}
         >
           <div className="grid grid-cols-2 gap-2">
             <a
-              href="#enquiry"
-              onClick={() => trackCollegeEvent("college_plan_cta_click", "mobile_sticky")}
-              className={`inline-flex h-11 items-center justify-center rounded-xl bg-[#f4c542] text-sm font-black text-slate-950 ${FOCUS_RING}`}
+              href={PHONE_HREF}
+              onClick={() => trackCall("mobile_sticky")}
+              className={`inline-flex h-11 items-center justify-center gap-1.5 rounded-xl bg-[#f4c542] text-sm font-black text-slate-950 ${FOCUS_RING}`}
             >
-              Get a Plan
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Call Now
             </a>
             <a
               href={WHATSAPP_LINK}

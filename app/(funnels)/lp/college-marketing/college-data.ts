@@ -21,8 +21,11 @@ export const WHATSAPP_MESSAGE =
   "Hello Clever Crow, I’m interested in digital marketing for our college. College name: ___. City: ___. My role: ___. Courses to promote: ___.";
 export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
-// Google Ads lead conversion, the same label the other landing-page forms report to.
-export const ADS_LEAD_CONVERSION = "AW-17335403082/YwV4CJ-q_e8YEPq9me49";
+export const PHONE_DISPLAY = "+91 99863 89444";
+export const PHONE_HREF = "tel:+919986389444";
+
+// Google Ads call conversion, the same label the shared LP header reports call clicks to.
+export const ADS_CALL_CONVERSION = "AW-17335403082/ul0ECKr5i_QaEMqElcpA";
 
 // Approved management discussion photograph in /public/images/college/.
 export const HERO_IMAGE: { src: string; alt: string; width: number; height: number } | null = {
@@ -47,7 +50,6 @@ export const HERO = {
     "Reach prospective students, generate relevant enquiries and strengthen admission follow-up with targeted advertising, better websites and WhatsApp automation.",
   secondary: "A marketing strategy built around your courses, location, admission goals and budget.",
   services: ["Google & Meta Ads", "College Websites", "SEO", "WhatsApp & CRM"],
-  primaryCta: "Get a Marketing Plan for Your College",
   secondaryCta: "Discuss on WhatsApp",
   clarification: "Marketing services for educational institutions.",
 };
@@ -196,28 +198,6 @@ export const FAQS = [
     a: "No. Admissions depend on factors including course demand, eligibility, fees, reputation and counselling. Our work focuses on improving visibility, relevant enquiries, follow-up and measurement.",
   },
 ];
-
-export const ENQUIRY = {
-  heading: "Let’s Build Your College’s Marketing Plan",
-  intro:
-    "Tell us about your institution and the courses you want to promote. We’ll review your requirements and discuss a suitable approach.",
-  audienceNote: "This form is for institutions seeking digital marketing services.",
-  budgetHelper: "Advertising spend only; agency fees are separate.",
-  consent:
-    "I agree to be contacted by Clever Crow about my institution’s marketing requirements. I have read the",
-  submit: "Request My College Marketing Plan",
-  success:
-    "Thank you. We’ve received your college marketing enquiry. Our team will contact you to discuss your requirements.",
-  failure: "We couldn’t submit your enquiry. Please try again or contact us on WhatsApp.",
-  alternative: "Prefer to discuss first?",
-  alternativeCta: "Message us on WhatsApp",
-  // Derived from the brief's intro, success message and budget FAQ; no timelines promised.
-  nextSteps: [
-    { title: "We review your requirements", desc: "Your courses, location, intake priorities and budget." },
-    { title: "We contact you to discuss", desc: "Your admission goals and current marketing." },
-    { title: "We recommend a suitable approach", desc: "Scope and budget are outlined in a proposal." },
-  ],
-};
 
 export const FOOTER = {
   company: "Clever Crow Strategies LLP",
