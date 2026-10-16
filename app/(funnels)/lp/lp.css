@@ -501,6 +501,8 @@ a {
 
 .package-card .package-list {
   flex: 1 1 auto;
+  /* Keep items stacked from the top; without this, shorter lists spread out to fill taller cards. */
+  align-content: start;
 }
 
 .package-list li {

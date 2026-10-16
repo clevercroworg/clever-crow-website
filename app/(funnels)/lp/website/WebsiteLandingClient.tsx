@@ -5,7 +5,7 @@ import "../lp.css";
 
 // Components
 import Header from "../components/Header";
-import HeroSection from "../components/HeroSection";
+import HeroSectionWebsite from "../components/HeroSectionWebsite";
 import LogoMarquee from "../components/LogoMarquee";
 import PerformanceExperts from "../components/PerformanceExperts";
 import SuccessStories from "../components/SuccessStories";
@@ -50,7 +50,7 @@ export default function WebsiteLandingClient({ data }: WebsiteLandingClientProps
       <div className="site-shell">
         <Header />
         <main id="top">
-          <HeroSection data={data.hero} />
+          <HeroSectionWebsite data={data.hero} />
           <LogoMarquee />
           <PricingSection data={data.pricing} />
           <PerformanceExperts />

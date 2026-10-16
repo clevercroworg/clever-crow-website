@@ -25,6 +25,7 @@ export type PricingMeta = {
   ecommerceCard?: PackageInfo;
   quoteText?: string;
   quoteHref?: string;
+  cardCta?: { label: string; href: string };
 };
 
 export type PortfolioItem = {
@@ -95,7 +96,7 @@ export function getWebsiteLandingData(): WebsiteLandingData {
           name: "Basic Website",
           oldPrice: "₹10,000",
           price: "₹9,999",
-          description: "",
+          description: "Best for small businesses that need a fast, professional online presence.",
           features: [
             "Up to 6 pages",
             "100% mobile responsive",
@@ -106,35 +107,24 @@ export function getWebsiteLandingData(): WebsiteLandingData {
           ],
         },
         {
-          label: "Professional",
-          name: "Website Package",
-          price: "₹18,000",
-          description: "",
-          features: [
-             "Everything in Basic plan",
-             "Up to 20 pages",
-             "Basic SEO",
-             "Sitemap setup",
-             "Google Analytics",
-             "Social media integration",
-             "Delivery within 6 days"
-          ],
-        },
-        {
           label: "Most Popular",
           name: "Premium Website",
           oldPrice: "₹35,000",
           price: "₹29,999",
-          description: "",
+          description: "Best for growing businesses that want search visibility, steady enquiries and a site they can update themselves.",
           features: [
-            "Everything in Pro plan",
+            "Everything in Starter plan",
             "Up to 30 pages",
-            "Blog posts",
-            "Admin dashboard",
-            "Advanced SEO",
-            "Speed Optimization",
+            "Custom design tailored to your brand",
+            "Admin dashboard to manage content",
+            "Blog setup",
+            "Advanced on-page SEO",
+            "Sitemap & Google Search Console setup",
+            "Google Analytics setup",
+            "Enquiry forms with email notifications",
+            "Social media integration",
+            "Speed optimisation",
             "Delivery within 12 days",
-            "<div class='mt-2 p-3.5 rounded-xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50 shadow-sm relative overflow-hidden'><div class='flex items-center justify-between mb-1.5'><span class='text-[11px] font-extrabold uppercase tracking-widest text-amber-700'>Bonus Included 🎁</span><span class='text-[10px] font-bold px-2 py-0.5 bg-white border border-amber-100 text-amber-600 rounded-full shadow-sm'>Value ₹6,000</span></div><p class='text-[14.5px] font-extrabold text-slate-900 leading-snug'>6 Free Instagram Posts</p><p class='text-[12.5px] text-slate-600 font-medium leading-tight mt-1'>Kickstart your digital presence seamlessly alongside your website launch—completely free!</p></div>"
           ],
           featured: true,
         },
@@ -158,6 +148,7 @@ export function getWebsiteLandingData(): WebsiteLandingData {
       },
       quoteText: "Need a broader scope or custom plan?",
       quoteHref: "tel:+919986389444",
+      cardCta: { label: "Call to Get Started", href: "tel:+919986389444" },
     },
     portfolio: [
       {

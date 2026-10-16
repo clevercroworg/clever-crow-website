@@ -19,6 +19,8 @@ type PricingMeta = {
   packages: PackageInfo[];
   quoteText?: string;
   quoteHref?: string;
+  // Optional call button pinned to the bottom of every card (opt-in per page).
+  cardCta?: { label: string; href: string };
 };
 
 type PricingSectionProps = {
@@ -90,7 +92,8 @@ export default function PricingSection({ data }: PricingSectionProps) {
                 {pkg.description && (
                   <p className="mt-4 text-[14px] font-medium leading-relaxed text-slate-700">{pkg.description}</p>
                 )}
-                <ul className="package-list mt-4">
+                {/* Long lists split into two columns on desktop so cards stay close in height */}
+                <ul className={`package-list mt-4 ${pkg.features.length >= 10 ? "lg:grid-cols-2 lg:gap-x-6" : ""}`}>
                   {pkg.features.map((feature) => (
                     <li 
                       key={feature} 
@@ -99,6 +102,19 @@ export default function PricingSection({ data }: PricingSectionProps) {
                     />
                   ))}
                 </ul>
+                {pricing.cardCta && (
+                  <a
+                    href={pricing.cardCta.href}
+                    onClick={trackCallClick}
+                    className={`mt-7 inline-flex h-12 w-full items-center justify-center rounded-xl text-sm font-bold transition ${
+                      pkg.featured
+                        ? "bg-[#f4c542] text-slate-950 hover:brightness-105"
+                        : "border border-slate-300 bg-white text-slate-900 hover:bg-slate-50"
+                    }`}
+                  >
+                    {pricing.cardCta.label}
+                  </a>
+                )}
               </div>
             </article>
           ))}

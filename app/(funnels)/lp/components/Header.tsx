@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { FaWhatsapp } from "react-icons/fa";
  
 interface HeaderProps {
   whatsappMessage?: string;
@@ -71,15 +72,10 @@ export default function Header({ whatsappMessage }: HeaderProps = {}) {
             onClick={trackWhatsAppClick}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-[38px] w-[38px] sm:h-11 sm:w-11 items-center justify-center rounded-full bg-green-500 text-white transition hover:bg-green-600 shadow-sm"
+            className="inline-flex h-[38px] w-[38px] sm:h-11 sm:w-11 items-center justify-center rounded-full bg-[#25D366] text-white transition hover:bg-[#1ebe5a] shadow-sm"
             aria-label="Chat on WhatsApp"
           >
-            <svg className="h-[18px] w-[18px] sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M3 21l1.65-4.06A9 9 0 1 1 8 20.3L3 21"></path>
-              <path d="M9 10c0 3 2 5 5 5"></path>
-              <path d="M9.5 9.5c.3-.9 1-.9 1.4-.2l.5.9c.2.4.1.9-.2 1.2l-.3.3"></path>
-              <path d="M14.5 14.5c.9-.3.9-1 .2-1.4l-.9-.5c-.4-.2-.9-.1-1.2.2l-.3.3"></path>
-            </svg>
+            <FaWhatsapp className="h-5 w-5 sm:h-[22px] sm:w-[22px]" aria-hidden="true" />
           </a>
         </div>
       </div>
