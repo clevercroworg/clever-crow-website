@@ -156,26 +156,29 @@ html { scroll-behavior: smooth; }
   display: none;
 }
 
-.section-grid {
-  position: relative;
-  overflow: hidden;
+/* Light patterned surface behind the logo strip + services.
+   --clay: sharp-edged clay "Truchet" blobs, rendered as a seamless tile (public/lp/digital-marketing/patterns/clay-blobs.jpg)
+   --cubes: light isometric cubes (vector tile, public/lp/digital-marketing/patterns/iso-cubes.svg) */
+.svc-pattern {
+  background-color: #f5f6f8;
+  background-repeat: repeat;
 }
 
-.section-grid::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
-  background-size: 24px 24px;
-  pointer-events: none;
-  z-index: 0;
+.svc-pattern--clay {
+  background-image: url("/lp/digital-marketing/patterns/clay-blobs.jpg");
+  background-size: 600px 600px;
 }
 
-.section-grid > * {
-  position: relative;
-  z-index: 1;
+.svc-pattern--cubes {
+  background-color: #f4f6f9;
+  background-image: url("/lp/digital-marketing/patterns/iso-cubes.svg");
+  background-size: 58.89px 102px;
+}
+
+@media (max-width: 640px) {
+  .svc-pattern--clay {
+    background-size: 420px 420px;
+  }
 }
 
 /* Improvement #6: FAQ smooth open/close animation */

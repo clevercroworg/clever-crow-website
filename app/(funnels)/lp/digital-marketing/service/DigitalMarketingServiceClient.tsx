@@ -521,8 +521,10 @@ export default function DigitalMarketingServiceClient() {
         </div>
       </section>
 
+      {/* One continuous patterned surface behind the logo strip and the services, so the pattern never restarts */}
+      <div className="svc-pattern svc-pattern--clay">
       {/* Brands We Work With */}
-      <section className="section-grid relative overflow-hidden bg-slate-50 py-6 sm:py-8">
+      <section className="overflow-hidden py-6 sm:py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="sr-only">Brands We Work With</h2>
           <div className="fade-edge relative overflow-hidden rounded-2xl border border-slate-200 bg-white py-4">
@@ -543,7 +545,7 @@ export default function DigitalMarketingServiceClient() {
       </section>
 
       {/* Smart Plans / Pricing Section */}
-      <section id="pricing" className="section-grid py-14 sm:py-16">
+      <section id="pricing" className="overflow-hidden pb-14 pt-8 sm:pb-20 sm:pt-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Our services"
@@ -604,6 +606,7 @@ export default function DigitalMarketingServiceClient() {
           </div>
         </div>
       </section>
+      </div>
 
       {/* Direct CTA Panel */}
       <section className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-14 text-white">
@@ -670,7 +673,7 @@ export default function DigitalMarketingServiceClient() {
       </section>
 
       {/* Our Results: case studies with scroll-driven galleries */}
-      <ResultsShowcase onOpenModal={() => setIsModalOpen(true)} />
+      <ResultsShowcase />
 
       {/* Industries We've Served */}
       <IndustriesServed onOpenModal={() => setIsModalOpen(true)} />

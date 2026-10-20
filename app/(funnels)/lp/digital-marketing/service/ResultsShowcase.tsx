@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  ArrowRight,
   Building2,
   CalendarDays,
   GraduationCap,
@@ -148,7 +147,7 @@ function CreativeTile({ src, alt }: { src: string; alt: string }) {
 const EDGE_LEFT = "lg:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]";
 const EDGE_RIGHT = "lg:pr-[max(2rem,calc((100vw-80rem)/2+2rem))]";
 
-function CaseStudyRow({ study, index, onOpenModal }: { study: CaseStudy; index: number; onOpenModal: () => void }) {
+function CaseStudyRow({ study, index }: { study: CaseStudy; index: number }) {
   const galleryLeft = index % 2 === 1;
 
   const m1 = <MetricTile key="m1" metric={study.metrics[0]} tone="amber" />;
@@ -200,20 +199,22 @@ function CaseStudyRow({ study, index, onOpenModal }: { study: CaseStudy; index: 
           ))}
         </div>
 
-        <div className="mt-6 flex items-center gap-3">
+        <div className="mt-6">
           {study.logo ? (
-            <span className="inline-flex h-12 items-center rounded-xl bg-white px-3">
-              <Image src={study.logo.src} alt={study.client} width={study.logo.width} height={study.logo.height} className="h-8 w-auto max-w-[180px] object-contain" />
+            <span className="inline-flex h-14 max-w-full items-center rounded-2xl bg-white px-5 shadow-sm sm:h-16 sm:px-6">
+              <Image
+                src={study.logo.src}
+                alt={study.client}
+                width={study.logo.width}
+                height={study.logo.height}
+                className="h-9 w-auto max-w-[200px] object-contain sm:h-10 sm:max-w-[240px]"
+              />
             </span>
           ) : (
-            <span className="inline-flex h-12 items-center rounded-xl border border-white/15 bg-white/5 px-4 text-lg font-bold text-white">
+            <span className="inline-flex h-14 max-w-full items-center rounded-2xl border border-white/15 bg-white/5 px-5 text-xl font-bold text-white sm:h-16 sm:px-6 sm:text-2xl">
               {study.client}
             </span>
           )}
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-slate-800">
-            <ChannelMark channel={study.channel} className="h-3.5 w-3.5" />
-            {study.channel}
-          </span>
         </div>
 
         <div className="mt-7 grid grid-cols-2 gap-6 border-y border-white/10 py-6">
@@ -231,16 +232,6 @@ function CaseStudyRow({ study, index, onOpenModal }: { study: CaseStudy; index: 
         <h3 className="mt-7 text-2xl font-bold leading-tight text-white sm:text-[1.75rem]">{study.headline}</h3>
         <p className="mt-4 text-base leading-relaxed text-slate-300">{study.story}</p>
 
-        <button
-          type="button"
-          onClick={onOpenModal}
-          className="group mt-7 inline-flex items-center gap-3 rounded-full bg-[#FFCE1B] py-2 pl-5 pr-2 text-sm font-bold text-[#071330] shadow-lg shadow-amber-500/20 transition hover:brightness-105 cursor-pointer"
-        >
-          Get a Similar Growth Plan
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#071330] text-[#FFCE1B] transition-transform group-hover:translate-x-0.5">
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </span>
-        </button>
       </motion.div>
 
       {/* Endless carousel: alternate rows travel in opposite directions; pauses on hover */}
@@ -277,7 +268,7 @@ function CaseStudyRow({ study, index, onOpenModal }: { study: CaseStudy; index: 
 /* Section                                                             */
 /* ------------------------------------------------------------------ */
 
-export default function ResultsShowcase({ onOpenModal }: { onOpenModal: () => void }) {
+export default function ResultsShowcase() {
   return (
     <section id="results" className="relative overflow-hidden bg-[#050b1f] py-20 text-white sm:py-28">
       {/* Background: soft glows and a grid that fades out */}
@@ -308,7 +299,7 @@ export default function ResultsShowcase({ onOpenModal }: { onOpenModal: () => vo
 
       <div className="relative mt-10 sm:mt-14">
         {CASE_STUDIES.map((study, index) => (
-          <CaseStudyRow key={study.id} study={study} index={index} onOpenModal={onOpenModal} />
+          <CaseStudyRow key={study.id} study={study} index={index} />
         ))}
       </div>
 
