@@ -53,5 +53,5 @@ export const SOCIAL_MEDIA_SERVICE_CONTENT: LandingContent = {
     "Keep your business active on social media with engaging posts, reels and consistent management that builds trust and encourages enquiries.",
   servicesSection: SOCIAL_INCLUDED,
   leadSource: "Social Media Service Landing Page",
-  whatsappMessage: "Hi Clever Crow, I'm interested in social media management. (Ref: LP/Social-Media-Service)",
+  whatsappMessage: "Hi Clever Crow, I'm interested in social media management. (Ref: LP/Social-Media-Marketing)",
 };

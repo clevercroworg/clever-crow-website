@@ -19,6 +19,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/lp/social-media-service',
+        destination: '/lp/social-media-marketing',
+        permanent: true,
+      },
+      {
         source: '/privacy',
         destination: '/privacy-policy',
         permanent: true,
