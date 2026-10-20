@@ -17,6 +17,8 @@ import ServiceFooter from './ServiceFooter';
 import SectionHeading from './SectionHeading';
 import HeroDoodles from './HeroDoodles';
 import ArcBackground from './ArcBackground';
+import { MotionConfig } from 'framer-motion';
+import { Reveal, RiseText, Stagger, StaggerItem } from './motion';
 
 export default function DigitalMarketingServiceClient() {
   const router = useRouter();
@@ -332,6 +334,7 @@ export default function DigitalMarketingServiceClient() {
   ];
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="svc-root bg-slate-50 text-slate-800 hospitality-funnel">
       {/* Navbar */}
       <nav className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
@@ -529,6 +532,7 @@ export default function DigitalMarketingServiceClient() {
       <section className="overflow-hidden py-6 sm:py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="sr-only">Brands We Work With</h2>
+          <Reveal y={20}>
           <div className="fade-edge relative overflow-hidden rounded-2xl border border-slate-200 bg-white py-4">
             <div className="logo-track">
               <div className="flex items-center gap-10 px-8">
@@ -543,6 +547,7 @@ export default function DigitalMarketingServiceClient() {
               </div>
             </div>
           </div>
+          </Reveal>
         </div>
       </section>
 
@@ -555,12 +560,15 @@ export default function DigitalMarketingServiceClient() {
             subtitle="Solutions designed to drive real growth."
           />
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger className="mt-10 grid gap-6 [perspective:1200px] sm:grid-cols-2 lg:grid-cols-3" stagger={0.1}>
             {pricingPlans.map((plan, index) => {
               const IconComp = plan.icon;
               return (
-                <article key={index} className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                  <img src={plan.image} alt={plan.title} className="h-44 w-full object-cover" />
+                <StaggerItem key={index} variant="tilt" className="h-full">
+                <article className="group relative h-full overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                  <div className="overflow-hidden">
+                    <img src={plan.image} alt={plan.title} className="h-44 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]" />
+                  </div>
                   <div className="p-6">
                     <h3 className="inline-flex items-center gap-2 text-lg font-black uppercase tracking-[0.06em] text-slate-900">
                       <IconComp className="w-5 h-5 text-amber-500 shrink-0 group-hover:scale-110 transition-transform duration-300" />
@@ -587,11 +595,13 @@ export default function DigitalMarketingServiceClient() {
                     </button>
                   </div>
                 </article>
+                </StaggerItem>
               );
             })}
-          </div>
+          </Stagger>
 
           {/* Custom Strategy Banner */}
+          <Reveal y={24} scale={0.98}>
           <div className="mt-12 rounded-3xl border border-amber-200 bg-amber-50/50 p-8 text-center backdrop-blur-sm">
             <p className="text-lg text-slate-700 font-medium flex items-center justify-center gap-2 flex-wrap">
               <Sparkles className="text-amber-600 w-5 h-5" />
@@ -606,6 +616,7 @@ export default function DigitalMarketingServiceClient() {
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
+          </Reveal>
         </div>
       </section>
       </div>
@@ -613,9 +624,11 @@ export default function DigitalMarketingServiceClient() {
       {/* Direct CTA Panel */}
       <section className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-14 text-white">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold sm:text-4xl text-white">Grow Your Business with Digital Marketing</h2>
-          <p className="mt-3 text-slate-200">SEO, Social Media, Google Ads, and conversion-focused strategy.</p>
-          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <h2 className="text-3xl font-extrabold sm:text-4xl text-white"><RiseText text="Grow Your Business with Digital Marketing" /></h2>
+          <Reveal y={16} delay={0.2}>
+            <p className="mt-3 text-slate-200">SEO, Social Media, Google Ads, and conversion-focused strategy.</p>
+          </Reveal>
+          <Reveal y={20} delay={0.32} className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a 
               href="tel:09986389444" 
               onClick={trackCallClick}
@@ -634,7 +647,7 @@ export default function DigitalMarketingServiceClient() {
               <FaWhatsapp className="text-lg" />
               Chat with Us on WhatsApp
             </a>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -646,10 +659,10 @@ export default function DigitalMarketingServiceClient() {
             title="Trending Reels We've Produced"
             subtitle="Take a look at high-impact content crafted by our social production teams."
           />
-          <div className="mt-8 grid gap-4 grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+          <Stagger className="mt-8 grid gap-4 grid-cols-2 md:grid-cols-4 lg:grid-cols-5" stagger={0.06}>
             {(showAllReels ? reels : reels.slice(0, 10)).map((src, i) => (
+              <StaggerItem key={i} variant="pop">
               <video 
-                key={i} 
                 ref={reelCallback}
                 data-src={src}
                 className="w-full rounded-2xl shadow-sm aspect-[9/16] object-cover bg-black border border-slate-200 hover:scale-[1.02] hover:border-amber-400/40 transition-all duration-300 cursor-pointer" 
@@ -658,8 +671,9 @@ export default function DigitalMarketingServiceClient() {
                 playsInline
                 preload="none"
               />
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
           {!showAllReels && reels.length > 10 && (
             <div className="mt-8 text-center">
               <button 
@@ -684,9 +698,10 @@ export default function DigitalMarketingServiceClient() {
       <section className="py-14 sm:py-16 bg-slate-50/50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="Client testimonials" title="What Our Clients Say" />
-          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <Stagger className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
             {testimonials.map((test, index) => (
-              <article key={index} className="relative rounded-2xl border border-slate-200 border-l-4 border-l-amber-400 bg-white p-6 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
+              <StaggerItem key={index} variant={index % 3 === 0 ? "slide-left" : index % 3 === 2 ? "slide-right" : "rise"} className="h-full">
+              <article className="relative h-full rounded-2xl border border-slate-200 border-l-4 border-l-amber-400 bg-white p-6 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
                 <span className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm border border-slate-100 z-10">
                   <FaGoogle className="w-4 h-4 text-[#4285F4]" />
                 </span>
@@ -695,8 +710,9 @@ export default function DigitalMarketingServiceClient() {
                 <p className="mt-3 text-slate-600 text-[14.7px] leading-relaxed relative z-10">&ldquo;{test.quote}&rdquo;</p>
                 <p className="mt-4 text-xs font-bold text-slate-900 tracking-wide uppercase relative z-10">{test.client}</p>
               </article>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -704,9 +720,10 @@ export default function DigitalMarketingServiceClient() {
       <section id="faq" className="scroll-mt-20 bg-white py-14 sm:py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="FAQs" title="Frequently Asked Questions" className="mb-10" />
-          <div className="space-y-3">
+          <Stagger className="space-y-3" stagger={0.07}>
             {faqs.map((faq, index) => (
-              <details key={index} className="group rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors duration-300 open:bg-amber-50/20 faq-details" open={index === 0}>
+              <StaggerItem key={index} variant="slide-left">
+              <details className="group rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors duration-300 open:bg-amber-50/20 faq-details" open={index === 0}>
                 <summary className="cursor-pointer font-semibold text-slate-800 hover:text-amber-600 transition-colors duration-300 list-none flex items-center justify-between">
                   <span>{faq.q}</span>
                   <ChevronDown className="w-4 h-4 text-slate-400 group-open:text-amber-500 transition-all duration-300 group-open:rotate-180 shrink-0 ml-2" />
@@ -715,8 +732,9 @@ export default function DigitalMarketingServiceClient() {
                   <p className="pt-2 text-sm text-slate-600 leading-relaxed border-t border-slate-200/50 mt-2">{faq.a}</p>
                 </div>
               </details>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -801,5 +819,6 @@ export default function DigitalMarketingServiceClient() {
         </div>
       )}
     </div>
+    </MotionConfig>
   );
 }

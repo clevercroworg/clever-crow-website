@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { ArrowRight, Phone } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
+import { Reveal } from "./motion";
 
 type ServiceFooterProps = {
   whatsappUrl: string;
@@ -23,10 +24,11 @@ const SOCIALS = [
 export default function ServiceFooter({ whatsappUrl, onOpenModal, onCallClick, onWhatsAppClick }: ServiceFooterProps) {
   return (
     <>
-      {/* CTA Section — styled with a smooth, distinct background to separate from footer */}
-      <section className="relative overflow-hidden bg-[#e9edf5] py-14 sm:py-20 border-t border-slate-200/80">
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl border border-slate-800/20 bg-[#071330] p-8 sm:p-10 lg:p-12 shadow-2xl">
+      {/* CTA Section on dark blue */}
+      <section className="relative overflow-hidden bg-[#050b1f] py-14 sm:py-20">
+        <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[60rem] -translate-x-1/2 rounded-full bg-blue-700/20 blur-[140px]" aria-hidden="true" />
+        <Reveal y={36} scale={0.97} className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#071330] p-8 sm:p-10 lg:p-12 shadow-2xl">
             {/* Background photo: devices with growth charts on the right; overlays keep the text readable */}
             <Image
               src="/lp/digital-marketing/digital-marketing-banner.jpg"
@@ -70,16 +72,14 @@ export default function ServiceFooter({ whatsappUrl, onOpenModal, onCallClick, o
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
-      {/* Minimal Centralized Footer */}
-      <footer id="site-footer" className="relative overflow-hidden bg-[#050b1f] text-white py-12 sm:py-16">
-        <div className="pointer-events-none absolute -top-32 left-1/2 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-blue-700/15 blur-[120px]" aria-hidden="true" />
-
-        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+      {/* Minimal Centralized Footer (white) */}
+      <footer id="site-footer" className="relative overflow-hidden border-t border-slate-200 bg-white py-12 text-slate-900 sm:py-16">
+        <Reveal y={24} className="relative mx-auto flex max-w-4xl flex-col items-center px-4 text-center sm:px-6 lg:px-8">
           {/* Clever Crow Logo */}
-          <span className="inline-flex items-center rounded-2xl bg-white px-5 py-2.5 shadow-sm">
+          <span className="inline-flex items-center px-1 py-1">
             <Image src="/CSS.svg" alt="Clever Crow" width={160} height={25} className="h-7 w-auto" />
           </span>
 
@@ -88,7 +88,7 @@ export default function ServiceFooter({ whatsappUrl, onOpenModal, onCallClick, o
             <a
               href="tel:09986389444"
               onClick={onCallClick}
-              className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-slate-200 transition hover:border-amber-400 hover:text-white"
+              className="inline-flex items-center gap-2.5 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-slate-800 transition hover:border-amber-400 hover:bg-white"
             >
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-400 text-[#071330]">
                 <Phone className="h-3.5 w-3.5" aria-hidden="true" />
@@ -100,7 +100,7 @@ export default function ServiceFooter({ whatsappUrl, onOpenModal, onCallClick, o
               onClick={onWhatsAppClick}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-slate-200 transition hover:border-[#25D366] hover:text-white"
+              className="inline-flex items-center gap-2.5 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-slate-800 transition hover:border-[#25D366] hover:bg-white"
             >
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#25D366] text-white">
                 <FaWhatsapp className="h-4 w-4" aria-hidden="true" />
@@ -118,7 +118,7 @@ export default function ServiceFooter({ whatsappUrl, onOpenModal, onCallClick, o
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-slate-300 transition hover:border-amber-400 hover:bg-amber-400 hover:text-[#071330]"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:-translate-y-0.5 hover:border-amber-400 hover:bg-amber-400 hover:text-[#071330]"
               >
                 <Icon className="h-4 w-4" aria-hidden="true" />
               </a>
@@ -126,13 +126,13 @@ export default function ServiceFooter({ whatsappUrl, onOpenModal, onCallClick, o
           </div>
 
           {/* Bottom Legal bar: Copyright and Privacy Policy */}
-          <div className="mt-10 w-full border-t border-white/10 pt-6 flex flex-col items-center justify-between gap-3 text-xs text-slate-500 sm:flex-row">
+          <div className="mt-10 flex w-full flex-col items-center justify-between gap-3 border-t border-slate-200 pt-6 text-xs text-slate-500 sm:flex-row">
             <p>© {new Date().getFullYear()} Clever Crow Strategies LLP. All rights reserved.</p>
-            <a href="/privacy-policy" className="transition hover:text-white">
+            <a href="/privacy-policy" className="transition hover:text-slate-900">
               Privacy Policy
             </a>
           </div>
-        </div>
+        </Reveal>
       </footer>
     </>
   );

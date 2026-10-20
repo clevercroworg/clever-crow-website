@@ -234,8 +234,12 @@ function CaseStudyRow({ study, index }: { study: CaseStudy; index: number }) {
 
       </motion.div>
 
-      {/* Endless carousel: alternate rows travel in opposite directions; pauses on hover */}
-      <div
+      {/* Endless carousel: alternate rows travel in opposite directions; pauses on hover. Slides in from its side. */}
+      <motion.div
+        initial={{ opacity: 0, x: galleryLeft ? -60 : 60 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "0px 0px -80px 0px" }}
+        transition={{ duration: 0.9, ease: EASE }}
         className={`group relative order-1 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_6%,black_94%,transparent)] ${
           galleryLeft
             ? "lg:order-1 lg:[mask-image:linear-gradient(270deg,transparent,black_12%)]"
@@ -259,7 +263,7 @@ function CaseStudyRow({ study, index }: { study: CaseStudy; index: number }) {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

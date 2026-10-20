@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { Reveal, RiseText } from "./motion";
 
 type SectionHeadingProps = {
   eyebrow: string;
@@ -12,27 +12,26 @@ type SectionHeadingProps = {
 };
 
 // The one heading style used by every section on this page: label, heading, one-line subtitle.
+// Label fades up, the title rises word by word, then the subtitle follows.
 export default function SectionHeading({ eyebrow, title, subtitle, tone = "light", className = "" }: SectionHeadingProps) {
   const dark = tone === "dark";
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`mx-auto max-w-3xl text-center ${className}`}
-    >
-      <p className={`text-xs font-bold uppercase tracking-[0.25em] ${dark ? "text-amber-400" : "text-amber-600"}`}>{eyebrow}</p>
+    <div className={`mx-auto max-w-3xl text-center ${className}`}>
+      <Reveal y={14}>
+        <p className={`text-xs font-bold uppercase tracking-[0.25em] ${dark ? "text-amber-400" : "text-amber-600"}`}>{eyebrow}</p>
+      </Reveal>
       <h2
         className={`mt-3 text-balance text-[1.85rem] leading-[1.15] tracking-[-0.025em] sm:text-4xl lg:text-[2.75rem] ${
           dark ? "text-white" : "text-[#071330]"
         }`}
       >
-        {title}
+        <RiseText text={title} delay={0.08} />
       </h2>
       {subtitle && (
-        <p className={`mx-auto mt-4 max-w-2xl text-base leading-relaxed sm:text-lg ${dark ? "text-slate-400" : "text-slate-600"}`}>{subtitle}</p>
+        <Reveal y={16} delay={0.25}>
+          <p className={`mx-auto mt-4 max-w-2xl text-base leading-relaxed sm:text-lg ${dark ? "text-slate-400" : "text-slate-600"}`}>{subtitle}</p>
+        </Reveal>
       )}
-    </motion.div>
+    </div>
   );
 }
