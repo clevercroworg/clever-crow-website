@@ -3,6 +3,9 @@ html { scroll-behavior: smooth; }
 /* Page typeface: Plus Jakarta Sans, loaded with next/font in page.tsx as --font-svc. */
 .svc-root {
   font-family: var(--font-svc), ui-sans-serif, system-ui, sans-serif;
+  /* Never let off-screen entrance animations widen the page (mobile browsers would zoom out and
+     misplace the fixed bars). clip, unlike hidden, keeps the sticky navbar working. */
+  overflow-x: clip;
 }
 
 .svc-root :is(h3, h4, h5, h6) {

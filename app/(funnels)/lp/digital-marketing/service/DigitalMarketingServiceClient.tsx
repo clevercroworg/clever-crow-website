@@ -695,7 +695,7 @@ export default function DigitalMarketingServiceClient() {
       <IndustriesServed onOpenModal={() => setIsModalOpen(true)} />
 
       {/* Success Testimonial Cards — Improvement #4: Google icon + left border */}
-      <section className="py-14 sm:py-16 bg-slate-50/50">
+      <section className="overflow-hidden py-14 sm:py-16 bg-slate-50/50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="Client testimonials" title="What Our Clients Say" />
           <Stagger className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
@@ -717,7 +717,7 @@ export default function DigitalMarketingServiceClient() {
       </section>
 
       {/* FAQ Details Accordion */}
-      <section id="faq" className="scroll-mt-20 bg-white py-14 sm:py-16">
+      <section id="faq" className="scroll-mt-20 overflow-hidden bg-white py-14 sm:py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="FAQs" title="Frequently Asked Questions" className="mb-10" />
           <Stagger className="space-y-3" stagger={0.07}>
