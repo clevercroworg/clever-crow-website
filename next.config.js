@@ -19,6 +19,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/lp/digital-marketing/service',
+        destination: '/lp/digital-marketing-service',
+        permanent: true,
+      },
+      {
         source: '/lp/social-media-service',
         destination: '/lp/social-media-marketing',
         permanent: true,

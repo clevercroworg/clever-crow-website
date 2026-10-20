@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import DigitalMarketingServiceClient from "../digital-marketing/service/DigitalMarketingServiceClient";
-import { SOCIAL_MEDIA_SERVICE_CONTENT } from "../digital-marketing/service/page-content";
+import DigitalMarketingServiceClient from "../digital-marketing-service/DigitalMarketingServiceClient";
+import { SOCIAL_MEDIA_SERVICE_CONTENT } from "../digital-marketing-service/page-content";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],

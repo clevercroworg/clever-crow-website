@@ -20,7 +20,7 @@ export const SERVICE_CONTENT: LandingContent = {
   heroSubtitle: "Grow your business with digital marketing that brings more leads and sales.",
   servicesSection: "plans",
   leadSource: "Digital Marketing Service Landing Page",
-  whatsappMessage: "Hi Clever Crow, I'm interested in digital marketing services. (Ref: LP/Digital-Marketing/Service)",
+  whatsappMessage: "Hi Clever Crow, I'm interested in digital marketing services. (Ref: LP/Digital-Marketing-Service)",
 };
 
 export const LEAD_GENERATION_CONTENT: LandingContent = {
