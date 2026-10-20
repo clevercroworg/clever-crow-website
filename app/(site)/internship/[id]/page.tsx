@@ -110,7 +110,7 @@ export default function InternshipApplicationPage({ params }: { params: Promise<
 
       if (!res.ok) throw new Error("Failed to submit");
 
-      router.push(`/internship/thank-you?role=${encodeURIComponent(internship.title)}`);
+      router.push("/thank-you");
     } catch (err) {
       setError("Something went wrong. Please try again.");
     } finally {

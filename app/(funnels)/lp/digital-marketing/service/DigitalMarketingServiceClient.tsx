@@ -406,7 +406,7 @@ export default function DigitalMarketingServiceClient() {
           <HeroDoodles />
           <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
             {/* Copy */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-8">
               <h1 className="text-[2.2rem] font-extrabold leading-[1.06] tracking-[-0.035em] sm:text-[3.25rem] lg:text-[3rem] xl:text-[3.85rem]">
                 Turn More Searches &amp; Clicks Into{" "}
                 <span className="bg-gradient-to-r from-[#FFE27A] via-[#FFCE1B] to-[#F5A623] bg-clip-text text-transparent sm:whitespace-nowrap">
@@ -414,11 +414,11 @@ export default function DigitalMarketingServiceClient() {
                 </span>
               </h1>
 
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
                 Grow your business with digital marketing that brings more leads and sales.
               </p>
 
-              <ul className="mt-8 grid max-w-xl grid-cols-2 gap-3 sm:gap-4">
+              <ul className="mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:gap-4">
                 {heroAchievements.map(({ value, label, icon: Icon }) => (
                   <li key={label} className="flex flex-col items-start gap-2.5 rounded-2xl border border-white/10 bg-white/[0.05] p-3.5 backdrop-blur-sm min-[380px]:flex-row min-[380px]:items-center min-[380px]:gap-3 sm:gap-4 sm:p-4">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-400 text-[#071330] sm:h-11 sm:w-11">
@@ -445,10 +445,10 @@ export default function DigitalMarketingServiceClient() {
             </div>
 
             {/* Callback form */}
-            <div className="relative lg:col-span-5 lg:w-full lg:max-w-[440px] lg:justify-self-end">
+            <div className="relative lg:col-span-4 lg:w-full lg:max-w-[360px] lg:justify-self-end">
               <div className="relative">
                 <div className="pointer-events-none absolute -inset-px rounded-[1.6rem] bg-gradient-to-b from-amber-300/70 via-white/15 to-white/5" aria-hidden="true" />
-                <div className="relative rounded-3xl bg-white p-6 text-slate-900 shadow-[0_40px_90px_-25px_rgba(0,0,0,0.75)] sm:p-8">
+                <div className="relative rounded-3xl bg-white p-6 text-slate-900 shadow-[0_40px_90px_-25px_rgba(0,0,0,0.75)] sm:p-8 lg:p-6">
                   <h2 className="text-2xl font-extrabold tracking-tight text-slate-950">Request a Call Back</h2>
 
                   <form onSubmit={handleFormSubmit} className="mt-5 space-y-3">

@@ -328,6 +328,7 @@ export default function SuccessStoriesClient() {
         }
         setFormStatus("sent");
         setFormData({ name: "", phone: "" });
+        window.location.href = "/thank-you";
       } else {
         setFormStatus("error");
       }

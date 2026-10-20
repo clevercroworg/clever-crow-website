@@ -343,9 +343,7 @@ export default function SalonLandingPage() {
           budget: "",
           message: ""
         });
-        setTimeout(() => {
-          router.push("/");
-        }, 1200);
+        router.push("/thank-you");
       } else {
         setSubmitStatus("error");
       }

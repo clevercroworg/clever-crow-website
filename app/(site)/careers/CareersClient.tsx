@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -254,6 +255,7 @@ function Field({ id, label, required, error, hint, children }: {
 
 function ApplicationForm({ roleId, setRoleId }: { roleId: string; setRoleId: (id: string) => void }) {
   const role = OPEN_ROLES.find((r) => r.id === roleId) ?? OPEN_ROLES[0];
+  const router = useRouter();
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Errors>({});
   const [cvName, setCvName] = useState("");
@@ -303,6 +305,7 @@ function ApplicationForm({ roleId, setRoleId }: { roleId: string; setRoleId: (id
         throw new Error("failed");
       }
       setStatus("success");
+      router.push("/thank-you");
     } catch {
       setStatus("error");
     }

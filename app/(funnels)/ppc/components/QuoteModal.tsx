@@ -44,7 +44,7 @@ export default function QuoteModal() {
         });
       }
 
-      window.location.href = "/ppc/thank-you?source=custom-quote";
+      window.location.href = "/thank-you";
     } catch (err) {
       console.error("Quote form failed", err);
       alert("Something went wrong. Please try again.");

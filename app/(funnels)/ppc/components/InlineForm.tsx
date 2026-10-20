@@ -41,7 +41,7 @@ export default function InlineForm() {
         });
       }
 
-      window.location.href = "/ppc/thank-you?source=digital-marketing";
+      window.location.href = "/thank-you";
     } catch (err) {
       console.error("Form submission failed", err);
       alert("Something went wrong. Please try again.");

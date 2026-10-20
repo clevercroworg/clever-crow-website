@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import ClientChatbot from "@/components/ClientChatbot";
 import UtmTracker from "@/components/UtmTracker";
+import MetaPixel from "@/components/MetaPixel";
 import Script from "next/script";
 
 export const metadata: Metadata = {
@@ -40,6 +41,7 @@ export default function RootLayout({
             });
           `}
         </Script>
+        <MetaPixel />
         <UtmTracker />
         {children}
         <ClientChatbot />
