@@ -17,7 +17,7 @@ import ServiceFooter from './ServiceFooter';
 import SectionHeading from './SectionHeading';
 import HeroDoodles from './HeroDoodles';
 import ArcBackground from './ArcBackground';
-import LeadGenIncluded from './LeadGenIncluded';
+import IncludedSection from './IncludedSection';
 import { SERVICE_CONTENT, type LandingContent } from './page-content';
 import { noOrphan } from './text';
 import { MotionConfig } from 'framer-motion';
@@ -410,6 +410,12 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
           <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
             {/* Copy */}
             <div className="lg:col-span-8">
+              {content.heroEyebrow && (
+                <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-amber-300 backdrop-blur-sm sm:text-xs">
+                  <span className="h-1.5 w-1.5 rounded-full bg-amber-400" aria-hidden="true" />
+                  {content.heroEyebrow}
+                </p>
+              )}
               <h1 className="text-[1.6rem] font-extrabold leading-[1.08] tracking-[-0.035em] min-[360px]:text-[1.85rem] min-[400px]:text-[2.1rem] sm:text-[3.25rem] lg:text-[3rem] xl:text-[3.85rem]">
                 {content.heroTitleLead.endsWith(".") ? (
                   <>
@@ -422,7 +428,7 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
                 <span className={`bg-gradient-to-r from-[#FFE27A] via-[#FFCE1B] to-[#F5A623] bg-clip-text text-transparent ${content.heroAccentOwnLine ? "block" : ""}`}>
                   {content.heroTitleAccent.endsWith(".") ? (
                     <>
-                      {(content.heroTitleAccent.split(" ").length === 2 ? content.heroTitleAccent.replace(" ", "\u00A0") : noOrphan(content.heroTitleAccent)).slice(0, -1)}
+                      {(content.heroTitleAccent.split(" ").length <= 3 ? content.heroTitleAccent.replaceAll(" ", "\u00A0") : noOrphan(content.heroTitleAccent)).slice(0, -1)}
                       <span className="-ml-[0.1em]">.</span>
                     </>
                   ) : (
@@ -569,8 +575,8 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
         </div>
       </section>
 
-      {content.servicesSection === "lead-generation" ? (
-        <LeadGenIncluded onOpenModal={() => setIsModalOpen(true)} />
+      {content.servicesSection !== "plans" ? (
+        <IncludedSection content={content.servicesSection} onOpenModal={() => setIsModalOpen(true)} />
       ) : (
       <>
       {/* Smart Plans / Pricing Section */}
