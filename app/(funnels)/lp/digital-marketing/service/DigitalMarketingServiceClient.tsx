@@ -199,7 +199,7 @@ export default function DigitalMarketingServiceClient() {
       image: "/lp/digital-marketing/images/webbg.jpg"
     },
     {
-      title: "SEO Management",
+      title: "SEO, AIO, GEO",
       description: "Boost search visibility and get steady organic leads.",
       icon: Search,
       features: [
@@ -212,7 +212,7 @@ export default function DigitalMarketingServiceClient() {
       image: "/lp/digital-marketing/images/seobg.jpg"
     },
     {
-      title: "Google Ads Management",
+      title: "Google Ads",
       description: "Run high-intent campaigns that bring qualified enquiries.",
       icon: FaGoogle,
       features: [
@@ -398,7 +398,7 @@ export default function DigitalMarketingServiceClient() {
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#040a1c]/80" />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 pt-12 sm:px-6 sm:pt-16 lg:px-8 lg:pt-20">
+        <div className="relative mx-auto max-w-7xl px-4 pt-4 sm:px-6 sm:pt-16 lg:px-8 lg:pt-20">
           <HeroDoodles />
           <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
             {/* Copy */}
@@ -555,10 +555,7 @@ export default function DigitalMarketingServiceClient() {
             {pricingPlans.map((plan, index) => {
               const IconComp = plan.icon;
               return (
-                <article key={index} className={`group relative overflow-hidden rounded-3xl border bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${plan.title === 'Google Ads Management' ? 'border-amber-400 ring-2 ring-amber-400/20' : 'border-slate-200'}`}>
-                  {plan.title === 'Google Ads Management' && (
-                    <div className="absolute top-4 right-4 z-10 rounded-full bg-amber-400 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-900 shadow-sm">Most Popular</div>
-                  )}
+                <article key={index} className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                   <img src={plan.image} alt={plan.title} className="h-44 w-full object-cover" />
                   <div className="p-6">
                     <h3 className="inline-flex items-center gap-2 text-lg font-black uppercase tracking-[0.06em] text-slate-900">
