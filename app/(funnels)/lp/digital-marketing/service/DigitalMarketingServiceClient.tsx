@@ -16,6 +16,7 @@ import StickyCtaBar from './StickyCtaBar';
 import ServiceFooter from './ServiceFooter';
 import SectionHeading from './SectionHeading';
 import HeroDoodles from './HeroDoodles';
+import ArcBackground from './ArcBackground';
 
 export default function DigitalMarketingServiceClient() {
   const router = useRouter();
@@ -522,7 +523,8 @@ export default function DigitalMarketingServiceClient() {
       </section>
 
       {/* One continuous patterned surface behind the logo strip and the services, so the pattern never restarts */}
-      <div className="svc-pattern svc-pattern--clay">
+      <div className="svc-pattern svc-pattern--arcs relative isolate">
+        <ArcBackground />
       {/* Brands We Work With */}
       <section className="overflow-hidden py-6 sm:py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -158,6 +158,7 @@ html { scroll-behavior: smooth; }
 
 /* Light patterned surface behind the logo strip + services.
    --clay: sharp-edged clay "Truchet" blobs, rendered as a seamless tile (public/lp/digital-marketing/patterns/clay-blobs.jpg)
+   --arcs: thin concentric line arcs (ArcBackground.tsx), the current choice
    --cubes: light isometric cubes (vector tile, public/lp/digital-marketing/patterns/iso-cubes.svg) */
 .svc-pattern {
   background-color: #f5f6f8;
@@ -167,6 +168,11 @@ html { scroll-behavior: smooth; }
 .svc-pattern--clay {
   background-image: url("/lp/digital-marketing/patterns/clay-blobs.jpg");
   background-size: 600px 600px;
+}
+
+/* --arcs: flat near-white; thin concentric arcs are drawn by ArcBackground.tsx */
+.svc-pattern--arcs {
+  background-color: #f8f9fb;
 }
 
 .svc-pattern--cubes {
