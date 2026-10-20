@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { FORM_RECIPIENTS } from "@/lib/form-recipients";
 import { CV_MAX_BYTES, OPEN_ROLES, isAllowedCvName } from "@/app/(site)/careers/careers-data";
 
 // Submissions faster than this are almost certainly automated.
@@ -94,10 +95,9 @@ export async function POST(req: Request) {
       auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
     });
 
-    // Same inbox as internship applications (/api/internship).
     await transporter.sendMail({
       from: `"Clever Crow Careers" <${process.env.SMTP_USER}>`,
-      to: process.env.TO_EMAIL || "manojvg900@gmail.com",
+      to: FORM_RECIPIENTS.join(","),
       replyTo: email,
       subject: `Careers Application: ${name.replace(/[\r\n]/g, " ")} (${role.title})`,
       html: `

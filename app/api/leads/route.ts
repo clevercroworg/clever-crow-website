@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import nodemailer from "nodemailer"
+import { FORM_RECIPIENTS } from "@/lib/form-recipients";
 
 const isValValid = (val: any) => {
   if (!val) return false;
@@ -45,11 +46,7 @@ export async function POST(req: Request) {
         }
       })
 
-      // Email recipients - both existing and new email
-      const emailRecipients = [
-        process.env.TO_EMAIL || "manojvg900@gmail.com",
-        "krishna@clevercrow.in"
-      ].filter(Boolean).join(",");
+      const emailRecipients = FORM_RECIPIENTS.join(",");
 
       const info = await transporter.sendMail({
         from: `"clever crow" <${process.env.SMTP_USER}>`,

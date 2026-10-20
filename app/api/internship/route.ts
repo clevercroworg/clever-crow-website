@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { FORM_RECIPIENTS } from "@/lib/form-recipients";
 import { 
   Calendar, 
   MapPin, 
@@ -62,7 +63,7 @@ export async function POST(req: Request) {
 
     const mailOptions = {
       from: `"Clever Crow Internships" <${process.env.SMTP_USER}>`,
-      to: process.env.TO_EMAIL || "manojvg900@gmail.com",
+      to: FORM_RECIPIENTS.join(","),
       subject: `New Internship Application: ${name} (${internship_title || "General"})`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; border-radius: 12px; padding: 24px;">

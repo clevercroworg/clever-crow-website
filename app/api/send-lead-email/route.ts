@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { FORM_RECIPIENTS } from "@/lib/form-recipients";
 import { Resend } from 'resend';
 
 export async function POST(request: NextRequest) {
@@ -10,7 +11,7 @@ export async function POST(request: NextRequest) {
     const { name, phone, service, pageUrl } = await request.json();
 
     // Send to both emails
-    const emailRecipients = ['krishna@clevercrow.in', 'hello@clevercrow.in'];
+    const emailRecipients = FORM_RECIPIENTS;
 
     for (const recipient of emailRecipients) {
       await resend.emails.send({
