@@ -12,6 +12,16 @@ html { scroll-behavior: smooth; }
   font-family: inherit;
 }
 
+/* No orphans: headings balance their lines so a single word never sits alone on the last line;
+   body copy uses "pretty" wrapping for the same reason. */
+.svc-root :is(h1, h2, h3, h4, h5, h6, .svc-heading) {
+  text-wrap: balance;
+}
+
+.svc-root p {
+  text-wrap: pretty;
+}
+
 /* globals.css forces Inter on h1/h2 with !important inside @layer base. Important declarations in an
    earlier cascade layer win, so this override sits in Tailwind's first layer (theme). */
 @layer theme {

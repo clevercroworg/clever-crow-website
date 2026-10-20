@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useRef } from "react";
 import { motion, useAnimationControls, useInView, type Variants } from "framer-motion";
+import { noOrphan } from "./text";
 
 // Shared scroll micro-animations for this page. Only transform and opacity are animated (GPU-friendly,
 // no layout work), each element animates once when it enters the viewport, and MotionConfig
@@ -163,7 +164,7 @@ const wordVariants: Variants = {
 
 /** Heading text that rises word by word from behind an invisible mask. Screen readers get the plain text. */
 export function RiseText({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
-  const words = text.split(" ");
+  const words = noOrphan(text).split(" ");
   return (
     <motion.span
       initial="hidden"

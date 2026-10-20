@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { FaGoogle, FaMeta } from "react-icons/fa6";
 import SectionHeading from "./SectionHeading";
+import { noOrphan } from "./text";
 import { CASE_STUDIES, type CaseStudy, type ResultMetric } from "./results-data";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -229,7 +230,7 @@ function CaseStudyRow({ study, index }: { study: CaseStudy; index: number }) {
           ))}
         </div>
 
-        <h3 className="mt-7 text-2xl font-bold leading-tight text-white sm:text-[1.75rem]">{study.headline}</h3>
+        <h3 className="mt-7 text-2xl font-bold leading-tight text-white sm:text-[1.75rem]">{noOrphan(study.headline)}</h3>
         <p className="mt-4 text-base leading-relaxed text-slate-300">{study.story}</p>
 
       </motion.div>

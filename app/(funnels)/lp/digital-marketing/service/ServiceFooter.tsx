@@ -5,6 +5,42 @@ import Image from "next/image";
 import { ArrowRight, Phone } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
 import { Reveal } from "./motion";
+import { noOrphan } from "./text";
+
+function CtaArt() {
+  const rings = Array.from({ length: 12 }, (_, i) => 70 + i * 22);
+  return (
+    <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-amber-400/20 blur-[90px]" />
+      <div className="absolute -bottom-32 right-1/3 h-72 w-96 rounded-full bg-blue-600/25 blur-[100px]" />
+      <div
+        className="absolute inset-0 opacity-40"
+        style={{
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.14) 1px, transparent 1.2px)",
+          backgroundSize: "22px 22px",
+          maskImage: "linear-gradient(90deg, transparent 35%, black 75%)",
+          WebkitMaskImage: "linear-gradient(90deg, transparent 35%, black 75%)",
+        }}
+      />
+      {/* Concentric arcs entering from the bottom-right corner */}
+      <svg className="absolute -bottom-40 -right-40 h-[520px] w-[520px]" viewBox="-300 -300 600 600" fill="none">
+        {rings.map((r, i) => (
+          <circle key={r} r={r} stroke={i % 3 === 0 ? "#FFCE1B" : "#93C5FD"} strokeOpacity={i % 3 === 0 ? 0.35 : 0.14} strokeWidth="1" vectorEffect="non-scaling-stroke" />
+        ))}
+      </svg>
+      {/* Rising growth line (desktop) */}
+      <svg className="absolute bottom-0 right-0 hidden h-[78%] w-[46%] lg:block" viewBox="0 0 400 200" preserveAspectRatio="none" fill="none">
+        <path d="M0 190 L60 168 L110 176 L170 132 L220 142 L280 92 L330 104 L400 30 L400 200 L0 200 Z" fill="#FFCE1B" fillOpacity="0.06" />
+        <path d="M0 190 L60 168 L110 176 L170 132 L220 142 L280 92 L330 104 L400 30" stroke="#FFCE1B" strokeOpacity="0.7" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+      </svg>
+      <svg className="absolute bottom-0 right-0 hidden h-[78%] w-[46%] lg:block" viewBox="0 0 400 200" preserveAspectRatio="none">
+        {[[60, 168], [170, 132], [280, 92], [400, 30]].map(([x, y]) => (
+          <circle key={x} cx={x} cy={y} r="3.5" fill="#FFCE1B" vectorEffect="non-scaling-stroke" />
+        ))}
+      </svg>
+    </div>
+  );
+}
 
 type ServiceFooterProps = {
   whatsappUrl: string;
@@ -29,23 +65,12 @@ export default function ServiceFooter({ whatsappUrl, onOpenModal, onCallClick, o
         <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[60rem] -translate-x-1/2 rounded-full bg-blue-700/20 blur-[140px]" aria-hidden="true" />
         <Reveal y={36} scale={0.97} className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#071330] p-8 sm:p-10 lg:p-12 shadow-2xl">
-            {/* Background photo: devices with growth charts on the right; overlays keep the text readable */}
-            <Image
-              src="/lp/digital-marketing/digital-marketing-banner.jpg"
-              alt=""
-              fill
-              sizes="(min-width: 1280px) 1216px, 100vw"
-              className="pointer-events-none object-cover object-[85%_center]"
-              aria-hidden="true"
-            />
-            <div
-              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#071330]/95 via-[#071330]/85 to-[#071330]/40 lg:bg-gradient-to-r lg:from-[#071330] lg:via-[#071330]/85 lg:to-[#071330]/15"
-              aria-hidden="true"
-            />
+            {/* Drawn background: soft light, dot grid, gold/blue concentric arcs and a rising growth line (right side) */}
+            <CtaArt />
             <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-              <div className="max-w-xl">
+              <div className="max-w-2xl">
                 <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-400">Let&apos;s grow together</p>
-                <p className="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">Ready to get more leads and sales?</p>
+                <h2 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">{noOrphan("Ready to get more leads and sales?")}</h2>
                 <p className="mt-3 text-base text-slate-300">
                   Share your goals and we&apos;ll map out the right mix of SEO, ads, website and automation for your business.
                 </p>

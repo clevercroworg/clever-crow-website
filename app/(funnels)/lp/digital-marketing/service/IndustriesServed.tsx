@@ -2,6 +2,7 @@
 
 import React from "react";
 import SectionHeading from "./SectionHeading";
+import { noOrphan } from "./text";
 import { PopIcon, Stagger, StaggerItem } from "./motion";
 import {
   ArrowUpRight,
@@ -68,7 +69,7 @@ export default function IndustriesServed({ onOpenModal }: { onOpenModal: () => v
                 <PopIcon className="relative flex h-14 w-14 items-center justify-center rounded-full border border-slate-200 bg-white text-[#071330] shadow-sm transition-colors duration-300 group-hover:border-amber-400 group-hover:bg-[#FFCE1B] sm:h-16 sm:w-16">
                   <Icon className="h-6 w-6 stroke-[1.75] transition-transform duration-300 group-hover:scale-110 sm:h-7 sm:w-7" aria-hidden="true" />
                 </PopIcon>
-                <h3 className="relative text-sm font-bold leading-snug text-slate-900 sm:text-base">{name}</h3>
+                <h3 className="relative text-sm font-bold leading-snug text-slate-900 sm:text-base">{noOrphan(name)}</h3>
               </div>
             </StaggerItem>
           ))}

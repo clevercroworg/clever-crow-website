@@ -3,8 +3,8 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { 
-  Phone, Monitor, Search, Sparkles, Award, Users, Star, BadgeCheck,
-  Megaphone, CheckCircle, ShieldCheck, User, Send, ArrowRight, X, 
+  Phone, Monitor, Search, Sparkles, Award, Users, Star, BadgeCheck, Lock,
+  Megaphone, CheckCircle, User, Send, ArrowRight, X, 
   ChevronDown 
 } from 'lucide-react';
 import { FaWhatsapp, FaGoogle, FaInstagram } from 'react-icons/fa';
@@ -17,12 +17,15 @@ import ServiceFooter from './ServiceFooter';
 import SectionHeading from './SectionHeading';
 import HeroDoodles from './HeroDoodles';
 import ArcBackground from './ArcBackground';
+import LeadGenIncluded from './LeadGenIncluded';
+import { SERVICE_CONTENT, type LandingContent } from './page-content';
+import { noOrphan } from './text';
 import { MotionConfig } from 'framer-motion';
 import { Reveal, RiseText, Stagger, StaggerItem } from './motion';
 
-export default function DigitalMarketingServiceClient() {
+export default function DigitalMarketingServiceClient({ content = SERVICE_CONTENT }: { content?: LandingContent }) {
   const router = useRouter();
-  const whatsappUrl = "https://wa.me/919986389444?text=Hi%20Clever%20Crow%2C%20I%27m%20interested%20in%20digital%20marketing%20services.%20(Ref:%20LP/Digital-Marketing/Service)";
+  const whatsappUrl = `https://wa.me/919986389444?text=${encodeURIComponent(content.whatsappMessage)}`;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAllReels, setShowAllReels] = useState(false);
   const [status, setStatus] = useState<{ loading: boolean; success: boolean; error: string | null }>({ loading: false, success: false, error: null });
@@ -138,7 +141,7 @@ export default function DigitalMarketingServiceClient() {
     setStatus({ loading: true, success: false, error: null });
 
     try {
-      await submitLead(formData.name, formData.phone, "Digital Marketing Service Landing Page");
+      await submitLead(formData.name, formData.phone, content.leadSource);
       // Fire Google conversion tracking
       if (typeof window !== 'undefined' && (window as any).gtag) {
         (window as any).gtag('event', 'conversion', {
@@ -167,7 +170,7 @@ export default function DigitalMarketingServiceClient() {
     setModalStatus({ loading: true, success: false, error: null });
 
     try {
-      await submitLead(modalFormData.name, modalFormData.phone, "Digital Marketing Service Landing Page (Modal)");
+      await submitLead(modalFormData.name, modalFormData.phone, `${content.leadSource} (Modal)`);
       // Fire Google conversion tracking
       if (typeof window !== 'undefined' && (window as any).gtag) {
         (window as any).gtag('event', 'conversion', {
@@ -407,15 +410,29 @@ export default function DigitalMarketingServiceClient() {
           <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
             {/* Copy */}
             <div className="lg:col-span-8">
-              <h1 className="text-[2.2rem] font-extrabold leading-[1.06] tracking-[-0.035em] sm:text-[3.25rem] lg:text-[3rem] xl:text-[3.85rem]">
-                Turn More Searches &amp; Clicks Into{" "}
-                <span className="bg-gradient-to-r from-[#FFE27A] via-[#FFCE1B] to-[#F5A623] bg-clip-text text-transparent sm:whitespace-nowrap">
-                  Business Enquiries<span className="-ml-[0.1em]">.</span>
+              <h1 className="text-[1.6rem] font-extrabold leading-[1.08] tracking-[-0.035em] min-[360px]:text-[1.85rem] min-[400px]:text-[2.1rem] sm:text-[3.25rem] lg:text-[3rem] xl:text-[3.85rem]">
+                {content.heroTitleLead.endsWith(".") ? (
+                  <>
+                    {content.heroTitleLead.slice(0, -1)}
+                    <span className="-ml-[0.1em]">.</span>
+                  </>
+                ) : (
+                  content.heroTitleLead
+                )}{" "}
+                <span className={`bg-gradient-to-r from-[#FFE27A] via-[#FFCE1B] to-[#F5A623] bg-clip-text text-transparent ${content.heroAccentOwnLine ? "block" : ""}`}>
+                  {content.heroTitleAccent.endsWith(".") ? (
+                    <>
+                      {(content.heroTitleAccent.split(" ").length === 2 ? content.heroTitleAccent.replace(" ", "\u00A0") : noOrphan(content.heroTitleAccent)).slice(0, -1)}
+                      <span className="-ml-[0.1em]">.</span>
+                    </>
+                  ) : (
+                    noOrphan(content.heroTitleAccent)
+                  )}
                 </span>
               </h1>
 
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                Grow your business with digital marketing that brings more leads and sales.
+                {content.heroSubtitle}
               </p>
 
               <ul className="mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:gap-4">
@@ -447,14 +464,15 @@ export default function DigitalMarketingServiceClient() {
             {/* Callback form */}
             <div className="relative lg:col-span-4 lg:w-full lg:max-w-[360px] lg:justify-self-end">
               <div className="relative">
-                <div className="pointer-events-none absolute -inset-px rounded-[1.6rem] bg-gradient-to-b from-amber-300/70 via-white/15 to-white/5" aria-hidden="true" />
-                <div className="relative rounded-3xl bg-white p-6 text-slate-900 shadow-[0_40px_90px_-25px_rgba(0,0,0,0.75)] sm:p-8 lg:p-6">
-                  <h2 className="text-2xl font-extrabold tracking-tight text-slate-950">Request a Call Back</h2>
+                <div className="relative rounded-3xl border border-white/15 bg-white/[0.07] p-6 text-white shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] ring-1 ring-inset ring-white/[0.04] backdrop-blur-xl sm:p-8 lg:p-7">
+                  <h2 className="text-2xl font-extrabold tracking-tight text-white">
+                    Request a <span className="text-[#FFCE1B]">Call Back</span>
+                  </h2>
 
                   <form onSubmit={handleFormSubmit} className="mt-5 space-y-3">
                     <label className="relative block">
                       <span className="sr-only">Your name</span>
-                      <User className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                      <User className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
                       <input
                         type="text"
                         id="name"
@@ -465,12 +483,12 @@ export default function DigitalMarketingServiceClient() {
                         onChange={handleInputChange}
                         placeholder="Your name"
                         disabled={status.loading}
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3.5 pl-11 pr-4 text-sm outline-none transition focus:border-amber-400 focus:bg-white focus:ring-4 focus:ring-amber-100"
+                        className="w-full rounded-xl border border-white/15 bg-white/[0.06] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-slate-400 outline-none transition focus:border-[#FFCE1B] focus:bg-white/[0.09] focus:ring-2 focus:ring-[#FFCE1B]/30"
                       />
                     </label>
                     <label className="relative block">
                       <span className="sr-only">Your phone number</span>
-                      <Phone className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                      <Phone className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
                       <input
                         type="tel"
                         id="phone"
@@ -482,24 +500,24 @@ export default function DigitalMarketingServiceClient() {
                         onChange={handleInputChange}
                         placeholder="Phone number"
                         disabled={status.loading}
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3.5 pl-11 pr-4 text-sm outline-none transition focus:border-amber-400 focus:bg-white focus:ring-4 focus:ring-amber-100"
+                        className="w-full rounded-xl border border-white/15 bg-white/[0.06] py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-slate-400 outline-none transition focus:border-[#FFCE1B] focus:bg-white/[0.09] focus:ring-2 focus:ring-[#FFCE1B]/30"
                       />
                     </label>
                     <button
                       type="submit"
                       disabled={status.loading}
-                      className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#FFCE1B] text-sm font-bold text-[#071330] shadow-lg shadow-amber-500/25 transition hover:brightness-105 active:scale-[0.99] disabled:opacity-60 cursor-pointer"
+                      className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FFD84D] via-[#FFC21A] to-[#F5A10A] text-sm font-bold text-[#071330] shadow-lg shadow-amber-500/25 transition hover:brightness-105 active:scale-[0.99] disabled:opacity-60 cursor-pointer"
                     >
                       {status.loading ? 'Submitting...' : 'Get My Free Callback'}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                     </button>
-                    {status.error && <p className="text-xs text-rose-600">{status.error}</p>}
-                    {status.success && <p className="text-xs text-emerald-600">Request submitted successfully!</p>}
+                    {status.error && <p className="text-xs text-rose-300">{status.error}</p>}
+                    {status.success && <p className="text-xs text-emerald-300">Request submitted successfully!</p>}
                   </form>
 
-                  <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-slate-500">
-                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
-                    We respect your privacy
+                  <p className="mt-5 flex items-center justify-center gap-1.5 border-t border-white/10 pt-4 text-xs text-slate-300">
+                    <Lock className="h-3.5 w-3.5 text-emerald-400" />
+                    We respect your privacy. 100% confidential.
                   </p>
                 </div>
               </div>
@@ -551,6 +569,10 @@ export default function DigitalMarketingServiceClient() {
         </div>
       </section>
 
+      {content.servicesSection === "lead-generation" ? (
+        <LeadGenIncluded onOpenModal={() => setIsModalOpen(true)} />
+      ) : (
+      <>
       {/* Smart Plans / Pricing Section */}
       <section id="pricing" className="overflow-hidden pb-14 pt-8 sm:pb-20 sm:pt-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -570,9 +592,9 @@ export default function DigitalMarketingServiceClient() {
                     <img src={plan.image} alt={plan.title} className="h-44 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]" />
                   </div>
                   <div className="p-6">
-                    <h3 className="inline-flex items-center gap-2 text-lg font-black uppercase tracking-[0.06em] text-slate-900">
+                    <h3 className="flex items-center gap-2 text-[15px] font-black uppercase tracking-[0.04em] text-slate-900 xl:text-lg">
                       <IconComp className="w-5 h-5 text-amber-500 shrink-0 group-hover:scale-110 transition-transform duration-300" />
-                      {plan.title}
+                      <span>{noOrphan(plan.title)}</span>
                     </h3>
                     <p className="mt-2 text-sm text-slate-600 min-h-[40px]">{plan.description}</p>
                     <ul className="mt-4 space-y-2 text-sm text-slate-700 min-h-[140px]">
@@ -619,6 +641,8 @@ export default function DigitalMarketingServiceClient() {
           </Reveal>
         </div>
       </section>
+      </>
+      )}
       </div>
 
       {/* Direct CTA Panel */}
