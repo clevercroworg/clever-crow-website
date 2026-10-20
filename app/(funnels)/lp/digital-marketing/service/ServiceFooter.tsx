@@ -37,8 +37,20 @@ export default function ServiceFooter({ whatsappUrl, services, onOpenModal, onCa
 
       <div className="relative mx-auto max-w-7xl px-4 pt-16 sm:px-6 sm:pt-20 lg:px-8">
         {/* CTA band */}
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#0f2257] via-[#0b1a44] to-[#071330] p-8 sm:p-10 lg:p-12">
-          <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-amber-400/20 blur-3xl" aria-hidden="true" />
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#071330] p-8 sm:p-10 lg:p-12">
+          {/* Background photo: devices with growth charts on the right; overlays keep the text readable */}
+          <Image
+            src="/lp/digital-marketing/digital-marketing-banner.jpg"
+            alt=""
+            fill
+            sizes="(min-width: 1280px) 1216px, 100vw"
+            className="pointer-events-none object-cover object-[85%_center]"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#071330]/95 via-[#071330]/85 to-[#071330]/40 lg:bg-gradient-to-r lg:from-[#071330] lg:via-[#071330]/80 lg:to-[#071330]/10"
+            aria-hidden="true"
+          />
           <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-xl">
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-400">Let&apos;s grow together</p>
@@ -61,7 +73,7 @@ export default function ServiceFooter({ whatsappUrl, services, onOpenModal, onCa
                 onClick={onWhatsAppClick}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/20 px-6 text-sm font-bold text-white transition hover:bg-white/10"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/25 bg-[#071330]/70 px-6 text-sm font-bold text-white backdrop-blur-md transition hover:bg-[#071330]/90"
               >
                 <FaWhatsapp className="h-4 w-4 text-[#25D366]" aria-hidden="true" />
                 Chat on WhatsApp
@@ -74,7 +86,7 @@ export default function ServiceFooter({ whatsappUrl, services, onOpenModal, onCa
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 py-14 sm:py-16 lg:grid-cols-12">
           <div className="col-span-2 lg:col-span-4">
             <span className="inline-flex items-center rounded-2xl bg-white px-5 py-2.5 shadow-sm">
-              <Image src="/lp/digital-marketing/images/logo-dark.svg" alt="Clever Crow" width={160} height={44} className="h-9 w-auto" />
+              <Image src="/CSS.svg" alt="Clever Crow" width={160} height={25} className="h-7 w-auto" />
             </span>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
               Clever Crow Strategies LLP is a performance marketing agency helping businesses grow with SEO, Google &amp; Meta

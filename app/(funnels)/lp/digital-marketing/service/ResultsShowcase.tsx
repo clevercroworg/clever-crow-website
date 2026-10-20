@@ -158,19 +158,23 @@ function CaseStudyRow({ study, index, onOpenModal }: { study: CaseStudy; index: 
   const timeline = <TimelineTile key="tl" study={study} />;
   const industry = <IndustryTile key="ind" study={study} />;
 
-  // One loop of columns, wide enough to fill large screens. Pairs swap order on the second pass for variety.
-  const columns: React.ReactNode[][] = [
-    [m1, shot],
-    [channel, timeline],
-    [industry, m2],
-    [shot, m1],
-    [timeline, channel],
-    [m2, industry],
-  ];
-  if (study.creatives?.length) {
-    const creatives = study.creatives.map((src, i) => <CreativeTile key={src} src={src} alt={`${study.client} ad creative ${i + 1}`} />);
-    for (let i = 0; i < creatives.length; i += 2) columns.push(creatives.slice(i, i + 2));
-  }
+  const visuals = (study.creatives ?? []).map((src, i) => (
+    <CreativeTile key={`v${i}`} src={src} alt={`${study.industry} campaign visual ${i + 1}`} />
+  ));
+
+  // One loop of columns, wide enough to fill large screens. With campaign visuals, photos are
+  // interleaved with the result tiles; without them, tile pairs repeat in a different order.
+  const columns: React.ReactNode[][] =
+    visuals.length >= 3
+      ? [[m1, visuals[0]], [shot, channel], [visuals[1], industry], [m2, visuals[2]], [timeline]]
+      : [
+          [m1, shot],
+          [channel, timeline],
+          [industry, m2],
+          [shot, m1],
+          [timeline, channel],
+          [m2, industry],
+        ];
   // The track holds the loop twice and slides by exactly half its width, so the motion never jumps.
   const track = [...columns, ...columns];
 

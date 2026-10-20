@@ -3,18 +3,19 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { 
-  Phone, Monitor, Search, Sparkles, Check,
+  Phone, Monitor, Search, Sparkles, Award, Users, Star, BadgeCheck,
   Megaphone, CheckCircle, ShieldCheck, User, Send, ArrowRight, X, 
   ChevronDown 
 } from 'lucide-react';
 import { FaWhatsapp, FaGoogle, FaInstagram } from 'react-icons/fa';
-import { FaMeta } from 'react-icons/fa6';
+import { SiGoogleads, SiGoogleanalytics, SiGooglesearchconsole, SiGoogletagmanager, SiMeta, SiWhatsapp } from 'react-icons/si';
 import './service.css';
 import ResultsShowcase from './ResultsShowcase';
 import IndustriesServed from './IndustriesServed';
 import StickyCtaBar from './StickyCtaBar';
 import ServiceFooter from './ServiceFooter';
 import SectionHeading from './SectionHeading';
+import HeroDoodles from './HeroDoodles';
 
 export default function DigitalMarketingServiceClient() {
   const router = useRouter();
@@ -264,20 +265,22 @@ export default function DigitalMarketingServiceClient() {
     }
   ];
 
-  const heroBenefits = [
-    "Campaigns built around your goals",
-    "Enquiry and conversion tracking",
-    "Clear monthly reporting",
+  // Figures already published on Clever Crow's pages; confirm before changing.
+  const heroAchievements = [
+    { value: "15+ Years", label: "Marketing experience", icon: Award },
+    { value: "550+", label: "Businesses served", icon: Users },
+    { value: "4.9/5", label: "Average client rating", icon: Star },
+    { value: "Certified", label: "Google & Meta experts", icon: BadgeCheck },
   ];
 
-  // Genuine clients, chosen from the "Brands We Work With" set for legibility on small white tiles.
-  const heroClientLogos = [
-    { src: "/lp/digital-marketing/client18.png", name: "Baatu" },
-    { src: "/lp/digital-marketing/client1.png", name: "British Darts" },
-    { src: "/lp/digital-marketing/client2.png", name: "Wedding Planning Unzipped" },
-    { src: "/lp/digital-marketing/client6.png", name: "Malpe Boating" },
-    { src: "/lp/digital-marketing/client8.png", name: "Sullivan Marketing" },
-    { src: "/lp/digital-marketing/client9.png", name: "SmartBuild" },
+  // Ad, analytics and tracking platforms the team works in.
+  const heroPlatforms = [
+    { name: "Google Ads", icon: SiGoogleads, color: "#4285F4" },
+    { name: "Meta Ads", icon: SiMeta, color: "#0866FF" },
+    { name: "Google Analytics", icon: SiGoogleanalytics, color: "#E37400" },
+    { name: "Google Tag Manager", icon: SiGoogletagmanager, color: "#246FDB" },
+    { name: "Search Console", icon: SiGooglesearchconsole, color: "#458CF5" },
+    { name: "WhatsApp Business", icon: SiWhatsapp, color: "#25D366" },
   ];
 
   const testimonials = [
@@ -331,17 +334,18 @@ export default function DigitalMarketingServiceClient() {
     <div className="svc-root bg-slate-50 text-slate-800 hospitality-funnel">
       {/* Navbar */}
       <nav className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-          <a href="#" className="inline-flex items-center gap-3">
-            <img src="/lp/digital-marketing/images/logo-dark.svg" alt="Clevercrow" className="h-11 w-auto" />
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+          <a href="#" className="inline-flex min-w-0 items-center gap-3">
+            <img src="/CSS.svg" alt="Clever Crow" className="h-6 w-auto min-[380px]:h-7 sm:h-8" />
           </a>
           <div className="flex items-center gap-2">
             <a 
               href="tel:09986389444" 
               onClick={trackCallClick}
-              className="inline-flex items-center gap-2 rounded-full bg-[#FFCE1B] px-4 py-2 text-sm font-bold text-slate-900 shadow-sm transition hover:bg-[#d99a00]"
+              aria-label="Call 099863 89444"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-[#FFCE1B] text-sm font-bold text-slate-900 shadow-sm transition hover:bg-[#d99a00] sm:w-auto sm:px-4"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="h-[18px] w-[18px] shrink-0" />
               <span className="hidden sm:inline">09986389444</span>
             </a>
             <a 
@@ -349,9 +353,10 @@ export default function DigitalMarketingServiceClient() {
               onClick={trackWhatsAppClick}
               target="_blank" 
               rel="noopener noreferrer" 
-              className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-400"
+              aria-label="Chat on WhatsApp"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-[#25D366] text-sm font-bold text-white shadow-sm transition hover:brightness-110 sm:w-auto sm:px-4"
             >
-              <FaWhatsapp className="text-base" />
+              <FaWhatsapp className="h-5 w-5 shrink-0" />
               <span className="hidden sm:inline">Chat</span>
             </a>
           </div>
@@ -393,43 +398,32 @@ export default function DigitalMarketingServiceClient() {
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#040a1c]/80" />
         </div>
 
-        <div className="mx-auto max-w-7xl px-4 pt-12 sm:px-6 sm:pt-16 lg:px-8 lg:pt-20">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="relative mx-auto max-w-7xl px-4 pt-12 sm:px-6 sm:pt-16 lg:px-8 lg:pt-20">
+          <HeroDoodles />
+          <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
             {/* Copy */}
             <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.06] py-1.5 pl-1.5 pr-4 text-xs font-semibold text-slate-200 backdrop-blur-sm">
-                <span className="flex items-center -space-x-1.5">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white ring-2 ring-[#0b1c4d]"><FaGoogle className="h-3 w-3 text-[#4285F4]" /></span>
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white ring-2 ring-[#0b1c4d]"><FaMeta className="h-3.5 w-3.5 text-[#0866FF]" /></span>
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white ring-2 ring-[#0b1c4d]"><Search className="h-3 w-3 text-emerald-600" /></span>
-                </span>
-                Google Ads · Meta Ads · SEO
-              </div>
-
-              <h1 className="mt-6 text-[2.2rem] font-extrabold leading-[1.06] tracking-[-0.035em] sm:text-[3.25rem] lg:text-[3rem] xl:text-[3.85rem]">
+              <h1 className="text-[2.2rem] font-extrabold leading-[1.06] tracking-[-0.035em] sm:text-[3.25rem] lg:text-[3rem] xl:text-[3.85rem]">
                 Turn More Searches &amp; Clicks Into{" "}
-                <span className="relative sm:inline-block sm:whitespace-nowrap">
-                  <span className="bg-gradient-to-r from-[#FFE27A] via-[#FFCE1B] to-[#F5A623] bg-clip-text text-transparent">
-                    Business Enquiries<span className="-ml-[0.1em]">.</span>
-                  </span>
-                  <svg className="absolute -bottom-2 left-0 hidden h-3 w-full sm:block text-amber-400/70" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true">
-                    <path d="M2 9C60 3 140 1 298 6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-                  </svg>
+                <span className="bg-gradient-to-r from-[#FFE27A] via-[#FFCE1B] to-[#F5A623] bg-clip-text text-transparent sm:whitespace-nowrap">
+                  Business Enquiries<span className="-ml-[0.1em]">.</span>
                 </span>
               </h1>
 
-              <p className="mt-7 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                Reach potential customers through Google Ads, Meta Ads and SEO—with a strategy built around your business,
-                location and budget. Track enquiries, cost per lead and campaign performance.
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
+                Grow your business with digital marketing that brings more leads and sales.
               </p>
 
-              <ul className="mt-8 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-3">
-                {heroBenefits.map((benefit) => (
-                  <li key={benefit} className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-3 text-sm font-semibold leading-snug text-white backdrop-blur-sm sm:flex-col sm:items-start sm:gap-2">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-400 text-[#071330]">
-                      <Check className="h-4 w-4 stroke-[3]" />
+              <ul className="mt-8 grid max-w-xl grid-cols-2 gap-3 sm:gap-4">
+                {heroAchievements.map(({ value, label, icon: Icon }) => (
+                  <li key={label} className="flex flex-col items-start gap-2.5 rounded-2xl border border-white/10 bg-white/[0.05] p-3.5 backdrop-blur-sm min-[380px]:flex-row min-[380px]:items-center min-[380px]:gap-3 sm:gap-4 sm:p-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-400 text-[#071330] sm:h-11 sm:w-11">
+                      <Icon className="h-5 w-5" />
                     </span>
-                    {benefit}
+                    <span className="min-w-0">
+                      <span className="block text-lg font-extrabold leading-none text-white sm:text-2xl">{value}</span>
+                      <span className="mt-1 block text-xs font-medium leading-snug text-slate-300 sm:text-sm">{label}</span>
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -447,15 +441,13 @@ export default function DigitalMarketingServiceClient() {
             </div>
 
             {/* Callback form */}
-            <div className="relative lg:col-span-5">
+            <div className="relative lg:col-span-5 lg:w-full lg:max-w-[440px] lg:justify-self-end">
               <div className="relative">
                 <div className="pointer-events-none absolute -inset-px rounded-[1.6rem] bg-gradient-to-b from-amber-300/70 via-white/15 to-white/5" aria-hidden="true" />
                 <div className="relative rounded-3xl bg-white p-6 text-slate-900 shadow-[0_40px_90px_-25px_rgba(0,0,0,0.75)] sm:p-8">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-600">Free consultation</p>
-                  <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-950">Request a Call Back</h2>
-                  <p className="mt-2 text-sm text-slate-500">Share your details and our team will call you to discuss your goals.</p>
+                  <h2 className="text-2xl font-extrabold tracking-tight text-slate-950">Request a Call Back</h2>
 
-                  <form onSubmit={handleFormSubmit} className="mt-6 space-y-3">
+                  <form onSubmit={handleFormSubmit} className="mt-5 space-y-3">
                     <label className="relative block">
                       <span className="sr-only">Your name</span>
                       <User className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
@@ -505,30 +497,22 @@ export default function DigitalMarketingServiceClient() {
                     <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
                     We respect your privacy
                   </p>
-
-                  <ol className="mt-6 grid grid-cols-3 gap-2 border-t border-slate-100 pt-5 text-center text-[11px] font-semibold text-slate-500">
-                    {['Submit details', 'Quick call', 'Growth plan'].map((step, i) => (
-                      <li key={step} className="flex flex-col items-center gap-1.5">
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#071330] text-[10px] font-bold text-[#FFCE1B]">{i + 1}</span>
-                        {step}
-                      </li>
-                    ))}
-                  </ol>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Trusted-by bar spanning the full width */}
-          <div className="mt-14 border-t border-white/10 py-8 sm:mt-16 lg:mt-20">
+          {/* Partner platforms bar spanning the full width */}
+          <div className="mt-12 border-t border-white/10 py-8 sm:mt-14 lg:mt-16">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:gap-10">
-              <p className="shrink-0 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 lg:w-40 lg:leading-relaxed">
-                Trusted by businesses like
+              <p className="shrink-0 whitespace-nowrap text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                Partnered with
               </p>
-              <ul className="grid flex-1 grid-cols-3 gap-2.5 sm:grid-cols-6 sm:gap-3">
-                {heroClientLogos.map((logo) => (
-                  <li key={logo.src} className="flex h-14 items-center justify-center rounded-xl bg-white px-3 shadow-sm transition duration-300 hover:-translate-y-0.5 sm:h-16">
-                    <img src={logo.src} alt={logo.name} className="max-h-8 w-auto max-w-full object-contain sm:max-h-10" />
+              <ul className="grid flex-1 grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-6">
+                {heroPlatforms.map(({ name, icon: Icon, color }) => (
+                  <li key={name} className="flex h-14 items-center gap-2.5 rounded-xl bg-white px-3.5 shadow-sm transition duration-300 hover:-translate-y-0.5 sm:h-16">
+                    <Icon className="h-6 w-6 shrink-0" style={{ color }} aria-hidden="true" />
+                    <span className="text-[13px] font-bold leading-tight text-slate-800">{name}</span>
                   </li>
                 ))}
               </ul>
@@ -538,10 +522,10 @@ export default function DigitalMarketingServiceClient() {
       </section>
 
       {/* Brands We Work With */}
-      <section className="section-grid relative overflow-hidden bg-slate-50 py-8">
+      <section className="section-grid relative overflow-hidden bg-slate-50 py-6 sm:py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-xl font-bold text-slate-900 sm:text-2xl">Brands We Work With</h2>
-          <div className="fade-edge relative mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white py-4">
+          <h2 className="sr-only">Brands We Work With</h2>
+          <div className="fade-edge relative overflow-hidden rounded-2xl border border-slate-200 bg-white py-4">
             <div className="logo-track">
               <div className="flex items-center gap-10 px-8">
                 {clientLogos.map((src, i) => (
@@ -697,7 +681,7 @@ export default function DigitalMarketingServiceClient() {
       {/* Success Testimonial Cards — Improvement #4: Google icon + left border */}
       <section className="py-14 sm:py-16 bg-slate-50/50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow="Client reviews" title="Join Our Success Stories" subtitle="What business owners say about working with us." />
+          <SectionHeading eyebrow="Client testimonials" title="What Our Clients Say" />
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((test, index) => (
               <article key={index} className="relative rounded-2xl border border-slate-200 border-l-4 border-l-amber-400 bg-white p-6 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
@@ -744,7 +728,6 @@ export default function DigitalMarketingServiceClient() {
 
       <StickyCtaBar
         whatsappUrl={whatsappUrl}
-        onOpenModal={() => setIsModalOpen(true)}
         onCallClick={trackCallClick}
         onWhatsAppClick={trackWhatsAppClick}
       />

@@ -1,9 +1,9 @@
 // Case studies for the "Our Results" section. Figures and stories mirror the results already
 // published on the Google Ads LP (app/(funnels)/lp/google-ads/google-ads-data.ts).
 //
-// `creatives` takes real exported ad creatives for that client (4:5 or 1:1). Until they are
-// added, the gallery is built from the client's website screenshot and designed result tiles.
-// Never add AI-generated "ads" for a named client.
+// `creatives` takes 4:5 campaign mood visuals from public/lp/digital-marketing/results/ (see
+// RESULTS_IMAGE_PROMPTS.md). They are generic and unbranded: never present an AI image as a named
+// client's real ad. Until they are added, the gallery uses the website screenshot and result tiles.
 
 export type ResultMetric = { value: string; label: string; trend: "up" | "down" | "rank" };
 
@@ -39,6 +39,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     screenshot: "/landing-page/google-ads/case-studies/bgs-global.jpg",
     logo: { src: "/images/logos/bgsgims.svg", width: 424, height: 101 },
+    creatives: ["/lp/digital-marketing/results/education-campus.jpg", "/lp/digital-marketing/results/analytics-dashboard.jpg", "/lp/digital-marketing/results/enquiry-call.jpg"],
   },
   {
     id: "ashray",
@@ -55,6 +56,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { value: "+40%", label: "Higher conversion rate", trend: "up" },
     ],
     screenshot: "/landing-page/google-ads/case-studies/ashray.jpg",
+    creatives: ["/lp/digital-marketing/results/real-estate-home.jpg", "/lp/digital-marketing/results/phone-social-feed.jpg", "/lp/digital-marketing/results/enquiry-call.jpg"],
   },
   {
     id: "baatu",
@@ -72,6 +74,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     screenshot: "/landing-page/google-ads/case-studies/baatu.jpg",
     logo: { src: "/lp/digital-marketing/BaatuLogo.png", width: 320, height: 63 },
+    creatives: ["/lp/digital-marketing/results/ecommerce-unboxing.jpg", "/lp/digital-marketing/results/phone-social-feed.jpg", "/lp/digital-marketing/results/search-on-laptop.jpg"],
   },
   {
     id: "ddc-smiles",
@@ -88,6 +91,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { value: "5.2x", label: "Return on investment", trend: "up" },
     ],
     screenshot: "/landing-page/google-ads/case-studies/ddcsmiles.jpg",
+    creatives: ["/lp/digital-marketing/results/dental-clinic.jpg", "/lp/digital-marketing/results/phone-social-feed.jpg", "/lp/digital-marketing/results/enquiry-call.jpg"],
   },
   {
     id: "alchemist",
@@ -104,6 +108,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { value: "Top 10", label: "Rankings for priority terms", trend: "rank" },
     ],
     screenshot: "/landing-page/google-ads/case-studies/alchemist.jpg",
+    creatives: ["/lp/digital-marketing/results/pharma-lab.jpg", "/lp/digital-marketing/results/search-on-laptop.jpg", "/lp/digital-marketing/results/analytics-dashboard.jpg"],
   },
   {
     id: "ravi-traders",
@@ -120,5 +125,6 @@ export const CASE_STUDIES: CaseStudy[] = [
       { value: "+210%", label: "Increase in orders", trend: "up" },
     ],
     screenshot: "/landing-page/google-ads/case-studies/ravi-traders.jpg",
+    creatives: ["/lp/digital-marketing/results/ecommerce-unboxing.jpg", "/lp/digital-marketing/results/analytics-dashboard.jpg", "/lp/digital-marketing/results/search-on-laptop.jpg"],
   },
 ];

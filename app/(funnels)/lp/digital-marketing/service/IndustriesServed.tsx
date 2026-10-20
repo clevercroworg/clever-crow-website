@@ -60,7 +60,6 @@ export default function IndustriesServed({ onOpenModal }: { onOpenModal: () => v
         <SectionHeading
           eyebrow="Sector experience"
           title="Industries We've Served"
-          subtitle="Every industry buys differently. We bring campaign playbooks shaped by what works for businesses like yours."
         />
 
         <div className="mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-3 sm:mt-16 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
