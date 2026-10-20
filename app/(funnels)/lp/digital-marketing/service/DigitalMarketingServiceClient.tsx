@@ -8,7 +8,7 @@ import {
   ChevronDown 
 } from 'lucide-react';
 import { FaWhatsapp, FaGoogle, FaInstagram } from 'react-icons/fa';
-import { SiGoogleads, SiGoogleanalytics, SiGooglesearchconsole, SiGoogletagmanager, SiMeta, SiWhatsapp } from 'react-icons/si';
+import { SiGoogleads, SiGoogleanalytics, SiGoogletagmanager, SiMeta, SiOpenai, SiWhatsapp } from 'react-icons/si';
 import './service.css';
 import ResultsShowcase from './ResultsShowcase';
 import IndustriesServed from './IndustriesServed';
@@ -277,9 +277,9 @@ export default function DigitalMarketingServiceClient() {
   const heroPlatforms = [
     { name: "Google Ads", icon: SiGoogleads, color: "#4285F4" },
     { name: "Meta Ads", icon: SiMeta, color: "#0866FF" },
+    { name: "ChatGPT", icon: SiOpenai, color: "#0F172A" },
     { name: "Google Analytics", icon: SiGoogleanalytics, color: "#E37400" },
-    { name: "Google Tag Manager", icon: SiGoogletagmanager, color: "#246FDB" },
-    { name: "Search Console", icon: SiGooglesearchconsole, color: "#458CF5" },
+    { name: "SEO", icon: SiGoogletagmanager, color: "#246FDB" },
     { name: "WhatsApp Business", icon: SiWhatsapp, color: "#25D366" },
   ];
 
@@ -720,7 +720,6 @@ export default function DigitalMarketingServiceClient() {
 
       <ServiceFooter
         whatsappUrl={whatsappUrl}
-        services={pricingPlans.map((plan) => plan.title)}
         onOpenModal={() => setIsModalOpen(true)}
         onCallClick={trackCallClick}
         onWhatsAppClick={trackWhatsAppClick}

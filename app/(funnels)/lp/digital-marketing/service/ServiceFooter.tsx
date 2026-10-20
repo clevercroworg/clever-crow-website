@@ -2,24 +2,15 @@
 
 import React from "react";
 import Image from "next/image";
-import { ArrowRight, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
 
 type ServiceFooterProps = {
   whatsappUrl: string;
-  services: string[];
   onOpenModal: () => void;
   onCallClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   onWhatsAppClick: () => void;
 };
-
-const PAGE_LINKS = [
-  { label: "Services", href: "#pricing" },
-  { label: "Our Results", href: "#results" },
-  { label: "Industries", href: "#industries" },
-  { label: "Our Work", href: "#our-work" },
-  { label: "FAQs", href: "#faq" },
-];
 
 // Profiles listed in the site's Organization schema (components/seo/OrganizationSchema.tsx).
 const SOCIALS = [
@@ -28,9 +19,7 @@ const SOCIALS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/clever-crow-strategies/", icon: FaLinkedinIn },
 ];
 
-const linkClass = "text-sm text-slate-400 transition hover:text-white";
-
-export default function ServiceFooter({ whatsappUrl, services, onOpenModal, onCallClick, onWhatsAppClick }: ServiceFooterProps) {
+export default function ServiceFooter({ whatsappUrl, onOpenModal, onCallClick, onWhatsAppClick }: ServiceFooterProps) {
   return (
     <footer id="site-footer" className="relative overflow-hidden bg-[#050b1f] text-white">
       <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[60rem] -translate-x-1/2 rounded-full bg-blue-700/20 blur-[140px]" aria-hidden="true" />
@@ -82,9 +71,9 @@ export default function ServiceFooter({ whatsappUrl, services, onOpenModal, onCa
           </div>
         </div>
 
-        {/* Link columns */}
-        <div className="grid grid-cols-2 gap-x-6 gap-y-10 py-14 sm:py-16 lg:grid-cols-12">
-          <div className="col-span-2 lg:col-span-4">
+        {/* Brand + contact */}
+        <div className="grid grid-cols-1 gap-10 py-12 sm:py-14 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-5">
             <span className="inline-flex items-center rounded-2xl bg-white px-5 py-2.5 shadow-sm">
               <Image src="/CSS.svg" alt="Clever Crow" width={160} height={25} className="h-7 w-auto" />
             </span>
@@ -108,33 +97,7 @@ export default function ServiceFooter({ whatsappUrl, services, onOpenModal, onCa
             </div>
           </div>
 
-          <div className="lg:col-span-3">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-white">Services</p>
-            <ul className="mt-5 space-y-3">
-              {services.map((service) => (
-                <li key={service}>
-                  <a href="#pricing" className={linkClass}>
-                    {service}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="lg:col-span-2">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-white">On this page</p>
-            <ul className="mt-5 space-y-3">
-              {PAGE_LINKS.map((link) => (
-                <li key={link.href}>
-                  <a href={link.href} className={linkClass}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="col-span-2 lg:col-span-3">
+          <div className="lg:col-span-5 lg:col-start-8">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-white">Contact</p>
             <ul className="mt-5 space-y-4 text-sm text-slate-400">
               <li>
@@ -153,14 +116,6 @@ export default function ServiceFooter({ whatsappUrl, services, onOpenModal, onCa
                   Chat on WhatsApp
                 </a>
               </li>
-              <li className="flex items-start gap-3">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/5">
-                  <MapPin className="h-4 w-4 text-amber-400" aria-hidden="true" />
-                </span>
-                <span className="leading-relaxed">
-                  Business Bay Center, Udupi–Manipal Highway, Kunjibettu, Udupi, Karnataka 576102
-                </span>
-              </li>
             </ul>
           </div>
         </div>
@@ -168,14 +123,9 @@ export default function ServiceFooter({ whatsappUrl, services, onOpenModal, onCa
         {/* Legal bar */}
         <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 py-6 text-xs text-slate-500 sm:flex-row">
           <p>© {new Date().getFullYear()} Clever Crow Strategies LLP. All rights reserved.</p>
-          <div className="flex items-center gap-5">
-            <a href="/privacy-policy" className="transition hover:text-white">
-              Privacy Policy
-            </a>
-            <a href="/terms-and-conditions" className="transition hover:text-white">
-              Terms &amp; Conditions
-            </a>
-          </div>
+          <a href="/privacy-policy" className="transition hover:text-white">
+            Privacy Policy
+          </a>
         </div>
       </div>
     </footer>
