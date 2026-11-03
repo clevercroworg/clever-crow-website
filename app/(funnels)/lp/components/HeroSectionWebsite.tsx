@@ -196,7 +196,7 @@ export default function HeroSectionWebsite({ data }: HeroSectionWebsiteProps) {
             {STATS.map(({ icon: Icon, value, label }) => (
               <div
                 key={label}
-                className="flex flex-col-reverse rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 sm:rounded-none sm:border-0 sm:bg-transparent sm:px-5 sm:py-0 sm:first:pl-0"
+                className="flex flex-col-reverse rounded-2xl border border-white/25 bg-gradient-to-br from-white/[0.16] to-white/[0.05] px-4 py-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_8px_24px_-12px_rgba(0,0,0,0.5)] backdrop-blur-md sm:rounded-none sm:border-0 sm:bg-none sm:px-5 sm:py-0 sm:shadow-none sm:backdrop-blur-none sm:first:pl-0"
               >
                 <dt className="mt-1 text-[13px] font-medium text-slate-400 sm:text-sm">{label}</dt>
                 <dd className="flex items-center gap-2 text-2xl font-black text-white sm:text-[1.7rem]">
