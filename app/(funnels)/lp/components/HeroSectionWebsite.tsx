@@ -179,11 +179,11 @@ export default function HeroSectionWebsite({ data }: HeroSectionWebsiteProps) {
 
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">{data.subtitle}</p>
 
-          <ul className="mt-8 grid max-w-xl grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
+          <ul className="mt-8 grid max-w-xl grid-cols-2 gap-x-3 gap-y-3 sm:gap-x-6">
             {data.highlights.map((item) => (
-              <li key={item} className="flex items-center gap-3 text-[15px] font-semibold text-slate-100">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400">
-                  <Check className="h-3.5 w-3.5 stroke-[3]" aria-hidden="true" />
+              <li key={item} className="flex items-center gap-2 text-[13px] font-semibold leading-snug text-slate-100 sm:gap-3 sm:text-[15px]">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400 sm:h-6 sm:w-6">
+                  <Check className="h-3 w-3 stroke-[3] sm:h-3.5 sm:w-3.5" aria-hidden="true" />
                 </span>
                 {item}
               </li>
