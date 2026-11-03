@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowDown, ArrowRight, Check, Globe, Lock, Phone, Star, User } from "lucide-react";
+import { ArrowDown, ArrowRight, Check, Globe, Layers, Lock, Phone, Star, User } from "lucide-react";
 
 type HeroMeta = {
   title: string;
@@ -20,6 +20,7 @@ const STATS = [
   { icon: Globe, value: "150+", label: "Websites Delivered" },
   { icon: Check, value: "98%", label: "Client Satisfaction" },
   { icon: Star, value: "4.9/5", label: "Average Rating" },
+  { icon: Layers, value: "11", label: "Industries Served" },
 ];
 
 // Thin line-art doodles on the web-design theme. Kept to the edges and the column gap so they never sit
@@ -190,12 +191,16 @@ export default function HeroSectionWebsite({ data }: HeroSectionWebsiteProps) {
             ))}
           </ul>
 
-          <dl className="mt-10 grid max-w-xl grid-cols-3 divide-x divide-white/10 border-t border-white/10 pt-6">
+          {/* 2x2 tiles on mobile, one row of four with dividers from sm up */}
+          <dl className="mt-10 grid max-w-2xl grid-cols-2 gap-3 border-t border-white/10 pt-6 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-white/10">
             {STATS.map(({ icon: Icon, value, label }) => (
-              <div key={label} className="flex flex-col-reverse px-3 first:pl-0 sm:px-5">
-                <dt className="mt-1 text-xs font-medium text-slate-400 sm:text-sm">{label}</dt>
-                <dd className="flex items-center gap-1.5 text-xl font-black text-white sm:text-2xl">
-                  <Icon className="h-4 w-4 shrink-0 text-[#FFC72C]" aria-hidden="true" />
+              <div
+                key={label}
+                className="flex flex-col-reverse rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 sm:rounded-none sm:border-0 sm:bg-transparent sm:px-5 sm:py-0 sm:first:pl-0"
+              >
+                <dt className="mt-1 text-[13px] font-medium text-slate-400 sm:text-sm">{label}</dt>
+                <dd className="flex items-center gap-2 text-2xl font-black text-white sm:text-[1.7rem]">
+                  <Icon className="h-5 w-5 shrink-0 text-[#FFC72C]" aria-hidden="true" />
                   {value}
                 </dd>
               </div>
