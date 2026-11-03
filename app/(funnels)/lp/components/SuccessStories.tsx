@@ -110,6 +110,58 @@ export default function SuccessStories({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Mobile tab row: edge fades show there is more to scroll; a one-time "peek" nudge hints at swiping.
+  const tabRowRef = useRef<HTMLDivElement>(null);
+  const [tabEdges, setTabEdges] = useState({ start: false, end: true });
+  const [hasSwiped, setHasSwiped] = useState(false);
+  const peekingRef = useRef(false);
+
+  useEffect(() => {
+    const row = tabRowRef.current;
+    if (!row || filterStyle !== "tabs") return;
+    const update = () => {
+      const max = row.scrollWidth - row.clientWidth;
+      setTabEdges({ start: row.scrollLeft > 4, end: max > 4 && row.scrollLeft < max - 4 });
+      // Only a real swipe hides the hint; the automatic peek doesn't count.
+      if (!peekingRef.current && row.scrollLeft > 12) setHasSwiped(true);
+    };
+    update();
+    row.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    // Peek once when the row first comes into view (skipped for reduced-motion users).
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let timer = 0;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        if (reduce || row.scrollWidth <= row.clientWidth || row.scrollLeft > 0) return;
+        timer = window.setTimeout(() => {
+          // Pause snapping so the nudge stays small, then settle back to the start.
+          peekingRef.current = true;
+          row.style.scrollSnapType = "none";
+          row.scrollTo({ left: 48, behavior: "smooth" });
+          timer = window.setTimeout(() => {
+            row.scrollTo({ left: 0, behavior: "smooth" });
+            timer = window.setTimeout(() => {
+              row.style.scrollSnapType = "";
+              peekingRef.current = false;
+            }, 600);
+          }, 600);
+        }, 500);
+      },
+      { threshold: 0.6 }
+    );
+    observer.observe(row);
+    return () => {
+      row.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      observer.disconnect();
+      window.clearTimeout(timer);
+    };
+  }, [filterStyle]);
+
   const displayCaseStudies = data ?? defaultCaseStudies;
   const filterMode = filterBy ?? "category";
 
@@ -256,10 +308,16 @@ export default function SuccessStories({
             </div>
 
             {/* Industry tabs: one scrollable row on mobile, wrapped and centred from md up */}
+            <div className="relative">
             <div
+              ref={tabRowRef}
               role="tablist"
               aria-label="Filter websites by industry"
-              className="-mx-4 mt-6 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:px-6 md:mx-0 md:flex-wrap md:justify-center md:gap-2.5 md:overflow-visible md:px-0 md:pb-0"
+              className="-mx-4 mt-6 flex snap-x snap-mandatory scroll-px-4 gap-2 overflow-x-auto px-4 pb-2 sm:scroll-px-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:px-6 md:mx-0 md:flex-wrap md:justify-center md:gap-2.5 md:overflow-visible md:px-0 md:pb-0 md:![mask-image:none] md:![-webkit-mask-image:none]"
+              style={{
+                maskImage: `linear-gradient(90deg, ${tabEdges.start ? "transparent 0, black 36px" : "black 0"}, ${tabEdges.end ? "black calc(100% - 56px), transparent 100%" : "black 100%"})`,
+                WebkitMaskImage: `linear-gradient(90deg, ${tabEdges.start ? "transparent 0, black 36px" : "black 0"}, ${tabEdges.end ? "black calc(100% - 56px), transparent 100%" : "black 100%"})`,
+              }}
             >
               {categoriesWithCounts.map(({ name, count }) => {
                 const isSelected = activeCategory === name;
@@ -295,6 +353,18 @@ export default function SuccessStories({
                   </button>
                 );
               })}
+            </div>
+            {/* Swipe hint (mobile): small chevron at the right edge until the first swipe or the end of the row */}
+            <button
+              type="button"
+              aria-label="Show more industries"
+              onClick={() => tabRowRef.current?.scrollBy({ left: 160, behavior: "smooth" })}
+              className={`absolute -right-1 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border border-slate-200 bg-white/95 text-slate-600 shadow-sm transition-opacity duration-300 md:hidden ${
+                tabEdges.end && !hasSwiped ? "opacity-100" : "pointer-events-none opacity-0"
+              }`}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
             </div>
           </div>
         ) : (
