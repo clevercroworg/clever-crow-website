@@ -43,6 +43,8 @@ type SuccessStoriesProps = {
   subtitle?: string;
   filterBy?: string;
   hideMetrics?: boolean;
+  // "tabs": category pills (scrollable row on mobile, wrapped on desktop) instead of the dropdown.
+  filterStyle?: "dropdown" | "tabs";
   isAppPortfolio?: boolean;
 };
 
@@ -97,6 +99,7 @@ export default function SuccessStories({
   subtitle,
   filterBy,
   hideMetrics = false,
+  filterStyle = "dropdown",
   isAppPortfolio = false
 }: SuccessStoriesProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -225,6 +228,77 @@ export default function SuccessStories({
           </p>
         </div>
 
+        {filterStyle === "tabs" ? (
+          <div className="mb-10 sm:mb-12">
+            {/* Search */}
+            <div className="relative mx-auto max-w-xl">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setVisibleCount(9);
+                }}
+                placeholder="Search websites by brand or keyword..."
+                aria-label="Search websites"
+                className="w-full pl-11 pr-10 py-3.5 rounded-full bg-white border border-slate-200/90 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f59e0b] focus:ring-2 focus:ring-[#f59e0b]/20 transition shadow-sm font-medium"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  aria-label="Clear search"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+
+            {/* Industry tabs: one scrollable row on mobile, wrapped and centred from md up */}
+            <div
+              role="tablist"
+              aria-label="Filter websites by industry"
+              className="-mx-4 mt-6 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:px-6 md:mx-0 md:flex-wrap md:justify-center md:gap-2.5 md:overflow-visible md:px-0 md:pb-0"
+            >
+              {categoriesWithCounts.map(({ name, count }) => {
+                const isSelected = activeCategory === name;
+                return (
+                  <button
+                    key={name}
+                    type="button"
+                    role="tab"
+                    aria-selected={isSelected}
+                    onClick={(e) => {
+                      handleSelectCategory(name);
+                      // Centre the tapped tab within the row only (never scrolls the page itself).
+                      const tab = e.currentTarget;
+                      const row = tab.parentElement;
+                      if (row && row.scrollWidth > row.clientWidth) {
+                        row.scrollTo({ left: tab.offsetLeft - (row.clientWidth - tab.offsetWidth) / 2, behavior: "smooth" });
+                      }
+                    }}
+                    className={`inline-flex shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2.5 text-sm font-bold transition cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f59e0b] ${
+                      isSelected
+                        ? "border-slate-900 bg-slate-900 text-white shadow-md"
+                        : "border-slate-200 bg-white text-slate-700 hover:border-[#f59e0b] hover:text-slate-900"
+                    }`}
+                  >
+                    {name}
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-[11px] font-black ${
+                        isSelected ? "bg-[#fcd34d] text-slate-900" : "bg-slate-100 text-slate-500"
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+        <>
         {/* Search Bar & Industry Dropdown Filter Control Bar */}
         <div className="mb-12 max-w-3xl mx-auto relative z-40">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
@@ -310,6 +384,8 @@ export default function SuccessStories({
 
           </div>
         </div>
+        </>
+        )}
 
         {/* Portfolio Showcase Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
