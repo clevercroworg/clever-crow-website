@@ -60,6 +60,7 @@ export type CaseStudy = {
   summary: string;
   image: string;
   link?: string;
+  logo?: string;
 };
 
 export type FaqData = {
