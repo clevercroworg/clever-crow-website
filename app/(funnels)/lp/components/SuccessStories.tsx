@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { FaWhatsapp } from "react-icons/fa6";
 import { Search, ExternalLink, Sparkles, ChevronRight, X, ChevronDown, Filter, ArrowUpRight, Globe, ShieldCheck, TrendingUp, Zap, CheckCircle2 } from "lucide-react";
 
 export interface CaseStudy {
@@ -71,6 +72,44 @@ function getBrandLogoTheme(title: string, category: string) {
     default:
       return { bg: "bg-slate-900 text-amber-400", letter: title.charAt(0) };
   }
+}
+
+function getDomain(link?: string) {
+  if (!link) return undefined;
+  try {
+    return new URL(link).hostname.replace(/^www\./, "");
+  } catch {
+    return undefined;
+  }
+}
+
+// Brand mark: the site's own icon on a white tile, falling back to the coloured monogram when the
+// site has no usable icon (the favicon service returns a tiny generic globe for those).
+function BrandLogo({ title, category, link, size = "md" }: { title: string; category: string; link?: string; size?: "md" | "lg" }) {
+  const [failed, setFailed] = useState(false);
+  const domain = getDomain(link);
+  const theme = getBrandLogoTheme(title, category);
+  const box = size === "lg" ? "w-12 h-12 sm:w-14 sm:h-14 rounded-2xl" : "w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl";
+  if (!domain || failed) {
+    return (
+      <div className={`${box} flex items-center justify-center font-black ${size === "lg" ? "text-xl sm:text-2xl" : "text-base sm:text-lg"} shadow-sm shrink-0 ${theme.bg}`}>
+        {theme.letter}
+      </div>
+    );
+  }
+  return (
+    <div className={`${box} flex items-center justify-center bg-white border border-slate-200 shadow-sm shrink-0 overflow-hidden`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={`https://www.google.com/s2/favicons?domain=${domain}&sz=128`}
+        alt={`${title} logo`}
+        loading="lazy"
+        className="w-3/5 h-3/5 object-contain"
+        onLoad={(e) => e.currentTarget.naturalWidth < 32 && setFailed(true)}
+        onError={() => setFailed(true)}
+      />
+    </div>
+  );
 }
 
 // Media box fallback theme generator
@@ -238,6 +277,19 @@ export default function SuccessStories({
   }, [displayCaseStudies, activeCategory, searchQuery, filterMode]);
 
   const selectedCase = displayCaseStudies.find((cs) => cs.id === selectedId);
+
+  // While the project popup is open: lock page scroll and close on Escape.
+  useEffect(() => {
+    if (!selectedId) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setSelectedId(null);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [selectedId]);
 
   const displayTitle = title ?? "Our Website";
   const displaySubtitle =
@@ -458,11 +510,10 @@ export default function SuccessStories({
         )}
 
         {/* Portfolio Showcase Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 relative z-10">
           <AnimatePresence mode="popLayout">
             {filteredCaseStudies.slice(0, visibleCount).map((cs) => {
               const isImageBroken = failedImages[cs.id];
-              const logoTheme = getBrandLogoTheme(cs.title, cs.category);
               const mediaBoxGrad = getMediaBoxGradient(cs.category);
 
               return (
@@ -473,17 +524,17 @@ export default function SuccessStories({
                   exit={{ opacity: 0, scale: 0.97, y: 15 }}
                   transition={{ duration: 0.25 }}
                   key={cs.id}
-                  className="group relative bg-white rounded-[28px] border border-slate-100 p-3.5 sm:p-4 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
+                  className="group relative bg-white rounded-[24px] sm:rounded-[28px] border border-slate-100 p-3 sm:p-4 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
                 >
                   {/* Top Inner Rounded Media Container */}
-                  <div className="relative aspect-[16/11] w-full rounded-[22px] overflow-hidden bg-slate-950 flex items-center justify-center border border-slate-100/60 shadow-inner cursor-pointer" onClick={() => setSelectedId(cs.id)}>
+                  <div className="relative aspect-[16/10] w-full rounded-[18px] sm:rounded-[22px] overflow-hidden bg-slate-950 flex items-center justify-center border border-slate-100/60 shadow-inner cursor-pointer" onClick={() => setSelectedId(cs.id)}>
                     {!isImageBroken ? (
                       <Image
                         src={cs.image}
                         alt={cs.title}
                         fill
                         onError={() => handleImageError(cs.id)}
-                        className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                        className="object-cover object-left-top transition-transform duration-700 ease-out group-hover:scale-105"
                         unoptimized
                       />
                     ) : (
@@ -507,15 +558,17 @@ export default function SuccessStories({
                       </div>
                     )}
 
-                    {/* Floating White Capsule Category Badge Top-Left */}
-                    <div className="absolute top-3.5 left-3.5 z-10">
+                    {/* Category badge: only useful in "All"; inside a category tab it just repeats the tab */}
+                    {activeCategory === "All" && (
+                    <div className="absolute top-3 left-3 sm:top-3.5 sm:left-3.5 z-10">
                       <span className="text-[10px] font-black uppercase tracking-wider bg-white text-slate-900 px-3.5 py-1.5 rounded-full shadow-md border border-slate-100">
                         {cs.category}
                       </span>
                     </div>
+                    )}
 
                     {/* Floating White Capsule Live Badge Top-Right */}
-                    <div className="absolute top-3.5 right-3.5 z-10">
+                    <div className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-10">
                       <span className="inline-flex items-center gap-1.5 text-[10px] font-black text-slate-900 bg-white px-3 py-1.5 rounded-full shadow-md border border-slate-100">
                         <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                         LIVE
@@ -524,19 +577,17 @@ export default function SuccessStories({
                   </div>
 
                   {/* Card Content Body Below Thumbnail (Sleek Clean Layout) */}
-                  <div className="pt-4 px-1 pb-1 flex flex-col justify-between flex-grow">
+                  <div className="pt-3 sm:pt-4 px-1 pb-0.5 sm:pb-1 flex flex-col justify-between flex-grow">
                     
                     {/* Brand Header: Logo Monogram + Title + Location */}
-                    <div className="flex items-center justify-between gap-3 mb-3">
+                    <div className="flex items-center justify-between gap-3 mb-1 sm:mb-3">
                       <div className="flex items-center gap-3 min-w-0">
                         {/* Brand Logo Monogram Box */}
-                        <div className={`w-11 h-11 rounded-2xl flex items-center justify-center font-black text-lg shadow-sm shrink-0 ${logoTheme.bg}`}>
-                          {logoTheme.letter}
-                        </div>
+                        <BrandLogo title={cs.title} category={cs.category} link={cs.link} />
 
                         {/* Title & Short Summary */}
                         <div className="min-w-0">
-                          <h3 className="text-lg font-extrabold text-slate-900 group-hover:text-[#6366F1] transition-colors leading-tight truncate cursor-pointer" onClick={() => setSelectedId(cs.id)}>
+                          <h3 className="text-base sm:text-lg font-extrabold text-slate-900 group-hover:text-[#6366F1] transition-colors leading-tight truncate cursor-pointer" onClick={() => setSelectedId(cs.id)}>
                             {cs.title}
                           </h3>
                           <p className="text-[11px] text-slate-500 font-medium truncate mt-0.5">
@@ -553,7 +604,7 @@ export default function SuccessStories({
                     </div>
 
                     {/* Footer Action Links */}
-                    <div className="mt-4 pt-3 border-t border-slate-100/80 flex items-center justify-between text-xs">
+                    <div className="mt-3 sm:mt-4 pt-3 border-t border-slate-100/80 flex items-center justify-between text-xs">
                       {cs.link ? (
                         <a
                           href={cs.link}
@@ -615,10 +666,24 @@ export default function SuccessStories({
         )}
       </div>
 
-      {/* World-Class Project Detail Modal Popup */}
+      {/* Project detail popup: browser-framed preview, key facts, and a "build me something similar" CTA */}
       <AnimatePresence>
-        {selectedId && selectedCase && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-y-auto bg-slate-950/80 backdrop-blur-md">
+        {selectedId && selectedCase && (() => {
+          const domain = getDomain(selectedCase.link);
+          const facts = [
+            { label: "Industry", value: selectedCase.category },
+            { label: "Location", value: selectedCase.location },
+            { label: "Project", value: selectedCase.duration },
+            { label: "Status", value: "Live" },
+          ];
+          const similarMessage = `Hi Clever Crow, I saw ${selectedCase.title} in your portfolio and would like a similar ${isAppPortfolio ? "app" : "website"} for my business.`;
+          return (
+          <div
+            className="fixed inset-0 z-[10000] flex items-end sm:items-center justify-center sm:p-6 bg-slate-950/75 backdrop-blur-sm"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-modal-title"
+          >
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -627,97 +692,130 @@ export default function SuccessStories({
               className="absolute inset-0 cursor-pointer"
             />
             <motion.div
-              className="relative w-full max-w-3xl bg-white border border-slate-200 rounded-[32px] shadow-2xl overflow-hidden text-slate-900 my-8 max-h-[90vh] flex flex-col z-10"
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="relative z-10 w-full sm:max-w-[880px] bg-white rounded-t-[28px] sm:rounded-[28px] shadow-2xl overflow-hidden text-slate-900 max-h-[92dvh] flex flex-col"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
             >
-              {/* Floating Close Button */}
               <button
                 onClick={() => setSelectedId(null)}
-                className="absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 backdrop-blur-md text-slate-700 hover:text-slate-950 border border-slate-200 shadow-md transition cursor-pointer"
+                aria-label="Close project details"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white text-slate-600 hover:text-slate-950 border border-slate-200 shadow-md transition cursor-pointer"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4.5 w-4.5" />
               </button>
 
-              {/* Scrollable Container inside Modal */}
-              <div className="overflow-y-auto max-h-[90vh] no-scrollbar">
-
-                {/* Top Full-Width Hero Preview Image Box */}
-                <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-950 flex items-center justify-center border-b border-slate-100">
-                  {!failedImages[selectedCase.id] ? (
-                    <Image
-                      src={selectedCase.image}
-                      alt={selectedCase.title}
-                      fill
-                      onError={() => handleImageError(selectedCase.id)}
-                      className="object-cover object-top"
-                      unoptimized
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 p-8 flex flex-col justify-end text-white">
-                      <h3 className="text-3xl font-black">{selectedCase.title}</h3>
-                      <p className="text-sm text-slate-300 mt-1">{selectedCase.summary}</p>
+              <div className="overflow-y-auto overscroll-contain no-scrollbar">
+                {/* Preview in a browser frame */}
+                <div className="bg-gradient-to-br from-amber-50 via-orange-50/60 to-indigo-50 px-4 pt-12 pb-0 sm:px-10 sm:pt-12">
+                  <div className="mx-auto rounded-t-2xl border border-b-0 border-slate-200 bg-white shadow-[0_-10px_40px_rgba(15,23,42,0.10)] overflow-hidden">
+                    <div className="flex items-center gap-3 px-3.5 py-2.5 border-b border-slate-100 bg-slate-50">
+                      <div className="flex gap-1.5 shrink-0">
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
+                      </div>
+                      <div className="flex-1 min-w-0 flex items-center justify-center gap-1.5 rounded-md bg-white border border-slate-200 px-3 py-1 text-[11px] font-semibold text-slate-500">
+                        <ShieldCheck className="w-3 h-3 text-emerald-500 shrink-0" />
+                        <span className="truncate">{domain ?? selectedCase.title}</span>
+                      </div>
+                      <span className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-black text-emerald-700 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-full shrink-0">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        LIVE
+                      </span>
                     </div>
-                  )}
-
-                  {/* Overlaid Badges on Image */}
-                  <div className="absolute top-4 left-4 z-10">
-                    <span className="text-xs font-black uppercase tracking-wider bg-white text-slate-900 px-4 py-1.5 rounded-full shadow-md border border-slate-100">
-                      {selectedCase.category}
-                    </span>
-                  </div>
-
-                  <div className="absolute top-4 right-16 z-10">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-black text-slate-900 bg-white px-3.5 py-1.5 rounded-full shadow-md border border-slate-100">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                      LIVE SITE
-                    </span>
+                    <div className="relative aspect-[16/9] w-full bg-slate-100">
+                      {!failedImages[selectedCase.id] ? (
+                        <Image
+                          src={selectedCase.image}
+                          alt={`${selectedCase.title} website preview`}
+                          fill
+                          sizes="(max-width: 640px) 100vw, 800px"
+                          onError={() => handleImageError(selectedCase.id)}
+                          className="object-cover object-left-top"
+                          unoptimized
+                        />
+                      ) : (
+                        <div className={`w-full h-full bg-gradient-to-br ${getMediaBoxGradient(selectedCase.category)} flex items-center justify-center`}>
+                          <span className="text-3xl font-black">{selectedCase.title}</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
 
-                {/* Modal Main Content Body */}
-                <div className="p-6 sm:p-8 space-y-6">
-                  
-                  {/* Brand Header */}
-                  <div className="flex items-center gap-4">
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center font-black text-2xl shadow-md shrink-0 ${getBrandLogoTheme(selectedCase.title, selectedCase.category).bg}`}>
-                      {getBrandLogoTheme(selectedCase.title, selectedCase.category).letter}
+                <div className="px-5 pt-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:px-10 sm:py-9">
+                  {/* Brand header */}
+                  <div className="flex items-start gap-4">
+                    <BrandLogo title={selectedCase.title} category={selectedCase.category} link={selectedCase.link} size="lg" />
+                    <div className="min-w-0">
+                      <h3 id="project-modal-title" className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 leading-tight">
+                        {selectedCase.title}
+                      </h3>
+                      {domain && selectedCase.link ? (
+                        <a
+                          href={selectedCase.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-1 inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-[#6366F1] hover:text-[#4F46E5]"
+                        >
+                          <Globe className="w-3.5 h-3.5" />
+                          {domain}
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                      ) : (
+                        <p className="mt-1 text-xs sm:text-sm font-semibold text-slate-500">{selectedCase.category} · {selectedCase.location}</p>
+                      )}
                     </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1">
-                          <Globe className="w-3.5 h-3.5 text-slate-400" />
-                          {selectedCase.location}
-                        </span>
-                        <span className="text-slate-300">•</span>
-                        <span className="text-xs font-bold text-[#6366F1]">Verified Case Study</span>
+                  </div>
+
+                  <p className="mt-5 text-[15px] sm:text-base text-slate-600 leading-relaxed">
+                    {selectedCase.summary}
+                  </p>
+
+                  {/* Results */}
+                  {!hideMetrics && (
+                    <div className="mt-6 grid grid-cols-2 gap-3">
+                      {[
+                        { icon: TrendingUp, label: "Key result", value: selectedCase.primaryMetric },
+                        { icon: Zap, label: "Highlight", value: selectedCase.secondaryMetric },
+                      ].map(({ icon: Icon, label, value }) => (
+                        <div key={label} className="rounded-2xl border border-amber-100 bg-gradient-to-br from-amber-50 to-white p-4 sm:p-5">
+                          <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-black uppercase tracking-widest text-amber-700">
+                            <Icon className="w-3.5 h-3.5" />
+                            {label}
+                          </div>
+                          <div className="mt-1.5 text-lg sm:text-2xl font-black text-slate-900 leading-tight">{value}</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Project facts */}
+                  <dl className="mt-6 grid grid-cols-2 sm:grid-cols-4 rounded-2xl border border-slate-100 bg-slate-50/70 divide-slate-100 overflow-hidden">
+                    {facts.map((f, i) => (
+                      <div
+                        key={f.label}
+                        className={`p-4 min-w-0 ${i % 2 === 1 ? "border-l border-slate-100" : ""} ${i > 1 ? "border-t sm:border-t-0 border-slate-100" : ""} ${i === 2 ? "sm:border-l" : ""}`}
+                      >
+                        <dt className="text-[10px] font-black uppercase tracking-widest text-slate-400">{f.label}</dt>
+                        <dd className="mt-1 text-sm font-bold text-slate-800 truncate flex items-center gap-1.5" title={f.value}>
+                          {f.label === "Status" && <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />}
+                          {f.value}
+                        </dd>
                       </div>
-                      <h3 className="text-2xl sm:text-3xl font-black text-slate-900">{selectedCase.title}</h3>
-                    </div>
-                  </div>
+                    ))}
+                  </dl>
 
-
-
-                  {/* Project Overview */}
-                  <div>
-                    <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#6366F1]" />
-                      PROJECT SUMMARY & STRATEGY
-                    </h4>
-                    <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
-                      {selectedCase.summary}
-                    </p>
-                  </div>
-
-                  {/* Tags */}
+                  {/* Highlights */}
                   {selectedCase.tags && selectedCase.tags.length > 0 && (
-                    <div>
-                      <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">SERVICES & SCOPE</h4>
+                    <div className="mt-6">
+                      <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-2.5">Highlights</h4>
                       <div className="flex flex-wrap gap-2">
                         {selectedCase.tags.map((tag) => (
-                          <span key={tag} className="text-xs font-bold bg-slate-100 border border-slate-200 text-slate-700 px-3.5 py-1.5 rounded-full">
+                          <span key={tag} className="inline-flex items-center gap-1.5 text-xs font-bold bg-white border border-slate-200 text-slate-700 px-3 py-1.5 rounded-full">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
                             {tag}
                           </span>
                         ))}
@@ -725,33 +823,41 @@ export default function SuccessStories({
                     </div>
                   )}
 
-                  {/* Action Footer */}
-                  {selectedCase.link && (
-                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                      <button
-                        onClick={() => setSelectedId(null)}
-                        className="text-xs font-bold text-slate-500 hover:text-slate-800 px-4 py-2"
-                      >
-                        Back to Portfolio
-                      </button>
+                  {/* CTA */}
+                  <div className="mt-8 rounded-2xl bg-slate-900 p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
+                    <div>
+                      <p className="text-base sm:text-lg font-black text-white">Want a {isAppPortfolio ? "app" : "website"} like this?</p>
+                      <p className="text-xs sm:text-sm text-slate-400 mt-0.5">Share your idea and get a free quote within 24 hours.</p>
+                    </div>
+                    <div className="flex flex-col-reverse sm:flex-row gap-2.5 shrink-0">
+                      {selectedCase.link && (
+                        <a
+                          href={selectedCase.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl border border-white/20 text-white hover:bg-white/10 font-bold text-sm transition"
+                        >
+                          Visit Live Site
+                          <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+                        </a>
+                      )}
                       <a
-                        href={selectedCase.link}
+                        href={`https://wa.me/919986389444?text=${encodeURIComponent(similarMessage)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-[#6366F1] hover:bg-[#4F46E5] text-white font-extrabold text-sm shadow-lg shadow-[#6366F1]/25 transition"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#fcd34d] hover:bg-[#fbbf24] text-slate-950 font-extrabold text-sm shadow-lg shadow-amber-500/20 transition"
                       >
-                        <span>Visit Live Website</span>
-                        <ArrowUpRight className="w-4.5 h-4.5 stroke-[2.5]" />
+                        <FaWhatsapp className="w-4 h-4" />
+                        Get a Similar {isAppPortfolio ? "App" : "Website"}
                       </a>
                     </div>
-                  )}
-
+                  </div>
                 </div>
-
               </div>
             </motion.div>
           </div>
-        )}
+          );
+        })()}
       </AnimatePresence>
     </section>
   );
