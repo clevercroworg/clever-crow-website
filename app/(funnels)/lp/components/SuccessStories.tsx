@@ -20,6 +20,7 @@ export interface CaseStudy {
   image: string;
   link?: string;
   builtWith?: string;
+  logo?: string; // brand logo image; overrides the auto-fetched favicon
 }
 
 const defaultCaseStudies: CaseStudy[] = [
@@ -85,11 +86,19 @@ function getDomain(link?: string) {
 
 // Brand mark: the site's own icon on a white tile, falling back to the coloured monogram when the
 // site has no usable icon (the favicon service returns a tiny generic globe for those).
-function BrandLogo({ title, category, link, size = "md" }: { title: string; category: string; link?: string; size?: "md" | "lg" }) {
+function BrandLogo({ title, category, link, logo, size = "md" }: { title: string; category: string; link?: string; logo?: string; size?: "md" | "lg" }) {
   const [failed, setFailed] = useState(false);
   const domain = getDomain(link);
   const theme = getBrandLogoTheme(title, category);
   const box = size === "lg" ? "w-12 h-12 sm:w-14 sm:h-14 rounded-2xl" : "w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl";
+  if (logo) {
+    return (
+      <div className={`${box} flex items-center justify-center bg-white border border-slate-200 shadow-sm shrink-0 overflow-hidden`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={logo} alt={`${title} logo`} loading="lazy" className="w-full h-full object-contain p-0.5" />
+      </div>
+    );
+  }
   if (!domain || failed) {
     return (
       <div className={`${box} flex items-center justify-center font-black ${size === "lg" ? "text-xl sm:text-2xl" : "text-base sm:text-lg"} shadow-sm shrink-0 ${theme.bg}`}>
@@ -583,7 +592,7 @@ export default function SuccessStories({
                     <div className="flex items-center justify-between gap-3 mb-1 sm:mb-3">
                       <div className="flex items-center gap-3 min-w-0">
                         {/* Brand Logo Monogram Box */}
-                        <BrandLogo title={cs.title} category={cs.category} link={cs.link} />
+                        <BrandLogo title={cs.title} category={cs.category} link={cs.link} logo={cs.logo} />
 
                         {/* Title & Short Summary */}
                         <div className="min-w-0">
@@ -748,7 +757,7 @@ export default function SuccessStories({
                 <div className="px-5 pt-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:px-10 sm:py-9">
                   {/* Brand header */}
                   <div className="flex items-start gap-4">
-                    <BrandLogo title={selectedCase.title} category={selectedCase.category} link={selectedCase.link} size="lg" />
+                    <BrandLogo title={selectedCase.title} category={selectedCase.category} link={selectedCase.link} logo={selectedCase.logo} size="lg" />
                     <div className="min-w-0">
                       <h3 id="project-modal-title" className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 leading-tight">
                         {selectedCase.title}
