@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
 
 const Chatbot = dynamic(
   () =>
@@ -15,5 +16,8 @@ const Chatbot = dynamic(
 );
 
 export default function ClientChatbot() {
+  const pathname = usePathname();
+  // No chatbot inside the admin dashboard.
+  if (pathname?.startsWith("/admin")) return null;
   return <Chatbot />;
 }

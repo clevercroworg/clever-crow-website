@@ -81,6 +81,13 @@ function InteractionTracker() {
 }
 
 export default function MetaPixel() {
+  return <MetaPixelUnlessAdmin />;
+}
+
+// The admin dashboard is internal, so staff visits are not sent to Meta.
+function MetaPixelUnlessAdmin() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/admin")) return null;
   return (
     <>
       <Script id="meta-pixel" strategy="afterInteractive">

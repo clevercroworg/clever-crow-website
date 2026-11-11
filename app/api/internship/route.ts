@@ -1,16 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { FORM_RECIPIENTS } from "@/lib/form-recipients";
-import { 
-  Calendar, 
-  MapPin, 
-  GraduationCap, 
-  Code2, 
-  CheckCircle2, 
-  Loader2,
-  ArrowRight,
-  Globe
-} from "lucide-react";
+import { saveSubmission } from "@/lib/leads/save";
 
 export async function POST(req: Request) {
   try {
@@ -40,6 +31,39 @@ export async function POST(req: Request) {
     if (!name || !email || !phone) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
+
+    // Save to the admin dashboard database (skipped silently if not configured).
+    const skillExtra: Record<string, unknown> = {};
+    for (const [skill, level] of Object.entries(skills)) skillExtra[`Skill: ${skill}`] = level;
+    await saveSubmission(req, {
+      form_type: "internship",
+      form_name: `Internship: ${internship_title || "General"}`,
+      name,
+      email,
+      phone,
+      service: internship_title,
+      page_url: body.landed_url,
+      landing_url: body.landing_url,
+      referrer: body.referrer,
+      utm_source: body.utm_source,
+      utm_medium: body.utm_medium,
+      utm_campaign: body.utm_campaign,
+      utm_term: body.utm_term,
+      utm_content: body.utm_content,
+      gclid: body.gclid,
+      fbclid: body.fbclid,
+      extra: {
+        "Date of birth": [dob_day, dob_month, dob_year].filter(Boolean).join(" "),
+        Education: education,
+        Address: address,
+        State: state,
+        Country: country,
+        "Run from beginning": run_beginning,
+        "Data consent": consent ? "Yes" : "No",
+        "Internship ID": internship_id,
+        ...skillExtra,
+      },
+    });
 
     // Configure transporter
     const transporter = nodemailer.createTransport({

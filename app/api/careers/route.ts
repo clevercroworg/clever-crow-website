@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { FORM_RECIPIENTS } from "@/lib/form-recipients";
+import { saveSubmission } from "@/lib/leads/save";
 import { CV_MAX_BYTES, OPEN_ROLES, isAllowedCvName } from "@/app/(site)/careers/careers-data";
 
 // Submissions faster than this are almost certainly automated.
@@ -69,6 +70,32 @@ export async function POST(req: Request) {
   if (Object.keys(errors).length > 0 || !role) {
     return NextResponse.json({ ok: false, errors }, { status: 422 });
   }
+
+  // Save to the admin dashboard database (skipped silently if not configured).
+  await saveSubmission(req, {
+    form_type: "career",
+    form_name: `Careers: ${role.title}`,
+    name,
+    email,
+    phone,
+    service: role.title,
+    message: note,
+    page_url: text(form, "landed_url", 1000),
+    landing_url: text(form, "landing_url", 1000),
+    referrer: text(form, "referrer", 1000),
+    utm_source: text(form, "utm_source", 200),
+    utm_medium: text(form, "utm_medium", 200),
+    utm_campaign: text(form, "utm_campaign", 300),
+    utm_term: text(form, "utm_term", 300),
+    utm_content: text(form, "utm_content", 300),
+    gclid: text(form, "gclid", 300),
+    fbclid: text(form, "fbclid", 300),
+    extra: {
+      City: city,
+      "Portfolio / profile": portfolio,
+      CV: cvFile ? `${cvFile.name} (attached in the email)` : "Not attached",
+    },
+  });
 
   if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
     console.error("CAREERS: SMTP credentials are not configured.");

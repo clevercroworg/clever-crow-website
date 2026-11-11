@@ -7,5 +7,6 @@ Disallow: /privacy-policy
 Disallow: /terms-and-conditions
 Disallow: /thank-you
 Disallow: /api/
+Disallow: /admin
 
 Sitemap: https://clevercrow.org/sitemap.xml

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server"
 import nodemailer from "nodemailer"
 import { FORM_RECIPIENTS } from "@/lib/form-recipients";
+import { saveSubmission } from "@/lib/leads/save";
+import { normalizeLeadFields } from "@/lib/leads/normalize";
 
 const isValValid = (val: any) => {
   if (!val) return false;
@@ -29,6 +31,36 @@ export async function POST(req: Request) {
         { status: 400 }
       )
     }
+
+    // Save to the admin dashboard database (skipped silently if not configured).
+    const KNOWN = new Set([
+      "name", "phone", "email", "message", "source", "company", "service", "budget", "timeline",
+      "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "referrer", "landed_url",
+      "landing_url", "gclid", "fbclid",
+    ])
+    const extra: Record<string, unknown> = {}
+    for (const [key, value] of Object.entries(body || {})) {
+      if (!KNOWN.has(key) && (typeof value === "string" || typeof value === "number" || typeof value === "boolean")) {
+        extra[key] = value
+      }
+    }
+    const lp = normalizeLeadFields(source, message)
+    await saveSubmission(req, {
+      form_type: "lead",
+      form_name: lp.form_name,
+      name, email, phone, timeline,
+      company: company || lp.company,
+      service: service || lp.service,
+      budget: budget || lp.budget,
+      message: lp.message,
+      page_url: landed_url,
+      landing_url: body.landing_url,
+      referrer,
+      utm_source, utm_medium, utm_campaign, utm_term, utm_content,
+      gclid: body.gclid,
+      fbclid: body.fbclid,
+      extra,
+    })
 
     try {
       console.log("Attempting to send lead email via Gmail SMTP...");

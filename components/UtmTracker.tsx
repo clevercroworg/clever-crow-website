@@ -15,6 +15,8 @@ function Tracker() {
         "utm_campaign",
         "utm_term",
         "utm_content",
+        "gclid", // Google Ads click ID
+        "fbclid", // Meta (Facebook/Instagram) click ID
       ];
       let hasNewUtms = false;
       const newUtmData: Record<string, string> = {};
@@ -29,6 +31,11 @@ function Tracker() {
 
       if (hasNewUtms) {
         localStorage.setItem("cc_utm_data", JSON.stringify(newUtmData));
+      }
+
+      // First page of this visit (the page they landed on), kept for the browser tab session.
+      if (!sessionStorage.getItem("cc_landing_url") || hasNewUtms) {
+        sessionStorage.setItem("cc_landing_url", window.location.href);
       }
 
       // 2. Capture and save external referrer
@@ -69,6 +76,10 @@ function Tracker() {
           if (savedReferrer) {
             data["referrer"] = savedReferrer;
           }
+          const landingUrl = sessionStorage.getItem("cc_landing_url");
+          if (landingUrl) {
+            data["landing_url"] = landingUrl;
+          }
         } catch (e) {
           console.error("Error reading tracking data:", e);
         }
@@ -76,17 +87,30 @@ function Tracker() {
         return data;
       };
 
-      // 3. Intercept fetch globally to enrich all POST requests to /api/leads
+      // 3. Intercept fetch globally to enrich POST requests to our form endpoints
+      // (/api/leads, /api/careers, /api/internship) with source/attribution data.
       const originalFetch = window.fetch;
       window.fetch = function (input, init) {
-        if (
+        const isFormPost =
           typeof input === "string" &&
-          input.includes("/api/leads") &&
-          init?.method === "POST" &&
-          init.body
-        ) {
+          /\/api\/(leads|careers|internship)\b/.test(input) &&
+          (init?.method || "").toUpperCase() === "POST" &&
+          !!init?.body;
+
+        // Multipart forms (careers): add the fields that aren't already there.
+        if (isFormPost && init!.body instanceof FormData) {
           try {
-            const body = JSON.parse(init.body as string);
+            const form = init!.body as FormData;
+            const trackingData = getTrackingData();
+            for (const [key, value] of Object.entries(trackingData)) {
+              if (!form.has(key) && value) form.append(key, value);
+            }
+          } catch (e) {
+            console.error("Error enriching form submission payload:", e);
+          }
+        } else if (isFormPost && typeof init!.body === "string") {
+          try {
+            const body = JSON.parse(init!.body as string);
             const trackingData = getTrackingData();
             const enrichedBody = {
               ...trackingData,
@@ -94,7 +118,7 @@ function Tracker() {
               landed_url: body.landed_url || trackingData.landed_url || window.location.href,
               referrer: body.referrer || trackingData.referrer || "Direct / None",
             };
-            init.body = JSON.stringify(enrichedBody);
+            init!.body = JSON.stringify(enrichedBody);
           } catch (e) {
             console.error("Error enriching lead submission payload:", e);
           }
