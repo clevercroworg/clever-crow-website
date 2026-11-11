@@ -11,8 +11,8 @@ export default function LogoutButton() {
       disabled={busy}
       onClick={async () => {
         setBusy(true);
-        await fetch("/api/admin/logout", { method: "POST" }).catch(() => null);
-        window.location.href = "/admin/login";
+        await fetch("/api/leads-portal/logout", { method: "POST" }).catch(() => null);
+        window.location.href = "/team/leads-portal/login";
       }}
       className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 disabled:opacity-60"
     >

@@ -39,7 +39,7 @@ export default function FilterBar({ values, size, types, channels, statuses, for
       if (v && !(key === "size" && v === "25")) sp.set(key, v);
     });
     const qs = sp.toString();
-    router.push(qs ? `/admin?${qs}` : "/admin");
+    router.push(qs ? `/team/leads-portal?${qs}` : "/team/leads-portal");
   };
 
   const sel = (name: string, label: string, options: Option[], allLabel: string) => (
@@ -57,7 +57,7 @@ export default function FilterBar({ values, size, types, channels, statuses, for
   );
 
   return (
-    <form ref={formRef} method="get" action="/admin" onSubmit={onSubmit} className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm sm:p-4">
+    <form ref={formRef} method="get" action="/team/leads-portal" onSubmit={onSubmit} className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm sm:p-4">
       <input type="hidden" name="size" value={size} />
       <div className="flex flex-col gap-2 sm:flex-row">
         <div className="relative flex-1">
@@ -118,7 +118,7 @@ export default function FilterBar({ values, size, types, channels, statuses, for
 
       {hasAny && (
         <div className="mt-3 flex justify-end">
-          <Link href="/admin" className="inline-flex items-center gap-1 text-sm font-medium text-slate-500 hover:text-slate-900">
+          <Link href="/team/leads-portal" className="inline-flex items-center gap-1 text-sm font-medium text-slate-500 hover:text-slate-900">
             <X className="h-4 w-4" /> Clear all filters
           </Link>
         </div>

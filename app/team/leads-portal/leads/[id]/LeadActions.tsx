@@ -38,13 +38,13 @@ export default function LeadActions({
     setSaving(which);
     setError("");
     try {
-      const res = await fetch(`/api/admin/leads/${id}`, {
+      const res = await fetch(`/api/leads-portal/leads/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(changes),
       });
       if (res.status === 401) {
-        window.location.href = "/admin/login";
+        window.location.href = "/team/leads-portal/login";
         return false;
       }
       if (!res.ok) throw new Error();
@@ -64,7 +64,7 @@ export default function LeadActions({
     setDeleting(true);
     setError("");
     try {
-      const res = await fetch(`/api/admin/leads/${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/leads-portal/leads/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error();
       router.push(backHref);
       router.refresh();

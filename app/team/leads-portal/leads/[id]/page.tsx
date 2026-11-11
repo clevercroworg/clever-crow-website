@@ -53,7 +53,7 @@ export default async function LeadDetailPage({ params, searchParams }: PageProps
   const { id: rawId } = await params;
   const sp = await searchParams;
   const backRaw = typeof sp.back === "string" ? sp.back : "";
-  const backHref = backRaw.startsWith("?") ? `/admin${backRaw}` : "/admin";
+  const backHref = backRaw.startsWith("?") ? `/team/leads-portal${backRaw}` : "/team/leads-portal";
 
   if (!isDatabaseConfigured()) {
     return (

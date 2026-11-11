@@ -65,7 +65,7 @@ export async function isAdmin() {
 
 /** For admin pages: sends anyone not signed in to the login page. */
 export async function requireAdmin() {
-  if (!(await isAdmin())) redirect("/admin/login");
+  if (!(await isAdmin())) redirect("/team/leads-portal/login");
 }
 
 // --- Login rate limiting (per server instance): 8 failed tries per 15 minutes per IP. ---

@@ -49,8 +49,8 @@ export default async function AdminDashboard({ searchParams }: PageProps) {
   }
 
   const currentQuery = dashboardHref(filters, { page: result.page, size: size === 25 ? undefined : size }, "");
-  const detailHref = (id: number) => `/admin/leads/${id}${currentQuery ? `?back=${encodeURIComponent(currentQuery)}` : ""}`;
-  const exportHref = dashboardHref(filters, {}, "/api/admin/export");
+  const detailHref = (id: number) => `/team/leads-portal/leads/${id}${currentQuery ? `?back=${encodeURIComponent(currentQuery)}` : ""}`;
+  const exportHref = dashboardHref(filters, {}, "/api/leads-portal/export");
   const monthTotal = stats.channels.reduce((s, c) => s + c.count, 0);
 
   const statCards = [

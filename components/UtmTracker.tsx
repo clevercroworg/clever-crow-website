@@ -93,7 +93,7 @@ function Tracker() {
       window.fetch = function (input, init) {
         const isFormPost =
           typeof input === "string" &&
-          /\/api\/(leads|careers|internship)\b/.test(input) &&
+          /\/api\/(leads|careers|internship)(\?|$)/.test(input) &&
           (init?.method || "").toUpperCase() === "POST" &&
           !!init?.body;
 

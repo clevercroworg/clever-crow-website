@@ -15,7 +15,7 @@ export default function LoginForm() {
     setError("");
     setBusy(true);
     try {
-      const res = await fetch("/api/admin/login", {
+      const res = await fetch("/api/leads-portal/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -26,7 +26,7 @@ export default function LoginForm() {
         setBusy(false);
         return;
       }
-      window.location.href = "/admin";
+      window.location.href = "/team/leads-portal";
     } catch {
       setError("Network error. Check your connection and try again.");
       setBusy(false);

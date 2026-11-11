@@ -87,7 +87,7 @@ export default function MetaPixel() {
 // The admin dashboard is internal, so staff visits are not sent to Meta.
 function MetaPixelUnlessAdmin() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/admin")) return null;
+  if (pathname?.startsWith("/team/leads-portal")) return null;
   return (
     <>
       <Script id="meta-pixel" strategy="afterInteractive">

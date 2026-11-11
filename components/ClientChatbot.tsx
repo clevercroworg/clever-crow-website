@@ -18,6 +18,6 @@ const Chatbot = dynamic(
 export default function ClientChatbot() {
   const pathname = usePathname();
   // No chatbot inside the admin dashboard.
-  if (pathname?.startsWith("/admin")) return null;
+  if (pathname?.startsWith("/team/leads-portal")) return null;
   return <Chatbot />;
 }

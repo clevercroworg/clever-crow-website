@@ -5,7 +5,7 @@ import LoginForm from "./LoginForm";
 export const dynamic = "force-dynamic";
 
 export default async function AdminLoginPage() {
-  if (await isAdmin()) redirect("/admin");
+  if (await isAdmin()) redirect("/team/leads-portal");
   const configured = isAdminConfigured();
 
   return (

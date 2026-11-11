@@ -27,7 +27,7 @@ export function parseFilters(params: Params) {
 export function dashboardHref(
   filters: Filters,
   changes: Record<string, string | number | undefined> = {},
-  base = "/admin"
+  base = "/team/leads-portal"
 ) {
   const sp = new URLSearchParams();
   for (const [k, v] of Object.entries({ ...filters, ...changes })) {
