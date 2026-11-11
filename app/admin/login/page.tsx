@@ -13,8 +13,8 @@ export default async function AdminLoginPage() {
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center text-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-icon.png" alt="Clever Crow" className="h-12 w-12 object-contain" />
-          <p className="mt-4 text-xl font-semibold tracking-tight">Leads dashboard</p>
+          <img src="/CSS.svg" alt="Clever Crow" className="h-10 w-auto object-contain" />
+          <p className="mt-5 text-xl font-semibold tracking-tight">Leads dashboard</p>
           <p className="mt-1 text-sm text-slate-500">Sign in to see your website enquiries.</p>
         </div>
 

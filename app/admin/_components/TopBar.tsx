@@ -7,10 +7,8 @@ export default function TopBar() {
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
         <Link href="/admin" className="flex min-w-0 items-center gap-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-icon.png" alt="" className="h-7 w-7 shrink-0 object-contain" />
-          <span className="truncate text-[15px] font-semibold tracking-tight">
-            Clever Crow <span className="font-normal text-slate-500">· Leads</span>
-          </span>
+          <img src="/CSS.svg" alt="Clever Crow" className="h-6 w-auto shrink-0 object-contain sm:h-7" />
+          <span className="truncate border-l border-slate-200 pl-2.5 text-[15px] font-medium text-slate-500">Leads</span>
         </Link>
         <LogoutButton />
       </div>
