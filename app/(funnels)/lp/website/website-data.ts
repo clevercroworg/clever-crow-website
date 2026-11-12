@@ -84,10 +84,11 @@ export function getWebsiteLandingData(): WebsiteLandingData {
   return {
     hero: {
       badges: ["Website Growth Packages", "Conversion-Focused Design", "SEO-Ready Structure", "Fast Launch"],
-      title: "Your Website.",
-      accentTitle: "Built to Convert.",
-      subtitle: "High-performing websites for businesses that need leads, not just pages. Fast load. Mobile first. SEO-ready structure from day one.",
-      highlights: ["15+ Years Experience", "550+ Happy Clients", "Certified Team", "Fast Delivery & Support"],
+      title: "Professional Websites.",
+      accentTitle: "At Affordable Prices.",
+      subtitle:
+        "Get a custom website for your business starting at ₹7,999\u00a0+\u00a0GST. Works smoothly on mobile, loads fast and makes it easy for customers to call or WhatsApp you.",
+      highlights: ["Custom Design", "1 Year Free Hosting", "Mobile Friendly", "WhatsApp Enquiry Integration"],
       ctaLabel: "View Prices",
     },
     pricing: {

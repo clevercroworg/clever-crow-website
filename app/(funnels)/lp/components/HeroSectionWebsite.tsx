@@ -108,7 +108,6 @@ function useFitHeading() {
     if (!h) return;
     const fit = () => {
       h.style.fontSize = "";
-      if (window.innerWidth >= 640) return; // larger screens wrap normally
       const lines = Array.from(h.children) as HTMLElement[];
       const tooWide = () => lines.some((l) => l.scrollWidth > h.clientWidth + 1);
       let size = parseFloat(getComputedStyle(h).fontSize);
@@ -201,16 +200,27 @@ export default function HeroSectionWebsite({ data }: HeroSectionWebsiteProps) {
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 sm:gap-12 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
         {/* Left: headline, supporting copy, proof */}
         <div className="lg:col-span-7">
-          {/* Two lines on phones: each half stays on one line (size follows the screen width; useFitHeading
-              shrinks it further if an in-app browser has enlarged the text) */}
-          <h1 ref={headingRef} className="text-[clamp(1.6rem,8.4vw,2.6rem)] font-black leading-[1.1] tracking-tight sm:text-6xl sm:leading-[1.05] lg:text-[4rem]">
-            <span className="block whitespace-nowrap sm:whitespace-normal">{data.title}</span>
-            <span className="mt-1 block whitespace-nowrap bg-gradient-to-r from-[#FFC72C] to-[#F59E0B] bg-clip-text pb-1 text-transparent sm:whitespace-normal">
+          {/* Always two lines: each half stays on one line (size follows the screen width; useFitHeading
+              shrinks it if a line would not fit, e.g. when an in-app browser enlarges text) */}
+          <h1 ref={headingRef} className="text-[clamp(1.5rem,7.4vw,2.6rem)] font-black leading-[1.12] tracking-tight sm:text-5xl lg:text-[3.6rem]">
+            <span className="block whitespace-nowrap">{data.title}</span>
+            <span className="mt-1 block whitespace-nowrap bg-gradient-to-r from-[#FFC72C] to-[#F59E0B] bg-clip-text pb-1 text-transparent">
               {data.accentTitle}
             </span>
           </h1>
 
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-300 sm:mt-6 sm:text-xl">{data.subtitle}</p>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-300 sm:mt-6 sm:text-lg lg:text-xl">{data.subtitle}</p>
+
+          <ul className="mt-6 grid max-w-xl grid-cols-2 gap-x-3 gap-y-3 sm:mt-8 sm:gap-x-6">
+            {data.highlights.map((item) => (
+              <li key={item} className="flex items-center gap-2 text-[13px] font-semibold leading-snug text-slate-100 sm:gap-3 sm:text-[15px]">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400 sm:h-6 sm:w-6">
+                  <Check className="h-3 w-3 stroke-[3] sm:h-3.5 sm:w-3.5" aria-hidden="true" />
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
 
           {/* 2x2 tiles on mobile, one row of four with dividers from sm up */}
           <dl className="mt-8 grid max-w-2xl grid-cols-2 gap-3 border-t border-white/10 pt-6 sm:mt-10 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-white/10">
