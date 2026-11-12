@@ -146,7 +146,7 @@ export default function HeroSectionWebsite({ data }: HeroSectionWebsiteProps) {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#050a1c] pt-28 pb-16 text-white sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-28">
+    <section className="relative overflow-hidden bg-[#050a1c] pt-24 pb-12 text-white sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-28">
       {/* Quiet background: navy gradient, a grid that fades out from the centre, two soft glows, a bottom hairline */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#050a1c] via-[#0a1433] to-[#0f1d4a]" aria-hidden="true" />
       <div
@@ -168,19 +168,20 @@ export default function HeroSectionWebsite({ data }: HeroSectionWebsiteProps) {
       />
       <HeroDoodles />
 
-      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 sm:gap-12 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
         {/* Left: headline, supporting copy, proof */}
         <div className="lg:col-span-7">
-          <h1 className="text-[2.6rem] font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-[4rem]">
-            {data.title}
-            <span className="mt-1 block bg-gradient-to-r from-[#FFC72C] to-[#F59E0B] bg-clip-text text-transparent">
+          {/* Two lines on phones: each half stays on one line, with the size following the screen width */}
+          <h1 className="text-[clamp(1.6rem,8.4vw,2.6rem)] font-black leading-[1.1] tracking-tight sm:text-6xl sm:leading-[1.05] lg:text-[4rem]">
+            <span className="block whitespace-nowrap sm:whitespace-normal">{data.title}</span>
+            <span className="mt-1 block whitespace-nowrap bg-gradient-to-r from-[#FFC72C] to-[#F59E0B] bg-clip-text pb-1 text-transparent sm:whitespace-normal">
               {data.accentTitle}
             </span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">{data.subtitle}</p>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-300 sm:mt-6 sm:text-xl">{data.subtitle}</p>
 
-          <ul className="mt-8 grid max-w-xl grid-cols-2 gap-x-3 gap-y-3 sm:gap-x-6">
+          <ul className="mt-6 grid max-w-xl grid-cols-2 gap-x-3 gap-y-3 sm:mt-8 sm:gap-x-6">
             {data.highlights.map((item) => (
               <li key={item} className="flex items-center gap-2 text-[13px] font-semibold leading-snug text-slate-100 sm:gap-3 sm:text-[15px]">
                 <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400 sm:h-6 sm:w-6">
@@ -192,7 +193,7 @@ export default function HeroSectionWebsite({ data }: HeroSectionWebsiteProps) {
           </ul>
 
           {/* 2x2 tiles on mobile, one row of four with dividers from sm up */}
-          <dl className="mt-10 grid max-w-2xl grid-cols-2 gap-3 border-t border-white/10 pt-6 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-white/10">
+          <dl className="mt-8 grid max-w-2xl grid-cols-2 gap-3 border-t border-white/10 pt-6 sm:mt-10 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-white/10">
             {STATS.map(({ icon: Icon, value, label }) => (
               <div
                 key={label}
