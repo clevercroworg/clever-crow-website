@@ -2,7 +2,7 @@
 
 import React, { useLayoutEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowDown, ArrowRight, Check, Globe, Layers, Lock, Phone, Star, User } from "lucide-react";
+import { ArrowDown, ArrowRight, Award, Check, Globe, Lock, Phone, Star, User } from "lucide-react";
 
 type HeroMeta = {
   title: string;
@@ -20,7 +20,7 @@ const STATS = [
   { icon: Globe, value: "150+", label: "Websites Delivered" },
   { icon: Check, value: "98%", label: "Client Satisfaction" },
   { icon: Star, value: "4.9/5", label: "Average Rating" },
-  { icon: Layers, value: "11", label: "Industries Served" },
+  { icon: Award, value: "15+", label: "Years Experience" },
 ];
 
 // Thin line-art doodles on the web-design theme. Kept to the edges and the column gap so they never sit
@@ -212,17 +212,6 @@ export default function HeroSectionWebsite({ data }: HeroSectionWebsiteProps) {
 
           <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-300 sm:mt-6 sm:text-xl">{data.subtitle}</p>
 
-          <ul className="mt-6 grid max-w-xl grid-cols-2 gap-x-3 gap-y-3 sm:mt-8 sm:gap-x-6">
-            {data.highlights.map((item) => (
-              <li key={item} className="flex items-center gap-2 text-[13px] font-semibold leading-snug text-slate-100 sm:gap-3 sm:text-[15px]">
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400 sm:h-6 sm:w-6">
-                  <Check className="h-3 w-3 stroke-[3] sm:h-3.5 sm:w-3.5" aria-hidden="true" />
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
-
           {/* 2x2 tiles on mobile, one row of four with dividers from sm up */}
           <dl className="mt-8 grid max-w-2xl grid-cols-2 gap-3 border-t border-white/10 pt-6 sm:mt-10 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-white/10">
             {STATS.map(({ icon: Icon, value, label }) => (
@@ -256,9 +245,6 @@ export default function HeroSectionWebsite({ data }: HeroSectionWebsiteProps) {
             <h2 className="text-2xl font-black tracking-tight">
               Request a <span className="text-[#FFC72C]">Call Back</span>
             </h2>
-            <p className="mt-1.5 text-sm text-slate-300">
-              Get a free strategy consultation &amp; custom quote within 15 minutes.
-            </p>
 
             <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
               <label className="relative block">
