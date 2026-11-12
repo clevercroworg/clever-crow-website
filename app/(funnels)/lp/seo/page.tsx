@@ -153,7 +153,7 @@ export default function SeoLandingPage() {
         (window as any).gtag('event', 'conversion', {
           'send_to': 'AW-17335403082/YwV4CJ-q_e8YEPq9me49',
         });
-        (window as any).gtag('event', 'GenerateLead', {
+        (window as any).gtag('event', 'generate_lead', {
           'event_category': 'Leads',
           'event_label': 'Lead Form Submit'
         });
@@ -182,7 +182,7 @@ export default function SeoLandingPage() {
         (window as any).gtag('event', 'conversion', {
           'send_to': 'AW-17335403082/YwV4CJ-q_e8YEPq9me49',
         });
-        (window as any).gtag('event', 'GenerateLead', {
+        (window as any).gtag('event', 'generate_lead', {
           'event_category': 'Leads',
           'event_label': 'Lead Form Submit'
         });

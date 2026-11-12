@@ -162,7 +162,7 @@ export default function HeroSectionWebsite({ data }: HeroSectionWebsiteProps) {
       // Same Google Ads lead conversion as the shared LP hero form.
       const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
       gtag?.("event", "conversion", { send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49" });
-      gtag?.("event", "GenerateLead", { event_category: "Leads", event_label: "Lead Form Submit" });
+      gtag?.("event", "generate_lead", { event_category: "Leads", event_label: "Lead Form Submit" });
 
       setName("");
       setPhone("");

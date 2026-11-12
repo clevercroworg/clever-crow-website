@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { trackLead } from "@/lib/tracking";
 
 /* ───────────────────────── DATA ───────────────────────── */
 
@@ -321,11 +322,7 @@ export default function SuccessStoriesClient() {
       });
       if (res.ok) {
         // Track lead conversion
-        if (typeof window !== "undefined" && typeof (window as any).gtag === "function") {
-          (window as any).gtag("event", "conversion", {
-            send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
-          });
-        }
+        await trackLead("Success Stories Form"); // waits for Google before the page reloads
         setFormStatus("sent");
         setFormData({ name: "", phone: "" });
         window.location.href = "/thank-you";

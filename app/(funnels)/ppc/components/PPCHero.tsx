@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackLead } from "@/lib/tracking";
 import {
   IconCheck,
   IconChartBar,
@@ -50,11 +51,7 @@ export default function PPCHero({
       if (!response.ok) throw new Error("Failed");
 
       // Fire Google Ads conversion tracking
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("event", "conversion", {
-          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
-        });
-      }
+      await trackLead("PPC Hero Form"); // waits for Google before the page reloads
 
       window.location.href = "/thank-you";
     } catch {

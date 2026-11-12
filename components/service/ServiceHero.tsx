@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   Zap,
 } from "lucide-react";
+import { trackLead } from "@/lib/tracking";
 
 type LogoItem = {
   src: string;
@@ -75,15 +76,7 @@ export default function ServiceHero({
       if (!response.ok) throw new Error("Failed to send");
 
       // Fire Google Ads conversion tracking
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("event", "conversion", {
-          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
-        });
-        (window as any).gtag("event", "GenerateLead", {
-          event_category: "Leads",
-          event_label: "Service Lead Form Submit",
-        });
-      }
+      await trackLead("Service Hero Form"); // waits for Google before the page reloads
 
       window.location.href = "/thank-you";
     } catch {

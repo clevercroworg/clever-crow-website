@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackLead } from "@/lib/tracking";
 
 export default function QuoteModal() {
   const [open, setOpen] = useState(false);
@@ -38,11 +39,7 @@ export default function QuoteModal() {
       }
 
       // Fire Google Ads conversion tracking
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("event", "conversion", {
-          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
-        });
-      }
+      await trackLead("PPC Quote Modal"); // waits for Google before the page reloads
 
       window.location.href = "/thank-you";
     } catch (err) {

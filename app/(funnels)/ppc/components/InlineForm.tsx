@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackLead } from "@/lib/tracking";
 
 export default function InlineForm() {
   const [loading, setLoading] = useState(false);
@@ -35,11 +36,7 @@ export default function InlineForm() {
       }
 
       // Fire Google Ads conversion tracking
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("event", "conversion", {
-          send_to: "AW-17335403082/YwV4CJ-q_e8YEPq9me49",
-        });
-      }
+      await trackLead("PPC Inline Form"); // waits for Google before the page reloads
 
       window.location.href = "/thank-you";
     } catch (err) {

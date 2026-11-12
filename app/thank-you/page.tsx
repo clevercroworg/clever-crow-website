@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+// Reached after a form is sent; the conversion is reported on submit, so this page only confirms.
+export const metadata: Metadata = {
+  title: "Thank You | Clever Crow",
+  robots: { index: false, follow: false },
+};
+
 export default function ThankYouPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-6">

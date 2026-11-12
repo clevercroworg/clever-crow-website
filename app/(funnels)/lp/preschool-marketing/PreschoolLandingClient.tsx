@@ -699,6 +699,7 @@ export default function PreschoolLandingClient() {
                 >
                   <a
                     href={PHONE_HREF}
+                    data-ads-call
                     className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-sm sm:text-base shadow-xs transition shrink-0 cursor-pointer whitespace-nowrap"
                   >
                     <Phone className="w-4 h-4" />
@@ -1247,6 +1248,7 @@ export default function PreschoolLandingClient() {
               </div>
               <a
                 href={PHONE_HREF}
+                    data-ads-call
                 className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-[#f4c542] hover:brightness-105 text-slate-950 font-black text-sm px-6 py-3 shadow-xs transition cursor-pointer"
               >
                 <Phone className="w-4 h-4" />
@@ -1354,6 +1356,7 @@ export default function PreschoolLandingClient() {
                       {/* Secondary Call Request Button */}
                       <a
                         href={PHONE_HREF}
+                    data-ads-call
                         className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#f4c542] hover:brightness-105 active:scale-[0.99] text-slate-950 font-black text-sm px-6 py-3 transition cursor-pointer"
                       >
                         <Phone className="w-4 h-4" />
@@ -1760,6 +1763,7 @@ export default function PreschoolLandingClient() {
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href={PHONE_HREF}
+                    data-ads-call
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#f4c542] hover:brightness-105 text-slate-950 font-black text-base px-8 py-3.5 shadow-md transition cursor-pointer"
               >
                 <Phone className="w-5 h-5" />

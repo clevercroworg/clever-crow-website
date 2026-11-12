@@ -125,7 +125,7 @@ const ReviewFormSection = () => {
               'event_category': 'Lead',
               'event_label': 'Hospitality Form Submission'
             });
-            window.gtag('event', 'GenerateLead', {
+            window.gtag('event', 'generate_lead', {
               'phone_number': '09986389444'
             });
           }
