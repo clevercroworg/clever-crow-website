@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ChevronRight, Inbox, Mail, Phone } from "lucide-react";
-import { requireAdmin } from "@/lib/admin/auth";
+import { requireSession } from "@/lib/admin/auth";
 import { dashboardHref, parseFilters } from "@/lib/admin/filters";
 import { isDatabaseConfigured } from "@/lib/leads/db";
 import { CHANNELS } from "@/lib/leads/attribution";
@@ -18,7 +18,7 @@ export const dynamic = "force-dynamic";
 type PageProps = { searchParams: Promise<Record<string, string | string[] | undefined>> };
 
 export default async function AdminDashboard({ searchParams }: PageProps) {
-  await requireAdmin();
+  const session = await requireSession();
   const { filters, page, size } = parseFilters(await searchParams);
 
   if (!isDatabaseConfigured()) {
@@ -50,7 +50,7 @@ export default async function AdminDashboard({ searchParams }: PageProps) {
 
   const currentQuery = dashboardHref(filters, { page: result.page, size: size === 25 ? undefined : size }, "");
   const detailHref = (id: number) => `/team/leads-portal/leads/${id}${currentQuery ? `?back=${encodeURIComponent(currentQuery)}` : ""}`;
-  const exportHref = dashboardHref(filters, {}, "/api/leads-portal/export");
+  const exportHref = session.role === "admin" ? dashboardHref(filters, {}, "/api/leads-portal/export") : undefined;
   const monthTotal = stats.channels.reduce((s, c) => s + c.count, 0);
 
   const statCards = [

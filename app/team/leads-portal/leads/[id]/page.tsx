@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ExternalLink, Mail, MessageCircle, Phone } from "lucide-react";
-import { requireAdmin } from "@/lib/admin/auth";
+import { requireSession } from "@/lib/admin/auth";
 import { isDatabaseConfigured } from "@/lib/leads/db";
 import { getSubmission } from "@/lib/leads/queries";
 import TopBar from "../../_components/TopBar";
@@ -49,7 +49,7 @@ function UrlValue({ url }: { url: string | null }) {
 }
 
 export default async function LeadDetailPage({ params, searchParams }: PageProps) {
-  await requireAdmin();
+  const session = await requireSession();
   const { id: rawId } = await params;
   const sp = await searchParams;
   const backRaw = typeof sp.back === "string" ? sp.back : "";
@@ -158,7 +158,19 @@ export default async function LeadDetailPage({ params, searchParams }: PageProps
 
           <aside className="lg:sticky lg:top-20 lg:self-start">
             <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
-              <LeadActions id={lead.id} status={lead.status} notes={lead.notes || ""} backHref={backHref} />
+              <LeadActions
+                id={lead.id}
+                status={lead.status}
+                notes={lead.notes || ""}
+                backHref={backHref}
+                canDelete={session.role === "admin"}
+              />
+              {lead.updated_by && lead.updated_at && (
+                <p className="mt-4 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                  Last updated by <span className="font-medium text-slate-700">{lead.updated_by}</span> ·{" "}
+                  {timeAgo(lead.updated_at)}
+                </p>
+              )}
             </section>
           </aside>
         </div>

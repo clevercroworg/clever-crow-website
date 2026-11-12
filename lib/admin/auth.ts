@@ -1,71 +1,77 @@
-import { createHash, createHmac, timingSafeEqual } from "crypto";
+import { createHmac, timingSafeEqual } from "crypto";
+import { cache } from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import type { NextResponse } from "next/server";
+import { isDatabaseConfigured } from "@/lib/leads/db";
+import { getSigningSecret, getUserById, type AdminUser, type Role } from "./users";
 
-// One shared admin login, configured with Vercel environment variables:
-//   ADMIN_USERNAME, ADMIN_PASSWORD, and optionally ADMIN_SESSION_SECRET.
-// Sessions are a signed, httpOnly cookie. Changing the password signs everyone out.
+// Leads dashboard logins live in the leads database (see users.ts); nothing to set in Vercel.
+// Sessions are a signed, httpOnly cookie holding the user id and their session version.
+// Disabling a user, changing their role or resetting their password bumps the version,
+// which signs them out everywhere straight away.
 
 export const SESSION_COOKIE = "cc_admin_session";
 export const SESSION_MAX_AGE = 60 * 60 * 24 * 7; // 7 days
 
-export function isAdminConfigured() {
-  return Boolean(process.env.ADMIN_USERNAME && process.env.ADMIN_PASSWORD);
-}
+export type Session = Pick<AdminUser, "id" | "username" | "name" | "role">;
 
-function secret() {
-  const base = process.env.ADMIN_SESSION_SECRET || "";
-  // Tie sessions to the current password, so changing it invalidates old sessions.
-  return createHash("sha256")
-    .update(`${base}|${process.env.ADMIN_USERNAME || ""}|${process.env.ADMIN_PASSWORD || ""}|clever-crow-admin`)
-    .digest();
-}
-
-function sign(payload: string) {
-  return createHmac("sha256", secret()).update(payload).digest("base64url");
+async function sign(payload: string) {
+  return createHmac("sha256", await getSigningSecret()).update(payload).digest("base64url");
 }
 
 function safeEqual(a: string, b: string) {
-  // Hash both sides first so the comparison takes the same time whatever the lengths.
-  const ha = createHash("sha256").update(a).digest();
-  const hb = createHash("sha256").update(b).digest();
-  return timingSafeEqual(ha, hb);
+  const ba = Buffer.from(a);
+  const bb = Buffer.from(b);
+  return ba.length === bb.length && timingSafeEqual(ba, bb);
 }
 
-export function checkCredentials(username: string, password: string) {
-  if (!isAdminConfigured()) return false;
-  const userOk = safeEqual(username.trim().toLowerCase(), (process.env.ADMIN_USERNAME || "").trim().toLowerCase());
-  const passOk = safeEqual(password, process.env.ADMIN_PASSWORD || "");
-  return userOk && passOk;
-}
-
-export function createSessionToken() {
+export async function createSessionToken(user: Pick<AdminUser, "id" | "session_version">) {
   const payload = Buffer.from(
-    JSON.stringify({ u: process.env.ADMIN_USERNAME, exp: Date.now() + SESSION_MAX_AGE * 1000 })
+    JSON.stringify({ uid: user.id, v: user.session_version, exp: Date.now() + SESSION_MAX_AGE * 1000 })
   ).toString("base64url");
-  return `${payload}.${sign(payload)}`;
+  return `${payload}.${await sign(payload)}`;
 }
 
-export function verifySessionToken(token?: string | null) {
-  if (!token || !isAdminConfigured()) return false;
+export async function setSessionCookie(res: NextResponse, user: Pick<AdminUser, "id" | "session_version">) {
+  res.cookies.set(SESSION_COOKIE, await createSessionToken(user), {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: SESSION_MAX_AGE,
+  });
+}
+
+export async function verifySessionToken(token?: string | null): Promise<Session | null> {
+  if (!token || !isDatabaseConfigured()) return null;
   const [payload, signature] = token.split(".");
-  if (!payload || !signature || !safeEqual(signature, sign(payload))) return false;
+  if (!payload || !signature) return null;
   try {
-    const data = JSON.parse(Buffer.from(payload, "base64url").toString()) as { exp?: number };
-    return typeof data.exp === "number" && data.exp > Date.now();
-  } catch {
-    return false;
+    if (!safeEqual(signature, await sign(payload))) return null;
+    const data = JSON.parse(Buffer.from(payload, "base64url").toString()) as { uid?: number; v?: number; exp?: number };
+    if (typeof data.uid !== "number" || typeof data.exp !== "number" || data.exp <= Date.now()) return null;
+    const user = await getUserById(data.uid);
+    if (!user || !user.active || user.session_version !== data.v) return null;
+    return { id: user.id, username: user.username, name: user.name, role: user.role };
+  } catch (error) {
+    console.error("ADMIN: session check failed", error);
+    return null;
   }
 }
 
-export async function isAdmin() {
+/** The signed-in user for this request, or null. Cached per request. */
+export const getSession = cache(async () => {
   const store = await cookies();
   return verifySessionToken(store.get(SESSION_COOKIE)?.value);
-}
+});
 
-/** For admin pages: sends anyone not signed in to the login page. */
-export async function requireAdmin() {
-  if (!(await isAdmin())) redirect("/team/leads-portal/login");
+/** For dashboard pages: sends anyone not signed in to the login page, and viewers away from admin-only pages. */
+export async function requireSession(role?: Role) {
+  const session = await getSession();
+  if (!session) redirect("/team/leads-portal/login");
+  if (role === "admin" && session.role !== "admin") redirect("/team/leads-portal");
+  return session;
 }
 
 // --- Login rate limiting (per server instance): 8 failed tries per 15 minutes per IP. ---

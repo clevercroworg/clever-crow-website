@@ -15,7 +15,7 @@ type Props = {
   statuses: Option[];
   forms: Option[];
   pages: Option[];
-  exportHref: string;
+  exportHref?: string; // CSV export, admins only
 };
 
 const select =
@@ -87,14 +87,16 @@ export default function FilterBar({ values, size, types, channels, statuses, for
             <SlidersHorizontal className="h-4 w-4" />
             Filters{activeCount ? ` (${activeCount})` : ""}
           </button>
-          <a
-            href={exportHref}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
-            title="Download these results as a CSV file (opens in Excel / Google Sheets)"
-          >
-            <Download className="h-4 w-4" />
-            <span className="hidden md:inline">Export</span>
-          </a>
+          {exportHref && (
+            <a
+              href={exportHref}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              title="Download these results as a CSV file (opens in Excel / Google Sheets)"
+            >
+              <Download className="h-4 w-4" />
+              <span className="hidden md:inline">Export</span>
+            </a>
+          )}
         </div>
       </div>
 

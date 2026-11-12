@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { guardAdminApi, noStore } from "@/lib/admin/http";
+import { authorizeApi, noStore } from "@/lib/admin/http";
 import { STATUSES, deleteSubmission, updateSubmission } from "@/lib/leads/queries";
 
 type Ctx = { params: Promise<{ id: string }> };
@@ -9,8 +9,9 @@ function parseId(raw: string) {
   return Number.isSafeInteger(id) && id > 0 ? id : null;
 }
 
+// Admins and viewers can update status and notes; only admins can delete.
 export async function PATCH(req: Request, { params }: Ctx) {
-  const denied = await guardAdminApi(req);
+  const { session, denied } = await authorizeApi(req);
   if (denied) return denied;
   const id = parseId((await params).id);
   if (!id) return NextResponse.json({ error: "Invalid id" }, { status: 400 });
@@ -35,7 +36,7 @@ export async function PATCH(req: Request, { params }: Ctx) {
   }
 
   try {
-    const ok = await updateSubmission(id, changes);
+    const ok = await updateSubmission(id, changes, session.name);
     if (!ok) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json({ ok: true }, { headers: noStore });
   } catch (error) {
@@ -45,7 +46,7 @@ export async function PATCH(req: Request, { params }: Ctx) {
 }
 
 export async function DELETE(req: Request, { params }: Ctx) {
-  const denied = await guardAdminApi(req);
+  const { denied } = await authorizeApi(req, "admin");
   if (denied) return denied;
   const id = parseId((await params).id);
   if (!id) return NextResponse.json({ error: "Invalid id" }, { status: 400 });

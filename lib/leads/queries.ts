@@ -46,6 +46,8 @@ export type Submission = {
   user_agent: string | null;
   status: string;
   notes: string | null;
+  updated_at: string | null;
+  updated_by: string | null;
   extra: Record<string, string>;
 };
 
@@ -100,6 +102,7 @@ function mapRow(row: Record<string, unknown>): Submission {
     ...(row as unknown as Submission),
     id: Number(row.id),
     created_at: new Date(row.created_at as string).toISOString(),
+    updated_at: row.updated_at ? new Date(row.updated_at as string).toISOString() : null,
     extra: (row.extra as Record<string, string>) || {},
   };
 }
@@ -135,7 +138,11 @@ export async function getSubmission(id: number) {
   return res.rows[0] ? mapRow(res.rows[0]) : null;
 }
 
-export async function updateSubmission(id: number, changes: { status?: string; notes?: string | null }) {
+export async function updateSubmission(
+  id: number,
+  changes: { status?: string; notes?: string | null },
+  updatedBy: string
+) {
   await ensureSchema();
   const sets: string[] = [];
   const params: unknown[] = [];
@@ -148,6 +155,8 @@ export async function updateSubmission(id: number, changes: { status?: string; n
     sets.push(`notes = $${params.length}`);
   }
   if (!sets.length) return false;
+  params.push(updatedBy);
+  sets.push(`updated_by = $${params.length}`, "updated_at = now()");
   params.push(id);
   const res = await getPool().query(`UPDATE submissions SET ${sets.join(", ")} WHERE id = $${params.length}`, params);
   return (res.rowCount || 0) > 0;

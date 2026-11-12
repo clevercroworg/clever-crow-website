@@ -18,11 +18,13 @@ export default function LeadActions({
   status: initialStatus,
   notes: initialNotes,
   backHref,
+  canDelete,
 }: {
   id: number;
   status: string;
   notes: string;
   backHref: string;
+  canDelete: boolean; // admins only
 }) {
   const router = useRouter();
   const [status, setStatus] = useState(initialStatus);
@@ -137,6 +139,7 @@ export default function LeadActions({
       )}
       {error && <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</p>}
 
+      {canDelete && (
       <div className="border-t border-slate-100 pt-4">
         {confirmDelete ? (
           <div className="rounded-lg border border-rose-200 bg-rose-50 p-3">
@@ -169,6 +172,7 @@ export default function LeadActions({
           </button>
         )}
       </div>
+      )}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { guardAdminApi } from "@/lib/admin/http";
+import { authorizeApi } from "@/lib/admin/http";
 import { parseFilters } from "@/lib/admin/filters";
 import { exportSubmissions } from "@/lib/leads/queries";
 
@@ -33,6 +33,7 @@ const COLUMNS: [string, string][] = [
   ["browser", "Browser"],
   ["os", "OS"],
   ["notes", "Notes"],
+  ["updated_by", "Last updated by"],
 ];
 
 function cell(value: unknown) {
@@ -46,7 +47,7 @@ function ist(iso: string) {
 }
 
 export async function GET(req: Request) {
-  const denied = await guardAdminApi(req);
+  const { denied } = await authorizeApi(req, "admin");
   if (denied) return denied;
   const { filters } = parseFilters(new URL(req.url).searchParams);
   try {
