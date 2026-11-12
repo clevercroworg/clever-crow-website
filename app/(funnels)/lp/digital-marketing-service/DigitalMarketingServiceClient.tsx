@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { 
   Phone, Monitor, Search, Sparkles, Award, Users, Star, BadgeCheck, Lock,
@@ -18,6 +18,8 @@ import SectionHeading from './SectionHeading';
 import HeroDoodles from './HeroDoodles';
 import ArcBackground from './ArcBackground';
 import IncludedSection from './IncludedSection';
+import PricingPackages from './PricingPackages';
+import PartnerBadges from './PartnerBadges';
 import { SERVICE_CONTENT, type LandingContent } from './page-content';
 import { noOrphan } from './text';
 import { MotionConfig } from 'framer-motion';
@@ -27,6 +29,11 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
   const router = useRouter();
   const whatsappUrl = `https://wa.me/919986389444?text=${encodeURIComponent(content.whatsappMessage)}`;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // Package picked from the pricing cards (shown in the popup and sent with the lead).
+  const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
+  useEffect(() => {
+    if (!isModalOpen) setSelectedPackage(null);
+  }, [isModalOpen]);
   const [showAllReels, setShowAllReels] = useState(false);
   const [status, setStatus] = useState<{ loading: boolean; success: boolean; error: string | null }>({ loading: false, success: false, error: null });
   const [modalStatus, setModalStatus] = useState<{ loading: boolean; success: boolean; error: string | null }>({ loading: false, success: false, error: null });
@@ -170,7 +177,11 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
     setModalStatus({ loading: true, success: false, error: null });
 
     try {
-      await submitLead(modalFormData.name, modalFormData.phone, `${content.leadSource} (Modal)`);
+      await submitLead(
+        modalFormData.name,
+        modalFormData.phone,
+        selectedPackage ? `${content.leadSource} (Modal: ${selectedPackage})` : `${content.leadSource} (Modal)`
+      );
       // Fire Google conversion tracking
       if (typeof window !== 'undefined' && (window as any).gtag) {
         (window as any).gtag('event', 'conversion', {
@@ -531,6 +542,9 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
           </div>
 
           {/* Partner platforms bar spanning the full width */}
+          {content.partnerBadges ? (
+            <PartnerBadges />
+          ) : (
           <div className="mt-12 border-t border-white/10 py-8 sm:mt-14 lg:mt-16">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:gap-10">
               <p className="shrink-0 whitespace-nowrap text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
@@ -546,6 +560,7 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
               </ul>
             </div>
           </div>
+          )}
         </div>
       </section>
 
@@ -574,6 +589,17 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
           </Reveal>
         </div>
       </section>
+
+      {content.pricingPackages && content.pricingPackages.length > 0 && (
+        <PricingPackages
+          packages={content.pricingPackages}
+          onChoose={(name) => {
+            setSelectedPackage(name);
+            setIsModalOpen(true);
+          }}
+          onCustom={() => setIsModalOpen(true)}
+        />
+      )}
 
       {content.servicesSection !== "plans" ? (
         <IncludedSection content={content.servicesSection} onOpenModal={() => setIsModalOpen(true)} />
@@ -654,7 +680,7 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
       {/* Direct CTA Panel */}
       <section className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-14 text-white">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold sm:text-4xl text-white"><RiseText text="Grow Your Business with Digital Marketing" /></h2>
+          <h2 className="text-3xl font-extrabold sm:text-4xl text-white"><RiseText text={content.ctaTitle ?? "Grow Your Business with Digital Marketing"} /></h2>
           <Reveal y={16} delay={0.2}>
             <p className="mt-3 text-slate-200">SEO, Social Media, Google Ads, and conversion-focused strategy.</p>
           </Reveal>
@@ -799,6 +825,15 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
               Request a Call Back
             </h3>
             <p className="text-slate-500 text-xs mt-1 mb-6">Leave your details and our team will get back to you shortly.</p>
+            {selectedPackage && (() => {
+              const pkg = content.pricingPackages?.find((p) => p.name === selectedPackage);
+              return (
+                <p className="-mt-3 mb-5 rounded-xl border border-amber-200 bg-amber-50 px-3.5 py-2.5 text-sm text-slate-700">
+                  Package: <span className="font-bold text-slate-900">{selectedPackage}</span>
+                  {pkg && <span className="text-slate-500"> · {pkg.price} + GST / month</span>}
+                </p>
+              );
+            })()}
 
             <form onSubmit={handleModalFormSubmit} className="space-y-4">
               <div>

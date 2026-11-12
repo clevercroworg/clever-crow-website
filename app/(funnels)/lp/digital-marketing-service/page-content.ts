@@ -12,13 +12,49 @@ export type LandingContent = {
   servicesSection: "plans" | IncludedContent;
   leadSource: string; // label in lead emails
   whatsappMessage: string;
+  // Optional, per page (pages that leave these out are unchanged):
+  pricingPackages?: PricingPackage[]; // monthly packages section above the services
+  partnerBadges?: boolean; // "Partner of Google / Meta" strip instead of the platforms list
+  ctaTitle?: string; // heading of the dark call-to-action panel
+};
+
+export type PricingPackage = {
+  name: string;
+  price: string; // e.g. "₹19,999"
+  includes: string[];
+  bestFor: string;
+  highlight?: string; // small label on the card, e.g. "Recommended"
 };
 
 export const SERVICE_CONTENT: LandingContent = {
-  heroTitleLead: "Turn More Searches & Clicks Into",
-  heroTitleAccent: "Business Enquiries.",
-  heroSubtitle: "Grow your business with digital marketing that brings more leads and sales.",
+  heroTitleLead: "Grow Your Business With",
+  heroTitleAccent: "Digital Marketing",
+  heroAccentOwnLine: true,
+  heroSubtitle: "Get More Website Visitors, Enquiries and Sales With Digital Marketing Strategies.",
   servicesSection: "plans",
+  pricingPackages: [
+    {
+      name: "Focused Growth",
+      price: "₹19,999",
+      includes: ["Google Ads or Meta Ads (one channel)", "Landing page optimisation guidance", "Conversion tracking"],
+      bestFor: "Businesses starting with one advertising channel",
+    },
+    {
+      name: "Paid Growth",
+      price: "₹29,999",
+      includes: ["Google Ads and Meta Ads", "Remarketing where eligible", "Conversion tracking", "Combined reporting"],
+      bestFor: "Businesses ready to advertise across both platforms",
+      highlight: "Recommended",
+    },
+    {
+      name: "Integrated Growth",
+      price: "₹44,999",
+      includes: ["Google Ads and Meta Ads", "A defined SEO / content scope"],
+      bestFor: "Businesses investing in enquiries and organic visibility together",
+    },
+  ],
+  partnerBadges: true,
+  ctaTitle: "Ready to Get More Enquiries?",
   leadSource: "Digital Marketing Service Landing Page",
   whatsappMessage: "Hi Clever Crow, I'm interested in digital marketing services. (Ref: LP/Digital-Marketing-Service)",
 };
