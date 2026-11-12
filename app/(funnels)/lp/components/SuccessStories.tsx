@@ -48,6 +48,9 @@ type SuccessStoriesProps = {
   // "tabs": category pills (scrollable row on mobile, wrapped on desktop) instead of the dropdown.
   filterStyle?: "dropdown" | "tabs";
   isAppPortfolio?: boolean;
+  // Phones: tapping a card opens the client's live site straight away (with a short "opening" animation)
+  // instead of the details popup. "Project Details" still opens the popup. Desktop is unchanged.
+  openSiteOnMobile?: boolean;
 };
 
 // Brand logo background color palette generator based on title
@@ -148,9 +151,28 @@ export default function SuccessStories({
   filterBy,
   hideMetrics = false,
   filterStyle = "dropdown",
-  isAppPortfolio = false
+  isAppPortfolio = false,
+  openSiteOnMobile = false,
 }: SuccessStoriesProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [openingId, setOpeningId] = useState<string | null>(null);
+  const openingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Card / title tap. The site is opened inside the tap itself (phone browsers block new tabs opened
+  // after a delay); the overlay animation plays on the card at the same time.
+  const openCase = (cs: CaseStudy) => {
+    if (openSiteOnMobile && cs.link && window.matchMedia("(max-width: 639px)").matches) {
+      setOpeningId(cs.id);
+      window.open(cs.link, "_blank", "noopener,noreferrer");
+      if (openingTimer.current) clearTimeout(openingTimer.current);
+      openingTimer.current = setTimeout(() => setOpeningId(null), 1600);
+      return;
+    }
+    setSelectedId(cs.id);
+  };
+  useEffect(() => () => {
+    if (openingTimer.current) clearTimeout(openingTimer.current);
+  }, []);
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(9);
@@ -532,11 +554,12 @@ export default function SuccessStories({
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.97, y: 15 }}
                   transition={{ duration: 0.25 }}
+                  whileTap={openSiteOnMobile && cs.link ? { scale: 0.97 } : undefined}
                   key={cs.id}
                   className="group relative bg-white rounded-[24px] sm:rounded-[28px] border border-slate-100 p-3 sm:p-4 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
                 >
                   {/* Top Inner Rounded Media Container */}
-                  <div className="relative aspect-[16/10] w-full rounded-[18px] sm:rounded-[22px] overflow-hidden bg-slate-950 flex items-center justify-center border border-slate-100/60 shadow-inner cursor-pointer" onClick={() => setSelectedId(cs.id)}>
+                  <div className="relative aspect-[16/10] w-full rounded-[18px] sm:rounded-[22px] overflow-hidden bg-slate-950 flex items-center justify-center border border-slate-100/60 shadow-inner cursor-pointer" onClick={() => openCase(cs)}>
                     {!isImageBroken ? (
                       <Image
                         src={cs.image}
@@ -576,6 +599,37 @@ export default function SuccessStories({
                     </div>
                     )}
 
+                    {/* Phones: "opening the site" feedback after a tap */}
+                    <AnimatePresence>
+                      {openingId === cs.id && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-2 bg-slate-950/70 backdrop-blur-[2px]"
+                          aria-live="polite"
+                        >
+                          <motion.span
+                            initial={{ scale: 0.6, x: -6, y: 6 }}
+                            animate={{ scale: 1, x: [-6, 4, 0], y: [6, -4, 0] }}
+                            transition={{ duration: 0.45, ease: "easeOut" }}
+                            className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-slate-900 shadow-lg"
+                          >
+                            <ArrowUpRight className="h-6 w-6 stroke-[2.5]" />
+                          </motion.span>
+                          <motion.span
+                            initial={{ y: 8, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.1, duration: 0.3 }}
+                            className="max-w-[85%] truncate text-sm font-bold text-white"
+                          >
+                            Opening {getDomain(cs.link) || "website"}…
+                          </motion.span>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
                     {/* Floating White Capsule Live Badge Top-Right */}
                     <div className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-10">
                       <span className="inline-flex items-center gap-1.5 text-[10px] font-black text-slate-900 bg-white px-3 py-1.5 rounded-full shadow-md border border-slate-100">
@@ -596,7 +650,7 @@ export default function SuccessStories({
 
                         {/* Title & Short Summary */}
                         <div className="min-w-0">
-                          <h3 className="text-base sm:text-lg font-extrabold text-slate-900 group-hover:text-[#6366F1] transition-colors leading-tight truncate cursor-pointer" onClick={() => setSelectedId(cs.id)}>
+                          <h3 className="text-base sm:text-lg font-extrabold text-slate-900 group-hover:text-[#6366F1] transition-colors leading-tight truncate cursor-pointer" onClick={() => openCase(cs)}>
                             {cs.title}
                           </h3>
                           <p className="text-[11px] text-slate-500 font-medium truncate mt-0.5">

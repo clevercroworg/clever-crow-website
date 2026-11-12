@@ -60,6 +60,7 @@ export default function WebsiteLandingClient({ data }: WebsiteLandingClientProps
             subtitle="Explore 150+ live client websites built across 11 key industries: Hospitality, Healthcare, SaaS, E-commerce, Real Estate, Education, Manufacturing, Wellness, FinTech, Retail & Lifestyle, and F&B."
             hideMetrics={false}
             filterStyle="tabs"
+            openSiteOnMobile
           />
           <FaqSection data={data.faqs} />
           <ClientReviews />
