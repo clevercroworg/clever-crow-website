@@ -5,6 +5,9 @@
 // or, in Google Ads, a tracking template / final URL suffix such as:  keyword={keyword}
 // The page then shows a matching headline and browser title.
 //
+// Every page and keyword version is pre-built and served from the CDN cache: proxy.ts reads the keyword
+// and quietly serves /lp/<page>/k/<keyword> (the address in the browser stays the same).
+//
 // Only keywords listed here change the page. Unknown or missing keywords show the page's default copy,
 // so nobody can put arbitrary text on the site through the URL. To add a keyword: add an entry below
 // (lowercase, words joined with hyphens). Accepted URL parameters: keyword, kw, utm_term.
@@ -170,10 +173,9 @@ export function readKeyword(searchParams: SearchParams | undefined) {
 }
 
 /** Page content with the keyword's headline applied, plus the browser title to use. */
-export function applyKeyword(content: LandingContent, searchParams: SearchParams | undefined) {
-  const slug = readKeyword(searchParams);
+export function applyKeywordSlug(content: LandingContent, slug: string | undefined) {
   const variant = slug ? KEYWORD_VARIANTS[slug] : undefined;
-  if (!variant) return { content, metaTitle: undefined, keyword: undefined };
+  if (!slug || !variant) return { content, metaTitle: undefined, keyword: undefined };
   return {
     content: {
       ...content,

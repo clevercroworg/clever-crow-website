@@ -91,3 +91,33 @@ export const SOCIAL_MEDIA_SERVICE_CONTENT: LandingContent = {
   leadSource: "Social Media Service Landing Page",
   whatsappMessage: "Hi Clever Crow, I'm interested in social media management. (Ref: LP/Social-Media-Marketing)",
 };
+
+// The pages built on this template, keyed by their /lp/<slug> address.
+export type TemplatePageConfig = { content: LandingContent; title: string; description: string };
+
+export const TEMPLATE_PAGES = {
+  "digital-marketing-service": {
+    content: SERVICE_CONTENT,
+    title: "Digital Marketing Services | Clever Crow",
+    description:
+      "Website development, SEO, Google Ads, Meta Ads, AI automation and social media management for businesses that need consistent leads.",
+  },
+  "lead-generation": {
+    content: LEAD_GENERATION_CONTENT,
+    title: "Lead Generation Campaigns | Clever Crow",
+    description:
+      "Reach the right customers with targeted campaigns, effective landing pages and timely follow-ups, all built around your business and budget.",
+  },
+  "seo-service": {
+    content: SEO_SERVICE_CONTENT,
+    title: "SEO, AEO & GEO Services | Clever Crow",
+    description:
+      "Grow your visibility across search engines and AI platforms with content and website improvements that help customers discover your business.",
+  },
+  "social-media-marketing": {
+    content: SOCIAL_MEDIA_SERVICE_CONTENT,
+    title: "Social Media Management Services | Clever Crow",
+    description:
+      "Engaging posts, reels and consistent social media management that builds trust and encourages enquiries.",
+  },
+} satisfies Record<string, TemplatePageConfig>;
