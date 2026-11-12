@@ -2,7 +2,7 @@ import { ensureSchema, getPool } from "./db";
 import type { Submission } from "./queries";
 
 // Numbers for the dashboard Overview and the Pipeline board. Dates are Indian time (IST).
-// Overview counts cover leads only (form_type = 'lead'); job and internship applications
+// Overview counts cover leads only (form_type = 'lead'); internship applications
 // are counted separately so they don't skew lead numbers.
 
 const TZ = "Asia/Kolkata";
@@ -68,11 +68,11 @@ export async function getOverview(range: Range, userId: number) {
       `SELECT
          count(*) FILTER (WHERE ${leadsInRange}) AS leads,
          count(*) FILTER (WHERE form_type = 'lead' AND created_at >= ${start("$3")} AND created_at < ${end("$4")}) AS prev_leads,
-         count(*) FILTER (WHERE form_type <> 'lead' AND ${inRange}) AS applications,
+         count(*) FILTER (WHERE form_type = 'internship' AND ${inRange}) AS applications,
          count(*) FILTER (WHERE form_type = 'lead' AND status = 'new') AS open_new,
          count(*) FILTER (WHERE ${leadsInRange} AND status = 'won') AS won,
          count(*) FILTER (WHERE ${leadsInRange} AND status = 'lost') AS lost,
-         count(*) FILTER (WHERE follow_up_at < now() AND status NOT IN ('won','lost','spam')) AS overdue,
+         count(*) FILTER (WHERE form_type <> 'career' AND follow_up_at < now() AND status NOT IN ('won','lost','spam')) AS overdue,
          count(*) FILTER (WHERE form_type = 'lead' AND assigned_to IS NULL AND status NOT IN ('won','lost','spam')) AS unassigned
        FROM submissions`,
       [range.from, range.to, prevFrom, prevTo]
@@ -108,7 +108,7 @@ export async function getOverview(range: Range, userId: number) {
       `SELECT s.id, s.name, s.phone, s.status, s.follow_up_at, s.assigned_to,
               (SELECT u.name FROM admin_users u WHERE u.id = s.assigned_to) AS assigned_name
        FROM submissions s
-       WHERE s.follow_up_at IS NOT NULL
+       WHERE s.follow_up_at IS NOT NULL AND s.form_type <> 'career'
          AND s.follow_up_at < (date_trunc('day', now() AT TIME ZONE '${TZ}') AT TIME ZONE '${TZ}') + interval '1 day'
          AND s.status NOT IN ('won','lost','spam')
        ORDER BY (s.assigned_to = $1) DESC NULLS LAST, s.follow_up_at ASC

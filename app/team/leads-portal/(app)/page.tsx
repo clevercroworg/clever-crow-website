@@ -107,7 +107,7 @@ export default async function OverviewPage({ searchParams }: PageProps) {
     <main className="mx-auto max-w-7xl space-y-5 px-4 py-6 sm:px-6 lg:px-8">
       <PageHeader
         title={`Hi ${firstName}`}
-        description={`${range.label} · leads from website forms${o.applications ? ` (plus ${o.applications} job / internship application${o.applications === 1 ? "" : "s"})` : ""}`}
+        description={`${range.label} · leads from website forms${o.applications ? ` (plus ${o.applications} internship application${o.applications === 1 ? "" : "s"})` : ""}`}
         actions={
           <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
             <div className="flex rounded-lg border border-slate-200 bg-white p-0.5 text-sm">

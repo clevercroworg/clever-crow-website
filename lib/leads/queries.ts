@@ -5,7 +5,6 @@ export type Status = (typeof STATUSES)[number];
 
 export const FORM_TYPES = [
   { value: "lead", label: "Leads" },
-  { value: "career", label: "Job applications" },
   { value: "internship", label: "Internships" },
 ] as const;
 
@@ -74,7 +73,8 @@ const IST_TODAY = `(date_trunc('day', now() AT TIME ZONE '${TZ}') AT TIME ZONE '
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
 function buildWhere(f: Filters) {
-  const where: string[] = [];
+  // Job applications (Careers page) are not shown in the dashboard.
+  const where: string[] = ["form_type <> 'career'"];
   const params: unknown[] = [];
   const add = (sql: string, value: unknown) => {
     params.push(value);
@@ -153,7 +153,7 @@ export async function exportSubmissions(filters: Filters, limit = 10000) {
 
 export async function getSubmission(id: number) {
   await ensureSchema();
-  const res = await getPool().query(`${SELECT_ROWS} WHERE s.id = $1`, [id]);
+  const res = await getPool().query(`${SELECT_ROWS} WHERE s.id = $1 AND s.form_type <> 'career'`, [id]);
   return res.rows[0] ? mapRow(res.rows[0]) : null;
 }
 
@@ -206,17 +206,17 @@ export async function getStats() {
               count(*) FILTER (WHERE created_at >= ${today} - interval '6 days') AS week,
               count(*) FILTER (WHERE created_at >= ${today} - interval '29 days') AS month,
               count(*) FILTER (WHERE status = 'new') AS new_count
-       FROM submissions`
+       FROM submissions WHERE form_type <> 'career'`
     ),
     pool.query<{ channel: string; count: string }>(
       `SELECT coalesce(channel, 'Direct') AS channel, count(*) AS count FROM submissions
-       WHERE created_at >= ${today} - interval '29 days' GROUP BY 1 ORDER BY 2 DESC`
+       WHERE form_type <> 'career' AND created_at >= ${today} - interval '29 days' GROUP BY 1 ORDER BY 2 DESC`
     ),
     pool.query<{ form_name: string }>(
-      `SELECT DISTINCT form_name FROM submissions WHERE form_name IS NOT NULL ORDER BY form_name LIMIT 300`
+      `SELECT DISTINCT form_name FROM submissions WHERE form_name IS NOT NULL AND form_type <> 'career' ORDER BY form_name LIMIT 300`
     ),
     pool.query<{ page_path: string; count: string }>(
-      `SELECT page_path, count(*) AS count FROM submissions WHERE page_path IS NOT NULL
+      `SELECT page_path, count(*) AS count FROM submissions WHERE page_path IS NOT NULL AND form_type <> 'career'
        GROUP BY 1 ORDER BY 2 DESC LIMIT 300`
     ),
   ]);
