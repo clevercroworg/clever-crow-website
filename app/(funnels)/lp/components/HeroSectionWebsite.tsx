@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowDown, ArrowRight, Check, Globe, Layers, Lock, Phone, Star, User } from "lucide-react";
 
@@ -96,8 +96,38 @@ function HeroDoodles() {
 }
 
 // Simple two-column hero for the website LP: copy on the left, callback form on the right.
+/**
+ * Keeps each heading line on one line on phones. In-app browsers (Instagram, Facebook) on Android
+ * enlarge text to match the phone's font-size setting and ignore text-size-adjust, which pushed the
+ * heading onto 3-4 lines. After layout, this shrinks the heading until every line fits the screen.
+ */
+function useFitHeading() {
+  const ref = useRef<HTMLHeadingElement>(null);
+  useLayoutEffect(() => {
+    const h = ref.current;
+    if (!h) return;
+    const fit = () => {
+      h.style.fontSize = "";
+      if (window.innerWidth >= 640) return; // larger screens wrap normally
+      const lines = Array.from(h.children) as HTMLElement[];
+      const tooWide = () => lines.some((l) => l.scrollWidth > h.clientWidth + 1);
+      let size = parseFloat(getComputedStyle(h).fontSize);
+      for (let i = 0; i < 30 && tooWide(); i++) {
+        size *= 0.95;
+        h.style.fontSize = `${size}px`;
+      }
+    };
+    fit();
+    document.fonts?.ready.then(fit);
+    window.addEventListener("resize", fit);
+    return () => window.removeEventListener("resize", fit);
+  }, []);
+  return ref;
+}
+
 export default function HeroSectionWebsite({ data }: HeroSectionWebsiteProps) {
   const router = useRouter();
+  const headingRef = useFitHeading();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
@@ -171,8 +201,9 @@ export default function HeroSectionWebsite({ data }: HeroSectionWebsiteProps) {
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 sm:gap-12 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
         {/* Left: headline, supporting copy, proof */}
         <div className="lg:col-span-7">
-          {/* Two lines on phones: each half stays on one line, with the size following the screen width */}
-          <h1 className="text-[clamp(1.6rem,8.4vw,2.6rem)] font-black leading-[1.1] tracking-tight sm:text-6xl sm:leading-[1.05] lg:text-[4rem]">
+          {/* Two lines on phones: each half stays on one line (size follows the screen width; useFitHeading
+              shrinks it further if an in-app browser has enlarged the text) */}
+          <h1 ref={headingRef} className="text-[clamp(1.6rem,8.4vw,2.6rem)] font-black leading-[1.1] tracking-tight sm:text-6xl sm:leading-[1.05] lg:text-[4rem]">
             <span className="block whitespace-nowrap sm:whitespace-normal">{data.title}</span>
             <span className="mt-1 block whitespace-nowrap bg-gradient-to-r from-[#FFC72C] to-[#F59E0B] bg-clip-text pb-1 text-transparent sm:whitespace-normal">
               {data.accentTitle}
