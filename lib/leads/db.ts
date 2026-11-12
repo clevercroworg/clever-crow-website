@@ -19,8 +19,9 @@ export function getPool() {
   if (!globalForPg.ccLeadsPool) {
     globalForPg.ccLeadsPool = new Pool({
       connectionString: getDatabaseUrl(),
-      max: 3,
-      idleTimeoutMillis: 10_000,
+      max: 5,
+      // Keep connections open between dashboard clicks; opening a new one costs several round trips.
+      idleTimeoutMillis: 120_000,
       connectionTimeoutMillis: 8_000,
     });
     globalForPg.ccLeadsPool.on("error", (err) => console.error("LEADS DB pool error:", err));
