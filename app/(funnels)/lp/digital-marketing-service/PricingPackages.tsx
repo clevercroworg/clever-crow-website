@@ -17,7 +17,7 @@ export default function PricingPackages({
   onCustom: () => void;
 }) {
   return (
-    <section id="packages" className="overflow-hidden pb-6 pt-10 sm:pb-8 sm:pt-14">
+    <section id="packages" className="overflow-hidden pb-14 pt-4 sm:pb-20 sm:pt-6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Pricing"

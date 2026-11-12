@@ -353,9 +353,12 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
       {/* Navbar */}
       <nav className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
-          <a href="#" className="inline-flex min-w-0 items-center gap-3">
-            <img src="/CSS.svg" alt="Clever Crow" className="h-6 w-auto min-[380px]:h-7 sm:h-8" />
-          </a>
+          <div className="flex min-w-0 items-center gap-3 lg:gap-4">
+            <a href="#" className="inline-flex min-w-0 items-center gap-3">
+              <img src="/CSS.svg" alt="Clever Crow" className={`h-6 w-auto min-[380px]:h-7 ${content.partnerBadges ? "" : "sm:h-8"}`} />
+            </a>
+            {content.partnerBadges && <PartnerBadges variant="inline" />}
+          </div>
           <div className="flex items-center gap-2">
             <a 
               href="tel:09986389444" 
@@ -379,6 +382,7 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
             </a>
           </div>
         </div>
+        {content.partnerBadges && <PartnerBadges variant="strip" />}
       </nav>
 
       {/* Hero Section */}
@@ -542,9 +546,6 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
           </div>
 
           {/* Partner platforms bar spanning the full width */}
-          {content.partnerBadges ? (
-            <PartnerBadges />
-          ) : (
           <div className="mt-12 border-t border-white/10 py-8 sm:mt-14 lg:mt-16">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:gap-10">
               <p className="shrink-0 whitespace-nowrap text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
@@ -560,7 +561,6 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
               </ul>
             </div>
           </div>
-          )}
         </div>
       </section>
 
@@ -589,17 +589,6 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
           </Reveal>
         </div>
       </section>
-
-      {content.pricingPackages && content.pricingPackages.length > 0 && (
-        <PricingPackages
-          packages={content.pricingPackages}
-          onChoose={(name) => {
-            setSelectedPackage(name);
-            setIsModalOpen(true);
-          }}
-          onCustom={() => setIsModalOpen(true)}
-        />
-      )}
 
       {content.servicesSection !== "plans" ? (
         <IncludedSection content={content.servicesSection} onOpenModal={() => setIsModalOpen(true)} />
@@ -743,6 +732,18 @@ export default function DigitalMarketingServiceClient({ content = SERVICE_CONTEN
           )}
         </div>
       </section>
+
+      {/* Monthly packages, between the reels and the results */}
+      {content.pricingPackages && content.pricingPackages.length > 0 && (
+        <PricingPackages
+          packages={content.pricingPackages}
+          onChoose={(name) => {
+            setSelectedPackage(name);
+            setIsModalOpen(true);
+          }}
+          onCustom={() => setIsModalOpen(true)}
+        />
+      )}
 
       {/* Our Results: case studies with scroll-driven galleries */}
       <ResultsShowcase />

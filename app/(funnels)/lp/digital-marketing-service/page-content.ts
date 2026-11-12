@@ -13,8 +13,8 @@ export type LandingContent = {
   leadSource: string; // label in lead emails
   whatsappMessage: string;
   // Optional, per page (pages that leave these out are unchanged):
-  pricingPackages?: PricingPackage[]; // monthly packages section above the services
-  partnerBadges?: boolean; // "Partner of Google / Meta" strip instead of the platforms list
+  pricingPackages?: PricingPackage[]; // monthly packages section between the reels and the results
+  partnerBadges?: boolean; // "Partner of Google / Meta" badges beside the logo in the navbar
   ctaTitle?: string; // heading of the dark call-to-action panel
 };
 

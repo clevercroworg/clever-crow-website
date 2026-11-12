@@ -1,9 +1,11 @@
 import React from "react";
 import { SiMeta } from "react-icons/si";
 
-// "Partner of" strip under the hero: Google Partner + Meta Business Partner.
-// Shown only on pages that set `partnerBadges: true` in page-content.ts.
-// If you have Google's official Partner badge embed code, it can replace the Google card below.
+// "Partner of" Google Partner + Meta Business Partner, shown in the navbar.
+// Used only on pages that set `partnerBadges: true` in page-content.ts.
+//   variant="inline": sits beside the logo (tablet and desktop)
+//   variant="strip":  thin row under the logo on phones, where there is no room beside it
+// If you have Google's official Partner badge embed code, it can replace the Google badge below.
 
 function GoogleG({ className = "" }: { className?: string }) {
   return (
@@ -16,29 +18,43 @@ function GoogleG({ className = "" }: { className?: string }) {
   );
 }
 
-export default function PartnerBadges() {
-  return (
-    <div className="mt-12 border-t border-white/10 py-8 sm:mt-14 lg:mt-16">
-      <div className="flex flex-col items-center gap-5 sm:flex-row sm:justify-start sm:gap-8">
-        <p className="shrink-0 whitespace-nowrap text-xs font-semibold uppercase tracking-[0.25em] text-slate-400">Partner of</p>
-        <span className="hidden h-12 w-px bg-white/15 sm:block" aria-hidden="true" />
-        <ul className="flex items-center gap-3 sm:gap-4">
-          <li className="flex h-16 items-center gap-3 rounded-xl bg-white px-4 shadow-sm sm:h-[72px] sm:px-5">
-            <GoogleG className="h-8 w-8 shrink-0 sm:h-9 sm:w-9" />
-            <span className="leading-tight">
-              <span className="block text-[15px] font-bold text-slate-800 sm:text-base">Google</span>
-              <span className="block text-xs font-medium text-slate-500 sm:text-[13px]">Partner</span>
-            </span>
-          </li>
-          <li className="flex h-16 items-center gap-3 rounded-xl bg-white px-4 shadow-sm sm:h-[72px] sm:px-5">
-            <SiMeta className="h-8 w-8 shrink-0 sm:h-9 sm:w-9" style={{ color: "#0866FF" }} aria-hidden="true" />
-            <span className="leading-tight">
-              <span className="block text-[15px] font-bold text-slate-800 sm:text-base">Meta</span>
-              <span className="block text-xs font-medium text-slate-500 sm:text-[13px]">Business Partner</span>
-            </span>
-          </li>
-        </ul>
+export default function PartnerBadges({ variant }: { variant: "inline" | "strip" }) {
+  if (variant === "strip") {
+    return (
+      <div className="border-t border-slate-100 bg-slate-50/70 md:hidden">
+        <div className="mx-auto flex max-w-7xl items-center justify-center gap-x-2.5 px-4 py-1.5 text-[10px] font-semibold text-slate-600">
+          <span className="text-[9px] uppercase tracking-[0.16em] text-slate-400 max-[359px]:hidden">Partner of</span>
+          <span className="inline-flex items-center gap-1 whitespace-nowrap">
+            <GoogleG className="h-3.5 w-3.5 shrink-0" />
+            Google Partner
+          </span>
+          <span className="h-3 w-px bg-slate-300" aria-hidden="true" />
+          <span className="inline-flex items-center gap-1 whitespace-nowrap">
+            <SiMeta className="h-4 w-4 shrink-0" style={{ color: "#0866FF" }} aria-hidden="true" />
+            Meta Business Partner
+          </span>
+        </div>
       </div>
+    );
+  }
+
+  return (
+    <div className="hidden shrink-0 items-center gap-3 md:flex lg:gap-4">
+      <span className="h-8 w-px bg-slate-200" aria-hidden="true" />
+      <p className="whitespace-nowrap text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">Partner of</p>
+      <ul className="flex items-center gap-3 lg:gap-4">
+        <li className="flex h-10 flex-col items-center justify-center gap-0.5 rounded-[5px] border border-slate-300 bg-white px-2">
+          <GoogleG className="h-[18px] w-[18px] shrink-0" />
+          <span className="whitespace-nowrap text-[8px] font-medium leading-none text-slate-500">Google Partner</span>
+        </li>
+        <li className="flex flex-col justify-center leading-none">
+          <span className="flex items-center gap-1">
+            <SiMeta className="h-5 w-5 shrink-0" style={{ color: "#0866FF" }} aria-hidden="true" />
+            <span className="text-[17px] font-bold tracking-tight text-slate-900">Meta</span>
+          </span>
+          <span className="mt-1 whitespace-nowrap text-[9px] font-medium text-slate-600">Business Partner</span>
+        </li>
+      </ul>
     </div>
   );
 }
