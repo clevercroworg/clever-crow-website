@@ -97,7 +97,7 @@ export default function Shell({ user, children }: Props) {
   const brand = (
     <Link href={BASE} className="flex items-center gap-2.5 px-1">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/CSS.svg" alt="Clever Crow" className="h-6 w-auto brightness-0 invert" />
+      <img src="/CSS-on-dark.svg" alt="Clever Crow" className="h-6 w-auto" />
       <span className="rounded bg-white/10 px-1.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-amber-300">Leads</span>
     </Link>
   );
