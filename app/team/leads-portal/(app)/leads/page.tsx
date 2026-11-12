@@ -79,7 +79,7 @@ export default async function LeadsPage({ searchParams }: PageProps) {
     <main className="mx-auto max-w-7xl space-y-5 px-4 py-6 sm:px-6 lg:px-8">
       <PageHeader title="Leads" description={`${stats.total.toLocaleString("en-IN")} submissions in total · ${stats.newCount.toLocaleString("en-IN")} not handled yet`} />
 
-      <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 pb-1">
+      <div className="flex flex-wrap gap-1.5">
         {quick.map((q) => (
           <Link
             key={q.label}

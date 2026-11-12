@@ -110,7 +110,7 @@ export default async function LeadDetailPage({ params, searchParams }: PageProps
           </div>
         </div>
 
-        <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_320px]">
+        <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div className="min-w-0 space-y-4">
             <Card title="Contact">
               <Row label="Name">{lead.name}</Row>
@@ -154,7 +154,7 @@ export default async function LeadDetailPage({ params, searchParams }: PageProps
             </Card>
           </div>
 
-          <aside className="order-first lg:order-none lg:sticky lg:top-6 lg:self-start">
+          <aside className="order-first min-w-0 lg:order-none lg:sticky lg:top-6 lg:self-start">
             <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
               <LeadActions
                 id={lead.id}

@@ -148,7 +148,7 @@ export default function LeadActions({
               setOwner(next);
               if (!(await save({ assigned_to: next }, "owner"))) setOwner(prev);
             }}
-            className="block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/15"
+            className="block w-full min-w-0 flex-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/15"
             aria-label="Owner"
           >
             <option value="">Unassigned</option>
@@ -191,7 +191,7 @@ export default function LeadActions({
               setFollowUp(next);
               if (!(await save({ follow_up_at: next }, "followup"))) setFollowUp(prev);
             }}
-            className={`block w-full rounded-lg border bg-white px-3 py-2 text-sm outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/15 ${
+            className={`block w-full min-w-0 flex-1 rounded-lg border bg-white px-3 py-2 text-sm outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/15 ${
               followUp && isPast(followUp) ? "border-rose-300 text-rose-700" : "border-slate-300 text-slate-900"
             }`}
             aria-label="Follow-up date and time"

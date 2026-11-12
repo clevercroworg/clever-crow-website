@@ -36,8 +36,8 @@ export default function LeadsChart({ data }: { data: Point[] }) {
   const active = hover === null ? null : points[hover];
 
   return (
-    <div>
-      <div className="relative h-56">
+    <div className="min-w-0">
+      <div className="relative h-56 overflow-hidden">
         {/* Gridlines + y labels */}
         <div className="absolute inset-0 left-8">
           {ticks.map((t) => (
@@ -47,7 +47,7 @@ export default function LeadsChart({ data }: { data: Point[] }) {
           ))}
         </div>
         {/* Columns */}
-        <div className="absolute inset-0 left-8 flex items-end gap-[2px]" onMouseLeave={() => setHover(null)}>
+        <div className="absolute inset-0 left-8 flex min-w-0 items-end gap-[2px]" onMouseLeave={() => setHover(null)}>
           {points.map((p, i) => (
             <button
               key={p.day}
@@ -56,7 +56,7 @@ export default function LeadsChart({ data }: { data: Point[] }) {
               onFocus={() => setHover(i)}
               onClick={() => setHover(i)}
               aria-label={`${p.label}: ${p.count} lead${p.count === 1 ? "" : "s"}`}
-              className="group relative flex h-full flex-1 items-end"
+              className="group relative flex h-full min-w-0 flex-1 items-end"
             >
               <span
                 className={`block w-full rounded-t-[4px] transition-colors ${hover === i ? "bg-[#1c5cab]" : "bg-[#2a78d6]"}`}

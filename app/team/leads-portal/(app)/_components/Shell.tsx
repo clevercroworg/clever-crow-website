@@ -19,7 +19,7 @@ const NAV = [
 
 function initials(name: string) {
   return name
-    .split(/[\s@._-]+/)
+    .split(/[^A-Za-z]+/)
     .filter(Boolean)
     .slice(0, 2)
     .map((w) => w[0]?.toUpperCase())
@@ -50,7 +50,7 @@ export default function Shell({ user, children }: Props) {
             onClick={() => setOpen(false)}
             aria-current={active ? "page" : undefined}
             className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-[15px] font-medium transition lg:py-2 lg:text-sm ${
-              active ? "bg-white/10 text-white" : "text-slate-500 hover:bg-white/5 hover:text-white"
+              active ? "bg-white/10 text-white" : "text-slate-300 hover:bg-white/5 hover:text-white"
             }`}
           >
             <Icon className={`h-[18px] w-[18px] shrink-0 ${active ? "text-amber-400" : ""}`} />
@@ -69,7 +69,7 @@ export default function Shell({ user, children }: Props) {
         </span>
         <span className="min-w-0 leading-tight">
           <span className="block truncate text-sm font-medium text-white">{user.name}</span>
-          <span className="block text-xs capitalize text-slate-500">{user.role}</span>
+          <span className="block text-xs capitalize text-slate-300">{user.role}</span>
         </span>
       </div>
       <div className="mt-3 grid gap-1">
@@ -77,7 +77,7 @@ export default function Shell({ user, children }: Props) {
           href={`${BASE}/account`}
           onClick={() => setOpen(false)}
           className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium ${
-            isActive(`${BASE}/account`) ? "bg-white/10 text-white" : "text-slate-500 hover:bg-white/5 hover:text-white"
+            isActive(`${BASE}/account`) ? "bg-white/10 text-white" : "text-slate-300 hover:bg-white/5 hover:text-white"
           }`}
         >
           <KeyRound className="h-[18px] w-[18px]" /> Account
@@ -86,7 +86,7 @@ export default function Shell({ user, children }: Props) {
           type="button"
           onClick={signOut}
           disabled={signingOut}
-          className="flex items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-500 hover:bg-white/5 hover:text-white disabled:opacity-60"
+          className="flex items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white disabled:opacity-60"
         >
           <LogOut className="h-[18px] w-[18px]" /> Sign out
         </button>
@@ -128,7 +128,7 @@ export default function Shell({ user, children }: Props) {
           <div className="absolute inset-y-0 left-0 flex w-72 max-w-[85%] flex-col gap-6 bg-slate-950 px-3 py-5 shadow-xl">
             <div className="flex items-center justify-between">
               {brand}
-              <button type="button" onClick={() => setOpen(false)} className="rounded-lg p-2 text-slate-500 hover:text-white" aria-label="Close menu">
+              <button type="button" onClick={() => setOpen(false)} className="rounded-lg p-2 text-slate-300 hover:text-white" aria-label="Close menu">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -138,7 +138,7 @@ export default function Shell({ user, children }: Props) {
         </div>
       )}
 
-      <div className="lg:pl-60">{children}</div>
+      <div className="min-w-0 lg:pl-60">{children}</div>
     </div>
   );
 }

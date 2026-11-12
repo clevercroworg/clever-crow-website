@@ -19,7 +19,7 @@ const FUNNEL = ["new", "contacted", "qualified", "won", "lost", "spam"];
 
 function Card({ title, subtitle, action, children }: { title: string; subtitle?: string; action?: React.ReactNode; children: React.ReactNode }) {
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+    <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
       <div className="mb-3 flex items-start justify-between gap-3">
         <div>
           <h2 className="text-sm font-semibold text-slate-900">{title}</h2>
@@ -34,7 +34,7 @@ function Card({ title, subtitle, action, children }: { title: string; subtitle?:
 
 function Change({ now, before }: { now: number; before: number }) {
   if (!before && !now) return <span className="text-xs text-slate-500">Same as before</span>;
-  if (!before) return <span className="text-xs text-slate-500">None the period before</span>;
+  if (!before) return <span className="text-xs text-slate-500">No leads before</span>;
   const pct = Math.round(((now - before) / before) * 100);
   const Icon = pct > 0 ? ArrowUpRight : pct < 0 ? ArrowDownRight : Minus;
   return (
@@ -92,9 +92,9 @@ export default async function OverviewPage({ searchParams }: PageProps) {
       href: leadsLink({ status: "won" }),
     },
     {
-      label: "Overdue follow-ups",
+      label: "Overdue",
       value: o.overdue,
-      foot: <span className="text-xs text-slate-500">{o.unassigned.toLocaleString("en-IN")} unassigned</span>,
+      foot: <span className="text-xs text-slate-500">Follow-ups past due</span>,
       href: dashboardHref({}, { followup: "overdue" }),
       warn: o.overdue > 0,
     },
@@ -109,24 +109,23 @@ export default async function OverviewPage({ searchParams }: PageProps) {
         title={`Hi ${firstName}`}
         description={`${range.label} · leads from website forms${o.applications ? ` (plus ${o.applications} job / internship application${o.applications === 1 ? "" : "s"})` : ""}`}
         actions={
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
             <div className="flex rounded-lg border border-slate-200 bg-white p-0.5 text-sm">
               {RANGES.map((r) => (
                 <Link
                   key={r.value}
                   href={r.value === "30d" ? "/team/leads-portal" : `/team/leads-portal?range=${r.value}`}
-                  className={`rounded-md px-2.5 py-1 font-medium ${range.key === r.value ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100"}`}
+                  className={`flex-1 rounded-md px-3 py-1.5 text-center font-medium sm:flex-none ${range.key === r.value ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100"}`}
                 >
                   {r.value === "365d" ? "12m" : r.value}
                 </Link>
               ))}
             </div>
-            <form method="get" action="/team/leads-portal" className="flex items-center gap-1 text-sm">
-              <input type="date" name="from" defaultValue={range.from} required className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-slate-700" aria-label="From" />
-              <span className="text-slate-500">–</span>
-              <input type="date" name="to" defaultValue={range.to} required className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-slate-700" aria-label="To" />
-              <button type="submit" className="rounded-lg border border-slate-200 bg-white px-2.5 py-1 font-medium text-slate-700 hover:bg-slate-50">
-                Apply
+            <form method="get" action="/team/leads-portal" className="grid grid-cols-2 gap-2 text-sm sm:flex sm:items-center sm:gap-1">
+              <input type="date" name="from" defaultValue={range.from} required className="min-w-0 rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-slate-700" aria-label="From date" />
+              <input type="date" name="to" defaultValue={range.to} required className="min-w-0 rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-slate-700" aria-label="To date" />
+              <button type="submit" className="col-span-2 rounded-lg border border-slate-300 bg-white px-3 py-1.5 font-medium text-slate-700 hover:bg-slate-50">
+                Apply dates
               </button>
             </form>
           </div>
@@ -147,13 +146,13 @@ export default async function OverviewPage({ searchParams }: PageProps) {
         ))}
       </section>
 
-      <div className="grid gap-5 xl:grid-cols-3">
-        <div className="space-y-5 xl:col-span-2">
+      <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
+        <div className="min-w-0 space-y-5 xl:col-span-2">
           <Card title="Leads per day" subtitle={range.days > 92 ? "Grouped by week" : "Hover or tap a column for the exact number"}>
             <LeadsChart data={o.perDay} />
           </Card>
 
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <Card title="Where leads came from" subtitle="By source channel · click to see them">
               <BarList rows={o.channels} href={(c) => leadsLink({ channel: c })} />
             </Card>
@@ -187,7 +186,7 @@ export default async function OverviewPage({ searchParams }: PageProps) {
           </div>
         </div>
 
-        <div className="space-y-5">
+        <div className="min-w-0 space-y-5">
           <Card
             title="Follow-ups due"
             subtitle="Overdue and due today · yours first"
