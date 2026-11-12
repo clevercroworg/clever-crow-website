@@ -7,6 +7,10 @@ type PackageInfo = {
   name: string;
   oldPrice?: string;
   price: string;
+  // Optional, per package (cards that leave these out look exactly as before):
+  priceNote?: string; // small text after the price, e.g. "+ GST"
+  strikePrice?: string; // crossed-out earlier price shown under the price, e.g. "₹15,999"
+  priceTerm?: string; // e.g. "One-time payment"
   description: string;
   features: string[];
   featured?: boolean;
@@ -84,9 +88,26 @@ export default function PricingSection({ data }: PricingSectionProps) {
                   <div>
                     <p className={`package-eyebrow ${pkg.featured ? "package-eyebrow-featured" : ""}`}>{pkg.label}</p>
                     <h3 className="package-title">
-                      {pkg.price}{" "}
+                      {pkg.price}
+                      {pkg.priceNote && (
+                        <span className="ml-1 align-baseline text-base font-bold text-slate-500">
+                          {pkg.priceNote}
+                          <span className="mx-1.5 text-slate-300" aria-hidden="true">·</span>
+                        </span>
+                      )}{" "}
                       <span className="package-price-suffix">{pkg.name}</span>
                     </h3>
+                    {(pkg.strikePrice || pkg.priceTerm) && (
+                      <p className="mt-1.5 flex flex-wrap items-center gap-x-2 text-sm text-slate-500">
+                        {pkg.strikePrice && (
+                          <s className="font-semibold text-slate-400 decoration-2">
+                            <span className="sr-only">Regular price </span>
+                            {pkg.strikePrice}
+                          </s>
+                        )}
+                        {pkg.priceTerm && <span>{pkg.priceTerm}</span>}
+                      </p>
+                    )}
                   </div>
                 </div>
                 {pkg.description && (

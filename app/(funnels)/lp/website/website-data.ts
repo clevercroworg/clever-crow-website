@@ -12,6 +12,9 @@ export type PackageInfo = {
   name: string;
   oldPrice?: string;
   price: string;
+  priceNote?: string; // e.g. "+ GST"
+  strikePrice?: string; // crossed-out earlier price, e.g. "₹15,999"
+  priceTerm?: string; // e.g. "One-time payment"
   description: string;
   features: string[];
   featured?: boolean;
@@ -95,16 +98,16 @@ export function getWebsiteLandingData(): WebsiteLandingData {
         {
           label: "Starter",
           name: "Basic Website",
-          oldPrice: "₹10,000",
-          price: "₹9,999",
+          price: "₹7,999",
+          priceNote: "+ GST",
+          strikePrice: "₹15,999",
+          priceTerm: "One-time payment",
           description: "Best for small businesses that need a fast, professional online presence.",
           features: [
-            "Up to 6 pages",
-            "100% mobile responsive",
-            "WhatsApp chat",
-            "Google forms",
-            "Gallery",
-            "Delivery within 4 days"
+            "Custom design for your business",
+            "Mobile-friendly layout",
+            "Free hosting for 1 year",
+            "WhatsApp enquiry integration",
           ],
         },
         {
