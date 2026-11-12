@@ -9,7 +9,7 @@ function get(params: Params, key: string) {
   return (s || "").toString().trim().slice(0, 200) || undefined;
 }
 
-export const FILTER_KEYS = ["q", "type", "channel", "status", "form", "page_path", "from", "to"] as const;
+export const FILTER_KEYS = ["q", "type", "channel", "status", "form", "page_path", "from", "to", "assigned", "followup"] as const;
 
 export function parseFilters(params: Params) {
   const filters: Filters = {};
@@ -27,7 +27,7 @@ export function parseFilters(params: Params) {
 export function dashboardHref(
   filters: Filters,
   changes: Record<string, string | number | undefined> = {},
-  base = "/team/leads-portal"
+  base = "/team/leads-portal/leads"
 ) {
   const sp = new URLSearchParams();
   for (const [k, v] of Object.entries({ ...filters, ...changes })) {

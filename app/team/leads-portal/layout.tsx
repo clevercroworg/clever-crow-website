@@ -12,7 +12,9 @@ export const viewport: Viewport = {
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 antialiased [font-family:Inter,system-ui,sans-serif]">
+    <div className="leads-portal min-h-screen bg-slate-50 text-slate-900 antialiased [font-family:Inter,system-ui,sans-serif]">
+      {/* Phones: 16px form fields so iOS doesn't zoom in when one is tapped. */}
+      <style>{`@media (max-width: 639px) { .leads-portal input, .leads-portal select, .leads-portal textarea { font-size: 16px; } }`}</style>
       {children}
     </div>
   );

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { clearFailedLogins, clientIp, isRateLimited, recordFailedLogin, setSessionCookie } from "@/lib/admin/auth";
+import { logActivity } from "@/lib/admin/activity";
 import { isSameOrigin, noStore } from "@/lib/admin/http";
 import { verifyDummyPassword, verifyPassword } from "@/lib/admin/password";
 import { getUserForLogin, normalizeUsername, recordLogin } from "@/lib/admin/users";
@@ -50,6 +51,7 @@ export async function POST(req: Request) {
 
     clearFailedLogins(ip);
     await recordLogin(found.user.id);
+    await logActivity(found.user, "login");
     const res = NextResponse.json({ ok: true }, { headers: noStore });
     await setSessionCookie(res, found.user);
     return res;

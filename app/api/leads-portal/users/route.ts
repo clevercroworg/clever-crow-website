@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
+import { logActivity } from "@/lib/admin/activity";
 import { authorizeApi, noStore } from "@/lib/admin/http";
 import { hashPassword, passwordProblem } from "@/lib/admin/password";
-import { USERNAME_RE, createUser, isRole, normalizeUsername } from "@/lib/admin/users";
+import { USERNAME_RE, createUser, isRole, normalizeEmail, normalizeUsername } from "@/lib/admin/users";
 
 // Admins add dashboard logins.
 export async function POST(req: Request) {
@@ -18,6 +19,8 @@ export async function POST(req: Request) {
   const username = normalizeUsername(body.username);
   const password = String(body.password || "");
   const role = body.role;
+  const email = normalizeEmail(body.email);
+  if (email === undefined) return NextResponse.json({ error: "That email address doesn't look right." }, { status: 400, headers: noStore });
 
   if (!name) return NextResponse.json({ error: "Enter a name." }, { status: 400, headers: noStore });
   if (!USERNAME_RE.test(username)) {
@@ -37,8 +40,11 @@ export async function POST(req: Request) {
       passwordHash: await hashPassword(password),
       role,
       createdBy: session.name,
+      email,
+      notifyNewLeads: Boolean(body.notify_new_leads),
     });
     if (!user) return NextResponse.json({ error: "That username is already taken." }, { status: 409, headers: noStore });
+    await logActivity(session, "user.create", { summary: `${user.name} (@${user.username}, ${user.role})` });
     return NextResponse.json({ ok: true, user }, { headers: noStore });
   } catch (error) {
     console.error("ADMIN: create user failed", error);

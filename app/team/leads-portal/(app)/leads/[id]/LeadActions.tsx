@@ -2,7 +2,24 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, Loader2, Trash2 } from "lucide-react";
+import { CalendarClock, Check, Loader2, Trash2, UserRound, X } from "lucide-react";
+import { isPast } from "../../_components/format";
+
+/** ISO -> value for <input type="datetime-local"> in the browser's own time zone. */
+function toLocalInput(iso: string | null) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+/** A date n days from now at the given hour, as ISO. */
+function daysFromNow(n: number, hour = 10) {
+  const d = new Date();
+  d.setDate(d.getDate() + n);
+  d.setHours(hour, 0, 0, 0);
+  return d.toISOString();
+}
 
 const STATUS_OPTIONS = [
   { value: "new", label: "New" },
@@ -17,12 +34,20 @@ export default function LeadActions({
   id,
   status: initialStatus,
   notes: initialNotes,
+  assignedTo,
+  followUpAt,
+  users,
+  meId,
   backHref,
   canDelete,
 }: {
   id: number;
   status: string;
   notes: string;
+  assignedTo: number | null;
+  followUpAt: string | null;
+  users: { id: number; name: string }[];
+  meId: number;
   backHref: string;
   canDelete: boolean; // admins only
 }) {
@@ -30,13 +55,18 @@ export default function LeadActions({
   const [status, setStatus] = useState(initialStatus);
   const [notes, setNotes] = useState(initialNotes);
   const [savedNotes, setSavedNotes] = useState(initialNotes);
-  const [saving, setSaving] = useState<"" | "status" | "notes">("");
+  const [saving, setSaving] = useState<"" | "status" | "notes" | "owner" | "followup">("");
+  const [owner, setOwner] = useState<number | null>(assignedTo);
+  const [followUp, setFollowUp] = useState<string | null>(followUpAt);
   const [flash, setFlash] = useState("");
   const [error, setError] = useState("");
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
-  async function save(changes: { status?: string; notes?: string }, which: "status" | "notes") {
+  async function save(
+    changes: { status?: string; notes?: string; assigned_to?: number | null; follow_up_at?: string | null },
+    which: "status" | "notes" | "owner" | "followup"
+  ) {
     setSaving(which);
     setError("");
     try {
@@ -50,7 +80,7 @@ export default function LeadActions({
         return false;
       }
       if (!res.ok) throw new Error();
-      setFlash(which === "status" ? "Status updated" : "Notes saved");
+      setFlash({ status: "Status updated", notes: "Notes saved", owner: "Owner updated", followup: "Follow-up updated" }[which]);
       setTimeout(() => setFlash(""), 2000);
       router.refresh();
       return true;
@@ -92,13 +122,115 @@ export default function LeadActions({
                 setStatus(o.value);
                 if (!(await save({ status: o.value }, "status"))) setStatus(prev);
               }}
-              className={`rounded-lg border px-2 py-1.5 text-sm font-medium transition ${
+              className={`min-h-10 rounded-lg border px-2 py-2 text-sm font-medium transition ${
                 status === o.value
                   ? "border-slate-900 bg-slate-900 text-white"
                   : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
               }`}
             >
               {o.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <p className="mb-2 flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-slate-500">
+          <UserRound className="h-3.5 w-3.5" /> Owner
+        </p>
+        <div className="flex gap-2">
+          <select
+            value={owner ?? ""}
+            disabled={saving === "owner"}
+            onChange={async (e) => {
+              const next = e.target.value ? Number(e.target.value) : null;
+              const prev = owner;
+              setOwner(next);
+              if (!(await save({ assigned_to: next }, "owner"))) setOwner(prev);
+            }}
+            className="block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/15"
+            aria-label="Owner"
+          >
+            <option value="">Unassigned</option>
+            {users.map((u) => (
+              <option key={u.id} value={u.id}>
+                {u.id === meId ? `${u.name} (me)` : u.name}
+              </option>
+            ))}
+          </select>
+          {owner !== meId && (
+            <button
+              type="button"
+              disabled={saving === "owner"}
+              onClick={async () => {
+                const prev = owner;
+                setOwner(meId);
+                if (!(await save({ assigned_to: meId }, "owner"))) setOwner(prev);
+              }}
+              className="shrink-0 rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            >
+              Take it
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div>
+        <p className="mb-2 flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-slate-500">
+          <CalendarClock className="h-3.5 w-3.5" /> Follow-up
+        </p>
+        <div className="flex gap-2">
+          <input
+            type="datetime-local"
+            value={toLocalInput(followUp)}
+            disabled={saving === "followup"}
+            onChange={async (e) => {
+              if (!e.target.value) return;
+              const next = new Date(e.target.value).toISOString();
+              const prev = followUp;
+              setFollowUp(next);
+              if (!(await save({ follow_up_at: next }, "followup"))) setFollowUp(prev);
+            }}
+            className={`block w-full rounded-lg border bg-white px-3 py-2 text-sm outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/15 ${
+              followUp && isPast(followUp) ? "border-rose-300 text-rose-700" : "border-slate-300 text-slate-900"
+            }`}
+            aria-label="Follow-up date and time"
+          />
+          {followUp && (
+            <button
+              type="button"
+              disabled={saving === "followup"}
+              onClick={async () => {
+                const prev = followUp;
+                setFollowUp(null);
+                if (!(await save({ follow_up_at: null }, "followup"))) setFollowUp(prev);
+              }}
+              className="shrink-0 rounded-lg border border-slate-300 px-2.5 text-slate-500 hover:bg-slate-50 hover:text-slate-800"
+              aria-label="Clear follow-up"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {[
+            { label: "Tomorrow 10 am", days: 1 },
+            { label: "In 3 days", days: 3 },
+            { label: "Next week", days: 7 },
+          ].map((q) => (
+            <button
+              key={q.label}
+              type="button"
+              disabled={saving === "followup"}
+              onClick={async () => {
+                const next = daysFromNow(q.days);
+                const prev = followUp;
+                setFollowUp(next);
+                if (!(await save({ follow_up_at: next }, "followup"))) setFollowUp(prev);
+              }}
+              className="min-h-8 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+            >
+              {q.label}
             </button>
           ))}
         </div>

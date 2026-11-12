@@ -91,6 +91,30 @@ CREATE TABLE IF NOT EXISTS admin_settings (
   key   TEXT PRIMARY KEY,
   value TEXT NOT NULL
 );
+
+-- Email alerts: who gets an email when a new lead arrives.
+ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS email TEXT;
+ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS notify_new_leads BOOLEAN NOT NULL DEFAULT false;
+
+-- Pipeline: who owns a lead and when to follow up.
+ALTER TABLE submissions ADD COLUMN IF NOT EXISTS assigned_to BIGINT;
+ALTER TABLE submissions ADD COLUMN IF NOT EXISTS follow_up_at TIMESTAMPTZ;
+CREATE INDEX IF NOT EXISTS submissions_assigned_idx ON submissions (assigned_to);
+CREATE INDEX IF NOT EXISTS submissions_follow_up_idx ON submissions (follow_up_at) WHERE follow_up_at IS NOT NULL;
+
+-- Who did what in the dashboard.
+CREATE TABLE IF NOT EXISTS activity_log (
+  id            BIGSERIAL PRIMARY KEY,
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  user_id       BIGINT,
+  user_name     TEXT,
+  action        TEXT NOT NULL,
+  submission_id BIGINT,
+  summary       TEXT,
+  details       JSONB NOT NULL DEFAULT '{}'::jsonb
+);
+CREATE INDEX IF NOT EXISTS activity_log_created_at_idx ON activity_log (created_at DESC);
+CREATE INDEX IF NOT EXISTS activity_log_submission_idx ON activity_log (submission_id);
 `;
 
 /** Creates the table on first use, so no manual migration step is needed. */

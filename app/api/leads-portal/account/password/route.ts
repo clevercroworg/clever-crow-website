@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { setSessionCookie } from "@/lib/admin/auth";
+import { logActivity } from "@/lib/admin/activity";
 import { authorizeApi, noStore } from "@/lib/admin/http";
 import { hashPassword, passwordProblem, verifyPassword } from "@/lib/admin/password";
 import { getPasswordHash, updateUser } from "@/lib/admin/users";
@@ -30,6 +31,7 @@ export async function POST(req: Request) {
     }
     const user = await updateUser(session.id, { passwordHash: await hashPassword(next) });
     if (!user) return NextResponse.json({ error: "Could not save." }, { status: 500, headers: noStore });
+    await logActivity(session, "password.change");
     const res = NextResponse.json({ ok: true }, { headers: noStore });
     await setSessionCookie(res, user);
     return res;

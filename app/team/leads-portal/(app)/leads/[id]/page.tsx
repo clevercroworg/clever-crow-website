@@ -4,10 +4,12 @@ import { ArrowLeft, ExternalLink, Mail, MessageCircle, Phone } from "lucide-reac
 import { requireSession } from "@/lib/admin/auth";
 import { isDatabaseConfigured } from "@/lib/leads/db";
 import { getSubmission } from "@/lib/leads/queries";
-import TopBar from "../../_components/TopBar";
+import { listLeadActivity, ACTIVITY_LABELS } from "@/lib/admin/activity";
+import { listAssignableUsers } from "@/lib/admin/users";
 import SetupNotice from "../../_components/SetupNotice";
 import { ChannelBadge, StatusBadge } from "../../_components/Badges";
 import { TYPE_LABELS, formatDateTime, timeAgo, whatsappNumber } from "../../_components/format";
+import { History } from "lucide-react";
 import LeadActions from "./LeadActions";
 
 export const dynamic = "force-dynamic";
@@ -53,22 +55,19 @@ export default async function LeadDetailPage({ params, searchParams }: PageProps
   const { id: rawId } = await params;
   const sp = await searchParams;
   const backRaw = typeof sp.back === "string" ? sp.back : "";
-  const backHref = backRaw.startsWith("?") ? `/team/leads-portal${backRaw}` : "/team/leads-portal";
+  const backHref = backRaw.startsWith("?") ? `/team/leads-portal/leads${backRaw}` : "/team/leads-portal/leads";
 
   if (!isDatabaseConfigured()) {
     return (
-      <>
-        <TopBar />
-        <main className="mx-auto max-w-5xl px-4 py-6 sm:px-6">
-          <SetupNotice />
-        </main>
-      </>
+      <main className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
+        <SetupNotice />
+      </main>
     );
   }
 
   const id = Number(rawId);
   if (!Number.isSafeInteger(id) || id <= 0) notFound();
-  const lead = await getSubmission(id);
+  const [lead, history, users] = await Promise.all([getSubmission(id), listLeadActivity(id), listAssignableUsers()]);
   if (!lead) notFound();
 
   const wa = whatsappNumber(lead.phone);
@@ -76,8 +75,7 @@ export default async function LeadDetailPage({ params, searchParams }: PageProps
 
   return (
     <>
-      <TopBar />
-      <main className="mx-auto max-w-5xl px-4 py-5 sm:px-6 sm:py-6">
+      <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
         <Link href={backHref} className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-slate-900">
           <ArrowLeft className="h-4 w-4" /> All submissions
         </Link>
@@ -156,12 +154,16 @@ export default async function LeadDetailPage({ params, searchParams }: PageProps
             </Card>
           </div>
 
-          <aside className="lg:sticky lg:top-20 lg:self-start">
+          <aside className="order-first lg:order-none lg:sticky lg:top-6 lg:self-start">
             <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
               <LeadActions
                 id={lead.id}
                 status={lead.status}
                 notes={lead.notes || ""}
+                assignedTo={lead.assigned_to}
+                followUpAt={lead.follow_up_at}
+                users={users}
+                meId={session.id}
                 backHref={backHref}
                 canDelete={session.role === "admin"}
               />
@@ -171,6 +173,29 @@ export default async function LeadDetailPage({ params, searchParams }: PageProps
                   {timeAgo(lead.updated_at)}
                 </p>
               )}
+            </section>
+
+            <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+              <p className="mb-3 flex items-center gap-1.5 text-sm font-semibold text-slate-900">
+                <History className="h-4 w-4 text-slate-500" /> History
+              </p>
+              <ol className="relative space-y-3 border-l border-slate-200 pl-4">
+                <li className="relative">
+                  <span className="absolute -left-[21px] top-1.5 h-2.5 w-2.5 rounded-full bg-amber-400 ring-4 ring-white" />
+                  <p className="text-sm text-slate-900">Submitted the {lead.form_name || "form"}</p>
+                  <p className="text-xs text-slate-500">{formatDateTime(lead.created_at)}</p>
+                </li>
+                {history.map((h) => (
+                  <li key={h.id} className="relative">
+                    <span className="absolute -left-[21px] top-1.5 h-2.5 w-2.5 rounded-full bg-slate-300 ring-4 ring-white" />
+                    <p className="text-sm text-slate-900">
+                      <span className="font-medium">{h.user_name || "Someone"}</span> · {ACTIVITY_LABELS[h.action] || h.action}
+                    </p>
+                    {h.summary && <p className="break-words text-xs text-slate-600">{h.summary}</p>}
+                    <p className="text-xs text-slate-500">{formatDateTime(h.created_at)}</p>
+                  </li>
+                ))}
+              </ol>
             </section>
           </aside>
         </div>

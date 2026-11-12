@@ -1,3 +1,5 @@
+import { after } from "next/server";
+import { notifyNewLead, siteOrigin } from "@/lib/admin/notify";
 import { ensureSchema, getPool, isDatabaseConfigured } from "./db";
 import { classifyChannel, parseUserAgent } from "./attribution";
 
@@ -134,7 +136,13 @@ export async function saveSubmission(req: Request, input: SubmissionInput): Prom
         JSON.stringify(cleanExtra(input.extra)),
       ]
     );
-    return Number(result.rows[0]?.id) || null;
+    const id = Number(result.rows[0]?.id) || null;
+    // Email alerts to team members who asked for them, after the form has responded.
+    if (id) {
+      const origin = siteOrigin(req);
+      after(() => notifyNewLead(id, origin));
+    }
+    return id;
   } catch (error) {
     console.error("LEADS DB: could not save submission", error);
     return null;

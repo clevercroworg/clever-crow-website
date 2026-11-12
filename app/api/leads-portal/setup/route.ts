@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { clearFailedLogins, clientIp, isRateLimited, recordFailedLogin, setSessionCookie } from "@/lib/admin/auth";
+import { logActivity } from "@/lib/admin/activity";
 import { isSameOrigin, noStore } from "@/lib/admin/http";
 import { hashPassword, passwordProblem } from "@/lib/admin/password";
 import { checkSetupCode } from "@/lib/admin/setup";
@@ -62,6 +63,7 @@ export async function POST(req: Request) {
 
     clearFailedLogins(ip);
     await recordLogin(user.id);
+    await logActivity(user, "setup", { summary: `First admin: ${user.name}` });
     const res = NextResponse.json({ ok: true }, { headers: noStore });
     await setSessionCookie(res, user);
     return res;

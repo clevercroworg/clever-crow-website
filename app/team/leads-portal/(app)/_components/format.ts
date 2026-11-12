@@ -19,6 +19,11 @@ export function formatTime(iso: string) {
   return new Date(iso).toLocaleTimeString("en-IN", { timeZone: TZ, hour: "numeric", minute: "2-digit" });
 }
 
+/** True if the time has passed. */
+export function isPast(iso: string) {
+  return new Date(iso).getTime() < Date.now();
+}
+
 export function timeAgo(iso: string) {
   const secs = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
   if (secs < 60) return "just now";

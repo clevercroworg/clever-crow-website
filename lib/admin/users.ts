@@ -18,9 +18,21 @@ export type AdminUser = {
   created_at: string;
   created_by: string | null;
   last_login_at: string | null;
+  email: string | null;
+  notify_new_leads: boolean;
 };
 
-const COLUMNS = "id, username, name, role, active, session_version, created_at, created_by, last_login_at";
+const COLUMNS =
+  "id, username, name, role, active, session_version, created_at, created_by, last_login_at, email, notify_new_leads";
+
+export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** "" -> null; otherwise a trimmed, lowercased address, or undefined if it isn't valid. */
+export function normalizeEmail(raw: unknown): string | null | undefined {
+  const s = String(raw ?? "").trim().toLowerCase().slice(0, 200);
+  if (!s) return null;
+  return EMAIL_RE.test(s) ? s : undefined;
+}
 
 function mapUser(row: Record<string, unknown>): AdminUser {
   return {
@@ -80,17 +92,27 @@ export async function createUser(input: {
   passwordHash: string;
   role: Role;
   createdBy: string | null;
+  email?: string | null;
+  notifyNewLeads?: boolean;
   onlyIfNoUsers?: boolean;
 }) {
   await ensureSchema();
   // onlyIfNoUsers makes first-time setup safe against two people submitting at once.
   const res = await getPool().query(
-    `INSERT INTO admin_users (username, name, password_hash, role, created_by)
-     SELECT $1, $2, $3, $4, $5
+    `INSERT INTO admin_users (username, name, password_hash, role, created_by, email, notify_new_leads)
+     SELECT $1, $2, $3, $4, $5, $6, $7
      ${input.onlyIfNoUsers ? "WHERE NOT EXISTS (SELECT 1 FROM admin_users)" : ""}
      ON CONFLICT (username) DO NOTHING
      RETURNING ${COLUMNS}`,
-    [input.username, input.name, input.passwordHash, input.role, input.createdBy]
+    [
+      input.username,
+      input.name,
+      input.passwordHash,
+      input.role,
+      input.createdBy,
+      input.email ?? null,
+      Boolean(input.notifyNewLeads && input.email),
+    ]
   );
   return res.rows[0] ? mapUser(res.rows[0]) : null;
 }
@@ -98,7 +120,14 @@ export async function createUser(input: {
 /** Any change here except a name change signs the user out everywhere (session_version + 1). */
 export async function updateUser(
   id: number,
-  changes: { name?: string; role?: Role; active?: boolean; passwordHash?: string }
+  changes: {
+    name?: string;
+    role?: Role;
+    active?: boolean;
+    passwordHash?: string;
+    email?: string | null;
+    notifyNewLeads?: boolean;
+  }
 ) {
   await ensureSchema();
   const sets: string[] = [];
@@ -111,6 +140,8 @@ export async function updateUser(
   if (changes.role !== undefined) set("role", changes.role);
   if (changes.active !== undefined) set("active", changes.active);
   if (changes.passwordHash !== undefined) set("password_hash", changes.passwordHash);
+  if (changes.email !== undefined) set("email", changes.email);
+  if (changes.notifyNewLeads !== undefined) set("notify_new_leads", changes.notifyNewLeads);
   if (!sets.length) return null;
   if (changes.role !== undefined || changes.active !== undefined || changes.passwordHash !== undefined) {
     sets.push("session_version = session_version + 1");
@@ -125,8 +156,28 @@ export async function updateUser(
 
 export async function deleteUser(id: number) {
   await ensureSchema();
-  const res = await getPool().query("DELETE FROM admin_users WHERE id = $1", [id]);
+  const pool = getPool();
+  await pool.query("UPDATE submissions SET assigned_to = NULL WHERE assigned_to = $1", [id]);
+  const res = await pool.query("DELETE FROM admin_users WHERE id = $1", [id]);
   return (res.rowCount || 0) > 0;
+}
+
+/** Active team members, for "assign to" pickers. */
+export async function listAssignableUsers() {
+  await ensureSchema();
+  const res = await getPool().query<{ id: string; name: string }>(
+    "SELECT id, name FROM admin_users WHERE active ORDER BY lower(name)"
+  );
+  return res.rows.map((r) => ({ id: Number(r.id), name: r.name }));
+}
+
+/** Who should get an email when a new lead arrives. */
+export async function listAlertRecipients() {
+  await ensureSchema();
+  const res = await getPool().query<{ email: string }>(
+    "SELECT DISTINCT email FROM admin_users WHERE active AND notify_new_leads AND email IS NOT NULL"
+  );
+  return res.rows.map((r) => r.email);
 }
 
 export async function countActiveAdmins() {

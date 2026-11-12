@@ -48,6 +48,9 @@ export type Submission = {
   notes: string | null;
   updated_at: string | null;
   updated_by: string | null;
+  assigned_to: number | null;
+  assigned_name: string | null;
+  follow_up_at: string | null;
   extra: Record<string, string>;
 };
 
@@ -60,7 +63,13 @@ export type Filters = {
   page_path?: string;
   from?: string; // YYYY-MM-DD (IST)
   to?: string; // YYYY-MM-DD (IST)
+  assigned?: string; // a user id, or "none"
+  followup?: string; // "overdue" | "today" | "upcoming" | "any"
 };
+
+// Columns for lead lists: everything, plus the assignee's name.
+const SELECT_ROWS = `SELECT s.*, (SELECT u.name FROM admin_users u WHERE u.id = s.assigned_to) AS assigned_name FROM submissions s`;
+const IST_TODAY = `(date_trunc('day', now() AT TIME ZONE '${TZ}') AT TIME ZONE '${TZ}')`;
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -93,6 +102,13 @@ function buildWhere(f: Filters) {
   if (f.page_path) add("page_path = ?", f.page_path);
   if (f.from && DATE_RE.test(f.from)) add(`created_at >= (?::date)::timestamp AT TIME ZONE '${TZ}'`, f.from);
   if (f.to && DATE_RE.test(f.to)) add(`created_at < ((?::date) + 1)::timestamp AT TIME ZONE '${TZ}'`, f.to);
+  if (f.assigned === "none") where.push("assigned_to IS NULL");
+  else if (f.assigned && /^\d+$/.test(f.assigned)) add("assigned_to = ?", Number(f.assigned));
+  if (f.followup === "overdue") where.push(`follow_up_at < now() AND status NOT IN ('won','lost','spam')`);
+  else if (f.followup === "today")
+    where.push(`follow_up_at >= ${IST_TODAY} AND follow_up_at < ${IST_TODAY} + interval '1 day'`);
+  else if (f.followup === "upcoming") where.push("follow_up_at >= now()");
+  else if (f.followup === "any") where.push("follow_up_at IS NOT NULL");
 
   return { sql: where.length ? `WHERE ${where.join(" AND ")}` : "", params };
 }
@@ -103,6 +119,9 @@ function mapRow(row: Record<string, unknown>): Submission {
     id: Number(row.id),
     created_at: new Date(row.created_at as string).toISOString(),
     updated_at: row.updated_at ? new Date(row.updated_at as string).toISOString() : null,
+    follow_up_at: row.follow_up_at ? new Date(row.follow_up_at as string).toISOString() : null,
+    assigned_to: row.assigned_to === null || row.assigned_to === undefined ? null : Number(row.assigned_to),
+    assigned_name: (row.assigned_name as string | null) ?? null,
     extra: (row.extra as Record<string, string>) || {},
   };
 }
@@ -111,12 +130,12 @@ export async function listSubmissions(filters: Filters, page: number, pageSize: 
   await ensureSchema();
   const { sql, params } = buildWhere(filters);
   const pool = getPool();
-  const countRes = await pool.query<{ count: string }>(`SELECT count(*) FROM submissions ${sql}`, params);
+  const countRes = await pool.query<{ count: string }>(`SELECT count(*) FROM submissions s ${sql}`, params);
   const total = Number(countRes.rows[0]?.count || 0);
   const pages = Math.max(1, Math.ceil(total / pageSize));
   const current = Math.min(Math.max(1, page), pages);
   const rowsRes = await pool.query(
-    `SELECT * FROM submissions ${sql} ORDER BY created_at DESC, id DESC LIMIT ${pageSize} OFFSET ${(current - 1) * pageSize}`,
+    `${SELECT_ROWS} ${sql} ORDER BY created_at DESC, id DESC LIMIT ${pageSize} OFFSET ${(current - 1) * pageSize}`,
     params
   );
   return { rows: rowsRes.rows.map(mapRow), total, page: current, pages };
@@ -126,7 +145,7 @@ export async function exportSubmissions(filters: Filters, limit = 10000) {
   await ensureSchema();
   const { sql, params } = buildWhere(filters);
   const res = await getPool().query(
-    `SELECT * FROM submissions ${sql} ORDER BY created_at DESC, id DESC LIMIT ${limit}`,
+    `${SELECT_ROWS} ${sql} ORDER BY created_at DESC, id DESC LIMIT ${limit}`,
     params
   );
   return res.rows.map(mapRow);
@@ -134,13 +153,13 @@ export async function exportSubmissions(filters: Filters, limit = 10000) {
 
 export async function getSubmission(id: number) {
   await ensureSchema();
-  const res = await getPool().query(`SELECT * FROM submissions WHERE id = $1`, [id]);
+  const res = await getPool().query(`${SELECT_ROWS} WHERE s.id = $1`, [id]);
   return res.rows[0] ? mapRow(res.rows[0]) : null;
 }
 
 export async function updateSubmission(
   id: number,
-  changes: { status?: string; notes?: string | null },
+  changes: { status?: string; notes?: string | null; assigned_to?: number | null; follow_up_at?: string | null },
   updatedBy: string
 ) {
   await ensureSchema();
@@ -153,6 +172,14 @@ export async function updateSubmission(
   if (changes.notes !== undefined) {
     params.push(changes.notes);
     sets.push(`notes = $${params.length}`);
+  }
+  if (changes.assigned_to !== undefined) {
+    params.push(changes.assigned_to);
+    sets.push(`assigned_to = $${params.length}`);
+  }
+  if (changes.follow_up_at !== undefined) {
+    params.push(changes.follow_up_at);
+    sets.push(`follow_up_at = $${params.length}`);
   }
   if (!sets.length) return false;
   params.push(updatedBy);

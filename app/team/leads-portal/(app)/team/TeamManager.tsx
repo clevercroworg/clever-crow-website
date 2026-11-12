@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, Plus, X } from "lucide-react";
+import { Bell, BellOff, Loader2, Plus, X } from "lucide-react";
 import type { AdminUser, Role } from "@/lib/admin/users";
 import { timeAgo } from "../_components/format";
 
@@ -39,7 +39,8 @@ function RoleBadge({ role }: { role: Role }) {
 
 function AddUser({ onDone }: { onDone: () => void }) {
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", username: "", password: "", role: "viewer" as Role });
+  const blank = { name: "", username: "", password: "", role: "viewer" as Role, email: "", notify_new_leads: false };
+  const [form, setForm] = useState(blank);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
@@ -60,7 +61,7 @@ function AddUser({ onDone }: { onDone: () => void }) {
         setError("");
         try {
           await call("/api/leads-portal/users", "POST", form);
-          setForm({ name: "", username: "", password: "", role: "viewer" });
+          setForm(blank);
           setOpen(false);
           onDone();
         } catch (err) {
@@ -72,7 +73,7 @@ function AddUser({ onDone }: { onDone: () => void }) {
     >
       <div className="mb-3 flex items-center justify-between">
         <p className="text-sm font-semibold">Add a login</p>
-        <button type="button" onClick={() => setOpen(false)} className="rounded p-1 text-slate-400 hover:text-slate-700" aria-label="Close">
+        <button type="button" onClick={() => setOpen(false)} className="rounded p-1 text-slate-500 hover:text-slate-700" aria-label="Close">
           <X className="h-4 w-4" />
         </button>
       </div>
@@ -97,6 +98,26 @@ function AddUser({ onDone }: { onDone: () => void }) {
             <option value="admin">Admin: everything, including delete, export and logins</option>
           </select>
         </label>
+        <label className="block text-sm">
+          <span className="mb-1 block font-medium text-slate-700">Email (optional)</span>
+          <input
+            className={input}
+            type="email"
+            autoComplete="off"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value, notify_new_leads: e.target.value ? form.notify_new_leads : false })}
+          />
+        </label>
+        <label className="flex items-center gap-2 self-end pb-2 text-sm text-slate-700">
+          <input
+            type="checkbox"
+            className="h-4 w-4 accent-slate-900"
+            disabled={!form.email}
+            checked={form.notify_new_leads}
+            onChange={(e) => setForm({ ...form, notify_new_leads: e.target.checked })}
+          />
+          Email them when a new lead comes in
+        </label>
       </div>
       {error && <p className="mt-3 rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</p>}
       <div className="mt-4 flex justify-end">
@@ -115,6 +136,9 @@ function UserRow({ user, isSelf, onDone }: { user: AdminUser; isSelf: boolean; o
   const [newPassword, setNewPassword] = useState("");
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [flash, setFlash] = useState("");
+  const [editingEmail, setEditingEmail] = useState(false);
+  const [email, setEmail] = useState(user.email || "");
+  const [notify, setNotify] = useState(user.notify_new_leads);
 
   async function run(which: string, fn: () => Promise<unknown>, done?: string) {
     setBusy(which);
@@ -145,11 +169,15 @@ function UserRow({ user, isSelf, onDone }: { user: AdminUser; isSelf: boolean; o
             {!user.active && (
               <span className="inline-flex rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-600">Turned off</span>
             )}
-            {isSelf && <span className="text-xs text-slate-400">(you)</span>}
+            {isSelf && <span className="text-xs text-slate-500">(you)</span>}
           </div>
           <p className="mt-0.5 text-sm text-slate-500">
             @{user.username} · {user.last_login_at ? `last signed in ${timeAgo(user.last_login_at)}` : "never signed in"}
             {user.created_by ? ` · added by ${user.created_by}` : ""}
+          </p>
+          <p className="mt-0.5 flex items-center gap-1.5 text-sm text-slate-500">
+            {user.notify_new_leads ? <Bell className="h-3.5 w-3.5 text-emerald-600" /> : <BellOff className="h-3.5 w-3.5 text-slate-500" />}
+            {user.email ? user.email : "No email"} · {user.notify_new_leads ? "new-lead alerts on" : "alerts off"}
           </p>
         </div>
 
@@ -166,6 +194,14 @@ function UserRow({ user, isSelf, onDone }: { user: AdminUser; isSelf: boolean; o
               <option value="admin">Admin</option>
             </select>
           )}
+          <button
+            type="button"
+            disabled={!!busy}
+            onClick={() => setEditingEmail((v) => !v)}
+            className={`${btn} border border-slate-300 bg-white text-slate-700 hover:bg-slate-50`}
+          >
+            Email &amp; alerts
+          </button>
           {!isSelf && (
             <button
               type="button"
@@ -227,6 +263,41 @@ function UserRow({ user, isSelf, onDone }: { user: AdminUser; isSelf: boolean; o
           />
           <button type="submit" disabled={!!busy} className={`${btn} bg-slate-900 text-white hover:bg-slate-800`}>
             {busy === "password" && <Loader2 className="h-3.5 w-3.5 animate-spin" />} Save new password
+          </button>
+        </form>
+      )}
+
+      {editingEmail && (
+        <form
+          className="mt-3 flex flex-col gap-2 rounded-lg border border-slate-200 bg-slate-50 p-3 sm:flex-row sm:items-center"
+          onSubmit={(e) => {
+            e.preventDefault();
+            run(
+              "email",
+              async () => {
+                await call(url, "PATCH", { email, notify_new_leads: notify });
+                setEditingEmail(false);
+              },
+              "Email settings saved"
+            );
+          }}
+        >
+          <input
+            className={`${input} sm:max-w-xs`}
+            type="email"
+            placeholder="Email address"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (!e.target.value) setNotify(false);
+            }}
+          />
+          <label className="flex items-center gap-2 text-sm text-slate-700">
+            <input type="checkbox" className="h-4 w-4 accent-slate-900" disabled={!email} checked={notify} onChange={(e) => setNotify(e.target.checked)} />
+            New-lead alerts
+          </label>
+          <button type="submit" disabled={!!busy} className={`${btn} bg-slate-900 text-white hover:bg-slate-800`}>
+            {busy === "email" && <Loader2 className="h-3.5 w-3.5 animate-spin" />} Save
           </button>
         </form>
       )}

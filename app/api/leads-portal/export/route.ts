@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { logActivity } from "@/lib/admin/activity";
 import { authorizeApi } from "@/lib/admin/http";
 import { parseFilters } from "@/lib/admin/filters";
 import { exportSubmissions } from "@/lib/leads/queries";
@@ -33,6 +34,8 @@ const COLUMNS: [string, string][] = [
   ["browser", "Browser"],
   ["os", "OS"],
   ["notes", "Notes"],
+  ["assigned_name", "Assigned to"],
+  ["follow_up_at", "Follow-up (IST)"],
   ["updated_by", "Last updated by"],
 ];
 
@@ -47,7 +50,7 @@ function ist(iso: string) {
 }
 
 export async function GET(req: Request) {
-  const { denied } = await authorizeApi(req, "admin");
+  const { session, denied } = await authorizeApi(req, "admin");
   if (denied) return denied;
   const { filters } = parseFilters(new URL(req.url).searchParams);
   try {
@@ -58,11 +61,12 @@ export async function GET(req: Request) {
       [
         ...COLUMNS.map(([key]) => {
           const v = (r as unknown as Record<string, unknown>)[key];
-          return cell(key === "created_at" ? ist(String(v)) : v);
+          return cell((key === "created_at" || key === "follow_up_at") && v ? ist(String(v)) : v);
         }),
         ...extraKeys.map((k) => cell(r.extra?.[k])),
       ].join(",")
     );
+    await logActivity(session, "leads.export", { summary: `${rows.length} rows` });
     const date = new Date().toISOString().slice(0, 10);
     return new NextResponse("﻿" + [header, ...lines].join("\r\n"), {
       headers: {
