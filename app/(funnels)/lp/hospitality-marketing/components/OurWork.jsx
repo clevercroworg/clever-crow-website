@@ -49,12 +49,12 @@ const AutoplayVideo = ({ src }) => {
 
 const OurWork = () => {
   const videoReels = [
-    "/lp/hospitality/reel1.mp4",
-    "/lp/hospitality/reel2.mp4",
-    "/lp/hospitality/reel7.mp4",
-    "/lp/hospitality/reel8.mp4",
-    "/lp/hospitality/reel18.mp4",
-    "/lp/hospitality/reel20.mp4"
+    "/lp/digital-marketing/assets/reels/reel1.mp4",
+    "/lp/digital-marketing/assets/reels/reel2.mp4",
+    "/lp/digital-marketing/assets/reels/reel7.mp4",
+    "/lp/digital-marketing/assets/reels/reel8.mp4",
+    "/lp/digital-marketing/assets/reels/reel18.mp4",
+    "/lp/digital-marketing/assets/reels/reel20.mp4"
   ];
 
   return (

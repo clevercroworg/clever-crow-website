@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 export default function TrendingReels() {
   const reels = Array.from({ length: 20 }, (_, i) => ({
     id: i + 1,
-    src: `/images/reels/reel${i + 1}.mp4`,
+    src: `/lp/digital-marketing/assets/reels/reel${i + 1}.mp4`,
   }));
 
   const ITEMS_PER_LOAD = 4;
