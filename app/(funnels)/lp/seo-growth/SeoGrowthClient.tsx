@@ -98,11 +98,13 @@ function AuditForm() {
   const [values, setValues] = useState({ website: "", name: "", phone: "", goal: "" });
   const [consent, setConsent] = useState(false);
   const [state, setState] = useState<{ loading: boolean; error: string }>({ loading: false, error: "" });
-  const set = (k: keyof typeof values) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+  const set = (k: "website" | "name" | "phone") => (e: React.ChangeEvent<HTMLInputElement>) =>
     setValues((v) => ({ ...v, [k]: e.target.value }));
 
   const field =
-    "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-[15px] text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-amber-500 focus:ring-2 focus:ring-amber-100";
+    "w-full rounded-xl border border-slate-200 bg-slate-50/70 py-3.5 pl-11 pr-4 text-[15px] text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-amber-400 focus:bg-white focus:ring-4 focus:ring-amber-400/15";
+  const label = "mb-1.5 block text-sm font-semibold text-[#071330]";
+  const icon = "pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-slate-400";
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -134,100 +136,138 @@ function AuditForm() {
   }
 
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_24px_60px_-24px_rgba(7,19,48,0.25)] sm:p-8">
-      <h3 className="text-2xl font-extrabold tracking-tight text-[#071330]">{AUDIT.form.heading}</h3>
-      <p className="mt-1.5 text-sm text-slate-600">{AUDIT.form.subtitle}</p>
-      <form onSubmit={onSubmit} className="mt-6 space-y-4" noValidate>
-        <label className="block">
-          <span className="mb-1.5 block text-sm font-semibold text-slate-700">
-            Website URL<span className="text-rose-500">*</span>
+    <div className="relative overflow-hidden rounded-3xl border border-amber-200/80 bg-white shadow-[0_30px_70px_-28px_rgba(7,19,48,0.35)]">
+      {/* Accent bar */}
+      <div className="h-1.5 bg-gradient-to-r from-[#FFD84D] via-[#FFC21A] to-[#F5A10A]" aria-hidden="true" />
+      <div className="p-6 sm:p-8">
+        <div className="flex items-start justify-between gap-3">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
+            100% free · No obligation
           </span>
-          <span className="relative block">
-            <Globe className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden="true" />
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#071330] text-[#FFCE1B] shadow-sm">
+            <SearchCheck className="h-5 w-5" aria-hidden="true" />
+          </span>
+        </div>
+        <h3 className="mt-3 text-2xl font-extrabold leading-tight tracking-tight text-[#071330] sm:text-[1.7rem]">
+          Get Your <span className="text-amber-500">Free</span> Website Review
+        </h3>
+        <p className="mt-1.5 text-[15px] text-slate-600">{AUDIT.form.subtitle}</p>
+
+        <form onSubmit={onSubmit} className="mt-6 space-y-4" noValidate>
+          <label className="block">
+            <span className={label}>
+              Website URL <span className="text-rose-500">*</span>
+            </span>
+            <span className="relative block">
+              <Globe className={icon} aria-hidden="true" />
+              <input
+                id="audit-website"
+                type="text"
+                inputMode="url"
+                autoComplete="url"
+                placeholder="yourbusiness.com"
+                value={values.website}
+                onChange={set("website")}
+                disabled={state.loading}
+                required
+                className={field}
+              />
+            </span>
+          </label>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+            <label className="block">
+              <span className={label}>
+                Your name <span className="text-rose-500">*</span>
+              </span>
+              <span className="relative block">
+                <User className={icon} aria-hidden="true" />
+                <input type="text" autoComplete="name" placeholder="Your name" value={values.name} onChange={set("name")} disabled={state.loading} required className={field} />
+              </span>
+            </label>
+            <label className="block">
+              <span className={label}>
+                Phone / WhatsApp <span className="text-rose-500">*</span>
+              </span>
+              <span className="relative block">
+                <Phone className={icon} aria-hidden="true" />
+                <input
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  placeholder="10-digit mobile"
+                  value={values.phone}
+                  onChange={set("phone")}
+                  disabled={state.loading}
+                  required
+                  className={field}
+                />
+              </span>
+            </label>
+          </div>
+
+          {/* Goal: tappable options instead of a dropdown */}
+          <fieldset>
+            <legend className={label}>
+              What would you like to improve? <span className="font-normal text-slate-400">(optional)</span>
+            </legend>
+            <div className="flex flex-wrap gap-2" role="radiogroup">
+              {AUDIT.form.goals.map((g) => {
+                const on = values.goal === g;
+                return (
+                  <button
+                    key={g}
+                    type="button"
+                    role="radio"
+                    aria-checked={on}
+                    disabled={state.loading}
+                    onClick={() => setValues((v) => ({ ...v, goal: on ? "" : g }))}
+                    className={`inline-flex min-h-10 items-center gap-1.5 rounded-full border px-3.5 py-2 text-left text-sm font-semibold transition ${
+                      on
+                        ? "border-amber-400 bg-amber-50 text-[#071330] ring-2 ring-amber-400/30"
+                        : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50"
+                    }`}
+                  >
+                    {on && <Check className="h-4 w-4 shrink-0 stroke-[3] text-amber-600" aria-hidden="true" />}
+                    {g}
+                  </button>
+                );
+              })}
+            </div>
+          </fieldset>
+
+          <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-slate-50 p-3 text-sm leading-snug text-slate-600">
             <input
-              id="audit-website"
-              type="text"
-              inputMode="url"
-              autoComplete="url"
-              placeholder="yourbusiness.com"
-              value={values.website}
-              onChange={set("website")}
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
               disabled={state.loading}
-              required
-              className={`${field} pl-11`}
+              className="mt-0.5 h-[18px] w-[18px] shrink-0 cursor-pointer rounded border-slate-300 accent-amber-500"
             />
-          </span>
-        </label>
-        <label className="block">
-          <span className="mb-1.5 block text-sm font-semibold text-slate-700">
-            Your name<span className="text-rose-500">*</span>
-          </span>
-          <span className="relative block">
-            <User className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden="true" />
-            <input type="text" autoComplete="name" placeholder="Your name" value={values.name} onChange={set("name")} disabled={state.loading} required className={`${field} pl-11`} />
-          </span>
-        </label>
-        <label className="block">
-          <span className="mb-1.5 block text-sm font-semibold text-slate-700">
-            Phone / WhatsApp number<span className="text-rose-500">*</span>
-          </span>
-          <span className="relative block">
-            <Phone className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden="true" />
-            <input
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel"
-              placeholder="10-digit mobile number"
-              value={values.phone}
-              onChange={set("phone")}
-              disabled={state.loading}
-              required
-              className={`${field} pl-11`}
-            />
-          </span>
-        </label>
-        <label className="block">
-          <span className="mb-1.5 block text-sm font-semibold text-slate-700">What would you like to improve?</span>
-          <span className="relative block">
-            <select value={values.goal} onChange={set("goal")} disabled={state.loading} className={`${field} appearance-none pr-10 ${values.goal ? "" : "text-slate-400"}`}>
-              <option value="">Select an option</option>
-              {AUDIT.form.goals.map((g) => (
-                <option key={g} value={g} className="text-slate-900">
-                  {g}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden="true" />
-          </span>
-        </label>
-        <label className="flex items-start gap-3 text-sm leading-snug text-slate-600">
-          <input
-            type="checkbox"
-            checked={consent}
-            onChange={(e) => setConsent(e.target.checked)}
+            {AUDIT.form.consent}
+          </label>
+
+          <button
+            type="submit"
             disabled={state.loading}
-            className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 accent-[#071330]"
-          />
-          {AUDIT.form.consent}
-        </label>
-        <button
-          type="submit"
-          disabled={state.loading}
-          className="group inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FFD84D] via-[#FFC21A] to-[#F5A10A] text-sm font-bold text-[#071330] shadow-lg shadow-amber-500/25 transition hover:brightness-105 active:scale-[0.99] disabled:opacity-60"
-        >
-          {state.loading ? "Sending..." : AUDIT.form.button}
-          {!state.loading && <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />}
-        </button>
-        {state.error && (
-          <p className="text-sm text-rose-600" role="alert">
-            {state.error}
-          </p>
-        )}
-      </form>
-      <p className="mt-5 flex items-center justify-center gap-1.5 border-t border-slate-100 pt-4 text-xs text-slate-500">
-        <Lock className="h-3.5 w-3.5 text-emerald-500" aria-hidden="true" />
-        We respect your privacy. 100% confidential.
-      </p>
+            className="group inline-flex h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#FFD84D] via-[#FFC21A] to-[#F5A10A] text-base font-extrabold text-[#071330] shadow-lg shadow-amber-500/30 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-amber-500/30 active:translate-y-0 disabled:opacity-60"
+          >
+            {state.loading ? "Sending..." : AUDIT.form.button}
+            {!state.loading && <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />}
+          </button>
+          {state.error && (
+            <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700" role="alert">
+              {state.error}
+            </p>
+          )}
+        </form>
+
+        <p className="mt-5 flex items-center justify-center gap-1.5 text-xs text-slate-500">
+          <Lock className="h-3.5 w-3.5 text-emerald-500" aria-hidden="true" />
+          We respect your privacy. 100% confidential.
+        </p>
+      </div>
     </div>
   );
 }
