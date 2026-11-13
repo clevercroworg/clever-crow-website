@@ -12,6 +12,9 @@ import { TYPE_LABELS, formatDateTime, timeAgo, whatsappNumber } from "../../_com
 import { History } from "lucide-react";
 import LeadActions from "./LeadActions";
 
+// Deleting leads is hidden for now. Set to true to show "Delete submission" to admins again.
+const LEAD_DELETE_ENABLED = false;
+
 export const dynamic = "force-dynamic";
 
 type PageProps = {
@@ -165,7 +168,7 @@ export default async function LeadDetailPage({ params, searchParams }: PageProps
                 users={users}
                 meId={session.id}
                 backHref={backHref}
-                canDelete={session.role === "admin"}
+                canDelete={LEAD_DELETE_ENABLED && session.role === "admin"}
               />
               {lead.updated_by && lead.updated_at && (
                 <p className="mt-4 border-t border-slate-100 pt-3 text-xs text-slate-500">
