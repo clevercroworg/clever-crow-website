@@ -15,6 +15,7 @@ export type PackageInfo = {
   priceNote?: string; // e.g. "+ GST"
   strikePrice?: string; // crossed-out earlier price, e.g. "₹15,999"
   priceTerm?: string; // e.g. "One-time payment"
+  pagesIncluded?: string; // highlighted line above the features, e.g. "Up to 10 pages included"
   description: string;
   features: string[];
   featured?: boolean;
@@ -27,6 +28,7 @@ export type PricingMeta = {
   packages: PackageInfo[];
   ecommerceCard?: PackageInfo;
   quoteText?: string;
+  quoteLinkText?: string;
   quoteHref?: string;
   cardCta?: { label: string; href: string };
 };
@@ -92,46 +94,44 @@ export function getWebsiteLandingData(): WebsiteLandingData {
       ctaLabel: "View Prices",
     },
     pricing: {
-      preTitle: "Transparent Pricing",
-      title: "High-Performance Website Packages",
-      subtitle: "Get conversion-focused websites with launch-ready setup and fast delivery.",
+      preTitle: "Website Packages",
+      title: "A professional website. A clear price.",
+      subtitle: "Choose the right package for your business.",
       packages: [
         {
-          label: "Starter",
-          name: "Basic Website",
+          label: "Basic",
+          name: "Basic",
+          description: "Build your business presence online.",
           price: "₹7,999",
           priceNote: "+ GST",
           strikePrice: "₹15,999",
           priceTerm: "One-time payment",
-          description: "Best for small businesses that need a fast, professional online presence.",
+          pagesIncluded: "Up to 10 pages included",
           features: [
             "Custom design for your business",
             "Mobile-friendly layout",
             "Free hosting for 1 year",
             "WhatsApp enquiry integration",
-          ],
-        },
-        {
-          label: "Most Popular",
-          name: "Premium Website",
-          oldPrice: "₹35,000",
-          price: "₹29,999",
-          description: "Best for growing businesses that want search visibility, steady enquiries and a site they can update themselves.",
-          features: [
-            "Everything in Starter plan",
-            "Up to 30 pages",
-            "Custom design tailored to your brand",
-            "Admin dashboard to manage content",
-            "Blog setup",
-            "Advanced on-page SEO",
-            "Sitemap & Google Search Console setup",
-            "Google Analytics setup",
-            "Enquiry forms with email notifications",
-            "Social media integration",
-            "Speed optimisation",
-            "Delivery within 12 days",
+            "Fast-loading pages",
           ],
           featured: true,
+        },
+        {
+          label: "Growth",
+          name: "Growth",
+          description: "More pages. More control. Room to grow.",
+          price: "₹29,999",
+          priceNote: "+ GST",
+          priceTerm: "One-time payment",
+          pagesIncluded: "Up to 30 pages included",
+          features: [
+            "Everything in Basic",
+            "Dashboard to update your content",
+            "Blog setup",
+            "On-page SEO setup",
+            "Google Analytics & Search Console",
+            "Enquiry forms with email notifications",
+          ],
         },
       ],
       ecommerceCard: {
@@ -151,7 +151,8 @@ export function getWebsiteLandingData(): WebsiteLandingData {
           "Meta Pixel and GA4 E-commerce Tracking",
         ],
       },
-      quoteText: "Need a broader scope or custom plan?",
+      quoteText: "Need something different?",
+      quoteLinkText: "Custom packages are available.",
       quoteHref: "tel:+919986389444",
       cardCta: { label: "Call to Get Started", href: "tel:+919986389444" },
     },

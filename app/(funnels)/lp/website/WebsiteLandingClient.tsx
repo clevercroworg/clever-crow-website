@@ -9,7 +9,7 @@ import HeroSectionWebsite from "../components/HeroSectionWebsite";
 import LogoMarquee from "../components/LogoMarquee";
 import PerformanceExperts from "../components/PerformanceExperts";
 import SuccessStories from "../components/SuccessStories";
-import PricingSection from "../components/PricingSection";
+import WebsitePricing from "./WebsitePricing";
 import FaqSection from "../components/FaqSection";
 import ClientReviews from "../components/ClientReviews";
 import Footer from "@/components/Footer";
@@ -52,7 +52,7 @@ export default function WebsiteLandingClient({ data }: WebsiteLandingClientProps
         <main id="top">
           <HeroSectionWebsite data={data.hero} />
           <LogoMarquee />
-          <PricingSection data={data.pricing} />
+          <WebsitePricing data={data.pricing} />
           <PerformanceExperts />
           <SuccessStories 
             data={data.caseStudies} 
