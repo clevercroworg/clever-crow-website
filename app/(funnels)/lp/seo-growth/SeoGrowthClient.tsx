@@ -33,6 +33,8 @@ import SectionHeading from "../digital-marketing-service/SectionHeading";
 import ArcBackground from "../digital-marketing-service/ArcBackground";
 import HeroDoodles from "../digital-marketing-service/HeroDoodles";
 import ServiceFooter from "../digital-marketing-service/ServiceFooter";
+import ResultsShowcase from "../digital-marketing-service/ResultsShowcase";
+import IndustriesServed from "../digital-marketing-service/IndustriesServed";
 import StickyCtaBar from "../digital-marketing-service/StickyCtaBar";
 import { Reveal, RiseText, Stagger, StaggerItem } from "../digital-marketing-service/motion";
 import { noOrphan } from "../digital-marketing-service/text";
@@ -766,6 +768,10 @@ export default function SeoGrowthClient() {
             </Reveal>
           </div>
         </section>
+
+        {/* Our results and sectors we serve (same sections as /lp/seo-service) */}
+        <ResultsShowcase />
+        <IndustriesServed onOpenModal={() => setModalPkg({ name: "SEO enquiry", tagline: "", cta: "Request a Call Back" })} />
 
         {/* 8. FAQ */}
         <section id="faq" className="scroll-mt-20 overflow-hidden py-14 sm:py-16">
