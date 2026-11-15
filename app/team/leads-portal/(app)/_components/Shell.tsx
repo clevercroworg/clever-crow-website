@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Activity, Columns3, KeyRound, LayoutDashboard, List, LogOut, Menu, Users, X } from "lucide-react";
+import { Activity, Columns3, PhoneCall, KeyRound, LayoutDashboard, List, LogOut, Menu, Users, X } from "lucide-react";
 
 type Props = { user: { name: string; role: "admin" | "viewer" }; children: React.ReactNode };
 
@@ -13,6 +13,7 @@ const NAV = [
   { href: BASE, label: "Overview", icon: LayoutDashboard, exact: true },
   { href: `${BASE}/leads`, label: "Leads", icon: List },
   { href: `${BASE}/pipeline`, label: "Pipeline", icon: Columns3 },
+  { href: `${BASE}/calls`, label: "AI calls", icon: PhoneCall },
   { href: `${BASE}/team`, label: "Team", icon: Users, admin: true },
   { href: `${BASE}/activity`, label: "Activity", icon: Activity, admin: true },
 ];

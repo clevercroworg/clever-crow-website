@@ -1,8 +1,11 @@
-import { NextResponse } from "next/server"
+import { after, NextResponse } from "next/server"
 import nodemailer from "nodemailer"
 import { FORM_RECIPIENTS } from "@/lib/form-recipients";
 import { saveSubmission } from "@/lib/leads/save";
 import { normalizeLeadFields } from "@/lib/leads/normalize";
+import { DEFAULT_ORG_ID } from "@/lib/calling/config";
+import { runDispatcher } from "@/lib/calling/dispatcher";
+import { captureCallbackRequest } from "@/lib/calling/queue";
 
 const isValValid = (val: any) => {
   if (!val) return false;
@@ -36,7 +39,7 @@ export async function POST(req: Request) {
     const KNOWN = new Set([
       "name", "phone", "email", "message", "source", "company", "service", "budget", "timeline",
       "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "referrer", "landed_url",
-      "landing_url", "gclid", "fbclid",
+      "landing_url", "gclid", "fbclid", "callback_consent", "callback_consent_version",
     ])
     const extra: Record<string, unknown> = {}
     for (const [key, value] of Object.entries(body || {})) {
@@ -45,7 +48,7 @@ export async function POST(req: Request) {
       }
     }
     const lp = normalizeLeadFields(source, message)
-    await saveSubmission(req, {
+    const submissionId = await saveSubmission(req, {
       form_type: "lead",
       form_name: lp.form_name,
       name, email, phone, timeline,
@@ -61,6 +64,25 @@ export async function POST(req: Request) {
       fbclid: body.fbclid,
       extra,
     })
+
+    // AI callback (docs/calling): only when the visitor ticked the callback consent box. Never blocks the form.
+    if (submissionId && body.callback_consent === true) {
+      try {
+        const queued = await captureCallbackRequest({
+          orgId: DEFAULT_ORG_ID,
+          submissionId,
+          rawPhone: phone,
+          consentVersion: body.callback_consent_version,
+          source: source || lp.form_name || "Website form",
+          pageUrl: landed_url || null,
+        })
+        if (queued.queued && queued.created) {
+          after(() => runDispatcher(DEFAULT_ORG_ID).catch((e) => console.error("CALLING: dispatch after form failed", e)))
+        }
+      } catch (callingError) {
+        console.error("CALLING: could not record callback request", callingError)
+      }
+    }
 
     try {
       console.log("Attempting to send lead email via Gmail SMTP...");

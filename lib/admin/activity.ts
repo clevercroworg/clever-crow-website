@@ -18,6 +18,18 @@ export const ACTIVITY_LABELS: Record<string, string> = {
   "user.delete": "Deleted login",
   "password.change": "Changed own password",
   "account.update": "Updated own email alerts",
+  "call.started": "AI call started",
+  "call.connected": "AI call connected",
+  "call.no_answer": "AI call not answered",
+  "call.busy": "AI call: line busy",
+  "call.failed": "AI call failed",
+  "calling.settings": "Changed AI calling settings",
+  "calling.request": "Requested an AI callback",
+  "calling.retry": "Retried an AI call",
+  "calling.cancel": "Cancelled an AI call",
+  "calling.run": "Ran the call dispatcher",
+  "calling.dnc_add": "Added to do-not-call",
+  "calling.dnc_remove": "Removed from do-not-call",
 };
 
 export type ActivityEntry = {

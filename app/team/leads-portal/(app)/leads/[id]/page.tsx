@@ -10,6 +10,7 @@ import SetupNotice from "../../_components/SetupNotice";
 import { ChannelBadge, StatusBadge } from "../../_components/Badges";
 import { TYPE_LABELS, formatDateTime, timeAgo, whatsappNumber } from "../../_components/format";
 import { History } from "lucide-react";
+import CallingPanel from "./CallingPanel";
 import LeadActions from "./LeadActions";
 
 // Deleting leads is hidden for now. Set to true to show "Delete submission" to admins again.
@@ -177,6 +178,8 @@ export default async function LeadDetailPage({ params, searchParams }: PageProps
                 </p>
               )}
             </section>
+
+            <CallingPanel leadId={lead.id} phone={lead.phone} />
 
             <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
               <p className="mb-3 flex items-center gap-1.5 text-sm font-semibold text-slate-900">
