@@ -130,6 +130,7 @@ const webhook = (job, attemptId, status, extra = {}) => ({
   const done = (await db.query("SELECT * FROM calls WHERE id = $1", [call.id])).rows[0];
   ok(done.status === "connected" && done.duration_seconds === 75 && done.outcome === "interested" && done.summary === "Wants a 5-page website" && done.language === "Kannada", "call updated: status, duration, outcome, summary, language");
   ok((await db.query("SELECT jsonb_array_length(segments) AS n FROM call_transcripts WHERE call_id = $1", [call.id])).rows[0]?.n === 2, "transcript stored separately");
+  ok(done.heat === "hot" && done.heat_score === 60 && done.follow_up_required === true, "heat: interested + 75s + budget = 60 → Hot, flagged for follow-up");
   const usage = (await db.query("SELECT * FROM call_usage WHERE call_id = $1", [call.id])).rows[0];
   ok(usage && usage.billable_minutes === 2 && Number(usage.agent_cost) === 7 && Number(usage.telephony_cost) === 0.6, "usage: 75s = 2 min (₹7.00) + 3 pulses (₹0.60)");
   ok((await db.query("SELECT status FROM call_jobs WHERE id = $1", [started.id])).rows[0].status === "completed", "job completed");
@@ -163,6 +164,7 @@ const webhook = (job, attemptId, status, extra = {}) => ({
   optOut.final_agent_variables = { call_outcome: "do_not_call", call_summary: "Asked not to be called" };
   await req(`/api/calling/webhooks/sarvam/${token}`, { method: "POST", body: optOut });
   ok((await db.query("SELECT count(*) FROM call_suppressions WHERE phone = '+919845033333'")).rows[0].count === "1", "opt-out adds the number to do-not-call");
+  ok((await db.query("SELECT heat FROM calls WHERE id = $1", [call3.id])).rows[0].heat === "cold", "opt-out call is Cold");
   ok((await db.query("SELECT count(*) FROM call_consents WHERE phone = '+919845033333' AND status = 'granted'")).rows[0].count === "0", "opt-out revokes consent");
   await submitLead("Opt Out Again", "9845033333");
   await sleep(800);
@@ -209,6 +211,9 @@ const webhook = (job, attemptId, status, extra = {}) => ({
   ok((r.status === 307 || r.text.includes("NEXT_REDIRECT;replace;/team/leads-portal;")) && !r.text.includes("Sarvam connection"), "viewer is redirected away from settings, nothing leaked");
   r = await req(`/team/leads-portal/calls/${call.id}`, { cookie: admin });
   ok(r.text.includes("Wants a 5-page website") && r.text.includes("I need a website"), "call page shows summary and transcript");
+  ok(r.text.includes("Why this lead is") && r.text.includes("+40 outcome: interested"), "call page explains the heat score");
+  r = await req("/team/leads-portal/calls?heat=hot", { cookie: admin });
+  ok(r.status === 200 && r.text.includes("Asha Kumar") && !r.text.includes("Opt Out<"), "Hot filter lists only hot calls");
   const ashaId = (await db.query("SELECT id FROM submissions WHERE name = 'Asha Kumar'")).rows[0].id;
   r = await req(`/team/leads-portal/leads/${ashaId}`, { cookie: admin });
   ok(r.text.includes("AI callback") && r.text.includes("Agreed to a callback"), "lead page shows the AI callback panel");

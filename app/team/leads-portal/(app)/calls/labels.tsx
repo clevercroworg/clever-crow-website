@@ -1,3 +1,5 @@
+import { Flame, Snowflake, Thermometer } from "lucide-react";
+
 // Display labels and colours for the Calls pages. Keep in sync with lib/calling/types.ts.
 
 export const CALL_STATUS_LABEL: Record<string, string> = {
@@ -55,3 +57,25 @@ export function duration(seconds: number | null) {
 export function Pill({ label, style }: { label: string; style: string }) {
   return <span className={`inline-flex whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ring-inset ${style}`}>{label}</span>;
 }
+
+const HEAT_UI = {
+  hot: { label: "Hot", icon: Flame, style: "bg-orange-50 text-orange-700 ring-orange-200" },
+  warm: { label: "Warm", icon: Thermometer, style: "bg-amber-50 text-amber-800 ring-amber-200" },
+  cold: { label: "Cold", icon: Snowflake, style: "bg-sky-50 text-sky-700 ring-sky-200" },
+} as const;
+
+/** Lead temperature from an AI call. Icon + word, never colour alone. */
+export function HeatBadge({ heat, score }: { heat: "hot" | "warm" | "cold" | null | undefined; score?: number | null }) {
+  if (!heat) return null;
+  const h = HEAT_UI[heat];
+  const Icon = h.icon;
+  return (
+    <span className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ring-inset ${h.style}`}>
+      <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+      {h.label}
+      {score !== null && score !== undefined && <span className="font-normal opacity-80">· {score}</span>}
+    </span>
+  );
+}
+
+export const HEAT_ICONS = { hot: Flame, warm: Thermometer, cold: Snowflake };

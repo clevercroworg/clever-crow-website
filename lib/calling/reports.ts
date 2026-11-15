@@ -13,7 +13,7 @@ export async function getCallingOverview(orgId: number, timezone: string, now = 
   const pool = getPool();
   const today = startOfLocalDay(now, timezone);
   const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
-  const [calls, month, jobs, lastEvent] = await Promise.all([
+  const [calls, month, jobs, lastEvent, heat] = await Promise.all([
     pool.query(
       `SELECT count(*) AS total,
               count(*) FILTER (WHERE status = 'connected') AS connected,
@@ -30,7 +30,12 @@ export async function getCallingOverview(orgId: number, timezone: string, now = 
     ),
     pool.query<{ status: string; count: string }>(`SELECT status, count(*) FROM call_jobs WHERE org_id = $1 GROUP BY status`, [orgId]),
     pool.query(`SELECT received_at, error FROM call_events WHERE org_id = $1 ORDER BY received_at DESC LIMIT 1`, [orgId]),
+    pool.query<{ heat: string; count: string }>(
+      `SELECT heat, count(*) FROM calls WHERE org_id = $1 AND heat IS NOT NULL AND created_at >= $2 GROUP BY heat`,
+      [orgId, monthStart]
+    ),
   ]);
+  const heatCounts = Object.fromEntries(heat.rows.map((r) => [r.heat, Number(r.count)])) as Partial<Record<"hot" | "warm" | "cold", number>>;
   const c = calls.rows[0];
   const total = Number(c.total);
   const answered = Number(c.connected);
@@ -46,6 +51,7 @@ export async function getCallingOverview(orgId: number, timezone: string, now = 
     },
     month: { minutes: Number(month.rows[0].minutes), cost: Number(month.rows[0].cost), calls: Number(month.rows[0].calls) },
     jobs: jobCounts,
+    heatThisMonth: { hot: heatCounts.hot ?? 0, warm: heatCounts.warm ?? 0, cold: heatCounts.cold ?? 0 },
     lastWebhook: lastEvent.rows[0] ? { at: iso(lastEvent.rows[0].received_at), error: lastEvent.rows[0].error as string | null } : null,
   };
 }
@@ -62,23 +68,33 @@ export type CallRow = {
   leadName: string | null;
   followUp: boolean;
   summary: string | null;
+  heat: "hot" | "warm" | "cold" | null;
+  heatScore: number | null;
 };
 
 export const CALLS_PAGE_SIZE = 25;
+export const HEATS = ["hot", "warm", "cold"] as const;
 
-export async function listCalls(orgId: number, page: number) {
+/** Call history, newest first. `heat` filters to one temperature (sorted hottest first within it). */
+export async function listCalls(orgId: number, page: number, heat: (typeof HEATS)[number] | null = null) {
   await ensureCallingSchema();
   const pool = getPool();
-  const total = Number((await pool.query<{ count: string }>("SELECT count(*) FROM calls WHERE org_id = $1", [orgId])).rows[0].count);
+  const params: unknown[] = [orgId];
+  let where = "c.org_id = $1";
+  if (heat) {
+    params.push(heat);
+    where += " AND c.heat = $2";
+  }
+  const total = Number((await pool.query<{ count: string }>(`SELECT count(*) FROM calls c WHERE ${where}`, params)).rows[0].count);
   const pages = Math.max(1, Math.ceil(total / CALLS_PAGE_SIZE));
   const current = Math.min(Math.max(1, page), pages);
   const res = await pool.query(
     `SELECT c.id, c.created_at, c.phone, c.status, c.outcome, c.duration_seconds, c.language, c.submission_id,
-            c.follow_up_required, c.summary, s.name AS lead_name
+            c.follow_up_required, c.summary, c.heat, c.heat_score, s.name AS lead_name
      FROM calls c LEFT JOIN submissions s ON s.id = c.submission_id
-     WHERE c.org_id = $1 ORDER BY c.created_at DESC, c.id DESC
+     WHERE ${where} ORDER BY ${heat ? "c.heat_score DESC NULLS LAST, " : ""}c.created_at DESC, c.id DESC
      LIMIT ${CALLS_PAGE_SIZE} OFFSET ${(current - 1) * CALLS_PAGE_SIZE}`,
-    [orgId]
+    params
   );
   const rows: CallRow[] = res.rows.map((r) => ({
     id: Number(r.id),
@@ -92,6 +108,8 @@ export async function listCalls(orgId: number, page: number) {
     leadName: r.lead_name,
     followUp: Boolean(r.follow_up_required),
     summary: r.summary,
+    heat: r.heat,
+    heatScore: num(r.heat_score),
   }));
   return { rows, total, page: current, pages };
 }
@@ -128,6 +146,9 @@ export async function getCallDetail(orgId: number, id: number) {
     followUp: Boolean(r.follow_up_required),
     submissionId: num(r.submission_id),
     leadName: r.lead_name as string | null,
+    heat: (r.heat as "hot" | "warm" | "cold" | null) ?? null,
+    heatScore: num(r.heat_score),
+    heatReasons: (r.heat_reasons as string[] | null) ?? [],
     transcript: (r.segments as { role: string; text: string }[] | null) ?? [],
     usage: r.billable_minutes === null || r.billable_minutes === undefined
       ? null
@@ -193,7 +214,7 @@ export async function getLeadCalling(orgId: number, submissionId: number, phone:
         )
       : Promise.resolve({ rows: [] as Record<string, unknown>[] }),
     pool.query(`SELECT id, status, scheduled_at, attempts, max_attempts, last_error FROM call_jobs WHERE org_id = $1 AND submission_id = $2 ORDER BY id DESC LIMIT 5`, [orgId, submissionId]),
-    pool.query(`SELECT id, created_at, status, outcome, duration_seconds, summary FROM calls WHERE org_id = $1 AND submission_id = $2 ORDER BY created_at DESC LIMIT 10`, [orgId, submissionId]),
+    pool.query(`SELECT id, created_at, status, outcome, duration_seconds, summary, heat FROM calls WHERE org_id = $1 AND submission_id = $2 ORDER BY created_at DESC LIMIT 10`, [orgId, submissionId]),
     phone ? pool.query(`SELECT 1 FROM call_suppressions WHERE org_id = $1 AND phone = $2`, [orgId, phone]) : Promise.resolve({ rowCount: 0 }),
   ]);
   const c = consent.rows[0];
@@ -215,6 +236,7 @@ export async function getLeadCalling(orgId: number, submissionId: number, phone:
       outcome: r.outcome as string | null,
       durationSeconds: num(r.duration_seconds),
       summary: r.summary as string | null,
+      heat: (r.heat as "hot" | "warm" | "cold" | null) ?? null,
     })),
   };
 }

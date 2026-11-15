@@ -57,7 +57,7 @@ Adding a number cancels its queued jobs and revokes its consent. Removing it doe
 `provider`, `provider_attempt_id` (unique together), `interaction_id` (for Sarvam analytics), `phone`, `status`
 (initiated, connected, no_answer, busy, failed), `outcome`, `summary`, `language`, `duration_seconds`,
 `failure_reason`, `agent_variables` (JSON, everything the agent collected), `follow_up_required`, `initiated_at`,
-`result_received_at`.
+`result_received_at`, `heat` (hot/warm/cold), `heat_score` (−100…100), `heat_reasons` (JSON list). See HEAT.md.
 
 ## call_transcripts
 `call_id` (PK) · `segments` JSON array of `{ role: "agent" | "user", text }` (English text from Sarvam).

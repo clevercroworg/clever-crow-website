@@ -6,12 +6,12 @@ import { DEFAULT_ORG_ID } from "@/lib/calling/config";
 import { maskPhone } from "@/lib/calling/phone";
 import { getCallDetail } from "@/lib/calling/reports";
 import { formatDateTime } from "../../_components/format";
-import { CALL_STATUS_LABEL, CALL_STATUS_STYLE, OUTCOME_LABEL, Pill, duration } from "../labels";
+import { CALL_STATUS_LABEL, CALL_STATUS_STYLE, HeatBadge, OUTCOME_LABEL, Pill, duration } from "../labels";
 
 export const dynamic = "force-dynamic";
 
 // Agent variables that are internal plumbing, not worth showing.
-const HIDDEN_VARS = new Set(["call_summary", "call_outcome"]);
+const HIDDEN_VARS = new Set(["call_summary", "call_outcome", "interest_level", "interest_reason", "detected_language", "opt_out"]);
 
 export default async function CallDetailPage({ params }: { params: Promise<{ id: string }> }) {
   await requireSession();
@@ -31,6 +31,7 @@ export default async function CallDetailPage({ params }: { params: Promise<{ id:
       <div className="flex flex-wrap items-center gap-3">
         <h1 className="text-2xl font-semibold tracking-tight text-slate-900">{call.leadName || maskPhone(call.phone)}</h1>
         <Pill label={CALL_STATUS_LABEL[call.status] ?? call.status} style={CALL_STATUS_STYLE[call.status] ?? CALL_STATUS_STYLE.initiated} />
+        <HeatBadge heat={call.heat} score={call.heatScore} />
         {call.outcome && <span className="text-sm font-medium text-slate-700">{OUTCOME_LABEL[call.outcome] ?? call.outcome}</span>}
       </div>
 
@@ -41,6 +42,25 @@ export default async function CallDetailPage({ params }: { params: Promise<{ id:
             <p className="mt-2 whitespace-pre-wrap text-[15px] leading-relaxed text-slate-700">{call.summary || "No summary was recorded for this call."}</p>
             {call.followUp && <p className="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-sm font-medium text-amber-900">Follow-up needed: a team member should contact this person.</p>}
           </section>
+
+          {call.heat && (
+            <section className={card}>
+              <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+                Why this lead is <HeatBadge heat={call.heat} score={call.heatScore} />
+              </h2>
+              {typeof call.variables?.interest_reason === "string" && call.variables.interest_reason && (
+                <p className="mt-2 text-[15px] text-slate-700">&ldquo;{call.variables.interest_reason}&rdquo; <span className="text-xs text-slate-500">(AI assistant)</span></p>
+              )}
+              <ul className="mt-2 space-y-1 text-sm text-slate-600">
+                {call.heatReasons.map((r) => (
+                  <li key={r} className="tabular-nums">
+                    {r}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-2 text-xs text-slate-500">Score out of 100: 60+ is Hot, 30–59 Warm, below 30 Cold.</p>
+            </section>
+          )}
 
           <section className={card}>
             <h2 className="text-sm font-semibold text-slate-900">Transcript</h2>

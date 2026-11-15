@@ -10,6 +10,7 @@ import { retryDelayMinutes } from "./schedule";
 import { verifyJobSignature } from "./security";
 import { CALL_OUTCOMES, type CallOutcome } from "./types";
 import { computeUsage } from "./usage";
+import { scoreHeat } from "./heat";
 
 export type ApplyResult =
   | { ok: true; duplicate?: boolean; callId: number; jobStatus?: string }
@@ -55,6 +56,7 @@ export async function applyCallResult(
     const outcome = rawOutcome && (CALL_OUTCOMES as readonly string[]).includes(rawOutcome) ? (rawOutcome as CallOutcome) : null;
     const optOut = outcome === "do_not_call" || vars.opt_out === true || vars.opt_out === "true";
     const usage = computeUsage(result.durationSeconds, settings);
+    const heat = scoreHeat({ status: result.status, durationSeconds: result.durationSeconds, outcome, variables: result.variables });
 
     const out = await repo.withTransaction(async (client) => {
       // If the start request was ambiguous ("needs review") but Sarvam did place the call, link it now.
@@ -79,7 +81,10 @@ export async function applyCallResult(
         outcome,
         summary: text(vars.call_summary, 2000),
         language: text(vars.detected_language, 40),
-        followUp: outcome ? FOLLOW_UP_OUTCOMES.has(outcome) : false,
+        followUp: (outcome ? FOLLOW_UP_OUTCOMES.has(outcome) : false) || heat?.heat === "hot",
+        heat: heat?.heat ?? null,
+        heatScore: heat?.score ?? null,
+        heatReasons: heat?.reasons ?? null,
       });
       if (result.transcript?.length) await repo.upsertTranscript(client, orgId, callId, result.transcript);
       if (usage.durationSeconds > 0) {
@@ -127,7 +132,9 @@ export async function applyCallResult(
     });
 
     await repo.finishEvent(event.id, null);
-    const label = result.status === "connected" ? `Connected · ${outcome ?? "no outcome"} · ${usage.durationSeconds}s` : result.status;
+    const label = result.status === "connected"
+      ? `Connected · ${outcome ?? "no outcome"} · ${usage.durationSeconds}s${heat ? ` · ${heat.heat.toUpperCase()} lead` : ""}`
+      : result.status;
     await logActivity({ id: 0, name: AI_ACTOR }, `call.${result.status}`, { submissionId: job.submissionId, summary: `AI call to ${maskPhone(job.phone)}: ${label}` });
     return { ok: true, callId: out.callId, jobStatus: out.jobStatus };
   } catch (error) {

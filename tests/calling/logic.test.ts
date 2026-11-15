@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { consentTextFor, CURRENT_CALLBACK_CONSENT_VERSION } from "@/lib/calling/consent-text";
 import { checkEligibility, type EligibilityFacts } from "@/lib/calling/eligibility";
 import { buildAgentVariables, cleanAgentVariable } from "@/lib/calling/guardrails";
+import { scoreHeat } from "@/lib/calling/heat";
 import { maskPhone, normalizeIndianMobile } from "@/lib/calling/phone";
 import { MockProvider } from "@/lib/calling/providers/mock";
 import { SarvamProvider } from "@/lib/calling/providers/sarvam";
@@ -250,5 +251,30 @@ describe("agent variable guardrails", () => {
   it("builds the full variable set safely from a lead", () => {
     expect(buildAgentVariables(null)).toEqual({ lead_name: "", enquiry_service: "", lead_company: "" });
     expect(buildAgentVariables({ name: "Asha", service: "SEO", company: null })).toEqual({ lead_name: "Asha", enquiry_service: "SEO", lead_company: "" });
+  });
+});
+
+describe("lead heat", () => {
+  const base = { status: "connected", durationSeconds: 75, outcome: null, variables: null } as const;
+  it("is only scored for answered calls", () => {
+    expect(scoreHeat({ ...base, status: "no_answer" })).toBeNull();
+  });
+  it("rates a clearly interested caller hot", () => {
+    const r = scoreHeat({ ...base, durationSeconds: 120, outcome: "interested", variables: { interest_level: "hot", timeline: "this month" } })!;
+    expect(r.heat).toBe("hot");
+    expect(r.score).toBe(100);
+    expect(r.reasons).toContain("+40 outcome: interested");
+  });
+  it("rates a curious but undecided caller warm", () => {
+    expect(scoreHeat({ ...base, outcome: "wants_more_info", variables: { interest_level: "warm" } })!.heat).toBe("warm");
+  });
+  it("rates disinterest, opt-outs and very short calls cold", () => {
+    expect(scoreHeat({ ...base, outcome: "not_interested" })!.heat).toBe("cold");
+    expect(scoreHeat({ ...base, outcome: "do_not_call" })).toMatchObject({ heat: "cold", score: -90 });
+    expect(scoreHeat({ ...base, durationSeconds: 12, outcome: null })!.heat).toBe("cold");
+  });
+  it("ignores empty or 'none' answers as buying signals", () => {
+    const r = scoreHeat({ ...base, outcome: "follow_up", variables: { budget: "none", timeline: "n/a" } })!;
+    expect(r.reasons.some((x) => x.includes("budget") || x.includes("timeline"))).toBe(false);
   });
 });

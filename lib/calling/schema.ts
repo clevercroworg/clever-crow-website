@@ -123,6 +123,11 @@ CREATE TABLE IF NOT EXISTS calls (
   UNIQUE (provider, provider_attempt_id)
 );
 CREATE INDEX IF NOT EXISTS calls_org_created_idx ON calls (org_id, created_at DESC);
+-- Lead heat from the call (lib/calling/heat.ts). Added after the first release, hence ALTER.
+ALTER TABLE calls ADD COLUMN IF NOT EXISTS heat TEXT;
+ALTER TABLE calls ADD COLUMN IF NOT EXISTS heat_score INT;
+ALTER TABLE calls ADD COLUMN IF NOT EXISTS heat_reasons JSONB;
+CREATE INDEX IF NOT EXISTS calls_heat_idx ON calls (org_id, heat, created_at DESC);
 CREATE INDEX IF NOT EXISTS calls_submission_idx ON calls (submission_id);
 
 -- Transcripts kept apart from calls so lists stay light.

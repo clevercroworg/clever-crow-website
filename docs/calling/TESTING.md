@@ -25,9 +25,9 @@ parsing.
 The script creates its own test users and leads. **Never point it at the production database.**
 
 ## Latest results (2026-11-15)
-- Unit tests: **26 / 26 passed** (incl. agent-variable guardrails: injected instructions, links, digits-as-names and
-  hidden characters dropped; Kannada and Hindi names kept)
-- End-to-end: **44 / 44 passed**, covering:
+- Unit tests: **31 / 31 passed** (incl. agent-variable guardrails: injected instructions, links, digits-as-names and
+  hidden characters dropped; Kannada and Hindi names kept; lead heat scoring)
+- End-to-end: **48 / 48 passed**, covering:
   - settings permissions and validation
   - no job without consent; forged consent versions ignored; canonical consent text stored
   - form → job → immediate dispatch → call row with provider attempt id
@@ -41,6 +41,8 @@ The script creates its own test users and leads. **Never point it at the product
   - manual callback refused without consent; viewer can't cancel; admin cancel; admin do-not-call add
   - automation off → consent recorded, no job
   - all dashboard pages render; viewer redirected from settings with no data leaked
+  - heat: interested + 75 s + budget → Hot (60) and flagged for follow-up; opt-out → Cold; call page explains the
+    score; Hot filter lists only hot calls
 
 ## Not yet tested (needs real accounts)
 Real Sarvam call, real webhook delivery, phone-number format acceptance, Kannada/Hindi call quality, Vercel Cron in

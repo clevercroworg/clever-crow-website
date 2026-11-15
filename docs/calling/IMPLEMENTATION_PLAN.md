@@ -55,7 +55,7 @@ Full details: [ARCHITECTURE.md](./ARCHITECTURE.md).
 | Phase | What | Status |
 |---|---|---|
 | 1 | Verify Sarvam API from official docs; architecture, data model, security and compliance design | Done |
-| 2 | Backend foundation: schema, consent, do-not-call, eligibility, jobs, dispatcher, Sarvam + mock adapters, webhook, usage, admin APIs, dashboard pages, unit + end-to-end tests with the mock provider | Done: 26/26 unit, 44/44 end-to-end ([TESTING.md](./TESTING.md)) |
+| 2 | Backend foundation: schema, consent, do-not-call, eligibility, jobs, dispatcher, Sarvam + mock adapters, webhook, usage, admin APIs, dashboard pages, unit + end-to-end tests with the mock provider | Done: 31/31 unit, 48/48 end-to-end ([TESTING.md](./TESTING.md)) |
 | 3 | Accounts: Vercel Pro, Sarvam workspace + API key, agent built in Sarvam, telephony connection + number, env vars | Waiting on you (see [SETUP.md](./SETUP.md)) |
 | 4 | Add the callback consent tick box to the chosen website forms | Waiting on your choice of forms |
 | 5 | One approved real test call to a team member's phone; confirm phone-number format, webhook delivery and transcript | After phase 3 |

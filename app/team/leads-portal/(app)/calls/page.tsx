@@ -5,7 +5,7 @@ import { DEFAULT_ORG_ID, callingEnv } from "@/lib/calling/config";
 import { providerReady } from "@/lib/calling/dispatcher";
 import { maskPhone } from "@/lib/calling/phone";
 import { getVoiceProvider } from "@/lib/calling/providers";
-import { getCallingOverview, listCalls, listJobs } from "@/lib/calling/reports";
+import { HEATS, getCallingOverview, listCalls, listJobs } from "@/lib/calling/reports";
 import { getSettings, listSuppressions } from "@/lib/calling/repository";
 import { isDatabaseConfigured } from "@/lib/leads/db";
 import PageHeader from "../_components/PageHeader";
@@ -13,7 +13,7 @@ import Pager from "../_components/Pager";
 import SetupNotice from "../_components/SetupNotice";
 import { formatDateTime, timeAgo } from "../_components/format";
 import { DncForm, DncRemove, JobActions } from "./CallingActions";
-import { CALL_STATUS_LABEL, CALL_STATUS_STYLE, JOB_STATUS_LABEL, JOB_STATUS_STYLE, OUTCOME_LABEL, Pill, duration } from "./labels";
+import { CALL_STATUS_LABEL, CALL_STATUS_STYLE, HEAT_ICONS, HeatBadge, JOB_STATUS_LABEL, JOB_STATUS_STYLE, OUTCOME_LABEL, Pill, duration } from "./labels";
 
 export const dynamic = "force-dynamic";
 
@@ -26,6 +26,7 @@ export default async function CallsPage({ searchParams }: PageProps) {
   const sp = await searchParams;
   const tab = ["queue", "dnc"].includes(one(sp.tab)) && (isAdmin || one(sp.tab) === "queue") ? one(sp.tab) : "calls";
   const page = Math.max(1, Number(one(sp.page)) || 1);
+  const heatFilter = (HEATS as readonly string[]).includes(one(sp.heat)) ? (one(sp.heat) as (typeof HEATS)[number]) : null;
 
   if (!isDatabaseConfigured()) {
     return (
@@ -42,7 +43,7 @@ export default async function CallsPage({ searchParams }: PageProps) {
   const live = env.enabled && settings.automationEnabled && ready;
   const [overview, calls, jobs, dnc] = await Promise.all([
     getCallingOverview(DEFAULT_ORG_ID, settings.timezone),
-    tab === "calls" ? listCalls(DEFAULT_ORG_ID, page) : null,
+    tab === "calls" ? listCalls(DEFAULT_ORG_ID, page, heatFilter) : null,
     tab === "queue" ? listJobs(DEFAULT_ORG_ID, null) : null,
     tab === "dnc" && isAdmin ? listSuppressions(DEFAULT_ORG_ID) : null,
   ]);
@@ -51,7 +52,7 @@ export default async function CallsPage({ searchParams }: PageProps) {
     { label: "Calls today", value: overview.today.calls, foot: `${overview.today.connected} connected` },
     { label: "Answer rate", value: `${overview.today.answerRate}%`, foot: `Avg ${duration(overview.today.avgDurationSeconds)} talk` },
     { label: "Waiting", value: overview.jobs.queued ?? 0, foot: `${overview.jobs.needs_review ?? 0} need review`, warn: (overview.jobs.needs_review ?? 0) > 0 },
-    { label: "This month", value: `₹${overview.month.cost.toLocaleString("en-IN")}`, foot: `${overview.month.minutes} billed min · excl. GST` },
+    { label: "This month", value: `₹${overview.month.cost.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, foot: `${overview.month.minutes} billed min · excl. GST` },
   ];
   const tabs = [
     { key: "calls", label: "Call history" },
@@ -102,6 +103,33 @@ export default async function CallsPage({ searchParams }: PageProps) {
         ))}
       </section>
 
+      <section aria-label="Lead heat this month" className="grid grid-cols-3 gap-3">
+        {(
+          [
+            ["hot", "Hot", "border-orange-200 bg-orange-50 text-orange-800", "Call these first"],
+            ["warm", "Warm", "border-amber-200 bg-amber-50 text-amber-900", "Worth a follow-up"],
+            ["cold", "Cold", "border-sky-200 bg-sky-50 text-sky-800", "Low interest"],
+          ] as const
+        ).map(([key, label, style, hint]) => {
+          const Icon = HEAT_ICONS[key];
+          const active = heatFilter === key;
+          return (
+            <Link
+              key={key}
+              href={active ? "/team/leads-portal/calls" : `/team/leads-portal/calls?heat=${key}`}
+              aria-current={active ? "true" : undefined}
+              className={`rounded-2xl border p-3 transition hover:shadow-sm sm:p-4 ${style} ${active ? "ring-2 ring-slate-900" : ""}`}
+            >
+              <p className="flex items-center gap-1.5 text-sm font-semibold">
+                <Icon className="h-4 w-4" aria-hidden="true" /> {label}
+              </p>
+              <p className="mt-1 text-2xl font-semibold tabular-nums sm:text-3xl">{overview.heatThisMonth[key]}</p>
+              <p className="mt-0.5 hidden text-xs opacity-80 sm:block">{hint} · this month</p>
+            </Link>
+          );
+        })}
+      </section>
+
       <nav className="flex flex-wrap gap-1.5" aria-label="Calls sections">
         {tabs.map((t) => (
           <Link
@@ -117,8 +145,18 @@ export default async function CallsPage({ searchParams }: PageProps) {
 
       {calls && (
         <>
+          {heatFilter && (
+            <p className="flex items-center gap-2 text-sm text-slate-600">
+              Showing <HeatBadge heat={heatFilter} /> calls, hottest first.
+              <Link href="/team/leads-portal/calls" className="font-medium text-slate-900 underline-offset-2 hover:underline">
+                Show all
+              </Link>
+            </p>
+          )}
           {calls.rows.length === 0 ? (
-            <p className="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center text-sm text-slate-500">No AI calls yet.</p>
+            <p className="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center text-sm text-slate-500">
+              {heatFilter ? "No calls with this heat yet." : "No AI calls yet."}
+            </p>
           ) : (
             <ul className="divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
               {calls.rows.map((c) => (
@@ -134,6 +172,7 @@ export default async function CallsPage({ searchParams }: PageProps) {
                       {c.outcome && <span>{OUTCOME_LABEL[c.outcome] ?? c.outcome}</span>}
                       <span className="tabular-nums">{duration(c.durationSeconds)}</span>
                       {c.language && <span>{c.language}</span>}
+                      <HeatBadge heat={c.heat} />
                       <Pill label={CALL_STATUS_LABEL[c.status] ?? c.status} style={CALL_STATUS_STYLE[c.status] ?? CALL_STATUS_STYLE.initiated} />
                     </span>
                   </Link>
@@ -141,7 +180,13 @@ export default async function CallsPage({ searchParams }: PageProps) {
               ))}
             </ul>
           )}
-          <Pager page={calls.page} pages={calls.pages} total={calls.total} size={25} noun="calls" href={(p) => (p > 1 ? `/team/leads-portal/calls?page=${p}` : "/team/leads-portal/calls")} />
+          <Pager page={calls.page} pages={calls.pages} total={calls.total} size={25} noun="calls" href={(p) => {
+              const q = new URLSearchParams();
+              if (heatFilter) q.set("heat", heatFilter);
+              if (p > 1) q.set("page", String(p));
+              const qs = q.toString();
+              return qs ? `/team/leads-portal/calls?${qs}` : "/team/leads-portal/calls";
+            }} />
         </>
       )}
 

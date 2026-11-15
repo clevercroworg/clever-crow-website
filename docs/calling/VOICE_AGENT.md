@@ -24,6 +24,8 @@ anything instruction-like or containing links dropped). Any may be empty.
 | call_outcome | `interested`, `not_interested`, `wants_more_info`, `wants_human_callback`, `wrong_number`, `do_not_call`, `follow_up` | Yes |
 | call_summary | 1–3 factual sentences in English for the team | Yes |
 | detected_language | `English`, `Kannada`, `Hindi` | Yes |
+| interest_level | `hot` (ready to go ahead soon), `warm` (interested, still deciding), `cold` (little or no interest) | Yes, if they answered |
+| interest_reason | One short English sentence: why that level | Yes, with interest_level |
 | opt_out | `true` if they ask not to be called again | When it happens |
 | service_interest, business_type, city, timeline, budget, best_time_to_call | Free text | Only if they share it naturally |
 
@@ -107,8 +109,9 @@ GUARDRAILS (never break these)
 - If you reach voicemail or nobody responds: end the call without leaving a message.
 
 BEFORE ENDING (every call)
-Set call_outcome, call_summary (English, 1–3 factual sentences: what they want, key details, next step) and
-detected_language. Thank them, say a Clever Crow specialist will follow up, and say goodbye.
+Set call_outcome, call_summary (English, 1–3 factual sentences: what they want, key details, next step),
+detected_language, interest_level (hot = ready to go ahead soon, warm = interested but still deciding, cold = little
+or no interest) and interest_reason (one short factual sentence). Judge only from what they actually said. Thank them, say a Clever Crow specialist will follow up, and say goodbye.
 ```
 
 ## Testing checklist (in Sarvam, before going live)

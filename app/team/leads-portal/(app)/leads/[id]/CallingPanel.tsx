@@ -6,7 +6,7 @@ import { getLeadCalling } from "@/lib/calling/reports";
 import { getSettings } from "@/lib/calling/repository";
 import { formatDateTime } from "../../_components/format";
 import { RequestCallbackButton } from "../../calls/CallingActions";
-import { CALL_STATUS_LABEL, CALL_STATUS_STYLE, JOB_STATUS_LABEL, JOB_STATUS_STYLE, OUTCOME_LABEL, Pill, duration } from "../../calls/labels";
+import { CALL_STATUS_LABEL, CALL_STATUS_STYLE, HeatBadge, JOB_STATUS_LABEL, JOB_STATUS_STYLE, OUTCOME_LABEL, Pill, duration } from "../../calls/labels";
 
 /** AI calling on the lead page: consent status, open job, past calls and the "Request AI callback" button. */
 export default async function CallingPanel({ leadId, phone }: { leadId: number; phone: string | null }) {
@@ -24,8 +24,11 @@ export default async function CallingPanel({ leadId, phone }: { leadId: number; 
 
   return (
     <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
-      <p className="mb-3 flex items-center gap-1.5 text-sm font-semibold text-slate-900">
-        <PhoneCall className="h-4 w-4 text-slate-500" /> AI callback
+      <p className="mb-3 flex items-center justify-between gap-2 text-sm font-semibold text-slate-900">
+        <span className="flex items-center gap-1.5">
+          <PhoneCall className="h-4 w-4 text-slate-500" /> AI callback
+        </span>
+        <HeatBadge heat={data.calls.find((c) => c.heat)?.heat} />
       </p>
       <p className="text-sm text-slate-700">
         {!e164
@@ -61,7 +64,10 @@ export default async function CallingPanel({ leadId, phone }: { leadId: number; 
                   </span>
                   {c.summary && <span className="mt-0.5 line-clamp-2 block text-xs text-slate-600">{c.summary}</span>}
                 </span>
-                <Pill label={CALL_STATUS_LABEL[c.status] ?? c.status} style={CALL_STATUS_STYLE[c.status] ?? CALL_STATUS_STYLE.initiated} />
+                <span className="flex shrink-0 flex-col items-end gap-1">
+                  <Pill label={CALL_STATUS_LABEL[c.status] ?? c.status} style={CALL_STATUS_STYLE[c.status] ?? CALL_STATUS_STYLE.initiated} />
+                  <HeatBadge heat={c.heat} />
+                </span>
               </Link>
             </li>
           ))}

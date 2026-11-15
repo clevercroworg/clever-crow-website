@@ -386,11 +386,15 @@ export async function applyCallResultRow(
     summary: string | null;
     language: string | null;
     followUp: boolean;
+    heat: string | null;
+    heatScore: number | null;
+    heatReasons: string[] | null;
   }
 ) {
   await client.query(
     `UPDATE calls SET status = $2, duration_seconds = $3, interaction_id = coalesce($4, interaction_id), failure_reason = $5,
        agent_variables = $6, outcome = $7, summary = $8, language = coalesce($9, language), follow_up_required = $10,
+       heat = $11, heat_score = $12, heat_reasons = $13,
        result_received_at = now(), updated_at = now()
      WHERE id = $1`,
     [
@@ -404,6 +408,9 @@ export async function applyCallResultRow(
       r.summary,
       r.language,
       r.followUp,
+      r.heat,
+      r.heatScore,
+      r.heatReasons ? JSON.stringify(r.heatReasons) : null,
     ]
   );
 }

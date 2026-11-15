@@ -17,6 +17,7 @@ or Hindi, and records the result on the lead in the leads dashboard.
 | [API.md](./API.md) | Every endpoint, who can call it, request and response |
 | [SARVAM_INTEGRATION.md](./SARVAM_INTEGRATION.md) | The verified Sarvam API contract, and the open questions |
 | [VOICE_AGENT.md](./VOICE_AGENT.md) | The agent prompt and the variables it must return |
+| [HEAT.md](./HEAT.md) | How each call's lead heat (Hot / Warm / Cold) is scored |
 | [SETUP.md](./SETUP.md) | Step-by-step: Vercel Pro, Sarvam, telephony, environment variables, going live |
 | [SECURITY.md](./SECURITY.md) | Threats and the controls against each |
 | [COMPLIANCE.md](./COMPLIANCE.md) | Consent, opt-out, India telecom (TRAI) checklist |
@@ -36,6 +37,7 @@ lib/calling/                 all backend logic (no UI)
   eligibility.ts             the single "may we call now?" rulebook
   security.ts                webhook token, job signatures, cron auth
   guardrails.ts              cleans form text before it reaches the AI agent
+  heat.ts                    lead heat score from duration + outcome + agent feedback
   usage.ts                   cost from duration
   schema.ts                  tables (created on first use)
   repository.ts              ALL SQL for calling
