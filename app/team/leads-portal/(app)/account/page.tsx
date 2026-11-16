@@ -16,7 +16,7 @@ export default async function AccountPage() {
         description={
           <>
             Signed in as <span className="font-medium text-slate-700">{session.name}</span> (@{session.username}) ·{" "}
-            <span className="capitalize">{session.role}</span>
+            <span>{session.role === "admin" ? "Main login" : "Team login"}</span>
           </>
         }
       />

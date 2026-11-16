@@ -70,7 +70,7 @@ export default function Shell({ user, children }: Props) {
         </span>
         <span className="min-w-0 leading-tight">
           <span className="block truncate text-sm font-medium text-white">{user.name}</span>
-          <span className="block text-xs capitalize text-slate-300">{user.role}</span>
+          <span className="block text-xs text-slate-300">{user.role === "admin" ? "Main login" : "Team login"}</span>
         </span>
       </div>
       <div className="mt-3 grid gap-1">

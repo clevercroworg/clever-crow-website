@@ -331,6 +331,10 @@ const webhook = (job, attemptId, status, extra = {}) => ({
   r = await req(`/team/leads-portal/calls/${call.id}`, { cookie: admin });
   ok(r.text.includes("Wants a 5-page website") && r.text.includes("I need a website"), "call page shows summary and transcript");
   ok(r.text.includes("Why this lead is") && r.text.includes("+40 outcome: interested"), "call page explains the heat score");
+  r = await req(`/team/leads-portal/calls/${call.id}`, { cookie: viewer });
+  ok(r.text.includes("Wants a 5-page website") && !r.text.includes("I need a website") && !r.text.includes("₹7.60"), "team login sees the summary, not the transcript or cost");
+  r = await req("/team/leads-portal/calls", { cookie: viewer });
+  ok(r.text.includes("calls placed") && !r.text.includes("budget"), "team login sees no spend or budget on the AI calls page");
   r = await req("/team/leads-portal/calls?heat=hot", { cookie: admin });
   ok(r.status === 200 && r.text.includes("Asha Kumar") && !r.text.includes("Opt Out<"), "Hot filter lists only hot calls");
   const ashaId = (await db.query("SELECT id FROM submissions WHERE name = 'Asha Kumar'")).rows[0].id;

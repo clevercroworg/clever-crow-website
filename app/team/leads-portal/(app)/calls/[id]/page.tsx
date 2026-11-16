@@ -14,7 +14,9 @@ export const dynamic = "force-dynamic";
 const HIDDEN_VARS = new Set(["call_summary", "call_outcome", "interest_level", "interest_reason", "detected_language", "opt_out"]);
 
 export default async function CallDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  await requireSession();
+  const session = await requireSession();
+  // Transcripts and costs are for main logins only. Team logins get the summary, result and heat.
+  const isAdmin = session.role === "admin";
   const id = Number((await params).id);
   if (!Number.isSafeInteger(id) || id <= 0) notFound();
   const call = await getCallDetail(DEFAULT_ORG_ID, id);
@@ -62,6 +64,7 @@ export default async function CallDetailPage({ params }: { params: Promise<{ id:
             </section>
           )}
 
+          {isAdmin && (
           <section className={card}>
             <h2 className="text-sm font-semibold text-slate-900">Transcript</h2>
             <p className="mb-3 text-xs text-slate-500">English text as provided by Sarvam (translated if the call was in another language).</p>
@@ -80,6 +83,7 @@ export default async function CallDetailPage({ params }: { params: Promise<{ id:
               <p className="text-sm text-slate-500">{call.status === "connected" ? "No transcript received." : "The call didn't connect, so there is no transcript."}</p>
             )}
           </section>
+          )}
         </div>
 
         <aside className="min-w-0 space-y-5">
@@ -92,7 +96,7 @@ export default async function CallDetailPage({ params }: { params: Promise<{ id:
                 ["Result received", call.resultAt ? formatDateTime(call.resultAt) : "Waiting"],
                 ["Duration", duration(call.durationSeconds)],
                 ["Language", call.language ?? "—"],
-                ["Cost", call.usage ? `₹${call.usage.cost.toFixed(2)} (${call.usage.minutes} min)` : "—"],
+                ...(isAdmin ? [["Cost", call.usage ? `₹${call.usage.cost.toFixed(2)} (${call.usage.minutes} min)` : "—"]] : []),
                 ["Failure", call.failureReason ?? "—"],
               ].map(([k, v]) => (
                 <div key={String(k)} className="flex justify-between gap-3">

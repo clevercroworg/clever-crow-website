@@ -2,11 +2,13 @@ import { randomBytes } from "crypto";
 import { ensureSchema, getPool } from "@/lib/leads/db";
 
 // Leads dashboard logins, stored in the leads database (admin_users table).
-//   admin:  everything, including delete, CSV export and managing users
-//   viewer: sees leads and can update status and notes
+//   admin  ("Main" on screen): everything, including CSV export, managing logins, AI call settings, costs and transcripts
+//   viewer ("Team" on screen): sees all leads and can update status and notes; no costs, transcripts or settings
 
 export const ROLES = ["admin", "viewer"] as const;
 export type Role = (typeof ROLES)[number];
+
+// On screen they are called "Main" and "Team"; the stored values stay the same so existing logins keep working.
 
 export type AdminUser = {
   id: number;

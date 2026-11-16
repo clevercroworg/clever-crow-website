@@ -25,7 +25,7 @@ export default async function TeamPage() {
     <main className="mx-auto max-w-5xl space-y-5 px-4 py-6 sm:px-6 lg:px-8">
       <PageHeader
         title="Team"
-        description="Admins can do everything, including delete, CSV export and managing logins. Viewers can see leads, update status and notes, assign leads and set follow-ups."
+        description="Main logins can do everything: CSV export, managing logins, AI call settings, call costs and transcripts. Team logins see all leads, update status and notes, assign leads and set follow-ups, and see AI call results and summaries."
       />
       <TeamManager users={users} currentUserId={session.id} />
     </main>

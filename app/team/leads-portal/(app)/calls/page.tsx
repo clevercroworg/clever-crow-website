@@ -56,12 +56,15 @@ export default async function CallsPage({ searchParams }: PageProps) {
     { label: "Calls today", value: overview.today.calls, foot: `${overview.today.connected} connected` },
     { label: "Answer rate", value: `${overview.today.answerRate}%`, foot: `Avg ${duration(overview.today.avgDurationSeconds)} talk` },
     { label: "Waiting", value: overview.jobs.queued ?? 0, foot: `${overview.jobs.needs_review ?? 0} need review`, warn: (overview.jobs.needs_review ?? 0) > 0 },
-    {
-      label: "This month",
-      value: inr(overview.month.cost),
-      foot: budget > 0 ? `of ${inr(budget, 0)} budget · ${overview.month.minutes} min` : `${overview.month.minutes} billed min · excl. GST`,
-      warn: budgetUsedUp,
-    },
+    // Spend and budget are for main logins only; team logins see the month's call count instead.
+    isAdmin
+      ? {
+          label: "This month",
+          value: inr(overview.month.cost),
+          foot: budget > 0 ? `of ${inr(budget, 0)} budget · ${overview.month.minutes} min` : `${overview.month.minutes} billed min · excl. GST`,
+          warn: budgetUsedUp,
+        }
+      : { label: "This month", value: overview.month.calls, foot: "calls placed" },
   ];
   const tabs = [
     { key: "calls", label: "Call history" },
@@ -89,7 +92,9 @@ export default async function CallsPage({ searchParams }: PageProps) {
           <p className="font-semibold text-slate-900">{paused ? "AI calling is paused" : live ? "AI calling is on" : "AI calling is off"}</p>
           <p className="text-slate-700">
             {paused
-              ? `This month's budget of ${inr(budget, 0)} is used up. New calls start again next month, or when an admin raises the budget in Settings.`
+              ? isAdmin
+                ? `This month's budget of ${inr(budget, 0)} is used up. New calls start again next month, or when you raise the budget in Settings.`
+                : "This month's calling limit is reached. A main login can change it."
               : live
               ? `Calls ${settings.callingStart}–${settings.callingEnd}, up to ${settings.maxDailyCalls} a day.`
               : env.mockBlocked
@@ -97,7 +102,7 @@ export default async function CallsPage({ searchParams }: PageProps) {
               : !env.enabled
                 ? "The master switch (CALLING_ENABLED) is off on the server."
                 : !ready
-                  ? "Sarvam isn't fully set up yet. An admin can see what's missing in Settings."
+                  ? "Sarvam isn't fully set up yet. A main login can see what's missing in Settings."
                   : "Automation is turned off in Settings."}
           </p>
         </div>

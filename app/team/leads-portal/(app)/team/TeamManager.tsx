@@ -32,7 +32,7 @@ function RoleBadge({ role }: { role: Role }) {
         role === "admin" ? "bg-amber-50 text-amber-800 ring-amber-200" : "bg-slate-50 text-slate-700 ring-slate-200"
       }`}
     >
-      {role === "admin" ? "Admin" : "Viewer"}
+      {role === "admin" ? "Main" : "Team"}
     </span>
   );
 }
@@ -94,8 +94,8 @@ function AddUser({ onDone }: { onDone: () => void }) {
         <label className="block text-sm">
           <span className="mb-1 block font-medium text-slate-700">Role</span>
           <select className={input} value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value as Role })}>
-            <option value="viewer">Viewer: see leads, update status and notes</option>
-            <option value="admin">Admin: everything, including delete, export and logins</option>
+            <option value="viewer">Team: all leads, status and notes; no costs, transcripts or settings</option>
+            <option value="admin">Main: everything, including export, logins, AI call costs and transcripts</option>
           </select>
         </label>
         <label className="block text-sm">
@@ -190,8 +190,8 @@ function UserRow({ user, isSelf, onDone }: { user: AdminUser; isSelf: boolean; o
               onChange={(e) => run("role", () => call(url, "PATCH", { role: e.target.value }), "Role updated")}
               className="rounded-lg border border-slate-300 bg-white px-2 py-1.5 text-sm text-slate-700"
             >
-              <option value="viewer">Viewer</option>
-              <option value="admin">Admin</option>
+              <option value="viewer">Team</option>
+              <option value="admin">Main</option>
             </select>
           )}
           <button
