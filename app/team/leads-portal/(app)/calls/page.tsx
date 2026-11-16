@@ -48,11 +48,20 @@ export default async function CallsPage({ searchParams }: PageProps) {
     tab === "dnc" && isAdmin ? listSuppressions(DEFAULT_ORG_ID) : null,
   ]);
 
+  const inr = (n: number, digits = 2) => `₹${n.toLocaleString("en-IN", { minimumFractionDigits: digits, maximumFractionDigits: digits })}`;
+  const budget = settings.monthlyBudget;
+  const budgetUsedUp = budget > 0 && overview.month.cost >= budget;
+  const paused = live && budgetUsedUp;
   const tiles = [
     { label: "Calls today", value: overview.today.calls, foot: `${overview.today.connected} connected` },
     { label: "Answer rate", value: `${overview.today.answerRate}%`, foot: `Avg ${duration(overview.today.avgDurationSeconds)} talk` },
     { label: "Waiting", value: overview.jobs.queued ?? 0, foot: `${overview.jobs.needs_review ?? 0} need review`, warn: (overview.jobs.needs_review ?? 0) > 0 },
-    { label: "This month", value: `₹${overview.month.cost.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, foot: `${overview.month.minutes} billed min · excl. GST` },
+    {
+      label: "This month",
+      value: inr(overview.month.cost),
+      foot: budget > 0 ? `of ${inr(budget, 0)} budget · ${overview.month.minutes} min` : `${overview.month.minutes} billed min · excl. GST`,
+      warn: budgetUsedUp,
+    },
   ];
   const tabs = [
     { key: "calls", label: "Call history" },
@@ -74,13 +83,17 @@ export default async function CallsPage({ searchParams }: PageProps) {
         }
       />
 
-      <div className={`flex items-start gap-3 rounded-2xl border p-4 ${live ? "border-emerald-200 bg-emerald-50" : "border-amber-200 bg-amber-50"}`}>
-        {live ? <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" /> : <PhoneOff className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" />}
+      <div className={`flex items-start gap-3 rounded-2xl border p-4 ${live && !paused ? "border-emerald-200 bg-emerald-50" : "border-amber-200 bg-amber-50"}`}>
+        {live && !paused ? <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" /> : <PhoneOff className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" />}
         <div className="text-sm">
-          <p className="font-semibold text-slate-900">{live ? "AI calling is on" : "AI calling is off"}</p>
+          <p className="font-semibold text-slate-900">{paused ? "AI calling is paused" : live ? "AI calling is on" : "AI calling is off"}</p>
           <p className="text-slate-700">
-            {live
+            {paused
+              ? `This month's budget of ${inr(budget, 0)} is used up. New calls start again next month, or when an admin raises the budget in Settings.`
+              : live
               ? `Calls ${settings.callingStart}–${settings.callingEnd}, up to ${settings.maxDailyCalls} a day.`
+              : env.mockBlocked
+                ? "The test provider (CALLING_PROVIDER=mock) is set on the live site. Remove it on the server to place real calls."
               : !env.enabled
                 ? "The master switch (CALLING_ENABLED) is off on the server."
                 : !ready

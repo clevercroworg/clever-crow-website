@@ -82,7 +82,8 @@ export class SarvamProvider implements VoiceProvider {
     }
     const detail = text.slice(0, 300);
     if (res.status === 429) return { ok: false, retryable: true, ambiguous: false, error: "Sarvam rate limit (429)", httpStatus: 429 };
-    if (res.status >= 500) {
+    // 5xx, or 408 (their side timed out waiting): the call may still have been placed. Never auto-retry.
+    if (res.status >= 500 || res.status === 408) {
       return { ok: false, retryable: false, ambiguous: true, error: `Sarvam server error ${res.status}`, httpStatus: res.status };
     }
     // 400/401/403/422: configuration or input problem; retrying won't help.

@@ -3,6 +3,7 @@
 
 import type { PoolClient } from "pg";
 import { getPool } from "@/lib/leads/db";
+import { LIMITS } from "./config";
 import { ensureCallingSchema } from "./schema";
 import type { CallJob, CallingSettings, JobStatus } from "./types";
 
@@ -36,6 +37,7 @@ function mapSettings(r: Record<string, unknown>): CallingSettings {
     rateAgentPerMinute: Number(r.rate_agent_per_minute),
     rateTelephonyPer30s: Number(r.rate_telephony_per_30s),
     pricingVersion: String(r.pricing_version),
+    monthlyBudget: Number(r.monthly_budget),
     updatedAt: iso(r.updated_at),
     updatedBy: (r.updated_by as string | null) ?? null,
   };
@@ -69,6 +71,7 @@ const SETTINGS_COLUMNS: Record<string, string> = {
   rateAgentPerMinute: "rate_agent_per_minute",
   rateTelephonyPer30s: "rate_telephony_per_30s",
   pricingVersion: "pricing_version",
+  monthlyBudget: "monthly_budget",
 };
 
 /** `changes` must already be validated (see lib/calling/settings-validation.ts). */
@@ -92,30 +95,65 @@ export async function updateSettings(orgId: number, changes: Partial<CallingSett
 
 // ---------------------------------------------------------------- consent and do-not-call
 
-export async function recordConsent(c: {
-  orgId: number;
-  submissionId: number | null;
-  phone: string;
-  consentText: string;
-  consentVersion: string;
-  source: string;
-  pageUrl: string | null;
-}) {
+/**
+ * Stores a consent record and returns its id, or null when this visitor's address is over its daily limit (nothing
+ * is stored then). The count and the insert happen under one per-address lock, so a burst of requests sent at the
+ * same instant can't all slip under the limit.
+ */
+export async function recordConsent(
+  c: {
+    orgId: number;
+    submissionId: number | null;
+    phone: string;
+    consentText: string;
+    consentVersion: string;
+    source: string;
+    pageUrl: string | null;
+    ipHash: string | null;
+  },
+  maxFromIpPerDay = 0
+) {
   await ensureCallingSchema();
-  const res = await getPool().query<{ id: string }>(
-    `INSERT INTO call_consents (org_id, submission_id, phone, consent_text, consent_version, source, page_url)
-     VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`,
-    [c.orgId, c.submissionId, c.phone, c.consentText, c.consentVersion, c.source, c.pageUrl]
-  );
-  return Number(res.rows[0].id);
+  return withTransaction(async (client) => {
+    if (c.ipHash && maxFromIpPerDay > 0) {
+      await client.query("SELECT pg_advisory_xact_lock(hashtext('cc-calling-ip'), hashtext($1))", [`${c.orgId}:${c.ipHash}`]);
+      const seen = await client.query<{ count: string }>(
+        "SELECT count(*) FROM call_consents WHERE org_id = $1 AND ip_hash = $2 AND captured_at > now() - interval '24 hours'",
+        [c.orgId, c.ipHash]
+      );
+      if (Number(seen.rows[0].count) >= maxFromIpPerDay) return null;
+    }
+    const res = await client.query<{ id: string }>(
+      `INSERT INTO call_consents (org_id, submission_id, phone, consent_text, consent_version, source, page_url, ip_hash)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
+      [c.orgId, c.submissionId, c.phone, c.consentText, c.consentVersion, c.source, c.pageUrl, c.ipHash]
+    );
+    return Number(res.rows[0].id);
+  });
 }
 
+/** Consent counts only while it is granted AND recent (LIMITS.consentValidDays). */
+const ACTIVE_CONSENT_SQL = `SELECT 1 FROM call_consents WHERE org_id = $1 AND phone = $2 AND purpose = 'callback'
+  AND status = 'granted' AND captured_at > now() - make_interval(days => ${LIMITS.consentValidDays})`;
+
 export async function hasActiveConsent(orgId: number, phone: string, client?: Db) {
-  const res = await db(client).query(
-    `SELECT 1 FROM call_consents WHERE org_id = $1 AND phone = $2 AND purpose = 'callback' AND status = 'granted' LIMIT 1`,
-    [orgId, phone]
-  );
+  await ensureCallingSchema();
+  const res = await db(client).query(`${ACTIVE_CONSENT_SQL} LIMIT 1`, [orgId, phone]);
   return (res.rowCount || 0) > 0;
+}
+
+/** How many callback requests this (hashed) IP address has made in the last 24 hours. */
+/** Has the AI called this number recently, or might it have (a start we couldn't confirm)? */
+export async function hasRecentCallActivity(orgId: number, phone: string, hours: number) {
+  const res = await getPool().query<{ recent: boolean }>(
+    `SELECT (
+       EXISTS (SELECT 1 FROM calls WHERE org_id = $1 AND phone = $2 AND created_at > now() - make_interval(hours => $3))
+       OR EXISTS (SELECT 1 FROM call_jobs WHERE org_id = $1 AND phone = $2 AND status = 'needs_review'
+                  AND updated_at > now() - make_interval(hours => $3))
+     ) AS recent`,
+    [orgId, phone, hours]
+  );
+  return Boolean(res.rows[0].recent);
 }
 
 export async function revokeConsent(orgId: number, phone: string, reason: string, client?: Db) {
@@ -187,7 +225,13 @@ function mapJob(r: Record<string, unknown>): CallJob {
   };
 }
 
-/** Creates a job unless one with the same idempotency key exists. Returns { job, created }. */
+const ACTIVE_JOB_SQL = "status IN ('queued','dispatching','in_progress')";
+
+/**
+ * Creates a job unless one with the same idempotency key exists, or (the usual case) the number already has a
+ * job waiting or in progress. The per-number lock makes that check safe when several requests for the same
+ * number arrive at the same instant. Returns { job, created }, or { job: null } when another job is active.
+ */
 export async function createJob(j: {
   orgId: number;
   submissionId: number | null;
@@ -197,18 +241,21 @@ export async function createJob(j: {
   idempotencyKey: string;
   createdBy: string | null;
   scheduledAt?: Date;
-}) {
+}): Promise<{ job: CallJob; created: boolean } | { job: null; created: false }> {
   await ensureCallingSchema();
-  const pool = getPool();
-  const ins = await pool.query(
-    `INSERT INTO call_jobs (org_id, submission_id, phone, max_attempts, language, idempotency_key, created_by, scheduled_at)
-     VALUES ($1, $2, $3, $4, $5, $6, $7, coalesce($8, now()))
-     ON CONFLICT (org_id, idempotency_key) DO NOTHING RETURNING *`,
-    [j.orgId, j.submissionId, j.phone, j.maxAttempts, j.language, j.idempotencyKey, j.createdBy, j.scheduledAt ?? null]
-  );
-  if (ins.rows[0]) return { job: mapJob(ins.rows[0]), created: true };
-  const existing = await pool.query("SELECT * FROM call_jobs WHERE org_id = $1 AND idempotency_key = $2", [j.orgId, j.idempotencyKey]);
-  return { job: mapJob(existing.rows[0]), created: false };
+  return withTransaction(async (client) => {
+    await client.query("SELECT pg_advisory_xact_lock(hashtext('cc-calling-phone'), hashtext($1))", [`${j.orgId}:${j.phone}`]);
+    const existing = await client.query("SELECT * FROM call_jobs WHERE org_id = $1 AND idempotency_key = $2", [j.orgId, j.idempotencyKey]);
+    if (existing.rows[0]) return { job: mapJob(existing.rows[0]), created: false };
+    if (await hasActiveJobForPhone(j.orgId, j.phone, client)) return { job: null, created: false };
+    const ins = await client.query(
+      `INSERT INTO call_jobs (org_id, submission_id, phone, max_attempts, language, idempotency_key, created_by, scheduled_at, expires_at)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, coalesce($8, now()), now() + make_interval(hours => ${LIMITS.jobMaxAgeHours}))
+       RETURNING *`,
+      [j.orgId, j.submissionId, j.phone, j.maxAttempts, j.language, j.idempotencyKey, j.createdBy, j.scheduledAt ?? null]
+    );
+    return { job: mapJob(ins.rows[0]), created: true };
+  });
 }
 
 export async function getJob(orgId: number, id: number, client?: Db) {
@@ -217,40 +264,66 @@ export async function getJob(orgId: number, id: number, client?: Db) {
   return res.rows[0] ? mapJob(res.rows[0]) : null;
 }
 
-export async function hasActiveJobForPhone(orgId: number, phone: string, client?: Db) {
+/** Same as getJob but holds the row until the transaction ends, so two results can't change one job at once. */
+export async function lockJob(client: Db, orgId: number, id: number) {
+  const res = await client.query("SELECT * FROM call_jobs WHERE org_id = $1 AND id = $2 FOR UPDATE", [orgId, id]);
+  return res.rows[0] ? mapJob(res.rows[0]) : null;
+}
+
+export async function hasActiveJobForPhone(orgId: number, phone: string, client?: Db, exceptJobId = 0) {
   const res = await db(client).query(
-    `SELECT 1 FROM call_jobs WHERE org_id = $1 AND phone = $2 AND status IN ('queued','dispatching','in_progress') LIMIT 1`,
-    [orgId, phone]
+    `SELECT 1 FROM call_jobs WHERE org_id = $1 AND phone = $2 AND ${ACTIVE_JOB_SQL} AND id <> $3 LIMIT 1`,
+    [orgId, phone, exceptJobId]
   );
   return (res.rowCount || 0) > 0;
 }
 
 /**
- * Atomically claims up to `limit` due jobs (status → dispatching). FOR UPDATE SKIP LOCKED means two dispatcher
- * runs at the same moment (e.g. a duplicated cron call) can never claim the same job.
+ * Claims due jobs (status → dispatching) without ever going over the daily or at-once limits.
+ * Counting and claiming happen under one per-organisation lock, so dispatcher runs that overlap (cron, a form,
+ * a webhook) can't each see "room for 2" and start 4. FOR UPDATE SKIP LOCKED also means no job is claimed twice.
  */
-export async function claimDueJobs(orgId: number, limit: number) {
-  if (limit <= 0) return [];
+export async function claimDueJobsWithinLimits(orgId: number, limits: { maxConcurrent: number; maxDaily: number; dayStart: Date }) {
   await ensureCallingSchema();
-  const res = await getPool().query(
-    `UPDATE call_jobs SET status = 'dispatching', locked_at = now(), updated_at = now()
-     WHERE id IN (
-       SELECT id FROM call_jobs
-       WHERE org_id = $1 AND status = 'queued' AND scheduled_at <= now()
-       ORDER BY scheduled_at, id
-       LIMIT $2
-       FOR UPDATE SKIP LOCKED
-     ) RETURNING *`,
-    [orgId, limit]
-  );
-  return res.rows.map(mapJob);
+  return withTransaction(async (client) => {
+    await client.query("SELECT pg_advisory_xact_lock(hashtext('cc-calling-claim'), $1::int)", [orgId]);
+    const counts = await client.query<{ active: string; dispatching: string; started_today: string }>(
+      `SELECT
+         (SELECT count(*) FROM call_jobs WHERE org_id = $1 AND status IN ('dispatching','in_progress')) AS active,
+         (SELECT count(*) FROM call_jobs WHERE org_id = $1 AND status = 'dispatching') AS dispatching,
+         (SELECT count(*) FROM calls WHERE org_id = $1 AND created_at >= $2) AS started_today`,
+      [orgId, limits.dayStart]
+    );
+    const active = Number(counts.rows[0].active);
+    // Jobs being dialled right now have no call row yet, so they are added to today's count.
+    const startedToday = Number(counts.rows[0].started_today) + Number(counts.rows[0].dispatching);
+    const capacity = Math.min(limits.maxConcurrent - active, limits.maxDaily - startedToday);
+    if (capacity <= 0) return { jobs: [] as CallJob[], active, startedToday, atLimit: true };
+    const res = await client.query(
+      `UPDATE call_jobs SET status = 'dispatching', locked_at = now(), updated_at = now()
+       WHERE id IN (
+         SELECT id FROM call_jobs
+         WHERE org_id = $1 AND status = 'queued' AND scheduled_at <= now()
+         ORDER BY scheduled_at, id
+         LIMIT $2
+         FOR UPDATE SKIP LOCKED
+       ) RETURNING *`,
+      [orgId, capacity]
+    );
+    return { jobs: res.rows.map(mapJob), active, startedToday, atLimit: false };
+  });
 }
 
+/**
+ * Updates a job. With `onlyIfStatus` the change is applied only if the job is still in that state, and the
+ * return value says whether it was: this is how a slow writer avoids overwriting a newer decision.
+ */
 export async function updateJob(
   orgId: number,
   id: number,
-  changes: { status?: JobStatus; scheduledAt?: Date; attempts?: number; maxAttempts?: number; lastError?: string | null },
-  client?: Db
+  changes: { status?: JobStatus; scheduledAt?: Date; attempts?: number; maxAttempts?: number; lastError?: string | null; renewExpiry?: boolean },
+  client?: Db,
+  onlyIfStatus?: JobStatus
 ) {
   const sets: string[] = ["updated_at = now()"];
   const params: unknown[] = [];
@@ -266,8 +339,15 @@ export async function updateJob(
   if (changes.attempts !== undefined) set("attempts", changes.attempts);
   if (changes.maxAttempts !== undefined) set("max_attempts", changes.maxAttempts);
   if (changes.lastError !== undefined) set("last_error", changes.lastError?.slice(0, 500) ?? null);
+  if (changes.renewExpiry) sets.push(`expires_at = now() + make_interval(hours => ${LIMITS.jobMaxAgeHours})`);
   params.push(orgId, id);
-  await db(client).query(`UPDATE call_jobs SET ${sets.join(", ")} WHERE org_id = $${params.length - 1} AND id = $${params.length}`, params);
+  let where = `org_id = $${params.length - 1} AND id = $${params.length}`;
+  if (onlyIfStatus) {
+    params.push(onlyIfStatus);
+    where += ` AND status = $${params.length}`;
+  }
+  const res = await db(client).query(`UPDATE call_jobs SET ${sets.join(", ")} WHERE ${where}`, params);
+  return (res.rowCount || 0) > 0;
 }
 
 /** Jobs stuck in "dispatching" (a run crashed mid-call-start) → needs_review: the call may or may not have started. */
@@ -292,19 +372,53 @@ export async function releaseStaleInProgress(orgId: number, olderThanMinutes = 4
   return res.rowCount || 0;
 }
 
-// ---------------------------------------------------------------- counters for limits
-
-export async function countCallsSince(orgId: number, since: Date) {
-  const res = await getPool().query<{ count: string }>("SELECT count(*) FROM calls WHERE org_id = $1 AND created_at >= $2", [orgId, since]);
-  return Number(res.rows[0].count);
-}
-
-export async function countCallsInProgress(orgId: number) {
-  const res = await getPool().query<{ count: string }>(
-    `SELECT count(*) FROM call_jobs WHERE org_id = $1 AND status IN ('dispatching','in_progress') AND updated_at > now() - interval '45 minutes'`,
+/** Requests nobody could act on in time (calling was off, limits were full) are dropped rather than dialled late. */
+export async function expireStaleJobs(orgId: number) {
+  const res = await getPool().query(
+    `UPDATE call_jobs SET status = 'cancelled', locked_at = NULL, updated_at = now(),
+       last_error = 'Expired: not reached within ${LIMITS.jobMaxAgeHours} hours of the request'
+     WHERE org_id = $1 AND status = 'queued'
+       AND coalesce(expires_at, created_at + make_interval(hours => ${LIMITS.jobMaxAgeHours})) < now()`,
     [orgId]
   );
-  return Number(res.rows[0].count);
+  return res.rowCount || 0;
+}
+
+// ---------------------------------------------------------------- facts for the dispatcher
+
+/** One cheap query that tells an idle dispatcher run it can stop straight away. */
+export async function getWorkload(orgId: number) {
+  await ensureCallingSchema();
+  const res = await getPool().query<{ due: string; queued: string; active: string }>(
+    `SELECT count(*) FILTER (WHERE status = 'queued' AND scheduled_at <= now()) AS due,
+            count(*) FILTER (WHERE status = 'queued') AS queued,
+            count(*) FILTER (WHERE status IN ('dispatching','in_progress')) AS active
+     FROM call_jobs WHERE org_id = $1 AND ${ACTIVE_JOB_SQL}`,
+    [orgId]
+  );
+  const r = res.rows[0];
+  return { due: Number(r.due), queued: Number(r.queued), active: Number(r.active) };
+}
+
+/** Everything the "may we dial this number right now?" check needs about a number, in one query. */
+export async function getDialFacts(orgId: number, phone: string) {
+  const res = await getPool().query<{ consent: boolean; suppressed: boolean; calls_this_week: string }>(
+    `SELECT EXISTS (${ACTIVE_CONSENT_SQL}) AS consent,
+            EXISTS (SELECT 1 FROM call_suppressions WHERE org_id = $1 AND phone = $2) AS suppressed,
+            (SELECT count(*) FROM calls WHERE org_id = $1 AND phone = $2 AND created_at > now() - interval '7 days') AS calls_this_week`,
+    [orgId, phone]
+  );
+  const r = res.rows[0];
+  return { hasActiveConsent: Boolean(r.consent), isSuppressed: Boolean(r.suppressed), callsThisWeek: Number(r.calls_this_week) };
+}
+
+/** Estimated spend since `fromDate` ("YYYY-MM-DD"), from our own usage records. */
+export async function costSince(orgId: number, fromDate: string) {
+  const res = await getPool().query<{ cost: string }>(
+    "SELECT coalesce(sum(agent_cost + telephony_cost), 0) AS cost FROM call_usage WHERE org_id = $1 AND usage_date >= $2",
+    [orgId, fromDate]
+  );
+  return Number(res.rows[0].cost);
 }
 
 export async function getLeadBasics(submissionId: number | null) {
@@ -326,8 +440,8 @@ export async function insertCall(c: {
   providerAttemptId: string;
   phone: string;
   language: string | null;
-}) {
-  const res = await getPool().query<{ id: string }>(
+}, client?: Db) {
+  const res = await db(client).query<{ id: string }>(
     `INSERT INTO calls (org_id, job_id, submission_id, provider, provider_attempt_id, phone, language)
      VALUES ($1, $2, $3, $4, $5, $6, $7)
      ON CONFLICT (provider, provider_attempt_id) DO UPDATE SET updated_at = now() RETURNING id`,
@@ -355,11 +469,27 @@ export async function recordEvent(provider: string, eventKey: string, orgId: num
   return { id: Number(existing.rows[0].id), alreadyProcessed: Boolean(existing.rows[0].processed_at) };
 }
 
-export async function finishEvent(id: number, error: string | null) {
+/**
+ * Closes a webhook delivery. An `error` leaves it unprocessed so the provider's retry is handled again;
+ * `ignoredNote` marks it handled but records why nothing was changed.
+ */
+export async function finishEvent(id: number, error: string | null, ignoredNote: string | null = null) {
   await getPool().query(
-    "UPDATE call_events SET processed_at = CASE WHEN $2::text IS NULL THEN now() ELSE processed_at END, error = $2 WHERE id = $1",
-    [id, error?.slice(0, 500) ?? null]
+    "UPDATE call_events SET processed_at = CASE WHEN $2::text IS NULL THEN now() ELSE processed_at END, error = coalesce($2, $3) WHERE id = $1",
+    [id, error?.slice(0, 500) ?? null, ignoredNote?.slice(0, 500) ?? null]
   );
+}
+
+/** Raw payloads hold transcripts and phone numbers; they are only needed for a while, for debugging. */
+export async function purgeOldEvents(days: number) {
+  const res = await getPool().query("DELETE FROM call_events WHERE received_at < now() - make_interval(days => $1)", [days]);
+  return res.rowCount || 0;
+}
+
+/** How many calls were placed for a job, and which is the newest: only the newest one's result may move the job on. */
+export async function callStatsForJob(client: Db, jobId: number) {
+  const res = await client.query<{ latest: string | null; count: string }>("SELECT max(id) AS latest, count(*) AS count FROM calls WHERE job_id = $1", [jobId]);
+  return { latestId: res.rows[0].latest ? Number(res.rows[0].latest) : null, count: Number(res.rows[0].count) };
 }
 
 export async function findCallByAttempt(provider: string, providerAttemptId: string, client?: Db) {

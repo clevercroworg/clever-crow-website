@@ -13,12 +13,18 @@ if needed, a lawyer before going live.
 - The agent says it's an AI assistant in its first sentence and never pretends to be human.
 - Opt-out on a call ("don't call me") immediately adds the number to the do-not-call list and revokes consent.
   Staff can add numbers manually.
-- Calls only within configured hours and days, with daily limits and a maximum number of attempts.
-- No audio is stored by us; no payment details or OTPs are collected.
+- Calls only within configured hours and days (never outside 09:00–21:00, whatever the settings), with daily limits
+  and a maximum number of attempts. At most 5 AI calls to one number in 7 days.
+- Consent is valid for **30 days**. After that the person has to ask again.
+- A request not reached within 72 hours is dropped rather than dialled late.
+- No audio is stored by us; no payment details or OTPs are collected. Transcripts and summaries are stored, and the
+  consent wording says so. Raw provider payloads are deleted after 30 days.
 
-## Consent wording (version callback-v1)
-> Yes, call me back about this enquiry. I understand the first call may be from Clever Crow's AI assistant, and I can ask
-> it to stop calling at any time.
+## Consent wording (version callback-v2, current)
+> Yes, call me back about this enquiry. I understand the first call may be from Clever Crow's AI assistant, that the call
+> may be recorded and transcribed to handle my enquiry, and that I can ask it to stop calling at any time.
+
+Version callback-v1 (no recording sentence) is still accepted for consents already given.
 
 The box must be **unticked by default** and optional. To change the wording, add a new version in
 `lib/calling/consent-text.ts`; never edit an existing one.
@@ -32,4 +38,5 @@ The box must be **unticked by default** and optional. To change the wording, add
 - [ ] Privacy policy mentions AI callbacks, the provider (Sarvam) and how to opt out.
 - [ ] DND (NCPR) handling: callbacks are requested by the customer, but confirm with the provider whether DND scrubbing
       still applies to your number type.
-- [ ] Calling hours stay within what's considered reasonable (defaults: 10:00–19:00, Mon–Sat).
+- [ ] Calling hours stay within what's considered reasonable (defaults: 10:00–19:00, Mon–Sat; hard limit 09:00–21:00).
+- [ ] How long transcripts should be kept (currently kept until deleted; decide a period and tell us).

@@ -1,6 +1,7 @@
 // The single rulebook for "may we call this person now?". Pure: the caller gathers the facts, this decides.
 // Used when a callback is queued AND again right before dialling (docs/calling/ARCHITECTURE.md → "Eligibility").
 
+import { LIMITS } from "./config";
 import { isWithinCallingHours, nextCallingWindowStart } from "./schedule";
 import type { CallingSettings } from "./types";
 
@@ -15,6 +16,7 @@ export type EligibilityFacts = {
   leadStatus: string | null; // submissions.status
   callsStartedToday: number;
   callsInProgress: number;
+  callsToPhoneThisWeek: number; // AI call attempts to this number in the last 7 days
   attempts: number;
   maxAttempts: number;
 };
@@ -37,6 +39,9 @@ export function checkEligibility(f: EligibilityFacts): Eligibility {
   if (f.isSuppressed) return stop("DO_NOT_CALL", "Number is on the do-not-call list");
   if (f.leadStatus && CLOSED_LEAD_STATUSES.has(f.leadStatus)) return stop("LEAD_CLOSED", `Lead is marked ${f.leadStatus}`);
   if (f.attempts >= f.maxAttempts) return stop("MAX_ATTEMPTS", `Already tried ${f.attempts} time(s)`);
+  if (f.callsToPhoneThisWeek >= LIMITS.callsPerPhonePerWeek) {
+    return stop("PHONE_WEEKLY_LIMIT", `Already called this number ${f.callsToPhoneThisWeek} times in the last 7 days`);
+  }
 
   // Temporary reasons: the job waits.
   const retrySoon = new Date(f.now.getTime() + 5 * 60_000);

@@ -48,6 +48,7 @@ export default function SettingsForm({ initial, languages }: { initial: CallingS
           rateAgentPerMinute: s.rateAgentPerMinute,
           rateTelephonyPer30s: s.rateTelephonyPer30s,
           pricingVersion: s.pricingVersion,
+          monthlyBudget: s.monthlyBudget,
         }),
       });
       if (res.status === 401) {
@@ -82,13 +83,14 @@ export default function SettingsForm({ initial, languages }: { initial: CallingS
         <div className="grid gap-3 sm:grid-cols-2">
           <label>
             <span className={label}>From ({s.timezone})</span>
-            <input type="time" value={s.callingStart} onChange={(e) => set("callingStart", e.target.value)} className={field} />
+            <input type="time" min="09:00" max="21:00" value={s.callingStart} onChange={(e) => set("callingStart", e.target.value)} className={field} />
           </label>
           <label>
             <span className={label}>Until</span>
-            <input type="time" value={s.callingEnd} onChange={(e) => set("callingEnd", e.target.value)} className={field} />
+            <input type="time" min="09:00" max="21:00" value={s.callingEnd} onChange={(e) => set("callingEnd", e.target.value)} className={field} />
           </label>
         </div>
+        <p className="mt-1.5 text-xs text-slate-500">The AI never calls before 09:00 or after 21:00, whatever is set here.</p>
         <p className={`${label} mt-3`}>Days</p>
         <div className="flex flex-wrap gap-1.5">
           {DAYS.map((d, i) => (
@@ -121,7 +123,15 @@ export default function SettingsForm({ initial, languages }: { initial: CallingS
               <input type="number" min={min} max={max} value={s[k]} onChange={(e) => set(k, Number(e.target.value))} className={field} />
             </label>
           ))}
+          <label>
+            <span className={label}>Monthly budget (₹, excl. GST; 0 = no cap)</span>
+            <input type="number" min={0} max={1000000} step="1" value={s.monthlyBudget} onChange={(e) => set("monthlyBudget", Number(e.target.value))} className={field} />
+          </label>
         </div>
+        <p className="mt-2 text-xs text-slate-500">
+          When this month&apos;s estimated cost reaches the budget, the AI stops starting new calls until next month or until you raise it. The same
+          number is never called more than 5 times in 7 days.
+        </p>
       </section>
 
       <section className={section}>

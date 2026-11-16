@@ -1,5 +1,7 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { callingEnv } from "@/lib/calling/config";
+import { runDispatcher } from "@/lib/calling/dispatcher";
+import { notifyCallAlert } from "@/lib/calling/notify";
 import { getVoiceProvider } from "@/lib/calling/providers";
 import { applyCallResult } from "@/lib/calling/results";
 import { verifyWebhookPathToken } from "@/lib/calling/security";
@@ -7,6 +9,7 @@ import { verifyWebhookPathToken } from "@/lib/calling/security";
 // Sarvam posts the result of every call attempt here (webhook_config.url set per call by the dispatcher).
 // Authenticated by the secret path token + the signed job metadata (lib/calling/security.ts).
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 const MAX_BODY_BYTES = 1_000_000;
 const noStore = { "Cache-Control": "no-store" };
@@ -35,6 +38,15 @@ export async function POST(req: Request, { params }: { params: Promise<{ token: 
   try {
     const result = await applyCallResult(provider.name, parsed, body, { env });
     if (!result.ok) return NextResponse.json({ error: result.error }, { status: result.httpStatus, headers: noStore });
+    if (!result.duplicate) {
+      const { orgId, callId, alert } = result;
+      // After answering the provider: a finished call frees a slot, so start the next waiting one now instead of
+      // at the next scheduled run, and tell the team about a hot lead.
+      after(async () => {
+        await runDispatcher(orgId, { env }).catch((e) => console.error("CALLING: dispatch after result failed", e));
+        if (alert) await notifyCallAlert(orgId, callId);
+      });
+    }
     return NextResponse.json({ ok: true, duplicate: Boolean(result.duplicate) }, { headers: noStore });
   } catch (error) {
     console.error("CALLING: webhook processing failed", error);

@@ -20,7 +20,7 @@ export default async function CallingPanel({ leadId, phone }: { leadId: number; 
     return null;
   }
   const activeJob = data.jobs.find((j) => ["queued", "dispatching", "in_progress", "needs_review"].includes(j.status));
-  const consentOk = data.consent?.status === "granted";
+  const consentOk = data.consent?.status === "granted" && !data.consent.expired;
 
   return (
     <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
@@ -39,6 +39,8 @@ export default async function CallingPanel({ leadId, phone }: { leadId: number; 
               ? `Agreed to a callback on ${formatDateTime(data.consent!.capturedAt)}.`
               : data.consent?.status === "revoked"
                 ? "Callback consent was withdrawn."
+                : data.consent?.expired
+                  ? `Agreed to a callback on ${formatDateTime(data.consent.capturedAt)}, more than 30 days ago. They need to ask again before the AI can call.`
                 : "Didn't ask for a callback, so the AI won't call them."}
       </p>
       {activeJob && (

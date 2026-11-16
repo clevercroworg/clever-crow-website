@@ -1,4 +1,5 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
+import { callingEnv, envProblems } from "@/lib/calling/config";
 import { consentTextFor, CURRENT_CALLBACK_CONSENT_VERSION } from "@/lib/calling/consent-text";
 import { checkEligibility, type EligibilityFacts } from "@/lib/calling/eligibility";
 import { buildAgentVariables, cleanAgentVariable } from "@/lib/calling/guardrails";
@@ -6,8 +7,8 @@ import { scoreHeat } from "@/lib/calling/heat";
 import { maskPhone, normalizeIndianMobile } from "@/lib/calling/phone";
 import { MockProvider } from "@/lib/calling/providers/mock";
 import { SarvamProvider } from "@/lib/calling/providers/sarvam";
-import { isWithinCallingHours, nextCallingWindowStart, retryDelayMinutes, startOfLocalDay } from "@/lib/calling/schedule";
-import { signJob, verifyBearer, verifyJobSignature, verifyWebhookPathToken, webhookPathToken } from "@/lib/calling/security";
+import { isWithinCallingHours, localDate, nextCallingWindowStart, retryDelayMinutes, startOfLocalDay, startOfLocalMonth } from "@/lib/calling/schedule";
+import { hashClientIp, signJob, verifyBearer, verifyJobSignature, verifyWebhookPathToken, webhookPathToken } from "@/lib/calling/security";
 import { validateSettings } from "@/lib/calling/settings-validation";
 import { computeUsage } from "@/lib/calling/usage";
 
@@ -53,6 +54,13 @@ describe("calling hours", () => {
   it("computes local day start", () => {
     expect(startOfLocalDay(MON_11_IST, "Asia/Kolkata").toISOString()).toBe("2026-11-15T18:30:00.000Z");
   });
+  it("uses the local month and date, not UTC", () => {
+    // 31 Oct 19:00 UTC is already 1 Nov 00:30 in India.
+    const lateOct = new Date("2026-10-31T19:00:00Z");
+    expect(startOfLocalMonth(lateOct, "Asia/Kolkata")).toEqual({ instant: new Date("2026-10-31T18:30:00.000Z"), date: "2026-11-01" });
+    expect(localDate(lateOct, "Asia/Kolkata")).toBe("2026-11-01");
+    expect(localDate(MON_11_IST, "Asia/Kolkata")).toBe("2026-11-16");
+  });
   it("backs off exponentially with a cap", () => {
     expect(retryDelayMinutes(1, 120)).toBe(120);
     expect(retryDelayMinutes(2, 120)).toBe(240);
@@ -72,6 +80,7 @@ describe("eligibility", () => {
     leadStatus: "new",
     callsStartedToday: 0,
     callsInProgress: 0,
+    callsToPhoneThisWeek: 0,
     attempts: 0,
     maxAttempts: 3,
   };
@@ -86,6 +95,10 @@ describe("eligibility", () => {
     expect(code({ leadStatus: "spam" })).toBe("stop:LEAD_CLOSED");
     expect(code({ phone: null })).toBe("stop:INVALID_PHONE");
     expect(code({ attempts: 3 })).toBe("stop:MAX_ATTEMPTS");
+  });
+  it("stops once a number has had 5 AI calls in a week", () => {
+    expect(code({ callsToPhoneThisWeek: 4 })).toBe("OK");
+    expect(code({ callsToPhoneThisWeek: 5 })).toBe("stop:PHONE_WEEKLY_LIMIT");
   });
   it("waits for switches, hours and limits", () => {
     expect(code({ masterSwitchOn: false })).toBe("later:MASTER_SWITCH_OFF");
@@ -114,11 +127,37 @@ describe("security", () => {
     expect(verifyJobSignature(secret, 2, 42, sig)).toBe(false);
     expect(verifyJobSignature(secret, 1, 42, undefined)).toBe(false);
   });
+  it("hashes the visitor IP without keeping it", () => {
+    const h = (xff: string | null, s = secret) => hashClientIp(s, new Headers(xff ? { "x-forwarded-for": xff } : {}));
+    expect(h("203.0.113.7")).toBe(h("203.0.113.7, 10.0.0.1")); // first entry is the visitor
+    expect(h("203.0.113.7")).not.toBe(h("203.0.113.8"));
+    expect(h("203.0.113.7")).not.toContain("203.0.113.7");
+    expect(h("203.0.113.7")).not.toBe(h("203.0.113.7", "y".repeat(40))); // keyed: useless without the secret
+    expect(h(null)).toBeNull();
+    expect(h("203.0.113.7", "")).toBeNull();
+  });
   it("checks bearer tokens", () => {
     expect(verifyBearer("Bearer abc", "abc")).toBe(true);
     expect(verifyBearer("Bearer abd", "abc")).toBe(false);
     expect(verifyBearer(null, "abc")).toBe(false);
     expect(verifyBearer("Bearer ", "")).toBe(false);
+  });
+});
+
+describe("environment", () => {
+  const saved = { ...process.env };
+  afterEach(() => {
+    process.env = { ...saved };
+  });
+  it("refuses the test provider on the live site, and places no calls at all", () => {
+    Object.assign(process.env, { CALLING_ENABLED: "true", CALLING_PROVIDER: "mock", VERCEL_ENV: "production" });
+    const env = callingEnv();
+    expect(env).toMatchObject({ enabled: false, provider: "sarvam", mockBlocked: true });
+    expect(envProblems(env).join(" ")).toContain("mock is not allowed");
+  });
+  it("allows the test provider everywhere else", () => {
+    Object.assign(process.env, { CALLING_ENABLED: "true", CALLING_PROVIDER: "mock", VERCEL_ENV: "preview" });
+    expect(callingEnv()).toMatchObject({ enabled: true, provider: "mock", mockBlocked: false });
   });
 });
 
@@ -134,6 +173,8 @@ describe("usage", () => {
 describe("consent text", () => {
   it("only accepts known versions", () => {
     expect(consentTextFor(CURRENT_CALLBACK_CONSENT_VERSION)).toContain("AI assistant");
+    expect(consentTextFor(CURRENT_CALLBACK_CONSENT_VERSION)).toContain("recorded and transcribed");
+    expect(consentTextFor("callback-v1")).toContain("AI assistant"); // older consents stay valid
     expect(consentTextFor("made-up")).toBeNull();
     expect(consentTextFor(undefined)).toBeNull();
   });
@@ -149,6 +190,19 @@ describe("settings validation", () => {
     expect(validateSettings({ enabledLanguages: ["Klingon"] }).ok).toBe(false);
     expect(validateSettings({ sarvamAppId: "abc; DROP TABLE" }).ok).toBe(false);
     expect(validateSettings({ timezone: "Mars/Base" }).ok).toBe(false);
+  });
+  it("keeps calling hours inside 09:00–21:00", () => {
+    expect(validateSettings({ callingStart: "09:00", callingEnd: "21:00" }).ok).toBe(true);
+    expect(validateSettings({ callingStart: "08:59" }).ok).toBe(false);
+    expect(validateSettings({ callingEnd: "21:01" }).ok).toBe(false);
+    expect(validateSettings({ callingStart: "00:00", callingEnd: "23:59" }).ok).toBe(false);
+  });
+  it("validates the monthly budget", () => {
+    expect(validateSettings({ monthlyBudget: 0 })).toEqual({ ok: true, value: { monthlyBudget: 0 } });
+    expect(validateSettings({ monthlyBudget: "2500.5" })).toEqual({ ok: true, value: { monthlyBudget: 2500.5 } });
+    expect(validateSettings({ monthlyBudget: -1 }).ok).toBe(false);
+    expect(validateSettings({ monthlyBudget: "" }).ok).toBe(false);
+    expect(validateSettings({ monthlyBudget: 5_000_000 }).ok).toBe(false);
   });
   it("ignores unknown fields", () => {
     const r = validateSettings({ orgId: 99, evil: true });
@@ -194,6 +248,7 @@ describe("Sarvam adapter", () => {
   it("classifies failures safely", async () => {
     expect(await new SarvamProvider("k", fakeFetch(429, "")).startOutboundCall(req)).toMatchObject({ ok: false, retryable: true, ambiguous: false });
     expect(await new SarvamProvider("k", fakeFetch(503, "")).startOutboundCall(req)).toMatchObject({ ok: false, retryable: false, ambiguous: true });
+    expect(await new SarvamProvider("k", fakeFetch(408, "")).startOutboundCall(req)).toMatchObject({ ok: false, retryable: false, ambiguous: true });
     expect(await new SarvamProvider("k", fakeFetch(422, "{}")).startOutboundCall(req)).toMatchObject({ ok: false, retryable: false, ambiguous: false });
     expect(await new SarvamProvider("k", fakeFetch(200, "{}")).startOutboundCall(req)).toMatchObject({ ok: false, ambiguous: true });
     const throwing = (async () => {

@@ -53,10 +53,13 @@ The System health panel should then show everything green except the master swit
 ## 8. Cron (after the test call works)
 Add to `vercel.json` and deploy (Pro required, otherwise the deploy fails):
 ```json
-"crons": [{ "path": "/api/calling/dispatch", "schedule": "* 4-13 * * 1-6" }]
+"crons": [{ "path": "/api/calling/dispatch", "schedule": "*/5 4-13 * * 1-6" }]
 ```
-That's every minute, 04:00–13:59 UTC = 09:30–19:29 IST, Monday–Saturday. It keeps the free database within its monthly
-hours (DECISIONS.md D2). Adjust if calling hours change. Vercel adds the `CRON_SECRET` header automatically.
+That's every 5 minutes, 04:00–13:59 UTC = 09:30–19:29 IST, Monday–Saturday. Every minute is not needed: a new request
+and every call result already start the dispatcher straight away, so the cron only picks up retries and requests that
+waited for calling hours. A run with nothing waiting is a single small query, which keeps the free database within its
+monthly hours (DECISIONS.md D2). Adjust if calling hours change. Vercel adds the `CRON_SECRET` header automatically.
 
 ## 9. Go live
-Turn AI calling on. Watch the AI calls page daily for a week (OPERATIONS.md), then raise the daily limit.
+Set the **monthly budget** in Settings → Limits (default ₹5,000; calls pause when it's reached). Turn AI calling on.
+Watch the AI calls page daily for a week (OPERATIONS.md), then raise the daily limit.

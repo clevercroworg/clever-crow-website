@@ -25,6 +25,7 @@ are unchanged.
 | sarvam_org_id, sarvam_workspace_id, sarvam_app_id, sarvam_app_version, sarvam_connection_id, sarvam_agent_phone | empty | From the Sarvam dashboard. Not secret. |
 | rate_agent_per_minute / rate_telephony_per_30s | 3.50 / 0.20 | INR excl. GST; edit when your plan changes |
 | pricing_version | sarvam-payg-2026-11 | Stored on each usage row |
+| monthly_budget | 5000 | INR excl. GST for the calendar month (org time zone). Reached → no new calls. 0 = no cap |
 | updated_at, updated_by | | |
 
 ## call_consents (never deleted)
@@ -35,7 +36,8 @@ are unchanged.
 | status | `granted` / `revoked` |
 | consent_text, consent_version | Exact wording agreed to (server copy) |
 | source, page_url | Which form and page |
-| captured_at, revoked_at, revoked_reason | |
+| captured_at, revoked_at, revoked_reason | Consent allows calls for 30 days from `captured_at` |
+| ip_hash | Keyed hash of the visitor's address (never the address), for the 5-requests-a-day limit |
 
 ## call_suppressions (do-not-call)
 `org_id, phone` unique · `reason`, `source` (`manual` / `agent_opt_out`), `created_at`, `created_by`.
@@ -51,6 +53,7 @@ Adding a number cancels its queued jobs and revokes its consent. Removing it doe
 | last_error | Human-readable reason for the current state |
 | idempotency_key | Unique per org; prevents duplicate jobs |
 | locked_at | Set while dispatching (stale detection) |
+| expires_at | 72 hours after the request (renewed on retry). Still queued after this → cancelled as "Expired" |
 | created_by | "AI assistant" (form) or the team member |
 
 ## calls (one row per attempt placed)
@@ -64,6 +67,7 @@ Adding a number cancels its queued jobs and revokes its consent. Removing it doe
 
 ## call_events (webhook log)
 `event_key` unique (`provider:attempt_id:status`) · full `payload` · `received_at`, `processed_at`, `error`.
+Rows older than 30 days are deleted automatically (about once a day, by the dispatcher).
 
 ## call_usage
 `call_id` unique · `duration_seconds`, `billable_minutes` (started 60 s), `telephony_pulses` (started 30 s),
@@ -72,4 +76,5 @@ Adding a number cancels its queued jobs and revokes its consent. Removing it doe
 ## Indexes
 `call_jobs (org_id, status, scheduled_at)` for the dispatcher; `(org_id, phone, status)` for duplicate checks;
 `call_consents (org_id, phone, status)`; `calls (org_id, created_at)`; `call_usage (org_id, usage_date)`;
-`call_events (received_at)`; foreign-key columns.
+`call_events (received_at)`; `call_consents (org_id, ip_hash, captured_at)`; `calls (org_id, phone, created_at)` for the
+cooldown and weekly cap; `calls (job_id)`; foreign-key columns.

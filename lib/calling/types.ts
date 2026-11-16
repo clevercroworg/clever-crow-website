@@ -45,6 +45,7 @@ export type CallingSettings = {
   rateAgentPerMinute: number; // INR, excl. GST
   rateTelephonyPer30s: number; // INR, excl. GST
   pricingVersion: string;
+  monthlyBudget: number; // INR, excl. GST; 0 = no cap
   updatedAt: string | null;
   updatedBy: string | null;
 };

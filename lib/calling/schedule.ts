@@ -76,6 +76,21 @@ export function startOfLocalDay(now: Date, timezone: string) {
   return zonedTimeToUtc(p.year, p.month, p.day, 0, 0, timezone);
 }
 
+/** Start of the current month in the organisation's time zone: the instant, and the date as "YYYY-MM-01". */
+export function startOfLocalMonth(now: Date, timezone: string) {
+  const p = zonedParts(now, timezone);
+  return {
+    instant: zonedTimeToUtc(p.year, p.month, 1, 0, 0, timezone),
+    date: `${p.year}-${String(p.month).padStart(2, "0")}-01`,
+  };
+}
+
+/** Today's date ("YYYY-MM-DD") in the organisation's time zone. */
+export function localDate(now: Date, timezone: string) {
+  const p = zonedParts(now, timezone);
+  return `${p.year}-${String(p.month).padStart(2, "0")}-${String(p.day).padStart(2, "0")}`;
+}
+
 /** Exponential backoff for retries: base, 2×base, 4×base … capped at 24 hours. */
 export function retryDelayMinutes(attemptsSoFar: number, baseMinutes: number) {
   const factor = 2 ** Math.max(0, attemptsSoFar - 1);

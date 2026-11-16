@@ -10,7 +10,8 @@ AI calls page:
   - If Sarvam shows the call happened, **Cancel** the job (the person was called).
   - If not, **Retry**.
 - **Answer rate** and outcomes look sensible; read a few transcripts.
-- **This month** cost is within budget.
+- **This month** cost is within budget. When the monthly budget (Settings → Limits) is used up, the page shows
+  "AI calling is paused" and no new calls start until next month or until an admin raises the budget.
 
 Settings → System health: all green, and "Last webhook" recent on calling days.
 
@@ -22,7 +23,12 @@ Settings → System health: all green, and "Last webhook" recent on calling days
 | Job "failed" with "Sarvam rejected the call (4xx)" | Configuration problem: check Sarvam IDs, version and number in Settings |
 | Many "no answer" | Try different calling hours; check the agent number isn't being flagged as spam |
 | Webhook errors in health panel | Check `CALLING_WEBHOOK_SECRET` hasn't changed mid-call; re-send from Sarvam if possible |
-| Need to change calling hours | Settings, and also the cron schedule in `vercel.json` (SETUP.md step 8) |
+| Need to change calling hours | Settings (inside 09:00–21:00), and also the cron schedule in `vercel.json` (SETUP.md step 8) |
+| Job cancelled with "Expired" | The request wasn't reached within 72 hours (limits, hours or budget). A person should call them. |
+| Job cancelled with "PHONE_WEEKLY_LIMIT" | That number already had 5 AI calls this week. A person should call them. |
+| "This lead hasn't agreed to a callback in the last 30 days" | Consent is too old. They need to ask again through the form. |
+| Email "Hot lead from an AI call" | Sent to everyone with email alerts on, when a call ends Hot or the person asks for a human. Call them soon. |
+| Banner "Test provider is not allowed on the live site" | Remove `CALLING_PROVIDER=mock` in Vercel and redeploy. |
 
 ## Costs
 Settings → Cost rates must match your Sarvam plan. Estimates are excl. GST. A 1-minute call ≈ ₹3.90; 100 calls/day of

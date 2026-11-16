@@ -34,6 +34,13 @@ export default async function CallingSettingsPage() {
       detail: overview.lastWebhook ? `${timeAgo(overview.lastWebhook.at!)}${overview.lastWebhook.error ? ` · error: ${overview.lastWebhook.error}` : ""}` : "None received yet",
     },
     {
+      label: "Monthly budget",
+      ok: settings.monthlyBudget === 0 || overview.month.cost < settings.monthlyBudget,
+      detail: settings.monthlyBudget > 0
+        ? `₹${overview.month.cost.toFixed(2)} of ₹${settings.monthlyBudget.toFixed(0)} used this month${overview.month.cost >= settings.monthlyBudget ? " · new calls are paused" : ""}`
+        : "No cap set",
+    },
+    {
       label: "Jobs needing review",
       ok: !(overview.jobs.needs_review ?? 0),
       detail: `${overview.jobs.needs_review ?? 0} · failed ${overview.jobs.failed ?? 0}`,

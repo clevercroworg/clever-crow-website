@@ -3,7 +3,8 @@
 //   1. The URL contains a token derived from CALLING_WEBHOOK_SECRET. Only Sarvam (who receives it per call) and we know it.
 //   2. Every call carries metadata { job_id, org_id, sig } where sig = HMAC(secret, "job:<org>:<job>"). Sarvam echoes the
 //      metadata back, so a webhook can only update the job it was created for.
-// A forged request would need both secrets-derived values. Results are also only accepted for attempt IDs we started.
+// A forged request would need both secret-derived values. On top of that, lib/calling/results.ts refuses a result
+// whose attempt ID belongs to a different job, and never lets a late or repeated result reopen a finished job.
 
 import { createHmac, timingSafeEqual } from "node:crypto";
 
@@ -32,6 +33,16 @@ export function signJob(secret: string, orgId: number, jobId: number) {
 
 export function verifyJobSignature(secret: string, orgId: number, jobId: number, sig: unknown) {
   return typeof sig === "string" && secret.length >= 32 && safeEqual(signJob(secret, orgId, jobId), sig);
+}
+
+/**
+ * The visitor's IP address as a keyed hash, for the "requests per IP" limit. The address itself is never stored.
+ * On Vercel the first x-forwarded-for entry is set by the platform and can't be spoofed by the visitor.
+ */
+export function hashClientIp(secret: string, headers: Headers) {
+  const ip = (headers.get("x-forwarded-for") || "").split(",")[0].trim() || (headers.get("x-real-ip") || "").trim();
+  if (!ip || !secret) return null;
+  return hmac(secret, `ip:${ip.slice(0, 64)}`).slice(0, 32);
 }
 
 /** Bearer check for the cron route ("Authorization: Bearer <CRON_SECRET>"). */

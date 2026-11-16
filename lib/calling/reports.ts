@@ -1,8 +1,9 @@
 // Read-only queries for the dashboard (Calls pages, lead page panel, health). Org-scoped.
 
 import { getPool } from "@/lib/leads/db";
+import { LIMITS } from "./config";
 import { ensureCallingSchema } from "./schema";
-import { startOfLocalDay } from "./schedule";
+import { startOfLocalDay, startOfLocalMonth } from "./schedule";
 import type { JobStatus } from "./types";
 
 const iso = (v: unknown) => (v ? new Date(v as string).toISOString() : null);
@@ -12,7 +13,7 @@ export async function getCallingOverview(orgId: number, timezone: string, now = 
   await ensureCallingSchema();
   const pool = getPool();
   const today = startOfLocalDay(now, timezone);
-  const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
+  const monthStart = startOfLocalMonth(now, timezone);
   const [calls, month, jobs, lastEvent, heat] = await Promise.all([
     pool.query(
       `SELECT count(*) AS total,
@@ -26,13 +27,13 @@ export async function getCallingOverview(orgId: number, timezone: string, now = 
     pool.query(
       `SELECT coalesce(sum(billable_minutes), 0) AS minutes, coalesce(sum(agent_cost + telephony_cost), 0) AS cost, count(*) AS calls
        FROM call_usage WHERE org_id = $1 AND usage_date >= $2`,
-      [orgId, monthStart.toISOString().slice(0, 10)]
+      [orgId, monthStart.date]
     ),
     pool.query<{ status: string; count: string }>(`SELECT status, count(*) FROM call_jobs WHERE org_id = $1 GROUP BY status`, [orgId]),
     pool.query(`SELECT received_at, error FROM call_events WHERE org_id = $1 ORDER BY received_at DESC LIMIT 1`, [orgId]),
     pool.query<{ heat: string; count: string }>(
       `SELECT heat, count(*) FROM calls WHERE org_id = $1 AND heat IS NOT NULL AND created_at >= $2 GROUP BY heat`,
-      [orgId, monthStart]
+      [orgId, monthStart.instant]
     ),
   ]);
   const heatCounts = Object.fromEntries(heat.rows.map((r) => [r.heat, Number(r.count)])) as Partial<Record<"hot" | "warm" | "cold", number>>;
@@ -208,7 +209,9 @@ export async function getLeadCalling(orgId: number, submissionId: number, phone:
   const [consent, jobs, calls, dnc] = await Promise.all([
     phone
       ? pool.query(
-          `SELECT status, consent_version, captured_at, revoked_at FROM call_consents
+          `SELECT status, consent_version, captured_at, revoked_at,
+                  captured_at <= now() - make_interval(days => ${LIMITS.consentValidDays}) AS expired
+           FROM call_consents
            WHERE org_id = $1 AND phone = $2 ORDER BY captured_at DESC LIMIT 1`,
           [orgId, phone]
         )
@@ -219,7 +222,16 @@ export async function getLeadCalling(orgId: number, submissionId: number, phone:
   ]);
   const c = consent.rows[0];
   return {
-    consent: c ? { status: String(c.status), version: String(c.consent_version), capturedAt: iso(c.captured_at)!, revokedAt: iso(c.revoked_at) } : null,
+    consent: c
+      ? {
+          status: String(c.status),
+          version: String(c.consent_version),
+          capturedAt: iso(c.captured_at)!,
+          revokedAt: iso(c.revoked_at),
+          // Granted, but too long ago to rely on (LIMITS.consentValidDays): the person has to ask again.
+          expired: c.status === "granted" && Boolean(c.expired),
+        }
+      : null,
     doNotCall: ((dnc as { rowCount: number | null }).rowCount || 0) > 0,
     jobs: jobs.rows.map((r) => ({
       id: Number(r.id),

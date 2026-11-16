@@ -7,7 +7,7 @@ import { requestManualCallback } from "@/lib/calling/queue";
 
 const REASONS: Record<string, string> = {
   INVALID_PHONE: "This lead has no valid Indian mobile number.",
-  NO_CONSENT: "This lead hasn't agreed to a callback, so the AI can't call them.",
+  NO_CONSENT: "This lead hasn't agreed to a callback in the last 30 days, so the AI can't call them.",
   DO_NOT_CALL: "This number is on the do-not-call list.",
   ALREADY_ACTIVE: "A call for this number is already queued or in progress.",
   LEAD_NOT_FOUND: "Lead not found.",

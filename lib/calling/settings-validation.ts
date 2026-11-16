@@ -1,5 +1,6 @@
 // Validates settings sent from the dashboard. Only known fields, within safe bounds, are accepted.
 
+import { LIMITS } from "./config";
 import type { CallingSettings } from "./types";
 
 const TIME = /^([01]\d|2[0-3]):[0-5]\d$/;
@@ -33,6 +34,10 @@ export function validateSettings(body: Record<string, unknown>): { ok: true; val
       if (!TIME.test(String(body[key]))) return bad("Times must be HH:MM (24-hour)");
       out[key] = String(body[key]);
     }
+  }
+  // Fixed outer window: nobody gets an AI call early in the morning or late at night because of a typo here.
+  if ((out.callingStart && out.callingStart < LIMITS.earliestStart) || (out.callingEnd && out.callingEnd > LIMITS.latestEnd)) {
+    return bad(`Calling hours must stay between ${LIMITS.earliestStart} and ${LIMITS.latestEnd}`);
   }
   if (out.callingStart && out.callingEnd && out.callingStart >= out.callingEnd) return bad("Calling hours must end after they start");
   if ("allowedDays" in body) {
@@ -88,6 +93,13 @@ export function validateSettings(body: Record<string, unknown>): { ok: true; val
       if (!Number.isFinite(n) || n < 0 || n > 1000) return bad("Rates must be between 0 and 1000");
       out[key] = Math.round(n * 100) / 100;
     }
+  }
+  if ("monthlyBudget" in body) {
+    const n = Number(body.monthlyBudget);
+    if (body.monthlyBudget === "" || body.monthlyBudget === null || !Number.isFinite(n) || n < 0 || n > 1_000_000) {
+      return bad("Monthly budget must be between 0 and 10,00,000 (0 = no cap)");
+    }
+    out.monthlyBudget = Math.round(n * 100) / 100;
   }
   if ("pricingVersion" in body) {
     const v = String(body.pricingVersion ?? "").trim();

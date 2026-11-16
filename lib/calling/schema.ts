@@ -42,6 +42,8 @@ CREATE TABLE IF NOT EXISTS calling_settings (
   updated_by             TEXT
 );
 INSERT INTO calling_settings (org_id) VALUES (${DEFAULT_ORG_ID}) ON CONFLICT (org_id) DO NOTHING;
+-- Spend cap for the calendar month (INR, excl. GST). 0 = no cap. Added after the first release, hence ALTER.
+ALTER TABLE calling_settings ADD COLUMN IF NOT EXISTS monthly_budget NUMERIC(10,2) NOT NULL DEFAULT 5000;
 
 -- Callback consent, kept separate from general contact/marketing consent. Never deleted (audit trail).
 CREATE TABLE IF NOT EXISTS call_consents (
@@ -61,6 +63,9 @@ CREATE TABLE IF NOT EXISTS call_consents (
 );
 CREATE INDEX IF NOT EXISTS call_consents_phone_idx ON call_consents (org_id, phone, status);
 CREATE INDEX IF NOT EXISTS call_consents_submission_idx ON call_consents (submission_id);
+-- Keyed hash of the visitor's IP (never the IP itself), for the per-IP request limit.
+ALTER TABLE call_consents ADD COLUMN IF NOT EXISTS ip_hash TEXT;
+CREATE INDEX IF NOT EXISTS call_consents_ip_idx ON call_consents (org_id, ip_hash, captured_at DESC);
 
 -- Do-not-call list. One row per number per org.
 CREATE TABLE IF NOT EXISTS call_suppressions (
@@ -96,6 +101,8 @@ CREATE TABLE IF NOT EXISTS call_jobs (
 CREATE INDEX IF NOT EXISTS call_jobs_due_idx ON call_jobs (org_id, status, scheduled_at);
 CREATE INDEX IF NOT EXISTS call_jobs_phone_idx ON call_jobs (org_id, phone, status);
 CREATE INDEX IF NOT EXISTS call_jobs_submission_idx ON call_jobs (submission_id);
+-- A job still queued after this moment is dropped instead of dialled (stale request).
+ALTER TABLE call_jobs ADD COLUMN IF NOT EXISTS expires_at TIMESTAMPTZ;
 
 -- One row per call attempt placed with the provider.
 CREATE TABLE IF NOT EXISTS calls (
@@ -129,6 +136,8 @@ ALTER TABLE calls ADD COLUMN IF NOT EXISTS heat_score INT;
 ALTER TABLE calls ADD COLUMN IF NOT EXISTS heat_reasons JSONB;
 CREATE INDEX IF NOT EXISTS calls_heat_idx ON calls (org_id, heat, created_at DESC);
 CREATE INDEX IF NOT EXISTS calls_submission_idx ON calls (submission_id);
+CREATE INDEX IF NOT EXISTS calls_phone_idx ON calls (org_id, phone, created_at DESC);
+CREATE INDEX IF NOT EXISTS calls_job_idx ON calls (job_id);
 
 -- Transcripts kept apart from calls so lists stay light.
 CREATE TABLE IF NOT EXISTS call_transcripts (

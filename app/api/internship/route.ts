@@ -3,6 +3,11 @@ import nodemailer from "nodemailer";
 import { FORM_RECIPIENTS } from "@/lib/form-recipients";
 import { saveSubmission } from "@/lib/leads/save";
 
+// Form text goes into an HTML email: escape it so a submission can't inject markup or links into the team's inbox.
+const esc = (value: unknown) =>
+  String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+const oneLine = (value: unknown) => String(value ?? "").replace(/[\r\n]+/g, " ").slice(0, 120);
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -75,47 +80,44 @@ export async function POST(req: Request) {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
-      tls: {
-        rejectUnauthorized: false
-      }
     });
 
     // Format skills for email
     const skillsHtml = Object.entries(skills)
-      .map(([name, level]) => `<li><strong>${name}:</strong> ${level || 'N/A'}</li>`)
+      .map(([name, level]) => `<li><strong>${esc(name)}:</strong> ${esc(level || 'N/A')}</li>`)
       .join('');
 
     const mailOptions = {
       from: `"Clever Crow Internships" <${process.env.SMTP_USER}>`,
       to: FORM_RECIPIENTS.join(","),
-      subject: `New Internship Application: ${name} (${internship_title || "General"})`,
+      subject: `New Internship Application: ${oneLine(name)} (${oneLine(internship_title || "General")})`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; border-radius: 12px; padding: 24px;">
           <h2 style="color: #eab308; border-bottom: 2px solid #fef9c3; padding-bottom: 12px;">🎓 New Internship Application</h2>
           
           <div style="background-color: #fef9c3; color: #854d0e; padding: 12px 16px; border-radius: 8px; font-weight: bold; margin-bottom: 20px;">
-            Applied For: ${internship_title || "Not specified"} (ID: ${internship_id || "N/A"})
+            Applied For: ${esc(internship_title || "Not specified")} (ID: ${esc(internship_id || "N/A")})
           </div>
 
           <h3 style="color: #4b5563; margin-top: 24px;">Personal Information</h3>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${phone}</p>
-          <p><strong>DOB/Age:</strong> ${dob}</p>
+          <p><strong>Name:</strong> ${esc(name)}</p>
+          <p><strong>Email:</strong> ${esc(email)}</p>
+          <p><strong>Phone:</strong> ${esc(phone)}</p>
+          <p><strong>DOB/Age:</strong> ${esc(dob)}</p>
 
           <h3 style="color: #4b5563; margin-top: 24px;">Academic & Skills</h3>
-          <p><strong>Education:</strong> ${education}</p>
+          <p><strong>Education:</strong> ${esc(education)}</p>
           <ul style="list-style: none; padding-left: 0;">
             ${skillsHtml}
           </ul>
 
           <h3 style="color: #4b5563; margin-top: 24px;">Location</h3>
-          <p><strong>Address:</strong> ${address}</p>
-          <p><strong>State:</strong> ${state}</p>
-          <p><strong>Country:</strong> ${country}</p>
+          <p><strong>Address:</strong> ${esc(address)}</p>
+          <p><strong>State:</strong> ${esc(state)}</p>
+          <p><strong>Country:</strong> ${esc(country)}</p>
 
           <h3 style="color: #4b5563; margin-top: 24px;">Additional Details</h3>
-          <p><strong>Run from beginning:</strong> ${run_beginning}</p>
+          <p><strong>Run from beginning:</strong> ${esc(run_beginning)}</p>
           <p><strong>Data Consent:</strong> ${consent ? 'Yes' : 'No'}</p>
           
           <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #eee; font-size: 12px; color: #9ca3af;">

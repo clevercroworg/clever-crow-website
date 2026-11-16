@@ -17,9 +17,11 @@
 
 ```
 1. Visitor ticks "call me back" → POST /api/leads { …, callback_consent: true, callback_consent_version }
-2. Lead saved → consent recorded (server text) → job created (status queued)          [queue.ts]
-3. after() runs the dispatcher immediately; cron also runs it every minute             [dispatcher.ts]
-4. Dispatcher: claim due jobs (FOR UPDATE SKIP LOCKED) → checkEligibility again
+2. Lead saved → abuse limits (SECURITY.md) → consent recorded (server text) → job created (status queued,
+   scheduled for the next calling window)                                              [queue.ts]
+3. after() runs the dispatcher immediately; so does every call result; cron covers retries [dispatcher.ts]
+4. Dispatcher: one query to see if anything is waiting → expire stale jobs → switches, hours, monthly budget
+   → claim due jobs inside the limits (per-org lock + FOR UPDATE SKIP LOCKED) → checkEligibility again
    → POST Sarvam /outbounds with webhook URL + signed metadata → calls row (initiated), job in_progress
 5. Sarvam calls the person (voice, AI, telephony all on Sarvam's side)
 6. Sarvam POSTs the result → token + signature checked → de-duplicated
@@ -32,7 +34,8 @@
 
 One pure function decides "may we call now?". It runs when a job is created and again **immediately before dialling**.
 
-Hard stops (job cancelled): invalid number, no active consent, on do-not-call, lead marked spam/won/lost, attempts used up.
+Hard stops (job cancelled): invalid number, no active consent (granted in the last 30 days), on do-not-call, lead marked
+spam/won/lost, attempts used up, 5 AI calls to the number in the last 7 days.
 Soft stops (job waits until `retryAt`): master switch off, automation off, provider not configured, outside calling
 hours (waits for the next window), daily limit reached (waits for the next day), concurrency limit (1 minute).
 
@@ -54,6 +57,11 @@ queued ──claim──▶ dispatching ──provider ok──▶ in_progress �
 Safety nets (run at the start of every dispatcher pass):
 - `dispatching` for more than 5 minutes (a run crashed mid-start) → `needs_review`
 - `in_progress` with no result for 45 minutes → `needs_review`
+- `queued` for more than 72 hours → `cancelled` ("Expired")
+
+Results (`results.ts`) lock the job row and follow three rules: a connected call always completes the job; any other
+result only moves a job that is still waiting for one (`dispatching`, `in_progress`, `needs_review`) and only if it is
+the job's newest call; a job a person cancelled or that already finished is never reopened.
 
 ## Retries
 
@@ -66,9 +74,12 @@ Safety nets (run at the start of every dispatcher pass):
 
 - Jobs are claimed with `FOR UPDATE SKIP LOCKED`, so two dispatcher runs at once (a duplicated cron call, the form
   trigger and the cron together) never claim the same job.
-- Capacity per run = min(concurrent limit − in progress, daily limit − started today).
-- One active job per phone number. The same form submitted twice can't create two jobs (idempotency key
-  `form:<submission id>`); a manual request uses `manual:<id>:<minute>`, so double clicks don't either.
+- Capacity per run = min(concurrent limit − in progress, daily limit − started today). Counting and claiming happen
+  under one per-organisation advisory lock, so overlapping runs can't add up to more than the limits.
+- One active job per phone number, checked and inserted under a per-number lock. The same form submitted twice can't
+  create two jobs (idempotency key `form:<submission id>`); a manual request uses `manual:<id>:<minute>`, so double
+  clicks don't either.
+- The dispatcher's own updates apply only while the job is still `dispatching`, so a cancel or a fast result wins.
 - Webhooks are de-duplicated on `provider:attempt_id:status`.
 
 ## Deploys
