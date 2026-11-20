@@ -76,20 +76,17 @@ export default function ChatbotHero({ onQuote }: { onQuote: () => void }) {
 
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-8">
         <div className="lg:col-span-7">
-          <motion.div {...rise(0)} className="flex items-center gap-2.5">
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white shadow-md ring-1 ring-slate-200/70 lg:hidden">
+          {/* Phones: the mascot says hello above the heading (desktop has it next to the chat window) */}
+          <motion.div {...rise(0)} className="flex items-center gap-2.5 lg:hidden">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white shadow-md ring-1 ring-slate-200/70 motion-safe:animate-[cbBob_3.5s_ease-in-out_infinite]">
               <AnimatedBot isSpeaking animate className="h-11 w-11" expression="excited" />
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white/80 px-3 py-1 text-[12px] font-bold text-indigo-700 sm:text-[13px]">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-              {HERO.badge}
+            <span className="rounded-2xl rounded-bl-md bg-white px-3 py-1.5 text-[13px] font-bold text-slate-800 shadow-sm ring-1 ring-slate-200/70">
+              Hi! I reply in seconds 👋
             </span>
           </motion.div>
 
-          <motion.h1 {...rise(0.08)} className="mt-4 text-[clamp(1.9rem,8.4vw,2.7rem)] font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.5rem]">
+          <motion.h1 {...rise(0.08)} className="mt-4 text-[clamp(1.9rem,8.4vw,2.7rem)] lg:mt-0 font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.5rem]">
             {HERO.title}{" "}
             <span className="relative inline-block whitespace-nowrap">
               <span className="relative z-10 bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">{HERO.accent}</span>

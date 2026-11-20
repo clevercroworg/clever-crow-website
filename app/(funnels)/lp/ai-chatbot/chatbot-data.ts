@@ -15,7 +15,6 @@ export type ChatbotPackage = {
 };
 
 export const HERO = {
-  badge: "AI Chatbot Development",
   title: "AI Chatbot for Your",
   accent: "Website & WhatsApp",
   subtitle:

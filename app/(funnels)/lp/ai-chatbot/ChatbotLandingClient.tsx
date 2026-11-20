@@ -23,6 +23,11 @@ const KEYFRAMES = `
   @keyframes cbTwinkle { 0%,100% { opacity: .2; transform: scale(.7); } 50% { opacity: 1; transform: scale(1); } }
   @keyframes cbDash { to { stroke-dashoffset: -28; } }
   @keyframes cbBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @keyframes cbShoot { 0%, 85% { opacity: 0; transform: translate(0,0) rotate(20deg); } 88% { opacity: 1; } 100% { opacity: 0; transform: translate(260px,95px) rotate(20deg); } }
+  @keyframes cbTravel { 0% { top: -10%; } 100% { top: 100%; } }
+  @keyframes cbFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  @keyframes cbFlowX { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+  @keyframes cbFlowY { from { transform: translateY(-100%); } to { transform: translateY(100%); } }
   @keyframes cbFeed { 0%,100% { transform: translateX(0); opacity: 1; } 50% { transform: translateX(6px); opacity: .75; } }
 `;
 
