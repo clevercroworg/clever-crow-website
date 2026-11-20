@@ -66,6 +66,40 @@ export function EcommerceComparison({ data }: { data: EcommerceLandingData["comp
   );
 }
 
+/** Drawn checkout screen for the payments card (large screens only, where the card has room). */
+function CheckoutMock() {
+  const options = [
+    { label: "UPI", note: "GPay, PhonePe, Paytm", on: true },
+    { label: "Card", note: "Debit or credit", on: false },
+    { label: "Cash on Delivery", note: "Pay when it arrives", on: false },
+  ];
+  return (
+    <div className="hidden self-center rounded-2xl bg-white p-4 text-slate-900 shadow-[0_30px_60px_-25px_rgba(0,0,0,0.8)] lg:block lg:rotate-2" aria-hidden="true">
+      <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">Checkout</p>
+      <p className="mt-0.5 flex items-baseline justify-between text-[13px] font-semibold">
+        Total <span className="text-lg font-black">₹1,848</span>
+      </p>
+      <ul className="mt-3 grid gap-2">
+        {options.map((o) => (
+          <li key={o.label} className={`flex items-center gap-2.5 rounded-xl border px-2.5 py-2 ${o.on ? "border-amber-400 bg-amber-50" : "border-slate-200"}`}>
+            <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 ${o.on ? "border-amber-500" : "border-slate-300"}`}>
+              {o.on && <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />}
+            </span>
+            <span className="min-w-0 leading-tight">
+              <span className="block text-[12px] font-bold">{o.label}</span>
+              <span className="block truncate text-[10px] text-slate-500">{o.note}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+      <span className="mt-3 flex h-9 items-center justify-center rounded-xl bg-slate-950 text-[12px] font-bold text-white">Pay ₹1,848</span>
+      <p className="mt-2 flex items-center justify-center gap-1 text-[10px] text-slate-400">
+        <ShieldCheck className="h-3 w-3" /> Secure payment
+      </p>
+    </div>
+  );
+}
+
 export function EcommerceFeatures({ data, sell }: { data: EcommerceLandingData["features"]; sell: EcommerceLandingData["sell"] }) {
   const [lead, ...rest] = data.items;
   const LeadIcon = ICONS[lead.icon] ?? Package;
@@ -88,21 +122,24 @@ export function EcommerceFeatures({ data, sell }: { data: EcommerceLandingData["
 
         {/* Bento: one large dark card, the rest in a grid */}
         <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-5 lg:grid-cols-4">
-          <article className="col-span-2 flex flex-col justify-between overflow-hidden rounded-3xl bg-[#050a1c] p-5 text-white sm:p-7 lg:row-span-2">
-            <div>
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FFC72C] text-slate-950">
-                <LeadIcon className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <h3 className="mt-4 text-xl font-bold sm:text-2xl">{lead.title}</h3>
-              <p className="mt-2 max-w-md text-[14px] leading-relaxed text-slate-300 sm:text-[15px]">{lead.text}</p>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-2" aria-hidden="true">
-              {["UPI", "Cards", "Net banking", "Wallets", "Cash on Delivery"].map((m) => (
-                <span key={m} className="rounded-lg border border-white/15 bg-white/5 px-2.5 py-1 text-[12px] font-semibold text-slate-200">
-                  {m}
+          <article className="col-span-2 grid gap-6 overflow-hidden rounded-3xl bg-[#050a1c] p-5 text-white sm:p-7 lg:row-span-2 lg:grid-cols-[1fr_200px] xl:grid-cols-[1fr_220px]">
+            <div className="flex flex-col justify-between gap-6">
+              <div>
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FFC72C] text-slate-950">
+                  <LeadIcon className="h-5 w-5" aria-hidden="true" />
                 </span>
-              ))}
+                <h3 className="mt-4 text-xl font-bold sm:text-2xl">{lead.title}</h3>
+                <p className="mt-2 max-w-md text-[14px] leading-relaxed text-slate-300 sm:text-[15px]">{lead.text}</p>
+              </div>
+              <div className="flex flex-wrap gap-2" aria-hidden="true">
+                {["UPI", "Cards", "Net banking", "Wallets", "Cash on Delivery"].map((m) => (
+                  <span key={m} className="rounded-lg border border-white/15 bg-white/5 px-2.5 py-1 text-[12px] font-semibold text-slate-200">
+                    {m}
+                  </span>
+                ))}
+              </div>
             </div>
+            <CheckoutMock />
           </article>
           {rest.map((item, i) => {
             const Icon = ICONS[item.icon] ?? Package;

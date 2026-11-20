@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ArrowDown, ArrowRight, Check, PackageCheck, Star } from "lucide-react";
+import { ArrowDown, ArrowRight, BadgeCheck, Check, PackageCheck, ShoppingBag, Star, Truck, type LucideIcon } from "lucide-react";
 import type { EcommerceLandingData } from "./ecommerce-data";
 import { openQuote } from "./EcommerceQuoteModal";
 
@@ -9,9 +10,44 @@ import { openQuote } from "./EcommerceQuoteModal";
 // The form opens as a pop-up to keep this short. Desktop adds a phone mockup; phones skip it to stay
 // short and fast.
 
+// A store notification that changes every few seconds: shows what running the store feels like.
+// "yourbrand.in" makes clear it's an example, not a real client's order. Stays still for people who reduce motion.
+const NOTIFICATIONS: { icon: LucideIcon; tone: string; text: string }[] = [
+  { icon: ShoppingBag, tone: "bg-emerald-100 text-emerald-700", text: "New order · ₹1,299 · Paid via UPI" },
+  { icon: BadgeCheck, tone: "bg-amber-100 text-amber-700", text: "COD order confirmed · ₹849" },
+  { icon: Truck, tone: "bg-blue-100 text-blue-700", text: "Order #1042 shipped to Pune" },
+  { icon: ShoppingBag, tone: "bg-emerald-100 text-emerald-700", text: "New order · ₹2,450 · Paid by card" },
+];
+
+function OrderToast({ className = "" }: { className?: string }) {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setInterval(() => setI((n) => (n + 1) % NOTIFICATIONS.length), 2800);
+    return () => clearInterval(t);
+  }, []);
+  const n = NOTIFICATIONS[i];
+  const Icon = n.icon;
+  return (
+    <div className={`inline-flex max-w-full items-center gap-2.5 rounded-2xl bg-white/95 py-1.5 pl-1.5 pr-3.5 text-slate-900 shadow-[0_12px_30px_-12px_rgba(0,0,0,0.6)] ${className}`} aria-hidden="true">
+      <span key={i} className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-xl ${n.tone} motion-safe:animate-[ccToastIn_0.45s_ease-out]`}>
+        <Icon className="h-4 w-4" />
+      </span>
+      <span key={`t${i}`} className="min-w-0 leading-tight motion-safe:animate-[ccToastIn_0.45s_ease-out]">
+        <span className="block text-[10px] font-semibold uppercase tracking-wide text-slate-400">yourbrand.in · now</span>
+        <span className="block truncate text-[13px] font-bold">{n.text}</span>
+      </span>
+    </div>
+  );
+}
+
 export default function EcommerceHero({ data }: { data: EcommerceLandingData["hero"] }) {
   return (
     <section className="relative overflow-hidden bg-[#050a1c] pt-[5.25rem] pb-7 text-white sm:pt-28 sm:pb-14 lg:pt-32 lg:pb-16">
+      <style>{`
+        @keyframes ccToastIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+        @keyframes ccFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+      `}</style>
       <div className="absolute inset-0 bg-gradient-to-br from-[#050a1c] via-[#0a1433] to-[#0f1d4a]" aria-hidden="true" />
       <div className="absolute -left-40 -top-24 h-[420px] w-[520px] rounded-full bg-blue-600/15 blur-[130px]" aria-hidden="true" />
       <div className="absolute -right-32 top-1/3 h-[380px] w-[380px] rounded-full bg-amber-500/10 blur-[120px]" aria-hidden="true" />
@@ -19,7 +55,9 @@ export default function EcommerceHero({ data }: { data: EcommerceLandingData["he
 
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 sm:px-6 lg:grid-cols-12 lg:px-8">
         <div className="lg:col-span-7">
-          <p className="inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-[12px] font-semibold text-amber-200 sm:text-[13px]">
+          {/* Phones: the live notification takes the label's place, so the hero doesn't grow */}
+          <OrderToast className="sm:hidden" />
+          <p className="hidden items-center gap-2 rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-[12px] font-semibold text-amber-200 sm:inline-flex sm:text-[13px]">
             <PackageCheck className="h-3.5 w-3.5" aria-hidden="true" />
             E-commerce Website Development
           </p>
@@ -69,7 +107,7 @@ export default function EcommerceHero({ data }: { data: EcommerceLandingData["he
           </p>
         </div>
 
-        <div className="hidden lg:col-span-5 lg:block">
+        <div className="relative hidden lg:col-span-5 lg:block">
           {/* Edges faded into the hero background so the photo's own backdrop doesn't show as a box. */}
           <Image
             src="/lp/ecommerce/hero-phone-mockup.jpg"
@@ -77,12 +115,13 @@ export default function EcommerceHero({ data }: { data: EcommerceLandingData["he
             width={896}
             height={1200}
             sizes="420px"
-            className="mx-auto h-auto w-[420px] max-w-full"
+            className="mx-auto h-auto w-[420px] max-w-full motion-safe:animate-[ccFloat_6s_ease-in-out_infinite]"
             style={{
               maskImage: "radial-gradient(ellipse 50% 50% at 50% 50%, black 72%, transparent 100%)",
               WebkitMaskImage: "radial-gradient(ellipse 50% 50% at 50% 50%, black 72%, transparent 100%)",
             }}
           />
+          <OrderToast className="absolute bottom-10 left-0 xl:left-4" />
         </div>
       </div>
     </section>
