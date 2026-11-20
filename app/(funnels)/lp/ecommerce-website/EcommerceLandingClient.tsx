@@ -34,8 +34,8 @@ export default function EcommerceLandingClient({ data }: { data: EcommerceLandin
           <SuccessStories
             data={data.caseStudies}
             title="Online Stores We've Built"
-            subtitle="D2C brands, lifestyle stores and retailers selling across India and abroad."
-            hideMetrics={false}
+            subtitle="Food, beauty, fashion and home brands selling online. Tap any store to see it."
+            hideMetrics
             filterStyle="tabs"
             openSiteOnMobile
           />

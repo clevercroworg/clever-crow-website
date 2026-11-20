@@ -12,9 +12,47 @@ export type EcommerceLandingData = {
   faqs: FaqData[];
 };
 
+// Product stores only, taken from the shared portfolio on /lp/website and regrouped by what they sell. Each is the
+// kind of store our two packages build (no marketplaces, apps or SaaS). The card shows `highlight` instead of revenue
+// figures. [portfolio id, tab, highlight]
+const STORES: [string, string, string][] = [
+  ["sleepyowl", "Food & Beverage", "Coffee subscriptions"],
+  ["bombaysweetshop", "Food & Beverage", "Festive gift hampers"],
+  ["cocofuse", "Food & Beverage", "D2C drinks store"],
+  ["gatodates-ecom", "Food & Beverage", "Healthy snacks store"],
+  ["perfectted", "Food & Beverage", "Energy drink store"],
+  ["countrybean-fb", "Food & Beverage", "Coffee and combos"],
+  ["teaorigin", "Food & Beverage", "Tea store"],
+  ["bluebrew", "Food & Beverage", "Cold brew store"],
+  ["nativeclanorganics", "Food & Beverage", "Organic pantry store"],
+  ["namhyafoods", "Food & Beverage", "Health foods store"],
+  ["slurrpfarm", "Food & Beverage", "Kids food store"],
+  ["tagzfoods", "Food & Beverage", "Snacks store"],
+  ["whatsupwellness-well", "Beauty & Wellness", "Wellness gummies store"],
+  ["nyumi", "Beauty & Wellness", "Supplements store"],
+  ["ikkai", "Beauty & Wellness", "Skincare store"],
+  ["cavemanorganics", "Beauty & Wellness", "Men's grooming store"],
+  ["bellalash-ecom", "Beauty & Wellness", "Beauty supplies store"],
+  ["monaariyavastra", "Fashion & Lifestyle", "Saree store"],
+  ["bonorganik", "Fashion & Lifestyle", "Family wear store"],
+  ["underdog", "Fashion & Lifestyle", "Streetwear store"],
+  ["themessycorner", "Fashion & Lifestyle", "Personalised gifts"],
+  ["copperh2o", "Fashion & Lifestyle", "Copper bottles store"],
+  ["artebella-ecom", "Home & Decor", "Art and decor store"],
+  ["homesake", "Home & Decor", "Handcrafted lighting"],
+  ["furnishka", "Home & Decor", "Furniture store"],
+  ["koparoclean", "Home & Decor", "Home care store"],
+  ["ecokaari", "Home & Decor", "Eco crafts store"],
+  ["britishdarts-ecom", "Sports & Specialty", "Sports equipment store"],
+  ["mrbur", "Sports & Specialty", "Dental supplies store"],
+];
+
 export function getEcommerceLandingData(): EcommerceLandingData {
-  // Online stores we have built, from the shared portfolio on /lp/website.
-  const caseStudies = getWebsiteLandingData().caseStudies.filter((cs) => cs.category === "Ecommerce" || cs.category === "Retail & Lifestyle");
+  const byId = new Map(getWebsiteLandingData().caseStudies.map((cs) => [cs.id, cs]));
+  const caseStudies = STORES.flatMap(([id, category, highlight]) => {
+    const cs = byId.get(id);
+    return cs ? [{ ...cs, category, primaryMetric: highlight, secondaryMetric: "Online store" }] : [];
+  });
 
   return {
     hero: {
