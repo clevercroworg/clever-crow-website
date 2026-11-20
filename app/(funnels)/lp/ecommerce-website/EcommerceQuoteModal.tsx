@@ -1,19 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, Lock, Phone, User } from "lucide-react";
+import { Loader2, Lock, Phone, User, X } from "lucide-react";
 import { trackLead } from "@/lib/tracking";
 
-// Short quote form: name, phone, package. Saves through /api/leads (dashboard + email) and counts as a Google Ads lead.
+// Quote pop-up: name, phone, package. Opened by every "Get Free Quote" / "Get This Package" button, so the page itself
+// stays short. A bottom sheet on phones, a centred card on larger screens. Saves through /api/leads (dashboard + email)
+// and counts as a Google Ads lead.
 const PACKAGES = ["Starter Store", "Growth Store", "Not sure yet"];
+const OPEN_EVENT = "cc-ecom-open-quote";
 
-export default function EcommerceQuoteForm() {
+/** Opens the quote pop-up, optionally with a package already chosen. */
+export function openQuote(packageName?: string) {
+  window.dispatchEvent(new CustomEvent(OPEN_EVENT, { detail: packageName ?? null }));
+}
+
+export default function EcommerceQuoteModal() {
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [pkg, setPkg] = useState("Not sure yet");
   const [state, setState] = useState({ loading: false, error: "" });
+
+  const nameRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const onOpen = (e: Event) => {
+      const name = (e as CustomEvent<string | null>).detail;
+      if (name && PACKAGES.includes(name)) setPkg(name);
+      setState({ loading: false, error: "" });
+      setIsOpen(true);
+    };
+    window.addEventListener(OPEN_EVENT, onOpen);
+    return () => window.removeEventListener(OPEN_EVENT, onOpen);
+  }, []);
+
+  // While open: no page scroll behind it, Escape closes, focus starts on the name field.
+  useEffect(() => {
+    if (!isOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false);
+    window.addEventListener("keydown", onKey);
+    const t = setTimeout(() => nameRef.current?.focus(), 50);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener("keydown", onKey);
+      clearTimeout(t);
+    };
+  }, [isOpen]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -47,13 +84,24 @@ export default function EcommerceQuoteForm() {
   const input =
     "h-12 w-full rounded-xl border border-slate-300 bg-white pl-10 pr-3 text-[16px] text-slate-900 placeholder:text-slate-400 focus:border-amber-400 focus:outline-none focus:ring-4 focus:ring-amber-100";
 
+  if (!isOpen) return null;
+
   return (
-    <section id="quote" className="scroll-mt-20 bg-white py-12 sm:py-16">
-      <div className="mx-auto max-w-xl px-5 sm:px-6">
-        <div className="overflow-hidden rounded-3xl border border-amber-200/80 bg-white shadow-[0_30px_70px_-28px_rgba(7,19,48,0.35)]">
+    <div className="fixed inset-0 z-[10000] flex items-end justify-center sm:items-center sm:p-6" role="dialog" aria-modal="true" aria-labelledby="quote-title">
+      <button type="button" className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px]" aria-label="Close" onClick={() => setIsOpen(false)} />
+      <div className="relative max-h-[92dvh] w-full overflow-y-auto rounded-t-3xl bg-white shadow-2xl sm:max-w-lg sm:rounded-3xl">
           <div className="h-1.5 bg-gradient-to-r from-[#FFC72C] to-[#F59E0B]" aria-hidden="true" />
-          <div className="p-5 sm:p-8">
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Get a free quote for your store</h2>
+          <span className="mx-auto mt-2.5 block h-1 w-10 rounded-full bg-slate-200 sm:hidden" aria-hidden="true" />
+          <button
+            type="button"
+            onClick={() => setIsOpen(false)}
+            className="absolute right-3 top-4 flex h-9 w-9 items-center justify-center rounded-full text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+            aria-label="Close quote form"
+          >
+            <X className="h-5 w-5" aria-hidden="true" />
+          </button>
+          <div className="p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] sm:p-8">
+            <h2 id="quote-title" className="pr-10 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Get a free quote for your store</h2>
             <p className="mt-1.5 text-[15px] text-slate-600">Share your number. Our team will call you within working hours to understand your products and suggest the right package.</p>
 
             <form className="mt-5 space-y-3.5" onSubmit={submit} noValidate>
@@ -61,7 +109,7 @@ export default function EcommerceQuoteForm() {
                 <span className="sr-only">Your name</span>
                 <span className="relative block">
                   <User className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden="true" />
-                  <input className={input} placeholder="Your name" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} />
+                  <input ref={nameRef} className={input} placeholder="Your name" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} />
                 </span>
               </label>
               <label className="block">
@@ -110,8 +158,7 @@ export default function EcommerceQuoteForm() {
               </p>
             </form>
           </div>
-        </div>
       </div>
-    </section>
+    </div>
   );
 }

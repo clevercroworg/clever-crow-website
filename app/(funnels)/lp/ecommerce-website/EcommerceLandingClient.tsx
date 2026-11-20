@@ -9,16 +9,16 @@ import FaqSection from "../components/FaqSection";
 import ClientReviews from "../components/ClientReviews";
 import WhatsAppButton from "../components/WhatsAppButton";
 import Footer from "@/components/Footer";
-import WebsitePricing from "../website/WebsitePricing";
 import EcommerceHero from "./EcommerceHero";
-import EcommerceQuoteForm from "./EcommerceQuoteForm";
-import { EcommerceFeatures, EcommerceProcess, MobileActionBar } from "./EcommerceSections";
+import EcommercePricing from "./EcommercePricing";
+import EcommerceQuoteModal from "./EcommerceQuoteModal";
+import { EcommerceComparison, EcommerceFeatures, EcommerceFinalCta, EcommerceProcess, MobileActionBar } from "./EcommerceSections";
 import type { EcommerceLandingData } from "./ecommerce-data";
 
 const WHATSAPP_MESSAGE = "Hi Clever Crow Team, I'm interested in an e-commerce website for my business.";
 
-// Most visitors arrive from Meta ads on a phone: compact hero, prices straight after, a short form,
-// and a bottom bar with call / WhatsApp / quote on small screens.
+// Most visitors arrive from Meta ads on a phone: compact hero, prices straight after, a quote pop-up behind every
+// quote button, and a bottom bar with call / WhatsApp / quote on small screens.
 export default function EcommerceLandingClient({ data }: { data: EcommerceLandingData }) {
   return (
     <main className="landing-page-container pb-20 sm:pb-0">
@@ -27,9 +27,9 @@ export default function EcommerceLandingClient({ data }: { data: EcommerceLandin
         <main id="top">
           <EcommerceHero data={data.hero} />
           <LogoMarquee />
-          <WebsitePricing data={data.pricing} />
-          <EcommerceQuoteForm />
-          <EcommerceFeatures data={data.features} />
+          <EcommercePricing data={data.pricing} />
+          <EcommerceComparison data={data.comparison} />
+          <EcommerceFeatures data={data.features} sell={data.sell} />
           <EcommerceProcess data={data.process} />
           <SuccessStories
             data={data.caseStudies}
@@ -41,10 +41,12 @@ export default function EcommerceLandingClient({ data }: { data: EcommerceLandin
           />
           <FaqSection data={data.faqs} />
           <ClientReviews />
+          <EcommerceFinalCta data={data.finalCta} whatsappMessage={WHATSAPP_MESSAGE} />
         </main>
         <Footer />
       </div>
 
+      <EcommerceQuoteModal />
       <MobileActionBar whatsappMessage={WHATSAPP_MESSAGE} />
       <div className="hidden sm:block">
         <WhatsAppButton message={WHATSAPP_MESSAGE} />

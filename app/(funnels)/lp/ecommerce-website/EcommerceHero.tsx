@@ -3,9 +3,10 @@
 import Image from "next/image";
 import { ArrowDown, ArrowRight, Check, PackageCheck, Star } from "lucide-react";
 import type { EcommerceLandingData } from "./ecommerce-data";
+import { openQuote } from "./EcommerceQuoteModal";
 
 // Compact hero: about one phone screen tall, so the offer and both buttons are visible without scrolling.
-// The form lives in its own section (#quote) to keep this short. Desktop adds a phone mockup; phones skip it to stay
+// The form opens as a pop-up to keep this short. Desktop adds a phone mockup; phones skip it to stay
 // short and fast.
 
 export default function EcommerceHero({ data }: { data: EcommerceLandingData["hero"] }) {
@@ -42,12 +43,13 @@ export default function EcommerceHero({ data }: { data: EcommerceLandingData["he
           </ul>
 
           <div className="mt-5 grid grid-cols-2 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
-            <a
-              href="#quote"
+            <button
+              type="button"
+              onClick={() => openQuote()}
               className="inline-flex h-12 items-center justify-center gap-1.5 rounded-xl bg-[#FFC72C] px-4 text-[15px] font-bold text-slate-950 shadow-[0_10px_30px_-10px_rgba(255,199,44,0.7)] transition hover:brightness-105 sm:px-7"
             >
               Get Free Quote <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
+            </button>
             <a
               href="#package"
               className="inline-flex h-12 items-center justify-center gap-1.5 rounded-xl border border-white/20 bg-white/5 px-4 text-[15px] font-bold text-white transition hover:bg-white/10 sm:px-7"

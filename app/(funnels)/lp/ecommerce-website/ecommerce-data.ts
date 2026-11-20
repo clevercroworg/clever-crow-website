@@ -2,14 +2,18 @@ import { getWebsiteLandingData, type CaseStudy, type FaqData, type PricingMeta }
 
 export type EcommerceFeature = { icon: string; title: string; text: string };
 export type ProcessStep = { days: string; title: string; text: string };
+export type ComparisonRow = { before: string; after: string };
 
 export type EcommerceLandingData = {
   hero: { title: string; accentTitle: string; subtitle: string; highlights: string[]; ctaLabel?: string };
   pricing: PricingMeta;
+  comparison: { preTitle: string; title: string; subtitle: string; beforeLabel: string; afterLabel: string; rows: ComparisonRow[] };
+  sell: { title: string; items: string[] };
   features: { preTitle: string; title: string; subtitle: string; items: EcommerceFeature[] };
   process: { preTitle: string; title: string; subtitle: string; steps: ProcessStep[]; note: string };
   caseStudies: CaseStudy[];
   faqs: FaqData[];
+  finalCta: { title: string; text: string };
 };
 
 // Product stores only, taken from the shared portfolio on /lp/website and regrouped by what they sell. Each is the
@@ -123,6 +127,24 @@ export function getEcommerceLandingData(): EcommerceLandingData {
       quoteHref: "tel:+919986389444",
       cardCta: { label: "Call to Get Started", href: "tel:+919986389444" },
     },
+    comparison: {
+      preTitle: "Why Your Own Store",
+      title: "Still taking orders in DMs?",
+      subtitle: "Instagram and WhatsApp are great for getting noticed. Your own store is where the selling gets easy.",
+      beforeLabel: "Selling on DMs",
+      afterLabel: "Your own online store",
+      rows: [
+        { before: "Replying to \"price?\" messages all day", after: "Prices, sizes and stock shown on every product" },
+        { before: "Chasing payment screenshots", after: "UPI, cards and COD paid at checkout" },
+        { before: "Orders lost in long chats", after: "Every order in one admin panel" },
+        { before: "Sales stop when you sleep", after: "Customers order 24×7, even at 2 AM" },
+        { before: "Hard to look trustworthy", after: "Your own brand, domain and secure checkout" },
+      ],
+    },
+    sell: {
+      title: "Built for every kind of product",
+      items: ["Fashion & Sarees", "Beauty & Skincare", "Food & Snacks", "Home Decor", "Jewellery", "Gifts & Hampers", "Health & Wellness", "Handicrafts", "Kids & Toys", "Pet Supplies", "Electronics Accessories", "Organic Products"],
+    },
     features: {
       preTitle: "Built to Sell",
       title: "Everything your store needs, set up for you",
@@ -157,7 +179,12 @@ export function getEcommerceLandingData(): EcommerceLandingData {
       { question: "Are there any charges after the one-time payment?", answer: "Hosting and SSL are free for the first year. After that, renewal is charged yearly. The payment gateway charges a small fee per transaction (usually around 2%), and courier charges depend on your shipping partner. We explain all of this before you start." },
       { question: "Can I add and manage products myself?", answer: "Yes. You get an easy admin panel to add products, change prices, manage stock and see orders. We also train your team before launch." },
       { question: "What do I need to provide to get started?", answer: "Your logo, product photos, product names, prices and descriptions, and your business details for the payment gateway. If you need help with product photos or descriptions, ask us." },
+      { question: "Can I sell on Instagram and WhatsApp too?", answer: "Yes. Your store links work in your Instagram bio, stories and WhatsApp chats. Customers tap the link, choose a product and pay, without any back-and-forth messages." },
       { question: "Can you help us get sales after the store is live?", answer: "Yes. We run Instagram, Facebook and Google Shopping ads and SEO for online stores. Your store is set up with the tracking these need from day one." },
     ],
+    finalCta: {
+      title: "Start selling online in about 15 days",
+      text: "Tell us what you sell. We'll suggest the right package and share a clear plan on a quick call.",
+    },
   };
 }
