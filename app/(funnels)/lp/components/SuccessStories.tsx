@@ -51,6 +51,8 @@ type SuccessStoriesProps = {
   // Phones: tapping a card opens the client's live site straight away (with a short "opening" animation)
   // instead of the details popup. "Project Details" still opens the popup. Desktop is unchanged.
   openSiteOnMobile?: boolean;
+  // Replaces the default "Our Website Portfolio" heading and "Verified client websites" badge.
+  heading?: { lead: string; accent: string; badge?: string };
 };
 
 // Brand logo background color palette generator based on title
@@ -153,6 +155,7 @@ export default function SuccessStories({
   filterStyle = "dropdown",
   isAppPortfolio = false,
   openSiteOnMobile = false,
+  heading,
 }: SuccessStoriesProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [openingId, setOpeningId] = useState<string | null>(null);
@@ -348,13 +351,13 @@ export default function SuccessStories({
         <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-[#fceabb] bg-[#fff8e6] px-4 py-1.5 text-xs font-extrabold uppercase tracking-wider text-[#b8860b] shadow-xs mb-4">
             <ShieldCheck className="w-4 h-4 text-[#d97706]" />
-            VERIFIED CLIENT WEBSITES
+            {heading?.badge ?? "VERIFIED CLIENT WEBSITES"}
           </span>
 
           <h2 className="text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl flex items-center justify-center gap-2 flex-wrap">
-            <span>Our Website</span>
+            <span>{heading?.lead ?? "Our Website"}</span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d97706] via-[#f59e0b] to-[#b45309]">
-              Portfolio
+              {heading?.accent ?? "Portfolio"}
             </span>
           </h2>
 
