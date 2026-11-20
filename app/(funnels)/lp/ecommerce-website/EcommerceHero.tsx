@@ -1,68 +1,12 @@
 "use client";
 
-import { ArrowDown, ArrowRight, Check, CreditCard, PackageCheck, ShoppingBag, Star, Truck } from "lucide-react";
+import Image from "next/image";
+import { ArrowDown, ArrowRight, Check, PackageCheck, Star } from "lucide-react";
 import type { EcommerceLandingData } from "./ecommerce-data";
 
 // Compact hero: about one phone screen tall, so the offer and both buttons are visible without scrolling.
-// The form lives in its own section (#quote) to keep this short. Desktop adds a drawn store mockup (no image needed).
-
-function StoreMockup() {
-  const products = [
-    { name: "Linen Kurta", price: "₹1,299", tone: "from-amber-200 to-orange-300" },
-    { name: "Cold Brew Pack", price: "₹549", tone: "from-sky-200 to-blue-300" },
-    { name: "Handmade Lamp", price: "₹2,199", tone: "from-emerald-200 to-teal-300" },
-    { name: "Skin Care Kit", price: "₹899", tone: "from-rose-200 to-pink-300" },
-  ];
-  return (
-    <div className="relative mx-auto w-[300px]" aria-hidden="true">
-      {/* Phone */}
-      <div className="rounded-[2.2rem] border border-white/15 bg-[#0b1430] p-2.5 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)]">
-        <div className="overflow-hidden rounded-[1.7rem] bg-white text-slate-900">
-          <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
-            <span className="text-sm font-black tracking-tight">yourbrand<span className="text-amber-500">.in</span></span>
-            <span className="relative">
-              <ShoppingBag className="h-5 w-5" />
-              <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-amber-400 text-[9px] font-bold">2</span>
-            </span>
-          </div>
-          <div className="mx-3 mt-3 rounded-xl bg-gradient-to-r from-slate-900 to-blue-900 px-3.5 py-3 text-white">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-amber-300">Festive sale</p>
-            <p className="text-sm font-bold">Flat 20% off · Code FEST20</p>
-          </div>
-          <div className="grid grid-cols-2 gap-2.5 p-3">
-            {products.map((p) => (
-              <div key={p.name} className="rounded-xl border border-slate-100 p-2">
-                <div className={`h-16 rounded-lg bg-gradient-to-br ${p.tone}`} />
-                <p className="mt-1.5 truncate text-[11px] font-semibold">{p.name}</p>
-                <p className="text-[11px] font-bold text-slate-700">{p.price}</p>
-                <span className="mt-1 block rounded-md bg-slate-900 py-1 text-center text-[9px] font-bold text-white">Add to cart</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      {/* Floating notifications */}
-      <div className="absolute -left-24 top-24 flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 text-slate-900 shadow-xl">
-        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600">
-          <CreditCard className="h-4 w-4" />
-        </span>
-        <span className="leading-tight">
-          <span className="block text-[11px] font-bold">New order · ₹1,848</span>
-          <span className="block text-[10px] text-slate-500">Paid via UPI</span>
-        </span>
-      </div>
-      <div className="absolute -right-20 bottom-20 flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 text-slate-900 shadow-xl">
-        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
-          <Truck className="h-4 w-4" />
-        </span>
-        <span className="leading-tight">
-          <span className="block text-[11px] font-bold">Out for delivery</span>
-          <span className="block text-[10px] text-slate-500">Order #1042 · Pune</span>
-        </span>
-      </div>
-    </div>
-  );
-}
+// The form lives in its own section (#quote) to keep this short. Desktop adds a phone mockup; phones skip it to stay
+// short and fast.
 
 export default function EcommerceHero({ data }: { data: EcommerceLandingData["hero"] }) {
   return (
@@ -124,7 +68,19 @@ export default function EcommerceHero({ data }: { data: EcommerceLandingData["he
         </div>
 
         <div className="hidden lg:col-span-5 lg:block">
-          <StoreMockup />
+          {/* Edges faded into the hero background so the photo's own backdrop doesn't show as a box. */}
+          <Image
+            src="/lp/ecommerce/hero-phone-mockup.jpg"
+            alt="An online store on a phone, with a new order paid by UPI and an order out for delivery"
+            width={896}
+            height={1200}
+            sizes="420px"
+            className="mx-auto h-auto w-[420px] max-w-full"
+            style={{
+              maskImage: "radial-gradient(ellipse 50% 50% at 50% 50%, black 72%, transparent 100%)",
+              WebkitMaskImage: "radial-gradient(ellipse 50% 50% at 50% 50%, black 72%, transparent 100%)",
+            }}
+          />
         </div>
       </div>
     </section>
