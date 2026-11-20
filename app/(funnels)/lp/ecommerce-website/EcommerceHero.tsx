@@ -2,13 +2,85 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ArrowDown, ArrowRight, BadgeCheck, Check, PackageCheck, ShoppingBag, Star, Truck, type LucideIcon } from "lucide-react";
+import { ArrowDown, ArrowRight, BadgeCheck, Check, CreditCard, Gift, IndianRupee, Package, PackageCheck, Percent, ShoppingBag, ShoppingCart, Star, Tag, Truck, type LucideIcon } from "lucide-react";
 import type { EcommerceLandingData } from "./ecommerce-data";
 import { openQuote } from "./EcommerceQuoteModal";
 
 // Compact hero: about one phone screen tall, so the offer and both buttons are visible without scrolling.
 // The form opens as a pop-up to keep this short. Desktop adds a phone mockup; phones skip it to stay
 // short and fast.
+
+// Faint shop icons drifting around the edges, a few sparkles, a soft grid and (desktop) a flowing "delivery route".
+// Kept to the edges and the gap between the columns so nothing sits behind the text; phones get only three, very faint.
+const DECO: { icon: LucideIcon; pos: string; size: string; dur: string; delay: string; mobile?: boolean }[] = [
+  { icon: ShoppingBag, pos: "left-[2%] top-[22%]", size: "h-9 w-9", dur: "9s", delay: "0s" },
+  { icon: Tag, pos: "left-[45%] top-[18%]", size: "h-7 w-7", dur: "11s", delay: "-3s" },
+  { icon: Percent, pos: "left-[3%] bottom-[16%]", size: "h-6 w-6", dur: "10s", delay: "-6s" },
+  { icon: Package, pos: "left-[50%] bottom-[22%]", size: "h-8 w-8", dur: "12s", delay: "-2s" },
+  { icon: CreditCard, pos: "right-[3%] top-[18%]", size: "h-8 w-8", dur: "10s", delay: "-4s" },
+  { icon: Gift, pos: "right-[2%] bottom-[30%]", size: "h-7 w-7", dur: "13s", delay: "-7s" },
+  { icon: ShoppingCart, pos: "right-[4%] top-[25%]", size: "h-5 w-5", dur: "9s", delay: "-1s", mobile: true },
+  { icon: IndianRupee, pos: "right-[6%] top-[44%]", size: "h-5 w-5", dur: "11s", delay: "-5s", mobile: true },
+  { icon: Tag, pos: "right-[5%] bottom-[9%]", size: "h-5 w-5", dur: "10s", delay: "-8s", mobile: true },
+];
+const SPARKLES = ["left-[40%] top-[30%]", "left-[6%] top-[60%]", "right-[30%] top-[16%]", "left-[56%] bottom-[12%]"];
+
+function HeroBackdrop() {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+      {/* Soft grid that fades out from the centre */}
+      <div
+        className="absolute inset-0 opacity-[0.09]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.45) 1px, transparent 1px)",
+          backgroundSize: "52px 52px",
+          maskImage: "radial-gradient(ellipse 70% 65% at 50% 40%, black, transparent 78%)",
+          WebkitMaskImage: "radial-gradient(ellipse 70% 65% at 50% 40%, black, transparent 78%)",
+        }}
+      />
+
+      {/* Drifting shop icons */}
+      {DECO.map(({ icon: Icon, pos, size, dur, delay, mobile }, i) => (
+        <span
+          key={i}
+          className={`absolute ${pos} ${mobile ? "text-white/[0.12] lg:hidden" : "hidden text-white/[0.13] lg:block"} motion-safe:animate-[ccDrift_var(--d)_ease-in-out_infinite]`}
+          style={{ ["--d" as string]: dur, animationDelay: delay }}
+        >
+          <Icon className={size} strokeWidth={1.6} />
+        </span>
+      ))}
+
+      {/* Twinkling sparkles */}
+      {SPARKLES.map((pos, i) => (
+        <svg
+          key={pos}
+          viewBox="0 0 24 24"
+          className={`absolute ${pos} hidden h-4 w-4 text-[#FFC72C]/60 sm:block motion-safe:animate-[ccTwinkle_3.2s_ease-in-out_infinite]`}
+          style={{ animationDelay: `${i * -0.8}s` }}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+        >
+          <path d="M12 3v6M12 15v6M3 12h6M15 12h6" />
+        </svg>
+      ))}
+
+      {/* Delivery route: a dashed line that flows from the copy toward the phone (desktop) */}
+      <svg viewBox="0 0 1200 160" preserveAspectRatio="none" className="absolute inset-x-0 bottom-0 hidden h-28 w-full text-[#FFC72C]/25 lg:block" fill="none">
+        <path
+          d="M-20 130 C 220 60, 420 150, 640 96 S 1000 30, 1220 70"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeDasharray="2 12"
+          strokeLinecap="round"
+          className="motion-safe:animate-[ccRoute_2.4s_linear_infinite]"
+        />
+      </svg>
+    </div>
+  );
+}
 
 // A store notification that changes every few seconds: shows what running the store feels like.
 // "yourbrand.in" makes clear it's an example, not a real client's order. Stays still for people who reduce motion.
@@ -47,11 +119,15 @@ export default function EcommerceHero({ data }: { data: EcommerceLandingData["he
       <style>{`
         @keyframes ccToastIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
         @keyframes ccFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        @keyframes ccDrift { 0%, 100% { transform: translate(0, 0) rotate(-6deg); } 50% { transform: translate(6px, -14px) rotate(6deg); } }
+        @keyframes ccTwinkle { 0%, 100% { opacity: 0.15; transform: scale(0.7); } 50% { opacity: 1; transform: scale(1); } }
+        @keyframes ccRoute { to { stroke-dashoffset: -28; } }
       `}</style>
       <div className="absolute inset-0 bg-gradient-to-br from-[#050a1c] via-[#0a1433] to-[#0f1d4a]" aria-hidden="true" />
       <div className="absolute -left-40 -top-24 h-[420px] w-[520px] rounded-full bg-blue-600/15 blur-[130px]" aria-hidden="true" />
       <div className="absolute -right-32 top-1/3 h-[380px] w-[380px] rounded-full bg-amber-500/10 blur-[120px]" aria-hidden="true" />
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#FFC72C]/40 to-transparent" aria-hidden="true" />
+      <HeroBackdrop />
 
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 sm:px-6 lg:grid-cols-12 lg:px-8">
         <div className="lg:col-span-7">
