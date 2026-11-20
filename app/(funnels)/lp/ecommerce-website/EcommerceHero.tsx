@@ -1,0 +1,132 @@
+"use client";
+
+import { ArrowDown, ArrowRight, Check, CreditCard, PackageCheck, ShoppingBag, Star, Truck } from "lucide-react";
+import type { EcommerceLandingData } from "./ecommerce-data";
+
+// Compact hero: about one phone screen tall, so the offer and both buttons are visible without scrolling.
+// The form lives in its own section (#quote) to keep this short. Desktop adds a drawn store mockup (no image needed).
+
+function StoreMockup() {
+  const products = [
+    { name: "Linen Kurta", price: "₹1,299", tone: "from-amber-200 to-orange-300" },
+    { name: "Cold Brew Pack", price: "₹549", tone: "from-sky-200 to-blue-300" },
+    { name: "Handmade Lamp", price: "₹2,199", tone: "from-emerald-200 to-teal-300" },
+    { name: "Skin Care Kit", price: "₹899", tone: "from-rose-200 to-pink-300" },
+  ];
+  return (
+    <div className="relative mx-auto w-[300px]" aria-hidden="true">
+      {/* Phone */}
+      <div className="rounded-[2.2rem] border border-white/15 bg-[#0b1430] p-2.5 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)]">
+        <div className="overflow-hidden rounded-[1.7rem] bg-white text-slate-900">
+          <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
+            <span className="text-sm font-black tracking-tight">yourbrand<span className="text-amber-500">.in</span></span>
+            <span className="relative">
+              <ShoppingBag className="h-5 w-5" />
+              <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-amber-400 text-[9px] font-bold">2</span>
+            </span>
+          </div>
+          <div className="mx-3 mt-3 rounded-xl bg-gradient-to-r from-slate-900 to-blue-900 px-3.5 py-3 text-white">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-amber-300">Festive sale</p>
+            <p className="text-sm font-bold">Flat 20% off · Code FEST20</p>
+          </div>
+          <div className="grid grid-cols-2 gap-2.5 p-3">
+            {products.map((p) => (
+              <div key={p.name} className="rounded-xl border border-slate-100 p-2">
+                <div className={`h-16 rounded-lg bg-gradient-to-br ${p.tone}`} />
+                <p className="mt-1.5 truncate text-[11px] font-semibold">{p.name}</p>
+                <p className="text-[11px] font-bold text-slate-700">{p.price}</p>
+                <span className="mt-1 block rounded-md bg-slate-900 py-1 text-center text-[9px] font-bold text-white">Add to cart</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* Floating notifications */}
+      <div className="absolute -left-24 top-24 flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 text-slate-900 shadow-xl">
+        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600">
+          <CreditCard className="h-4 w-4" />
+        </span>
+        <span className="leading-tight">
+          <span className="block text-[11px] font-bold">New order · ₹1,848</span>
+          <span className="block text-[10px] text-slate-500">Paid via UPI</span>
+        </span>
+      </div>
+      <div className="absolute -right-20 bottom-20 flex items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 text-slate-900 shadow-xl">
+        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+          <Truck className="h-4 w-4" />
+        </span>
+        <span className="leading-tight">
+          <span className="block text-[11px] font-bold">Out for delivery</span>
+          <span className="block text-[10px] text-slate-500">Order #1042 · Pune</span>
+        </span>
+      </div>
+    </div>
+  );
+}
+
+export default function EcommerceHero({ data }: { data: EcommerceLandingData["hero"] }) {
+  return (
+    <section className="relative overflow-hidden bg-[#050a1c] pt-[5.25rem] pb-7 text-white sm:pt-28 sm:pb-14 lg:pt-32 lg:pb-16">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#050a1c] via-[#0a1433] to-[#0f1d4a]" aria-hidden="true" />
+      <div className="absolute -left-40 -top-24 h-[420px] w-[520px] rounded-full bg-blue-600/15 blur-[130px]" aria-hidden="true" />
+      <div className="absolute -right-32 top-1/3 h-[380px] w-[380px] rounded-full bg-amber-500/10 blur-[120px]" aria-hidden="true" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#FFC72C]/40 to-transparent" aria-hidden="true" />
+
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 sm:px-6 lg:grid-cols-12 lg:px-8">
+        <div className="lg:col-span-7">
+          <p className="inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-[12px] font-semibold text-amber-200 sm:text-[13px]">
+            <PackageCheck className="h-3.5 w-3.5" aria-hidden="true" />
+            E-commerce Website Development
+          </p>
+
+          <h1 className="mt-3 text-[clamp(1.85rem,8.6vw,2.6rem)] font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]">
+            <span className="block">{data.title}</span>
+            <span className="block bg-gradient-to-r from-[#FFC72C] to-[#F59E0B] bg-clip-text pb-1 text-transparent">{data.accentTitle}</span>
+          </h1>
+
+          <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-slate-300 sm:mt-5 sm:text-lg">{data.subtitle}</p>
+
+          <ul className="mt-4 grid max-w-xl grid-cols-2 gap-x-3 gap-y-2 sm:mt-7 sm:gap-x-6">
+            {data.highlights.map((item) => (
+              <li key={item} className="flex items-center gap-2 text-[13px] font-semibold leading-snug text-slate-100 sm:text-[15px]">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400">
+                  <Check className="h-3 w-3 stroke-[3]" aria-hidden="true" />
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-5 grid grid-cols-2 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
+            <a
+              href="#quote"
+              className="inline-flex h-12 items-center justify-center gap-1.5 rounded-xl bg-[#FFC72C] px-4 text-[15px] font-bold text-slate-950 shadow-[0_10px_30px_-10px_rgba(255,199,44,0.7)] transition hover:brightness-105 sm:px-7"
+            >
+              Get Free Quote <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+            <a
+              href="#package"
+              className="inline-flex h-12 items-center justify-center gap-1.5 rounded-xl border border-white/20 bg-white/5 px-4 text-[15px] font-bold text-white transition hover:bg-white/10 sm:px-7"
+            >
+              {data.ctaLabel ?? "View Packages"} <ArrowDown className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+
+          <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-slate-400 sm:mt-5">
+            <span className="flex items-center gap-1 font-semibold text-slate-200">
+              <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" aria-hidden="true" /> 4.9/5 rating
+            </span>
+            <span aria-hidden="true">·</span>
+            <span>150+ websites delivered</span>
+            <span className="hidden sm:inline" aria-hidden="true">·</span>
+            <span className="hidden sm:inline">15+ years experience</span>
+          </p>
+        </div>
+
+        <div className="hidden lg:col-span-5 lg:block">
+          <StoreMockup />
+        </div>
+      </div>
+    </section>
+  );
+}
