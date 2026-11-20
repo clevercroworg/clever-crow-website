@@ -3,7 +3,7 @@
 import { ArrowRight, BarChart3, Check, CreditCard, LayoutDashboard, MessageCircle, Package, Phone, ShieldCheck, Smartphone, Tag, Truck, X, type LucideIcon } from "lucide-react";
 import { ADS_CALL_CONVERSION, gtag } from "@/lib/tracking";
 import type { EcommerceLandingData } from "./ecommerce-data";
-import { openQuote } from "./EcommerceQuoteModal";
+import { openQuote } from "../components/QuoteModal";
 
 const ICONS: Record<string, LucideIcon> = {
   payments: CreditCard,

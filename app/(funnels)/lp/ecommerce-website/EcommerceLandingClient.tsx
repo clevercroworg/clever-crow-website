@@ -12,7 +12,7 @@ import WhatsAppButton from "../components/WhatsAppButton";
 import Footer from "@/components/Footer";
 import EcommerceHero from "./EcommerceHero";
 import EcommercePricing from "./EcommercePricing";
-import EcommerceQuoteModal from "./EcommerceQuoteModal";
+import QuoteModal from "../components/QuoteModal";
 import { EcommerceComparison, EcommerceFeatures, EcommerceFinalCta, EcommerceProcess, MobileActionBar } from "./EcommerceSections";
 import type { EcommerceLandingData } from "./ecommerce-data";
 
@@ -87,7 +87,13 @@ export default function EcommerceLandingClient({ data }: { data: EcommerceLandin
         <Footer />
       </div>
 
-      <EcommerceQuoteModal />
+      <QuoteModal
+        packages={["Starter Store", "Growth Store"]}
+        service="E-commerce website"
+        formName="E-commerce Quote Form"
+        title="Get a free quote for your store"
+        subtitle="Share your number. Our team will call you within working hours to understand your products and suggest the right package."
+      />
       <MobileActionBar whatsappMessage={WHATSAPP_MESSAGE} />
       <div className="hidden sm:block">
         <WhatsAppButton message={WHATSAPP_MESSAGE} />

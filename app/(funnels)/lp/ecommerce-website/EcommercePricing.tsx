@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ArrowRight, Check, ChevronDown, Phone, Sparkles } from "lucide-react";
 import { ADS_CALL_CONVERSION, gtag } from "@/lib/tracking";
 import type { PricingMeta } from "../website/website-data";
-import { openQuote } from "./EcommerceQuoteModal";
+import { openQuote } from "../components/QuoteModal";
 
 // Package cards for the e-commerce page. On phones each card shows its first features and a "see all" toggle,
 // so both prices stay close together. "Get This Package" opens the quote pop-up with that package chosen.

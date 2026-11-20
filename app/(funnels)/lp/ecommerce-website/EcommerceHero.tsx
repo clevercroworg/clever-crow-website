@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowDown, ArrowRight, BadgeCheck, Check, CreditCard, Gift, IndianRupee, Package, PackageCheck, Percent, ShoppingBag, ShoppingCart, Star, Tag, Truck, type LucideIcon } from "lucide-react";
 import type { EcommerceLandingData } from "./ecommerce-data";
-import { openQuote } from "./EcommerceQuoteModal";
+import { openQuote } from "../components/QuoteModal";
 
 // Compact hero: about one phone screen tall, so the offer and both buttons are visible without scrolling.
 // The form opens as a pop-up to keep this short. Desktop adds a phone mockup; phones skip it to stay

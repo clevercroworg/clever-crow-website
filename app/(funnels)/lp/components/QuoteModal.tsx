@@ -1,27 +1,40 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Lock, Phone, User, X } from "lucide-react";
 import { trackLead } from "@/lib/tracking";
 
-// Quote pop-up: name, phone, package. Opened by every "Get Free Quote" / "Get This Package" button, so the page itself
-// stays short. A bottom sheet on phones, a centred card on larger screens. Saves through /api/leads (dashboard + email)
-// and counts as a Google Ads lead.
-const PACKAGES = ["Starter Store", "Growth Store", "Not sure yet"];
-const OPEN_EVENT = "cc-ecom-open-quote";
+// Quote pop-up for landing pages: name, phone, package. Opened by every "Get Free Quote" / "Get This Package" button, so
+// the page itself stays short. A bottom sheet on phones, a centred card on larger screens. Saves through /api/leads
+// (dashboard + email) and counts as a Google Ads lead. One per page.
+const NOT_SURE = "Not sure yet";
+const OPEN_EVENT = "cc-lp-open-quote";
+
+type QuoteModalProps = {
+  /** Package names shown as choices; "Not sure yet" is added. */
+  packages: string[];
+  /** What the lead is about, e.g. "E-commerce website". Shown to the team in the lead. */
+  service: string;
+  /** Name for analytics, e.g. "E-commerce Quote Form". */
+  formName: string;
+  title: string;
+  subtitle: string;
+};
 
 /** Opens the quote pop-up, optionally with a package already chosen. */
 export function openQuote(packageName?: string) {
   window.dispatchEvent(new CustomEvent(OPEN_EVENT, { detail: packageName ?? null }));
 }
 
-export default function EcommerceQuoteModal() {
+export default function QuoteModal({ packages, service, formName, title, subtitle }: QuoteModalProps) {
+  const packageKey = packages.join("|");
+  const PACKAGES = useMemo(() => [...packageKey.split("|"), NOT_SURE], [packageKey]);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [pkg, setPkg] = useState("Not sure yet");
+  const [pkg, setPkg] = useState(NOT_SURE);
   const [state, setState] = useState({ loading: false, error: "" });
 
   const nameRef = useRef<HTMLInputElement>(null);
@@ -35,7 +48,7 @@ export default function EcommerceQuoteModal() {
     };
     window.addEventListener(OPEN_EVENT, onOpen);
     return () => window.removeEventListener(OPEN_EVENT, onOpen);
-  }, []);
+  }, [PACKAGES]);
 
   // While open: no page scroll behind it, Escape closes, focus starts on the name field.
   useEffect(() => {
@@ -68,13 +81,13 @@ export default function EcommerceQuoteModal() {
           name: name.trim(),
           phone: phone.trim(),
           email: "",
-          service: `E-commerce website: ${pkg}`,
-          message: `E-commerce website enquiry. Package: ${pkg}. Page: ${window.location.href}`,
+          service: `${service}: ${pkg}`,
+          message: `${service} enquiry. Package: ${pkg}. Page: ${window.location.href}`,
           source,
         }),
       });
       if (!res.ok) throw new Error("Something went wrong. Please try again or call us.");
-      await trackLead("E-commerce Quote Form");
+      await trackLead(formName);
       router.push("/thank-you");
     } catch (err) {
       setState({ loading: false, error: err instanceof Error ? err.message : "Something went wrong. Please try again." });
@@ -101,8 +114,8 @@ export default function EcommerceQuoteModal() {
             <X className="h-5 w-5" aria-hidden="true" />
           </button>
           <div className="p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] sm:p-8">
-            <h2 id="quote-title" className="pr-10 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Get a free quote for your store</h2>
-            <p className="mt-1.5 text-[15px] text-slate-600">Share your number. Our team will call you within working hours to understand your products and suggest the right package.</p>
+            <h2 id="quote-title" className="pr-10 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">{title}</h2>
+            <p className="mt-1.5 text-[15px] text-slate-600">{subtitle}</p>
 
             <form className="mt-5 space-y-3.5" onSubmit={submit} noValidate>
               <label className="block">
