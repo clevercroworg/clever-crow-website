@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArrowDown, ArrowRight, BadgeCheck, Check, CreditCard, Gift, IndianRupee, Package, PackageCheck, Percent, ShoppingBag, ShoppingCart, Star, Tag, Truck, type LucideIcon } from "lucide-react";
 import type { EcommerceLandingData } from "./ecommerce-data";
 import { openQuote } from "../components/QuoteModal";
+import HeroQuickForm from "./HeroQuickForm";
 
 // Compact hero: about one phone screen tall, so the offer and both buttons are visible without scrolling.
 // The form opens as a pop-up to keep this short. Desktop adds a phone mockup; phones skip it to stay
@@ -156,7 +157,9 @@ export default function EcommerceHero({ data }: { data: EcommerceLandingData["he
             ))}
           </ul>
 
-          <div className="mt-5 grid grid-cols-2 gap-3 sm:mt-8 sm:flex sm:flex-wrap">
+          {/* Phones: a small form right here. Larger screens: the two buttons. */}
+          <HeroQuickForm />
+          <div className="mt-5 hidden gap-3 sm:mt-8 sm:flex sm:flex-wrap">
             <button
               type="button"
               onClick={() => openQuote()}

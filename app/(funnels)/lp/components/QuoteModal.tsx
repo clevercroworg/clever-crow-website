@@ -22,6 +22,27 @@ type QuoteModalProps = {
   subtitle: string;
 };
 
+/**
+ * Saves a quote request as a lead (dashboard + email) and records the Google Ads lead conversion.
+ * Shared by the pop-up and the small inline forms. Throws a readable message on failure.
+ */
+export async function submitQuoteLead(lead: { name: string; phone: string; service: string; pkg: string; formName: string; formLabel?: string }) {
+  const res = await fetch("/api/leads", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: lead.name.trim(),
+      phone: lead.phone.trim(),
+      email: "",
+      service: `${lead.service}: ${lead.pkg}`,
+      message: `${lead.service} enquiry. Package: ${lead.pkg}. Page: ${window.location.href}`,
+      source: `${document.title} (${lead.formLabel ?? "Quote form"})`,
+    }),
+  });
+  if (!res.ok) throw new Error("Something went wrong. Please try again or call us.");
+  await trackLead(lead.formName);
+}
+
 /** Opens the quote pop-up, optionally with a package already chosen. */
 export function openQuote(packageName?: string) {
   window.dispatchEvent(new CustomEvent(OPEN_EVENT, { detail: packageName ?? null }));
@@ -73,21 +94,7 @@ export default function QuoteModal({ packages, service, formName, title, subtitl
     }
     setState({ loading: true, error: "" });
     try {
-      const source = `${document.title} (Quote form)`;
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          phone: phone.trim(),
-          email: "",
-          service: `${service}: ${pkg}`,
-          message: `${service} enquiry. Package: ${pkg}. Page: ${window.location.href}`,
-          source,
-        }),
-      });
-      if (!res.ok) throw new Error("Something went wrong. Please try again or call us.");
-      await trackLead(formName);
+      await submitQuoteLead({ name, phone, service, pkg, formName });
       router.push("/thank-you");
     } catch (err) {
       setState({ loading: false, error: err instanceof Error ? err.message : "Something went wrong. Please try again." });
